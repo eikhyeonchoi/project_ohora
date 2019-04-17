@@ -15,7 +15,7 @@
 ## 종료 조건(Postconditions)
 
 - 리뷰를 조회하였다.
-
+ 
 ## 시나리오(Flow of Events)
 ### 리뷰 조회하기
 
