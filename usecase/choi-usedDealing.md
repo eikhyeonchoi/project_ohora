@@ -1,6 +1,6 @@
 # choi-usedDealing - 중고거래 게시판 관리(Used transaction board management)
 
-<img src="./images/usedDealing.png" width="400">
+<img src="./images/choi-usedDealing.png" width="400">
 
 중고거래 게시판 항목을 등록, 조회, 변경, 삭제하는 유스케이스이다.
 
