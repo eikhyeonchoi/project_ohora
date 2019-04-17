@@ -5,7 +5,7 @@
 ## 주 액터(Primary Actor)
 
 비회원
-
+ 
 ## 보조 액터(Secondary Actor)
 
 ## 사전 조건(Preconditions)
