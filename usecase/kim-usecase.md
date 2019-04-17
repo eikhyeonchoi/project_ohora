@@ -8,11 +8,11 @@
 - 시스템에 로그인 한 사용자
 
 ## Use-Cases
-### [리뷰관리](kim-usedReview)(회원)
+### [리뷰관리](kim-usedReview.md)(회원)
 - 회원이 리뷰를 등록, 변경, 삭제, 추천, 비추천 신고 및 
   댓글 등록, 삭제하는 것
  
-### [리뷰조회](kim-usedReviewDetail)(비회원)
+### [리뷰조회](kim-usedReviewDetail.md)(비회원)
 - 비회원이 리뷰를 조회하는 것
 
 
