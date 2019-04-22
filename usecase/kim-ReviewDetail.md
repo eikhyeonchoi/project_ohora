@@ -30,6 +30,7 @@
 7. 액터는 리뷰 목록 중 하나를 선택한다.
 8. 시스템은 상세 리뷰 창을 출력한다.
 
-
-## UI 프로토타입
+## 리뷰 
+![리뷰조회 폼](./images/kim-review1.png)
+![리뷰조회 폼](./images/kim-reviewDetail2.png)
 

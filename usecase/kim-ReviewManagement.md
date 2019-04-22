@@ -107,5 +107,6 @@
 4. 시스템은 '[리뷰 조회하기](kim-ReviewDetail.md)' 유스케이스 4번을 출력한다.
 
 
-## UI 프로토타입
+### 리뷰조회 
+![리뷰조회 폼](./images/kim-reviewDetail.png)
 
