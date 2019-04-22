@@ -44,7 +44,7 @@
  - 매니저가 질문을 변경하는 것
   
 ### [매뉴얼 삭제](Joo-uc004-ManualDelete.md)(기업, 관리자)
- - 비회원 및 회원이 자신이 질문한 것을 변경하는 것
+ - 비회원 및 회원이 자신이 질문한 것을 변경하는 것C
  - 매니저가 질문을 변경하는 것
  
 ### [메뉴얼 댓글 관리](Joo-uc005-Manual_comment.md)(회원)
@@ -75,12 +75,6 @@
 
 ### [compare 조회하기](Lee-CompareSelect.md)(비회원, 회원)
 - 비회원 및 회원이 compare 조회기능을 이용하는 것.
-
-### [compare 댓글관리하기](Lee-CompareComment.md)(회원)
-- 회원이 조회한 compare에 댓글을 작성 하는것.
-- 회원이 작성한 compare 댓글을 삭제 하는것.
-- 회원이 작성한 compare 댓글을 변경 하는것.
-- 회원이 작성한 compare 댓글을 추천/비추천 하는것.
 
 ### [QnA관리하기](Lee-ServiceQnA.md)(회원, 관리자)
 - 회원이 QnA를 작성하는 것.
