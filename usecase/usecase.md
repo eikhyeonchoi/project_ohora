@@ -60,7 +60,7 @@
 ### [중고거래 게시판 관리](choi-usedDealing.md)(회원)
 - 회원이 중고거래 게시판에 대해 등록, 조회, 수정, 삭제 하는것
 
-### 중고거래 게시판 조회(비회원)
+### [중고거래 게시판 조회](choi-noSignUpUsedDealing.md)(비회원)
 - 비회원이 중고거래 게시판에 대해 조회하는 것
 
 ### [리뷰관리](kim-ReviewManagement.md)(회원)
