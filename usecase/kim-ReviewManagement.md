@@ -109,5 +109,4 @@
 
 ### 리뷰조회 
 ![리뷰조회 폼](./images/kim-reviewDetail.png)
-### 리뷰댓글
-![리뷰댓글 폼](./images/kim-reviewComment.png)
+

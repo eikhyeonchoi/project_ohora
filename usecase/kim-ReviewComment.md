@@ -32,5 +32,6 @@
    
 
 
-## UI 프로토타입
+### 리뷰댓글
+![리뷰댓글 폼](./images/kim-reviewComment.png)
 
