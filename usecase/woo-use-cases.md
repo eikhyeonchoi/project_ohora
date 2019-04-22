@@ -22,7 +22,7 @@
 ### [팁 열람하기](woo-uc001-TipDetail.md)(비회원)
 - 티키위키에 등록된 팁을 보는 것
 
-### [팁 관리](woo-uc002-TipManageMent.md)(회원)
+### [팁 관리](woo-uc002-TipManagement.md)(회원)
 - 회원으로 등록된 사용자가 팁을 티키위키에 등록, 변경 하는 것.
 
 ### [문의하기](woo-uc003-TipQuestion.md)(회원)
@@ -37,6 +37,6 @@
 ### [공지사항 열람하기](woo-uc007-TipNoticeDetail.md)(비회원)
 - 모든 사용자가 공지사항을 보는 것.
 
-### [공지사항 관리](woo-uc008-TipNoiceManagement.md)(관리자)
+### [공지사항 관리](woo-uc008-TipNoticeManagement.md)(관리자)
 - 관리자가 공지사항에 수정, 등록, 삭제하는 것.
 
