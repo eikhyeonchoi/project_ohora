@@ -31,5 +31,5 @@
 8. 시스템은 상세 리뷰 창을 출력한다.
 
 ## 리뷰 
-![매뉴얼 폼](./images/kim-review1.png)
+![리뷰조회 폼](./images/kim-review1.png)
 
