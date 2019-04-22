@@ -1,4 +1,4 @@
-# UC007- 공지사항 열람하기(Tip Notice list&Detail)
+# UC006- 공지사항 열람하기(Tip Notice list&Detail)
 모든 사용자가 공지사항을 본다.
 
 ## 주 액터(Primary Actor)
