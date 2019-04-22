@@ -7,7 +7,7 @@
 ## 보조 액터(Secondary Actor)
 
 ## 사전 조건(Preconditions)
-- 팁키피디아를 이용하는 사용자
+- 티키위키를 이용하는 사용자
 
 ## 종료 조건(Postconditionse)
 - 공지사항을 열람하여 내용을 확인한다.
