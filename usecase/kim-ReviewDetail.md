@@ -32,4 +32,5 @@
 
 ## 리뷰 
 ![리뷰조회 폼](./images/kim-review1.png)
+![리뷰조회 폼](./images/kim-reviewDetail2.png)
 
