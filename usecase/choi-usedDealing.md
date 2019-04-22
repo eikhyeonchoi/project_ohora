@@ -59,3 +59,17 @@
 
 ## UI 프로토타입
 
+### 중고거래 목록
+![중고거래 목록(List)](./images/choi-중고list.PNG)
+
+### 중고거래 등록, 수정
+![중고거래 등록, 수정 - 01(Create, Update)](./images/choi-중고create&update01.PNG)
+![중고거래 등록, 수정 - 02(Create, Update)](./images/choi-중고create&update02.PNG)
+![중고거래 등록, 수정 - 03(Create, Update)](./images/choi-중고create&update03.PNG)
+
+### 중고거래 상세보기
+![중고거래 상세보기(Read)](./images/choi-중고read.PNG)
+
+### 중고거래 삭제
+![중고거래 삭제(Delete)](./images/choi-중고delete.PNG)
+

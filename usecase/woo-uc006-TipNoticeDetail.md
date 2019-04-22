@@ -1,4 +1,4 @@
-# UC007- 공지사항 열람하기(Tip Notice list&Detail)
+# UC006- 공지사항 열람하기(Tip Notice list&Detail)
 모든 사용자가 공지사항을 본다.
 
 ## 주 액터(Primary Actor)
@@ -7,7 +7,7 @@
 ## 보조 액터(Secondary Actor)
 
 ## 사전 조건(Preconditions)
-- 팁키피디아를 이용하는 사용자
+- 티키위키를 이용하는 사용자
 
 ## 종료 조건(Postconditionse)
 - 공지사항을 열람하여 내용을 확인한다.
