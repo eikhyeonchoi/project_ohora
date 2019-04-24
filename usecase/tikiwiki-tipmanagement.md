@@ -38,16 +38,16 @@
 ## UI 프로토타입
 
 ### 티키위키 디테일
-![티키위키 디테일](./images/woo-tikiwikiDetailPure.png)
+![티키위키 디테일](./images/tikiwiki-detail.png)
 
 ### 티키위키 등록
-![티키위키 등록](./images/woo-tikiwikiAdd.png)
+![티키위키 등록](./images/tikiwiki-add.png)
 
 ### 티키위키 디테일 등록 후
-![티키위키 디테일 등록 후](./images/woo-tikiwikiDetail.png)
+![티키위키 디테일 등록 후](./images/tikiwiki-afterAdd.png)
 
 ### 티키위키 변경
-![티키위키 변경](./images/woo-tikiwikiUpdate.png)
+![티키위키 변경](./images/tikiwiki-update.png)
 
 ### 티키위키 디테일 변경 후
-![티키위키 디테일 변경 후](./images/woo-tikiwikiDetail2.png)
+![티키위키 디테일 변경 후](./images/tikiwiki-afterUpdate.png)

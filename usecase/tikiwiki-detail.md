@@ -26,10 +26,10 @@
 ## UI 프로토타입
 
 ### 티키위키 메인
-![티키위키 메인](./images/woo-tikiwikimain.png)
+![티키위키 메인](./images/tikiwiki-main.png)
 
 ### 티키위키 리스트
-![티키위키 리스트](./images/woo-tikiwikiList.png)
+![티키위키 리스트](./images/tikiwiki-list.png)
 
 ### 티키위키 디테일
-![티키위키 디테일](./images/woo-tikiwikiDetail.png)
+![티키위키 디테일](./images/tikiwiki-detail.png)
