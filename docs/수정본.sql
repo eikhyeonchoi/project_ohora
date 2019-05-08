@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS notice RESTRICT;
 DROP TABLE IF EXISTS faq RESTRICT;
 
 -- 질문카테고리
-DROP TABLE IF EXISTS quetion_category RESTRICT;
+DROP TABLE IF EXISTS question_category RESTRICT;
 
 -- 팁
 DROP TABLE IF EXISTS tip RESTRICT;
@@ -307,7 +307,7 @@ MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원 번호';
 -- 제조사
 CREATE TABLE manufacturer (
 manufac_no INTEGER      NOT NULL COMMENT '제조사번호', -- 제조사번호
-reg_no     INTEGER      NOT NULL COMMENT '사업자 등록번호', -- 사업자 등록번호
+reg_no     varchar(30)  NOT NULL COMMENT '사업자 등록번호', -- 사업자 등록번호
 name       VARCHAR(50)  NOT NULL COMMENT '회사명', -- 회사명
 tel        VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
 homepage   VARCHAR(255) NULL     COMMENT '홈페이지' -- 홈페이지
@@ -472,26 +472,26 @@ ALTER TABLE faq
 MODIFY COLUMN faq_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문 번호';
 
 -- 질문카테고리
-CREATE TABLE quetion_category (
+CREATE TABLE question_category (
 qctg_no INTEGER     NOT NULL COMMENT '질문카테고리번호', -- 질문카테고리번호
 name    VARCHAR(50) NOT NULL COMMENT '카테고리 이름' -- 카테고리 이름
 )
 COMMENT '질문카테고리';
 
 -- 질문카테고리
-ALTER TABLE quetion_category
-ADD CONSTRAINT PK_quetion_category -- 질문카테고리 기본키
+ALTER TABLE question_category
+ADD CONSTRAINT PK_question_category -- 질문카테고리 기본키
 PRIMARY KEY (
 qctg_no -- 질문카테고리번호
 );
 
 -- 질문카테고리 유니크 인덱스
-CREATE UNIQUE INDEX UIX_quetion_category
-ON quetion_category ( -- 질문카테고리
+CREATE UNIQUE INDEX UIX_question_category
+ON question_category ( -- 질문카테고리
 name ASC -- 카테고리 이름
 );
 
-ALTER TABLE quetion_category
+ALTER TABLE question_category
 MODIFY COLUMN qctg_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문카테고리번호';
 
 -- 팁
@@ -874,11 +874,11 @@ q_no -- 질문 번호
 
 -- 자주묻는질문
 ALTER TABLE faq
-ADD CONSTRAINT FK_quetion_category_TO_faq -- 질문카테고리 -> 자주묻는질문
+ADD CONSTRAINT FK_question_category_TO_faq -- 질문카테고리 -> 자주묻는질문
 FOREIGN KEY (
 qctg_no -- 질문카테고리번호
 )
-REFERENCES quetion_category ( -- 질문카테고리
+REFERENCES question_category ( -- 질문카테고리
 qctg_no -- 질문카테고리번호
 );
 
