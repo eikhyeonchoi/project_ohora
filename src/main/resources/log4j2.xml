@@ -9,7 +9,7 @@
     <Root level="INFO">
       <AppenderRef ref="Console"/>
     </Root>
-    <logger name="bitcamp.team.third" level="DEBUG" additivity="false">
+    <logger name="bitcamp.team" level="DEBUG" additivity="false">
       <AppenderRef ref="Console"/>
     </logger>
   </Loggers>
