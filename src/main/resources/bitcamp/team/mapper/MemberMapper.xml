@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bitcamp.team.first.lms.dao.MemberDao">
+<mapper namespace="bitcamp.team.dao.MemberDao">
+
   <resultMap type="member" id="memberMap">
     <id column="member_id" property="no"/>
     <result column="email" property="email"/>

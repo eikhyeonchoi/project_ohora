@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bitcamp.team.first.lms.dao.FboardDao">
+<mapper namespace="bitcamp.team.dao.FboardDao">
+
   <resultMap type="fboard" id="boardMap">
     <id column="fb_no" property="no" />
     <result column="member_no" property="memberNo" />

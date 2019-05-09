@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="bitcamp.team.second.dao.FaqDao">
+<mapper namespace="bitcamp.team.dao.FaqDao">
   
   <resultMap type="faq" id="faqMap">
     <id column="faq_no"       property="no"/>

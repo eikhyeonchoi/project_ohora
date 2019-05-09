@@ -17,17 +17,17 @@ import org.springframework.context.annotation.ImportResource;
   </context:component-scan>
  */
 @ComponentScan(
-    basePackages="bitcamp.team.second",
+    basePackages="bitcamp.team",
     excludeFilters= @Filter(
         type = FilterType.REGEX,
-        pattern = "bitcamp.team.second.web"
+        pattern = "bitcamp.team.web"
     ))
 
 // 트랜잭션을 설정한 파일을 로딩한다.
 // => Spring IoC 컨테이너는 @ImportResource 애노테이션에 지정된 설정 파일에 따라 객체를 준비한다.
 // => 이 애노테이션은 application-context-tx.xml 설정을 대체한다.
 //
-@ImportResource("classpath:/bitcamp/team/second/conf/tx-context.xml")
+@ImportResource("classpath:/bitcamp/team/conf/tx-context.xml")
 public class AppConfig {
 
   final static Logger logger = LogManager.getLogger(AppConfig.class);

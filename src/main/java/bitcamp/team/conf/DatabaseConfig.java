@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //=> application-context-db.xml을 이 Java config 클래스가 대체한다.
 
 @Configuration // IoC 컨테이너에 이 클래스를 알려주지 않아도 찾을 수 있게 한다.
-@PropertySource("classpath:/bitcamp/team/second/conf/jdbc.properties")
+@PropertySource("classpath:/bitcamp/team/conf/jdbc.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
   

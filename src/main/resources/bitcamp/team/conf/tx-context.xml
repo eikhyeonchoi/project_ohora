@@ -45,7 +45,7 @@
     <aop:config>
         <!-- 트랜잭션 advice를 적용할 대상을 정의한다. -->
         <aop:pointcut id="serviceOperation" 
-                      expression="execution(* bitcamp.team.second.service.impl.*.*(..))"/>
+                      expression="execution(* bitcamp.team.service.Impl.*.*(..))"/>
         
         <!-- 그 대상에 트랜잭션 advice를 지정한다. -->
         <aop:advisor advice-ref="txAdvice" 
