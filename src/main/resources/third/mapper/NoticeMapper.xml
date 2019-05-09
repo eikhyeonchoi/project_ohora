@@ -22,7 +22,7 @@
       notice
   </sql>
   
-  <select id="findAll" resultMap="boardMap" parameterType="map">
+  <select id="findAll" resultMap="noticeMap" parameterType="map">
     <include refid="select1"/>
     order by 
       ntc_no desc
@@ -32,7 +32,7 @@
   </select>
   
   <!-- 
-  <select id="findByNo" resultMap="boardMap" parameterType="int">
+  <select id="findByNo" resultMap="noticeMap" parameterType="int">
     <include refid="select1"/>
     where 
       board_id = #{value}
@@ -45,12 +45,12 @@
     where board_id = #{value}
   </update>
   
-  <insert id="insert" parameterType="board">
+  <insert id="insert" parameterType="notice">
     insert into lms_board(conts) 
     values(#{contents})
   </insert>
   
-  <update id="update" parameterType="board">
+  <update id="update" parameterType="notice">
     update lms_board 
     set 
       conts = #{contents} 
