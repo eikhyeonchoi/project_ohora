@@ -17,30 +17,33 @@ if (param) {
 }
 
 $('#add-btn').click(() => {
-  $.post( '../../../app/json/notice/add',{
+  $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
     contents: $('#contents').val()
     },
-    function() {
-      //alert( "success" );
+    function(data) {
+      if(data.status == 'fail'){
+        alert('등록 실패입니다!\n' + data.message);
+      } else {
+        location.href = "index.html";
+      }
       })
-    .done(function() {location.href = "index.html";})
-    .fail(function(data) {alert('등록 실패입니다!\n' + data.message);}
-    )});
+      });
 
 $('#delete-btn').click(() => {
-  $.getJSON('../../../app/json/notice/delete?no=' + no, 
+  $.getJSON('../../app/json/notice/delete?no=' + $('#no').val(), 
   function(data) {
-    console.log(data)
     //$('#no').val()
   })
-  .done(function() {location.href = "index.html";})
-  .fail(function(data) {alert('삭제 실패입니다!\n' + data.message);
+  .done(function(data) {location.href = "index.html";})
+  .fail(function(data) {
+    console.log(data)
+    alert('삭제 실패입니다!\n' + data.responseText);
   })
 });
 
 $('#update-btn').click(() => {
-  $.post('../../../app/json/notice/update', {
+  $.post('../../app/json/notice/update', {
     no: $('#no').val(),
     title: $('#title').val(), 
     contents: $('#contents').val()
@@ -57,7 +60,7 @@ $('#update-btn').click(() => {
 
 function loadData(no) {
 
-  $.getJSON('../../../app/json/notice/detail?no=' + no, function(data) {
+  $.getJSON('../../app/json/notice/detail?no=' + no, function(data) {
     $('#no').val(data.no),
     $('#title').val(data.title),
     $('#contents').val(data.contents);
