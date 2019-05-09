@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.first.lms.dao.FboardDao">
+  <resultMap type="fboard" id="boardMap">
+    <id column="fb_no" property="no" />
+    <result column="member_no" property="memberNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="cnt" property="viewCount" />
+  </resultMap>
+  
+  <resultMap type="fboard" id="boardMemberMap">
+    <id column="fb_no" property="no" />
+    <result column="member_no" property="memberNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="cnt" property="viewCount" />
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="email" property="email" />
+      <result column="n_name" property="nickName" />
+    </association>
+  </resultMap>
+
+  <sql id="select1">
+    select
+    fb_no,
+    member_no,
+    titl,
+    conts,
+    cdt,
+    cnt
+    from
+    fboard
+  </sql>
+
+  <select id="findAll" resultMap="boardMemberMap">
+     select 
+      b.fb_no,
+      b.titl, 
+      b.cdt,
+      b.cnt,
+      m.member_no,
+      m.n_name 
+    from
+      fboard b
+    left outer join
+      member m
+    on b.member_no = m.member_no 
+    order by
+      fb_no desc
+  </select>
+
+  <select id="findByNo" resultMap="boardMemberMap" parameterType="int">
+    select 
+      b.fb_no,
+      b.titl, 
+      b.conts,
+      b.cdt,
+      b.cnt,
+      m.member_no,
+      m.n_name 
+    from
+      fboard b
+    left outer join
+      member m
+    on b.member_no = m.member_no 
+    where 
+      b.fb_no = #{value}
+  </select>
+
+  <update id="increaseCount" parameterType="int">
+    update fboard
+    set
+    cnt = cnt + 1
+    where fb_no =
+    #{value}
+  </update>
+  
+  <insert id="insert" parameterType="fboard">
+    insert into fboard (member_no, titl, conts)
+    values
+    (#{memberNo}, #{title}, #{contents})
+  </insert>
+
+  <delete id="delete" parameterType="int">
+    delete from fboard where fb_no = #{no}
+  </delete>
+
+</mapper>
+
+
