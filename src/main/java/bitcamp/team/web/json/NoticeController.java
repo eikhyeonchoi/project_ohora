@@ -22,6 +22,11 @@ public class NoticeController {
   public Object add(Notice notice) {
     HashMap<String, Object> content = new HashMap<>();
     try {
+      if (notice.getTitle() == "") {
+        throw new RuntimeException("제목을 입력해 주세요");
+      } else if (notice.getContents() == "") {
+        throw new RuntimeException("내용을 입력해 주세요");
+      }
       noticeService.add(notice);
       content.put("status", "success");
     } catch (Exception e) {

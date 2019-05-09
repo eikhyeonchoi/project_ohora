@@ -5,12 +5,12 @@
 <mapper namespace="bitcamp.team.dao.MemberDao">
 
   <resultMap type="member" id="memberMap">
-    <id column="member_id" property="no"/>
+    <id column="member_no" property="no"/>
     <result column="email" property="email"/>
     <result column="pwd" property="password"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
-    <result column="n_name" property="n_name"/>
+    <result column="n_name" property="nickName"/>
     <result column="type" property="type"/>
     <result column="ban" property="ban"/>
   </resultMap>
@@ -22,22 +22,22 @@
     tel,
     n_name,
     type,
-    ban
+    ban,
+    pwd
   </sql>
 
   <select id="findAll" resultMap="memberMap">
     select
-      <include refid="default-columns"/>,
-      pwd,
+      <include refid="default-columns"/>
     from 
       member
     order by
-      member_id desc
+      member_no desc
   </select>
  
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
-      <include refid="default-columns"/>,
+      <include refid="default-columns"/>
     from member
     where
       member_no = #{value}

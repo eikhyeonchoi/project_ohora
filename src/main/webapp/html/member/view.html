@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>자유게시판 디테일</title>
+<meta charset="UTF-8">
+<title>회원 조회</title>
   <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<link rel="stylesheet" href="index.css">
 </head>
-<body>
 
+<body>
   <header class="bit-main-header"></header>
   <div class="container">
     <h1></h1>
@@ -22,33 +21,45 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="memberNo" class="col-sm-2 col-form-label">작성자</label>
+        <label for="name" class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="memberNo" name='memberNo'>
+          <input type="text" class="form-control" id="name" name='name'>
         </div>
       </div>
       <div class="form-group row">
-        <label for="title" class="col-sm-2 col-form-label">제목</label>
+        <label for="nickName" class="col-sm-2 col-form-label">닉네임</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="title" name='title'>
+          <input type="text" class="form-control" id="nickName" name='nickName'>
         </div>
       </div>
       <div class="form-group row">
-        <label for="contents" class="col-sm-2 col-form-label">내용</label>
+        <label for="email" class="col-sm-2 col-form-label">이메일</label>
         <div class="col-sm-10">
-          <textarea class="form-control" id="contents" name='contents' rows='5'></textarea>
+          <input type='email' class="form-control" id="email" name='email'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">암호</label>
+        <div class="col-sm-10">
+          <input type='password' class="form-control" id="password" name='password'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
+        <div class="col-sm-10">
+          <input type='text' class="form-control" id="tel" name='tel'>
         </div>
       </div>
       <div class="form-group row bit-view-item">
-        <label for="createdDate" class="col-sm-2 col-form-label">작성일</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control-plaintext" id="createdDate">
+        <label for="type" class="col-sm-2 col-form-label">타입</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="type" name='type' readonly>
         </div>
       </div>
       <div class="form-group row bit-view-item">
-        <label for="viewCount" class="col-sm-2 col-form-label">조회수</label>
+        <label for="ban" class="col-sm-2 col-form-label">벤</label>
         <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="viewCount">
+          <input type="text" class="form-control-plaintext" id="ban" name='ban' readonly>
         </div>
       </div>
       <div class="form-group row">
@@ -56,11 +67,12 @@
           <a href='index.html' class="btn btn-primary btn-sm">목록</a>
           <button type="button" id="delete-btn" class="btn btn-danger btn-sm bit-view-item">삭제</button>
           <button type="button" id="update-btn" class="btn btn-warning btn-sm bit-view-item">변경</button>
-          <button type="button" id="add-btn"class="btn btn-success btn-sm bit-new-item">등록</button>
+          <button type="button" id="add-btn" class="btn btn-success btn-sm bit-new-item">등록</button>
         </div>
       </div>
     </form>
-  </div> <!-- container -->
+  </div>
+  <!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

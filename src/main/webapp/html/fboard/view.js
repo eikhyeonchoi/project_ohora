@@ -33,19 +33,38 @@ $('#add-btn').click(() => {
   },
   function(data) {
     headers: ("Content-Type", "application/x-www-form-urlencoded");
-  if (data.status == 'success') 
+  if (data.status == 'success') {
     location.href = "index.html";
-
-  }).fail (function (data) {
+  }
+  }).fail(function(data) {
     alert('등록 실패 입니다.\n' +  data.message);
-
   })
 });
 
-$('#delete-btn').click() => {
-  $.post('../../app/json/fboard/delete?no=')
-};
+$('#delete-btn').click(() => {
+  $.getJSON('../../app/json/fboard/delete?no=' + param.split('=')[1], function(data) {
+    if (data.status == 'success') {
+      location.href = "index.html";
+    } else {
+      alert('삭제 실패 입니다.\n' +  data.message);
+    }
+  }) 
+});
 
+$('#update-btn').click(() => {
+  $.post('/bitcamp-team-project/app/json/fboard/update?no=' + param.split('=')[1], {
+    title: $('#title').val(),
+    contents: $('#contents').val()
+  },
+  function(data) {
+    headers: ("Content-Type", "application/x-www-form-urlencoded");
+  if (data.status == 'success') {
+    location.href = "index.html";
+  } else {
+    alert('변경 실패 입니다.\n' +  data.message);
+  }
+  })
+});
 
 
 
