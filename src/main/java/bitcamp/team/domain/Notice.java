@@ -1,14 +1,23 @@
 package bitcamp.team.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Notice {
+public class Notice implements Cloneable, Serializable {
+  private static final long serialVersionUID = 1L;
 
   protected int no;
   protected String title;
   protected String contents;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   protected Date createdDate;
   protected int viewCount;
+
+  @Override
+  public Notice clone() throws CloneNotSupportedException {
+    return (Notice) super.clone();
+  }
 
   @Override
   public String toString() {

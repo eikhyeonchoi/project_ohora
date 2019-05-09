@@ -16,6 +16,7 @@
     select 
       ntc_no, 
       titl,
+      conts,
       cdt, 
       cnt 
     from 
@@ -31,38 +32,37 @@
     </if>
   </select>
   
-  <!-- 
   <select id="findByNo" resultMap="noticeMap" parameterType="int">
     <include refid="select1"/>
     where 
-      board_id = #{value}
+      ntc_no = #{value}
   </select>
   
   <update id="increaseCount" parameterType="int">
-    update lms_board 
+    update notice 
     set 
-      vw_cnt = vw_cnt + 1 
-    where board_id = #{value}
+      cnt = cnt + 1 
+    where ntc_no = #{value}
   </update>
   
   <insert id="insert" parameterType="notice">
-    insert into lms_board(conts) 
-    values(#{contents})
+    insert into notice(titl, conts) 
+    values(#{title}, #{contents})
   </insert>
   
   <update id="update" parameterType="notice">
-    update lms_board 
+    update notice 
     set 
+      titl = #{title},
       conts = #{contents} 
-    where board_id = #{no}
+    where ntc_no = #{no}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from lms_board 
-    where board_id = #{no}
+    delete from notice 
+    where ntc_no = #{no}
   </delete>
   
-   -->
   <select id="countAll" resultType="int">
     select count(*) from notice
   </select>
