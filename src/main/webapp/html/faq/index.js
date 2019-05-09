@@ -1,3 +1,8 @@
+/*
+ * faq 
+ * index javascript
+ * 
+ */
 var tbody = $('tbody'),
     templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);

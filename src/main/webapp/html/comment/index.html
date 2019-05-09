@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>댓글 연습</title>
+</head>
+<body>
+<h1>댓글 html</h1>
+<textarea id="comment-textarea" rows="2" cols="30"></textarea>
+<button id="comment-add-btn" txype="button">등록</button>
+<div id="comment-list"></div>
+
+<div id="recomment-add-form">
+  <form>
+    <textarea rows="2" cols="30"></textarea>
+    <button id="recomment-add-btn" type="button">등록</button>
+    <button id="recomment-cancel-btn" type="button">취소</button>
+  </form>
+</div>
+
+<script id="comment-template" type="text/x-handlebars-template">
+<ul id='comment-ul'>
+  {{#each list}}
+    <li id='comment-li'>{{contents}}<button id='recomment-btn' type='button'>답글</button></li>
+  {{/each}}
+</ul>
+</script>
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

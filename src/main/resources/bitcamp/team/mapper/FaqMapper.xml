@@ -38,7 +38,7 @@
       qc.name
     from 
       faq f
-      left outer join question_category qc on f.qctg_no = qc.qctg_no 
+      right outer join question_category qc on f.qctg_no = qc.qctg_no 
     order by 
       qc.qctg_no asc;
   </select>
