@@ -92,6 +92,16 @@
     delete from fboard where fb_no = #{no}
   </delete>
 
+  <update id="update" parameterType="fboard">
+    update 
+      fboard
+    <set>
+      <if test="title != null">titl = #{title}</if>,
+      <if test="contents != null">conts = #{contents}</if>
+    </set>
+    where fb_no = #{no}
+  </update>
+  
 </mapper>
 
 
