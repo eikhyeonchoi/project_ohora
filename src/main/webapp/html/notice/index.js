@@ -8,10 +8,9 @@ templateSrc = $('#tr-template').html();
 
 var trGenerator = Handlebars.compile(templateSrc);
 
-//JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
 
-  $.getJSON('../../../app/json/notice/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../../app/json/notice/list?pageNo=' + pn + '&pageSize=' + pageSize, 
           function (obj){
     
     pageNo = obj.pageNo;
@@ -19,17 +18,14 @@ function loadList(pn) {
     tbody.html('');
     $(trGenerator(obj)).appendTo(tbody);
 
-    // 현재 페이지의 번호를 갱신한다.
     currSpan.html(String(pageNo));
 
-    // 1페이지일 경우 버튼을 비활성화 한다.
     if (pageNo == 1) {
       prevPageLi.addClass('disabled');
     } else {
       prevPageLi.removeClass('disabled');
     } 
 
-    // 마지막 페이지일 경우 버튼을 비활성화 한다.
     if (pageNo == obj.totalPage) {
       nextPageLi.addClass('disabled');
     } else {
@@ -50,7 +46,6 @@ $('#nextPage > a').click((e) => {
   loadList(pageNo + 1);
 });
 
-//페이지를 출력한 후 1페이지 목록을 로딩한다.
 loadList(1);
 
 $(document.body).bind('loaded-list', () => {
