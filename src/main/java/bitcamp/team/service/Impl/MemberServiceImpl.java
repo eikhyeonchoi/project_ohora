@@ -11,16 +11,17 @@ import bitcamp.team.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
-
+  
   public MemberServiceImpl(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
 
   @Override
   public List<Member> list() {
+    System.out.println(memberDao.findAll());
     return memberDao.findAll();
   }
-
+  
   @Override
   public int add(Member member) {
     return memberDao.insert(member);
