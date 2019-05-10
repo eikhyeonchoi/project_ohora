@@ -1,20 +1,14 @@
-var allcb =  $("#all-checkBox");
-var agree = $('#agree');
-var sercb = $('#service-checkBox');
-var memcb = $('#member-checkBox');
+var allcb =  $("#all-checkBox"),
+    agree = $('#agree'),
+    sercb = $('#service-checkBox'),
+    memcb = $('#member-checkBox');
+
 allcb.prop("checked", false);
 sercb.prop("checked", false);
 memcb.prop("checked", false);
 
 allcb.click(function() {
-  if ( allcb.is(":checked")){
-    sercb.prop("checked", true);
-    memcb.prop("checked", true);
-  } else {
-    sercb.prop("checked", false);
-    memcb.prop("checked", false);
-  }
-
+  setTerms()
 });
 
 sercb.click(function() {
@@ -38,5 +32,15 @@ function viewTerms() {
     allcb.prop("checked",true);
   } else {
     allcb.prop("checked",false);
+  }
+}
+
+function setTerms() {
+  if (allcb.is(":checked")){
+    sercb.prop("checked", true);
+    memcb.prop("checked", true);
+  } else {
+    sercb.prop("checked", false);
+    memcb.prop("checked", false);
   }
 }

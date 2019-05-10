@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public List<Member> list() {
-      return memberDao.findAll();
+    return memberDao.findAll();
   }
 
   @Override
@@ -33,23 +33,23 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int update(Member member) {
-      return memberDao.update(member);
+    return memberDao.update(member);
   }
 
-    @Override
-    public int delete(int no) {
-      return memberDao.delete(no);
-    }
+  @Override
+  public int delete(int no) {
+    return memberDao.delete(no);
+  }
 
-    @Override
-    public Member get(String email, String password) {
-      HashMap<String,Object> paramMap = new HashMap<>();
-      paramMap.put("email", email);
-      paramMap.put("password", password);
-      return memberDao.findByEmailPassword(paramMap);
-    }
-    @Override
-    public int size() {
-      return memberDao.countAll();
-    }
+  @Override
+  public Member get(String email, String password) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+    paramMap.put("password", password);
+    return memberDao.findByEmailPassword(paramMap);
+  }
+  @Override
+  public int size() {
+    return memberDao.countAll();
+  }
 }
