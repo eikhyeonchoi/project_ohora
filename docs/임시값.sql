@@ -368,7 +368,3 @@ insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@te
 
 
 
-
-
-
-
