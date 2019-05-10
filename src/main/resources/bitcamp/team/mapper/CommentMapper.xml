@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.team.dao.CommentDao">
+  
+  <resultMap type="comment" id="commentMap">
+    <id column="comment_no"       property="no"/>
+    <result column="group_no"  property="groupNo"/>
+    <result column="sort"     property="sortNo"/>
+    <result column="depth"    property="depth"/>
+    <result column="contents"    property="contents"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="commentMap">
+    select
+      group_no,
+      sort,
+      depth,
+      contents
+    from 
+      comment
+    order by 
+      group_no desc,
+      sort asc;
+  </select>
+  
+  <!-- 
+  <insert id="insert" parameterType="comment">
+    insert into 
+      comment(group_no, sort, depth, contents) 
+    values(#{groupNo}, #{sortNo}, #{depth}, #{contents});
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      faq
+    <where>
+      faq_no = #{value};
+    </where>
+  </delete>
+ -->
+  
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

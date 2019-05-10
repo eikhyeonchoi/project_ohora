@@ -1,3 +1,8 @@
+/*
+ *  faq 
+ *  view javascript
+ * 
+ */
 var select = $('#faq-question-category-option'),
 templateSrc = $('#select-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
@@ -16,6 +21,7 @@ if(param){
 
   // console.log(param);
   $.getJSON('/bitcamp-team-project/app/json/faq/detail?no=' + param.split('=')[1], function(obj) { // 10
+    console.log(obj);
     $('#faq-no').val(obj.faq.no);
     $('#faq-title').val(obj.faq.title);
     $('#faq-contents').val(obj.faq.contents);
@@ -30,6 +36,7 @@ if(param){
   ($.getJSON('/bitcamp-team-project/app/json/faq/list', (obj) => {
     // console.log(obj);
     $(trGenerator(obj)).appendTo(select);
+    $(document.body).tr
     $(document.body).trigger('loaded-addForm');
   }));
 }
