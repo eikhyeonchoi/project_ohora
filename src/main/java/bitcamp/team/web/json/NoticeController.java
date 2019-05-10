@@ -60,12 +60,12 @@ public class NoticeController {
 
   @GetMapping("list")
   public Object list(@RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "3") int pageSize) {
+      @RequestParam(defaultValue = "10") int pageSize, String keyword, String searchType) {
 
-    if (pageSize < 3 || pageSize > 8)
-      pageSize = 3;
+    if (pageSize < 10 || pageSize > 18)
+      pageSize = 10;
 
-    int rowCount = noticeService.size();
+    int rowCount = noticeService.size(keyword);
     int totalPage = rowCount / pageSize;
     if (rowCount % pageSize > 0)
       totalPage++;
@@ -75,13 +75,15 @@ public class NoticeController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-    List<Notice> notice = noticeService.list(pageNo, pageSize);
+    List<Notice> notice = noticeService.list(pageNo, pageSize, keyword, searchType);
 
     HashMap<String, Object> content = new HashMap<>();
     content.put("list", notice);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
+    content.put("keyword", keyword);
+    content.put("searchType", searchType);
 
     return content;
   }

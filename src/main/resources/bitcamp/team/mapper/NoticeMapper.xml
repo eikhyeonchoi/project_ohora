@@ -4,66 +4,87 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitcamp.team.dao.NoticeDao">
 
-<resultMap type="notice" id="noticeMap">
-    <id column="ntc_no" property="no"/>
-    <result column="titl" property="title"/>
-    <result column="conts" property="contents"/>
-    <result column="cdt" property="createdDate"/>
-    <result column="cnt" property="viewCount"/>
+  <resultMap type="notice" id="noticeMap">
+    <id column="ntc_no" property="no" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="cnt" property="viewCount" />
   </resultMap>
-  
+
   <sql id="select1">
-    select 
-      ntc_no, 
-      titl,
-      conts,
-      cdt, 
-      cnt 
-    from 
-      notice
+    select
+    ntc_no,
+    titl,
+    conts,
+    cdt,
+    cnt
+    from
+    notice
   </sql>
-  
+
   <select id="findAll" resultMap="noticeMap" parameterType="map">
-    <include refid="select1"/>
-    order by 
-      ntc_no desc
+    <include refid="select1" />
+    <where>
+      <if test="searchType == 'title' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        titl like #{pattern1}
+      </if>
+      <if test="searchType == 'contents' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        conts like #{pattern1}
+      </if>
+      <if test="searchType == 'all' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        titl like #{pattern1} or
+        conts like #{pattern1}
+      </if>
+    </where>
+    order by
+    ntc_no desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
   </select>
-  
+
   <select id="findByNo" resultMap="noticeMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-      ntc_no = #{value}
+    <include refid="select1" />
+    where
+    ntc_no = #{value}
   </select>
-  
+
   <update id="increaseCount" parameterType="int">
-    update notice 
-    set 
-      cnt = cnt + 1 
+    update notice
+    set
+    cnt = cnt + 1
     where ntc_no = #{value}
   </update>
-  
+
   <insert id="insert" parameterType="notice">
-    insert into notice(titl, conts) 
+    insert into notice(titl, conts)
     values(#{title}, #{contents})
   </insert>
-  
+
   <update id="update" parameterType="notice">
-    update notice 
-    set 
-      titl = #{title},
-      conts = #{contents} 
+    update notice
+    set
+    titl = #{title},
+    conts = #{contents}
     where ntc_no = #{no}
   </update>
-  
+
   <delete id="delete" parameterType="int">
-    delete from notice 
+    delete from notice
     where ntc_no = #{no}
   </delete>
-  
-  <select id="countAll" resultType="int">
+
+  <select id="countAll" resultType="int" parameterType="map">
     select count(*) from notice
+    <where>
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        titl like #{pattern1}
+      </if>
+    </where>
   </select>
 </mapper>

@@ -4,7 +4,7 @@ import java.util.List;
 import bitcamp.team.domain.Notice;
 
 public interface NoticeService {
-  List<Notice> list(int pageNo, int pageSize);
+  List<Notice> list(int pageNo, int pageSize, String keyword, String searchType);
 
   int add(Notice notice);
 
@@ -14,5 +14,5 @@ public interface NoticeService {
 
   int delete(int no);
 
-  int size();
+  int size(String keyword);
 }

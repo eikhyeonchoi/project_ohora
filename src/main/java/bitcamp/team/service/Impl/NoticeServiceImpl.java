@@ -17,10 +17,12 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public List<Notice> list(int pageNo, int pageSize) {
+  public List<Notice> list(int pageNo, int pageSize, String keyword, String searchType) {
     HashMap<String, Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("searchType", searchType);
+    params.put("keyword", keyword);
 
     return noticeDao.findAll(params);
   }
@@ -50,8 +52,14 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public int size() {
-    return noticeDao.countAll();
+  public int size(String keyword) {
+    if (keyword != null) {
+      HashMap<String, Object> params = new HashMap<>();
+      params.put("keyword", keyword);
+
+      return noticeDao.countAll(params);
+    }
+    return noticeDao.countAll(null);
   }
 
 
