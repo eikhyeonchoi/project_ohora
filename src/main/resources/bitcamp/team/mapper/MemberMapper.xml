@@ -5,14 +5,14 @@
 <mapper namespace="bitcamp.team.dao.MemberDao">
 
   <resultMap type="member" id="memberMap">
-    <id column="member_no" property="no"/>
-    <result column="email" property="email"/>
-    <result column="pwd" property="password"/>
-    <result column="name" property="name"/>
-    <result column="tel" property="tel"/>
-    <result column="n_name" property="nickName"/>
-    <result column="type" property="type"/>
-    <result column="ban" property="ban"/>
+    <id column="member_no" property="no" />
+    <result column="email" property="email" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="tel" property="tel" />
+    <result column="n_name" property="nickName" />
+    <result column="type" property="type" />
+    <result column="ban" property="ban" />
   </resultMap>
 
   <sql id="default-columns">
@@ -28,30 +28,30 @@
 
   <select id="findAll" resultMap="memberMap">
     select
-      <include refid="default-columns"/>
-    from 
-      member
+    <include refid="default-columns" />
+    from
+    member
     order by
-      member_no desc
+    member_no desc
   </select>
- 
+
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
-      <include refid="default-columns"/>
+    <include refid="default-columns" />
     from member
     where
-      member_no = #{value}
+    member_no = #{value}
   </select>
-  
+
   <insert id="insert" parameterType="member">
     insert into member (
-      type, email, pwd, n_name, name, tel
+    type, email, pwd, n_name, name, tel
     )
-    values 
-      (#{type}, #{email}, password(#{password}), #{n_name}, #{name}), #{tel})
+    values
+    (#{type}, #{email}, password(#{password}), #{n_name}, #{name}), #{tel})
   </insert>
-  
-  
+
+
   <update id="update" parameterType="member">
     update member
     <set>
@@ -62,14 +62,24 @@
       <if test="name != null">name = #{name}</if>
       <if test="tel != null">tel = #{tel},</if>
     </set>
-      where
-        member_no = #{no}
+    where
+    member_no = #{no}
   </update>
-  
+
   <delete id="delete" parameterType="int">
     delete from member where member_no = #{no}
   </delete>
-  
+
+  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
+    select
+    <include refid="default-columns" />
+    from
+    member
+    where
+    email=#{email}
+    and pwd = password(#{password})
+  </select>
+
   <select id="countAll" resultType="int">
     select count(*) from member
   </select>
