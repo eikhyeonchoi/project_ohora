@@ -3,16 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitcamp.team.dao.MemberDao">
-
   <resultMap type="member" id="memberMap">
-    <id column="member_no" property="no"/>
-    <result column="email" property="email"/>
-    <result column="pwd" property="password"/>
-    <result column="name" property="name"/>
-    <result column="tel" property="tel"/>
-    <result column="n_name" property="nickName"/>
-    <result column="type" property="type"/>
-    <result column="ban" property="ban"/>
+    <id column="member_no" property="no" />
+    <result column="email" property="email" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="tel" property="tel" />
+    <result column="n_name" property="nickName" />
+    <result column="type" property="type" />
+    <result column="ban" property="ban" />
+    <result column="manufac_no" property="manufacNo" />
+  </resultMap>
+
+  <resultMap type="member" id="memberAllMap">
+    <id column="member_no" property="no" />
+    <result column="email" property="email" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="tel" property="tel" />
+    <result column="n_name" property="nickName" />
+    <result column="type" property="type" />
+    <result column="ban" property="ban" />
+    <result column="manufac_no" property="manufacNo" />
+    <association property="manufacturer" javaType="manufacturer">
+      <id column="manufac_no" property="no" />
+      <result column="compName" property="name" />
+      <result column="compTel" property="tel" />
+      <result column="homepage" property="homePage" />
+      <result column="reg_no" property="registerNo" />
+    </association>
   </resultMap>
 
   <sql id="default-columns">
@@ -25,33 +44,57 @@
     ban,
     pwd
   </sql>
+  
+  <sql id="defualt-columns2">
+    name as compName,
+    tel as compTel,
+    hompage,
+    reg_no
+  </sql>
 
-  <select id="findAll" resultMap="memberMap">
+  <select id="findAll" resultMap="memberAllMap" parameterType="map">
     select
-      <include refid="default-columns"/>
-    from 
-      member
+    m.member_no,
+    m.email,
+    m.name,
+    m.tel,
+    m.n_name,
+    m.ban,
+    m.pwd,
+    f.manufac_no,
+    f.name as compName,
+    f.tel as compTel,
+    f.homepage,
+    f.reg_no
+    from
+    member m
+    left outer join
+    manufacturer f
+    on m.manufac_no = f.manufac_no
+    where
+    m.manufac_no is not null
     order by
-      member_no desc
+    member_no desc
   </select>
- 
+
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
-      <include refid="default-columns"/>
+    <include refid="default-columns" />
     from member
     where
-      member_no = #{value}
+    member_no = #{value}
   </select>
-  
+
   <insert id="insert" parameterType="member">
+  <insert id="insertByMaf">
     insert into member (
-      type, email, pwd, n_name, name, tel
+    type, email, pwd, n_name, name, tel
     )
-    values 
-      (#{type}, #{email}, password(#{password}), #{n_name}, #{name}), #{tel})
+    values
+    (#{type}, #{email}, password(#{password}), #{n_name}, #{name}), #{tel})
   </insert>
-  
-  
+
+
   <update id="update" parameterType="member">
     update member
     <set>
@@ -62,14 +105,24 @@
       <if test="name != null">name = #{name}</if>
       <if test="tel != null">tel = #{tel},</if>
     </set>
-      where
-        member_no = #{no}
+    where
+    member_no = #{no}
   </update>
-  
+
   <delete id="delete" parameterType="int">
     delete from member where member_no = #{no}
   </delete>
-  
+
+  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
+    select
+    <include refid="default-columns" />
+    from
+    member
+    where
+    email=#{email}
+    and pwd = password(#{password})
+  </select>
+
   <select id="countAll" resultType="int">
     select count(*) from member
   </select>
