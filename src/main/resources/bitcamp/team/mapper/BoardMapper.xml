@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.team.dao.BoardDao">
+
+  <resultMap type="board" id="boardMap">
+    <id     column="id"               property="no"/>
+    <result column="subject"          property="title"/>
+    <result column="content"          property="contents"/>
+    <result column="register_date"    property="registerDate"/>
+  </resultMap>
+
+  <resultMap type="boardReply" id="boardReplyMap">
+    <id     column="reply_id"         property="no"/>
+    <result column="board_id"         property="boardId"/>
+    <result column="parent_id"        property="parentId"/>
+    <result column="depth"            property="depth"/>
+    <result column="reply_content"    property="contents"/>
+    <result column="register_date"    property="registerDate"/>
+  </resultMap>
+
+
+  <insert id="insert" parameterType="map">
+    insert into board(
+      subject,
+      content
+    )values(
+      #{title},
+      #{contents}
+    )
+  </insert>
+  
+  <insert id="update" parameterType="board">
+    update
+      board
+    set
+      subject = #{title},
+      content = #{contents}
+    where
+      id = #{no}
+  </insert>
+  
+  <select id="countAll" resultType="int" parameterType="map">
+    select
+      count(id)
+    from
+      board;
+  </select>
+    
+    
+  <select id="findAll" resultMap="boardMap">
+    select
+        id,
+        subject,
+        content,
+        date_format(register_date, '%Y-%m-%d %H:%i:%s') register_date
+    from
+        board;
+  </select>
+    
+    
+  <select id="detail" resultMap="boardMap" parameterType="int">
+    select
+      id,
+      subject,
+      content,
+      date_format(register_date, '%Y-%m-%d %H:%i:%s') register_date
+    from
+      board
+    where
+      id = #{value};
+  </select>
+  
+  <select id="findReply" resultMap="boardReplyMap" parameterMap="int">
+    select
+      reply_content,
+      register_date
+    from
+      board_reply
+    where
+      board_id=#{value};
+  </select>
+  
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

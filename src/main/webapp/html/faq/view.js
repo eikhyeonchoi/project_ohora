@@ -36,7 +36,6 @@ if(param){
   ($.getJSON('/bitcamp-team-project/app/json/faq/list', (obj) => {
     // console.log(obj);
     $(trGenerator(obj)).appendTo(select);
-    $(document.body).tr
     $(document.body).trigger('loaded-addForm');
   }));
 }
@@ -63,7 +62,8 @@ $(document.body).bind('loaded-addForm', () => {
 $(document.body).bind('loaded-updateForm', () => {
   // update
   $('#faq-update-btn').click(() =>{
-    $.post('/bitcamp-team-project/app/json/faq/update?no=' + param.split('=')[1], {
+    $.post('/bitcamp-team-project/app/json/faq/update', {
+      no: param.split('=')[1],
       title: $('#faq-title').val(),
       contents: $('#faq-contents').val(),
       qcNo: $('#faqCtg-no option:selected').val()

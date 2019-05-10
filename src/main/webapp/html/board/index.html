@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>임시 게시판</title>
+</head>
+<body>
+<h1>임시 게시판 (+ 댓글)</h1>
+<button id="boardAdd" type="button">새 글</button>
+
+<table id="boardList" border="1">
+  <tr>
+      <th width="50px">No</th>
+      <th width="850px">제목</th>
+      <th width="200px">작성일</th>
+  </tr>
+</table>
+<script id="boardList-template" type="text/x-handlebars-template">
+{{#each list}}
+  <tr>
+    <td>{{no}}</td>
+    <td>
+      <a href='/bitcamp-team-project/html/board/view.html?no={{no}}'>{{title}}</a>
+    </td>
+    <td>{{registerDate}}</td>
+  </tr>
+{{/each}}
+</script>
+
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
