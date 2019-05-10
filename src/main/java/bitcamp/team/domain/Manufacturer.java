@@ -1,19 +1,13 @@
 package bitcamp.team.domain;
 
-public class manufacturer {
+public class Manufacturer {
 
   private int no;
   private String name;
   private String tel;
-  private String haomPage;
+  private String homePage;
   private String registerNo;
-
-  @Override
-  public String toString() {
-    return "manufacturer [no=" + no + ", name=" + name + ", tel=" + tel + ", haomPage=" + haomPage
-        + ", registerNo=" + registerNo + "]";
-  }
-
+  
   public int getNo() {
     return no;
   }
@@ -32,11 +26,11 @@ public class manufacturer {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public String getHaomPage() {
-    return haomPage;
+  public String getHomePage() {
+    return homePage;
   }
-  public void setHaomPage(String haomPage) {
-    this.haomPage = haomPage;
+  public void setHomePage(String homePage) {
+    this.homePage = homePage;
   }
   public String getRegisterNo() {
     return registerNo;
@@ -44,7 +38,11 @@ public class manufacturer {
   public void setRegisterNo(String registerNo) {
     this.registerNo = registerNo;
   }
-
+  @Override
+  public String toString() {
+    return "Manufacturer [no=" + no + ", name=" + name + ", tel=" + tel + ", homePage=" + homePage
+        + ", registerNo=" + registerNo + "]";
+  }
 }
 
 

@@ -55,7 +55,6 @@ public class MemberController {
 
   @GetMapping("list")
   public Object list() throws Exception {
-
     HashMap<String,Object> map = new HashMap<>();
     List<Member> members = memberService.list();
     map.put("list", members);

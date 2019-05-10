@@ -4,9 +4,8 @@ var trGenerator = Handlebars.compile(templateSrc);
 
 function loadList(pn) {
 
-  $.getJSON('../../app/json/member/list', 
+  $.getJSON('../../app/json/manufacturer/list', 
       function(obj) {
-    console.log(obj);
     tbody.html(''); 
     $(trGenerator(obj)).appendTo(tbody);
 

@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitcamp.team.dao.MemberDao">
-
   <resultMap type="member" id="memberMap">
     <id column="member_no" property="no" />
     <result column="email" property="email" />
@@ -13,6 +12,26 @@
     <result column="n_name" property="nickName" />
     <result column="type" property="type" />
     <result column="ban" property="ban" />
+    <result column="manufac_no" property="manufacNo" />
+  </resultMap>
+
+  <resultMap type="member" id="memberAllMap">
+    <id column="member_no" property="no" />
+    <result column="email" property="email" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="tel" property="tel" />
+    <result column="n_name" property="nickName" />
+    <result column="type" property="type" />
+    <result column="ban" property="ban" />
+    <result column="manufac_no" property="manufacNo" />
+    <association property="manufacturer" javaType="manufacturer">
+      <id column="manufac_no" property="no" />
+      <result column="compName" property="name" />
+      <result column="compTel" property="tel" />
+      <result column="homepage" property="homePage" />
+      <result column="reg_no" property="registerNo" />
+    </association>
   </resultMap>
 
   <sql id="default-columns">
@@ -25,12 +44,35 @@
     ban,
     pwd
   </sql>
+  
+  <sql id="defualt-columns2">
+    name as compName,
+    tel as compTel,
+    hompage,
+    reg_no
+  </sql>
 
-  <select id="findAll" resultMap="memberMap">
+  <select id="findAll" resultMap="memberAllMap" parameterType="map">
     select
-    <include refid="default-columns" />
+    m.member_no,
+    m.email,
+    m.name,
+    m.tel,
+    m.n_name,
+    m.ban,
+    m.pwd,
+    f.manufac_no,
+    f.name as compName,
+    f.tel as compTel,
+    f.homepage,
+    f.reg_no
     from
-    member
+    member m
+    left outer join
+    manufacturer f
+    on m.manufac_no = f.manufac_no
+    where
+    m.manufac_no is not null
     order by
     member_no desc
   </select>
@@ -44,6 +86,7 @@
   </select>
 
   <insert id="insert" parameterType="member">
+  <insert id="insertByMaf">
     insert into member (
     type, email, pwd, n_name, name, tel
     )
