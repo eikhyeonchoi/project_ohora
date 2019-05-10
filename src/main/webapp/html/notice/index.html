@@ -1,47 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>공지사항</title>
-  <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>공지사항</title>
+<link rel="stylesheet"
+ href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
 
-<header class="bit-main-header"></header>
+ <header class="bit-main-header"></header>
 
-<div class="container">
-<h1>공지사항</h1>
-<p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p>
+ <div class="container">
+  <h1>공지사항</h1>
+  <p>
+   <a href='view.html' class="btn btn-primary btn-sm">새 글</a>
+  </p>
 
-<div class="bit-list">
-<table class="table table-hover">
-<thead>
-  <tr> 
-    <th scope="col">번호</th>
-    <th scope="col">제목</th>
-    <th scope="col">등록일</th>
-    <th scope="col">조회수</th>
-  </tr>
-</thead>
-<tbody></tbody>
+  <div class="bit-list">
+   <table class="table table-hover">
+    <thead>
+     <tr>
+      <th scope="col">번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">등록일</th>
+      <th scope="col">조회수</th>
+     </tr>
+    </thead>
+    <tbody></tbody>
 
-</table>
-</div><!-- .bit-list -->
+   </table>
+  </div>
+  <!-- .bit-list -->
 
-<nav aria-label="목록 페이지 이동">
-  <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
-  </ul>
-</nav>
-</div><!-- .container -->
+  <!-- 페이지 이동 버튼 -->
+  
+  <nav aria-label="목록 페이지 이동">
+   <ul class="pagination justify-content-center">
+    <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="1stPage" class="page-item"><a class="page-link" href="#">1</a></li>
+    <li id="2ndPage" class="page-item"><a class="page-link" href="#">2</a></li>
+    <li id="3thPage" class="page-item"><a class="page-link" href="#">3</a></li>
+    <li id="4thPage" class="page-item"><a class="page-link" href="#">4</a></li>
+    <li id="5thPage" class="page-item"><a class="page-link" href="#">5</a></li>
+    <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+   </ul>
+  </nav>
+   <!-- 검색창 -->
 
-<script id="tr-template" type="text/x-handlebars-template">
+  <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+   <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+     <div class="input-group mb-3">
+      <select name="searchType" class="custom-select" id="searchType">
+       <option class="dropdown-item" value="title" id="search_title">제목</option>
+       <option class="dropdown-item" value="contents" id="search_contents">내용</option>
+       <option class="dropdown-item" value="all" id="search_all">제목+내용</option>
+      </select>
+     </div>
+    </div>
+   </div>
+   <input id="keyword" class="form-control mr-sm-2" placeholder="검색"
+    aria-label="검색">
+   <button type="button" id="search-btn" class="btn btn-outline-success my-2 my-sm-0">검색</button>
+  </form>
+  
+  
+ </div>
+ <!-- .container -->
+
+ <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
@@ -51,12 +79,12 @@
 </tr>
 {{/each}}
 </script>
- 
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="index.js"></script>
+
+ <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="index.js"></script>
 
 </body>
 </html>

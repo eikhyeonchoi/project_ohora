@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.ManufacturerDao">
+
+  <resultMap type="manufacturer" id="manufacturerMap">
+    <id column="manufac_no" property="no" />
+    <result column="name" property="name" />
+    <result column="tel" property="tel" />
+    <result column="homepage" property="homePage" />
+    <result column="reg_no" property="registerNo" />
+  </resultMap>
+
+  <sql id="default-columns">
+    manufac_no,
+    name,
+    tel,
+    homepage,
+    reg_no
+  </sql>
+
+  <select id="findAll" resultMap="manufacturerMap">
+    select
+      <include refid="default-columns"/>
+    from
+      manufacturer
+    order by
+      manufac_no desc;
+  </select>
+
+  <select id="findByNo" resultMap="manufacturerMap" parameterType="int">
+    select 
+      <include refid="default-columns"/>
+    from 
+      manufacturer
+    where
+      manufac_no = #{value}
+  </select>
+  
+  <select id="findByKeyword" resultMap="manufacturerMap" parameterType="string">
+    <bind name="pattern1" value="'%' + _parameter + '%'"/>
+    select
+      <include refid="default-columns"/>
+    from
+      manucaturer
+    where
+      name like #{pattern1}
+      or homepage like #{pattern1}
+      or reg_no like #{pattern1}
+    order by manufac_no desc
+  </select>
+  
+  <insert id="insert" parameterType="manufacturer">
+  insert into manufacturer (
+    name, tel, homepage, reg_no
+  )
+  values 
+    (#{name}, #{tel}, #{homePage}, #{registerNo})    
+  </insert>
+
+  <update id="update" parameterType="manufacturer">
+    update manufacturer
+      <set>
+        <if test="name != null">name = #{name}</if>
+        <if test="tel != null">tel = #{tel}</if>
+        <if test="haomPage != null">homepage = #{homePage}</if>
+        <if test="registerNo != null">registerNo = #{registerNo}</if>
+      </set>
+      where
+        manufac_no = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from manufacturer
+    where
+      manufac_no = #{no}
+  </delete>
+
+</mapper>
+
+

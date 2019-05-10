@@ -12,6 +12,10 @@ public class Member implements Serializable {
   private String tel;
   private int type;
   private boolean ban;
+  private int manufacNo;
+  
+  private Manufacturer manufacturer;
+  
   public int getNo() {
     return no;
   }
@@ -60,10 +64,22 @@ public class Member implements Serializable {
   public void setBan(boolean ban) {
     this.ban = ban;
   }
+  public Manufacturer getManufacturer() {
+    return manufacturer;
+  }
+  public void setManufacturer(Manufacturer manufacturer) {
+    this.manufacturer = manufacturer;
+  }
+  public int getManufacNo() {
+    return manufacNo;
+  }
+  public void setManufac_no(int manufac_no) {
+    this.manufacNo = manufac_no;
+  }
   @Override
   public String toString() {
     return "Member [no=" + no + ", email=" + email + ", name=" + name + ", password=" + password
-        + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban + "]";
+        + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban
+        + ", manufacNo=" + manufacNo + ", manufacturer=" + manufacturer + "]";
   }
-  
 }

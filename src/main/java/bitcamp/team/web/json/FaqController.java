@@ -20,7 +20,7 @@ public class FaqController {
 
   @GetMapping("list")
   public Object list() {
-    return faqService.list(); // 해쉬맵 객체임
+    return faqService.list();
   } // list
 
   @GetMapping("detail")

@@ -17,5 +17,5 @@ public interface NoticeDao {
 
   int delete(int no);
 
-  int countAll();
+  int countAll(Map<String, Object> param);
 }
