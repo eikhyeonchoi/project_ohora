@@ -17,9 +17,13 @@ public interface BoardDao {
   
   // list
   List<Board> findAll();
+  // 댓글 
+  List<BoardReply> findReplyAll(int no);
   
   // view == detail 
   Board detail(int no);
   
-  List<BoardReply> findReply(int no);
+  int delete(int no);
+  
+  int insertReply(BoardReply boardReply);
 }

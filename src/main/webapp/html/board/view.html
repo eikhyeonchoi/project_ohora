@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset='UTF-8'>
 <title>임시 게시판(상세정보)</title>
 </head>
 <body>
 <h1>임시 게시판(상세정보)</h1>
 제목<br>
-<input id="title" type="text" placeholder="제목"/><br>
+<input id='title' type='text' placeholder='제목'/><br>
 내용<br>
-<textarea id="contents" rows="10" cols="80"></textarea><br>
-<button id='return-indext-btn' type="button">게시판</button>
-<button id='update-btn' type="button">수정</button>
-<button id='delete-btn' type="button">삭제</button>
+<textarea id='contents' rows='10' cols='80'></textarea>
+<button id='return-indext-btn' type='button'>게시판</button>
+<button id='board-update-btn' type='button'>수정</button>
+<button id='board-delete-btn' type='button'>삭제</button>
+<br>
+댓글달기<br>
+<textarea id='reply-content' rows='2' cols='20' placeholder="댓글내용"></textarea>
+<button id='reply-add-btn' type="button">댓글등록</button>
 
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="view.js"></script>
+<table id='reply-table'>
+  <thead>
+    <tr>
+      <th scope='col'>댓글내용</th>                    
+      <th scope='col'>작성일</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+
+<div id='rere-form'>
+답글<br>
+<textarea id='rere-content' rows='2' cols='20' placeholder="답글내용"></textarea>
+<button id='rere-add-btn' type="button">등록</button>
+<button id='rere-cancel-btn' type="button">취소</button>
+</div>
+
+<script id='tr-template' type='text/x-handlebars-template'>
+{{#each replylist}}
+<tr>
+  <td>{{contents}}</td>
+  <td>{{registerDate}}</td>
+  <td>
+    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button'>답글</button>
+  </td>
+</tr>
+{{/each}}
+</script>
+<script src='/bitcamp-team-project/node_modules/jquery/dist/jquery.js'></script>
+<script src='/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='view.js'></script>
 </body>
 </html>

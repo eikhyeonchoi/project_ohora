@@ -86,6 +86,11 @@
   </select>
 
   <insert id="insert" parameterType="member">
+  
+  
+  </insert>
+  
+  
   <insert id="insertByMaf">
     insert into member (
     type, email, pwd, n_name, name, tel

@@ -23,7 +23,7 @@
   </resultMap>
 
 
-  <insert id="insert" parameterType="map">
+  <insert id="insert" parameterType="board">
     insert into board(
       subject,
       content
@@ -74,8 +74,11 @@
       id = #{value};
   </select>
   
-  <select id="findReply" resultMap="boardReplyMap" parameterMap="int">
+  <select id="findReplyAll" resultMap="boardReplyMap" parameterType="int">
     select
+      reply_id,
+      parent_id,
+      depth,
       reply_content,
       register_date
     from
@@ -83,6 +86,19 @@
     where
       board_id=#{value};
   </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      board
+    where 
+      id=#{value};
+  </delete>
+  
+  <insert id="insertReply" parameterType="boardReply">
+    insert into
+      board_reply(board_id, parent_id, depth, reply_content)
+    values(#{boardId}, #{parentId}, #{depth}, #{contents})
+  </insert>
   
   
 </mapper>
