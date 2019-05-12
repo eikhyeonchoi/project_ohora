@@ -18,11 +18,13 @@ var param = location.href.split('?')[1]; // no=10
   
   $('#title').val(obj.list.title);
   $('#contents').val(obj.list.contents);
-
+  
   
   // 대댓글 이벤트 구현
   for(var el of obj.replylist) {
-    console.log(el.contents);
+    if (el.depth == 1){
+      $('#rere-add-btn-' + el.no).hide();
+    }
     $('#rere-add-btn-' + el.no).on('click', function(){
       $(this).closest('tr').after(rereForm.show());
       var parentId = $(this).attr('data-no');
