@@ -69,7 +69,7 @@ public class ManufacturerController {
     try {
 
       if (manufacturerService.update(manufacturer) == 0) 
-        throw new Exception("해당 번호의 수업이 없습니다.");
+        throw new Exception("해당 번호의 제조사가 없습니다.");
 
       content.put("status", "success");
 

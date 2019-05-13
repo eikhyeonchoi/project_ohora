@@ -85,6 +85,91 @@ DROP TABLE IF EXISTS fboard_rcm RESTRICT;
 -- 주의사항
 DROP TABLE IF EXISTS precautions RESTRICT;
 
+-- 제품
+DROP TABLE IF EXISTS product RESTRICT;
+
+-- 제품 대분류
+DROP TABLE IF EXISTS large_category RESTRICT;
+
+-- 제품 소분류
+DROP TABLE IF EXISTS small_category RESTRICT;
+
+-- 매뉴얼 댓글
+DROP TABLE IF EXISTS manual_cmt RESTRICT;
+
+-- 리뷰
+DROP TABLE IF EXISTS review RESTRICT;
+
+-- 제품만족도
+DROP TABLE IF EXISTS satisfy RESTRICT;
+
+-- 리뷰 댓글
+DROP TABLE IF EXISTS review_cmt RESTRICT;
+
+-- 회원
+DROP TABLE IF EXISTS member RESTRICT;
+
+-- 제조사
+DROP TABLE IF EXISTS manufacturer RESTRICT;
+
+-- 자유게시판
+DROP TABLE IF EXISTS fboard RESTRICT;
+
+-- 자유게시판 댓글
+DROP TABLE IF EXISTS fboard_cmt RESTRICT;
+
+-- 고객문의
+DROP TABLE IF EXISTS question RESTRICT;
+
+-- 고객문의유형
+DROP TABLE IF EXISTS question_type RESTRICT;
+
+-- 고객문의답변
+DROP TABLE IF EXISTS answer RESTRICT;
+
+-- 공지사항
+DROP TABLE IF EXISTS notice RESTRICT;
+
+-- 자주묻는질문
+DROP TABLE IF EXISTS faq RESTRICT;
+
+-- 질문카테고리
+DROP TABLE IF EXISTS question_category RESTRICT;
+
+-- 팁
+DROP TABLE IF EXISTS tip RESTRICT;
+
+-- 팁 히스토리
+DROP TABLE IF EXISTS tip_history RESTRICT;
+
+-- 제품 첨부파일
+DROP TABLE IF EXISTS product_file RESTRICT;
+
+-- 리뷰 첨부파일
+DROP TABLE IF EXISTS review_file RESTRICT;
+
+-- 매뉴얼 첨부파일
+DROP TABLE IF EXISTS manual_file RESTRICT;
+
+-- 자게 첨부파일
+DROP TABLE IF EXISTS fboard_file RESTRICT;
+
+-- 구성품
+DROP TABLE IF EXISTS component RESTRICT;
+
+-- 매뉴얼댓글추천
+DROP TABLE IF EXISTS manual_rcm RESTRICT;
+
+-- 리뷰댓글추천
+DROP TABLE IF EXISTS review_rcm RESTRICT;
+
+-- 자유게시판댓글 추천
+DROP TABLE IF EXISTS fboard_rcm RESTRICT;
+
+-- 주의사항
+DROP TABLE IF EXISTS precautions RESTRICT;- 메뉴얼번호
+);
+
 -- 매뉴얼
 CREATE TABLE manual (
 manual_no  INTEGER      NOT NULL COMMENT '메뉴얼번호', -- 메뉴얼번호
@@ -99,7 +184,7 @@ COMMENT '매뉴얼';
 ALTER TABLE manual
 ADD CONSTRAINT PK_manual -- 매뉴얼 기본키
 PRIMARY KEY (
-manual_no -- 메뉴얼번호
+manual_no -- 매뉴얼
 );
 
 ALTER TABLE manual

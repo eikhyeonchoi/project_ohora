@@ -1,13 +1,13 @@
 var param = location.href.split('?')[1];
 if (param) {
-  $('h1').html("회원 조회");
+  $('h1').html('제조사 조회');
   loadData(param.split('=')[1]);
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
 } else {
-  $('h1').html("회원 가입");
+  $('h1').html('제조사 추가');
   var el = $('.bit-view-item');
   for (e of el) {
     e.style.display = 'none';
@@ -15,12 +15,11 @@ if (param) {
 }
 
 $('#add-btn').click(function() {
-  $.post('../../app/json/member/add', {
+  $.post('../../app/json/manufacturer/add', {
     name: $('#name').val(),
-    nickName: $('#nickName').val(),
-    email: $('#email').val(),
-    password: $('#password').val(),
-    tel: $('#tel').val()
+    tel: $('#tel').val(),
+    homePage: $('#homepage').val(),
+    registerNo: $('#reg_no').val()
   },
   function(data) {
     if (data.status == 'success') {
@@ -31,15 +30,38 @@ $('#add-btn').click(function() {
   })
 });
 
+$('#delete-btn').click(() => {
+  $.getJSON('../../app/json/manufacturer/delete?no=' + param.split('=')[1], function(data) {
+    if (data.status == 'success') {
+      location.href = "index.html";
+    } else {
+      alert('삭제 실패 입니다.\n' +  data.message);
+    }
+  }) 
+});
+
+$('#update-btn').click(function() {
+  $.post('../../app/json/manufacturer/update?no=' + param.split('=')[1], {
+    name: $('#name').val(),
+    tel: $('#tel').val(),
+    homePage: $('#homepage').val(),
+    registerNo: $('#reg_no').val()
+  },
+  function(data) {
+    if (data.status == 'success') {
+      location.href = "index.html";
+    } else {
+      alert('변경 실패 입니다.\n' +  data.message);
+    }
+  })
+});
+
 function loadData(no) {
-  $.getJSON('../../app/json/member/detail?no=' + no, function(data) {
+  $.getJSON('../../app/json/manufacturer/detail?no=' + no, function(data) {
     $('#no').val(data.no);
     $('#name').val(data.name);
-    $('#nickName').val(data.nickName);
-    $('#email').val(data.email);
-    $('#password').val(data.password);
     $('#tel').val(data.tel);
-    $('#type').val(data.type);
-    $('#ban').val(data.ban);
+    $('#homepage').val(data.homePage);
+    $('#reg_no').val(data.reg_no);
   });
 };
