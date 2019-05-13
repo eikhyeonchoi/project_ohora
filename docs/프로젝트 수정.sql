@@ -8,14 +8,8 @@ MODIFY COLUMN ntc_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항 번�
 
 ALTER TABLE manufacturer MODIFY reg_no varchar(30);
 
-alter table member add manufac_no integer null;
+alter table manufacturer add member_no integer null;
 
-ALTER TABLE member ADD CONSTRAINT manufacturerNo
+alter table manufacturer add constraint member_no foreign key (member_no)
 
-FOREIGN KEY (manufac_no) REFERENCES manufacturer (manufac_no);
-
-alter table member add manufac_no integer null;
-
-alter table member add constraint manufac_no foreign key (manufac_no)
-
-references manufacturer (manufac_no);
+references member (member_no);

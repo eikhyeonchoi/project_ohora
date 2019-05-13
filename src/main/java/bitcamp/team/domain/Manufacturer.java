@@ -7,7 +7,7 @@ public class Manufacturer {
   private String tel;
   private String homePage;
   private String registerNo;
-  
+
   public int getNo() {
     return no;
   }
