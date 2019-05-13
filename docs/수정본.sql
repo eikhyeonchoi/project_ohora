@@ -167,8 +167,7 @@ DROP TABLE IF EXISTS review_rcm RESTRICT;
 DROP TABLE IF EXISTS fboard_rcm RESTRICT;
 
 -- 주의사항
-DROP TABLE IF EXISTS precautions RESTRICT;- 메뉴얼번호
-);
+DROP TABLE IF EXISTS precautions RESTRICT;
 
 -- 매뉴얼
 CREATE TABLE manual (
