@@ -62,10 +62,10 @@
   <update id="update" parameterType="manufacturer">
     update manufacturer
       <set>
-        <if test="name != null">name = #{name}</if>
-        <if test="tel != null">tel = #{tel}</if>
-        <if test="haomPage != null">homepage = #{homePage}</if>
-        <if test="registerNo != null">registerNo = #{registerNo}</if>
+        <if test="name != null">name = #{name},</if>
+        <if test="tel != null">tel = #{tel},</if>
+        <if test="homePage != null">homepage = #{homePage},</if>
+        <if test="registerNo != null">reg_no = #{registerNo}</if>
       </set>
       where
         manufac_no = #{no}
