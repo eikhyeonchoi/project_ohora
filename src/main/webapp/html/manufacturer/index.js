@@ -21,6 +21,19 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
+$('#search-btn').click(() => {
+  $.post( '../../app/json/notice/search?keyword=' + $('#keyword').val(), {
+    keyword: $('keyword').val()
+  },
+  function(data) {
+    if(data.status == 'fail'){
+      alert('검색 실패입니다!\n' + data.message);
+    } else {
+      location.href = "index.html";
+    }
+  })
+});
+
 loadList(1);
 
 
