@@ -45,8 +45,6 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member get(String email, String password) {
     HashMap<String,Object> paramMap = new HashMap<>();
-    System.out.println(email);
-    System.out.println(password);
     paramMap.put("email", email);
     paramMap.put("password", password);
     
