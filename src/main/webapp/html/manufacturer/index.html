@@ -30,6 +30,12 @@
       </table>
     </div>
     <!-- bit-list -->
+    
+  <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+   <input id="keyword" class="form-control mr-sm-2" placeholder="회사명" aria-label="검색">
+   <button type="button" id="search-btn" class="btn btn-outline-success my-2 my-sm-0">검색</button>
+  </form>
+    
 
     <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
@@ -42,7 +48,7 @@
     </tr>
   {{/each}}
   </script>
-
+  
   </div>
   <!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
