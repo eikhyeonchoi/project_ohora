@@ -7,7 +7,11 @@ public class Manufacturer {
   private String tel;
   private String homePage;
   private String registerNo;
-  
+  private int memberNo;
+
+  private Member member;
+
+
   public int getNo() {
     return no;
   }
@@ -38,11 +42,26 @@ public class Manufacturer {
   public void setRegisterNo(String registerNo) {
     this.registerNo = registerNo;
   }
+  public int getMemberNo() {
+    return memberNo;
+  }
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
+  }
+
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
   @Override
   public String toString() {
     return "Manufacturer [no=" + no + ", name=" + name + ", tel=" + tel + ", homePage=" + homePage
-        + ", registerNo=" + registerNo + "]";
+        + ", registerNo=" + registerNo + ", memberNo=" + memberNo + ", member=" + member + "]";
   }
+
 }
 
 

@@ -11,7 +11,7 @@ import bitcamp.team.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
-  
+
   public MemberServiceImpl(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
     System.out.println(memberDao.findAll());
     return memberDao.findAll();
   }
-  
+
   @Override
   public int add(Member member) {
     return memberDao.insert(member);
@@ -45,14 +45,12 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member get(String email, String password) {
     HashMap<String,Object> paramMap = new HashMap<>();
-    System.out.println(email);
-    System.out.println(password);
     paramMap.put("email", email);
     paramMap.put("password", password);
-    
+
     return memberDao.findByEmailPassword(paramMap);
   }
-  
+
   @Override
   public int size() {
     return memberDao.countAll();

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Board;
 import bitcamp.team.domain.BoardReply;
-import bitcamp.team.domain.Faq;
 import bitcamp.team.service.BoardService;
 
 @RestController("json/BoardController")

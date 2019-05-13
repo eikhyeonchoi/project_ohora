@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>만족도</title>
+</head>
+<body>
+<h1> 만족도 조사 - detail</h1>
+<a href='add.html'>만족도 등록</a>
+<table border=1>
+<thead>
+  <tr> 
+   <th scope="col">만족도 번호</th>
+   <th scope="col">제품 번호</th>
+   <th scope="col">제품명</th>
+   <th scope="col">난이도</th>
+   <th scope="col">이해도</th>
+   <th scope="col">디자인</th>
+   <th scope="col">as만족도</th>
+   <th scope="col">편의성</th>
+   <th scope="col">가격만족도</th>
+  </tr>
+</thead>
+<tbody></tbody>
+</table>
+
+
+<script id="select-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td scope='row'>{{product.no}}</td> 
+  <td><a class='satisfy-a-class' href='#' data-no='{{no}}'>{{product.name}}</a></td>
+  <td scope='row'>{{level}}</td>
+  <td scope='row'>{{understand}}</td>
+  <td scope='row'>{{design}}</td>
+  <td scope='row'>{{asStf}}</td>
+  <td scope='row'>{{useful}}</td>
+  <td scope='row'>{{priceStf}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="view.js"></script>
+</body>
+</html>

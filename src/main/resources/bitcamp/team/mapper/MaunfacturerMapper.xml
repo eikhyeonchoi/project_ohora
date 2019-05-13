@@ -13,41 +13,33 @@
   </resultMap>
 
   <sql id="default-columns">
+  select
     manufac_no,
     name,
     tel,
     homepage,
     reg_no
+  from
+    manufacturer
   </sql>
 
-  <select id="findAll" resultMap="manufacturerMap">
-    select
-      <include refid="default-columns"/>
-    from
-      manufacturer
+  <select id="findAll" resultMap="manufacturerMap" parameterType="String">
+    <include refid="default-columns"/>
     order by
       manufac_no desc;
   </select>
 
   <select id="findByNo" resultMap="manufacturerMap" parameterType="int">
-    select 
-      <include refid="default-columns"/>
-    from 
-      manufacturer
+    <include refid="default-columns"/>
     where
       manufac_no = #{value}
   </select>
   
   <select id="findByKeyword" resultMap="manufacturerMap" parameterType="string">
     <bind name="pattern1" value="'%' + _parameter + '%'"/>
-    select
-      <include refid="default-columns"/>
-    from
-      manucaturer
+    <include refid="default-columns"/>
     where
       name like #{pattern1}
-      or homepage like #{pattern1}
-      or reg_no like #{pattern1}
     order by manufac_no desc
   </select>
   
@@ -62,10 +54,10 @@
   <update id="update" parameterType="manufacturer">
     update manufacturer
       <set>
-        <if test="name != null">name = #{name}</if>
-        <if test="tel != null">tel = #{tel}</if>
-        <if test="haomPage != null">homepage = #{homePage}</if>
-        <if test="registerNo != null">registerNo = #{registerNo}</if>
+        <if test="name != null">name = #{name},</if>
+        <if test="tel != null">tel = #{tel},</if>
+        <if test="homePage != null">homepage = #{homePage},</if>
+        <if test="registerNo != null">reg_no = #{registerNo}</if>
       </set>
       where
         manufac_no = #{no}
