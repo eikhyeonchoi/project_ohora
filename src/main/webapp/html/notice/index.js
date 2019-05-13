@@ -179,7 +179,7 @@ $(document.body).bind('loaded-list', () => {
 //검색
 
 $('#search-btn').click((e) => {
-  loadList(1);
+  loadList();
 });
 
 
