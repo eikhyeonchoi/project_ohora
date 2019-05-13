@@ -62,6 +62,6 @@ function loadData(no) {
     $('#name').val(data.name);
     $('#tel').val(data.tel);
     $('#homepage').val(data.homePage);
-    $('#reg_no').val(data.reg_no);
+    $('#registerNo').val(data.registerNo);
   });
 };
