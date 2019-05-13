@@ -1,7 +1,6 @@
 var pageNo = 1,
 pageSize = 10,
 totalPage = 1,
-dataNo = {},
 keyword = $('keyword'),
 tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
@@ -179,7 +178,7 @@ $(document.body).bind('loaded-list', () => {
 //검색
 
 $('#search-btn').click((e) => {
-  loadList(1);
+  loadList();
 });
 
 
