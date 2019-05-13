@@ -30,16 +30,16 @@ insert into small_category(lctg_no, name) values(4, 'TV'); --14
 insert into small_category(lctg_no, name) values(4, '냉장고'); --15
 insert into small_category(lctg_no, name) values(4, '에어컨'); --16
 
---manufacturer 임시값 "제조사"
-insert into manufacturer(reg_no, name, tel, homepage) values('111-11-11111', '삼성전자','1234-1234', 'https://www.samsung.com/'); --1
-insert into manufacturer(reg_no, name, tel, homepage) values('222-22-22222', '애플','5467-1234', 'https://www.apple.com/'); -- 2
-insert into manufacturer(reg_no, name, tel, homepage) values('333-33-33333', 'LG전자','6785-1234', 'https://www.lge.co.kr');--3
-insert into manufacturer(reg_no, name, tel, homepage) values('444-44-44444', '한성컴퓨터','1835-1234', 'http://www.monsterlabs.co.kr/'); --4
-insert into manufacturer(reg_no, name, tel, homepage) values('555-55-55555', '니콘','4521-1234', 'https://www.nikon-image.co.kr/'); --5
-insert into manufacturer(reg_no, name, tel, homepage) values('666-66-66666', '캐논','8567-1234', 'https://kr.canon/ko'); -- 6
-insert into manufacturer(reg_no, name, tel, homepage) values('777-77-77777', '소니코리아','8602-1234', 'https://www.sony.co.kr/'); --7
-insert into manufacturer(reg_no, name, tel, homepage) values('888-88-88888', '인텔','5621-1234', 'https://www.intel.co.kr/'); --8
-insert into manufacturer(reg_no, name, tel, homepage) values('999-99-9999', 'AMD','5832-1234', 'https://www.amd.com/ko'); --9
+-- member 임시값 '회원'
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'이름1','1234-1234','일반회원1',1,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com',password('2222'),'이름2','2222-2222','일반회원2',1,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com',password('3333'),'이름3','3333-3333','일반회원3',1,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company1@test.com',password('1111'),'기업회원1','1234-1234','기업회원1',2,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company2@test.com',password('2222'),'기업회원2','1234-1234','기업회원2',2,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company3@test.com',password('3333'),'기업회원3','1234-1234','기업회원3',2,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com',password('1111'),'관리자1','1234-1234','관리자1',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com',password('2222'),'관리자2','1234-1234','관리자2',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com',password('3333'),'관리자3','1234-1234','관리자3',3,false);
 
 --product 임시값 "제품"
 insert into product(sctg_no, manufac_no, name) values(1,1,'갤럭시S10');
@@ -354,17 +354,20 @@ insert into question_type(conts) values('고객문의유형3번');
 insert into question_type(conts) values('고객문의유형4번');
 insert into question_type(conts) values('고객문의유형5번');
 
--- member 임시값 '회원'
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'이름1','1234-1234','일반회원1',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com',password('2222'),'이름2','2222-2222','일반회원2',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com',password('3333'),'이름3','3333-3333','일반회원3',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company1@test.com',password('1111'),'기업회원1','1234-1234','기업회원1',2,false,1);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company2@test.com',password('2222'),'기업회원2','1234-1234','기업회원2',2,false,2);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company3@test.com',password('3333'),'기업회원3','1234-1234','기업회원3',2,false,3);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com',password('1111'),'관리자1','1234-1234','관리자1',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com',password('2222'),'관리자2','1234-1234','관리자2',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com',password('3333'),'관리자3','1234-1234','관리자3',3,false);
 
+--manufacturer 임시값 "제조사"
+insert into manufacturer(reg_no, name, tel, homepage) values('111-11-11111', '삼성전자','1234-1234', 'https://www.samsung.com/'); --1
+insert into manufacturer(reg_no, name, tel, homepage) values('222-22-22222', '애플','5467-1234', 'https://www.apple.com/'); -- 2
+insert into manufacturer(reg_no, name, tel, homepage) values('333-33-33333', 'LG전자','6785-1234', 'https://www.lge.co.kr');--3
+insert into manufacturer(reg_no, name, tel, homepage) values('444-44-44444', '한성컴퓨터','1835-1234', 'http://www.monsterlabs.co.kr/'); --4
+insert into manufacturer(reg_no, name, tel, homepage) values('555-55-55555', '니콘','4521-1234', 'https://www.nikon-image.co.kr/'); --5
+insert into manufacturer(reg_no, name, tel, homepage) values('666-66-66666', '캐논','8567-1234', 'https://kr.canon/ko'); -- 6
+insert into manufacturer(reg_no, name, tel, homepage) values('777-77-77777', '소니코리아','8602-1234', 'https://www.sony.co.kr/'); --7
+insert into manufacturer(reg_no, name, tel, homepage) values('888-88-88888', '인텔','5621-1234', 'https://www.intel.co.kr/'); --8
+insert into manufacturer(reg_no, name, tel, homepage) values('999-99-9999', 'AMD','5832-1234', 'https://www.amd.com/ko'); --9
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('111-44-777', 'bit-1','3424-1234', 'https://www.bit.com/ko', 4); --10
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('222-55-888', 'bit-2','2321-1234', 'https://www.camp.com/ko', 5); --11
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('333-66-9999', 'bit-3','6431-1234', 'https://www.ohora.com/ko', 6); --12
 
 
 

@@ -1,34 +1,10 @@
 var param = location.href.split('?')[1];
-if (param) {
   $('h1').html("회원 조회");
   loadData(param.split('=')[1]);
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
-} else {
-  $('h1').html("회원 가입");
-  var el = $('.bit-view-item');
-  for (e of el) {
-    e.style.display = 'none';
-  }
-}
-
-$('#add-btn').click(function() {
-  $.post('../../app/json/member/add', {
-    name: $('#name').val(),
-    nickName: $('#nickName').val(),
-    email: $('#email').val(),
-    password: $('#password').val(),
-    tel: $('#tel').val()
-  },
-  function(data) {
-  if (data.status == 'success') {
-    location.href = "index.html";
-  } else {
-    alert('등록 실패 입니다.\n' +  data.message);
-  });
-})
 
 function loadData(no) {
   $.getJSON('../../app/json/member/detail?no=' + no, function(data) {

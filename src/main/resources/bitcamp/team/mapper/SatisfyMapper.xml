@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.team.dao.SatisfyDao">
+
+  <resultMap type="satisfy" id="satisfyMap">
+    <id column="stf_no"       property="no"/>
+    <result column="member_no"  property="mNo"/>
+    <result column="product_no"    property="pdNo"/>
+    <result column="level"     property="level"/>
+    <result column="understand"    property="understand"/>
+    <result column="dgn"  property="design"/>
+    <result column="as_stf"     property="asStf"/>
+    <result column="useful"    property="useful"/>
+    <result column="price_stf"    property="priceStf"/>
+    
+    
+    <association property="member" javaType="member">
+      <id column="member_no"   property="no"/>
+    </association>
+    <association property="product" javaType="product">
+      <id column="product_no"   property="no"/>
+      <id column="name" property="name"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="product" id="productMap">
+    <id column="product_no" property="no"/>
+    <result column="sctg_no" property="sctgNo"/>
+    <result column="manufac_no" property="manufacNo"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="productMap">
+    select product_no, name
+     from 
+     product
+     order by
+     product_no asc;
+  </select>
+  
+   <select id="findByNo" resultMap="satisfyMap" parameterType="int">
+    select
+      s.stf_no,
+      p.product_no,
+      p.name,
+      s.level,
+      s.understand,
+      s.dgn,
+      s.as_stf,
+      s.useful,
+      s.price_stf
+    from 
+      satisfy s
+      left outer join product p on s.product_no = p.product_no
+    where 
+      p.product_no = #{value};
+  </select>
+  
+  <select id="countAll" resultType="int" parameterType="int">
+    select
+      count(*)
+    from 
+      satisfy s
+      left outer join product p on s.product_no = p.product_no
+    where 
+      p.product_no = #{value};
+  </select>
+  
+  <!--  
+  <select id="findAll" resultMap="satisfyMap">
+    select  
+      s.stf_no,
+      m.member_no,
+      s.level,
+      s.understand,
+      s.dgn,
+      s.as_stf,
+      s.useful,
+      s.price_stf
+    from 
+      satisfy s
+      left outer join member m on s.member_no = m.member_no
+    order by 
+      s.stf_no asc;
+  </select>
+  -->
+  </mapper>

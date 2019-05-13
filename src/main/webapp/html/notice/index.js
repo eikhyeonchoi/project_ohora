@@ -1,6 +1,7 @@
 var pageNo = 1,
 pageSize = 10,
-totalPage = 0,
+totalPage = 1,
+dataNo = {},
 keyword = $('keyword'),
 tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
@@ -21,13 +22,45 @@ function loadList(pn) {
 
     pageNo = obj.pageNo;
     totalPage = obj.totalPage;
-    
+
     tbody.html('');
     $(trGenerator(obj)).appendTo(tbody);
 
     currSpan.html(String(pageNo));
 
     var currpage = pageNo % 5
+/*
+    if($('#page > a').html() > totalPage) {
+      $('#page').css('display', 'none');
+    } else {
+      $('#page').css('display', '');
+    }
+    */
+    
+    if($('#2ndPage > a').html() > totalPage) {
+      $('#2ndPage').css('display', 'none');
+    } else {
+      $('#2ndPage').css('display', '');
+    }
+
+    if($('#3thPage > a').html() > totalPage) {
+      $('#3thPage').css('display', 'none');
+    } else {
+      $('#3thPage').css('display', '');
+    }
+
+    if($('#4thPage > a').html() > totalPage) {
+      $('#4thPage').css('display', 'none');
+    } else {
+      $('#4thPage').css('display', '');
+    }
+
+    if($('#5thPage > a').html() > totalPage) {
+      $('#5thPage').css('display', 'none');
+    } else {
+      $('#5thPage').css('display', '');
+    }
+    
 
     if (currpage == 1) {
       $('#1stPage').addClass('active');
@@ -58,18 +91,20 @@ function loadList(pn) {
     } else {
       $('#5thPage').removeClass('active');
     }
-
-    if (pageNo == 1) {
+    if (pageNo < 6) {
       prevPageLi.addClass('disabled');
     } else {
       prevPageLi.removeClass('disabled');
     } 
 
-    if (pageNo == obj.totalPage) {
+    var maxPage = (obj.totalPage / 5).toFixed(0) * 5
+    
+    if (pageNo > maxPage) {
       nextPageLi.addClass('disabled');
     } else {
       nextPageLi.removeClass('disabled');
     }
+
 
     $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage, 'obj', obj]);
   });
@@ -80,44 +115,53 @@ var currPage = $(document.body).bind('loaded-list', ()=> {
 });
 
 var endPage = $(document.body).bind('loaded-list', ()=> {
-  endPage = totalPage % 5;
+  endPage = totalPage
 });
 
 $('#1stPage > a').click((e) => {
   e.preventDefault();
-  loadList(endPage);
+  loadList($('#1stPage > a').html());
 });
 
 $('#2ndPage > a').click((e) => {
   e.preventDefault();
-  loadList(endPage + 1);
+  loadList($('#2ndPage > a').html());
 });
 
 $('#3thPage > a').click((e) => {
   e.preventDefault();
-  loadList(endPage + 2);
+  loadList($('#3thPage > a').html());
 });
 
 $('#4thPage > a').click((e) => {
   e.preventDefault();
-  loadList(endPage + 3);
+  loadList($('#4thPage > a').html());
 });
 
 $('#5thPage > a').click((e) => {
   e.preventDefault();
-  loadList(endPage + 4);
+  loadList($('#5thPage > a').html());
 });
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  $('#1stPage > a').text()
-  console.log($('#1stPage > a').html());
-  loadList(pageNo - 1);
+  $('#1stPage > a').text(Number($('#1stPage > a').html()) - 5);
+  $('#2ndPage > a').text(Number($('#2ndPage > a').html()) - 5);
+  $('#3thPage > a').text(Number($('#3thPage > a').html()) - 5);
+  $('#4thPage > a').text(Number($('#4thPage > a').html()) - 5);
+  $('#5thPage > a').text(Number($('#5thPage > a').html()) - 5);
+  var pagecnt = $('#5thPage > a').html()
+  loadList(pagecnt);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  var pagecnt = $('#1stPage > a').text(6)
+  $('#1stPage > a').text(Number($('#1stPage > a').html()) + 5);
+  $('#2ndPage > a').text(Number($('#2ndPage > a').html()) + 5);
+  $('#3thPage > a').text(Number($('#3thPage > a').html()) + 5);
+  $('#4thPage > a').text(Number($('#4thPage > a').html()) + 5);
+  $('#5thPage > a').text(Number($('#5thPage > a').html()) + 5);
+  var pagecnt = $('#1stPage > a').html()
   loadList(pagecnt);
 });
 
@@ -137,10 +181,6 @@ $(document.body).bind('loaded-list', () => {
 $('#search-btn').click((e) => {
   loadList(1);
 });
-
-
-
-
 
 
 

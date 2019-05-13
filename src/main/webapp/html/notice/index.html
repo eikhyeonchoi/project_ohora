@@ -34,18 +34,25 @@
 
   <!-- 페이지 이동 버튼 -->
   
+  <!-- 
+  <nav aria-label="목록 페이지 이동"></nav>
+   -->
+  
   <nav aria-label="목록 페이지 이동">
    <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="prevPage" class="page-item bt-prevPage"><a class="page-link"
+     href="?pageNo=0&pageSize=3">이전</a></li>
     <li id="1stPage" class="page-item"><a class="page-link" href="#">1</a></li>
     <li id="2ndPage" class="page-item"><a class="page-link" href="#">2</a></li>
     <li id="3thPage" class="page-item"><a class="page-link" href="#">3</a></li>
     <li id="4thPage" class="page-item"><a class="page-link" href="#">4</a></li>
     <li id="5thPage" class="page-item"><a class="page-link" href="#">5</a></li>
-    <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+    <li id="nextPage" class="page-item bt-nextPage"><a class="page-link"
+     href="?pageNo=2&pageSize=3">다음</a></li>
    </ul>
   </nav>
-   <!-- 검색창 -->
+   
+  <!-- 검색창 -->
 
   <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
    <div class="form-group row">
@@ -60,14 +67,26 @@
      </div>
     </div>
    </div>
-   <input id="keyword" class="form-control mr-sm-2" placeholder="검색"
-    aria-label="검색">
+   <input id="keyword" class="form-control mr-sm-2" placeholder="검색" aria-label="검색">
    <button type="button" id="search-btn" class="btn btn-outline-success my-2 my-sm-0">검색</button>
   </form>
-  
-  
+
+
  </div>
  <!-- .container -->
+ 
+ <!-- 
+ <script id="tr-pageNav" type="text/x-handlebars-template">
+  <ul class="pagination justify-content-center">
+  <li id="prevPage" class="page-item bt-prevPage"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+    {{#each nos}} 
+      <li id="page" class="page-item"><a class="page-link" href="#">{{no}}</a></li>
+    {{/each}} 
+  <li id="nextPage" class="page-item bt-nextPage"><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+  </ul>
+</script>
+
+ -->
 
  <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
@@ -80,10 +99,10 @@
 {{/each}}
 </script>
 
+ <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
- <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src="index.js"></script>
 
 </body>
