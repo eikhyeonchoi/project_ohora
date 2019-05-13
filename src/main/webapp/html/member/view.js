@@ -23,13 +23,11 @@ $('#add-btn').click(function() {
     tel: $('#tel').val()
   },
   function(data) {
-    headers: ("Content-Type", "application/x-www-form-urlencoded");
   if (data.status == 'success') {
     location.href = "index.html";
-  }
-  }).fail(function(data) {
+  } else {
     alert('등록 실패 입니다.\n' +  data.message);
-  })
+  });
 })
 
 function loadData(no) {

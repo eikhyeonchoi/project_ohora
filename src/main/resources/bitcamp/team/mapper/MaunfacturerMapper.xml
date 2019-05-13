@@ -20,7 +20,7 @@
     reg_no
   </sql>
 
-  <select id="findAll" resultMap="manufacturerMap">
+  <select id="findAll" resultMap="manufacturerMap" parameterMap="manufacturer">
     select
       <include refid="default-columns"/>
     from
