@@ -1,7 +1,6 @@
 var pageNo = 1,
 pageSize = 10,
 totalPage = 1,
-dataNo = {},
 keyword = $('keyword'),
 tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
