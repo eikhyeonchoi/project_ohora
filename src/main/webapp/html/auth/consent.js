@@ -21,7 +21,7 @@ memcb.click(function() {
 
 agree.click(function() {
   if (allcb.is(":checked")) {
-    location.href = 'www.naver.com';
+    location.href = '/bitcamp-team-project/html/member/form.html';
   } else {
     alert('동의하세요!');
   }

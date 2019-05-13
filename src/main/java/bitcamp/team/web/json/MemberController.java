@@ -19,17 +19,24 @@ public class MemberController {
   @PostMapping("add")
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    try {
-      memberService.add(member);
-      content.put("status", "success");
+    if (member.getType() == 1) {
+      try {
+        System.out.println(member);
+        System.out.println("AAAA");
+        memberService.add(member);
+        content.put("status", "success");
 
-    } catch (Exception e) {
+      } catch (Exception e) {
+        content.put("status", "fail");
+        content.put("message", e.getMessage());
+
+      }
+      return content;
+    } else {
+
       content.put("status", "fail");
-      content.put("message", e.getMessage());
-
+      return content;
     }
-    return content;
-
   }
 
   //  @GetMapping("delete")
