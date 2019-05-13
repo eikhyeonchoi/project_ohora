@@ -356,14 +356,14 @@ insert into question_type(conts) values('고객문의유형5번');
 
 -- member 임시값 '회원'
 insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'이름1','1234-1234','일반회원1',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com','2222','이름2','2222-2222','일반회원2',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com','3333','이름3','3333-3333','일반회원3',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company1@test.com','1111','기업회원1','1234-1234','기업회원1',2,false,1);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company2@test.com','2222','기업회원2','1234-1234','기업회원2',2,false,2);
-insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company3@test.com','3333','기업회원3','1234-1234','기업회원3',2,false,3);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com','1111','관리자1','1234-1234','관리자1',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com','2222','관리자2','1234-1234','관리자2',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com','3333','관리자3','1234-1234','관리자3',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com',password('2222'),'이름2','2222-2222','일반회원2',1,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com',password('3333'),'이름3','3333-3333','일반회원3',1,false);
+insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company1@test.com',password('1111'),'기업회원1','1234-1234','기업회원1',2,false,1);
+insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company2@test.com',password('2222'),'기업회원2','1234-1234','기업회원2',2,false,2);
+insert into member(email, pwd, name, tel, n_name, type, ban, manufac_no) values('company3@test.com',password('3333'),'기업회원3','1234-1234','기업회원3',2,false,3);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com',password('1111'),'관리자1','1234-1234','관리자1',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com',password('2222'),'관리자2','1234-1234','관리자2',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com',password('3333'),'관리자3','1234-1234','관리자3',3,false);
 
 
 
