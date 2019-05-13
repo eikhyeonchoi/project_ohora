@@ -3,62 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <title>제조사 조회</title>
-  <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 
 <body>
-  <header class="bit-main-header"></header>
-  <div class="container">
-    <h1></h1>
-    <form>
-      <div class="form-group row bit-view-item">
-        <label for="no" class="col-sm-2 col-form-label">번호</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="no" name='no' readonly>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">회사 명</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name='name'>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="homepage" class="col-sm-2 col-form-label">홈페이지</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="homepage" name='homepage'>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="reg_no" class="col-sm-2 col-form-label">사용자 등록 번호</label>
-        <div class="col-sm-10">
-          <input type='email' class="form-control" id="reg_no" name='reg_no'>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
-        <div class="col-sm-10">
-          <input type='text' class="form-control" id="tel" name='tel'>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <a href='index.html' class="btn btn-primary btn-sm">목록</a>
-          <button type="button" id="delete-btn" class="btn btn-danger btn-sm bit-view-item">삭제</button>
-          <button type="button" id="update-btn" class="btn btn-warning btn-sm bit-view-item">변경</button>
-          <button type="button" id="add-btn" class="btn btn-success btn-sm bit-new-item">등록</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!-- container -->
-  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../header.js"></script>
-  <script src="view.js"></script>
+	<header class="bit-main-header"></header>
+	<div class="container">
+		<h1></h1>
+		<div class="form-group row bit-view-item">
+			<label for="no" class="col-sm-2 col-form-label">번호</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control-plaintext" id="no" name='no'
+					readonly>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="name" class="col-sm-2 col-form-label">회사 명</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" name='name'>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="homepage" class="col-sm-2 col-form-label">홈페이지</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="homepage"
+					name='homepage'>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="reg_no" class="col-sm-2 col-form-label">사용자 등록 번호</label>
+			<div class="col-sm-10">
+				<input type='email' class="form-control" id="reg_no" name='reg_no'>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="tel" class="col-sm-2 col-form-label">전화번호</label>
+			<div class="col-sm-10">
+				<input type='text' class="form-control" id="tel" name='tel'>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<a href='index.html' class="btn btn-primary btn-sm">목록</a>
+				<button type="button" id="delete-btn"
+					class="btn btn-danger btn-sm bit-view-item">삭제</button>
+				<button type="button" id="update-btn"
+					class="btn btn-warning btn-sm bit-view-item">변경</button>
+				<button type="button" id="add-btn"
+					class="btn btn-success btn-sm bit-new-item">등록</button>
+			</div>
+		</div>
+	</div>
+	<!-- container -->
+	<script
+		src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../header.js"></script>
+	<script src="view.js"></script>
 </body>
 </html>
 
