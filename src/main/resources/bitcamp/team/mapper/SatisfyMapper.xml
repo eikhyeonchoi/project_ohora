@@ -72,7 +72,7 @@
   
   <!--  
   <select id="findAll" resultMap="satisfyMap">
-    select 
+    select  
       s.stf_no,
       m.member_no,
       s.level,
