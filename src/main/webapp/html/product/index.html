@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품 index</title>
+</head>
+<body>
+<h1>제품 index</h1>
+
+
+<span id="seachSpan">
+</span>
+<table>
+  <thead>
+    <tr> 
+      <th scope="col">번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">질문유형</th>
+    </tr>
+  </thead>
+  
+  <tbody></tbody>
+</table>
+
+<script id="large-category-template" type="text/x-handlebars-template">
+<select id='lageCtgSelect'>
+    <option value='' option:selected>대분류 선택</option>
+  {{#each largeList}}
+    <option value='{{productSmallCategory.productLargeCategory.no}}'>{{productSmallCategory.productLargeCategory.no}}{{productSmallCategory.productLargeCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+
+<script id="small-category-template" type="text/x-handlebars-template">
+<select id='smallCtgSelect'>
+    <option value='' option:selected>소분류 선택</option>
+  {{#each smallList}}
+    <option value='{{productSmallCategory.no}}'>{{productSmallCategory.no}}{{productSmallCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
