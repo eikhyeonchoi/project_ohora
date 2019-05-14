@@ -64,7 +64,8 @@ public class AuthController {
 
     return content;
   }
-
+    
+    
   @GetMapping("user")
   public Object user(HttpSession session) throws Exception {
 
@@ -81,6 +82,8 @@ public class AuthController {
     }
     return content;
   }
+    
+    
 }
 
 
