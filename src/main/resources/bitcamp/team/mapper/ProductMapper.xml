@@ -96,6 +96,14 @@
       p.product_no asc;
   </select>
   
+  <select id="findNoByName" resultMap="productMap" parameterType="string">
+    select
+      product_no
+    from
+      product
+    where
+      name = #{value}
+  </select>
   
 </mapper>
 

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 리스트</title>
+<title>팁 리스트</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -13,19 +13,18 @@
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>자유게시판 리스트</h1>
+    <h1>팁 리스트</h1>
     <p>
-      <button id="add-btn" type="button" class="btn btn-success btn-sm">새 글</button>
+      <a href='view.html' class="btn btn-success btn-sm">새 팁</a>
     </p>
     <div class="bit-list">
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">번호</th>
-            <th scope="col">제목</th>
+            <th scope="col">제품명</th>
             <th scope="col">작성자</th>
             <th scope="col">등록일</th>
-            <th scope="col">조회수</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -36,10 +35,9 @@
   {{#each list}}
     <tr>
       <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+      <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{product.name}}</a></td>
       <td scope='row'>{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
-      <td scope='row'>{{viewCount}}</td>
     </tr>
   {{/each}}
   </script>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.team.dao.TipDao">
+
+  <resultMap type="tip" id="tipMap">
+    <id     column="tip_no"           property="no"/>
+    <result column="product_no"       property="productNo"/>
+    <result column="member_no"        property="memberNo"/>
+    <result column="conts"            property="contents"/>
+    <result column="cdt"              property="createdDate"/>
+    <association property="product" javaType="product">
+      <id column="product_no"         property="no"/>
+      <result column="name"           property="name"/>
+    </association>
+    <association property="member"  javaType="member">
+      <id column="member_no"          property="no"/>
+      <result column="n_name"         property="nickName"/>
+    </association>
+  </resultMap>
+
+  <sql id="join-select1">
+    select
+      t.tip_no,
+      t.product_no,
+      t.member_no,
+      t.conts,
+      t.cdt,
+      p.name,
+      m.n_name
+    from
+      tip t
+    left outer join
+      product p
+    on t.product_no = p.product_no 
+    left outer join
+      member m
+    on t.member_no = m.member_no
+  </sql>
+
+  <select id="findAll" resultMap="tipMap">
+    <include refid="join-select1"/>
+    order by
+      tip_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="tipMap" parameterType="int">
+    <include refid="join-select1"/>
+    where
+      t.tip_no = #{value}
+    order by
+      tip_no desc
+  </select>
+  
+  <update id="update" parameterType="tip">
+    update tip
+    set
+      member_no = #{memberNo},
+      conts = #{contents},
+      cdt = current_timestamp()
+    where
+      tip_no = #{no}
+  </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
