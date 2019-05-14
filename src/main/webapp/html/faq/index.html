@@ -3,33 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <title>faq</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
-<h1> 자주묻는 질문 - list</h1>
-<a href='view.html'>새 FAQ 등록</a>
-<table border=1>
-<thead>
-  <tr> 
-    <th scope="col">번호</th>
-    <th scope="col">제목</th>
-    <th scope="col">질문유형</th>
-  </tr>
-</thead>
-<tbody></tbody>
-</table>
-
+  <header class="bit-main-header"></header>
+  <div class="container">
+    <h1> 자주묻는 질문 - list</h1>
+    <a id='faq-add' href='view.html'>새 FAQ 등록</a>
+    <table>
+    <thead>
+      <tr> 
+        <th scope="col">질문유형</th>
+        <th scope="col">제목</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+  </div>
+  
+  
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <th scope='row'>{{no}}</th>
-  <td><a class='faq-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{questionCategory.name}}</td>
-</tr>
+  <tr id='faq-component'>
+    <td>{{questionCategory.name}}</td>
+    <td><a class='faq-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
+  </tr>
 {{/each}}
 </script>
 
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
 <script src="index.js"></script>
 </body>
 </html>

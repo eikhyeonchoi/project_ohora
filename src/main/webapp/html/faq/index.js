@@ -5,37 +5,54 @@
  */
 var tbody = $('tbody'),
     templateSrc = $('#tr-template').html();
+
 var trGenerator = Handlebars.compile(templateSrc);
 
-($.getJSON('/bitcamp-team-project/app/json/faq/list', (obj) => {
-  console.log(obj);
-  $(trGenerator(obj)).appendTo(tbody);
-  $(document.body).trigger('loaded-list');
-}));
-
-
-$(document.body).bind('loaded-list', () => {
-  $('.faq-a-class').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
-  });
-});
-
-/*
-(function () {
-  var xhr = new XMLHttpRequest()
+$(document).ready(function() {
+  $('#faq-content').hide(); 
   
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState != 4 || xhr.status != 200)
-      return;
-    $(trGenerator(JSON.parse(xhr.responseText))).appendTo(tbody);
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    if (obj.user.type == 3) {
+      $('#faq-add').show();
+    } else {
+      $('#faq-add').hide();
+    }
+  }) // get
+  
+  $.get('/bitcamp-team-project/app/json/faq/list', function(obj) {
+    // list = obj.list;
+    $(trGenerator(obj)).appendTo(tbody);
     
-    console.log(JSON.parse(xhr.responseText));
-  };
+    $(document.body).trigger({
+        type: 'loaded-list'});
+  }) // get
   
-  xhr.open('GET', '/bitcamp-team-project/app/json/faq/list', true)
-  xhr.send()
-  
-})();
-*/
+}) // ready
+
+// 기존에 '제목' 항목누르면 상세정보 페이지로 넘어가는 것
+// window.location.href = 'view.html?no=' + $(e.target).attr('data-no');
+
+
+$(document.body).bind('loaded-list', function() {
+  $('.faq-a-class').on('click', function(e) {
+    e.preventDefault();
+    console.log($(this));
+    // $(this).closest('tr').after(faqContent.show());
+    
+  }); // on
+}); // bind
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품 add</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+</head>
+<body>
+  <header class="bit-main-header"></header>
+  <div class="container">
+    <h1>제품 add</h1>
+    <div id='selectDiv'></div>
+    제품이름 <input id="productName" type="text"><br>
+    <button id="product-add-btn" type="button">등록</button>
+    <button id="product-cancel-btn" type="button">취소</button>
+    
+    
+  </div> <!-- .container -->
+  
+<script id="small-category-template" type="text/x-handlebars-template">
+<select id='smallCtgSelect'>
+    <option value='0' option:selected>소분류 선택</option>
+  {{#each smallList}}
+    <option value='{{productSmallCategory.no}}'>{{productSmallCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+  
+<script id="manufacturor-template" type="text/x-handlebars-template">
+<select id='manufacturerSelect'>
+    <option value='0' option:selected>제조사 선택</option>
+  {{#each manuList}}
+    <option value='{{no}}'>{{name}}</option>
+  {{/each}}
+</select>
+</script>
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
+<script src="add.js"></script>
+
+</body>
+</html>

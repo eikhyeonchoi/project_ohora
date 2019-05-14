@@ -1,5 +1,7 @@
 /**
  * 
+ *  product
+ *  index html
  */
 var searchSpan = $('#seachSpan'),
     tbody = $('tbody'),
@@ -22,6 +24,9 @@ $(document).ready(function() {
     }
   }) // get
   
+  $('#insert-btn').click(function() {
+    location.href = 'add.html';
+  })
   
   $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
     $(largeCategoryGenerator(obj)).appendTo(searchSpan);
@@ -97,6 +102,8 @@ function afterLoadedClickEvent(){
     location.href= 'view.html?no=' + $(e.target).attr('data-no');
   })
 }
+
+
 
 
 

@@ -30,9 +30,15 @@
         <result column="largeName"      property="name"/>
       </association>
     </association>
-    
   </resultMap>
   
+  <resultMap type="manufacturer" id="manufacturertMap">
+    <id     column="manufac_no"   property="no"/>
+    <result column="reg_no"      property="smallCategoryNo"/>
+    <result column="name"      property="smallCategoryNo"/>
+    <result column="tel"      property="smallCategoryNo"/>
+    <result column="homepage"      property="smallCategoryNo"/>
+  </resultMap>
   
   <select id="findLargeCategory" resultMap="productMap" >
     select distinct
@@ -95,6 +101,13 @@
     order by
       p.product_no asc;
   </select>
+  
+    
+  <insert id="insert" parameterType="product">
+    insert into 
+      product(sctg_no, manufac_no, name)
+    values (#{smallCategoryNo}, #{manufacturerNo}, #{name});
+  </insert>
   
   
 </mapper>

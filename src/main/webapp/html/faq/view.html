@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
+  <header class="bit-main-header"></header>
+  <div class="container">
 <h1> 자주묻는 질문 - detail</h1>
 <form>
   <label for='faq-no' class='faq-view-item'>번호 </label>
@@ -18,8 +23,7 @@
   <button id="faq-delete-btn" class='faq-view-item' type="button">삭제</button>
   <button id="faq-add-btn" class='faq-add-item' type="button">등록</button>
 </form>
-
-
+</div>
 <script id="select-template" type="text/x-handlebars-template">
 <select id='faqCtg-no'>
   {{#each faqCtg}}
@@ -27,9 +31,11 @@
   {{/each}}
 </select>
 </script>
-
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
 <script src="view.js"></script>
 </body>
 </html>

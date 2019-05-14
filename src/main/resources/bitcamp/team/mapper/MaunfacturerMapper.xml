@@ -29,6 +29,16 @@
       manufac_no desc;
   </select>
 
+  <select id="findAllUseProductAdd" resultMap="manufacturerMap">
+    select
+      manufac_no,
+      name
+    from
+      manufacturer
+    order by
+      manufac_no asc;
+  </select>
+
   <select id="findByKeyword" resultMap="manufacturerMap" parameterType="string">
     <include refid="default-columns"/>
       <bind name="pattern1" value="'%' + _parameter + '%'"/>
