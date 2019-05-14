@@ -17,13 +17,13 @@
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name='name'>
+          <input type="text" required class="form-control" id="name" name='name'>
         </div>
       </div>
       <div class="form-group row">
         <label for="nickName" class="col-sm-2 col-form-label">닉네임</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="nickName" name='nickName'>
+          <input type="text" required class="form-control" id="nickName" name='nickName'>
         </div>
       </div>
       <div class="form-group row">
@@ -54,27 +54,28 @@
         </div>
       </div>
       <div class="form-group row bit-new-item">
-        <label for="name3" class="col-sm-2 col-form-label">기업 전화번호</label>
+        <label for="tel2" class="col-sm-2 col-form-label">기업 전화번호</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name3" name='name3'>
+          <input type="text" class="form-control" id="tel2" name='tel2'>
         </div>
       </div>
       <div class="form-group row bit-new-item">
-        <label for="name4" class="col-sm-2 col-form-label">기업 홈페이지 주소</label>
+        <label for="homePage" class="col-sm-2 col-form-label">기업 홈페이지 주소</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name4" name='name4'>
+          <input type="text" class="form-control" id="homePage" name='homePage'>
         </div>
       </div>
       <div class="form-group row bit-new-item">
-        <label for="name5" class="col-sm-2 col-form-label">사업자 등록번호</label>
+        <label for="registerNo" class="col-sm-2 col-form-label">사업자 등록번호</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name5" name='name5'>
+          <input type="text" class="form-control" id="registerNo" name='registerNo'>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-10">
           <a href='index.html' class="btn btn-primary btn-sm">목록</a>
-          <button type="button" id="add-btn" class="btn btn-success btn-sm">등록</button>
+          <input type="submit" id="add-btn" class="btn btn-success btn-sm" value="등록">
+          <input type="submit">
         </div>
       </div>
     </form>

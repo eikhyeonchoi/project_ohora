@@ -3,16 +3,16 @@ import java.io.Serializable;
 
 public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
   private String email;
   private String name;
   private String password;
   private String nickName;
   private String tel;
-  private int type;
+  private String type;
   private boolean ban;
-  
+
   public int getNo() {
     return no;
   }
@@ -49,10 +49,10 @@ public class Member implements Serializable {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public int getType() {
+  public String getType() {
     return type;
   }
-  public void setType(int type) {
+  public void setType(String type) {
     this.type = type;
   }
   public boolean isBan() {
@@ -61,12 +61,12 @@ public class Member implements Serializable {
   public void setBan(boolean ban) {
     this.ban = ban;
   }
-  
+
   @Override
   public String toString() {
     return "Member [no=" + no + ", email=" + email + ", name=" + name + ", password=" + password
         + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban + "]";
   }
-  
+
 }
 
