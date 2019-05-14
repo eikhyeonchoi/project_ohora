@@ -19,6 +19,12 @@ if (param) {
   }
 }
 
+$.getJSON('../../app/json/auth/user', function(data) {
+  if(data.status == "fail") {
+    $('#update-btn').hide();
+  }
+})
+
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
       function(obj) {
