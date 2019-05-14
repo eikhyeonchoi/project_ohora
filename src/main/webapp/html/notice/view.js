@@ -2,6 +2,19 @@ var h1 = $('h1'),
 el1 = $('.bit-new-item'),
 el2 = $('.bit-view-item');
 
+$(document).ready(function() {
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
+    var loginUser = obj.user.type;
+    if(loginUser != 3) {
+      $('#update-btn').css('display', 'none');
+      $('#delete-btn').css('display', 'none');
+    } else {
+      $('#update-btn').css('display', '');
+      $('#delete-btn').css('display', '');
+    }
+})});
+
 var param = location.href.split('?')[1];
 if (param) {
   h1.html("공지사항"); 
@@ -60,21 +73,11 @@ $('#update-btn').click(() => {
 function loadData(no) {
 
   $.getJSON('../../app/json/notice/detail?no=' + no, function(data) {
-    $('#no').val(data.notice.no),
-    $('#title').val(data.notice.title),
-    $('#contents').val(data.notice.contents),
-    $('#createdDate').val(data.notice.createdDate),
-    $('#viewCount').val(data.notice.viewCount);
-
-    //관리자 필터
-    var loginUser = data.loginUser.type;
-    if(loginUser != 3) {
-      $('#update-btn').css('display', 'none');
-      $('#delete-btn').css('display', 'none');
-    } else {
-      $('#update-btn').css('display', '');
-      $('#delete-btn').css('display', '');
-    }
+    $('#no').val(data.no),
+    $('#title').val(data.title),
+    $('#contents').val(data.contents),
+    $('#createdDate').val(data.createdDate),
+    $('#viewCount').val(data.viewCount);
   });
 
 }

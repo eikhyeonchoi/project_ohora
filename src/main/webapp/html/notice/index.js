@@ -10,6 +10,17 @@ templateSrc = $('#tr-template').html();
 
 var trGenerator = Handlebars.compile(templateSrc);
 
+$(document).ready(function() {
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
+    var loginUser = obj.user.type;
+    if(loginUser != 3) {
+      $('#add-button').css('display', 'none');
+    } else {
+      $('#add-button').css('display', '');
+    }
+})});
+
 function loadList(pn) {
 
   $.getJSON('../../app/json/notice/list?pageNo=' + pn + 
@@ -18,14 +29,6 @@ function loadList(pn) {
           '&searchType=' + $('#searchType').val(), 
           function (obj){
 
-    //관리자 필터 적용
-    var loginUser = obj.loginUser.type;
-    if(loginUser != 3) {
-      $('#add-button').css('display', 'none');
-    } else {
-      $('#add-button').css('display', '');
-    }
-    
     //page
     pageNo = obj.pageNo;
     totalPage = obj.totalPage;
