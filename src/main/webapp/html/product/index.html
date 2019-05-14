@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품 index</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <header class="bit-main-header"></header>
+  <div class="container">
+    <h1>제품 index</h1>
+
+  <button id='insert-btn' type="button">새 글</button>
+    <span id="seachSpan"> </span>
+    <h2>전체 제품 게시물 목록</h2>
+    <table id='basic-list-table'>
+      <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제품명</th>
+          <th scope="col">제조사</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+    </table>
+  </div>
+  <script id="large-category-template" type="text/x-handlebars-template">
+<select id='lageCtgSelect'>
+    <option value='0' option:selected>대분류 선택</option>
+  {{#each largeList}}
+    <option value='{{productSmallCategory.productLargeCategory.no}}'>{{productSmallCategory.productLargeCategory.no}}{{productSmallCategory.productLargeCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+
+  <script id="small-category-template" type="text/x-handlebars-template">
+<select id='smallCtgSelect'>
+    <option value='0' option:selected>소분류 선택</option>
+  {{#each smallList}}
+    <option value='{{productSmallCategory.no}}'>{{productSmallCategory.no}}{{productSmallCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+
+  <script id="basic-list-form-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th>{{no}}</th>
+  <td><a class='product-a-class' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{manufacturer.name}}</td>
+</tr>
+{{/each}}
+</script>
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

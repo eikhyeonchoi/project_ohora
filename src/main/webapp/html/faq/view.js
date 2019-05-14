@@ -4,7 +4,7 @@
  * 
  */
 var select = $('#faq-question-category-option'),
-templateSrc = $('#select-template').html();
+    templateSrc = $('#select-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
 
 var param = location.href.split('?')[1]; // no=10
@@ -39,6 +39,7 @@ if(param){
     $(document.body).trigger('loaded-addForm');
   }));
 }
+// 익현이 바보 더열심히 하세요
 
 // 데이터가 로드되고 난 후 add버튼에 리스너추가
 $(document.body).bind('loaded-addForm', () => {

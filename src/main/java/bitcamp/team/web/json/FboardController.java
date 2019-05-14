@@ -38,7 +38,6 @@ public class FboardController {
       content.put("status", "success");
 
     } catch (Exception e) {
-
       content.put("status", "fail");
       content.put("message", e.getMessage());
 

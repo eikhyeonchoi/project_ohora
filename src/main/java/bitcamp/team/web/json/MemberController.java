@@ -19,7 +19,6 @@ public class MemberController {
   @PostMapping("add")
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    if (member.getType() == 1) {
       try {
         System.out.println(member);
         System.out.println("AAAA");
@@ -32,12 +31,7 @@ public class MemberController {
 
       }
       return content;
-    } else {
-
-      content.put("status", "fail");
-      return content;
     }
-  }
 
   //  @GetMapping("delete")
   //  public Object delete(int no) throws Exception {
@@ -64,6 +58,7 @@ public class MemberController {
   public Object list() throws Exception {
     HashMap<String,Object> map = new HashMap<>();
     List<Member> members = memberService.list();
+    System.out.println(members);
     map.put("list", members);
 
     return map;

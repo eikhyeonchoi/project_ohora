@@ -13,3 +13,5 @@ alter table manufacturer add member_no integer null;
 alter table manufacturer add constraint member_no foreign key (member_no)
 
 references member (member_no);
+
+ALTER TABLE member MODIFY type varchar(30);

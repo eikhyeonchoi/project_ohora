@@ -29,8 +29,8 @@
   
   <resultMap type="product" id="productMap">
     <id column="product_no" property="no"/>
-    <result column="sctg_no" property="sctgNo"/>
-    <result column="manufac_no" property="manufacNo"/>
+    <result column="sctg_no" property="smallCategoryNo"/>
+    <result column="manufac_no" property="manufacturerNo"/>
     <result column="name" property="name"/>
   </resultMap>
   
@@ -70,22 +70,25 @@
       p.product_no = #{value};
   </select>
   
-  <!--  
-  <select id="findAll" resultMap="satisfyMap">
-    select  
-      s.stf_no,
-      m.member_no,
-      s.level,
-      s.understand,
-      s.dgn,
-      s.as_stf,
-      s.useful,
-      s.price_stf
-    from 
-      satisfy s
-      left outer join member m on s.member_no = m.member_no
-    order by 
-      s.stf_no asc;
-  </select>
-  -->
+  <insert id="insert" parameterType="satisfy">
+  insert into 
+    satisfy(product_no, member_no, level, understand, dgn, as_stf, useful, price_stf)
+  value(
+        #{pdNo}, 
+        #{mNo}, 
+        #{level},
+        #{understand},
+        #{design},
+        #{asStf}, 
+        #{useful}, 
+        #{priceStf}); 
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+    
   </mapper>

@@ -2,9 +2,13 @@ package bitcamp.team.domain;
 
 public class Product {
   private int no;
-  private int sctgNo;
-  private int manufacNo;
+  private int smallCategoryNo;
+  private int manufacturerNo;
   private String name;
+  
+  private Manufacturer manufacturer;
+  private ProductSmallCategory productSmallCategory;
+  
   
   public int getNo() {
     return no;
@@ -12,17 +16,17 @@ public class Product {
   public void setNo(int no) {
     this.no = no;
   }
-  public int getSctgNo() {
-    return sctgNo;
+  public int getSmallCategoryNo() {
+    return smallCategoryNo;
   }
-  public void setSctgNo(int sctgNo) {
-    this.sctgNo = sctgNo;
+  public void setSmallCategoryNo(int smallCategoryNo) {
+    this.smallCategoryNo = smallCategoryNo;
   }
-  public int getManufacNo() {
-    return manufacNo;
+  public int getManufacturerNo() {
+    return manufacturerNo;
   }
-  public void setManufacNo(int manufacNo) {
-    this.manufacNo = manufacNo;
+  public void setManufacturerNo(int manufacturerNo) {
+    this.manufacturerNo = manufacturerNo;
   }
   public String getName() {
     return name;
@@ -30,6 +34,22 @@ public class Product {
   public void setName(String name) {
     this.name = name;
   }
+<<<<<<< HEAD
+  public Manufacturer getManufacturer() {
+    return manufacturer;
+  }
+  public void setManufacturer(Manufacturer manufacturer) {
+    this.manufacturer = manufacturer;
+  }
+  public ProductSmallCategory getProductSmallCategory() {
+    return productSmallCategory;
+  }
+  public void setProductSmallCategory(ProductSmallCategory productSmallCategory) {
+    this.productSmallCategory = productSmallCategory;
+  }
   
   
+  
+=======
+>>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
 }

@@ -1,7 +1,6 @@
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
-
 function loadList(pn) {
 
   $.getJSON('../../app/json/manufacturer/list', 
@@ -21,19 +20,15 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
-$('#search-btn').click(() => {
-  $.post( '../../app/json/notice/search?keyword=' + $('#keyword').val(), {
-    keyword: $('keyword').val()
-  },
-  function(data) {
-    if(data.status == 'fail'){
-      alert('검색 실패입니다!\n' + data.message);
-    } else {
-      location.href = "index.html";
-    }
-  })
-});
-
 loadList(1);
 
-
+$('#search-btn').click(() => {
+  console.log($('#keyword').val());
+  $.getJSON('../../app/json/manufacturer/search?keyword=' + $('#keyword').val()
+      , function(data) {
+    console.log(data);
+    tbody.html(''); 
+    $(trGenerator(data)).appendTo(tbody);
+    $(document.body).trigger('loaded-list');
+  })
+});

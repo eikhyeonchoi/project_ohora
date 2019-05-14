@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1> 만족도 조사 - detail</h1>
+<a class='satisfy-a-class' href='add.html'>만족도 등록</a>
 <table border=1>
 <thead>
   <tr> 
@@ -29,7 +30,7 @@
 <tr>
   <th scope='row'>{{no}}</th>
   <td scope='row'>{{product.no}}</td> 
-  <td><a class='satisfy-a-class' href='#' data-no='{{no}}'>{{product.name}}</a></td>
+  <td>{{product.name}}</td>
   <td scope='row'>{{level}}</td>
   <td scope='row'>{{understand}}</td>
   <td scope='row'>{{design}}</td>

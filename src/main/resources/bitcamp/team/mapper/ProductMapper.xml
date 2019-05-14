@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.team.dao.ProductDao">
+
+  <resultMap type="product" id="productMap">
+    <id     column="product_no"   property="no"/>
+    <result column="sctg_no"      property="smallCategoryNo"/>
+    <result column="manufac_no"   property="manufacturerNo"/>
+    <result column="productName"         property="name"/>
+    
+    <association property="manufacturer" javaType="manufacturer">
+      <id column="manufac_no"    property="no"/>
+      <result column="reg_no"    property="registerNo"/>
+      <result column="manufacturerName"      property="name"/>
+      <result column="tel"       property="tel"/>
+      <result column="homepage"  property="homePage"/>
+    </association>
+    
+    <association property="productSmallCategory" javaType="productSmallCategory">
+      <id column="sctg_no"    property="no"/>
+      <result column="lctg_no"    property="largeCategoryNo"/>
+      <result column="smallName"      property="name"/>
+      
+      <association property="productLargeCategory" javaType="productLargeCategory">
+        <id column="lctg_no"       property="no"/>
+        <result column="largeName"      property="name"/>
+      </association>
+    </association>
+    
+  </resultMap>
+  
+  
+  <select id="findLargeCategory" resultMap="productMap" >
+    select distinct
+      lc.lctg_no,
+      lc.name as largeName
+   from
+      product p
+      join manufacturer mf on p.manufac_no=mf.manufac_no
+      join small_category sc on p.sctg_no=sc.sctg_no
+      join large_category lc on sc.lctg_no=lc.lctg_no
+    order by
+      lc.lctg_no asc;
+  </select>
+  
+  <select id="findSmallCategory" resultMap="productMap" >
+    select distinct
+      sc.sctg_no,
+      sc.name as smallName
+   from
+      product p
+      join manufacturer mf on p.manufac_no=mf.manufac_no
+      join small_category sc on p.sctg_no=sc.sctg_no
+      join large_category lc on sc.lctg_no=lc.lctg_no
+    order by
+      sc.sctg_no asc;
+  </select>
+  
+  
+  <!-- 
+      lc.name as 대분류,
+      sc.name as 소분류,
+  
+   -->
+  <select id="findAll" resultMap="productMap" parameterType="map">
+    select
+      mf.name as manufacturerName,
+      p.product_no,
+      p.sctg_no,
+      p.manufac_no,
+      p.name as productName
+    from
+      product p
+      join manufacturer mf on p.manufac_no=mf.manufac_no
+      join small_category sc on p.sctg_no=sc.sctg_no
+      join large_category lc on sc.lctg_no=lc.lctg_no
+    <where>
+      <if test="largeNo != null">
+        lc.lctg_no=#{largeNo} and
+      </if>
+      
+      <if test="smallNo != null">
+        sc.sctg_no=#{smallNo}
+      </if>
+      
+      <if test="productName != null">
+        <bind name="prodSeachPattern" value="'%' + productName + '%'"/>
+        and p.name like #{prodSeachPattern}
+      </if>
+    </where>
+    order by
+      p.product_no asc;
+  </select>
+  
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
