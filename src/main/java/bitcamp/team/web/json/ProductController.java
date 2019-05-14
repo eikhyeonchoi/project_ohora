@@ -29,22 +29,21 @@ public class ProductController {
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
     
-    System.out.println(largeNo);
-    System.out.println(smallNo);
-    System.out.println(productName);
-    
     HashMap<String, Object> param = new HashMap<>();
+    // 대분류 소분류 넣지않고 검색
+    if((largeNo == 0 && smallNo == 0) && !productName.equals("undefined")) {
+      param.put("productName", productName);
+    }
+    
+    // 다 채워넣고 검색
     if(largeNo != 0) {
       param.put("largeNo", largeNo);
-      System.out.println("largeNo put");
       
       if (smallNo != 0) {
         param.put("smallNo", smallNo);
-        System.out.println("smallNo put");
         
         if(!productName.equals("undefined")) {
           param.put("productName", productName);
-          System.out.println("productName put");
         }
       }
     }
