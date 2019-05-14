@@ -46,6 +46,12 @@ public class ProductServiceImpl implements ProductService{
   public int add(Product product) {
     return productDao.insert(product);
   }
+
+  @Override
+  public int get(String name) {
+    Product product = productDao.findNoByName(name);
+    return product.getNo();
+  }
   
 
 }

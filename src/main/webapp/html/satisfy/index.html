@@ -3,20 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>만족도 조사</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
-<h1> 만족도 조사(product list)</h1>
-<table border=1>
-<thead>
-  <tr> 
-    <th scope="col">제품 번호</th>
-    <th scope="col">제품명</th>
-  </tr>
-</thead>
-<tbody></tbody>
-</table>
+<header class="bit-main-header"></header>
+<div class="container">
+  <h1>만족도 조사(product list)</h1>
+  <table border=1>
+    <thead>
+      <tr>
+        <th scope="col">제품 번호</th>
+        <th scope="col">제품명</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  
+  </div>
 
-<script id="tr-template" type="text/x-handlebars-template">
+  <script id="tr-template" type="text/x-handlebars-template">
 
 {{#each list}}
 <tr>
@@ -26,8 +34,11 @@
 {{/each}}
 </script>
 
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="index.js"></script>
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

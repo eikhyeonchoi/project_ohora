@@ -1,6 +1,19 @@
 var h1 = $('h1'),
-    el1 = $('.bit-new-item'),
-    el2 = $('.bit-view-item'); 
+el1 = $('.bit-new-item'),
+el2 = $('.bit-view-item');
+
+$(document).ready(function() {
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
+    var loginUser = obj.user.type;
+    if(loginUser != 3) {
+      $('#update-btn').css('display', 'none');
+      $('#delete-btn').css('display', 'none');
+    } else {
+      $('#update-btn').css('display', '');
+      $('#delete-btn').css('display', '');
+    }
+})});
 
 var param = location.href.split('?')[1];
 if (param) {
@@ -20,19 +33,18 @@ $('#add-btn').click(() => {
   $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
     contents: $('#contents').val()
-    },
-    function(data) {
-      if(data.status == 'fail'){
-        alert('등록 실패입니다!\n' + data.message);
-      } else {
-        location.href = "index.html";
-      }
-      })
-      });
+  }, function(data) {
+    if(data.status == 'fail'){
+      alert('등록 실패입니다!\n' + data.message);
+    } else {
+      location.href = "index.html";
+    }
+  })
+});
 
 $('#delete-btn').click(() => {
   $.getJSON('../../app/json/notice/delete?no=' + $('#no').val(), 
-  function(data) {
+          function(data) {
     //$('#no').val()
   })
   .done(function(data) {location.href = "index.html";})
@@ -48,7 +60,7 @@ $('#update-btn').click(() => {
     title: $('#title').val(), 
     contents: $('#contents').val()
   }, function() {
-    
+
   })
   .done(function() {
     location.href = "index.html";
@@ -63,8 +75,8 @@ function loadData(no) {
   $.getJSON('../../app/json/notice/detail?no=' + no, function(data) {
     $('#no').val(data.no),
     $('#title').val(data.title),
-    $('#contents').val(data.contents);
-    $('#createdDate').val(data.createdDate);
+    $('#contents').val(data.contents),
+    $('#createdDate').val(data.createdDate),
     $('#viewCount').val(data.viewCount);
   });
 

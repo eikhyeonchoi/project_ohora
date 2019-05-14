@@ -30,6 +30,7 @@
         <result column="largeName"      property="name"/>
       </association>
     </association>
+    
   </resultMap>
   
   <resultMap type="manufacturer" id="manufacturertMap">
@@ -109,6 +110,14 @@
     values (#{smallCategoryNo}, #{manufacturerNo}, #{name});
   </insert>
   
+  <select id="findNoByName" resultMap="productMap" parameterType="string">
+    select
+      product_no
+    from
+      product
+    where
+      name = #{value}
+  </select>
   
 </mapper>
 

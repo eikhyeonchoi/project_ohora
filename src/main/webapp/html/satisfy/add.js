@@ -19,10 +19,14 @@ document.getElementById('product-no').value = addNo;
       
     }, function(data) {
       headers: ("Content-Type", "application/x-www-form-urlencoded");
+    
+     
     if(data.status == 'success'){
       location.href='index.html';
-    } else alert("0 ~ 5 사이 번호 입력");
+    } else alert("등록 실패!\n" + data.message);
     })
+    
+    
   }); 
 
 
