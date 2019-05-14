@@ -55,11 +55,9 @@ public class ManufacturerController {
 
   @GetMapping("list")
   public Object list() throws Exception {
-
     HashMap<String,Object> map = new HashMap<>();
-    List<Manufacturer> manufacturers = manufacturerService.list(null);
+    List<Manufacturer> manufacturers = manufacturerService.list();
     map.put("list", manufacturers);
-
     return map;
   }
 
@@ -82,10 +80,19 @@ public class ManufacturerController {
   
   @GetMapping("search")
   public Object search(String keyword) throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-    List<Manufacturer> manufacturers = manufacturerService.list(keyword);
-    content.put("manufacturers", manufacturers);
-    return content;
+    System.out.println("==>" + keyword);
+    HashMap<String,Object> map = new HashMap<>();
+    try {
+      List<Manufacturer> manufacturers = manufacturerService.list(keyword);
+      map.put("list", manufacturers);
+      map.put("status", "success");
+      
+    } catch(Exception e) {
+      map.put("stauts", "fail");
+      map.put("message", e.getMessage());
+    }
+    
+    return map;
   }
 }
 

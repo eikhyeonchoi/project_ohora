@@ -5,6 +5,7 @@ import bitcamp.team.domain.Manufacturer;
 
 public interface ManufacturerService {
   List<Manufacturer> list(String keyword);
+  List<Manufacturer> list();
   int add(Manufacturer member);
   Manufacturer get(int no);
   int update(Manufacturer member);

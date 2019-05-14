@@ -9,6 +9,19 @@ public class Product {
   private Manufacturer manufacturer;
   private ProductSmallCategory productSmallCategory;
   
+  
+  public Manufacturer getManufacturer() {
+    return manufacturer;
+  }
+  public void setManufacturer(Manufacturer manufacturer) {
+    this.manufacturer = manufacturer;
+  }
+  public ProductSmallCategory getProductSmallCategory() {
+    return productSmallCategory;
+  }
+  public void setProductSmallCategory(ProductSmallCategory productSmallCategory) {
+    this.productSmallCategory = productSmallCategory;
+  }
   public int getNo() {
     return no;
   }
@@ -33,19 +46,4 @@ public class Product {
   public void setName(String name) {
     this.name = name;
   }
-  public Manufacturer getManufacturer() {
-    return manufacturer;
-  }
-  public void setManufacturer(Manufacturer manufacturer) {
-    this.manufacturer = manufacturer;
-  }
-  public ProductSmallCategory getProductSmallCategory() {
-    return productSmallCategory;
-  }
-  public void setProductSmallCategory(ProductSmallCategory productSmallCategory) {
-    this.productSmallCategory = productSmallCategory;
-  }
-  
-  
-  
 }

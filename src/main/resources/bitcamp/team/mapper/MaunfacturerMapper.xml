@@ -23,8 +23,18 @@
     manufacturer
   </sql>
 
-  <select id="findAll" resultMap="manufacturerMap" parameterType="String">
+  <select id="findAll" resultMap="manufacturerMap">
     <include refid="default-columns"/>
+    order by
+      manufac_no desc;
+  </select>
+
+  <select id="findByKeyword" resultMap="manufacturerMap" parameterType="string">
+    <include refid="default-columns"/>
+      <bind name="pattern1" value="'%' + _parameter + '%'"/>
+      <if test="pattern1 != null">
+        where name like #{pattern1}
+      </if>
     order by
       manufac_no desc;
   </select>
@@ -33,14 +43,6 @@
     <include refid="default-columns"/>
     where
       manufac_no = #{value}
-  </select>
-  
-  <select id="findByKeyword" resultMap="manufacturerMap" parameterType="string">
-    <bind name="pattern1" value="'%' + _parameter + '%'"/>
-    <include refid="default-columns"/>
-    where
-      name like #{pattern1}
-    order by manufac_no desc
   </select>
   
   <insert id="insert" parameterType="manufacturer">
