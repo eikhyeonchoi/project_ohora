@@ -107,6 +107,14 @@
       reply_id=#{value}
   </delete>
   
+  <update id="updateReply" parameterType="boardReply">
+  update
+      board_reply
+    set
+      reply_content = #{contents}
+    where
+      reply_id = #{no}
+  </update>
   
 </mapper>
 

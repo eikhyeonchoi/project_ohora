@@ -73,6 +73,10 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public int delete(int no) {
+    List<BoardReply> replyList = boardDao.findReplyAll(no);
+    for (BoardReply b : replyList) {
+      boardDao.deleteReply(b.getNo());
+    }
     return boardDao.delete(no);
   }
 
@@ -86,6 +90,9 @@ public class BoardServiceImpl implements BoardService {
     return boardDao.deleteReply(no);
   }
 
-
+  @Override
+  public int updateReply(BoardReply boardReply) {
+    return boardDao.updateReply(boardReply);
+  }
 
 }

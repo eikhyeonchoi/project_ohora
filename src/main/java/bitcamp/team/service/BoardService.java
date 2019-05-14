@@ -27,4 +27,7 @@ public interface BoardService {
   // 댓글 삭제
   int deleteReply(int no);
 
+  // 댓글 업데이트
+  int updateReply(BoardReply boardReply);
+
 }

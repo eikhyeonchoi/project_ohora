@@ -36,8 +36,7 @@
     </div>
   </div>
   
-  <div class="form-group row" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;
-          margin-left: <c:out value="${20*replylist.redepth}"/>px; display: inline-block">
+  <div class="form-group row">
     <label for="contents" class="col-sm-2 col-form-label">댓글 내용</label>
     <div class="col-sm-8">
       <textarea class="form-control" id="reply-content" 
@@ -72,11 +71,13 @@
 <script id='tr-template' type='text/x-handlebars-template'>
 {{#each replylist}}
 <tr>
-  <td>{{contents}}</td>
+  <td><textarea class="form-control" id="rere-content-{{no}}" 
+                value="{{no}}" rows='2' cols='20' readonly>{{contents}}</textarea></td>
   <td>{{registerDate}}</td>
   <td>
-    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary bit-view-item'>답글</button>
-    <button id='rere-delete-btn' data-no='{{no}}' type='button' class='btn btn-primary bit-view-item'>삭제</button>
+    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>답글</button>
+    <button id='rere-delete-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>삭제</button>
+    <button id='rere-update-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>수정</button>
   </td>
 </tr>
 {{/each}}
