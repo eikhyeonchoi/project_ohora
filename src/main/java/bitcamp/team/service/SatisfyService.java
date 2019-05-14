@@ -7,4 +7,5 @@ import bitcamp.team.domain.Satisfy;
 public interface SatisfyService {
   List<Satisfy> list();
   Map<String, Object> get(int no);
+  int add(Satisfy satisfy);
 }

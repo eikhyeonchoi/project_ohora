@@ -7,4 +7,5 @@ public interface SatisfyDao {
   List<Satisfy> findAll();
   List<Satisfy> findByNo(int no);
   int countAll(int no);
+  int insert(Satisfy satisfy);
 }

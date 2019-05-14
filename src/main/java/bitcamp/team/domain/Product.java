@@ -34,6 +34,7 @@ public class Product {
   public void setName(String name) {
     this.name = name;
   }
+<<<<<<< HEAD
   public Manufacturer getManufacturer() {
     return manufacturer;
   }
@@ -49,4 +50,6 @@ public class Product {
   
   
   
+=======
+>>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
 }
