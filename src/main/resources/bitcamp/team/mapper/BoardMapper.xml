@@ -91,7 +91,7 @@
     delete from
       board
     where 
-      id=#{value};
+      id=#{value}
   </delete>
   
   <insert id="insertReply" parameterType="boardReply">
@@ -99,6 +99,13 @@
       board_reply(board_id, parent_id, depth, reply_content)
     values(#{boardId}, #{parentId}, #{depth}, #{contents})
   </insert>
+  
+  <delete id="deleteReply" parameterType="int">
+    delete from
+      board_reply
+    where 
+      reply_id=#{value}
+  </delete>
   
   
 </mapper>

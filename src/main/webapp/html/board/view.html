@@ -3,39 +3,71 @@
 <head>
 <meta charset='UTF-8'>
 <title>임시 게시판(상세정보)</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
+<header></header>
+
 <h1>임시 게시판(상세정보)</h1>
-제목<br>
-<input id='title' type='text' placeholder='제목'/><br>
-내용<br>
-<textarea id='contents' rows='10' cols='80'></textarea>
-<button id='return-indext-btn' type='button'>게시판</button>
-<button id='board-update-btn' type='button'>수정</button>
-<button id='board-delete-btn' type='button'>삭제</button>
-<br>
-댓글달기<br>
-<textarea id='reply-content' rows='2' cols='20' placeholder="댓글내용"></textarea>
-<button id='reply-add-btn' type="button">댓글등록</button>
 
-<table id='reply-table'>
-  <thead>
-    <tr>
-      <th scope='col'>댓글내용</th>                    
-      <th scope='col'>작성일</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<div class="container">
+<h1></h1>
+  <div class="form-group row bit-view-item">
+    <label for="no" class="col-sm-2 col-form-label">제목</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control-plaintext" id="title" 
+             name="title">
+    </div>
+  </div>
 
-
-
-<div id='rere-form'>
-답글<br>
-<textarea id='rere-content' rows='2' cols='20' placeholder="답글내용"></textarea>
-<button id='rere-add-btn' type="button">등록</button>
-<button id='rere-cancel-btn' type="button">취소</button>
-</div>
+<div class="form-group row">
+    <label for="contents" class="col-sm-2 col-form-label">내용</label>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="contents" 
+                name='contents' rows='5' cols='80'></textarea>
+    </div>
+  </div>
+  
+    <div class="form-group row">
+    <div class="col-sm-10">
+      <a class="btn btn-primary" href='index.html'>목록</a> 
+      <button type="button" id="board-update-btn" class="btn btn-primary bit-view-item">수정</button>
+      <button type="button" id="board-delete-btn" class="btn btn-primary bit-view-item">삭제</button>
+    </div>
+  </div>
+  
+  <div class="form-group row" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;
+          margin-left: <c:out value="${20*replylist.redepth}"/>px; display: inline-block">
+    <label for="contents" class="col-sm-2 col-form-label">댓글 내용</label>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="reply-content" 
+                name='reply-content' rows='2' cols='20'></textarea>
+      <button type="button" id="reply-add-btn" class="btn btn-primary bit-view-item">댓글 등록</button>
+    </div>
+  </div>
+  
+  <div class="bit-list">
+   <table class="table table-hover" id='reply-table'>
+    <thead>
+     <tr>
+      <th scope="col">댓글내용</th>
+      <th scope="col">작성일</th>
+     </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+    </div>
+    
+  <div id='rere-form'>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="rere-content" 
+                name='contents' rows='2' cols='50' placeholder="답글 내용"></textarea>
+      <button type="button" id="rere-add-btn" class="btn btn-primary bit-view-item">등록</button>
+      <button type="button" id="rere-cancel-btn" class="btn btn-primary bit-view-item">취소</button>
+    </div>
+  </div>
+  
+  </div><!-- .container -->
 
 <script id='tr-template' type='text/x-handlebars-template'>
 {{#each replylist}}
@@ -43,13 +75,17 @@
   <td>{{contents}}</td>
   <td>{{registerDate}}</td>
   <td>
-    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button'>답글</button>
+    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary bit-view-item'>답글</button>
+    <button id='rere-delete-btn' data-no='{{no}}' type='button' class='btn btn-primary bit-view-item'>삭제</button>
   </td>
 </tr>
 {{/each}}
 </script>
-<script src='/bitcamp-team-project/node_modules/jquery/dist/jquery.js'></script>
-<script src='/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
 <script src='view.js'></script>
 </body>
 </html>

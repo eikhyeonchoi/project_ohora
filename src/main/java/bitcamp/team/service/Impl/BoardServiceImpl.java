@@ -10,7 +10,7 @@ import bitcamp.team.domain.BoardReply;
 import bitcamp.team.service.BoardService;
 
 @Service
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
   BoardDao boardDao;
 
@@ -37,34 +37,35 @@ public class BoardServiceImpl implements BoardService{
   public List<Board> list() {
     return boardDao.findAll();
   }
+
   @Override
   public List<BoardReply> replyList(int no) {
     // 한 게시물에 종속되는 모든 댓글 가져오기
     List<BoardReply> replyList = boardDao.findReplyAll(no);
-    
+
     List<BoardReply> parent = new ArrayList<BoardReply>();
     List<BoardReply> child = new ArrayList<BoardReply>();
     List<BoardReply> returnList = new ArrayList<BoardReply>();
-    
+
     for (BoardReply b : replyList) {
-      if(b.getDepth() == 0)
+      if (b.getDepth() == 0)
         parent.add(b);
-      else 
+      else
         child.add(b);
     }
-    
+
     for (BoardReply parentBoard : parent) {
       returnList.add(parentBoard);
-      for(BoardReply childBoard : child) {
+      for (BoardReply childBoard : child) {
         if (parentBoard.getNo() == childBoard.getParentId()) {
           returnList.add(childBoard);
         }
-      } 
+      }
     }
     return returnList;
   }
-  
-  
+
+
   @Override
   public Board get(int no) {
     return boardDao.detail(no);
@@ -80,6 +81,10 @@ public class BoardServiceImpl implements BoardService{
     return boardDao.insertReply(boardReply);
   }
 
+  @Override
+  public int deleteReply(int no) {
+    return boardDao.deleteReply(no);
+  }
 
 
 
