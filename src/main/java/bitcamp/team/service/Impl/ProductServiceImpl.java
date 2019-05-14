@@ -31,6 +31,12 @@ public class ProductServiceImpl implements ProductService{
     
     return ctgList;
   }
+
+  @Override
+  public int get(String name) {
+    Product product = productDao.findNoByName(name);
+    return product.getNo();
+  }
   
 
 }

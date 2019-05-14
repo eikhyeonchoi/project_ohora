@@ -2,55 +2,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>제조사 목록</title>
+<title>팁 리스트</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>제조사 목록</h1>
+    <h1>팁 리스트</h1>
     <p>
-      <a href='view.html' class="btn btn-success btn-sm">제조사 추가</a>
+      <a href='view.html' class="btn btn-success btn-sm">새 팁</a>
     </p>
     <div class="bit-list">
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">번호</th>
-            <th scope="col">이름</th>
-            <th scope="col">전화</th>
-            <th scope="col">홈페이지</th>
-            <th scope="col">사업자 등록번호</th>
+            <th scope="col">제품명</th>
+            <th scope="col">작성자</th>
+            <th scope="col">등록일</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-    <!-- bit-list -->
-    
-  <div class="form-inline my-2 my-lg-0 justify-content-center">
-    <input id="keyword" class="form-control mr-sm-2" placeholder="회사명" aria-label="검색">
-    <button type="button" id="search-btn" class="btn btn-outline-success my-2 my-sm-0">검색</button>
-  </div>
-    
 
     <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
     <tr>
       <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
-      <td scope='row'>{{tel}}</td>
-      <td scope='row'>{{homePage}}</td>
-      <td scope='row'>{{registerNo}}</td>
+      <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{product.name}}</a></td>
+      <td scope='row'>{{member.nickName}}</td>
+      <td scope='row'>{{createdDate}}</td>
     </tr>
   {{/each}}
   </script>
-  
+
   </div>
-  <!-- container -->
+  <!-- .container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -59,3 +52,5 @@
   <script src="index.js"></script>
 </body>
 </html>
+
+

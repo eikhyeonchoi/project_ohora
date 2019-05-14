@@ -22,6 +22,19 @@ $(document.body).bind('loaded-list', () => {
 
 loadList(1);
 
+$('#keyword').keydown((e) => {
+  if (event.keyCode == 13) {
+  e.preventDefault();
+  $.getJSON('../../app/json/manufacturer/search?keyword=' + $('#keyword').val()
+      , function(data) {
+    console.log(data);
+    tbody.html(''); 
+    $(trGenerator(data)).appendTo(tbody);
+    $(document.body).trigger('loaded-list');
+  })
+  }
+});
+
 $('#search-btn').click(() => {
   console.log($('#keyword').val());
   $.getJSON('../../app/json/manufacturer/search?keyword=' + $('#keyword').val()

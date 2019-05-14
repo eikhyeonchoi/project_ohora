@@ -10,4 +10,5 @@ public interface ProductDao {
   List<Product> findAll(Map<String, Object> param);
   List<ProductLargeCategory> findLargeCategory();
   List<ProductSmallCategory> findSmallCategory();
+  Product findNoByName(String name);
 }

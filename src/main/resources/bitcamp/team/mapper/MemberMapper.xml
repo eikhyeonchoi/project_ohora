@@ -29,11 +29,20 @@
     select
   <include refid="default-columns"/>
     from
-      member 
+      member
     order by
       member_no desc
   </select>
-
+  
+  <select id="findNoByNickName" resultMap="memberMap" parameterType="string">
+    select
+      member_no
+    from
+      member
+    where
+      n_name = #{nickName}
+  </select>
+  
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
   <include refid="default-columns"/>
