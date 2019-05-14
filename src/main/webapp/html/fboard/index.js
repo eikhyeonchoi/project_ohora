@@ -1,4 +1,5 @@
 var tbody = $('tbody');
+var addBtn = $('#add-btn');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
 
@@ -14,10 +15,18 @@ function loadList(pn) {
   }); 
 }
 
-$(document.body).bind('loaded-list', () => {
-  var alist = $('.bit-view-link').click((e) => {
-    e.preventDefault();
-    location.href = 'view.html?no=' + $(e.target).attr('data-no');
+$.getJSON('../../app/json/auth/user', function(data) {
+  if (data.status == "fail") {
+    addBtn.hide();
+  }
+});
+
+addBtn.click(() => {
+  $(document.body).bind('loaded-list', () => {
+    var alist = $('.bit-view-link').click((e) => {
+      e.preventDefault();
+      location.href = 'view.html?no=' + $(e.target).attr('data-no');
+    });
   });
 });
 

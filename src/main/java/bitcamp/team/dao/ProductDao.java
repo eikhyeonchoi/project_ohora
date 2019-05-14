@@ -10,4 +10,6 @@ public interface ProductDao {
   List<Product> findAll(Map<String, Object> param);
   List<ProductLargeCategory> findLargeCategory();
   List<ProductSmallCategory> findSmallCategory();
+  List<Product> findManufacturer();
+  int insert(Product product);
 }

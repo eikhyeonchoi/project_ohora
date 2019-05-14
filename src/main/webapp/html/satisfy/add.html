@@ -7,21 +7,78 @@
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
+<header class="bit-main-header"></header>
+<div class="container">
 <h1> 만족도 평가(add)</h1>
 <form>
-  제품번호 <input id='product-no' type="text" type="hidden" readonly><br>
-  회원번호 <input id='member-no' type="text"><br><br>
+
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">제품번호</label>
+    <div class="col-sm-10">
+      <input id='product-no' type="text" readonly><br>
+    </div>
+  </div>
   
-  난이도 <input id='satisfy-level' type="text"><br>
-  이해도 <input id='satisfy-understand' type="text"><br>
-  디자인 <input id='satisfy-design' type="text"><br>
-  as 만족도 <input id='satisfy-asStf' type="text"><br>
-  편의성 <input id='satisfy-useful' type="text"><br>
-  가격만족도 <input id='satisfy-priceStf' type="text"><br>
-  <button id="satisfy-add-btn" class='satisfy-view-item' type="button">등록</button>
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">회원번호</label>
+    <div class="col-sm-10">
+      <input id='member-no' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">난이도</label>
+    <div class="col-sm-10">
+      <input id='satisfy-level' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">이해도</label>
+    <div class="col-sm-10">
+      <input id='satisfy-understand' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">디자인</label>
+    <div class="col-sm-10">
+      <input id='satisfy-design' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">as 만족도</label>
+    <div class="col-sm-10">
+      <input id='satisfy-asStf' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">편의성</label>
+    <div class="col-sm-10">
+      <input id='satisfy-useful' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row bit-view-item">
+   <label for="no" class="col-sm-2 col-form-label">가격만족도</label>
+    <div class="col-sm-10">
+      <input id='satisfy-priceStf' type="text"><br>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+        <div class="col-sm-10">
+  <button id="satisfy-add-btn" class='btn btn-success btn-sm satisfy-view-item' type="button">등록</button>
+  </div>
+  </div>
+  
 </form>
+</div>
 
 
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>

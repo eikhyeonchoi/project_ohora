@@ -29,7 +29,7 @@
       faq f
       left outer join question_category qc on f.qctg_no = qc.qctg_no 
     order by 
-      f.faq_no asc;
+      f.qctg_no asc;
   </select>
   
   <select id='findCategoryName' resultMap="faqMap">

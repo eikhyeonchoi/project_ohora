@@ -42,6 +42,7 @@ public class Product {
     this.name = name;
   }
 
+
   public Manufacturer getManufacturer() {
     return manufacturer;
   }
