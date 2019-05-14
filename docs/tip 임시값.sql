@@ -25,27 +25,27 @@ insert into tip_history (tip_no, conts)
 values (1, '갤럭시 s10 팁입니다 2.');
 insert into tip_history (tip_no, conts)
 values (1, '갤럭시 s10 팁입니다 3.');
-insert into tip_history (tip_no, conts)
-values (2, '갤럭시노트10 팁입니다 1.');
-insert into tip_history (tip_no, conts)
-values (2, '갤럭시노트10 팁입니다 2.');
-insert into tip_history (tip_no, conts)
-values (3, '갤럭시탭s5 팁입니다. 1.');
-insert into tip_history (tip_no, conts)
-values (3, '갤럭시탭s5 팁입니다. 2');
-insert into tip_history (tip_no, conts)
-values (3, '갤럭시탭s5 팁입니다. 3.');
-insert into tip_history (tip_no, conts)
-values (3, '갤럭시탭s5 팁입니다. 4.');
-insert into tip_history (tip_no, conts)
-values (3, '갤럭시탭s5 팁입니다. 5.');
-insert into tip_history (tip_no, conts)
-values (4, '갤럭시탭s4 팁입니다. 1.');
-insert into tip_history (tip_no, conts)
-values (5, '갤럭시기어핏2 팁입니다 1.');
-insert into tip_history (tip_no, conts)
-values (5, '갤럭시기어핏2 팁입니다 2.');
-insert into tip_history (tip_no, conts)
-values (6, '갤럭시기어핏2 pro 팁입니다. 1.');
-insert into tip_history (tip_no, conts)
-values (7, '삼성/에어컨1 팁입니다.');
+insert into tip_history (tip_no, conts, nickName)
+values (2, '갤럭시노트10 팁입니다 1.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (2, '갤럭시노트10 팁입니다 2.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (3, '갤럭시탭s5 팁입니다. 1.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (3, '갤럭시탭s5 팁입니다. 2', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (3, '갤럭시탭s5 팁입니다. 3.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (3, '갤럭시탭s5 팁입니다. 4.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (3, '갤럭시탭s5 팁입니다. 5.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (4, '갤럭시탭s4 팁입니다. 1.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (5, '갤럭시기어핏2 팁입니다 1.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (5, '갤럭시기어핏2 팁입니다 2.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (6, '갤럭시기어핏2 pro 팁입니다. 1.', '일반회원1');
+insert into tip_history (tip_no, conts, nickName)
+values (7, '삼성/에어컨1 팁입니다.', '일반회원1');

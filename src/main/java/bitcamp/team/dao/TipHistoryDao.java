@@ -9,4 +9,5 @@ public interface TipHistoryDao {
    int delete(int no);
    int insert(TipHistory tip);
    int update(TipHistory tip);
+   int countAll();
 }

@@ -60,13 +60,22 @@
     where
       h.tip_no = #{value}
     order by
-      tip_no desc
+      this_no desc
   </select>
   
   <insert id="insert" parameterType="tiphistory">
     insert into tip_history (tip_no, conts, nickName)
     values (#{tipNo}, #{contents}, #{nickName})
   </insert>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from tip_history;
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from tip_history
+    where this_no = #{value}
+  </delete>
 </mapper>
 
 

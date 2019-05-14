@@ -18,18 +18,16 @@ public class TipHistoryController {
 
   @Autowired TipService tipService;
   @Autowired TipHistoryService tipHistoryService;
-  
+
   @GetMapping("list")
   public Object list(int no) throws Exception {
-    System.out.println(no);
     List<TipHistory> history = tipHistoryService.get(no);
     HashMap<String,Object> map = new HashMap<>();
-    System.out.println(history);
     map.put("list", history);
 
     return map;
   }
-  
+
 
   @PostMapping("add")
   public Object add(TipHistory tipHistory) throws Exception {
