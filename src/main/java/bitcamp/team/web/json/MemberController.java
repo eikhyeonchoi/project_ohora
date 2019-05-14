@@ -20,16 +20,14 @@ public class MemberController {
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
       try {
-        System.out.println(member);
-        System.out.println("AAAA");
         memberService.add(member);
         content.put("status", "success");
-
       } catch (Exception e) {
         content.put("status", "fail");
         content.put("message", e.getMessage());
 
       }
+      System.out.println(content.get("status"));
       return content;
     }
 

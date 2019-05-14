@@ -31,15 +31,15 @@ insert into small_category(lctg_no, name) values(4, '냉장고'); --15
 insert into small_category(lctg_no, name) values(4, '에어컨'); --16
 
 -- member 임시값 '회원'
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'이름1','1234-1234','일반회원1',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com',password('2222'),'이름2','2222-2222','일반회원2',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com',password('3333'),'이름3','3333-3333','일반회원3',1,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('company1@test.com',password('1111'),'기업회원1','1234-1234','기업회원1',2,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('company2@test.com',password('2222'),'기업회원2','1234-1234','기업회원2',2,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('company3@test.com',password('3333'),'기업회원3','1234-1234','기업회원3',2,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com',password('1111'),'관리자1','1234-1234','관리자1',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com',password('2222'),'관리자2','1234-1234','관리자2',3,false);
-insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com',password('3333'),'관리자3','1234-1234','관리자3',3,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'이름1','1234-1234','일반회원1',일반 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com',password('2222'),'이름2','2222-2222','일반회원2',일반 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com',password('3333'),'이름3','3333-3333','일반회원3',일반 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company1@test.com',password('1111'),'기업회원1','1234-1234','기업회원1',기업 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company2@test.com',password('2222'),'기업회원2','1234-1234','기업회원2',기업 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('company3@test.com',password('3333'),'기업회원3','1234-1234','기업회원3',기업 회원,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager1@test.com',password('1111'),'관리자1','1234-1234','관리자1',관리자,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager2@test.com',password('2222'),'관리자2','1234-1234','관리자2',관리자,false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('manager3@test.com',password('3333'),'관리자3','1234-1234','관리자3',관리자,false);
 
 --product 임시값 "제품"
 insert into product(sctg_no, manufac_no, name) values(1,1,'갤럭시S10');

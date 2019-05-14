@@ -10,6 +10,17 @@ templateSrc = $('#tr-template').html();
 
 var trGenerator = Handlebars.compile(templateSrc);
 
+$(document).ready(function() {
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
+    var loginUser = obj.user.type;
+    if(loginUser != 3) {
+      $('#add-button').css('display', 'none');
+    } else {
+      $('#add-button').css('display', '');
+    }
+})});
+
 function loadList(pn) {
 
   $.getJSON('../../app/json/notice/list?pageNo=' + pn + 
@@ -17,8 +28,8 @@ function loadList(pn) {
           '&keyword=' + $('#keyword').val() + 
           '&searchType=' + $('#searchType').val(), 
           function (obj){
-    console.log(obj);
 
+    //page
     pageNo = obj.pageNo;
     totalPage = obj.totalPage;
 
@@ -28,13 +39,6 @@ function loadList(pn) {
     currSpan.html(String(pageNo));
 
     var currpage = pageNo % 5
-/*
-    if($('#page > a').html() > totalPage) {
-      $('#page').css('display', 'none');
-    } else {
-      $('#page').css('display', '');
-    }
-    */
     
     if($('#2ndPage > a').html() > totalPage) {
       $('#2ndPage').css('display', 'none');
@@ -166,6 +170,7 @@ $('#nextPage > a').click((e) => {
 
 loadList(1);
 
+//detail 링크
 $(document.body).bind('loaded-list', () => {
 
   $('.bit-view-link').click((e) => {
@@ -178,7 +183,12 @@ $(document.body).bind('loaded-list', () => {
 //검색
 
 $('#search-btn').click((e) => {
-  loadList();
+  $('#1stPage > a').text(1);
+  $('#2ndPage > a').text(2);
+  $('#3thPage > a').text(3);
+  $('#4thPage > a').text(4);
+  $('#5thPage > a').text(5);
+  loadList(1);
 });
 
 

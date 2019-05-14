@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#basic-list-table {
+	text-align: center;
+}
+
+tbody tr {
+	min-width: 500px;
+}

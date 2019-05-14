@@ -29,4 +29,9 @@ public class SatisfyServiceImpl implements SatisfyService {
     content.put("totalColumn", satisfyDao.countAll(no));
     return content;
   }
+  
+  @Override
+  public int add(Satisfy satisfy) {
+    return satisfyDao.insert(satisfy);
+  }
 }

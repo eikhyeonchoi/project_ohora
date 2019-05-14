@@ -21,6 +21,7 @@ public class NoticeController {
   @PostMapping("add")
   public Object add(Notice notice) {
     HashMap<String, Object> content = new HashMap<>();
+
     try {
       if (notice.getTitle() == "") {
         throw new RuntimeException("제목을 입력해 주세요");
@@ -54,8 +55,7 @@ public class NoticeController {
 
   @GetMapping("detail")
   public Object detail(int no) {
-    Notice notice = noticeService.get(no);
-    return notice;
+    return noticeService.get(no);
   }
 
   @GetMapping("list")

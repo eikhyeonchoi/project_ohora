@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>만족도</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
 <h1> 만족도 조사 - detail</h1>
-<a href='add.html'>만족도 등록</a>
+<a class='satisfy-a-class' href='add.html'>만족도 등록</a>
 <table border=1>
 <thead>
   <tr> 
@@ -30,7 +34,7 @@
 <tr>
   <th scope='row'>{{no}}</th>
   <td scope='row'>{{product.no}}</td> 
-  <td><a class='satisfy-a-class' href='#' data-no='{{no}}'>{{product.name}}</a></td>
+  <td>{{product.name}}</td>
   <td scope='row'>{{level}}</td>
   <td scope='row'>{{understand}}</td>
   <td scope='row'>{{design}}</td>
@@ -43,6 +47,9 @@
 
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
 <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../header.js"></script>
 <script src="view.js"></script>
 </body>
 </html>

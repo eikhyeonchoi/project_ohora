@@ -77,6 +77,7 @@ public class AuthController {
       content.put("user", loginUser);
     } else {
       content.put("status", "fail");
+      content.put("user", new Member());
     }
     return content;
   }
