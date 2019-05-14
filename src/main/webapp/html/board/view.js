@@ -78,7 +78,7 @@ $(document.body).bind('loaded-list', () => {
     $.get('/bitcamp-team-project/app/json/board/delete?no=' + param.split('=')[1], (obj) => {
       if(obj.status == 'success'){
         location.href='index.html';
-      } else alert('삭제 실패\n' +  obj.message)
+      } else alert('삭제 실패 \n' +  obj.message)
     }) // post
   });// click
 
@@ -96,6 +96,16 @@ $(document.body).bind('loaded-list', () => {
     } else alert("답글등록 실패\n" + data.message);
     }) // post
   }); // click
+  
+  //댓글 삭제
+  $('#rere-delete-btn').click(function(){
+    $.get('/bitcamp-team-project/app/json/board/deleteReply?no=' + param.split('=')[1], (obj) => {
+      alert('rere-delete-btn')
+      if(obj.status == 'success'){
+        location.href='view.html';
+      } else alert('삭제 실패 \n' +  obj.message)
+    }) // post
+  });// click
 
 
 }); // bind
