@@ -31,12 +31,23 @@ public class MemberServiceImpl implements MemberService {
   public Member get(int no) {
     return memberDao.findByNo(no);
   }
-  
+
   @Override
   public int get(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
     return member.getNo();
   }
+
+  @Override
+  public int get2(String nickName) {
+    Member member = memberDao.findNoByNickName(nickName);
+    if (member == null) {
+      return 0;
+    } else {
+      return member.getNo();
+    }
+  }
+
   @Override
   public int update(Member member) {
     return memberDao.update(member);

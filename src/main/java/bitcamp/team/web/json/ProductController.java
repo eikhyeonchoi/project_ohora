@@ -8,28 +8,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Product;
 import bitcamp.team.service.ProductService;
+import bitcamp.team.service.SatisfyService;
+import bitcamp.team.service.TipService;
 
 @RestController("json/ProductController")
 @RequestMapping("/json/product")
 public class ProductController {
 
   ProductService productService;
+  SatisfyService satisfyService;
+  TipService tipService;
 
-  public ProductController(ProductService productService) {
+  public ProductController(
+      ProductService productService,
+      SatisfyService satisfyService, 
+      TipService tipService) {
     this.productService = productService;
+    this.satisfyService = satisfyService;
+    this.tipService = tipService;
   }
 
   @GetMapping("ctgList")
   public Object ctgList() {
     return productService.findCategory();
-  }
+  } // ctgList
   
   @GetMapping("manuList")
   public Object listManufacturer() {
     HashMap<String, Object> content = new HashMap<>();
     content.put("manuList", productService.listManufacturer());
     return content;
-  }
+  } // listManufacturer
+  
+  @GetMapping("confirmTip")
+  public Object confirmTip(int no) {
+    HashMap<String, Object> content = new HashMap<>();
+    int memberNo = tipService.confirm(no);
+    if(memberNo == 0) {
+      content.put("status","success");
+    } else {
+      content.put("status", "fail");
+    }
+    
+    return content;
+  } // confirmTip
+  
+  
+  @GetMapping("findReviewedMember")
+  public Object findReviewedMember(int uNo, int pNo) {
+    HashMap<String, Object> content = new HashMap<>();
+    HashMap<String, Object> paramMap = new HashMap<>();
+    
+    paramMap.put("uNo", uNo);
+    paramMap.put("pNo", pNo);
+    int memberNo = satisfyService.getReviewedMember(paramMap);
+    
+    if(memberNo == 0) {
+      content.put("status","success");
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  } // findReviewedMember
   
   
   @GetMapping("list")

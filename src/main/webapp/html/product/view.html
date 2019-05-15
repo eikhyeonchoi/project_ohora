@@ -2,9 +2,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>product detail</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
+  <header class="bit-main-header"></header>
+  <div class="container">
+    <h1>product detail (view.html)</h1>
 
+    <div id='company-manager-div'>
+      <button id='go-manual-add-or-update-btn'>메뉴얼add or update</button>
+    </div>
+    <div id='common-member-div'>
+      <button id='go-reivew-add-btn'>리뷰add</button>
+      <button id='go-satisfy-add-btn'>만족도add</button>
+    </div>
+    <div id='non-member-div'>
+      <button id='go-manual-btn'>메뉴얼view</button>
+      <button id='go-reivew-btn'>리뷰view</button>
+      <button id='go-tip-btn'>팁</button>
+    </div>
+  </div>
+  <!-- container -->
+
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="view.js"></script>
 </body>
 </html>

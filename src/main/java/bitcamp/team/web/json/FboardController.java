@@ -1,15 +1,12 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
-import bitcamp.team.domain.Member;
 import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
 
@@ -21,17 +18,13 @@ public class FboardController {
 
   @Autowired FboardService boardService;
   @Autowired MemberService memberService;
-  
+
   @PostMapping("add")
-  public Object add(Fboard board,
-      ServletRequest request) throws Exception {
+  public Object add(Fboard board) throws Exception {
     // 자게 글쓸때 작성자 이름을 남기기위해 HttpServletRequest를 사용한다.
-    HttpServletRequest httpReq = (HttpServletRequest) request;
-    Member loginUser = (Member) httpReq.getSession().getAttribute("loginUser");
 
     HashMap<String,Object> content = new HashMap<>();
     try {
-      board.setMemberNo(loginUser.getNo());
       System.out.println(board);
       boardService.add(board);
 

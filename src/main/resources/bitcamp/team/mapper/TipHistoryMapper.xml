@@ -58,9 +58,15 @@
   <select id="findByNo" resultMap="tipHistoryMap" parameterType="int">
     <include refid="join-select1"/>
     where
-      h.tip_no = #{value}
+      t.product_no = #{value}
     order by
       this_no desc
+  </select>
+  
+  <select id="findContsByNo" resultMap="tipHistoryMap" parameterType="int">
+    <include refid="join-select1"/>
+    where
+      h.this_no = #{value}
   </select>
   
   <insert id="insert" parameterType="tiphistory">

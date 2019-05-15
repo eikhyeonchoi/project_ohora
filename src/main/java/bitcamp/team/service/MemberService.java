@@ -11,5 +11,6 @@ public interface MemberService {
   int update(Member member);
   int delete(int no);
   int get(String nickName);
+  int get2(String nickName);
   int size();
 }

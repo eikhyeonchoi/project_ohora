@@ -11,7 +11,7 @@ if (param) {
     e.style.display = 'none';
   }
 } else {
-  $('h1').html("팁 생성");
+  $('h1').html("새 팁");
   var el = $('.bit-view-item');
   for (e of el) {
     e.style.display = 'none';
@@ -23,7 +23,6 @@ $.getJSON('../../app/json/auth/user', function(data) {
   $('#rollback-btn').hide();
   if (data.status == "fail") {
     $('#update-btn').hide();
-    $('#add-btn').hide();
   } 
   if (data.user.type == "3") {
     $('.history-list').show();
@@ -33,7 +32,7 @@ $.getJSON('../../app/json/auth/user', function(data) {
     $('#updateUser').attr('placeholder', data.user.nickName);
   });
 })
-$.getJSON('bitcamp-team-project/app/json/')
+
 
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
@@ -48,31 +47,24 @@ function loadList(no) {
 }
 
 $(document.body).bind('loaded-list', () => {
-  $('.rollback-btn').click(function(e) {
-    $.getJSON('/bitcamp-team-project/app/json/tiphistory/detail?no=' + $(e.target).attr('data-no'),
-        function(data) {
-      var hisNo = data.history.no;
-      if (data.status == "success") {
-        var r = confirm('롤백 하시겠습니까?');
-        if (r == true) {
-        $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
-          name: $('#productName').val(),
-          hisNo: hisNo
-        }, function(obj) {
-          if (obj.status == 'success') {
-            location.href = "view.html?no=" + param.split('=')[1];
-          } else {
-            alert('롤백에 실패했습니다.\n' + data.message);
-          }
-        }, "json")
-        } else {
-          location.href = "view.html?no=" + param.split('=')[1];
-        }
+  var alist = $('.bit-view-link').click((e) => {
+    e.preventDefault();
+    console.log($('#productName').val());
+    console.log($('#nickName').val());
+    console.log($('#rbconts').val());
+    $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
+      name: $('#productName').val(),
+      nickName: $('#nickName').val(),
+      contents: $('#rbconts').val()
+    }, function(data) {
+      if (data.status == 'success') {
+        alert('롤백 중입니다.');
       } else {
-        alert('안됩니닷!');
+        alert('롤백에 실패했습니다.\n' + data.message);
       }
-    });
-  })
+      
+    }, "json")
+  });
 });
 
 function loadData(no) {
@@ -91,14 +83,15 @@ $('#update-btn').click(() => {
     name: $('#productName').val(),
     nickName: $('#updateUser').attr('placeholder'),
     contents: $('#contents').val()
-  }, function(data) {
+  },
+  function(data) {
     if (data.status == 'success') {
-      location.href = "view.html?no=" + param.split('=')[1];
+      location.href = "index.html";
     } else {
       alert('변경 실패 입니다.\n' +  data.message);
     }
   }, "json");
-
+  
   console.log($('#no').val());
   $.post('/bitcamp-team-project/app/json/tiphistory/add', {
     tipNo: $('#no').val(),
@@ -112,3 +105,6 @@ $('#update-btn').click(() => {
     }
   }, "json")
 });
+
+
+

@@ -84,6 +84,16 @@
         #{priceStf}); 
   </insert>
   
+  <select id='findByMemberNo' resultType="int" parameterType="map">
+    select
+      count(*)
+    from
+      satisfy
+    where
+      member_no=#{uNo}
+      and
+      product_no=#{pNo}
+  </select>
   
   
   

@@ -1,3 +1,4 @@
+var memberNo;
 var param = location.href.split('?')[1];
 if (param) {
   $('h1').html("게시물 조회");
@@ -25,10 +26,18 @@ function loadData(no) {
   });
 };
 
+$(document).ready(function() {
+  $.getJSON('../../app/json/auth/user' ,function(data) {
+    $("#user").attr('placeholder', data.user.no);
+  });
+});
+
 $('#add-btn').click(function() {
+  console.log($("#user").attr('placeholder'))
   $.post('../../app/json/fboard/add', {
     title: $('#title').val(),
-    contents: $('#contents').val()
+    contents: $('#contents').val(),
+    memberNo: $("#user").attr('placeholder')
   },
   function(data) {
     if (data.status == 'success') {

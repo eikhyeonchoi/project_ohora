@@ -4,9 +4,8 @@
  * 
  */
 var tbody = $('tbody'),
-    templateSrc = $('#tr-template').html();
-
-var trGenerator = Handlebars.compile(templateSrc);
+    templateSrc = $('#tr-template').html(),
+    trGenerator = Handlebars.compile(templateSrc)
 
 $(document).ready(function() {
   $('#faq-content').hide(); 
@@ -29,22 +28,22 @@ $(document).ready(function() {
   
 }) // ready
 
-// 기존에 '제목' 항목누르면 상세정보 페이지로 넘어가는 것
-// window.location.href = 'view.html?no=' + $(e.target).attr('data-no');
-
 
 $(document.body).bind('loaded-list', function() {
-  $('.faq-a-class').on('click', function(e) {
-    e.preventDefault();
-    console.log($(this));
-    // $(this).closest('tr').after(faqContent.show());
-    
+  $('.faq-component').on('click', function(e) {
+    location.href = 'view.html?no=' + $(e.target).attr('data-no');
   }); // on
 }); // bind
 
 
 
-
+/*
+var childTag = $(this).find('.faq-component-child');
+$.getJSON('/bitcamp-team-project/app/json/faq/detail?no=' + $(this).find('a').attr('data-no'), function(obj) {
+  childTag.html('');
+  $(trChildGenerator(obj)).appendTo(childTag);
+});
+*/
 
 
 
