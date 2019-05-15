@@ -11,7 +11,7 @@ if (param) {
     e.style.display = 'none';
   }
 } else {
-  $('h1').html("새 팁");
+  $('h1').html("팁 생성");
   var el = $('.bit-view-item');
   for (e of el) {
     e.style.display = 'none';
@@ -23,6 +23,7 @@ $.getJSON('../../app/json/auth/user', function(data) {
   $('#rollback-btn').hide();
   if (data.status == "fail") {
     $('#update-btn').hide();
+    $('#add-btn').hide();
   } 
   if (data.user.type == "3") {
     $('.history-list').show();
@@ -32,7 +33,7 @@ $.getJSON('../../app/json/auth/user', function(data) {
     $('#updateUser').attr('placeholder', data.user.nickName);
   });
 })
-
+$.getJSON('bitcamp-team-project/app/json/')
 
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
@@ -52,17 +53,21 @@ $(document.body).bind('loaded-list', () => {
         function(data) {
       var hisNo = data.history.no;
       if (data.status == "success") {
+        var r = confirm('롤백 하시겠습니까?');
+        if (r == true) {
         $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
           name: $('#productName').val(),
           hisNo: hisNo
         }, function(obj) {
           if (obj.status == 'success') {
-            alert('롤백 중입니다.');
             location.href = "view.html?no=" + param.split('=')[1];
           } else {
             alert('롤백에 실패했습니다.\n' + data.message);
           }
         }, "json")
+        } else {
+          location.href = "view.html?no=" + param.split('=')[1];
+        }
       } else {
         alert('안됩니닷!');
       }
