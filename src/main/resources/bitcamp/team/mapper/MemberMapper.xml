@@ -54,7 +54,7 @@
   <insert id="insert" parameterType="member">
     insert into member (name, n_name, email, pwd, tel, type, ban)
     values
-    (#{name}, #{nickName}, #{email}, #{password}, #{tel}, #{type}, #{ban})
+    (#{name}, #{nickName}, #{email}, password(#{password}), #{tel}, #{type}, #{ban})
   </insert>
 
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">

@@ -20,7 +20,9 @@ public class MemberController {
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
       try {
+        System.out.println("호출1");
         memberService.add(member);
+        System.out.println("호출2");
         content.put("status", "success");
       } catch (Exception e) {
         content.put("status", "fail");
@@ -50,6 +52,12 @@ public class MemberController {
   public Object detail(int no) throws Exception {
     Member member = memberService.get(no);
     return member;
+  }
+  
+  @GetMapping("nickName")
+  public Object detail(String nickName) throws Exception {
+    int abcd = memberService.get2(nickName);
+    return abcd;
   }
 
   @GetMapping("list")

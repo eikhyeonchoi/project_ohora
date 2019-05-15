@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 조회</title>
+<title>회원 가입</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -32,7 +32,7 @@
         <label for="password2" class="col-sm-2 col-form-label">비밀번호 확인</label>
         <div class="col-sm-10">
           <input type='password' class="form-control" id="password2" name='password2'>
-          <p id="password2-p"></p>
+          <p id="password2-p">비밀번호를 한번더 입력해 주세요.</p>
         </div>
       </div>
       <div class="form-group row">
@@ -46,7 +46,8 @@
         <label for="nickName" class="col-sm-2 col-form-label">닉네임</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="nickName" name='nickName'>
-          <p>닉네임을 입력해 주세요.</p>
+          <button type="button" id="n-name-btn">중복 검사</button>
+          <p id="nickName-p">닉네임을 입력해 주세요.</p>
         </div>
       </div>
       <div class="form-group row">
