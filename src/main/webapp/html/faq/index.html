@@ -23,12 +23,12 @@
     </table>
   </div>
   
-  
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
-  <tr id='faq-component'>
+  <tr class='faq-component'>
     <td>{{questionCategory.name}}</td>
     <td><a class='faq-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
+    <td><div class='faq-component-child'></div><td>
   </tr>
 {{/each}}
 </script>

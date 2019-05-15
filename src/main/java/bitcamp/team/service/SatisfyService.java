@@ -8,4 +8,5 @@ public interface SatisfyService {
   List<Satisfy> list();
   Map<String, Object> get(int no);
   int add(Satisfy satisfy);
+  int getReviewedMember(Map<String, Object> param);
 }

@@ -7,16 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Product;
+import bitcamp.team.domain.Satisfy;
 import bitcamp.team.service.ProductService;
+import bitcamp.team.service.SatisfyService;
 
 @RestController("json/ProductController")
 @RequestMapping("/json/product")
 public class ProductController {
 
   ProductService productService;
+  SatisfyService satisfyService;
 
-  public ProductController(ProductService productService) {
+  public ProductController(
+      ProductService productService,
+      SatisfyService satisfyService) {
     this.productService = productService;
+    this.satisfyService = satisfyService;
   }
 
   @GetMapping("ctgList")
@@ -28,6 +34,23 @@ public class ProductController {
   public Object listManufacturer() {
     HashMap<String, Object> content = new HashMap<>();
     content.put("manuList", productService.listManufacturer());
+    return content;
+  }
+  
+  @GetMapping("findReviewedMember")
+  public Object findReviewedMember(int uNo, int pNo) {
+    HashMap<String, Object> content = new HashMap<>();
+    HashMap<String, Object> paramMap = new HashMap<>();
+    
+    paramMap.put("uNo", uNo);
+    paramMap.put("pNo", pNo);
+    int memberNo = satisfyService.getReviewedMember(paramMap);
+    
+    if(memberNo == 0) {
+      content.put("status","success");
+    } else {
+      content.put("status", "fail");
+    }
     return content;
   }
   
