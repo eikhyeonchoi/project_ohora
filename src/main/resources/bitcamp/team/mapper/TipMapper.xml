@@ -70,6 +70,11 @@
   <select id="confirmTip" resultType="int" parameterType="int">
     select count(*) from tip where product_no = #{value}
   </select>
+  
+  <insert id="insert" parameterType="map">
+    insert into tip (product_no, member_no, conts)
+    values (#{productNo}, #{memberNo}, #{contents})
+  </insert>
 </mapper>
 
 
