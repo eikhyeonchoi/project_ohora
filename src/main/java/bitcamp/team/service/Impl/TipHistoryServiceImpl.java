@@ -37,4 +37,10 @@ public class TipHistoryServiceImpl implements TipHistoryService {
   public int count() {
     return tipDao.countAll();
   }
+
+  @Override
+  public TipHistory detail(int no) {
+    TipHistory history = tipDao.findContsByNo(no);
+    return history;
+  }
 }

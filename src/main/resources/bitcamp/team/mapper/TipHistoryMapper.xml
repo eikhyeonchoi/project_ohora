@@ -63,6 +63,12 @@
       this_no desc
   </select>
   
+  <select id="findContsByNo" resultMap="tipHistoryMap" parameterType="int">
+    <include refid="join-select1"/>
+    where
+      h.this_no = #{value}
+  </select>
+  
   <insert id="insert" parameterType="tiphistory">
     insert into tip_history (tip_no, conts, nickName)
     values (#{tipNo}, #{contents}, #{nickName})

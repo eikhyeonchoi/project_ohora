@@ -47,27 +47,24 @@ function loadList(no) {
 }
 
 $(document.body).bind('loaded-list', () => {
-  $('.rollback-btn').click(function(e) {
-    $.getJSON('/bitcamp-team-project/app/json/tiphistory/detail?no=' + $(e.target).attr('data-no'),
-        function(data) {
-      var hisNo = data.history.no;
-      if (data.status == "success") {
-        $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
-          name: $('#productName').val(),
-          hisNo: hisNo
-        }, function(obj) {
-          if (obj.status == 'success') {
-            alert('롤백 중입니다.');
-            location.href = "view.html?no=" + param.split('=')[1];
-          } else {
-            alert('롤백에 실패했습니다.\n' + data.message);
-          }
-        }, "json")
+  var alist = $('.bit-view-link').click((e) => {
+    e.preventDefault();
+    console.log($('#productName').val());
+    console.log($('#nickName').val());
+    console.log($('#rbconts').val());
+    $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
+      name: $('#productName').val(),
+      nickName: $('#nickName').val(),
+      contents: $('#rbconts').val()
+    }, function(data) {
+      if (data.status == 'success') {
+        alert('롤백 중입니다.');
       } else {
-        alert('안됩니닷!');
+        alert('롤백에 실패했습니다.\n' + data.message);
       }
-    });
-  })
+      
+    }, "json")
+  });
 });
 
 function loadData(no) {
@@ -86,14 +83,15 @@ $('#update-btn').click(() => {
     name: $('#productName').val(),
     nickName: $('#updateUser').attr('placeholder'),
     contents: $('#contents').val()
-  }, function(data) {
+  },
+  function(data) {
     if (data.status == 'success') {
-      location.href = "view.html?no=" + param.split('=')[1];
+      location.href = "index.html";
     } else {
       alert('변경 실패 입니다.\n' +  data.message);
     }
   }, "json");
-
+  
   console.log($('#no').val());
   $.post('/bitcamp-team-project/app/json/tiphistory/add', {
     tipNo: $('#no').val(),
@@ -107,3 +105,6 @@ $('#update-btn').click(() => {
     }
   }, "json")
 });
+
+
+

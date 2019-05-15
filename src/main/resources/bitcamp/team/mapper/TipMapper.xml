@@ -57,13 +57,19 @@
   
   <update id="update" parameterType="tip">
     update tip
-    set
+    <set>
       member_no = #{memberNo},
       conts = #{contents},
-      cdt = current_timestamp()
+      <if test="createdDate != null">cdt = #{createdDate}</if>
+      <if test="createdDate == null">cdt = current_timestamp()</if>
+    </set>
     where
       tip_no = #{no}
   </update>
+  
+  <select id="confirmTip" resultType="int" parameterType="int">
+    select count(*) from tip where product_no = #{value}
+  </select>
 </mapper>
 
 

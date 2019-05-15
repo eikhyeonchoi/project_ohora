@@ -54,4 +54,19 @@ public class TipHistoryController {
     }
     return contents;
   }
+  
+  @GetMapping("detail")
+  public Object detail(int no) throws Exception {
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      TipHistory history = tipHistoryService.detail(no);
+      contents.put("status", "success");
+      contents.put("history", history);
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("message", e.getMessage());
+    }
+    return contents;
+  }
+  
 }
