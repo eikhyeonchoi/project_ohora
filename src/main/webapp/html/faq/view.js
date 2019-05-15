@@ -12,12 +12,22 @@ var param = location.href.split('?')[1]; // no=10
 //파라미터가 있을 경우 detail, update, delete
 if(param){ 
   $('.faq-add-item').hide();
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
+    if (obj.user.type == 3) {
+      $('#faq-update-btn').show();
+      $('#faq-delete-btn').show();
+    } else {
+      $('#faq-update-btn').hide();
+      $('#faq-delete-btn').hide();
+    }
+  }) // get
   
   // 카테고리목록을 받아오기 위한 쿼리문 ==> handlebars에서 사용함
-  ($.getJSON('/bitcamp-team-project/app/json/faq/list', (obj) => {
+  $.getJSON('/bitcamp-team-project/app/json/faq/list', (obj) => {
     $(trGenerator(obj)).appendTo(select);
     $(document.body).trigger('loaded-updateForm');
-  }));
+  });
 
   // console.log(param);
   $.getJSON('/bitcamp-team-project/app/json/faq/detail?no=' + param.split('=')[1], function(obj) { // 10
@@ -43,6 +53,8 @@ if(param){
 
 // 데이터가 로드되고 난 후 add버튼에 리스너추가
 $(document.body).bind('loaded-addForm', () => {
+
+  
   $('#faq-add-btn').click(() =>{
     // console.log($('#faqCtg-no option:selected').val());
     $.post('/bitcamp-team-project/app/json/faq/add',{

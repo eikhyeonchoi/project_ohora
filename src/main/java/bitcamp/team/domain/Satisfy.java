@@ -4,7 +4,6 @@ public class Satisfy {
   private int no;
   private int pdNo;
   private int mNo;
-  
   private double level;
   private double understand;
   private double design;

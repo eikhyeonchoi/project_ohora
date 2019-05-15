@@ -1,15 +1,17 @@
-var addNo = location.href.split('?')[1].split('=')[1];  
-console.log(addNo);
 
-document.getElementById('product-no').value = addNo;
+var qs = location.href.split('?')[1],
+    values = qs.split('&'),
+    userNo = values[0].split('=')[1],
+    productNo = values[1].split('=')[1];
 
-  // ($('#product-no').css('dispalay', 'none'));
+console.log(userNo);
+console.log(productNo);
 
 // 등록버튼 클릭시
   $('#satisfy-add-btn').click(() => {
     $.post('/bitcamp-team-project/app/json/satisfy/add',{
-      pdNo: $('#product-no').val(),
-      mNo: $('#member-no').val(),
+      pdNo: productNo,
+      mNo: userNo,
       level: $('#satisfy-level').val(),
       understand: $('#satisfy-understand').val(),
       design: $('#satisfy-design').val(),
@@ -22,17 +24,11 @@ document.getElementById('product-no').value = addNo;
     
      
     if(data.status == 'success'){
-      location.href='index.html';
+      location.href='../product/view.html?no=' + productNo;
     } else alert("등록 실패!\n" + data.message);
     })
     
-    
   }); 
-
-
-
-
-
 
 
 
