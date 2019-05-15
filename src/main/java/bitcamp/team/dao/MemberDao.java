@@ -12,6 +12,7 @@ public interface MemberDao {
   Member findByNo(int no);
   Member findByEmailPassword(Map<String,Object> paramMap);
   Member findNoByNickName(String nickName);
+  Member findNoByNickName2(String nickName);
   int update(Member member);
   int delete(int no);
   int countAll();
