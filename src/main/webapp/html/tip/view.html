@@ -60,6 +60,7 @@
               <th scope="col">등록일</th>
               <th scope="col">히스토리 내용</th>
               <th scope="col">작성자</th>
+              <th scope="col">롤백</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -71,6 +72,8 @@
         <td scope='row'>{{updateDate}}</td>
         <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
         <td scope='row'>{{nickName}}</td>
+        <td scope='row'>
+          <button type="button" id="rollback-btn" class="btn btn-warning btn-sm bit-view-item">롤백</button>
       </tr>
       {{/each}}
       </script>

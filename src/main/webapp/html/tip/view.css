@@ -12,6 +12,10 @@ th:nth-child(3) {
 	text-align: center;
   width: 100px;
 }
+th:nth-child(4) {
+  text-align: center;
+  width: 40px;
+}
 td:nth-child(1) {
   text-align: center;
   width: 40px;
@@ -20,4 +24,9 @@ td:nth-child(1) {
 td:nth-child(3) {
   text-align: center;
   width: 100px;
+}
+
+td:nth-child(4) {
+  text-align: center;
+  width: 40px;
 }
