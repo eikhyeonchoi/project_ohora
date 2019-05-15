@@ -19,11 +19,12 @@ if (param) {
 }
 
 $.getJSON('../../app/json/auth/user', function(data) {
+  $('.history-list').hide();
   if (data.status == "fail") {
     $('#update-btn').hide();
   } 
-  if (data.user.type == "1" || data.user.type == "2") {
-    $('.history-list').hide();
+  if (data.user.type == "3") {
+    $('.history-list').show();
   }
   $(document).ready(function() {
     $('#updateUser').attr('placeholder', data.user.nickName);
