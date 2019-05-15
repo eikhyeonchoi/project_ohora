@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManufacturerDao;
 import bitcamp.team.dao.ProductDao;
+import bitcamp.team.dao.TipDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.service.ProductService;
@@ -52,6 +53,8 @@ public class ProductServiceImpl implements ProductService{
     Product product = productDao.findNoByName(name);
     return product.getNo();
   }
+  
+  
   
 
 }

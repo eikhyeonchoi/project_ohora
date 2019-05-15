@@ -11,4 +11,5 @@ public interface TipService {
   List<Tip> list();
   Tip get(int no);
   int delete(int no);
+  int confirm(int no);
 }
