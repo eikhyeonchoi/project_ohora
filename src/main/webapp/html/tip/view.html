@@ -8,7 +8,7 @@
 >
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="view.css">
 </head>
 <body>
 
@@ -17,9 +17,8 @@
     <h1></h1>
     <form>
       <div class="form-group row bit-view-item">
-        <label for="no" class="col-sm-2 col-form-label">번호</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="no" name='no' readonly>
+          <input type="hidden" class="form-control-plaintext" id="no" name='no' readonly>
         </div>
       </div>
       <div class="form-group row bit-view-item">
@@ -58,10 +57,9 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">번호</th>
-              <th scope="col">제품명</th>
-              <th scope="col">작성자</th>
               <th scope="col">등록일</th>
+              <th scope="col">히스토리 내용</th>
+              <th scope="col">작성자</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -70,10 +68,9 @@
       <script id="tr-template" type="text/x-handlebars-template">
       {{#each list}}
       <tr>
-        <th scope='row'>{{no}}</th>
+        <td scope='row'>{{updateDate}}</td>
         <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
         <td scope='row'>{{nickName}}</td>
-        <td scope='row'>{{tip.createdDate}}</td>
       </tr>
       {{/each}}
       </script>

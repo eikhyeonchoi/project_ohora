@@ -22,6 +22,16 @@ public class TipHistoryController {
   @GetMapping("list")
   public Object list(int no) throws Exception {
     List<TipHistory> history = tipHistoryService.get(no);
+    int count = 0;
+    for (TipHistory his : history) {
+      if (his != null)
+        count++;
+      else
+        break;
+    }
+    for (int i = count - 1; i > 9; i--) {
+      tipHistoryService.delete(history.remove(i).getNo());
+    }
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", history);
 
@@ -31,9 +41,8 @@ public class TipHistoryController {
 
   @PostMapping("add")
   public Object add(TipHistory tipHistory) throws Exception {
-    System.out.println("tipNo ==> " + tipHistory.getTipNo());
-    System.out.println("nickName ==> " + tipHistory.getNickName());
     HashMap<String,Object> contents = new HashMap<>();
+    
     try {
       tipHistoryService.add(tipHistory);
       contents.put("status", "success");
