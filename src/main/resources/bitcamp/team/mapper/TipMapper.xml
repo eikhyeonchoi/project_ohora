@@ -50,7 +50,7 @@
   <select id="findByNo" resultMap="tipMap" parameterType="int">
     <include refid="join-select1"/>
     where
-      t.tip_no = #{value}
+      p.product_no = #{value}
     order by
       tip_no desc
   </select>
@@ -64,7 +64,7 @@
       <if test="createdDate == null">cdt = current_timestamp()</if>
     </set>
     where
-      tip_no = #{no}
+     product_no=#{no}
   </update>
   
   <select id="confirmTip" resultType="int" parameterType="int">
