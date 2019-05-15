@@ -10,4 +10,5 @@ public interface ProductService {
   List<Manufacturer> listManufacturer();
   Map<String, Object> findCategory();
   int add(Product product);
+  int get(String name);
 }
