@@ -28,6 +28,9 @@ public interface BoardDao {
 
   int insertReply(BoardReply boardReply);
 
+  // 댓글 하나만 가져오기
+  BoardReply getReply(int no);
+
   // 댓글 삭제
   int deleteReply(int no);
 

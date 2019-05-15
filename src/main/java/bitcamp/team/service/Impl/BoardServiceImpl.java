@@ -95,4 +95,9 @@ public class BoardServiceImpl implements BoardService {
     return boardDao.updateReply(boardReply);
   }
 
+  @Override
+  public BoardReply getReply(int no) {
+    return boardDao.getReply(no);
+  }
+
 }
