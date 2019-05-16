@@ -119,6 +119,15 @@
       name = #{value}
   </select>
   
+  <select id="findByNo" resultMap="productMap" parameterType="int">
+    select
+      name as productName
+    from
+      product
+    where
+      product_no = #{value}
+  </select>
+  
 </mapper>
 
 

@@ -72,6 +72,9 @@ $(document).ready(function(){
       }else {
         tipBtn.text('팁 등록하기');
         tipBtn.click(function() {
+
+          location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
+          
         })
       }
     }

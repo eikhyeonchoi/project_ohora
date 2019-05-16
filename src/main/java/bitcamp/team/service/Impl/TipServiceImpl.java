@@ -37,10 +37,14 @@ public class TipServiceImpl implements TipService{
   public Tip get(int no) {
     return tipDao.findByNo(no);
   }
-
+  
   @Override
   public int confirm(int no) {
     return tipDao.confirmTip(no);
   }
   
+  @Override
+  public int getNo(int no) {
+    return tipDao.findNoByProductNo(no);
+  }
 }

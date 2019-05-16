@@ -41,6 +41,33 @@ public class TipController {
     return tip;
   }
 
+  @PostMapping("add")
+  public Object add(Tip tip, Member member, Product product) throws Exception {
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      Tip tips = tip;
+      int prodNo = productService.get(product.getName());
+      String nickName = member.getNickName();
+      
+      tips.setMemberNo(memberService.get(nickName));
+      tips.setProductNo(prodNo);
+      tipService.add(tips);
+      
+      TipHistory his = new TipHistory();
+      System.out.println("tip_no==>" + tipService.getNo(prodNo));
+      his.setTipNo(tipService.getNo(prodNo));
+      his.setContents(tips.getContents());
+      his.setNickName(nickName);
+      tipHistoryService.add(his);
+      
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
+  
   @PostMapping("update")
   public Object update(Tip tip, Member member,Product product) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
@@ -100,6 +127,23 @@ public class TipController {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
     }
+    return contents;
+  }
+  
+  @GetMapping("productName")
+  public Object get(int no) throws Exception {
+    System.out.println(no);
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      String prd = productService.get(no);
+      System.out.println(prd);
+      contents.put("status", "success");
+      contents.put("product", prd);
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    
     return contents;
   }
 }
