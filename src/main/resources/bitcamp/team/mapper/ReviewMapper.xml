@@ -84,5 +84,15 @@
       rv_no = #{no};
   </update>
   
+  <update id="updateCount" parameterType="String">
+    update
+      review
+    set
+      cnt = cnt + 1
+    where
+      rv_no = #{no};
+  </update>
+
+  
 
 </mapper>
