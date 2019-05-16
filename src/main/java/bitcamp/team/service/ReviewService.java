@@ -1,0 +1,10 @@
+package bitcamp.team.service;
+
+import java.util.List;
+import java.util.Map;
+import bitcamp.team.domain.Review;
+
+public interface ReviewService {
+  List<Review> list();
+  Map<String, Object> get(int no);
+}
