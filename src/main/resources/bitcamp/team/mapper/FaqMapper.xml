@@ -3,86 +3,87 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="bitcamp.team.dao.FaqDao">
-  
+
   <resultMap type="faq" id="faqMap">
-    <id column="faq_no"       property="no"/>
-    <result column="qctg_no"  property="qcNo"/>
-    <result column="titl"     property="title"/>
-    <result column="conts"    property="contents"/>
-    
+    <id column="faq_no" property="no" />
+    <result column="qctg_no" property="qcNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+
     <association property="questionCategory" javaType="questionCategory">
-      <id column="qctg_no"   property="no"/>
-      <result column="name"  property="name"/>
+      <id column="qctg_no" property="no" />
+      <result column="name" property="name" />
     </association>
   </resultMap>
-  
+
+
   <select id="findAll" resultMap="faqMap">
-    select 
-      f.faq_no, 
-      f.titl, 
-      f.conts, 
-      f.qctg_no, 
-      qc.name
-    from 
-      faq f
-      left outer join question_category qc on f.qctg_no = qc.qctg_no 
-    order by 
-      f.qctg_no asc;
+    select
+    f.faq_no,
+    f.titl,
+    f.conts,
+    f.qctg_no,
+    qc.name
+    from
+    faq f
+    left outer join question_category qc on f.qctg_no = qc.qctg_no
+    order by
+    f.qctg_no asc;
   </select>
-  
+
   <select id='findCategoryName' resultMap="faqMap">
     select distinct
-      qc.qctg_no,
-      qc.name
-    from 
-      faq f
-      right outer join question_category qc on f.qctg_no = qc.qctg_no 
-    order by 
-      qc.qctg_no asc;
+    qc.qctg_no,
+    qc.name
+    from
+    faq f
+    right outer join question_category qc on f.qctg_no = qc.qctg_no
+    order by
+    qc.qctg_no asc;
   </select>
-  
+
   <select id="findByNo" resultMap="faqMap" parameterType="int">
-    select 
-      f.faq_no, 
-      f.titl, 
-      f.conts, 
-      f.qctg_no, 
-      qc.name
-    from 
-      faq f
-      left outer join question_category qc on f.qctg_no = qc.qctg_no
-    where 
-      faq_no = #{value};
+    select
+    f.faq_no,
+    f.titl,
+    f.conts,
+    f.qctg_no,
+    qc.name
+    from
+    faq f
+    left outer join question_category qc on f.qctg_no = qc.qctg_no
+    where
+    faq_no = #{value};
   </select>
-  
+
   <insert id="insert" parameterType="faq">
-    insert into 
-      faq(qctg_no, titl, conts) 
+    insert into
+    faq(qctg_no, titl, conts)
     values(#{qcNo}, #{title}, #{contents})
   </insert>
-  
+
   <delete id="delete" parameterType="int">
     delete from
-      faq
+    faq
     <where>
       faq_no = #{value};
     </where>
   </delete>
-  
+
   <update id="update" parameterType="faq">
     update
-      faq
+    faq
     set
-      qctg_no = #{qcNo},
-      titl = #{title},
-      conts = #{contents}
+    qctg_no = #{qcNo},
+    titl = #{title},
+    conts = #{contents}
     where
-      faq_no = #{no};
+    faq_no = #{no};
   </update>
   
-  
+
 </mapper>
 
 

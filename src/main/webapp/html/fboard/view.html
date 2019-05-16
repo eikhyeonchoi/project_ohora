@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>자유게시판 디테일</title>
-  <link rel="stylesheet"
+<meta charset="UTF-8">
+<title>자유게시판 조회</title>
+<link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
@@ -13,15 +13,16 @@
 
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1></h1>
+    <h1>자유게시판 detail</h1>
     <form>
-      <div class="form-group row bit-view-item">
-        <label for="no" class="col-sm-2 col-form-label">번호</label>
+      <div class="form-group row">
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="no" name='no' readonly>
+          <a href='index.html' class="btn btn-primary btn-sm">목록</a>
+          <button type="button" id="delete-btn" class="btn btn-danger btn-sm">삭제</button>
+          <button type="button" id="update-btn" class="btn btn-warning btn-sm">변경</button>
         </div>
       </div>
-      <div class="form-group row bit-view-item">
+      <div class="form-group row">
         <label for="memberNo" class="col-sm-2 col-form-label">작성자</label>
         <div class="col-sm-10">
           <input type="text" class="form-control-plaintext" id="memberNo" name='memberNo' readonly>
@@ -39,37 +40,76 @@
           <textarea class="form-control" id="contents" name='contents' rows='5'></textarea>
         </div>
       </div>
-      <div class="form-group row bit-view-item">
+      <div class="form-group row">
         <label for="createdDate" class="col-sm-2 col-form-label">작성일</label>
         <div class="col-sm-5">
           <input type="text" class="form-control-plaintext" id="createdDate" readonly>
         </div>
       </div>
-      <div class="form-group row bit-view-item">
+      <div class="form-group row">
         <label for="viewCount" class="col-sm-2 col-form-label">조회수</label>
         <div class="col-sm-10">
           <input type="text" class="form-control-plaintext" id="viewCount" readonly>
         </div>
       </div>
-      <div class="form-group row bit-view-item">
-        <label for="user" class="col-sm-2 col-form-label">회원번호</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="user">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <a href='index.html' class="btn btn-primary btn-sm">목록</a>
-          <button type="button" id="delete-btn" class="btn btn-danger btn-sm bit-view-item">삭제</button>
-          <button type="button" id="update-btn" class="btn btn-warning btn-sm bit-view-item">변경</button>
-          <button type="button" id="add-btn"class="btn btn-success btn-sm bit-new-item">등록</button>
-        </div>
-      </div>
     </form>
-  </div> <!-- container -->
-  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+    <hr>
+    
+    <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    
+    <div id='fboard-comment-add-form'>
+      <textarea id='comment-contents' rows="3" cols="40" placeholder="댓글을 입력하세요"></textarea>
+      <button id="comment-add-btn" type="button">등록</button>
+    </div> <!-- fboard-comment-add-form -->
+    
+    <h5>댓글list</h5>
+    
+    <div id='fboard-comment-list-form'>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">내용</th>
+          <th scope="col">작성일</th>
+          <th scope="col">닉네임</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    
+    </div><!-- fboard-comment-list-form -->
+    
+  </div><!-- container -->
+
+  <script id="comment-list" type="text/x-handlebars-template">
+  {{#each list}}
+    <tr class='comment-component'>
+      <td>{{no}}</td>
+      <td>{{contents}}</td>
+      <td>{{createdDate}}</td>
+      <td>{{member.nickName}}<td>
+      <td>
+        <button class='reply-form-btn' data-no='{{no}}'>답글</button>
+      </td>
+    </tr>
+      <div class='comment-component-child'></div>
+  {{/each}}
+  </script>
+  
+  <script id="reply-template" type="text/x-handlebars-template">
+    <textarea id='reply-content'></textarea>
+    <button class='reply-add-btn' type='button'>등록</button>
+    <button class='reply-cancel-btn' type='button'>취소</button>
+  </script>
+  
+  
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
   <script src="view.js"></script>
 </body>

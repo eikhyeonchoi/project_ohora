@@ -19,3 +19,6 @@ ALTER TABLE member MODIFY type varchar(30);
 alter table tip_history add nickName varchar(30) not null;
 
 alter table member add unique key (n_name);
+
+alter table fboard_cmt add column parent_id int not null;
+alter table fboard_cmt add column depth int not null;

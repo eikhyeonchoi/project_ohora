@@ -3,6 +3,7 @@ package bitcamp.team.dao;
 
 import java.util.List;
 import bitcamp.team.domain.Fboard;
+import bitcamp.team.domain.FboardComment;
 
 public interface FboardDao {
 
@@ -13,4 +14,10 @@ public interface FboardDao {
    int insert(Fboard fBoard);
    int update(Fboard fBoard);
    int countAll();
+   
+   // 여기서부터 댓글 dao
+   // 여기서부터 댓글 dao
+   List<FboardComment> findCommentAll(int no);
+   int insertComment(FboardComment fboardComment);
+   
 }

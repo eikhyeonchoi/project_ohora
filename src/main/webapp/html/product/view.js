@@ -11,7 +11,8 @@ var nonMemberDiv = $('#non-member-div'),
 var tipBtn = $('#go-tip-btn');
 
 var userNo = 0,
-productNo = location.href.split('?')[1].split('=')[1];
+    productNo = getQuerystring('no'),
+    productName = decodeURIComponent(getQuerystring('name'));
 
 var total = 0,
 satisAver = 0,
@@ -23,12 +24,12 @@ useful = 0,
 price = 0;
 
 $(document).ready(function(){
+  
   managerAndCompanyDiv.hide();
   memberDiv.hide();
 
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
-
-    $('#product-name').append('<p>'+obj.list[0].product.name+'</p>')
+      $('#product-name').append('<p>' + productName + '</p>');
 
 
     for (var el of obj.list) {
@@ -72,9 +73,7 @@ $(document).ready(function(){
       }else {
         tipBtn.text('팁 등록하기');
         tipBtn.click(function() {
-
           location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
-          
         })
       }
     }
@@ -109,9 +108,26 @@ $(document).bind('loaded-user', function() {
       }
     }) // get
   }) // click
+  
+  
+  $('#go-reivew-btn').click(function() {
+    location.href = '../review/view.html?no=' + productNo + '&name=' + productName;
+  })
+  
 }) // bind
 
 
+
+function getQuerystring(key, default_) {
+  if (default_==null) default_=""; 
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+  var qs = regex.exec(window.location.href);
+  if(qs == null)
+    return default_;
+  else
+    return qs[1];
+} // getQuerystring
 
 
 
