@@ -20,5 +20,10 @@ public class ReviewController {
 
     return map;
   }
+  
+  @GetMapping("detail")
+  public Object detail(int no) throws Exception {
+    return reviewService.get(no);
+  }
 
 }

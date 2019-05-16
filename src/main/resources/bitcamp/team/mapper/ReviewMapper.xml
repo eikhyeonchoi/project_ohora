@@ -22,11 +22,24 @@
       <id column="member_no" property="no" />
       <result column="name" property="name" />
     </association>
-
   </resultMap>
+  
+  <resultMap type="product" id="productMap">
+    <id column="product_no" property="no"/>
+    <result column="sctg_no" property="smallCategoryNo"/>
+    <result column="manufac_no" property="manufacturerNo"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="productMap">
+    select product_no, name
+     from 
+     product
+     order by
+     product_no asc;
+  </select>
 
-
-  <select id="findAll" resultMap="reviewMap" parameterType="map">
+  <select id="findByNo" resultMap="reviewMap" parameterType="int">
     select
       p.name, r.name, m.name, r.cdt, r.cnt
     from

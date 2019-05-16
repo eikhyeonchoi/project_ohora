@@ -5,4 +5,5 @@ import bitcamp.team.domain.Review;
 
 public interface ReviewDao {
   List<Review> findAll();
+  List<Review> findByNo(int no);
 }
