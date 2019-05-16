@@ -5,17 +5,59 @@
  *  
  */
 var nonMemberDiv = $('#non-member-div'),
-memberDiv = $('#common-member-div'),
-managerAndCompanyDiv = $('#company-manager-div');
+    memberDiv = $('#common-member-div'),
+    managerAndCompanyDiv = $('#company-manager-div');
 
 var tipBtn = $('#go-tip-btn');
 
 var userNo = 0,
 productNo = location.href.split('?')[1].split('=')[1];
 
+var total = 0,
+satisAver = 0,
+level = 0,
+understand = 0,
+design = 0,
+asStf = 0,
+useful = 0,
+price = 0;
+
 $(document).ready(function(){
   managerAndCompanyDiv.hide();
   memberDiv.hide();
+
+  $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
+
+    $('#product-name').append('<p>'+obj.list[0].product.name+'</p>')
+
+
+    for (var el of obj.list) {
+      total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
+      price += el.priceStf,
+      level += el.level,
+      understand += el.understand,
+      design += el.design,
+      asStf += el.asStf, 
+      useful += el.useful;
+    }
+    satisAver = (total / (obj.totalColumn * 6)).toFixed(2);
+    price = (price / (obj.totalColumn)).toFixed(2);
+    level = (level / (obj.totalColumn)).toFixed(2);
+    understand = (understand / (obj.totalColumn)).toFixed(2);
+    design = (design / (obj.totalColumn)).toFixed(2);
+    asStf = (asStf / (obj.totalColumn)).toFixed(2);
+    useful = (useful / (obj.totalColumn)).toFixed(2);
+
+    console.log('총 만족도 => ' + satisAver);
+    console.log('가격만족도 => ' + price);
+    console.log('사용난이도 => ' + level);
+    console.log('이해도 => ' + understand);
+    console.log('디자인 => ' + design);
+    console.log('a/s만족도 => ' + asStf);
+    console.log('사용만족도 => ' + useful);
+
+
+  }) //get
 
   $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
     console.log(obj);
@@ -30,7 +72,6 @@ $(document).ready(function(){
       }else {
         tipBtn.text('팁 등록하기');
         tipBtn.click(function() {
-          alert('임시버튼');
         })
       }
     }
