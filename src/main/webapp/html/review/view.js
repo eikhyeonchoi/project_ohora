@@ -6,7 +6,6 @@ var productName = decodeURIComponent(getQuerystring('name'));
 
 ($.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo, (obj) => {
   console.log(obj);
-  console.log(detailNo);
   
   $('#product-name').append(productName)
   
@@ -18,7 +17,14 @@ var productName = decodeURIComponent(getQuerystring('name'));
   });
   
 }));
-   
+
+($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
+    if(obj.status == 'fail') {
+      $('#add-btn').hide();
+    } else {
+      $('#add-btn').show();
+    }
+}));
     
 
 
