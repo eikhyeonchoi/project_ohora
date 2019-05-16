@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+</head>
+<body>
+  <header class="bit-main-header"></header>
+  <div class="container">
+<h1> 리뷰(detail)</h1>
+<form>
+  <label for='faq-no' class='faq-view-item'>번호 </label>
+  <input id='faq-no' class='faq-view-item' type="text" readonly><br><br>
+  
+  <div id='faq-question-category-option'></div>
+  
+  제목 <input id='faq-title' type="text"><br><br>
+  내용 <textarea id="faq-contents" rows="3" cols="30"></textarea><br><br>
+  <button id="faq-update-btn" class='faq-view-item' type="button">수정</button>
+  <button id="faq-delete-btn" class='faq-view-item' type="button">삭제</button>
+  <button id="faq-add-btn" class='faq-add-item' type="button">등록</button>
+</form>
+</div>
+<script id="select-template" type="text/x-handlebars-template">
+<select id='faqCtg-no'>
+  {{#each faqCtg}}
+    <option value='{{questionCategory.no}}'>{{questionCategory.name}}</option>
+  {{/each}}
+</select>
+</script>
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
+<script src="view.js"></script>
+</body>
+</html>

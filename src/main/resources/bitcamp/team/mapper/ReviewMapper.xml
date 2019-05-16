@@ -31,6 +31,7 @@
     <result column="name" property="name"/>
   </resultMap>
   
+  
   <select id="findAll" resultMap="productMap">
     select product_no, name
      from 
@@ -39,20 +40,20 @@
      product_no asc;
   </select>
 
+
   <select id="findByNo" resultMap="reviewMap" parameterType="int">
     select
       r.rv_no,
-      p.name as productName,
       r.name as reviewName,
       m.name as memberName, 
       r.cdt,
       r.cnt
     from
       review r
-      join product p on r.product_no = p.product_no
       join member m on m.member_no = r.member_no
     where
-      p.product_no = #{value};
+      r.product_no = #{value};
   </select>
+  
 
 </mapper>

@@ -13,7 +13,7 @@ $(document.body).bind('loaded-list', () => {
   $('.product-a-class').click((e) => {
     e.preventDefault();
     window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
+      $(e.target).attr('data-no') + '&name=' + $(e.target).attr('data-name');
   });
 });
 
