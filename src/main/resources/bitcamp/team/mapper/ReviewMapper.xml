@@ -26,16 +26,15 @@
   </resultMap>
 
 
-
   <select id="findAll" resultMap="reviewMap" parameterType="map">
     select
-    p.name, r.name, m.name, r.cdt, r.cnt
+      p.name, r.name, m.name, r.cdt, r.cnt
     from
-    review r
-    join product p on r.product_no = p.product_no
-    join member m on r.member_no = m.member_no
+      review r
+      join product p on r.product_no = p.product_no
+      join member m on r.member_no = m.member_no
     where
-    p.product_no = #{value};
+      p.product_no = #{value};
   </select>
 
 </mapper>
