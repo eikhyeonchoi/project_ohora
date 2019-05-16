@@ -1,3 +1,7 @@
+var randomNo = 0;
+var SetTime, // 이메일인증 할때 뜨는 시간초(3분)
+msg,
+tid;
 var email = $("#email"),
 ep = $("#email-p"),
 password = $("#password"),
@@ -8,6 +12,7 @@ namee = $("#name"),
 np = $("#name-p"),
 nickName = $("#nickName"),
 nnp = $("#nickName-p"),
+ranNo = $("#ranNo"),
 tel,
 tel1 = $("#tel1"),
 tel2 = $("#tel2"),
@@ -22,8 +27,15 @@ var telCk = false;
 var nickNameCk = false;
 var nNameOverlap = false;
 var type = "일반 회원";
+var ranNoCk = false;
 
+$(document).ready(function() {
+  ranNo.hide();
+  $("#ranNo-btn").hide();
+})
 email.change(function() {
+  ranNoCk = false;
+  $("#email-btn").show();
   emailCheck()
 });
 
@@ -73,6 +85,7 @@ function emailCheck() {
     emailCk = false;
   } else {
     ep.html("");
+    ep.html("email 을 인증해 주세요.");
     emailCk = true;
   }
 };
@@ -145,7 +158,8 @@ $("#n-name-btn").click(function() {
 });
 
 $('#add-btn').click(function() {
-  if (emailCk == true &&
+  console.log(ranNoCk);
+  if (ranNoCk == true &&
       passwordCk == true && 
       password2Ck == true && 
       nameCk == true &&
@@ -172,7 +186,56 @@ $('#add-btn').click(function() {
     alert("회원 정보를 모두 입력하세여~")
     return;
   }
+});
 
+function msg_time() { // 카운트 다운 함수.
+  console.log("호출");
+  m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; // 남은 시간 계산
+  msg = "현재 남은 시간은 " + m + " 입니다.";
+
+  if (SetTime < 0) {      // 시간이 종료 되었으면..
+    msg = "시간이 만료되었 습니다 인증번호를 다시 요청해 주세요.";
+    clearInterval(tid);   // 타이머 해제
+  }
+  ep.html(msg);
+  SetTime--;  // 1초씩 감소
+}
+
+$("#email-btn").click(function() {
+  ranNoCk = false;
+  randomNo = 0;
+  if (emailCk) {
+    SetTime = 180;
+    $.getJSON('../../app/json/member/email?email=' + email.val(),
+        function(data) {
+      if (data.status == 'success') {
+        randomNo = data.ranNo;
+        alert("이메일을 확인해 주세요.\n 제한시간은 3분입니다.");
+        ranNo.show();
+        $("#ranNo-btn").show();
+        $("#email-btn").html("인증번호 다시 받기");
+        tid = setInterval('msg_time()',1000);
+        $("#ranNo-btn").click(function() {
+          if (randomNo == ranNo.val()) {
+            alert("인증성공!")
+            clearInterval(tid);
+            ep.html("");
+            ranNo.hide();
+            $("#email-btn").hide();
+            $("#ranNo-btn").hide();
+            ranNoCk = true;
+          } else {
+            alert("인증번호를 다시 확인해주세요.\n" + data.error);
+          }
+        })
+      } else {
+        alert("이메일 인증에 실패했습니다.");
+      }
+    }, "json");
+
+  } else {
+    alert("이메일을 제대로 입력해 주세요.")
+  };
 });
 
 

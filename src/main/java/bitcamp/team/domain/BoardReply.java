@@ -4,9 +4,25 @@ public class BoardReply {
   private int no;
   private int boardId;
   private int parentId;
+  private int memberId;
   private int depth;
   private String contents;
   private String registerDate;
+
+  @Override
+  public String toString() {
+    return "BoardReply [no=" + no + ", boardId=" + boardId + ", parentId=" + parentId
+        + ", memberId=" + memberId + ", depth=" + depth + ", contents=" + contents
+        + ", registerDate=" + registerDate + "]";
+  }
+
+  public int getMemberId() {
+    return memberId;
+  }
+
+  public void setMemberId(int memberId) {
+    this.memberId = memberId;
+  }
 
   public int getNo() {
     return no;

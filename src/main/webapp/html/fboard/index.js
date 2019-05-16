@@ -38,14 +38,9 @@ $(document.body).bind('loaded-list', function(obj){
   
 }) // bind
 
-
-
-
-
-
-
-
-
+addBtn.click(() => {
+  location.href = 'view.html';
+});
 
 
 

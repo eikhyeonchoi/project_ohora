@@ -28,4 +28,25 @@ public class ReviewServiceImpl implements ReviewService {
     content.put("list", reviewDao.findByNo(no));
     return content;
   }
+  
+  @Override
+  public Review get2(int no) {
+    Review review = reviewDao.findByNo2(no);
+    if (review != null) {
+      reviewDao.findByNo2(no);
+    }
+    return review;
+  }
+  
+  @Override
+  public int delete(int no) {
+    return reviewDao.delete(no);
+  }
+  
+  @Override
+  public int update(Review review) {
+    return reviewDao.update(review);
+  }
+  
+  
 }
