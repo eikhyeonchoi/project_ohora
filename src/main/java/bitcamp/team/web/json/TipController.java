@@ -84,5 +84,22 @@ public class TipController {
       contents.put("error", e.getMessage());
     }
     return contents;
-  } 
+  }
+  
+  @GetMapping("confirm")
+  public Object confirm(Product product) throws Exception {
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      if (tipService.confirm(productService.get(product.getName())) == 1) {
+        contents.put("confirm", "exist");
+      } else {
+        contents.put("confirm", "empty");
+      }
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
 }
