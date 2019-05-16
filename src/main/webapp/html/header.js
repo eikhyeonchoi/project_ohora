@@ -45,6 +45,7 @@ function loadLoginUser() {
     notLoginState = document.querySelector('#bit-not-login-state');
 
     if (data.status == 'success') {
+      $("#bit-auth").hide();
       loginState.className = 
         loginState.className.replace('bit-invisible', '');
       document.querySelector('#login-username').innerHTML = data.user.name;
