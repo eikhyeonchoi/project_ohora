@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Review;
 import bitcamp.team.service.ReviewService;
 
 @RestController("json/ReviewController")
@@ -24,6 +25,12 @@ public class ReviewController {
   @GetMapping("detail")
   public Object detail(int no) throws Exception {
     return reviewService.get(no);
+  }
+  
+  @GetMapping("detail2")
+  public Object detail2(int no) throws Exception {
+    Review review = reviewService.get2(no);
+    return review;
   }
 
 }

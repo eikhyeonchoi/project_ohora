@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ReviewDao;
+import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.Review;
 import bitcamp.team.service.ReviewService;
 
@@ -28,4 +29,15 @@ public class ReviewServiceImpl implements ReviewService {
     content.put("list", reviewDao.findByNo(no));
     return content;
   }
+  
+  @Override
+  public Review get2(int no) {
+    Review review = reviewDao.findByNo2(no);
+    if (review != null) {
+      reviewDao.findByNo2(no);
+    }
+    return review;
+  }
+  
+  
 }

@@ -57,7 +57,11 @@
   
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
-     rv_no, name, conts, cdt, cnt 
+     rv_no as rno, 
+     name as reviewName, 
+     conts,
+     cdt, 
+     cnt 
    from 
      review
     where 
