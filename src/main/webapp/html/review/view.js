@@ -11,6 +11,12 @@ var productName = decodeURIComponent(getQuerystring('name'));
   $('#product-name').append(productName)
   
   $(trGenerator(obj)).appendTo(tbody);
+  
+  $('.review-a-class').click((e) => {
+    e.preventDefault();
+    window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
+  });
+  
 }));
    
     
