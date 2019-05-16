@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Member;
 import bitcamp.team.service.MemberService;
+import bitcamp.team.web.Authentication.Gmail;
+import bitcamp.team.web.Authentication.RandomNo;
 
 @RestController("json/MemberController")
 @RequestMapping("/json/member")
@@ -83,6 +85,22 @@ public class MemberController {
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  @GetMapping("email")
+  public Object Authentication (String email) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    Gmail gmail = new Gmail();
+    int ranNo = RandomNo.randomNo();
+
+    String emailStatus = gmail.gmailSend(email, ranNo);
+    if (emailStatus.equals("success")) {
+      content.put("status", "success");
+      content.put("ranNo", ranNo);
+    } else {
+      content.put("status", "fail");
     }
     return content;
   }

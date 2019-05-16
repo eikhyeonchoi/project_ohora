@@ -32,18 +32,10 @@ public class SatisfyController {
   }
   
   @PostMapping("add")
-  public Object add(Satisfy satisfy,
-      ServletRequest request) throws Exception{
-    
-    HttpServletRequest httpReq = (HttpServletRequest) request;
-    Member loginUser = (Member) httpReq.getSession().getAttribute("loginUser");
-    
+  public Object add(Satisfy satisfy) throws Exception{
     HashMap<String,Object> content = new HashMap<>();
     
     try {
-      satisfy.setmNo(loginUser.getNo());
-      satisfyService.add(satisfy);
-      
       if (satisfy.getLevel() > 5 || satisfy.getLevel() < 0) {
         throw new Exception("0~5 숫자 입력");
       } else if (satisfy.getUnderstand() > 5 || satisfy.getUnderstand() < 0) {
@@ -58,6 +50,7 @@ public class SatisfyController {
         throw new Exception("0~5 숫자 입력");
       }
       
+      satisfyService.add(satisfy);
       content.put("status", "success");
 
     } catch (Exception e) {

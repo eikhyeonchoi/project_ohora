@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리뷰 list</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+</head>
+<body>
+<header class="bit-main-header"></header>
+<div class="container">
+  <h1>리뷰 목록(list)</h1>
+  <h4 id='product-name'></h4>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">아이디</th>
+        <th scope="col">제목</th>
+        <th scope="col">날짜</th>
+        <th scope="col">조회수</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  
+  </div>
+
+  <script id="select-template" type="text/x-handlebars-template">
+
+{{#each list}}
+<tr>
+  <td>{{member.name}}</a></td>
+  <td><a class='review-a-class' href='view2.html' data-no='{{no}}'>{{title}}</a></td>
+  <td>{{createdDate}}</td>
+  <td>{{viewCount}}</td>
+</tr>
+{{/each}}
+</script>
+
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="view.js"></script>
+</body>
+</html>

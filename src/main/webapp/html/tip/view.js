@@ -33,7 +33,17 @@ $.getJSON('../../app/json/auth/user', function(data) {
     $('#updateUser').attr('placeholder', data.user.nickName);
   });
 })
-$.getJSON('bitcamp-team-project/app/json/')
+
+$.getJSON('/bitcamp-team-project/app/json/tip/confirm?productName=' + $('productName').val(), 
+    function(obj) {
+  if (obj.confirm == 'empty') {
+    $('#add-btn').show();
+    $('#update-btn').hide();
+  } else {
+    $('#add-btn').hide();
+    $('#update-btn').show();
+  }
+})
 
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
@@ -55,16 +65,16 @@ $(document.body).bind('loaded-list', () => {
       if (data.status == "success") {
         var r = confirm('롤백 하시겠습니까?');
         if (r == true) {
-        $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
-          name: $('#productName').val(),
-          hisNo: hisNo
-        }, function(obj) {
-          if (obj.status == 'success') {
-            location.href = "view.html?no=" + param.split('=')[1];
-          } else {
-            alert('롤백에 실패했습니다.\n' + data.message);
-          }
-        }, "json")
+          $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
+            name: $('#productName').val(),
+            hisNo: hisNo
+          }, function(obj) {
+            if (obj.status == 'success') {
+              location.href = "view.html?no=" + param.split('=')[1];
+            } else {
+              alert('롤백에 실패했습니다.\n' + data.message);
+            }
+          }, "json")
         } else {
           location.href = "view.html?no=" + param.split('=')[1];
         }
@@ -75,6 +85,20 @@ $(document.body).bind('loaded-list', () => {
   })
 });
 
+$('#add-btn').click(() => {
+  $.post('/bitcamp-team-project/app/json/tip/add', {
+    name:     $('productName').val(),
+    nickName: $('#updateUser').attr('placeholder'),
+    contents: $('#contents').val()
+  }, function(data) {
+    if(data.status == 'success') {
+      location.href = "index.html";
+    } else {
+      alert('팁 생성 실패입니다.\n' + data.message);
+    }
+  }, "json")
+});
+
 function loadData(no) {
   $.getJSON('../../app/json/tip/detail?no=' + no, function(data) {
     $('#no').val(data.no);
@@ -83,32 +107,32 @@ function loadData(no) {
     $('#contents').val(data.contents);
     $('#createdDate').val(data.createdDate);
   });
+
+  $('#update-btn').click(() => {
+    console.log($('#updateUser').attr('placeholder'));
+    $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
+      name: $('#productName').val(),
+      nickName: $('#updateUser').attr('placeholder'),
+      contents: $('#contents').val()
+    }, function(data) {
+      if (data.status == 'success') {
+        location.href = "view.html?no=" + param.split('=')[1];
+      } else {
+        alert('변경 실패 입니다.\n' +  data.message);
+      }
+    }, "json");
+
+    console.log($('#no').val());
+    $.post('/bitcamp-team-project/app/json/tiphistory/add', {
+      tipNo: $('#no').val(),
+      contents: $('#contents').val(),
+      nickName: $('#updateUser').attr('placeholder')
+    }, function(data) {
+      if (data.status == 'success') {
+        alert('히스토리 저장중입니다.');
+      } else {
+        alert('히스토리 추가 실패입니다.\n' + data.message) ;
+      }
+    }, "json")
+  });
 };
-
-$('#update-btn').click(() => {
-  console.log($('#updateUser').attr('placeholder'));
-  $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
-    name: $('#productName').val(),
-    nickName: $('#updateUser').attr('placeholder'),
-    contents: $('#contents').val()
-  }, function(data) {
-    if (data.status == 'success') {
-      location.href = "view.html?no=" + param.split('=')[1];
-    } else {
-      alert('변경 실패 입니다.\n' +  data.message);
-    }
-  }, "json");
-
-  console.log($('#no').val());
-  $.post('/bitcamp-team-project/app/json/tiphistory/add', {
-    tipNo: $('#no').val(),
-    contents: $('#contents').val(),
-    nickName: $('#updateUser').attr('placeholder')
-  }, function(data) {
-    if (data.status == 'success') {
-      alert('히스토리 저장중입니다.');
-    } else {
-      alert('히스토리 추가 실패입니다.\n' + data.message) ;
-    }
-  }, "json")
-});

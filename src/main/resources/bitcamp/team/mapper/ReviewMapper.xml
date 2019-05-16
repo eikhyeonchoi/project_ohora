@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.ReviewDao">
+
+  <resultMap type="review" id="reviewMap">
+    <id column="rno" property="no" />
+    <result column="product_no" property="productNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="reviewName" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="cnt" property="viewCount" />
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="memberName" property="name" />
+    </association>
+  </resultMap>
+  
+  <resultMap type="product" id="productMap">
+    <id column="product_no" property="no"/>
+    <result column="sctg_no" property="smallCategoryNo"/>
+    <result column="manufac_no" property="manufacturerNo"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="productMap">
+    select product_no, name
+     from 
+     product
+     order by
+     product_no asc;
+  </select>
+
+
+  <select id="findByNo" resultMap="reviewMap" parameterType="int">
+    select
+      r.rv_no as rno,
+      r.name as reviewName,
+      m.name as memberName, 
+      r.cdt,
+      r.cnt
+    from
+      review r
+      join member m on m.member_no = r.member_no
+    where
+      r.product_no = #{value};
+  </select>
+  
+  <select id="findByNo2" resultMap="reviewMap" parameterType="int">
+    select
+     rv_no as rno, 
+     name as reviewName, 
+     conts,
+     cdt, 
+     cnt 
+   from 
+     review
+    where 
+      rv_no = #{value};
+  </select>
+  
+  
+  <delete id="delete" parameterType="int">
+    delete 
+    from
+      review
+    where
+      rv_no = #{value};
+  </delete>
+  
+  
+  <update id="update" parameterType="review">
+    update
+      review
+    <set>
+      <if test="title != null">name = #{title}</if>,
+      <if test="contents != null">conts = #{contents}</if>
+    </set>
+    where
+      rv_no = #{no};
+  </update>
+  
+  <update id="updateCount" parameterType="String">
+    update
+      review
+    set
+      cnt = cnt + 1
+    where
+      rv_no = #{no};
+  </update>
+
+  
+
+</mapper>

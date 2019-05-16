@@ -45,19 +45,18 @@
    <select id="findByNo" resultMap="satisfyMap" parameterType="int">
     select
       s.stf_no,
-      p.product_no,
-      p.name,
       s.level,
       s.understand,
       s.dgn,
       s.as_stf,
       s.useful,
-      s.price_stf
+      s.price_stf,
+      p.name
     from 
       satisfy s
-      left outer join product p on s.product_no = p.product_no
+      join product p on s.product_no=p.product_no
     where 
-      p.product_no = #{value};
+      s.product_no = #{value};
   </select>
   
   <select id="countAll" resultType="int" parameterType="int">

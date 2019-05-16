@@ -16,7 +16,6 @@ var largeCategoryGenerator = Handlebars.compile(largeSrc),
 
 $(document).ready(function() {
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
-    console.log(obj);
     if (obj.user.type == 2 || obj.user.type == 3) {
       $('#insert-btn').show();
     } else {

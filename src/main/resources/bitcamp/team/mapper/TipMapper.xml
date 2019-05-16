@@ -71,6 +71,11 @@
     select count(*) from tip where product_no = #{value}
   </select>
   
+  <select id="findNoByProductNo" resultType="int" parameterType="int">
+    select tip_no from tip where product_no = #{value}
+  </select>
+  
+  
   <insert id="insert" parameterType="map">
     insert into tip (product_no, member_no, conts)
     values (#{productNo}, #{memberNo}, #{contents})

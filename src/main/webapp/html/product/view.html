@@ -11,8 +11,16 @@
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>product detail (view.html)</h1>
+    <h1>제품 정보 (product/view.html)</h1>
+    <p>제품 설명 몇 사진, 만족도 정보가 이 페이지에 종합적으로 제시됨 (+css로 디자인해서)</p>
+    <br>
 
+    <div id='productScore'>
+      <p>제품의 종합적인 점수 목록(임시로 목록으로 뿌림) => 나중에 css로 바꿈</p>
+      <p id='product-name'>제품이름</p>
+      <p> 콘솔창 확인</p>
+    </div>
+    
     <div id='company-manager-div'>
       <button id='go-manual-add-or-update-btn'>메뉴얼add or update</button>
     </div>
@@ -25,8 +33,8 @@
       <button id='go-reivew-btn'>리뷰view</button>
       <button id='go-tip-btn'>팁</button>
     </div>
-  </div>
-  <!-- container -->
+
+  </div><!-- container -->
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
