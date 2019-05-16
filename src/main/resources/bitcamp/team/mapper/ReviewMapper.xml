@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.ReviewDao">
+
+  <resultMap type="review" id="reviewMap">
+    <id column="rv_no" property="no" />
+    <result column="product_no" property="productNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="name" property="name" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="cnt" property="viewCount" />
+
+    <association property="product" javaType="product">
+      <id column="product_no" property="no" />
+      <result column="name" property="name" />
+    </association>
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="name" property="name" />
+    </association>
+
+  </resultMap>
+
+
+
+  <select id="findAll" resultMap="reviewMap" parameterType="map">
+    select
+    p.name, r.name, m.name, r.cdt, r.cnt
+    from
+    review r
+    join product p on r.product_no = p.product_no
+    join member m on r.member_no = m.member_no
+    where
+    p.product_no = #{value};
+  </select>
+
+</mapper>
