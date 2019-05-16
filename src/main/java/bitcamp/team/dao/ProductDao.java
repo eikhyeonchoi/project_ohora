@@ -13,4 +13,5 @@ public interface ProductDao {
   List<Product> findManufacturer();
   int insert(Product product);
   Product findNoByName(String name);
+  Product findByNo(int no);
 }

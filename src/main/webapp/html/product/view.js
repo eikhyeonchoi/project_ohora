@@ -30,7 +30,8 @@ $(document).ready(function(){
       }else {
         tipBtn.text('팁 등록하기');
         tipBtn.click(function() {
-          alert('임시버튼');
+          location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
+          
         })
       }
     }
