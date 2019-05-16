@@ -10,6 +10,7 @@ public interface TipService {
   int update(Tip tip);
   List<Tip> list();
   Tip get(int no);
+  int getNo(int no);
   int delete(int no);
   int confirm(int no);
 }

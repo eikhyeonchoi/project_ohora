@@ -46,11 +46,21 @@ public class TipController {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
-      tips.setMemberNo(memberService.get(member.getNickName()));
-      tips.setProductNo(productService.get(product.getName()));
-      tipService.add(tips);
-      contents.put("status", "success");
+      int prodNo = productService.get(product.getName());
+      String nickName = member.getNickName();
       
+      tips.setMemberNo(memberService.get(nickName));
+      tips.setProductNo(prodNo);
+      tipService.add(tips);
+      
+      TipHistory his = new TipHistory();
+      System.out.println("tip_no==>" + tipService.getNo(prodNo));
+      his.setTipNo(tipService.getNo(prodNo));
+      his.setContents(tips.getContents());
+      his.setNickName(nickName);
+      tipHistoryService.add(his);
+      
+      contents.put("status", "success");
     } catch (Exception e) {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
