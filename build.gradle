@@ -52,4 +52,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    
+    // 이메일 인증 처리 라이브러리
+    compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
+    
 }
+
+
