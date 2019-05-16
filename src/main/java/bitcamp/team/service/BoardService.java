@@ -24,6 +24,8 @@ public interface BoardService {
 
   int insertReply(BoardReply boardReply);
 
+  BoardReply getReply(int no);
+
   // 댓글 삭제
   int deleteReply(int no);
 

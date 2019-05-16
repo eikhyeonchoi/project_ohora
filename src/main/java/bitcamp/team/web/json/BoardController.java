@@ -59,8 +59,6 @@ public class BoardController {
     try {
       if (boardService.update(board) == 0)
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-
-
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -111,10 +109,14 @@ public class BoardController {
   public Object deleteReply(int no) {
     HashMap<String, Object> content = new HashMap<>();
     try {
-      if (boardService.deleteReply(no) == 0)
+      BoardReply br = boardService.getReply(no);
+      if (br.getParentId() == 0) {
+        br.setContents("(삭제 된 댓글입니다.)");
+        br.setRegisterDate("0");
+        boardService.updateReply(br);
+      } else if (boardService.deleteReply(no) == 0)
         throw new RuntimeException("해당 번호의 댓글이 없습니다.");
       content.put("status", "success");
-
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -128,8 +130,6 @@ public class BoardController {
     try {
       if (boardService.updateReply(boardReply) == 0)
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-
-
       content.put("status", "success");
 
     } catch (Exception e) {

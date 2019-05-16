@@ -11,7 +11,7 @@ templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
 
 $(document).ready(function() {
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+  $.get('../../app/json/auth/user', function(obj){
     console.log(obj);
     var loginUser = obj.user.type;
     if(loginUser != 3) {

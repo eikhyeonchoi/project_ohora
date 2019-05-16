@@ -94,6 +94,19 @@
       id=#{value}
   </delete>
   
+  <select id="getReply" resultMap="boardReplyMap" parameterType="int">
+    select
+      reply_id,
+      parent_id,
+      depth,
+      reply_content,
+      register_date
+    from
+      board_reply
+    where
+      reply_id=#{replyNo};
+  </select>
+  
   <insert id="insertReply" parameterType="boardReply">
     insert into
       board_reply(board_id, parent_id, depth, reply_content)
@@ -112,6 +125,9 @@
       board_reply
     set
       reply_content = #{contents}
+      <if test="registerDate != null">
+      , register_date = cast(#{registerDate} as unsigned)
+      </if>
     where
       reply_id = #{no}
   </update>

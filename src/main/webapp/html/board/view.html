@@ -70,18 +70,23 @@
 
 <script id='tr-template' type='text/x-handlebars-template'>
 {{#each replylist}}
-<tr>
-  <td><textarea class="form-control" id="rere-content-{{no}}" 
-                value="{{no}}" rows='2' cols='20' readonly>{{contents}}</textarea></td>
-  <td>{{registerDate}}</td>
+<tr class='rere-tr'>
+  <td class='rere-td' data-contents='{{contents}}'>{{contents}}</td>
+  <td class='rere-rd'>{{registerDate}}</td>
   <td>
-    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>답글</button>
-    <button id='rere-delete-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>삭제</button>
-    <button id='rere-update-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary'>수정</button>
+    <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-add-btn' data-depth='{{depth}}'>답글</button>
+    <button id='rere-delete-btn-{{no}}' value='{{registerDate}}' data-no='{{no}}' type='button' class='btn btn-primary test-delete-btn'>삭제</button>
+    <button id='rere-update-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-update-btn'>수정</button>
   </td>
 </tr>
 {{/each}}
 </script>
+
+<script id='tr-template-child' type='text/x-handlebars-template'>
+<textarea data-contents='{{contents}}'>{{contents}}</textarea>
+</script>
+
+
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
