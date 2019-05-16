@@ -13,11 +13,6 @@
     <result column="cdt" property="createdDate" />
     <result column="cnt" property="viewCount" />
 
-    <association property="product" javaType="product">
-      <id column="product_no" property="no" />
-      <result column="productName" property="name" />
-    </association>
-
     <association property="member" javaType="member">
       <id column="member_no" property="no" />
       <result column="memberName" property="name" />
@@ -67,6 +62,27 @@
     where 
       rv_no = #{value};
   </select>
+  
+  
+  <delete id="delete" parameterType="int">
+    delete 
+    from
+      review
+    where
+      rv_no = #{value};
+  </delete>
+  
+  
+  <update id="update" parameterType="review">
+    update
+      review
+    <set>
+      <if test="title != null">name = #{title}</if>,
+      <if test="contents != null">conts = #{contents}</if>
+    </set>
+    where
+      rv_no = #{no};
+  </update>
   
 
 </mapper>

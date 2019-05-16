@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ReviewDao;
-import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.Review;
 import bitcamp.team.service.ReviewService;
 
@@ -37,6 +36,16 @@ public class ReviewServiceImpl implements ReviewService {
       reviewDao.findByNo2(no);
     }
     return review;
+  }
+  
+  @Override
+  public int delete(int no) {
+    return reviewDao.delete(no);
+  }
+  
+  @Override
+  public int update(Review review) {
+    return reviewDao.update(review);
   }
   
   

@@ -3,6 +3,7 @@ package bitcamp.team.web.json;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Review;
@@ -31,6 +32,37 @@ public class ReviewController {
   public Object detail2(int no) throws Exception {
     Review review = reviewService.get2(no);
     return review;
+  }
+  
+  @GetMapping("delete")
+  public Object delete(int no) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (reviewService.delete(no) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  } 
+
+
+  @PostMapping("update")
+  public Object update(Review review) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (reviewService.update(review) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
   }
 
 }

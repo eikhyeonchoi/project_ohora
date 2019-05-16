@@ -1,7 +1,6 @@
 var detailNo = getQuerystring('no');
 
 ($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
-    console.log(data);
     $('#review-no').val(data.no),
     $('#review-title').val(data.title),
     $('#review-contents').val(data.contents),
@@ -20,32 +19,31 @@ var detailNo = getQuerystring('no');
     }
 });
   
-  $('#delete-btn').click(() => {
-    $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + $('#no').val(), 
-            function(data) {
-      //$('#no').val()
+  
+ 
+  
+$('#delete-btn').click(() => {
+  $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + detailNo, function(data) {
     })
-    .done(function(data) {location.href = "index.html";})
+    .done(function(data) {window.history.back();})
     .fail(function(data) {
       console.log(data)
       alert('삭제 실패입니다!\n' + data.responseText);
     })
   });
 
+  
   $('#update-btn').click(() => {
-    $.post('/bitcamp-team-project/app/json/review/update', {
-      no: $('#no').val(),
-      title: $('#title').val(), 
-      contents: $('#contents').val()
-    }, function() {
-
-    })
-    .done(function() {
-      location.href = "index.html";
-    })
-    .fail(function() {
-      alert('등록 실패입니다!\n' + data.message)
-    })
+    $.post('/bitcamp-team-project/app/json/review/update?no=' + detailNo, {
+      title: $('#review-title').val(), 
+      contents: $('#review-contents').val()
+    }, function(data) {
+      if (data.status == 'success') {
+        location.href = "index.html";
+      } else {
+        alert('변경 실패 입니다.\n' +  data.message);
+      }
+    }, "json")
   });
   
   
