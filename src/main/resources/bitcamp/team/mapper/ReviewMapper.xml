@@ -8,19 +8,19 @@
     <id column="rv_no" property="no" />
     <result column="product_no" property="productNo" />
     <result column="member_no" property="memberNo" />
-    <result column="name" property="name" />
+    <result column="reviewName" property="title" />
     <result column="conts" property="contents" />
     <result column="cdt" property="createdDate" />
     <result column="cnt" property="viewCount" />
 
     <association property="product" javaType="product">
       <id column="product_no" property="no" />
-      <result column="name" property="name" />
+      <result column="productName" property="name" />
     </association>
 
     <association property="member" javaType="member">
       <id column="member_no" property="no" />
-      <result column="name" property="name" />
+      <result column="memberName" property="name" />
     </association>
   </resultMap>
   
@@ -41,11 +41,16 @@
 
   <select id="findByNo" resultMap="reviewMap" parameterType="int">
     select
-      p.name, r.name, m.name, r.cdt, r.cnt
+      r.rv_no,
+      p.name as productName,
+      r.name as reviewName,
+      m.name as memberName, 
+      r.cdt,
+      r.cnt
     from
       review r
       join product p on r.product_no = p.product_no
-      join member m on r.member_no = m.member_no
+      join member m on m.member_no = r.member_no
     where
       p.product_no = #{value};
   </select>

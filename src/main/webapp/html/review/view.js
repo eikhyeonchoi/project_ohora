@@ -8,16 +8,17 @@ var trGenerator = Handlebars.compile(templateSrc);
   console.log(detailNo);
   
   $(trGenerator(obj)).appendTo(tbody);
-}));
-  
-  $.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj) {
-    if(obj.status == "fail") {
-      $('.satisfy-a-class').hide();
 
-    });
+}));
+   
   
   
-  
+//  $.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj) {
+//    if(obj.status == "fail") {
+//      $('.satisfy-a-class').hide();
+//    }
+//  })
+      
   
   // add.html로 제품번호(detailNo) 넘기기
 //  $('.satisfy-a-class').click((e) => {

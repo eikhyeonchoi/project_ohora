@@ -17,7 +17,7 @@ public class ReviewController {
   public Object list() throws Exception {
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", reviewService.list());
-
+    
     return map;
   }
   

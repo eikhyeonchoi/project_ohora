@@ -15,6 +15,7 @@
   <table border=1>
     <thead>
       <tr>
+        <th scope="col">리뷰 번호</th>
         <th scope="col">제품명</th>
         <th scope="col">제목</th>
         <th scope="col">아이디</th>
@@ -31,8 +32,9 @@
 
 {{#each list}}
 <tr>
-  <th scope='row'>{{product.name}}</th>
-  <td><a class='review-a-class' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <th scope='row'>{{no}}</th>
+  <td>{{product.name}}</td>
+  <td><a class='review-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
   <td>{{member.name}}</a></td>
   <td>{{createdDate}}</td>
   <td>{{viewCount}}</td>

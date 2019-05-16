@@ -7,7 +7,7 @@ public class Review {
   private int no;
   private int productNo;
   private int memberNo;
-  private String name;
+  private String title;
   private String contents;
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date createdDate;
@@ -33,11 +33,11 @@ public class Review {
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
   }
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setTitle(String title) {
+    this.title = title;
   }
   public String getContents() {
     return contents;
@@ -69,9 +69,6 @@ public class Review {
   public void setMember(Member member) {
     this.member = member;
   }
-  
-  
- 
   
   
 }
