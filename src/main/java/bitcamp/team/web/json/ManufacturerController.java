@@ -16,6 +16,7 @@ public class ManufacturerController {
 
   @Autowired ManufacturerService manufacturerService;
 
+  // 관리자가 제조사 등록
   @PostMapping("add")
   public Object add(Manufacturer manufacturer) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -28,6 +29,17 @@ public class ManufacturerController {
       content.put("message", e.getMessage());
 
     }
+    return content;
+
+  }
+  
+  // 기업회원가입
+  @PostMapping("addCompany")
+  public Object add2(Manufacturer manufacturer) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    
+    System.out.println("호출됨");
+    System.out.println(manufacturer);
     return content;
 
   }

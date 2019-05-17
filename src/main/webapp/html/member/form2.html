@@ -12,82 +12,51 @@
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1></h1>
     <form>
-      <div class="form-group row">
-        <label for="email" class="col-sm-2 col-form-label">이메일</label>
-        <div class="col-sm-10">
-          <input type='email' class="form-control" id="email" name='email'>
-          <p>이메일을 입력하세요.</p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-        <div class="col-sm-10">
-          <input type='password' class="form-control" id="password" name='password'>
-          <p>비밀번호를 입력해 주세요.</p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="password2" class="col-sm-2 col-form-label">비밀번호 확인</label>
-        <div class="col-sm-10">
-          <input type='password' class="form-control" id="password2" name='password2'>
-          <button id="id-ck">비밀번호 확인</button>
-          <p></p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">이름</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name='name'>
-          <p>회원명을 입력해 주세요.</p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="nickName" class="col-sm-2 col-form-label">닉네임</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="nickName" name='nickName'>
-          <p>닉네임을 입력해 주세요.</p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
-        <div class="col-sm-10">
-          <input type='text' class="form-control" id="tel" name='tel'>
-          <p>전화번호를 입력해 주세요.</p>
-        </div>
-      </div>
-      <br>
       <h3 class="bit-new-item">기업 추가정보</h3>
       <br>
       <div class="form-group row bit-new-item">
-        <label for="name2" class="col-sm-2 col-form-label">기업명</label>
+        <label for="name" class="col-sm-2 col-form-label">기업명</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name2" name='name2'>
+          <input type="text" class="form-control" id="name" name='name'>
+          <p id="name-p">기업명을 입력하세요.</p>
         </div>
       </div>
       <div class="form-group row bit-new-item">
-        <label for="tel2" class="col-sm-2 col-form-label">기업 전화번호</label>
+        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="tel2" name='tel2'>
+          <input type="text" class="form-control" id="tel" name='tel' readonly>
+           <p>
         </div>
       </div>
       <div class="form-group row bit-new-item">
         <label for="homePage" class="col-sm-2 col-form-label">기업 홈페이지 주소</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="homePage" name='homePage'>
+          <P id="homePage-p">기업 URL을 입력해주세요.</P>
         </div>
       </div>
       <div class="form-group row bit-new-item">
         <label for="registerNo" class="col-sm-2 col-form-label">사업자 등록번호</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="registerNo" name='registerNo'>
+          <input type="number" min="1" class="form-control" id="registerNo" name='registerNo'>
+          <p id="registerNo-p">&emsp;-를 제외하고 입력해주세요.</p>
+        </div>
+      </div>
+      <div class="form-group row bit-new-item">
+        <label for="registerNo" class="col-sm-2 col-form-label">주소</label>
+        <div class="col-sm-10">
+          <button type="button" id="postcodify_search_button">주소 검색</button><br />
+          <input id="adr1" type="text" name="" class="postcodify_postcode5 form-control" value="" placeholder="우편 번호" readonly/>
+          <input id="adr2" type="text" name="" class="postcodify_address form-control" value="" placeholder="도로명 주소" readonly/>
+          <input id="adr3" type="text" name="" class="postcodify_details form-control" value="" placeholder="상세 주소를 입력하세요."/>
+          <input id="adr4" type="text" name="" class="postcodify_extra_info form-control" value="" placeholder="참고항목" readonly/><br/>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-10">
-          <a href='index.html' class="btn btn-primary btn-sm">목록</a>
-          <button type="button" id="add-btn" class="btn btn-success btn-sm">등록</button>
+          <a href='index.html' class="btn btn-primary btn-sm">취소</a>
+          <button type="button" id="add-btn" class="btn btn-success btn-sm">가입하기</button>
         </div>
       </div>
     </form>
@@ -98,8 +67,13 @@
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- jQuery와 Postcodify를 로딩한다 -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+  <!-- 주소검색 버튼을 누르면 주소검색 폼을 띄우는 함수 -->
+  <script>$(function() { $("#postcodify_search_button").postcodifyPopUp(); });</script> 
   <script src="../header.js"></script>
-  <script src="form.js"></script>
+  <script src="form2.js"></script>
 </body>
 </html>
 
