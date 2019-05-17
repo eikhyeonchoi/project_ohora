@@ -45,12 +45,7 @@ $(document.body).bind('loaded-detail', function(data){
   
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
     console.log(obj);
-    $(commentListGenerator(obj)).appendTo(tbody)
-    
-    $('.reply-form-btn').click(function(e) {
-      
-    }) // click
-    
+    $(commentListGenerator(obj)).appendTo($('.comment-child'));
   }); // get
   
   deleteBtn.click(() => {
@@ -69,7 +64,6 @@ $(document.body).bind('loaded-detail', function(data){
       contents: $('#contents').val()
     }, function(obj) {
       if (obj.status == 'success') {
-        location.href = "index.html";
       } else {
         alert('변경 실패 입니다.\n' +  obj.message);
       }
@@ -77,6 +71,10 @@ $(document.body).bind('loaded-detail', function(data){
   }); // update click
   
   $('#comment-add-btn').click(function() {
+    addComment();
+    console.log(yyyymmdd());
+    
+    /*
     $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
       memberNo: data.mNo,
       fboardNo: boardNo,
@@ -85,14 +83,34 @@ $(document.body).bind('loaded-detail', function(data){
       parentId: 0
     }, function(obj) {
       if (obj.status == 'success') {
-        location.reload();
       } else {
         alert('변경 실패 입니다.\n' +  obj.message);
       }
     }, "json")
+    */
   }) // comment-add-btn click
 
 }) // bind
+
+function addComment(){
+  
+  console.log($('.fboard-comment-list-form').children().first().clone());
+  console.log($('.fboard-comment-list-form').children().eq(1).clone());
+  
+  var userInformClone = $('.fboard-comment-list-form').children().first().clone();
+  var commentFormClone = $('.fboard-comment-list-form').children().eq(1).clone();
+  var br = '<br>';
+  
+  
+  /*
+  var userInformDivStart = "<div class='user-inform col-sm-12'>";
+  var nameLabel = "<label class for='basic-url'>"+ +"</label>";
+  var cdtLabel = "<label class for='basic-url'>"+ +"</label>";
+  var endDiv = '</div>';
+  var commentDivStart = "<div class='comment-form input-group'>";
+  var createInput = "<input type='text' class='form-control col-sm-10 value='"+ +"'>";
+  */
+}
 
 
 function getQuerystring(key, default_){
@@ -107,4 +125,16 @@ function getQuerystring(key, default_){
 } // getQuerystring
 
 
-
+function yyyymmdd(){
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth()+1
+  var day = date.getDate();
+  if(month < 10){
+      month = "0"+month;
+  }
+  if(day < 10){
+      day = "0"+day;
+  }
+  return year + "-" + month + "-"+day;
+}
