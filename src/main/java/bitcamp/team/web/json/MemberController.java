@@ -21,19 +21,21 @@ public class MemberController {
   @PostMapping("add")
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-      try {
-        System.out.println("호출1");
-        memberService.add(member);
-        System.out.println("호출2");
-        content.put("status", "success");
-      } catch (Exception e) {
-        content.put("status", "fail");
-        content.put("message", e.getMessage());
-
+    Member member2 = member;
+    try {
+      memberService.add(member);
+      if (member.getType().equals("기업 회원")) {
+        memberService.delete(member.getEmail());
+        content.put("member", member2);
       }
-      System.out.println(content.get("status"));
-      return content;
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+
     }
+    return content;
+  }
 
   //  @GetMapping("delete")
   //  public Object delete(int no) throws Exception {
@@ -55,7 +57,7 @@ public class MemberController {
     Member member = memberService.get(no);
     return member;
   }
-  
+
   @GetMapping("nickName")
   public Object detail(String nickName) throws Exception {
     int abcd = memberService.get2(nickName);
@@ -66,7 +68,6 @@ public class MemberController {
   public Object list() throws Exception {
     HashMap<String,Object> map = new HashMap<>();
     List<Member> members = memberService.list();
-    System.out.println(members);
     map.put("list", members);
 
     return map;
@@ -88,21 +89,28 @@ public class MemberController {
     }
     return content;
   }
-  
+
   @GetMapping("email")
   public Object Authentication (String email) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    Gmail gmail = new Gmail();
-    int ranNo = RandomNo.randomNo();
 
-    String emailStatus = gmail.gmailSend(email, ranNo);
-    if (emailStatus.equals("success")) {
-      content.put("status", "success");
-      content.put("ranNo", ranNo);
+    int emailNo = memberService.get3(email);
+    if (emailNo == 0) {
+      Gmail gmail = new Gmail();
+      int ranNo = RandomNo.randomNo();
+
+      String emailStatus = gmail.gmailSend(email, ranNo);
+      if (emailStatus.equals("success")) {
+        content.put("status", "success");
+        content.put("ranNo", ranNo);
+      } else {
+        content.put("status", "fail");
+      }
+      return content;
     } else {
-      content.put("status", "fail");
+      content.put("nop", 0);
+      return content;
     }
-    return content;
   }
 }
 

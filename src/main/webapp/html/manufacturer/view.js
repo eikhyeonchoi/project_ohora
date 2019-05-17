@@ -19,7 +19,7 @@ $('#add-btn').click(function() {
     name: $('#name').val(),
     tel: $('#tel').val(),
     homePage: $('#homepage').val(),
-    registerNo: $('#reg_no').val()
+    registerNo: $('#registerNo').val()
   },
   function(data) {
     if (data.status == 'success') {
@@ -45,7 +45,7 @@ $('#update-btn').click(function() {
     name: $('#name').val(),
     tel: $('#tel').val(),
     homePage: $('#homepage').val(),
-    registerNo: $('#reg_no').val()
+    registerNo: $('#registerNo').val()
   },
   function(data) {
     if (data.status == 'success') {

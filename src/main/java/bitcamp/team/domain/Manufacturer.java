@@ -8,9 +8,17 @@ public class Manufacturer {
   private String homePage;
   private String registerNo;
   private int memberNo;
+  private String address;
 
   private Member member;
 
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
   public int getNo() {
     return no;
@@ -59,7 +67,8 @@ public class Manufacturer {
   @Override
   public String toString() {
     return "Manufacturer [no=" + no + ", name=" + name + ", tel=" + tel + ", homePage=" + homePage
-        + ", registerNo=" + registerNo + ", memberNo=" + memberNo + ", member=" + member + "]";
+        + ", registerNo=" + registerNo + ", memberNo=" + memberNo + ", address=" + address
+        + ", member=" + member + "]";
   }
 
 }

@@ -17,8 +17,8 @@ $('#login-btn').click(() => {
   }
   
   if (data.status == 'success') {
-    // location.href = "../index.html"
-    window.history.back();
+     location.href = "/bitcamp-team-project/html/index.html"
+//    window.history.back();
 
   } else {
     alert('로그인 실패입니다!\n' + data.message);

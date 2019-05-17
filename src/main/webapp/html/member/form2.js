@@ -1,59 +1,116 @@
-var who = window.localStorage.getItem('who');
-if (who == "nomal") {
-  $('h1').html("일반회원 가입");
-  var el = $('.bit-new-item');
-  for (e of el) {
-    e.style.display = 'none';
-  };
-} else {
-  $('h1').html("기업회원 가입");
-}
+var namee = $("#name"),
+np = $("#name-p"),
+homePage = $("#homePage"),
+hp = $("#homePage-p"),
+registerNo = $("#registerNo"),
+rp = $("#registerNo-p"),
+adr1 = $("#adr1"),
+adr2 = $("#adr2"),
+adr3 = $("#adr3"),
+adr4 = $("#adr4"),
+tel2 = $("#tel"),
+address;
 
-var addMember = function(name, nickName, email, password, tel, type) {
-  alert("addMember호출");
-  $.post("../../app/json/member/add", { 
-    name: name,
-    nickName: nickName,
-    email: email,
-    password: password,
-    tel: tel,
-    type: type},
-    function(data) {
-      alert("ssd")
-      console.log("호출");
-      if (data.status == 'success') {
-        location.replace("index.html");
-      } else {
-        alert('등록 실패 입니다.\n' +  data.message);
-      }
-    }, "json");
+var nameCk = false;
+var hompCk = false;
+var regNoCk = false;
+var adrCk = false;
+
+$(document).ready(function() {
+  var tel = window.localStorage.getItem('tel');
+  tel2.val(tel);
+});
+
+namee.change(function() {
+  nameCheck()
+});
+
+homePage.change(function() {
+  hompCheck()
+});
+
+registerNo.keydown(function() {
+  if (registerNo.val().length == 10) {
+    registerNo.val(registerNo.val().substring(0, 9));
+  } 
+});
+
+registerNo.change(function() {
+  renCheck()
+});
+
+function nameCheck() {
+  if (namee.val() == ""){
+    np.html("기업명을 입력하세요.");
+    nameCk = false;
+  } else {
+    np.html("");
+    nameCk = true;
+  }
+};
+
+function hompCheck() {
+  if (homePage.val() == ""){
+    hp.html("기업 URL을 입력해주세요.");
+    hompCk = false;
+  } else {
+    hp.html("");
+    hompCk = true;
+  }
+};
+
+function renCheck() {
+  if (registerNo.val() == ""){
+    rp.html("&emsp; -를 제외하고 입력해주세요.");
+    regNoCk = false;
+  } else {
+    rp.html("");
+    regNoCk = true;
+  }
+};
+
+adr1.change(function() {
+  adrCheck();
+});
+
+adr3.change(function() {
+  adrCheck();
+});
+
+function adrCheck() {
+  if (adr1.val() != "" && adr3.val() != "") {
+    address = adr1.val() + "/" + adr2.val() + "/" + adr3.val() + "/" + adr4.val();
+    adrCk = true;
+    console.log(address);
+
+  } else {
+    adrCk = false;
+    console.log("else");
+
+  }
 };
 
 $('#add-btn').click(function() {
-  var email = $('#email').val();
-  if (email == "") {
-    alert("email을 입력해 주세요.")
-    return;
-  } else {
-    if (email.indexOf('@') != 1) {
-      alert("email 형식으로 입력해 주세요.\n" +
-      "ex) dencw6@gmail.com");
-      return;
-    } else {
+  console.log("호출");
+  if (nameCk == true &&
+      hompCk == true && 
+      regNoCk == true && 
+      adrCk == true) {
+    $.post("../../app/json/manufacturer/addCompany", {
+      name: namee.val(),
+      tel: tel2.val(),
+      homePage: homePage.val(),
+      registerNo: registerNo.val(),
+      address: address,
       
-    }
-  } 
-  var name = $('#name').val();
-  var nickName = $('#nickName').val();
-  var password = $('#password').val();
-  var tel = $('#tel').val();
-  var type = "일반 회원";
-  if (name != "" && nickName != "" && email != "" && password != "" && tel != "" && type != "") {
-    alert("if호출");
-    addMember(name, nickName, email, password, tel, type);
+    }, function(data) {
+
+    }, "json");
+
   } else {
-    alert("else호출");
+    alert("기업 정보를 모두 입력하세여~")
     return;
   }
 });
+
 
