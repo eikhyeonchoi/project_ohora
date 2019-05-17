@@ -125,6 +125,7 @@
   <select id="findCommentAll" resultMap="fboardCommentMap" parameterType="int">
     select
       fc.fb_cmt_no,
+      fc.member_no,
       fc.conts,
       fc.cdt,
       m.n_name
@@ -140,6 +141,12 @@
     values(#{memberNo}, #{fboardNo}, #{contents}, #{depth}, #{parentId})
   </insert>
   
+  <delete id="deleteComment" parameterType="int">
+    delete from
+      fboard_cmt
+    where
+      fb_cmt_no = #{value}
+  </delete>
   
 </mapper>
 

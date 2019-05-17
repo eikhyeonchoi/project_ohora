@@ -14,6 +14,9 @@ var boardNo = getQuerystring('no'),
     commentListGenerator = Handlebars.compile(commentListSrc),
     replyGenerator = Handlebars.compile(replySrc);
 
+var userNo = 0,
+    userNickName = '';
+
 $(document).ready(function() {
   $.get('../../app/json/fboard/detail?no=' + boardNo, function(obj) {
     $('#memberNo').val(obj.member.nickName);
@@ -32,20 +35,15 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-detail', function(data){
   
-  $.get('/bitcamp-team-project/app/json/auth/user' ,function(obj) {
-    console.log(obj);
-    if(obj.user.no != data.mNo){
-      deleteBtn.hide();
-      updateBtn.hide();
-      $('#title').prop('readonly', true);
-      $('#contents').prop('readonly', true);
-    } 
-  }); // get
-  
+  callUserInform(data);
   
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
+    console.log('댓글obj');
     console.log(obj);
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
+    
+    
+    $(document.body).trigger('loaded-comment-list');
   }); // get
   
   deleteBtn.click(() => {
@@ -70,47 +68,104 @@ $(document.body).bind('loaded-detail', function(data){
     }, "json") 
   }); // update click
   
+  
   $('#comment-add-btn').click(function() {
-    addComment();
-    console.log(yyyymmdd());
+    ajaxAddComment();
+  })
+
+}) // loaded-detail bind
+
+
+$(document.body).bind('loaded-comment-list', function() {
+  authViewBtn();
+  ajaxDeleteComment();
+}) // loaded-comment-list bind
+
+
+
+
+function authViewBtn(){
+  $('.p-member-no').each(function(index, item) {
+    if ($(item).attr('data-member-no') != window.userNo) {
+      $(item).next().next().next().hide();
+      $(item).next().next().next().next().hide();
+    }
+  })
+} // authViewBtn
+
+function ajaxDeleteComment(){
+    $('.comment-delete-btn').click(function(e) {
+      $(e.target).closest('div').prev().remove();
+      $(e.target).closest('div').next().remove();
+      $(e.target).closest('div').remove();
+      
+      $.getJSON('../../app/json/fboard/deleteComment?no=' + $(e.target).attr('data-no'), function(obj) {
+        if (obj.status == 'success') {
+          return;
+        } else {
+          alert('삭제 실패 입니다.\n' +  obj.message);
+        }
+      }) // get
+    }) // click
+} // deleteBtnActivate
+
+function ajaxAddComment(){
+  window.count = 0;
+  if (count == 0) {
+    count++;
+    var obj = {
+        list: [
+          {
+            contents: $('#comment-contents').val(),
+            createdDate: getCurrentTime,
+            member: {nickName: userNickName}
+          }]}
     
-    /*
-    $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
-      memberNo: data.mNo,
-      fboardNo: boardNo,
-      contents: $('#comment-contents').val(),
-      depth: 0,
-      parentId: 0
-    }, function(obj) {
-      if (obj.status == 'success') {
-      } else {
-        alert('변경 실패 입니다.\n' +  obj.message);
-      }
-    }, "json")
-    */
-  }) // comment-add-btn click
+    if($('#comment-contents').val().length == 0){
+      alert('내용을 입력해주세요');
+      return;
+    }
+    
+    $(commentListGenerator(obj)).appendTo($('.comment-child'));
+    requestAddComment();
+    $('#comment-contents').val('');
+  } else {
+    
+    var userClone = $('.fboard-comment-list-form').children().first().clone();
+    var commentClone = $('.fboard-comment-list-form').children().eq(1).clone();
+    userClone.find('.user-nickname').text(userNickName);
+    userClone.find('.created-date').text(getCurrentTime);
+    commentClone.find('input').val($('#comment-contents').val());
+    
+    if($('#comment-contents').val().length == 0){
+      alert('내용을 입력해주세요');
+      return;
+    }
+    
+    $('.fboard-comment-list-form').append(userClone).append(commentClone).append('<br>');
+    requestAddComment();
+    $('#comment-contents').val('');
+  }
+  
+  $(document.body).trigger('commentAddComplete');
+} // ajaxAddComment
 
-}) // bind
+function requestAddComment(){
+  $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
+    memberNo: userNo,
+    fboardNo: boardNo,
+    contents: $('#comment-contents').val(),
+    depth: 0,
+    parentId: 0
+  }, function(obj) {
+    if (obj.status == 'success') {
+    } else {
+      alert('등록 실패 입니다.\n' +  obj.message);
+    }
+  }, "json") // post
+  
+} // requestAddComment
 
-function addComment(){
-  
-  console.log($('.fboard-comment-list-form').children().first().clone());
-  console.log($('.fboard-comment-list-form').children().eq(1).clone());
-  
-  var userInformClone = $('.fboard-comment-list-form').children().first().clone();
-  var commentFormClone = $('.fboard-comment-list-form').children().eq(1).clone();
-  var br = '<br>';
-  
-  
-  /*
-  var userInformDivStart = "<div class='user-inform col-sm-12'>";
-  var nameLabel = "<label class for='basic-url'>"+ +"</label>";
-  var cdtLabel = "<label class for='basic-url'>"+ +"</label>";
-  var endDiv = '</div>';
-  var commentDivStart = "<div class='comment-form input-group'>";
-  var createInput = "<input type='text' class='form-control col-sm-10 value='"+ +"'>";
-  */
-}
 
 
 function getQuerystring(key, default_){
@@ -125,16 +180,42 @@ function getQuerystring(key, default_){
 } // getQuerystring
 
 
-function yyyymmdd(){
-  var date = new Date();
-  var year = date.getFullYear();
-  var month = date.getMonth()+1
-  var day = date.getDate();
-  if(month < 10){
-      month = "0"+month;
+function callUserInform(data){
+  $.get('/bitcamp-team-project/app/json/auth/user' ,function(obj) {
+    userNickName = obj.user.nickName;
+    userNo = obj.user.no;
+    if(obj.user.no != data.mNo){
+      deleteBtn.hide();
+      updateBtn.hide();
+      $('#title').prop('readonly', true);
+      $('#contents').prop('readonly', true);
+    } 
+  }); // get
+} // callUserInform
+
+
+function getCurrentTime() {
+  var d = new Date();
+  var s =
+    leadingZeros(d.getFullYear(), 4) + '-' +
+    leadingZeros(d.getMonth() + 1, 2) + '-' +
+    leadingZeros(d.getDate(), 2) + ' ' +
+
+    leadingZeros(d.getHours(), 2) + ':' +
+    leadingZeros(d.getMinutes(), 2) + ':' +
+    leadingZeros(d.getSeconds(), 2);
+
+  return s;
+} // getCurrentTime
+
+
+function leadingZeros(n, digits) {
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (i = 0; i < digits - n.length; i++)
+      zero += '0';
   }
-  if(day < 10){
-      day = "0"+day;
-  }
-  return year + "-" + month + "-"+day;
+  return zero + n;
 }

@@ -14,4 +14,5 @@ public interface FboardService {
   
   List<FboardComment> commentList(int no);
   int addComment(FboardComment fboardComment);
+  int deleteComment(int no);
 }

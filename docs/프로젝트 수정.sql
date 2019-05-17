@@ -10,7 +10,7 @@ ALTER TABLE manufacturer MODIFY reg_no varchar(30);
 
 alter table manufacturer add member_no integer null;
 
-alter table manufacturer add constraint member_no foreign key (member_no)
+alter table manufacturer add constraint member_no foreign key(member_no)
 
 references member (member_no);
 

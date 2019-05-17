@@ -59,4 +59,9 @@ public class FboardServiceImpl implements FboardService {
   public int addComment(FboardComment fboardComment) {
     return boardDao.insertComment(fboardComment);
   }
+
+  @Override
+  public int deleteComment(int no) {
+    return boardDao.deleteComment(no);
+  }
 }

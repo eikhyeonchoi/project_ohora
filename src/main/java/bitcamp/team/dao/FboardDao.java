@@ -19,5 +19,5 @@ public interface FboardDao {
    // 여기서부터 댓글 dao
    List<FboardComment> findCommentAll(int no);
    int insertComment(FboardComment fboardComment);
-   
+   int deleteComment(int no);
 }
