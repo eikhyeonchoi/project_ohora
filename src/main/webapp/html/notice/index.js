@@ -109,7 +109,7 @@ function loadList(pn) {
     }
 
 
-    $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage, 'obj', obj]);
+    $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
   });
 } // loadList()
 

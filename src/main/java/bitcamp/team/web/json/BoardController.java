@@ -1,6 +1,7 @@
 package bitcamp.team.web.json;
 
 import java.util.HashMap;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,17 +106,45 @@ public class BoardController {
     return content;
   } // add
 
+
   @GetMapping("deleteReply")
   public Object deleteReply(int no) {
     HashMap<String, Object> content = new HashMap<>();
+    BoardReply currRp = boardService.getReply(no); // 현재 댓글
+    int boardNo = currRp.getBoardId(); // 현재 댓글의 board id
+    List<BoardReply> brs = boardService.replyList(boardNo); // 현재 게시판의 모든 댓글
+    int rereCount = 0; // 같은 댓글 밑의 child 댓글 개수
+    int parentNo = currRp.getParentId(); // 현재 댓글의 parent id
+
     try {
-      BoardReply br = boardService.getReply(no);
-      if (br.getParentId() == 0) {
-        br.setContents("(삭제 된 댓글입니다.)");
-        br.setRegisterDate("0");
-        boardService.updateReply(br);
-      } else if (boardService.deleteReply(no) == 0)
+      if (currRp.getParentId() == 0) {
+        for (BoardReply re : brs) {
+          if (currRp.getNo() == re.getParentId()) {
+            currRp.setContents("(삭제 된 댓글입니다.)");
+            currRp.setRegisterDate("0");
+            boardService.updateReply(currRp);
+            break;
+          } // if(대댓글 유무 비교)
+        } // for(댓글 + 대댓글 불러오기); 대댓글 유무 비교를 위함
+      } // if(댓글인지 대댓글인지 비교)
+      if (currRp.getRegisterDate() == "0") {
+        // (수정한 댓글일 경우 delete 안 하게끔 넘기기)
+      } else if (boardService.deleteReply(no) == 0) {
+        // 대댓글이 없는 댓글이거나 대댓글일 경우 넘어옴
         throw new RuntimeException("해당 번호의 댓글이 없습니다.");
+      } else {
+        // 대댓글이 없는 댓글이거나 대댓글일 경우 넘어옴2
+        for (BoardReply re : brs) {
+          if (parentNo == re.getParentId())
+            // 다른 대댓글이 있을 경우 rereCount 하나씩 증가 (= 같은 parent id를 쓰는 대댓글의 개수)
+            rereCount++;
+        }
+        if (rereCount == 1
+            && boardService.getReply(parentNo).getRegisterDate().contains("0000-00-00")) {
+          // 대댓글이 1이고, register date가 0일때 부모 댓글이 삭제
+          boardService.deleteReply(parentNo);
+        }
+      }
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");

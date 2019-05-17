@@ -1,41 +1,46 @@
-var tbody = $('tbody');
-var addBtn = $('#add-btn');
-var templateSrc = $('#tr-template').html();
-var trGenerator = Handlebars.compile(templateSrc);
+var tbody = $('tbody'),
+    addBtn = $('#fboard-add-btn'),
+    templateSrc = $('#tr-template').html(),
+    trGenerator = Handlebars.compile(templateSrc);
 
-var count=180;
-var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+$(document).ready(function(){
 
-
-function loadList(pn) {
-
-  $.getJSON('../../app/json/fboard/list', 
-      function(obj) {
-    tbody.html(''); 
+  $.get('/bitcamp-team-project/app/json/fboard/list', function(obj){
     $(trGenerator(obj)).appendTo(tbody);
-
     $(document.body).trigger('loaded-list');
+  }) //get
 
-  }); 
-}
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj) {
+    $(document.body).trigger({
+      type: 'loaded-user',
+      userType: obj.user.type,
+      status: obj.status
+    }); // trigger
+  }) // get
+}) // ready
 
-$(document.body).bind('loaded-list', () => {
-  var alist = $('.bit-view-link').click((e) => {
+
+
+$(document.body).bind('loaded-user', function(obj){
+  if (obj.status != 'success'){
+    addBtn.hide();
+  } 
+  addBtn.click(function() {
+    location.href='add.html';
+  }) // click
+}) // bind
+
+$(document.body).bind('loaded-list', function(obj){
+  $('.fboard-detail').click(function(e) {
     e.preventDefault();
     location.href = 'view.html?no=' + $(e.target).attr('data-no');
-  });
-});
-
-$.getJSON('../../app/json/auth/user', function(data) {
-  if (data.status == "fail") {
-    addBtn.hide();
-  }
-});
+  }) // click
+  
+}) // bind
 
 addBtn.click(() => {
   location.href = 'view.html';
 });
 
-loadList(1);
 
 

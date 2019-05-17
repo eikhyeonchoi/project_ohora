@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
+import bitcamp.team.domain.FboardComment;
 import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
 
@@ -86,4 +87,42 @@ public class FboardController {
 
     return content;
   }
+
+  @GetMapping("commentList")
+  public Object commentList(int no) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    List<FboardComment> boards = boardService.commentList(no);
+    content.put("list", boards);
+
+    return content;
+  }
+
+  @PostMapping("addComment")
+  public Object addComment(FboardComment comment) {
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      
+      if(comment.getContents() == "") 
+        throw new Exception("내용입력을 하지않았습니다");
+      
+      if (boardService.addComment(comment) == 0) 
+        throw new Exception("저장 실패");
+      else 
+        content.put("status", "success");
+      
+    } catch(Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+
+
+
+
+
+
+
 }

@@ -98,7 +98,7 @@ $(document.body).bind('loaded-search-list', ()=> {
 
 function afterLoadedClickEvent(){
   $('.product-a-class').click((e) => {
-    location.href= 'view.html?no=' + $(e.target).attr('data-no');
+    location.href= 'view.html?no=' + $(e.target).attr('data-no') +'&name=' + $(e.target).attr('data-name');
   })
 }
 

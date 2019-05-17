@@ -15,7 +15,7 @@
   <div class="container">
     <h1>자유게시판 리스트</h1>
     <p>
-      <button id="add-btn" type="button" class="btn btn-success btn-sm">새 글</button>
+      <button id="fboard-add-btn" type="button" class="btn btn-success btn-sm">새 글</button>
     </p>
     <div class="bit-list">
       <table class="table table-hover">
@@ -36,7 +36,7 @@
   {{#each list}}
     <tr>
       <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+      <td scope='row'><a class='bit-view-link fboard-detail' href='#' data-no='{{no}}'>{{title}}</a></td>
       <td scope='row'>{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
       <td scope='row'>{{viewCount}}</td>

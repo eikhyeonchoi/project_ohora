@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.FboardDao;
 import bitcamp.team.domain.Fboard;
+import bitcamp.team.domain.FboardComment;
 import bitcamp.team.service.FboardService;
 
 @Service
@@ -47,5 +48,15 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public int size() {
     return boardDao.countAll();
+  }
+
+  @Override
+  public List<FboardComment> commentList(int no) {
+    return boardDao.findCommentAll(no);
+  }
+
+  @Override
+  public int addComment(FboardComment fboardComment) {
+    return boardDao.insertComment(fboardComment);
   }
 }
