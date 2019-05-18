@@ -1,6 +1,9 @@
 package bitcamp.team.service.Impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.FboardDao;
 import bitcamp.team.domain.Fboard;
@@ -51,8 +54,23 @@ public class FboardServiceImpl implements FboardService {
   }
 
   @Override
-  public List<FboardComment> commentList(int no) {
-    return boardDao.findCommentAll(no);
+  public HashMap<String, Object> commentList(int no) {
+    ArrayList<FboardComment> requestList = (ArrayList<FboardComment>) boardDao.findCommentAll(no);
+    ArrayList<FboardComment> parentComment = new ArrayList<FboardComment>();
+    ArrayList<FboardComment> childComment = new ArrayList<FboardComment>();
+    HashMap<String, Object> content = new HashMap<String, Object>();
+    
+    for (FboardComment comment : requestList) {
+      if(comment.getParentId() == 0) {
+        parentComment.add(comment);
+      } else {
+        childComment.add(comment);
+      }
+    }
+    content.put("list",parentComment);
+    content.put("clist",childComment);
+    
+    return content;
   }
 
   @Override
@@ -63,5 +81,10 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public int deleteComment(int no) {
     return boardDao.deleteComment(no);
+  }
+
+  @Override
+  public int updateComment(HashMap<String, Object> param) {
+    return boardDao.updateComment(param);
   }
 }

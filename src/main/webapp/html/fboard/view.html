@@ -54,10 +54,10 @@
       </div>
     </form>
     <hr>
-
+    
+    
     <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
     <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-
     <label for='basic-url'>총댓글</label>
     <div id='fboard-comment-add-form' class='input-group'> 
       <textarea id='comment-contents' class='form-control col-sm-10' rows='2' placeholder='댓글을 입력하세요'></textarea>
@@ -87,11 +87,29 @@
         <a href='#' class='comment-delete-btn' data-no='{{no}}'>삭제</a>
       </div>
       <br>  
+      <div class='comment-child'></div>
     {{/each}}
     </div>
   </script>
 
-  <script id="reply-template" type="text/x-handlebars-template">
+  <script id="reply-list" type="text/x-handlebars-template">
+    <div id='fboard-reply-list-form col-sm-12'>
+      {{#each replyList}}
+        <div class='reply-user-inform'>
+          <label for='basic-url' class='reply-user-nickname'>{{member.nickName}}</label>
+          <label for='basic-url' class='reply-created-date'>{{createdDate}}</label>
+        </div>
+        <div class='reply-form input-group'>
+          <div class='input-group-prepend'>
+            <span class='input-group-text'>RE</span>
+          </div>
+          <p style='display: none' data-reply-member-no='{{memberNo}}' class='p-reply-member-no'></p>
+          <input type='text' class='form-control col-sm-8 reply-contents' placeholder='답글입력' value='{{contents}}'>
+          <a href='#' class='comment-update-btn' data-reply-no='{{no}}'>수정</a>
+          <a href='#' class='comment-delete-btn' data-reply-no='{{no}}'>삭제</a>
+        </div>
+      {{/each}}
+    </div>
   </script>
 
 
@@ -99,6 +117,7 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>
   <script src="view.js"></script>
 </body>

@@ -90,12 +90,7 @@ public class FboardController {
 
   @GetMapping("commentList")
   public Object commentList(int no) throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-
-    List<FboardComment> boards = boardService.commentList(no);
-    content.put("list", boards);
-
-    return content;
+    return boardService.commentList(no);
   }
 
   @PostMapping("addComment")
@@ -106,9 +101,10 @@ public class FboardController {
       
       if (boardService.addComment(comment) == 0) 
         throw new Exception("저장 실패");
-      else 
+      else {
         content.put("status", "success");
-      
+        content.put("fboardNo", comment.getNo());
+      }
     } catch(Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -132,7 +128,26 @@ public class FboardController {
     return content;
   }
 
+  @PostMapping("updateComment")
+  public Object updateComment(int no, String contents, String updateDate) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("no",no);
+    paramMap.put("contents",contents);
+    paramMap.put("updateDate",updateDate);
+    
+    try {
+      if (boardService.updateComment(paramMap) == 0) 
+        throw new Exception("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
 
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
 
 
 
