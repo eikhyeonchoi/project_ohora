@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.QuestionDao">
+
+  <resultMap type="question" id="questionMap">
+    <id column="q_no" property="no" />
+    <result column="qtype_no" property="questionNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="status" property="status" />
+  </resultMap>
+
+  <resultMap type="question" id="questionTypeMap">
+    <id column="q_no" property="no" />
+    <result column="qtype_no" property="questionNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="status" property="status" />
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="email" property="email" />
+      <result column="n_name" property="nickName" />
+    </association>
+    <association property="questionType" javaType="questionType">
+      <id column="qtype_no" property="no" />
+      <result column="conts" property="name" />
+    </association>
+  </resultMap>
+
+  <select id="findAll" resultMap="questionTypeMap">
+    select
+    q.titl,
+    q.cdt,
+    q.status,
+    m.n_name,
+    t.conts
+  from
+    question q
+  left outer join
+    member m
+  on q.member_no = m.member_no
+  left outer join
+    question_type = t
+  on q.qtype_no = t.qtype_no
+    order by
+    q_no desc
+  </select>
+
+</mapper>
+
+

@@ -29,6 +29,7 @@ var nNameOverlap = false;
 var type;
 var ranNoCk = false;
 var who;
+var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
 $(document).ready(function() {
   who = window.localStorage.getItem('who')
@@ -43,6 +44,7 @@ $(document).ready(function() {
 })
 
 email.change(function() {
+  clearInterval(tid);
   ranNoCk = false;
   $("#email-btn").show();
   emailCheck()
@@ -89,7 +91,7 @@ function emailCheck() {
   if (email.val() == ""){
     ep.html("email을 입력해 주세요.");
     emailCk = false;
-  } else if (!email.val().match('@')) {
+  } else if (!email.val().match(regExp)) {
     ep.html("email 형식으로 입력해 주세요.");
     emailCk = false;
   } else {

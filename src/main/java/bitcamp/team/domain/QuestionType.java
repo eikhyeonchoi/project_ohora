@@ -1,9 +1,8 @@
 package bitcamp.team.domain;
-
-// faq 카테고리다 헷갈리지말자.
-// faq 카테고리다 헷갈리지말자.
-// faq 카테고리다 헷갈리지말자.
-public class QuestionCategory {
+// 1:1문의 카테고리다 헷갈리지말자
+// 1:1문의 카테고리다 헷갈리지말자
+// 1:1문의 카테고리다 헷갈리지말자
+public class QuestionType {
   
   private int no;
   private String name;
@@ -19,6 +18,11 @@ public class QuestionCategory {
   }
   public void setName(String name) {
     this.name = name;
+  }
+  
+  @Override
+  public String toString() {
+    return "QuestionType [no=" + no + ", name=" + name + "]";
   }
   
 }
