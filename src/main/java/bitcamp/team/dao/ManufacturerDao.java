@@ -5,6 +5,7 @@ import bitcamp.team.domain.Manufacturer;
 
 public interface ManufacturerDao {
   int insert(Manufacturer member);
+  int insertCompany(Manufacturer member);
   List<Manufacturer> findAll();
   List<Manufacturer> findAllUseProductAdd();
   List<Manufacturer> findByKeyword(String keyword);

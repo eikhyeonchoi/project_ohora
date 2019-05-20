@@ -159,6 +159,21 @@
       fb_cmt_no=#{no}
   </update>
   
+  <select id="findReply" resultMap="fboardCommentMap" parameterType="map">
+    select
+      fc.fb_cmt_no,
+      fc.member_no,
+      fc.conts,
+      fc.parent_id,
+      fc.cdt,
+      m.n_name
+    from
+      fboard_cmt fc
+      join member m on m.member_no=fc.member_no
+    where
+      fc.fb_no=#{fboardNo} and fc.parent_id=#{parentNo}
+  </select>
+  
 </mapper>
 
 

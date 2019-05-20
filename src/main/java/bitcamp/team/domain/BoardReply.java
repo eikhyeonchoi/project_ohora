@@ -6,14 +6,23 @@ public class BoardReply {
   private int parentId;
   private int memberId;
   private int depth;
+  private String memberName;
   private String contents;
   private String registerDate;
 
   @Override
   public String toString() {
     return "BoardReply [no=" + no + ", boardId=" + boardId + ", parentId=" + parentId
-        + ", memberId=" + memberId + ", depth=" + depth + ", contents=" + contents
-        + ", registerDate=" + registerDate + "]";
+        + ", memberId=" + memberId + ", depth=" + depth + ", memberName=" + memberName
+        + ", contents=" + contents + ", registerDate=" + registerDate + "]";
+  }
+
+  public String getMemberName() {
+    return memberName;
+  }
+
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
   }
 
   public int getMemberId() {

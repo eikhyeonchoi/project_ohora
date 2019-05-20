@@ -14,8 +14,6 @@ replySrc = $('#reply-list').html(),
 commentListGenerator = Handlebars.compile(commentListSrc),
 replyGenerator = Handlebars.compile(replySrc);
 
-var clist;
-
 var userNo = 0,
 userNickName = '';
 
@@ -31,7 +29,7 @@ $(document).ready(function() {
       type: 'loaded-detail',
       mNo: obj.memberNo
     }) // trigger
-  }); //get
+  }); // get
 }); // ready
 
 
@@ -41,43 +39,42 @@ $(document.body).bind('loaded-detail', function(data){
 
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
     console.log(obj);
-    window.clist = obj.clist;
-    
-    $(commentListGenerator(obj)).appendTo($('.comment-child'));
-    
-    /*
-    var reList = [];
     for(var pEl of obj.list){
+      var con = String(pEl.contents);
+      if(con.includes('삭제')) {
+        $(pEl).attr('deletedComment', true);
+      }
       for (var cEl of obj.clist){
         if(pEl.no == cEl.parentId){
-          reList.push({
-            no: cEl.no,
-            memberNo: cEl.memberNo,
-            contents: cEl.contents,
-            createdDate: cEl.createdDate,
-            member: {
-              nickName: cEl.member.nickName
-            }
-          });
+          $(pEl).attr('hasChild', true);
+          break;
         } // if
       } // for
     } // for
     
-    var re = {
-        replyList: reList
-    };
-    
-    console.log()
-    */
+    $(commentListGenerator(obj)).appendTo($('.comment-child'));
+
+    $('.find-reply-a').one('click', function(e) {
+      e.preventDefault();
+      $.get('/bitcamp-team-project/app/json/fboard/findReply?fboardNo='
+          + boardNo + '&parentNo=' + $(e.target).attr('data-commtnet-no'), function(replyObj) {
+            console.log(replyObj);
+            $(replyGenerator(replyObj)).appendTo($(e.target).next())
+            $(document.body).trigger({
+              type: 'loaded-comment-list'
+            });
+          }) // get
+          $(e.target).hide();
+    }); // click
+
 
     $(document.body).trigger({
       type: 'loaded-comment-list'
     });
-    
+
     $(document.body).trigger({
       type: 'activated-comment-update-delete-btn'
-    })
-    
+    });
   }); // get
 
 
@@ -111,9 +108,41 @@ $(document.body).bind('loaded-detail', function(data){
 
 
 $(document.body).bind('loaded-comment-list', function() {
-
   authViewBtn();
+
+  $('.reply-add-btn').one('click', function(e){
+    e.preventDefault();
+    replyFormGenerator(e);
+  }); // click
   
+  $('.reply-update-btn').one('click', function(e) {
+    e.preventDefault();
+    console.log($(e.target).attr('data-reply-no'));
+    $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
+      no: $(e.target).attr('data-reply-no'),
+      contents: $(e.target).prev().val(),
+      updateDate: getCurrentTime()
+    }, function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('변경 실패 입니다.\n' +  obj.message);
+      }
+    }, "json")
+  })
+  
+  $('.reply-delete-btn').one('click', function(e) {
+    e.preventDefault();
+    console.log($(e.target).attr('data-reply-no'));
+    $.getJSON('../../app/json/fboard/deleteComment?no=' + $(e.target).attr('data-reply-no'), function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('삭제 실패 입니다.\n' +  obj.message);
+      }
+    }) // get
+  })
+
   $('#comment-add-btn').click(function() {
     ajaxAddComment();
   })
@@ -133,7 +162,7 @@ function callUserInform(data){
       $('#fboard-comment-add-form').remove();
       $('.reply-add-btn').remove();
     }
-    
+
     userNickName = obj.user.nickName;
     userNo = obj.user.no;
     if(obj.user.no != data.mNo){
@@ -148,10 +177,25 @@ function callUserInform(data){
 
 function authViewBtn(){
   $('.p-member-no').each(function(index, item) {
+    if(window.userNo == 0){
+      $(item).next().next().hide();
+      $(item).next().next().next().hide();
+      $(item).next().next().next().next().hide();
+      $(item).next().prop('disabled',true);
+      
+    }
     if ($(item).attr('data-member-no') != window.userNo) {
       $(item).next().next().next().hide();
       $(item).next().next().next().next().hide();
       $(item).next().prop('disabled',true);
+    }
+  })
+
+  $('.p-reply-member-no').each(function(index, item) {
+    if ($(item).attr('data-reply-member-no') != window.userNo || window.userNo == 0) {
+      $(item).next().prop('disabled',true);
+      $(item).next().next().hide();
+      $(item) .next().next().next().hide();
     }
   })
 } // authViewBtn
@@ -161,13 +205,33 @@ function ajaxDeleteComment(){
   $('.comment-delete-btn').click(function(e) {
     e.preventDefault();
     var commentNo = 0;
-    
     if(window.newCommentNo == undefined) {
       commentNo = $(e.target).attr('data-no');
     } else {
       commentNo = window.newCommentNo;
     }
     
+    if($(e.target).closest('div').next().is('a')){
+      
+      $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
+        no: commentNo,
+        contents: '삭제된 댓글입니다.',
+        updateDate: getCurrentTime()
+      }, function(obj) {
+        if (obj.status == 'success') {
+          swal('삭제완료', getCurrentTime(), "success");
+        } else {
+          alert('변경 실패 입니다.\n' +  obj.message);
+        }
+      }, "json");
+      
+      $(e.target).prev().prev().prev().text('삭제된 댓글입니다.').prop('disabled', true);
+      $(e.target).prev().prev().remove();
+      $(e.target).prev().remove();
+      $(e.target).remove();
+      return;
+    }
+
     $.getJSON('../../app/json/fboard/deleteComment?no=' + commentNo, function(obj) {
       if (obj.status == 'success') {
         return;
@@ -175,12 +239,12 @@ function ajaxDeleteComment(){
         alert('삭제 실패 입니다.\n' +  obj.message);
       }
     }) // get
-    
+
     $(e.target).closest('div').prev().remove();
     $(e.target).closest('div').next().remove();
     $(e.target).closest('div').remove();
   }) // click
-  
+
 } // deleteBtnActivate
 
 
@@ -189,12 +253,13 @@ function ajaxUpdateComment(){
     e.preventDefault();
     var commentNo = 0;
     $(e.target).closest('div').prev().children().eq(1).text(getCurrentTime());
-    
+
     if(window.newCommentNo == undefined) {
       commentNo = $(e.target).attr('data-no');
     } else {
       commentNo = window.newCommentNo;
     }
+    
     $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
       no: commentNo,
       contents: $(e.target).prev().prev().val(),
@@ -211,8 +276,6 @@ function ajaxUpdateComment(){
 
 
 function ajaxAddComment(){
-  console.log('ajaxAddComment');
-
   window.count = 0;
   if (count == 0) {
     count++;
@@ -245,7 +308,7 @@ function ajaxAddComment(){
       return;
     }
 
-    $('.fboard-comment-list-form').append(userClone).append(commentClone).append('<br>');
+    $('.fboard-comment-list-form').append(userClone).append(cocmmentClone).append('<br>');
     requestAddComment();
     $('#comment-contents').val('');
   }
@@ -253,6 +316,7 @@ function ajaxAddComment(){
   $(document.body).trigger({
     type: 'activated-comment-update-delete-btn'
   });
+  
 } // ajaxAddComment
 
 
@@ -274,10 +338,65 @@ function requestAddComment(){
 } // requestAddComment
 
 
-////////////////////////////////////////////////////////// reply
-////////////////////////////////////////////////////////// reply
+// ////////////////////////////////////////////////////////reply
+// ////////////////////////////////////////////////////////reply
+// ////////////////////////////////////////////////////////reply
+
+function replyFormGenerator(e) {
+  var replyObj = {
+      replyList: [
+        {
+          no: $(e.target).attr('data-no'),
+          createdDate: getCurrentTime(),
+          memberNo: userNo,
+          contents: '',
+          member: {
+            nickName: userNickName
+          }
+        }
+        ]
+  };
+  
+  if($(e.target).closest('div').next().is('a')){
+    $(replyGenerator(replyObj)).appendTo($(e.target).closest('div').next().next());
+    $(e.target).closest('div').next().next().children().children().eq(1).children().eq(4).remove();
+    $(e.target).closest('div').next().next().children().children().eq(1).children().eq(3).remove();
+    $(e.target).closest('div').next().next().children().children().eq(1).children().eq(2)
+                .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
+  } else {
+    $(replyGenerator(replyObj)).appendTo($(e.target).closest('div').next());
+    $(e.target).closest('div').next().children().children().eq(1).children().eq(4).remove();
+    $(e.target).closest('div').next().children().children().eq(1).children().eq(3).remove();
+    $(e.target).closest('div').next().children().children().eq(1).children().eq(2)
+                .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
+  }
+
+  $(document.body).trigger({
+    type: 'loaded-reply-form'
+  });
+}
 
 
+$(document.body).bind('loaded-reply-form', function(e) {
+  // 답글등록
+  $('.reply-register-btn').click(function(e) {
+    $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
+      memberNo: userNo,
+      fboardNo: boardNo,
+      contents: $(e.target).prev().val(),
+      depth: 1,
+      parentId: $(e.target).attr('data-no')
+    }, function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('등록 실패 입니다.\n' +  obj.message);
+      }
+    }, "json") // post
+  }); // click
+  
+  
+}) // loaded-reply-form bind
 
 
 function getQuerystring(key, default_){

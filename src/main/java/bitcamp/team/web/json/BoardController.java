@@ -2,6 +2,7 @@ package bitcamp.team.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Board;
 import bitcamp.team.domain.BoardReply;
 import bitcamp.team.service.BoardService;
+import bitcamp.team.service.MemberService;
 
 @RestController("json/BoardController")
 @RequestMapping("/json/board")
 public class BoardController {
 
   BoardService boardService;
+  @Autowired
+  MemberService memberService;
 
   public BoardController(BoardService boardService) {
     this.boardService = boardService;
@@ -89,6 +93,11 @@ public class BoardController {
   public Object add(BoardReply boardReply) {
     HashMap<String, Object> content = new HashMap<>();
     try {
+      System.out.println(boardReply);
+      String name = boardReply.getMemberName();
+      System.out.println(memberService.get(name));
+
+      boardReply.setMemberId(memberService.get(name));
       if (boardReply.getContents() == "")
         throw new Exception("내용을 입력하지 않았습니다");
 
@@ -122,6 +131,7 @@ public class BoardController {
           if (currRp.getNo() == re.getParentId()) {
             currRp.setContents("(삭제 된 댓글입니다.)");
             currRp.setRegisterDate("0");
+            currRp.setMemberName("");
             boardService.updateReply(currRp);
             break;
           } // if(대댓글 유무 비교)
@@ -135,14 +145,22 @@ public class BoardController {
       } else {
         // 대댓글이 없는 댓글이거나 대댓글일 경우 넘어옴2
         for (BoardReply re : brs) {
-          if (parentNo == re.getParentId())
+          if (parentNo == re.getParentId()) {
             // 다른 대댓글이 있을 경우 rereCount 하나씩 증가 (= 같은 parent id를 쓰는 대댓글의 개수)
             rereCount++;
-        }
-        if (rereCount == 1
-            && boardService.getReply(parentNo).getRegisterDate().contains("0000-00-00")) {
-          // 대댓글이 1이고, register date가 0일때 부모 댓글이 삭제
-          boardService.deleteReply(parentNo);
+            if (brs.size() == 0) {
+              break;
+            }
+          } // if()
+        } // for(한 게시판의 모든 댓글 검사)
+        if (parentNo != 0) {
+          // parent no가 0일 경우
+          // boardService.getReply(parentNo).getRegisterDate().contains("0000-00-00")를 실행할 수 없음.
+          if (rereCount == 1
+              && boardService.getReply(parentNo).getRegisterDate().contains("0000-00-00")) {
+            // 대댓글이 1이고, register date가 0일때 부모 댓글이 삭제
+            boardService.deleteReply(parentNo);
+          }
         }
       }
       content.put("status", "success");

@@ -91,19 +91,23 @@ function adrCheck() {
 };
 
 $('#add-btn').click(function() {
-  console.log("호출");
   if (nameCk == true &&
       hompCk == true && 
       regNoCk == true && 
       adrCk == true) {
-    $.post("../../app/json/manufacturer/addCompany", {
+    $.post("../../app/json/manufacturer/authCompany", {
       name: namee.val(),
       tel: tel2.val(),
       homePage: homePage.val(),
       registerNo: registerNo.val(),
       address: address,
-      
     }, function(data) {
+      if (data.status == 'success') {
+        alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
+        location.replace("../auth/login.html");
+      } else {
+        alert('등록 실패 입니다.\n' +  data.message);
+      }
 
     }, "json");
 

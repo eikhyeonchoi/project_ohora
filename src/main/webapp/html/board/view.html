@@ -49,6 +49,7 @@
    <table class="table table-hover" id='reply-table'>
     <thead>
      <tr>
+      <th scope="col">작성자</th>
       <th scope="col">댓글내용</th>
       <th scope="col">작성일</th>
      </tr>
@@ -71,12 +72,13 @@
 <script id='tr-template' type='text/x-handlebars-template'>
 {{#each replylist}}
 <tr class='rere-tr'>
+  <td id='rere-mem-{{no}}' class='rere-mem' data-memberId='{{memberId}}'>{{memberName}}</td>
   <td class='rere-td' data-contents='{{contents}}'>{{contents}}</td>
   <td class='rere-rd'>{{registerDate}}</td>
   <td>
     <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-add-btn' data-depth='{{depth}}'>답글</button>
-    <button id='rere-delete-btn-{{no}}' value='{{registerDate}}' data-no='{{no}}' type='button' class='btn btn-primary test-delete-btn'>삭제</button>
     <button id='rere-update-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-update-btn'>수정</button>
+    <button id='rere-delete-btn-{{no}}' value='{{registerDate}}' data-no='{{no}}' type='button' class='btn btn-primary test-delete-btn'>삭제</button>
   </td>
 </tr>
 {{/each}}

@@ -2,7 +2,6 @@ package bitcamp.team.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
 
@@ -19,4 +18,6 @@ public interface FboardService {
   int addComment(FboardComment fboardComment);
   int deleteComment(int no);
   int updateComment(HashMap<String, Object> param);
+  List<FboardComment> findReply(HashMap<String, Object> param);
+  
 }

@@ -3,7 +3,6 @@ package bitcamp.team.service.Impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.FboardDao;
 import bitcamp.team.domain.Fboard;
@@ -86,5 +85,10 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public int updateComment(HashMap<String, Object> param) {
     return boardDao.updateComment(param);
+  }
+
+  @Override
+  public List<FboardComment> findReply(HashMap<String, Object> param) {
+    return boardDao.findReply(param);
   }
 }

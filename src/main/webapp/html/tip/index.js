@@ -1,9 +1,9 @@
 var tbody = $('tbody');
-var templateSrc = $('#tr-template').html();
+var template = $('#tr-template');
+var templateSrc = template.html();
 var trGenerator = Handlebars.compile(templateSrc);
 
 function loadList(pn) {
-
   $.getJSON('../../app/json/tip/list', 
       function(obj) {
     tbody.html(''); 
@@ -11,7 +11,7 @@ function loadList(pn) {
 
     $(document.body).trigger('loaded-list');
 
-  }); 
+  });
 }
 
 $(document.body).bind('loaded-list', () => {
@@ -21,6 +21,29 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
+$('#search-btn').click((e) => {
+  e.preventDefault();
+  search($('select#searchTag').val(), $('#search').val());
+});
+
+function search(cond, val) {
+  console.log(cond);
+  console.log(val);
+  $.getJSON('/bitcamp-team-project/app/json/tip/search?searchType=' 
+      + cond + '&keyword=' + val
+      , function(data) {
+        if (data.status == 'success') {
+          alert('찾았습니다!');
+          console.log(data.searchList);
+          tbody.html('');
+          $(trGenerator(data)).appendTo(tbody);
+
+          $(document.body).trigger('loaded-list');
+        } else {
+          alert('오류입니다!\n' + data.error);
+        }
+      });
+}
 loadList(1);
 
 

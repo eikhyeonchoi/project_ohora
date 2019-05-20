@@ -183,15 +183,12 @@ $('#add-btn').click(function() {
     }, function(data) {
       if (data.status == 'success') {
         if (who == "company") {
-          console.log("기업회원호출");
-          console.log(data.member);
           window.localStorage.tel = tel;
-          window.localStorage.member = data.member;
           location.href = 'form2.html'; 
         } else {
           alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
-        location.replace("../auth/login.html");
-      }
+          location.replace("../auth/login.html");
+        }
       } else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
@@ -207,8 +204,9 @@ function msg_time() { // 카운트 다운 함수.
   m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; // 남은 시간 계산
   msg = "현재 남은 시간은 " + m + " 입니다.";
 
-  if (SetTime < 0) {      // 시간이 종료 되었으면..
-    msg = "시간이 만료되었 습니다 인증번호를 다시 요청해 주세요.";
+  if (SetTime < 0) {      // 시간이 종료 되었으면..\
+    alert('시간이 만료되었습니다.');
+    location.href = '/bitcamp-team-project/html/index.html'; 
     clearInterval(tid);   // 타이머 해제
   }
   ep.html(msg);
@@ -224,17 +222,19 @@ $("#email-btn").click(function() {
         function(data) {
       if (data.nop != 0) {
         if (data.status == 'success') {
+          clearInterval(tid);
           randomNo = data.ranNo;
           alert("이메일을 확인해 주세요.\n 제한시간은 3분입니다.");
           ranNo.show();
           $("#ranNo-btn").show();
           $("#email-btn").html("인증번호 다시 받기");
-          tid = setInterval('msg_time()',1000);
-          $("#ranNo-btn").click(function() {
+          tid = setInterval('msg_time()', 1000);
+          $("#ranNo-btn").off("click").on("click", function(e) {
             if (randomNo == ranNo.val()) {
-              alert("인증성공!")
+              alert("인증성공!");
               clearInterval(tid);
               ep.html("");
+              console.log("호출")
               ranNo.hide();
               $("#email-btn").hide();
               $("#ranNo-btn").hide();
