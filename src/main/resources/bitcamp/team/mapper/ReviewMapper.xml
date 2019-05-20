@@ -63,6 +63,14 @@
       rv_no = #{value};
   </select>
   
+  <update id="increaseCount" parameterType="int">
+    update review
+    set
+    cnt = cnt + 1
+    where rv_no =
+    #{value}
+  </update>
+  
   
   <delete id="delete" parameterType="int">
     delete 

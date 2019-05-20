@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
   public Review get2(int no) {
     Review review = reviewDao.findByNo2(no);
     if (review != null) {
-      reviewDao.findByNo2(no);
+      reviewDao.increaseCount(no);
     }
     return review;
   }
