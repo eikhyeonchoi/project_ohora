@@ -19,6 +19,7 @@
     <result column="parent_id"        property="parentId"/>
     <result column="member_id"        property="memberId"/>
     <result column="depth"            property="depth"/>
+    <result column="member_name"        property="memberName"/>
     <result column="reply_content"    property="contents"/>
     <result column="register_date"    property="registerDate"/>
   </resultMap>
@@ -81,6 +82,7 @@
       parent_id,
       member_id,
       depth,
+      member_name,
       reply_content,
       register_date
     from
@@ -103,6 +105,7 @@
       member_id,
       board_id,
       depth,
+      member_name,
       reply_content,
       register_date
     from
@@ -113,8 +116,8 @@
   
   <insert id="insertReply" parameterType="boardReply">
     insert into
-      board_reply(board_id, parent_id, member_id, depth, reply_content)
-    values(#{boardId}, #{memberId}, #{parentId}, #{depth}, #{contents})
+      board_reply(board_id, parent_id, member_id, depth, member_name, reply_content)
+    values(#{boardId}, #{parentId}, #{memberId}, #{depth}, #{memberName}, #{contents})
   </insert>
   
   <delete id="deleteReply" parameterType="int">

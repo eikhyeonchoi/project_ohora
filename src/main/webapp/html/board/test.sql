@@ -16,3 +16,4 @@ CREATE TABLE board_reply (
  
  alter table board_reply add foreign key(board_id) references board(id);
  alter table board_reply add member_id int;
+ alter table board_reply add member_name varchar(50);
