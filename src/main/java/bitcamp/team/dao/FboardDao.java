@@ -22,4 +22,5 @@ public interface FboardDao {
    int insertComment(FboardComment fboardComment);
    int deleteComment(int no);
    int updateComment(HashMap<String, Object> param);
-}
+   List<FboardComment> findReply(HashMap<String, Object> paramMap);
+} 

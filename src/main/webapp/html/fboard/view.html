@@ -81,13 +81,20 @@
       </div>
       <div class='comment-form input-group'>
         <p style='display: none' data-member-no='{{memberNo}}' class='p-member-no'></p>
+      {{#if deletedComment}}
+        <input type="text" class="form-control col-sm-10 commen-list-contents" value='{{contents}}' readonly>
+      {{else}}
         <input type="text" class="form-control col-sm-10 commen-list-contents" value='{{contents}}'>
-        <a href='#' class='reply-add-btn'>답글</a>
+        <a href='#' class='reply-add-btn' data-no='{{no}}'>답글</a>
         <a href='#' class='comment-update-btn' data-no='{{no}}'>수정</a>
         <a href='#' class='comment-delete-btn' data-no='{{no}}'>삭제</a>
+      {{/if}}
       </div>
+      {{#if hasChild}}
+        <a href='#' class='find-reply-a col-sm-12' data-commtnet-no={{no}}>답글 보기</a>
+      {{/if}}
+      <div class='comment-child-reply-div col-sm-12'></div>
       <br>  
-      <div class='comment-child'></div>
     {{/each}}
     </div>
   </script>
@@ -105,13 +112,13 @@
           </div>
           <p style='display: none' data-reply-member-no='{{memberNo}}' class='p-reply-member-no'></p>
           <input type='text' class='form-control col-sm-8 reply-contents' placeholder='답글입력' value='{{contents}}'>
-          <a href='#' class='comment-update-btn' data-reply-no='{{no}}'>수정</a>
-          <a href='#' class='comment-delete-btn' data-reply-no='{{no}}'>삭제</a>
+          <a href='#' class='reply-update-btn' data-reply-no='{{no}}'>수정</a>
+          <a href='#' class='reply-delete-btn' data-reply-no='{{no}}'>삭제</a>
+          <br>
         </div>
       {{/each}}
     </div>
   </script>
-
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>

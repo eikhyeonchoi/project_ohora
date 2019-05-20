@@ -149,6 +149,17 @@ public class FboardController {
     return content;
   }
 
+  @GetMapping("findReply")
+  public Object findReply(int fboardNo, int parentNo) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> param = new HashMap<>();
+    
+    param.put("fboardNo", fboardNo);
+    param.put("parentNo", parentNo);
+    
+    content.put("replyList", boardService.findReply(param));
+    return content;
+  }
 
 
 
