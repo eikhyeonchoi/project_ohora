@@ -347,14 +347,6 @@ insert into question_category(name) values('질문 유형 3');
 insert into question_category(name) values('질문 유형 4');
 insert into question_category(name) values('질문 유형 5');
 
--- question_type 임시값 '고객문의유형' (고객문의)
-insert into question_type(conts) values('고객문의유형1번');
-insert into question_type(conts) values('고객문의유형2번');
-insert into question_type(conts) values('고객문의유형3번');
-insert into question_type(conts) values('고객문의유형4번');
-insert into question_type(conts) values('고객문의유형5번');
-
-
 --manufacturer 임시값 "제조사"
 insert into manufacturer(reg_no, name, tel, homepage) values('111-11-11111', '삼성전자','1234-1234', 'https://www.samsung.com/'); --1
 insert into manufacturer(reg_no, name, tel, homepage) values('222-22-22222', '애플','5467-1234', 'https://www.apple.com/'); -- 2
