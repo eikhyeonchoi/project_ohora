@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blueimp-file-upload": "^9.30.0",
     "bootstrap": "^4.3.1",
     "handlebars": "^4.1.2",
     "jquery": "^3.4.1",

@@ -119,6 +119,16 @@
       name = #{value}
   </select>
   
+  <select id="findNoByNameList" resultMap="productMap" parameterType="map">
+    <bind name="pattern1" value="'%' + _parameter + '%'"/>
+    select
+      product_no
+    from
+      product
+    where
+      name like #{pattern1}
+  </select>
+  
   <select id="findByNo" resultMap="productMap" parameterType="int">
     select
       name as productName

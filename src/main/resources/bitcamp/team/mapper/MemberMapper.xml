@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitcamp.team.dao.MemberDao">
+
   <resultMap type="member" id="memberMap">
     <id column="member_no" property="no" />
     <result column="email" property="email" />
@@ -40,7 +41,17 @@
     from
       member
     where
-      n_name = #{nickName}
+      n_name=#{value}
+  </select>
+  
+  <select id="findNoByNickNameList" resultMap="memberMap" parameterType="map">
+  <bind name="pattern1" value="'%' + _parameter + '%'"/>
+    select
+      member_no
+    from
+      member
+    where
+      n_name like #{pattern1}
   </select>
   
   <select id="findByNo" resultMap="memberMap" parameterType="int">
@@ -48,7 +59,7 @@
   <include refid="default-columns"/>
     from member
     where
-    member_no = #{value}
+    member_no=#{value}
   </select>
 
   <insert id="insert" parameterType="member">
@@ -59,7 +70,7 @@
 
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
     select
-  <include refid="default-columns" />
+  <include refid="default-columns"/>
     from
       member
     where

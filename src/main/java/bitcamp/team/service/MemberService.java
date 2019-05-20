@@ -10,7 +10,8 @@ public interface MemberService {
   Member get(String email, String password);
   int update(Member member);
   int delete(int no);
-  int get(String nickName);
+  int getNo(String nickName);
+  List<Member> getList(String nickName);
   int get2(String nickName);
   int size();
 }

@@ -33,14 +33,20 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int get(String nickName) {
+  public List<Member> getList(String nickName) {
+    List<Member> members = memberDao.findNoByNickNameList(nickName);
+    return members;
+  }
+  
+  @Override
+  public int getNo(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
     return member.getNo();
   }
 
   @Override
   public int get2(String nickName) {
-    Member member = memberDao.findNoByNickName(nickName);
+    Member member = memberDao.findNoByNickName2(nickName);
     if (member == null) {
       return 0;
     } else {

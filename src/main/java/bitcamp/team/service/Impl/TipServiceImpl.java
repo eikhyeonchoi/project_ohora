@@ -1,6 +1,7 @@
 package bitcamp.team.service.Impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.TipDao;
 import bitcamp.team.domain.Tip;
@@ -46,5 +47,10 @@ public class TipServiceImpl implements TipService{
   @Override
   public int getNo(int no) {
     return tipDao.findNoByProductNo(no);
+  }
+  
+  @Override
+  public List<Tip> search(Map<String,Object> map) {
+    return tipDao.search(map);
   }
 }
