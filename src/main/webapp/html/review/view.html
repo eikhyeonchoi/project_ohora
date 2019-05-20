@@ -27,11 +27,23 @@
     </thead>
     <tbody></tbody>
   </table>
-  
   </div>
 
-  <script id="select-template" type="text/x-handlebars-template">
+    <nav aria-label="목록 페이지 이동">
+   <ul class="pagination justify-content-center">
+    <li id="prevPage" class="page-item bt-prevPage"><a class="page-link"
+     href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="1stPage" class="page-item"><a class="page-link" href="#">1</a></li>
+    <li id="2ndPage" class="page-item"><a class="page-link" href="#">2</a></li>
+    <li id="3thPage" class="page-item"><a class="page-link" href="#">3</a></li>
+    <li id="4thPage" class="page-item"><a class="page-link" href="#">4</a></li>
+    <li id="5thPage" class="page-item"><a class="page-link" href="#">5</a></li>
+    <li id="nextPage" class="page-item bt-nextPage"><a class="page-link"
+     href="?pageNo=2&pageSize=3">다음</a></li>
+   </ul>
+  </nav>
 
+  <script id="select-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <td>{{member.name}}</a></td>

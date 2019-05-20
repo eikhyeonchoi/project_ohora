@@ -44,5 +44,10 @@ public class ReviewServiceImpl implements ReviewService {
     return reviewDao.update(review);
   }
   
+  @Override
+  public int size(int no) {
+      return reviewDao.countPage(no);
+  }
+  
   
 }

@@ -100,6 +100,21 @@
     where
       rv_no = #{no};
   </update>
+  
+  <select id="countAll" resultType="int" parameterType="map">
+    select count(*) from review
+    <where>
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        conts like #{pattern1}
+      </if>
+    </where>
+  </select>
+  
+  <select id="countPage" resultType="int" parameterType="int">
+    select count(*) from review
+    where product_no = #{value}
+  </select>
 
   
 

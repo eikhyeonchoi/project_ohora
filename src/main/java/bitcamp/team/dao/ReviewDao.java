@@ -1,6 +1,7 @@
 package bitcamp.team.dao;
 
 import java.util.List;
+import java.util.Map;
 import bitcamp.team.domain.Review;
 
 public interface ReviewDao {
@@ -11,4 +12,7 @@ public interface ReviewDao {
   int increaseCount(int no);
   int delete(int no);
   int update(Review review);
+  
+  int countAll(Map<String, Object> param);
+  int countPage(int no);
 }

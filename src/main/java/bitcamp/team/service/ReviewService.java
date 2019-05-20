@@ -9,4 +9,5 @@ public interface ReviewService {
   Review get2(int no);
   int delete(int no);
   int update(Review review);
+  int size(int no);
 }
