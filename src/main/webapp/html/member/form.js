@@ -228,7 +228,7 @@ $("#email-btn").click(function() {
           ranNo.show();
           $("#ranNo-btn").show();
           $("#email-btn").html("인증번호 다시 받기");
-          tid = setInterval(msg_time(), 1000);
+          tid = setInterval('msg_time()', 1000);
           $("#ranNo-btn").off("click").on("click", function(e) {
             if (randomNo == ranNo.val()) {
               alert("인증성공!");

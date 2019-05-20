@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int get2(String nickName) {
-    Member member = memberDao.findNoByNickName2(nickName);
+    Member member = memberDao.findNoByNickName(nickName);
     if (member == null) {
       return 0;
     } else {
