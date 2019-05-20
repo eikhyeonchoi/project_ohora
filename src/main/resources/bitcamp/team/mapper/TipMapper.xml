@@ -80,6 +80,16 @@
     insert into tip (product_no, member_no, conts)
     values (#{productNo}, #{memberNo}, #{contents})
   </insert>
+  
+  <select id="search" resultMap="tipMap" parameterType="map">
+    <include refid="join-select1"/>
+    <bind name="pattern1" value="'%' + keyword + '%'"/>
+    <where>
+      <if test="prodName != null">or p.name like #{pattern1}</if>
+      <if test="memName != null">or m.n_name like #{pattern1}</if>
+      <if test="cont != null">or conts like #{pattern1}</if>
+    </where>
+  </select>
 </mapper>
 
 

@@ -1,4 +1,5 @@
 package bitcamp.team.web.json;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,20 +47,20 @@ public class TipController {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
-      int prodNo = productService.get(product.getName());
+      int prodNo = productService.getNo(product.getName());
       String nickName = member.getNickName();
-      
-      tips.setMemberNo(memberService.get(nickName));
+
+      tips.setMemberNo(memberService.getNo(nickName));
       tips.setProductNo(prodNo);
       tipService.add(tips);
-      
+
       TipHistory his = new TipHistory();
       System.out.println("tip_no==>" + tipService.getNo(prodNo));
       his.setTipNo(tipService.getNo(prodNo));
       his.setContents(tips.getContents());
       his.setNickName(nickName);
       tipHistoryService.add(his);
-      
+
       contents.put("status", "success");
     } catch (Exception e) {
       contents.put("status", "fail");
@@ -67,14 +68,14 @@ public class TipController {
     }
     return contents;
   }
-  
+
   @PostMapping("update")
   public Object update(Tip tip, Member member,Product product) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
-      tips.setMemberNo(memberService.get(member.getNickName()));
-      tips.setProductNo(productService.get(product.getName()));
+      tips.setMemberNo(memberService.getNo(member.getNickName()));
+      tips.setProductNo(productService.getNo(product.getName()));
       if(tipService.update(tips) == 0)
         throw new RuntimeException("해당 번호의 팁이 존재하지 않습니다.");
 
@@ -95,8 +96,8 @@ public class TipController {
         if (his.getNo() == tipHistoryService.detail(hisNo).getNo()) {
           tips.setContents(his.getContents());
           tips.setCreatedDate(his.getUpdateDate());
-          tips.setMemberNo(memberService.get(his.getNickName()));
-          tips.setProductNo(productService.get(product.getName()));
+          tips.setMemberNo(memberService.getNo(his.getNickName()));
+          tips.setProductNo(productService.getNo(product.getName()));
           break;
         } else {
           tipHistoryService.delete(his.getNo());
@@ -112,12 +113,12 @@ public class TipController {
     }
     return contents;
   }
-  
+
   @GetMapping("confirm")
   public Object confirm(Product product) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
-      if (tipService.confirm(productService.get(product.getName())) == 1) {
+      if (tipService.confirm(productService.getNo(product.getName())) == 1) {
         contents.put("confirm", "exist");
       } else {
         contents.put("confirm", "empty");
@@ -129,7 +130,7 @@ public class TipController {
     }
     return contents;
   }
-  
+
   @GetMapping("productName")
   public Object get(int no) throws Exception {
     System.out.println(no);
@@ -143,7 +144,39 @@ public class TipController {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
     }
-    
+
+    return contents;
+  }
+
+  @GetMapping("search")
+  public Object search(String searchType, String keyword) throws Exception {
+    HashMap<String,Object> contents = new HashMap<>();
+    HashMap<String,Object> nums = new HashMap<>();
+    try {
+      List<Tip> searchList = new ArrayList<>();
+      switch (searchType) {
+        case "prodName":
+          nums.put("prodName", searchType);
+          break;
+        case "memName":
+          nums.put("memName", searchType);
+          break;
+        case "cont":
+          nums.put("cont", searchType);
+          break;
+        default:
+          nums.put("error", "empty");
+      }
+      nums.put("keyword", keyword);
+      searchList = tipService.search(nums);
+      contents.put("searchList", searchList);
+      contents.put("status", "success");
+
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+
     return contents;
   }
 }
