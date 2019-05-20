@@ -176,6 +176,7 @@ console.log('전역 memberId:' + memberNo);
     $(this).closest('tr').after(rereForm.show());
     var parentId = $(this).attr('data-no');
     $('#rere-add-btn').click(function(e){
+    	//if(rere-form 1번 이상일 때) {$.post 호출 X};
       $.get('../../app/json/auth/user', function(data) {
         $.post('/bitcamp-team-project/app/json/board/addReply', {
           boardId: param.split('=')[1],

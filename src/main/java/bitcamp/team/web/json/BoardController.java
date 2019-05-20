@@ -95,9 +95,8 @@ public class BoardController {
     try {
       System.out.println(boardReply);
       String name = boardReply.getMemberName();
-      System.out.println(memberService.get(name));
 
-      boardReply.setMemberId(memberService.get(name));
+      boardReply.setMemberId(memberService.getNo(name));
       if (boardReply.getContents() == "")
         throw new Exception("내용을 입력하지 않았습니다");
 
