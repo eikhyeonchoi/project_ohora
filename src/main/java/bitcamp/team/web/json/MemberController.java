@@ -2,6 +2,7 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,21 +20,21 @@ public class MemberController {
   @Autowired MemberService memberService;
 
   @PostMapping("add")
-  public Object add(Member member) throws Exception {
+  public Object add(Member member, HttpSession session) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-      try {
-        System.out.println("호출1");
+    try {
+      if (member.getType().equals("기업 회원")) {
+        session.setAttribute("companyMember", member);
+      } else {
         memberService.add(member);
-        System.out.println("호출2");
-        content.put("status", "success");
-      } catch (Exception e) {
-        content.put("status", "fail");
-        content.put("message", e.getMessage());
-
       }
-      System.out.println(content.get("status"));
-      return content;
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
     }
+    return content;
+  }
 
   //  @GetMapping("delete")
   //  public Object delete(int no) throws Exception {
@@ -55,10 +56,10 @@ public class MemberController {
     Member member = memberService.get(no);
     return member;
   }
-  
+
   @GetMapping("nickName")
   public Object detail(String nickName) throws Exception {
-    int abcd = memberService.get2(nickName);
+    int abcd = memberService.authEmail(nickName);
     return abcd;
   }
 
@@ -66,7 +67,6 @@ public class MemberController {
   public Object list() throws Exception {
     HashMap<String,Object> map = new HashMap<>();
     List<Member> members = memberService.list();
-    System.out.println(members);
     map.put("list", members);
 
     return map;
@@ -88,21 +88,28 @@ public class MemberController {
     }
     return content;
   }
-  
+
   @GetMapping("email")
   public Object Authentication (String email) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    Gmail gmail = new Gmail();
-    int ranNo = RandomNo.randomNo();
 
-    String emailStatus = gmail.gmailSend(email, ranNo);
-    if (emailStatus.equals("success")) {
-      content.put("status", "success");
-      content.put("ranNo", ranNo);
+    int emailNo = memberService.getEmail(email);
+    if (emailNo == 0) {
+      Gmail gmail = new Gmail();
+      int ranNo = RandomNo.randomNo();
+
+      String emailStatus = gmail.gmailSend(email, ranNo);
+      if (emailStatus.equals("success")) {
+        content.put("status", "success");
+        content.put("ranNo", ranNo);
+      } else {
+        content.put("status", "fail");
+      }
+      return content;
     } else {
-      content.put("status", "fail");
+      content.put("nop", 0);
+      return content;
     }
-    return content;
   }
 }
 

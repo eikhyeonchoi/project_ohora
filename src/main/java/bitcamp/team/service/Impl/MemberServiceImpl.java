@@ -33,14 +33,24 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int get(String nickName) {
+  public int getNo(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
     return member.getNo();
   }
 
   @Override
-  public int get2(String nickName) {
+  public int authEmail(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
+    if (member == null) {
+      return 0;
+    } else {
+      return member.getNo();
+    }
+  }
+
+  @Override
+  public int getEmail(String email) {
+    Member member = memberDao.findByEmail(email);
     if (member == null) {
       return 0;
     } else {
@@ -59,6 +69,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
+  public int delete(String email) {
+    return memberDao.deleteCompany(email);
+  }
+
+  @Override
   public Member get(String email, String password) {
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("email", email);
@@ -71,4 +86,5 @@ public class MemberServiceImpl implements MemberService {
   public int size() {
     return memberDao.countAll();
   }
+
 }

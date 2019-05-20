@@ -10,6 +10,7 @@ public interface ProductService {
   List<Manufacturer> listManufacturer();
   Map<String, Object> findCategory();
   int add(Product product);
-  int get(String name);
+  List<Product> getList(String name);
+  int getNo(String name);
   String get(int no);
 }

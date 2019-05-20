@@ -22,7 +22,6 @@ $.getJSON('../../app/json/auth/user', function(data) {
   $('.history-list').hide();
   $('#rollback-btn').hide();
   if (data.status == "fail") {
-    $('#update-btn').hide();
     $('#add-btn').hide();
   } 
   if (data.user.type == "3") {
@@ -31,6 +30,11 @@ $.getJSON('../../app/json/auth/user', function(data) {
   }
   $(document).ready(function() {
     $('#updateUser').attr('placeholder', data.user.nickName);
+    if (data.user.type == null) {
+      $('#update-btn').hide();
+    } else {
+      $('#update-btn').show();
+    }
   });
 })
 

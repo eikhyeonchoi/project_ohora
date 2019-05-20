@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>티키위키</title>
 <link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
+>
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -27,18 +28,39 @@
         <tbody></tbody>
       </table>
     </div>
+    <div class="form-group row">
+      <select id="searchTag" name="searchTag">
+        <option value="">검색조건</option>
+        <option id="prodName" value="prodName">제품명</option>
+        <option id="memName" value="memName">작성자</option>
+        <option id="conts" value="cont">내용</option>
+      </select>
+      <div class="col-sm-5">
+        <input type="text" class="form-control-plaintext" id="search" name='search' placeholder="검색">
+      </div>
+      <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
+    </div>
 
     <script id="tr-template" type="text/x-handlebars-template">
-  {{#each list}}
+    {{#each list}}
     <tr>
       <th scope='row'>{{no}}</th>
       <td scope='row'><a class='bit-view-link' href='#' data-no='{{product.no}}'>{{product.name}}</a></td>
       <td scope='row'>{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
     </tr>
-  {{/each}}
-  </script>
+    {{/each}}
 
+    {{#searchList}}
+    <tr>
+      <th scope='row'>{{no}}</th>
+      <td scope='row'><a class='bit-view-link' href='#' data-no='{{product.no}}'>{{product.name}}</a></td>
+      <td scope='row'>{{member.nickName}}</td>
+      <td scope='row'>{{createdDate}}</td>
+    </tr>
+    {{/searchList}}
+  
+    </script>
   </div>
   <!-- .container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>

@@ -26,13 +26,22 @@ var nameCk = false;
 var telCk = false;
 var nickNameCk = false;
 var nNameOverlap = false;
-var type = "일반 회원";
+var type;
 var ranNoCk = false;
+var who;
 
 $(document).ready(function() {
+  who = window.localStorage.getItem('who')
+  if (who == "company") {
+    $('#add-btn').html("다음");
+    type = "기업 회원";
+  } else {
+    type = "일반 회원";
+  }
   ranNo.hide();
   $("#ranNo-btn").hide();
 })
+
 email.change(function() {
   ranNoCk = false;
   $("#email-btn").show();
@@ -130,7 +139,6 @@ function telCheck() {
     tp.html("");
     telCk = true;
     tel = tel1.val() + tel2.val() + tel3.val();
-    console.log(tel);
   } else {
     tp.html("전화번호를 입력해 주세요.");
     telCk = false;
@@ -158,7 +166,6 @@ $("#n-name-btn").click(function() {
 });
 
 $('#add-btn').click(function() {
-  console.log(ranNoCk);
   if (ranNoCk == true &&
       passwordCk == true && 
       password2Ck == true && 
@@ -175,8 +182,13 @@ $('#add-btn').click(function() {
       type: type
     }, function(data) {
       if (data.status == 'success') {
-        location.replace("../auth/login.html");
-        alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
+        if (who == "company") {
+          window.localStorage.tel = tel;
+          location.href = 'form2.html'; 
+        } else {
+          alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
+          location.replace("../auth/login.html");
+        }
       } else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
@@ -189,12 +201,12 @@ $('#add-btn').click(function() {
 });
 
 function msg_time() { // 카운트 다운 함수.
-  console.log("호출");
   m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; // 남은 시간 계산
   msg = "현재 남은 시간은 " + m + " 입니다.";
 
-  if (SetTime < 0) {      // 시간이 종료 되었으면..
-    msg = "시간이 만료되었 습니다 인증번호를 다시 요청해 주세요.";
+  if (SetTime < 0) {      // 시간이 종료 되었으면..\
+    alert('시간이 만료되었습니다.');
+    location.href = '/bitcamp-team-project/html/index.html'; 
     clearInterval(tid);   // 타이머 해제
   }
   ep.html(msg);
@@ -208,28 +220,34 @@ $("#email-btn").click(function() {
     SetTime = 180;
     $.getJSON('../../app/json/member/email?email=' + email.val(),
         function(data) {
-      if (data.status == 'success') {
-        randomNo = data.ranNo;
-        alert("이메일을 확인해 주세요.\n 제한시간은 3분입니다.");
-        ranNo.show();
-        $("#ranNo-btn").show();
-        $("#email-btn").html("인증번호 다시 받기");
-        tid = setInterval('msg_time()',1000);
-        $("#ranNo-btn").click(function() {
-          if (randomNo == ranNo.val()) {
-            alert("인증성공!")
-            clearInterval(tid);
-            ep.html("");
-            ranNo.hide();
-            $("#email-btn").hide();
-            $("#ranNo-btn").hide();
-            ranNoCk = true;
-          } else {
-            alert("인증번호를 다시 확인해주세요.\n" + data.error);
-          }
-        })
+      if (data.nop != 0) {
+        if (data.status == 'success') {
+          clearInterval(tid);
+          randomNo = data.ranNo;
+          alert("이메일을 확인해 주세요.\n 제한시간은 3분입니다.");
+          ranNo.show();
+          $("#ranNo-btn").show();
+          $("#email-btn").html("인증번호 다시 받기");
+          tid = setInterval('msg_time()', 1000);
+          $("#ranNo-btn").off("click").on("click", function(e) {
+            if (randomNo == ranNo.val()) {
+              alert("인증성공!");
+              clearInterval(tid);
+              ep.html("");
+              console.log("호출")
+              ranNo.hide();
+              $("#email-btn").hide();
+              $("#ranNo-btn").hide();
+              ranNoCk = true;
+            } else {
+              alert("인증번호를 다시 확인해주세요.\n" + data.error);
+            }
+          })
+        } else {
+          alert("이메일 인증에 실패했습니다.");
+        }
       } else {
-        alert("이메일 인증에 실패했습니다.");
+        alert("이미 가입된 이메일입니다.");
       }
     }, "json");
 

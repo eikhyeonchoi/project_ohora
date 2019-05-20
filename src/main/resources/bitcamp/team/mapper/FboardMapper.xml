@@ -27,6 +27,22 @@
     </association>
   </resultMap>
 
+
+  <resultMap type="fboardComment" id="fboardCommentMap">
+    <id column="fb_cmt_no" property="no" />
+    <result column="member_no" property="memberNo" />
+    <result column="fb_no" property="fboardNo" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="depth" property="depth" />
+    <result column="parent_id" property="parentId" />
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="n_name" property="nickName" />
+    </association>
+  </resultMap>
+
   <sql id="select1">
     select
     fb_no,
@@ -100,6 +116,47 @@
       <if test="contents != null">conts = #{contents}</if>
     </set>
     where fb_no = #{no}
+  </update>
+  
+  
+  <!-- 여기서부터 댓글 mapper ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <!-- 여기서부터 댓글 mapper ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <!-- 여기서부터 댓글 mapper ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <select id="findCommentAll" resultMap="fboardCommentMap" parameterType="int">
+    select
+      fc.fb_cmt_no,
+      fc.member_no,
+      fc.conts,
+      fc.parent_id,
+      fc.cdt,
+      m.n_name
+    from
+      fboard_cmt fc
+      join member m on m.member_no=fc.member_no
+    where
+      fc.fb_no = #{value}
+  </select>
+  
+  <insert id="insertComment" parameterType="fboardComment" useGeneratedKeys="true" keyProperty="no">
+    insert into fboard_cmt(member_no, fb_no, conts, depth, parent_id)
+    values(#{memberNo}, #{fboardNo}, #{contents}, #{depth}, #{parentId})
+  </insert>
+  
+  <delete id="deleteComment" parameterType="int">
+    delete from
+      fboard_cmt
+    where
+      fb_cmt_no = #{value}
+  </delete>
+  
+  <update id="updateComment" parameterType="map">
+    update
+      fboard_cmt
+    set
+      conts=#{contents},
+      cdt=#{updateDate}
+    where
+      fb_cmt_no=#{no}
   </update>
   
 </mapper>

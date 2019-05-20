@@ -10,6 +10,8 @@
     <result column="tel" property="tel" />
     <result column="homepage" property="homePage" />
     <result column="reg_no" property="registerNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="address" property="address" />
   </resultMap>
 
   <sql id="default-columns">
@@ -63,6 +65,15 @@
     (#{name}, #{tel}, #{homePage}, #{registerNo})    
   </insert>
 
+  <!-- 기업 회원가입 -->
+  <insert id="insertCompany" parameterType="manufacturer">
+  insert into manufacturer (
+    name, tel, homepage, reg_no, member_no, address
+  )
+  values 
+    (#{name}, #{tel}, #{homePage}, #{registerNo}, #{memberNo}, #{address})
+  </insert>
+  
   <update id="update" parameterType="manufacturer">
     update manufacturer
       <set>

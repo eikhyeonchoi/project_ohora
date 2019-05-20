@@ -1,6 +1,8 @@
 package bitcamp.team.web.json;
 
 import java.util.HashMap;
+import javax.servlet.ServletContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,12 @@ import bitcamp.team.service.TipService;
 @RequestMapping("/json/product")
 public class ProductController {
 
-  ProductService productService;
-  SatisfyService satisfyService;
-  TipService tipService;
+  String uploadDir;
+
+  @Autowired ProductService productService;
+  @Autowired SatisfyService satisfyService;
+  @Autowired TipService tipService;
+  @Autowired ServletContext servletContext;
 
   public ProductController(
       ProductService productService,
@@ -32,14 +37,14 @@ public class ProductController {
   public Object ctgList() {
     return productService.findCategory();
   } // ctgList
-  
+
   @GetMapping("manuList")
   public Object listManufacturer() {
     HashMap<String, Object> content = new HashMap<>();
     content.put("manuList", productService.listManufacturer());
     return content;
   } // listManufacturer
-  
+
   @GetMapping("confirmTip")
   public Object confirmTip(int no) {
     HashMap<String, Object> content = new HashMap<>();
@@ -49,20 +54,20 @@ public class ProductController {
     } else {
       content.put("status", "fail");
     }
-    
+
     return content;
   } // confirmTip
-  
-  
+
+
   @GetMapping("findReviewedMember")
   public Object findReviewedMember(int uNo, int pNo) {
     HashMap<String, Object> content = new HashMap<>();
     HashMap<String, Object> paramMap = new HashMap<>();
-    
+
     paramMap.put("uNo", uNo);
     paramMap.put("pNo", pNo);
     int memberNo = satisfyService.getReviewedMember(paramMap);
-    
+
     if(memberNo == 0) {
       content.put("status","success");
     } else {
@@ -70,27 +75,27 @@ public class ProductController {
     }
     return content;
   } // findReviewedMember
-  
-  
+
+
   @GetMapping("list")
   public Object list(
       @RequestParam(required = false) int largeNo, 
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
-    
+
     HashMap<String, Object> param = new HashMap<>();
     // 대분류 소분류 넣지않고 검색
     if((largeNo == 0 && smallNo == 0) && !productName.equals("undefined")) {
       param.put("productName", productName);
     }
-    
+
     // 다 채워넣고 검색
     if(largeNo != 0) {
       param.put("largeNo", largeNo);
-      
+
       if (smallNo != 0) {
         param.put("smallNo", smallNo);
-        
+
         if(!productName.equals("undefined")) {
           param.put("productName", productName);
         }
@@ -102,8 +107,8 @@ public class ProductController {
 
     return returnMap;
   } // list
-  
-  
+
+
   @PostMapping("add")
   public Object add(Product product) {
     HashMap<String,Object> content = new HashMap<>();
@@ -115,15 +120,12 @@ public class ProductController {
 
       productService.add(product);
       content.put("status", "success");
-
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-    
+
     return content;
   } // add
-  
-  
 
 }
