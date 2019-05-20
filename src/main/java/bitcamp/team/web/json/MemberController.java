@@ -59,7 +59,7 @@ public class MemberController {
 
   @GetMapping("nickName")
   public Object detail(String nickName) throws Exception {
-    int abcd = memberService.get2(nickName);
+    int abcd = memberService.getNo(nickName);
     return abcd;
   }
 
@@ -93,7 +93,7 @@ public class MemberController {
   public Object Authentication (String email) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
 
-    int emailNo = memberService.get3(email);
+    int emailNo = memberService.getEmail(email);
     if (emailNo == 0) {
       Gmail gmail = new Gmail();
       int ranNo = RandomNo.randomNo();

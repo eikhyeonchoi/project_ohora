@@ -44,16 +44,6 @@
       n_name=#{value}
   </select>
   
-  <select id="findNoByNickNameList" resultMap="memberMap" parameterType="map">
-  <bind name="pattern1" value="'%' + _parameter + '%'"/>
-    select
-      member_no
-    from
-      member
-    where
-      n_name like #{pattern1}
-  </select>
-  
   <select id="findByEmail" resultMap="memberMap" parameterType="string">
     select
       member_no,

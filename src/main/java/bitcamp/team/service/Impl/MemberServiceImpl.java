@@ -31,12 +31,6 @@ public class MemberServiceImpl implements MemberService {
   public Member get(int no) {
     return memberDao.findByNo(no);
   }
-
-  @Override
-  public List<Member> getList(String nickName) {
-    List<Member> members = memberDao.findNoByNickNameList(nickName);
-    return members;
-  }
   
   @Override
   public int getNo(String nickName) {
@@ -45,17 +39,7 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int get2(String nickName) {
-    Member member = memberDao.findNoByNickName(nickName);
-    if (member == null) {
-      return 0;
-    } else {
-      return member.getNo();
-    }
-  }
-
-  @Override
-  public int get3(String email) {
+  public int getEmail(String email) {
     Member member = memberDao.findByEmail(email);
     if (member == null) {
       return 0;
