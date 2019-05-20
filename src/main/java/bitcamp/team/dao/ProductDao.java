@@ -12,6 +12,7 @@ public interface ProductDao {
   List<ProductSmallCategory> findSmallCategory();
   List<Product> findManufacturer();
   int insert(Product product);
+  List<Product> findNoByNameList(String name);
   Product findNoByName(String name);
   Product findByNo(int no);
 }

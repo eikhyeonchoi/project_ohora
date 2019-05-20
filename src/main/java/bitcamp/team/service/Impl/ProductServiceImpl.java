@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManufacturerDao;
 import bitcamp.team.dao.ProductDao;
+import bitcamp.team.dao.ProductFileDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.service.ProductService;
@@ -15,6 +16,7 @@ public class ProductServiceImpl implements ProductService{
  
   ProductDao productDao;
   ManufacturerDao manufacturerDao;
+  ProductFileDao productFileDao;
   
   public ProductServiceImpl(
       ProductDao productDao, 
@@ -48,9 +50,14 @@ public class ProductServiceImpl implements ProductService{
   }
 
   @Override
-  public int get(String name) {
+  public int getNo(String name) {
     Product product = productDao.findNoByName(name);
     return product.getNo();
+  }
+  
+  @Override
+  public List<Product> getList(String name) {
+    return productDao.findNoByNameList(name);
   }
   
   @Override
@@ -59,9 +66,6 @@ public class ProductServiceImpl implements ProductService{
     return product.getName();
   }
   
-  
-  
-
 }
 
 

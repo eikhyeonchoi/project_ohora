@@ -8,14 +8,8 @@ public class Product {
 
   private Manufacturer manufacturer;
   private ProductSmallCategory productSmallCategory;
-
-
   public int getNo() {
     return no;
-  }
-
-  public void setNo(int no) {
-    this.no = no;
   }
 
   public int getSmallCategoryNo() {
@@ -42,7 +36,6 @@ public class Product {
     this.name = name;
   }
 
-
   public Manufacturer getManufacturer() {
     return manufacturer;
   }
@@ -59,4 +52,8 @@ public class Product {
     this.productSmallCategory = productSmallCategory;
   }
 
+
+  public void setNo(int no) {
+    this.no = no;
+  }
 }

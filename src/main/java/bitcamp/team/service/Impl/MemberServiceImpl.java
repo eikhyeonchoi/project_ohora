@@ -33,13 +33,13 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int get(String nickName) {
+  public int getNo(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
     return member.getNo();
   }
 
   @Override
-  public int get2(String nickName) {
+  public int authEmail(String nickName) {
     Member member = memberDao.findNoByNickName(nickName);
     if (member == null) {
       return 0;
@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int get3(String email) {
+  public int getEmail(String email) {
     Member member = memberDao.findByEmail(email);
     if (member == null) {
       return 0;
@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
   public int delete(int no) {
     return memberDao.delete(no);
   }
-  
+
   @Override
   public int delete(String email) {
     return memberDao.deleteCompany(email);

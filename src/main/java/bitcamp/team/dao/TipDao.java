@@ -2,6 +2,7 @@
 package bitcamp.team.dao;
 
 import java.util.List;
+import java.util.Map;
 import bitcamp.team.domain.Tip;
 
 public interface TipDao {
@@ -13,4 +14,5 @@ public interface TipDao {
    int update(Tip tip);
    int confirmTip(int no);
    int findNoByProductNo(int no);
+   List<Tip> search(Map<String,Object> map);
 }
