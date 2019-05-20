@@ -13,5 +13,7 @@ public interface MemberService {
   int getNo(String nickName);
   List<Member> getList(String nickName);
   int get2(String nickName);
+  int get3(String email);
   int size();
+  int delete(String email);
 }
