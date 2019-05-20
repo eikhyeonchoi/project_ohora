@@ -2,19 +2,23 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Manufacturer;
+import bitcamp.team.domain.Member;
 import bitcamp.team.service.ManufacturerService;
+import bitcamp.team.service.MemberService;
 
 @RestController("json/ManufacturerController")
 @RequestMapping("/json/manufacturer")
 public class ManufacturerController {
 
   @Autowired ManufacturerService manufacturerService;
+  @Autowired MemberService memberService;
 
   // 관리자가 제조사 등록
   @PostMapping("add")
@@ -32,16 +36,24 @@ public class ManufacturerController {
     return content;
 
   }
-  
-  // 기업회원가입
-  @PostMapping("addCompany")
-  public Object add2(Manufacturer manufacturer) throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-    
-    System.out.println("호출됨");
-    System.out.println(manufacturer);
-    return content;
 
+  // 기업회원가입
+  @PostMapping("authCompany")
+  public Object add2(Manufacturer manufacturer, HttpSession session) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    Member member = (Member) session.getAttribute("companyMember");
+    try {
+      memberService.add(member);
+      int memberNo = memberService.get(member.getNickName());
+      manufacturer.setMemberNo(memberNo);
+      manufacturerService.add2(manufacturer);
+      session.removeAttribute("companyMember");
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
   }
 
   @GetMapping("delete")
@@ -89,7 +101,7 @@ public class ManufacturerController {
     }
     return content;
   }
-  
+
   @GetMapping("search")
   public Object search(String keyword) throws Exception {
     System.out.println("==>" + keyword);
@@ -98,12 +110,12 @@ public class ManufacturerController {
       List<Manufacturer> manufacturers = manufacturerService.list(keyword);
       map.put("list", manufacturers);
       map.put("status", "success");
-      
+
     } catch(Exception e) {
       map.put("stauts", "fail");
       map.put("message", e.getMessage());
     }
-    
+
     return map;
   }
 }

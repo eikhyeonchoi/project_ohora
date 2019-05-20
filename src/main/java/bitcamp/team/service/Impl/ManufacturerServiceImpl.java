@@ -37,6 +37,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
   public int add(Manufacturer manufacturer) {
     return manufacturerDao.insert(manufacturer);
   }
+  
+  @Override
+  public int add2(Manufacturer manufacturer) {
+    return manufacturerDao.insertCompany(manufacturer);
+  }
+
 
   @Override
   public Manufacturer get(int no) {

@@ -2,6 +2,7 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,20 +20,18 @@ public class MemberController {
   @Autowired MemberService memberService;
 
   @PostMapping("add")
-  public Object add(Member member) throws Exception {
+  public Object add(Member member, HttpSession session) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    Member member2 = member;
     try {
-      memberService.add(member);
       if (member.getType().equals("기업 회원")) {
-        memberService.delete(member.getEmail());
-        content.put("member", member2);
+        session.setAttribute("companyMember", member);
+      } else {
+        memberService.add(member);
       }
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
-
     }
     return content;
   }
