@@ -59,7 +59,7 @@ public class MemberController {
 
   @GetMapping("nickName")
   public Object detail(String nickName) throws Exception {
-    int abcd = memberService.getNo(nickName);
+    int abcd = memberService.authEmail(nickName);
     return abcd;
   }
 
