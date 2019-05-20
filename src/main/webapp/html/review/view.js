@@ -7,6 +7,7 @@ var pageNo = 1,
 pageSize = 10,
 totalPage = 1,
 tbody = $('tbody'),
+currSpan = $('#currPage > span'),
 prevPageLi = $('#prevPage'),
 nextPageLi = $('#nextPage');
 
@@ -96,6 +97,9 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
   
   tbody.html('');
   $(trGenerator(obj)).appendTo(tbody);
+  
+  currSpan.html(String(pageNo));
+  
   $('#product-name').html('');
   $('#product-name').append(productName);
   
