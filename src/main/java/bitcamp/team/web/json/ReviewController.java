@@ -1,6 +1,7 @@
 package bitcamp.team.web.json;
 
 import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,11 @@ public class ReviewController {
   
   @GetMapping("detail")
   public Object detail(int no) throws Exception {
-    return reviewService.get(no);
+    List<Review> review = reviewService.get(no);
+    HashMap<String,Object> map = new HashMap<>();
+    map.put("list", review);
+
+    return map;
   }
   
   @GetMapping("detail2")
