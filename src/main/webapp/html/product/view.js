@@ -97,7 +97,6 @@ $(document).ready(function(){
     if (data.status == 'success') {
       alert('성공했습니다!');
       $('<img>').attr('src', data.pList.preview.toDataURL()).css('width', '100px').appendTo(fileDiv);
-      }
     } else {
       alert('실패했습니다!\n' + data.error);
     }
