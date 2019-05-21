@@ -375,7 +375,7 @@ CREATE TABLE question (
   conts     TEXT         NOT NULL, -- 질문 내용
   cdt       DATETIME     NULL     DEFAULT CURRENT_TIMESTAMP, -- 작성일
   titl      VARCHAR(100) NOT NULL, -- 제목
-  status    VARCHAR(50)  NOT NULL DEFAULT default "답변 대기중" -- 상태
+  status    VARCHAR(50)  NOT NULL DEFAULT "답변 대기중" -- 상태
 );
 
 -- 고객문의
