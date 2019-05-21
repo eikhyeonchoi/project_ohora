@@ -15,4 +15,5 @@ public interface ProductDao {
   List<Product> findNoByNameList(String name);
   Product findNoByName(String name);
   Product findByNo(int no);
+  Product findFileByNo(int no);
 }

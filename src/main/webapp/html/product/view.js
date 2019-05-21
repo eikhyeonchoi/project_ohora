@@ -5,14 +5,15 @@
  *  
  */
 var nonMemberDiv = $('#non-member-div'),
-    memberDiv = $('#common-member-div'),
-    managerAndCompanyDiv = $('#company-manager-div');
+memberDiv = $('#common-member-div'),
+managerAndCompanyDiv = $('#company-manager-div'),
+fileDiv = $('images-div');
 
 var tipBtn = $('#go-tip-btn');
 
 var userNo = 0,
-    productNo = getQuerystring('no'),
-    productName = decodeURIComponent(getQuerystring('name'));
+productNo = getQuerystring('no'),
+productName = decodeURIComponent(getQuerystring('name'));
 
 var total = 0,
 satisAver = 0,
@@ -24,12 +25,12 @@ useful = 0,
 price = 0;
 
 $(document).ready(function(){
-  
+
   managerAndCompanyDiv.hide();
   memberDiv.hide();
 
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
-      $('#product-name').append('<p>' + productName + '</p>');
+    $('#product-name').append('<p>' + productName + '</p>');
 
 
     for (var el of obj.list) {
@@ -56,8 +57,6 @@ $(document).ready(function(){
     console.log('디자인 => ' + design);
     console.log('a/s만족도 => ' + asStf);
     console.log('사용만족도 => ' + useful);
-
-
   }) //get
 
   $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
@@ -92,7 +91,17 @@ $(document).ready(function(){
       type: 'loaded-user'
     });
   }) // get
-
+  
+  $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
+    console.log(data.pList);
+    if (data.status == 'success') {
+      alert('성공했습니다!');
+      $('<img>').attr('src', data.pList.preview.toDataURL()).css('width', '100px').appendTo(fileDiv);
+      }
+    } else {
+      alert('실패했습니다!\n' + data.error);
+    }
+  });
 
 }) // ready
 
@@ -108,15 +117,13 @@ $(document).bind('loaded-user', function() {
       }
     }) // get
   }) // click
-  
-  
+
+
   $('#go-reivew-btn').click(function() {
     location.href = '../review/view.html?no=' + productNo + '&name=' + productName;
   })
-  
+
 }) // bind
-
-
 
 function getQuerystring(key, default_) {
   if (default_==null) default_=""; 

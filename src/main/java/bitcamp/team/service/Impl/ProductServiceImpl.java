@@ -9,6 +9,7 @@ import bitcamp.team.dao.ProductDao;
 import bitcamp.team.dao.ProductFileDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
+import bitcamp.team.domain.ProductFile;
 import bitcamp.team.service.ProductService;
 
 @Service
@@ -20,9 +21,11 @@ public class ProductServiceImpl implements ProductService{
   
   public ProductServiceImpl(
       ProductDao productDao, 
-      ManufacturerDao manufacturerDao) {
+      ManufacturerDao manufacturerDao,
+      ProductFileDao productFileDao) {
     this.productDao = productDao;
     this.manufacturerDao = manufacturerDao;
+    this.productFileDao = productFileDao;
   }
 
   @Override
@@ -46,7 +49,14 @@ public class ProductServiceImpl implements ProductService{
 
   @Override
   public int add(Product product) {
-    return productDao.insert(product);
+    int count = productDao.insert(product);
+    List<ProductFile> productFiles = product.getProductFiles();
+    for (ProductFile f : productFiles) {
+      f.setProductNo(product.getNo());
+    }
+    productFileDao.insert(product.getProductFiles());
+    
+    return count;
   }
 
   @Override
@@ -66,6 +76,10 @@ public class ProductServiceImpl implements ProductService{
     return product.getName();
   }
   
+  @Override
+  public Product getFile(int no) {
+    return productDao.findFileByNo(no);
+  }
 }
 
 

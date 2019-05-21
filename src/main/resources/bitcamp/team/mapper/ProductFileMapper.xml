@@ -6,46 +6,30 @@
 <mapper namespace="bitcamp.team.dao.ProductFileDao">
 
   <resultMap type="productFile" id="productFileMap">
-    <id     column="pfile_no"   property="no"/>
-    <result column="product_no"      property="productNo"/>
-    <result column="img"   property="image"/>
-    
-    <collection property="product" javaType="product">
-      <id column="p_no"    property="no"/>
-      <result column="sctg_no"    property="smallCategoryNo"/>
-      <result column="manufac_no"      property="manufacturerNo"/>
-      <result column="name"       property="name"/>
-    </collection>
+    <id     column="pfile_no"         property="no"/>
+    <result column="product_no"       property="productNo"/>
+    <result column="img"              property="img"/>
   </resultMap>
   
   <select id="findByProductNo" resultMap="productFileMap" parameterType="int">
     select
-      f.pfile_no,
-      f.product_no,
-      f.img,
-      p.product_no as p_no,
-      p.sctg_no,
-      p.manufac_no,
-      p.name
+      pfile_no,
+      product_no,
+      img
     from
-      product_file f
-    left outer join
-      product p
-    on
-       f.product_no = p.product_no
+      product_file
     where
-      f.product_no = #{value}
+      product_no = #{value}
     order by
-      f.pfile_no desc
+      pfile_no desc
   </select>
     
-  <insert id="insert" parameterType="map">
+  <insert id="insert" parameterType="list">
     insert into 
-      product_file(product_no, img)
+      product_file (product_no, img)
     values 
-      <foreach collection="list" item="productFile"
-             separator=",">
-      (#{product_file.productNo},#{product_file.image})
+      <foreach collection="list" item="productFile" separator=",">
+      (#{productFile.productNo}, #{productFile.img})
     </foreach>
   </insert>
 </mapper>
