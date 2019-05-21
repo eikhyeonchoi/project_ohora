@@ -90,7 +90,7 @@ $('#mine').click(function(e) {
   $('.test-update-btn').click(function(e) {
     var rNo = $(e.target).attr('data-no')
     var td = $(this).parents('.rere-tr').find('.rere-td');
-    if($('#rere-add-btn-' + rNo).css('display') != 'none') {
+    if($('#rere-delete-btn-' + rNo).css('display') != 'none') {
       $('#rere-delete-btn-' + rNo).hide();
       $('#rere-add-btn-' + rNo).hide();
       $('#rere-cancel-btn-' + rNo).show();
@@ -105,14 +105,16 @@ $('#mine').click(function(e) {
       console.log(td.find('textarea').attr('data-contents'));
 
       console.log(td.find('.rere-rd'));
+      
+      $('#rere-delete-btn-' + rNo).show();
+      $('#rere-add-btn-' + rNo).show();
+      $('#rere-cancel-btn-' + rNo).hide();
 
       $.post('/bitcamp-team-project/app/json/board/updateReply', {
         no: rNo,
         contents: td.find('textarea').val()
       }, function() {
-        $('#rere-delete-btn-' + rNo).show();
-        $('#rere-add-btn-' + rNo).show();
-        $('#rere-cancel-btn-' + rNo).hide();
+        
       })
       location.reload();
     } // else
