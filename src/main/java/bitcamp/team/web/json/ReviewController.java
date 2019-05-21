@@ -42,8 +42,7 @@ public class ReviewController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Review> review = reviewService.get(no);
-    
+    List<Review> review = reviewService.get(no, pageNo, pageSize);
     
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", review);

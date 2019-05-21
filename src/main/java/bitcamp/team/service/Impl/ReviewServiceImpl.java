@@ -1,5 +1,6 @@
 package bitcamp.team.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ReviewDao;
@@ -21,8 +22,13 @@ public class ReviewServiceImpl implements ReviewService {
   }
   
   @Override
-  public List<Review> get(int no) {
-    return reviewDao.findByNo(no);
+  public List<Review> get(int no,int pageNo, int pageSize) {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("selectNo", no);
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+
+    return reviewDao.findByNo(params);
   }
   
   @Override
