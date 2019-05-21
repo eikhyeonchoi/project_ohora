@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.team.dao.ManualDao">
+
+  <resultMap type="board" id="manualMap">
+    <id column="manual_no"      property="no" />
+    <result column="product_no" property="productNo" />
+    <result column="conts"      property="contents" />
+    <result column="cnt"        property="viewCount" />
+    <result column="vlink"      property="vLink" />
+
+    <association property="manualFile" javaType="manualFile">
+      <id column="mfile_no"      property="no" />
+      <result column="manual_no" property="manualNo" />
+      <result column="img"       property="img" />
+      <result column="type"      property="type" />
+    </association>
+
+    <!-- 
+    <association property="manualPrecaution" javaType="manualPrecaution">
+      <id column="pcautions_no"   property="no" />
+      <result column="manual_no"  property="manualNo" />
+      <result column="titl"       property="title" />
+      <result column="contents"   property="contents" />
+      <result column="media"      property="media" />
+    </association>
+
+    <association property="manualComponent" javaType="manualComponent">
+      <id column="cmp_no"          property="no" />
+      <result column="manual_no"   property="manualNo" />
+      <result column="name"        property="name" />
+      <result column="explanation" property="expl" />
+      <result column="img"         property="img" />
+    </association>
+     -->
+  </resultMap>
+
+
+  <insert id="insert" parameterType="manual" 
+    useGeneratedKeys="true" keyColumn="manual_no" keyProperty="no">
+    insert into
+      manual(product_no, conts, cnt, vlink) 
+    values(#{productNo}, #{contents}, #{viewCount}, #{vLink})
+  </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

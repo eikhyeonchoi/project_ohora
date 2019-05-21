@@ -51,7 +51,7 @@ $(document.body).bind('loaded-detail', function(data){
         } // if
       } // for
     } // for
-    
+
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
 
     $('.find-reply-a').one('click', function(e) {
@@ -114,7 +114,7 @@ $(document.body).bind('loaded-comment-list', function() {
     e.preventDefault();
     replyFormGenerator(e);
   }); // click
-  
+
   $('.reply-update-btn').one('click', function(e) {
     e.preventDefault();
     console.log($(e.target).attr('data-reply-no'));
@@ -130,7 +130,7 @@ $(document.body).bind('loaded-comment-list', function() {
       }
     }, "json")
   })
-  
+
   $('.reply-delete-btn').one('click', function(e) {
     e.preventDefault();
     console.log($(e.target).attr('data-reply-no'));
@@ -182,7 +182,7 @@ function authViewBtn(){
       $(item).next().next().next().hide();
       $(item).next().next().next().next().hide();
       $(item).next().prop('disabled',true);
-      
+
     }
     if ($(item).attr('data-member-no') != window.userNo) {
       $(item).next().next().next().hide();
@@ -210,9 +210,9 @@ function ajaxDeleteComment(){
     } else {
       commentNo = window.newCommentNo;
     }
-    
+
     if($(e.target).closest('div').next().is('a')){
-      
+
       $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
         no: commentNo,
         contents: '삭제된 댓글입니다.',
@@ -224,7 +224,7 @@ function ajaxDeleteComment(){
           alert('변경 실패 입니다.\n' +  obj.message);
         }
       }, "json");
-      
+
       $(e.target).prev().prev().prev().text('삭제된 댓글입니다.').prop('disabled', true);
       $(e.target).prev().prev().remove();
       $(e.target).prev().remove();
@@ -232,19 +232,16 @@ function ajaxDeleteComment(){
       return;
     }
 
-    $.getJSON('../../app/json/fboard/deleteComment?no=' + commentNo, function(obj) {
-      if (obj.status == 'success') {
-        return;
-      } else {
-        alert('삭제 실패 입니다.\n' +  obj.message);
-      }
-    }) // get
+    if (obj.status == 'success') {
+      return;
+    } else {
+      alert('삭제 실패 입니다.\n' +  obj.message);
+    }
 
     $(e.target).closest('div').prev().remove();
     $(e.target).closest('div').next().remove();
     $(e.target).closest('div').remove();
-  }) // click
-
+  });
 } // deleteBtnActivate
 
 
@@ -259,7 +256,7 @@ function ajaxUpdateComment(){
     } else {
       commentNo = window.newCommentNo;
     }
-    
+
     $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
       no: commentNo,
       contents: $(e.target).prev().prev().val(),
@@ -316,7 +313,7 @@ function ajaxAddComment(){
   $(document.body).trigger({
     type: 'activated-comment-update-delete-btn'
   });
-  
+
 } // ajaxAddComment
 
 
@@ -338,9 +335,9 @@ function requestAddComment(){
 } // requestAddComment
 
 
-// ////////////////////////////////////////////////////////reply
-// ////////////////////////////////////////////////////////reply
-// ////////////////////////////////////////////////////////reply
+//////////////////////////////////////////////////////////reply
+//////////////////////////////////////////////////////////reply
+//////////////////////////////////////////////////////////reply
 
 function replyFormGenerator(e) {
   var replyObj = {
@@ -356,19 +353,19 @@ function replyFormGenerator(e) {
         }
         ]
   };
-  
+
   if($(e.target).closest('div').next().is('a')){
     $(replyGenerator(replyObj)).appendTo($(e.target).closest('div').next().next());
     $(e.target).closest('div').next().next().children().children().eq(1).children().eq(4).remove();
     $(e.target).closest('div').next().next().children().children().eq(1).children().eq(3).remove();
     $(e.target).closest('div').next().next().children().children().eq(1).children().eq(2)
-                .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
+    .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
   } else {
     $(replyGenerator(replyObj)).appendTo($(e.target).closest('div').next());
     $(e.target).closest('div').next().children().children().eq(1).children().eq(4).remove();
     $(e.target).closest('div').next().children().children().eq(1).children().eq(3).remove();
     $(e.target).closest('div').next().children().children().eq(1).children().eq(2)
-                .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
+    .after('<button type="button" class="btn btn-primary reply-register-btn" data-no='+'"'+ $(e.target).attr('data-no') +'"'+'>등록</button>');    
   }
 
   $(document.body).trigger({
@@ -394,8 +391,8 @@ $(document.body).bind('loaded-reply-form', function(e) {
       }
     }, "json") // post
   }); // click
-  
-  
+
+
 }) // loaded-reply-form bind
 
 
