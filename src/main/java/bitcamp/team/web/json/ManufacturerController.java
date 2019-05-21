@@ -44,7 +44,7 @@ public class ManufacturerController {
     Member member = (Member) session.getAttribute("companyMember");
     try {
       memberService.add(member);
-      int memberNo = memberService.get(member.getNickName());
+      int memberNo = memberService.getNo(member.getNickName());
       manufacturer.setMemberNo(memberNo);
       manufacturerService.add2(manufacturer);
       session.removeAttribute("companyMember");

@@ -1,7 +1,10 @@
 package bitcamp.team.web.json;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Product;
+import bitcamp.team.domain.ProductFile;
 import bitcamp.team.service.ProductService;
 import bitcamp.team.service.SatisfyService;
 import bitcamp.team.service.TipService;
@@ -76,6 +80,21 @@ public class ProductController {
     return content;
   } // findReviewedMember
 
+  @GetMapping("files")
+  public Object files(int no) {
+    System.out.println("files 내부 ==> " + no);
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      Product pList = productService.getFile(no);
+      System.out.println(pList);
+      contents.put("pList", pList);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
 
   @GetMapping("list")
   public Object list(
@@ -110,21 +129,45 @@ public class ProductController {
 
 
   @PostMapping("add")
-  public Object add(Product product) {
+  public Object add(Product product, Part[] productFiles) {
+    this.uploadDir = servletContext.getRealPath("/upload/productfile");
+
     HashMap<String,Object> content = new HashMap<>();
+    ArrayList<ProductFile> files = new ArrayList<>();
     try {
       if (product.getName().equals("") ||
           product.getSmallCategoryNo() == 0 || 
           product.getManufacturerNo() == 0)
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
-
-      productService.add(product);
-      content.put("status", "success");
+      System.out.println(product);
+      for (Part part : productFiles) {
+        String filename = UUID.randomUUID().toString();
+        String filepath = uploadDir + "/"  +filename;
+        part.write(filepath);
+        
+        ProductFile productFile = new ProductFile();
+        productFile.setImg(filename);
+        System.out.println(productFile);
+        files.add(productFile);
+      }
+      product.setProductFiles(files);
+      if (product.getSmallCategoryNo() == 0) {
+        throw new RuntimeException("소분류를 선택해주세요!");
+      } else if (product.getName().length() == 0) {
+        throw new RuntimeException("제품 제목을 입력해주세요!");
+      } else if (product.getManufacturerNo() == 0) {
+        throw new RuntimeException("제조사를 선택해주세요!");
+      } else if (files.size() == 0) {
+        throw new RuntimeException("최소 한개 사진을 등록해야 합니다.");
+      } else {
+        productService.add(product);
+        System.out.println("add 마침");
+        content.put("status", "success");
+      }
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-
     return content;
   } // add
 

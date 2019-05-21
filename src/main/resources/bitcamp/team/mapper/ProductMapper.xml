@@ -5,13 +5,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="bitcamp.team.dao.ProductDao">
-
   <resultMap type="product" id="productMap">
     <id     column="product_no"   property="no"/>
     <result column="sctg_no"      property="smallCategoryNo"/>
     <result column="manufac_no"   property="manufacturerNo"/>
     <result column="productName"         property="name"/>
-    
     <association property="manufacturer" javaType="manufacturer">
       <id column="manufac_no"    property="no"/>
       <result column="reg_no"    property="registerNo"/>
@@ -24,14 +22,22 @@
       <id column="sctg_no"    property="no"/>
       <result column="lctg_no"    property="largeCategoryNo"/>
       <result column="smallName"      property="name"/>
-      
       <association property="productLargeCategory" javaType="productLargeCategory">
         <id column="lctg_no"       property="no"/>
         <result column="largeName"      property="name"/>
       </association>
     </association>
+    </resultMap>
     
-  </resultMap>
+    <resultMap type="product" id="productFileMap">
+      <id       column="product_no"         property="no"/>
+      <result   column="name"               property="name"/>
+      <collection property="productFiles"      ofType="productFile">
+        <id     column="pfile_no"           property="no"/>
+        <result column="productNo"          property="productNo"/>
+        <result column="img"                property="img"/>
+      </collection>
+    </resultMap>
   
   <resultMap type="manufacturer" id="manufacturertMap">
     <id     column="manufac_no"   property="no"/>
@@ -40,7 +46,6 @@
     <result column="tel"      property="smallCategoryNo"/>
     <result column="homepage"      property="smallCategoryNo"/>
   </resultMap>
-  
   <select id="findLargeCategory" resultMap="productMap" >
     select distinct
       lc.lctg_no,
@@ -104,7 +109,10 @@
   </select>
   
     
-  <insert id="insert" parameterType="product">
+  <insert id="insert" parameterType="product"
+          useGeneratedKeys="true"
+          keyColumn="product_no"
+          keyProperty="no">
     insert into 
       product(sctg_no, manufac_no, name)
     values (#{smallCategoryNo}, #{manufacturerNo}, #{name});
@@ -137,7 +145,20 @@
     where
       product_no = #{value}
   </select>
-  
+  <select id="findFileByNo" resultMap="productFileMap" parameterType="int">
+    select
+      p.product_no,
+      p.sctg_no,
+      p.manufac_no,
+      p.name,
+      f.img
+    from
+      product p
+    left join
+      product_file f
+    on p.product_no = f.product_no
+    where p.product_no = #{value}
+  </select>
 </mapper>
 
 
