@@ -48,6 +48,21 @@
       join member m on m.member_no = r.member_no
     where
       r.product_no = #{selectNo}
+      
+    <if test="searchType == 'title' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and r.name like #{pattern1}
+    </if>
+    <if test="searchType == 'contents' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and conts like #{pattern1}
+    </if>
+    <if test="searchType == 'all' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and r.name  like #{pattern1} or
+           conts like #{pattern1}
+    </if>
+    
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>

@@ -22,11 +22,13 @@ public class ReviewServiceImpl implements ReviewService {
   }
   
   @Override
-  public List<Review> get(int no,int pageNo, int pageSize) {
+  public List<Review> get(int no,int pageNo, int pageSize, String keyword, String searchType) {
     HashMap<String, Object> params = new HashMap<>();
     params.put("selectNo", no);
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("searchType", searchType);
+    params.put("keyword", keyword);
 
     return reviewDao.findByNo(params);
   }

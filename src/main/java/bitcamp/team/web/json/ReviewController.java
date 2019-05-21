@@ -27,7 +27,7 @@ public class ReviewController {
   
   @GetMapping("detail")
   public Object detail(int no, @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize) throws Exception {
+      @RequestParam(defaultValue = "10") int pageSize, String keyword, String searchType) throws Exception {
     
     if (pageSize < 10 || pageSize > 18)
       pageSize = 10;
@@ -42,13 +42,16 @@ public class ReviewController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Review> review = reviewService.get(no, pageNo, pageSize);
+    List<Review> review = reviewService.get(no, pageNo, pageSize, keyword, searchType);
     
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", review);
     map.put("pageNo", pageNo);
     map.put("pageSize", pageSize);
     map.put("totalPage", totalPage);
+    map.put("keyword", keyword);
+    map.put("searchType", searchType);
+
 
     return map;
   }
