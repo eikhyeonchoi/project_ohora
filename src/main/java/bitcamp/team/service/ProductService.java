@@ -13,4 +13,5 @@ public interface ProductService {
   List<Product> getList(String name);
   int getNo(String name);
   String get(int no);
+  Product getFile(int no);
 }

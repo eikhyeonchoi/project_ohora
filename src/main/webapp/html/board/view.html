@@ -52,6 +52,12 @@
       <th scope="col">작성자</th>
       <th scope="col">댓글내용</th>
       <th scope="col">작성일</th>
+      <button type="button" id="latest">최신순</button>
+      <!--
+      추천순으로 10개까지 보이기 
+      <a id="like" href="#">best 댓글</a>
+       -->
+      <button type="button" id="mine">내가 쓴 글</button>
      </tr>
     </thead>
     <tbody></tbody>
@@ -71,13 +77,14 @@
 
 <script id='tr-template' type='text/x-handlebars-template'>
 {{#each replylist}}
-<tr class='rere-tr'>
-  <td id='rere-mem-{{no}}' class='rere-mem' data-memberId='{{memberId}}'>{{memberName}}</td>
+<tr id='rere-tr-{{no}}' class='rere-tr'>
+  <td id='rere-mem-{{no}}' class='rere-mem' data-memberId='{{memberId}}' data-parnetId='{{parentId}}'>{{memberName}}</td>
   <td class='rere-td' data-contents='{{contents}}'>{{contents}}</td>
   <td class='rere-rd'>{{registerDate}}</td>
   <td>
     <button id='rere-add-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-add-btn' data-depth='{{depth}}'>답글</button>
     <button id='rere-update-btn-{{no}}' value='{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-update-btn'>수정</button>
+    <button id='rere-cancel-btn-{{no}}' data-no='{{no}}' type='button' class='btn btn-primary test-cancel-btn' style='display: none'>취소</button>
     <button id='rere-delete-btn-{{no}}' value='{{registerDate}}' data-no='{{no}}' type='button' class='btn btn-primary test-delete-btn'>삭제</button>
   </td>
 </tr>

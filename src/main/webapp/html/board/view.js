@@ -15,20 +15,24 @@ $(document).ready(function() {
 //    console.log(data);
 //    console.log(obj.replylist);
       var status = data.status, //로그인 유무 상태
-      userNo = data.user.no;
-
-
+      userNo = data.user.no,
+      userType = data.user.type;
+      
+      
       if(status == "fail") {
         $('.test-update-btn').hide();
         $('.test-delete-btn').hide();
+        $('.mine').hide();
       }
       for(var a of obj.replylist) {
         var rNo = a.no,
         replyMem = $('#rere-mem-' + rNo).attr('data-memberId'); //댓글 쓴 유저 ID값
-        console.log(replyMem);
         if(userNo != replyMem) {
           $('#rere-update-btn-' + rNo).hide();
           $('#rere-delete-btn-' + rNo).hide();
+        } 
+        if(userType == 3) {
+          $('#rere-delete-btn-' + rNo).show();
         }
       }
     } //function(data)
@@ -36,14 +40,22 @@ $(document).ready(function() {
   }); // getJSON
 });
 
-/*
-$(document.body).bind('loaded-list', function(obj) {
-  console.log(obj);
-  console.log('bind memberId: ' + memberId);
-  return this.memberId;
+//내가 쓴 글 필터
+$('#mine').click(function(e) {
+  $.getJSON('/bitcamp-team-project/app/json/board/detail?no=' + no, (obj) => {
+    $.get('../../app/json/auth/user', function(data) {
+      var userNo = data.user.no;
+      for(var a of obj.replylist) {
+        var rNo = a.no,
+        replyMem = a.memberId,
+        replyParent = a.parentId;
+        if(userNo != replyMem) {
+          $('#rere-tr-' + rNo).hide();
+        }
+      }
+    })
+  })
 });
-console.log('전역 memberId:' + memberNo);
- */
 
 ($.getJSON('/bitcamp-team-project/app/json/board/detail?no=' + no, (obj) => {
 
@@ -65,12 +77,23 @@ console.log('전역 memberId:' + memberNo);
     }
   } // for
 
+  $('.test-cancel-btn').click(function(e) {
+    var rNo = $(e.target).attr('data-no')
+    $(this).parents('.rere-tr').find('textarea').detach();
+
+    $('#rere-add-btn-' + rNo).show();
+    $('#rere-delete-btn-' + rNo).show();
+    $('.test-cancel-btn').hide();
+    location.reload();
+  })
+
   $('.test-update-btn').click(function(e) {
     var rNo = $(e.target).attr('data-no')
     var td = $(this).parents('.rere-tr').find('.rere-td');
-    if($('#rere-add-btn-' + rNo).css('display') != 'none') {
+    if($('#rere-delete-btn-' + rNo).css('display') != 'none') {
       $('#rere-delete-btn-' + rNo).hide();
       $('#rere-add-btn-' + rNo).hide();
+      $('#rere-cancel-btn-' + rNo).show();
       // 뺴오는거
       // $(this).parents('.rere-tr').find('.rere-td').attr('data-contents')
       td.text('');
@@ -82,13 +105,16 @@ console.log('전역 memberId:' + memberNo);
       console.log(td.find('textarea').attr('data-contents'));
 
       console.log(td.find('.rere-rd'));
+      
+      $('#rere-delete-btn-' + rNo).show();
+      $('#rere-add-btn-' + rNo).show();
+      $('#rere-cancel-btn-' + rNo).hide();
 
       $.post('/bitcamp-team-project/app/json/board/updateReply', {
         no: rNo,
         contents: td.find('textarea').val()
       }, function() {
-        $('#rere-delete-btn-' + rNo).show();
-        $('#rere-add-btn-' + rNo).show();
+        
       })
       location.reload();
     } // else
@@ -176,7 +202,6 @@ console.log('전역 memberId:' + memberNo);
     $(this).closest('tr').after(rereForm.show());
     var parentId = $(this).attr('data-no');
     $('#rere-add-btn').click(function(e){
-    	//if(rere-form 1번 이상일 때) {$.post 호출 X};
       $.get('../../app/json/auth/user', function(data) {
         $.post('/bitcamp-team-project/app/json/board/addReply', {
           boardId: param.split('=')[1],
@@ -196,8 +221,8 @@ console.log('전역 memberId:' + memberNo);
 
     $('#rere-cancel-btn').click(function(){
       $('#rere-form').find('textarea').val('');
-//      $("#rere-form").reset();
       rereForm.hide();
+      location.reload();
     }) // click
 
   }) // on
@@ -208,50 +233,50 @@ console.log('전역 memberId:' + memberNo);
 }));
 
 
-$(document.body).bind('loaded-list', () => {
-  $('#return-indext-btn').click(function(){
-    location.href = 'index.html';
-  });
+    $(document.body).bind('loaded-list', () => {
+      $('#return-indext-btn').click(function(){
+        location.href = 'index.html';
+      });
 
-  // 게시판 수정
-  $('#board-update-btn').click(function(){
-    $.post('/bitcamp-team-project/app/json/board/update', {
-      no: no,
-      title: $('#title').val(),
-      contents: $('#contents').val()
-    }, function(data) {
-      headers: ("Content-Type", "application/x-www-form-urlencoded");
-    if(data.status == 'success'){
-      location.href='index.html';
-    } else alert("수정 실패\n" + data.message);
-    }) // post
-  }); // click
+      // 게시판 수정
+      $('#board-update-btn').click(function(){
+        $.post('/bitcamp-team-project/app/json/board/update', {
+          no: no,
+          title: $('#title').val(),
+          contents: $('#contents').val()
+        }, function(data) {
+          headers: ("Content-Type", "application/x-www-form-urlencoded");
+        if(data.status == 'success'){
+          location.href='index.html';
+        } else alert("수정 실패\n" + data.message);
+        }) // post
+      }); // click
 
-  // 게시판 삭제
-  $('#board-delete-btn').click(function(){
-    $.get('/bitcamp-team-project/app/json/board/delete?no=' + param.split('=')[1], (obj) => {
-      if(obj.status == 'success'){
-        location.href='index.html';
-      } else alert('삭제 실패 \n' +  obj.message)
-    }) // post
-  });// click
+      // 게시판 삭제
+      $('#board-delete-btn').click(function(){
+        $.get('/bitcamp-team-project/app/json/board/delete?no=' + param.split('=')[1], (obj) => {
+          if(obj.status == 'success'){
+            location.href='index.html';
+          } else alert('삭제 실패 \n' +  obj.message)
+        }) // post
+      });// click
 
-  // 댓글 등록
-  $('#reply-add-btn').click(function(){
-    $.get('../../app/json/auth/user', function(data) {
-      $.post('/bitcamp-team-project/app/json/board/addReply', {
-        boardId: no,
-        parentId: 0,
-        memberId: data.user.no,
-        depth: 0,
-        memberName: data.user.nickName, 
-        contents: $('#reply-content').val()
-      }, function(data) {
-        headers: ("Content-Type", "application/x-www-form-urlencoded");
-      if(data.status == 'success'){
-        location.reload();
-      } else alert("답글 등록 실패\n" + data.message);
-      }) // post
-    }) // get
-  }); // click
-}); // bind
+      // 댓글 등록
+      $('#reply-add-btn').click(function(){
+        $.get('../../app/json/auth/user', function(data) {
+          $.post('/bitcamp-team-project/app/json/board/addReply', {
+            boardId: no,
+            parentId: 0,
+            memberId: data.user.no,
+            depth: 0,
+            memberName: data.user.nickName, 
+            contents: $('#reply-content').val()
+          }, function(data) {
+            headers: ("Content-Type", "application/x-www-form-urlencoded");
+          if(data.status == 'success'){
+            location.reload();
+          } else alert("답글 등록 실패\n" + data.message);
+          }) // post
+        }) // get
+      }); // click
+    }); // bind

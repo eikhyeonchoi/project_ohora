@@ -16,7 +16,7 @@
       <id     column="tip_no"         property="no"/>
       <result column="product_no"     property="productNo"/>
       <result column="member_no"      property="memberNo"/>
-      <result column="orderConts"     property="contents"/>
+      <result column="olderConts"     property="contents"/>
       <result column="cdt"            property="createdDate"/>
       <association property="product" javaType="product">
         <id     column="product_no"   property="no"/>
@@ -38,7 +38,7 @@
       h.nickName,
       t.product_no,
       t.member_no,
-      t.conts as orderConts,
+      t.conts as olderConts,
       t.cdt,
       p.name,
       m.n_name

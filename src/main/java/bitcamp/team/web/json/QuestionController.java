@@ -21,6 +21,7 @@ public class QuestionController {
     List<Question> questions = questionService.list();
     HashMap<String,Object> content = new HashMap<>();
     System.out.println(questions);
+    System.out.println(questions);
     content.put("list", questions);
 
     return content;

@@ -34,9 +34,11 @@ $('#add-btn').click(() => {
     title: $('#title').val(), 
     contents: $('#contents').val()
   }, function(data) {
+    $('.bit-view-item').hide();
     if(data.status == 'fail'){
       alert('등록 실패입니다!\n' + data.message);
     } else {
+      $('.bit-view-item').show();
       location.href = "index.html";
     }
   })
@@ -60,7 +62,7 @@ $('#update-btn').click(() => {
     title: $('#title').val(), 
     contents: $('#contents').val()
   }, function() {
-
+  
   })
   .done(function() {
     location.href = "index.html";

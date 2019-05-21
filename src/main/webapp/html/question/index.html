@@ -12,8 +12,9 @@
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>문의 내역</h1>
+    <h1 style="text-align: center;">문의 내역</h1>
     <p>
+      <button id="delete-btn" type="button" class="btn btn-success btn-sm">선택 삭제</button>
       <button id="add-btn" type="button" class="btn btn-success btn-sm">문의 하기</button>
     </p>
     <div class="bit-list">
@@ -35,15 +36,15 @@
     <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
     <tr>
-      <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link fboard-detail' href='#' data-no='{{no}}'>{{title}}</a></td>
+      <th scope='row'>[{{questionType.name}}]</th>
+      <td><a class='bit-view-link my-link' href='#' data-no='{{no}}'>{{title}}</a></td>
       <td scope='row'>{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
-      <td scope='row'>{{viewCount}}</td>
+      <td scope='row'>{{status}}</td>
+      <td><input type="checkbox" name="user_CheckBox" ></td>
     </tr>
   {{/each}}
   </script>
-
   </div>
   <!-- .container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>

@@ -14,7 +14,9 @@ nextPageLi = $('#nextPage');
 function loadList(pn) {
 $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo + 
     '&pageSize=' + pageSize +
-    '&pageNo=' + pn, (obj) => {
+    '&pageNo=' + pn +
+    '&keyword=' + $('#keyword').val() + 
+    '&searchType=' + $('#searchType').val(), (obj) => {
       
       console.log(detailNo);
       //page
@@ -170,7 +172,15 @@ $('#nextPage > a').click((e) => {
 
 loadList(1);
 
-
+// 검색
+$('#search-btn').click((e) => {
+  $('#1stPage > a').text(1);
+  $('#2ndPage > a').text(2);
+  $('#3thPage > a').text(3);
+  $('#4thPage > a').text(4);
+  $('#5thPage > a').text(5);
+  loadList(1);
+});
 
 ($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
     if(obj.status == 'fail') {
