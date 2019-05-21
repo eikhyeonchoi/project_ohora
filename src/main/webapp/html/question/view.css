@@ -1,0 +1,44 @@
+h3 {
+	text-align: center;
+}
+
+.bit-input {
+	border: 0px;
+	width: 250px;
+}
+
+#bit-input1 {
+	margin-left: 5px;
+}
+
+#bit-input2 {
+	text-align: center;
+}
+
+#bit-input3 {
+	text-align: right;
+}
+
+.my-hr {
+	border: 0px;
+	height: 3px;
+	background-color: black;
+}
+
+hr {
+	border: 0px;
+	height: 1px;
+	background-color: gray;
+}
+
+.my-class-title {
+	width: 680px;
+	height: 40px;
+  font-weight: bold;
+}
+
+.my-text {
+	padding: 5px;
+	resize: none;
+}
+

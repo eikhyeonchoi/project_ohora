@@ -23,7 +23,7 @@ public class MemberController {
   public Object add(Member member, HttpSession session) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (member.getType().equals("기업 회원")) {
+      if (member.getType().equals("2")) {
         session.setAttribute("companyMember", member);
       } else {
         memberService.add(member);

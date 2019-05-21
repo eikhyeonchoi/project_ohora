@@ -35,9 +35,9 @@ $(document).ready(function() {
   who = window.localStorage.getItem('who')
   if (who == "company") {
     $('#add-btn').html("다음");
-    type = "기업 회원";
+    type = "2";
   } else {
-    type = "일반 회원";
+    type = "1";
   }
   ranNo.hide();
   $("#ranNo-btn").hide();
