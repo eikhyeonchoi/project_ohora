@@ -93,12 +93,11 @@ public class BoardController {
   public Object add(BoardReply boardReply) {
     HashMap<String, Object> content = new HashMap<>();
     try {
-      System.out.println(boardReply);
-      String name = boardReply.getMemberName();
-
-      boardReply.setMemberId(memberService.getNo(name));
       if (boardReply.getContents() == "")
         throw new Exception("내용을 입력하지 않았습니다");
+
+      if (boardReply.getMemberId() == 0)
+        throw new RuntimeException("댓글을 쓸 권한이 없습니다.\n로그인 후 입력해주세요");
 
       if (boardReply.getDepth() != 0) {
         String con = "ㄴ " + boardReply.getContents();

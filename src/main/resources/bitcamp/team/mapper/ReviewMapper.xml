@@ -36,7 +36,7 @@
   </select>
 
 
-  <select id="findByNo" resultMap="reviewMap" parameterType="int">
+  <select id="findByNo" resultMap="reviewMap" parameterType="map">
     select
       r.rv_no as rno,
       r.name as reviewName,
@@ -47,7 +47,26 @@
       review r
       join member m on m.member_no = r.member_no
     where
-      r.product_no = #{value};
+      r.product_no = #{selectNo}
+      
+    <if test="searchType == 'title' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and r.name like #{pattern1}
+    </if>
+    <if test="searchType == 'contents' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and conts like #{pattern1}
+    </if>
+    <if test="searchType == 'all' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+       and r.name  like #{pattern1} or
+           conts like #{pattern1}
+    </if>
+    
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+      
   </select>
   
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
@@ -88,15 +107,6 @@
       <if test="title != null">name = #{title}</if>,
       <if test="contents != null">conts = #{contents}</if>
     </set>
-    where
-      rv_no = #{no};
-  </update>
-  
-  <update id="updateCount" parameterType="String">
-    update
-      review
-    set
-      cnt = cnt + 1
     where
       rv_no = #{no};
   </update>
