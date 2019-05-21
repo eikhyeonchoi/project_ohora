@@ -7,7 +7,7 @@
 var nonMemberDiv = $('#non-member-div'),
 memberDiv = $('#common-member-div'),
 managerAndCompanyDiv = $('#company-manager-div'),
-fileDiv = $('images-div');
+fileDiv = $('#images-div');
 
 var tipBtn = $('#go-tip-btn');
 
@@ -93,10 +93,11 @@ $(document).ready(function(){
   }) // get
   
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
-    console.log(data.pList);
     if (data.status == 'success') {
       alert('성공했습니다!');
-      $('<img>').attr('src', data.pList.preview.toDataURL()).css('width', '100px').appendTo(fileDiv);
+      for (var i = 0; i < data.pList.productFiles.length; i++) {
+        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[0].img).appendTo(fileDiv);
+      }
     } else {
       alert('실패했습니다!\n' + data.error);
     }

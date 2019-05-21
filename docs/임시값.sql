@@ -342,11 +342,11 @@ insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시
 insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시값2');
 
 -- question_category 임시값 '질문 카테고리' (자주묻는질문)
-insert into question_category(name) values('질문 유형 1');
-insert into question_category(name) values('질문 유형 2');
-insert into question_category(name) values('질문 유형 3');
-insert into question_category(name) values('질문 유형 4');
-insert into question_category(name) values('질문 유형 5');
+insert into faq_type(name) values('질문 유형 1');
+insert into faq_type(name) values('질문 유형 2');
+insert into faq_type(name) values('질문 유형 3');
+insert into faq_type(name) values('질문 유형 4');
+insert into faq_type(name) values('질문 유형 5');
 
 --manufacturer 임시값 "제조사"
 insert into manufacturer(reg_no, name, tel, homepage) values('111-11-11111', '삼성전자','1234-1234', 'https://www.samsung.com/'); --1
