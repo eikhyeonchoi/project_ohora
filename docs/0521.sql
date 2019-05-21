@@ -70,9 +70,6 @@ DROP TABLE IF EXISTS manual_file RESTRICT;
 -- 자게 첨부파일
 DROP TABLE IF EXISTS fboard_file RESTRICT;
 
--- 구성품
-DROP TABLE IF EXISTS component RESTRICT;
-
 -- 매뉴얼댓글추천
 DROP TABLE IF EXISTS manual_rcm RESTRICT;
 
@@ -82,17 +79,11 @@ DROP TABLE IF EXISTS review_rcm RESTRICT;
 -- 자유게시판댓글 추천
 DROP TABLE IF EXISTS fboard_rcm RESTRICT;
 
--- 주의사항
-DROP TABLE IF EXISTS precautions RESTRICT;
-
--- 임시 테이블
+-- 고객문의파일
 DROP TABLE IF EXISTS question_file RESTRICT;
 
--- 임시 테이블2
+-- 답변 파일
 DROP TABLE IF EXISTS answer_file RESTRICT;
-
--- 구성품2
-DROP TABLE IF EXISTS basic RESTRICT;
 
 -- 메뉴얼 페이지 타입
 DROP TABLE IF EXISTS manual_type RESTRICT;
@@ -375,7 +366,7 @@ CREATE TABLE question (
   conts     TEXT         NOT NULL, -- 질문 내용
   cdt       DATETIME     NULL     DEFAULT CURRENT_TIMESTAMP, -- 작성일
   titl      VARCHAR(100) NOT NULL, -- 제목
-  status    VARCHAR(50)  NOT NULL DEFAULT "답변 대기중" -- 상태
+  status    VARCHAR(50)  NOT NULL DEFAULT default "답변 대기중" -- 상태
 );
 
 -- 고객문의
@@ -596,23 +587,6 @@ ALTER TABLE fboard_file
 ALTER TABLE fboard_file
   MODIFY COLUMN fb_file_no INTEGER NOT NULL AUTO_INCREMENT;
 
--- 구성품
-CREATE TABLE component (
-  cmp_no    INTEGER     NOT NULL, -- 구성품번호
-  manual_no INTEGER     NOT NULL, -- 메뉴얼번호
-  name      VARCHAR(50) NOT NULL  -- 제목
-);
-
--- 구성품
-ALTER TABLE component
-  ADD CONSTRAINT PK_component -- 구성품 기본키
-    PRIMARY KEY (
-      cmp_no -- 구성품번호
-    );
-
-ALTER TABLE component
-  MODIFY COLUMN cmp_no INTEGER NOT NULL AUTO_INCREMENT;
-
 -- 매뉴얼댓글추천
 CREATE TABLE manual_rcm (
   member_no INTEGER NOT NULL, -- 회원 번호
@@ -655,33 +629,16 @@ ALTER TABLE fboard_rcm
       fb_cmt_no  -- 자유게시판 댓글 번호
     );
 
--- 주의사항
-CREATE TABLE precautions (
-  pcautions_no INTEGER     NOT NULL, -- 주의사항번호
-  manual_no    INTEGER     NOT NULL, -- 메뉴얼번호
-  titl         VARCHAR(50) NOT NULL  -- 제목
-);
-
--- 주의사항
-ALTER TABLE precautions
-  ADD CONSTRAINT PK_precautions -- 주의사항 기본키
-    PRIMARY KEY (
-      pcautions_no -- 주의사항번호
-    );
-
-ALTER TABLE precautions
-  MODIFY COLUMN pcautions_no INTEGER NOT NULL AUTO_INCREMENT;
-
--- 임시 테이블
+-- 고객문의파일
 CREATE TABLE question_file (
   question_file_no INTEGER      NOT NULL, -- 파일번호
   q_no             INTEGER      NOT NULL, -- 질문 번호
   file_path        VARCHAR(255) NOT NULL  -- 첨부파일
 );
 
--- 임시 테이블
+-- 고객문의파일
 ALTER TABLE question_file
-  ADD CONSTRAINT PK_question_file -- 임시 테이블 기본키
+  ADD CONSTRAINT PK_question_file -- 고객문의파일 기본키
     PRIMARY KEY (
       question_file_no -- 파일번호
     );
@@ -689,36 +646,22 @@ ALTER TABLE question_file
 ALTER TABLE question_file
   MODIFY COLUMN question_file_no INTEGER NOT NULL AUTO_INCREMENT;
 
--- 임시 테이블2
+-- 답변 파일
 CREATE TABLE answer_file (
   answer_file_no INTEGER      NOT NULL, -- 새 컬럼
   ans_no         INTEGER      NOT NULL, -- 답변 번호
   file_path      VARCHAR(255) NOT NULL  -- 첨부파일
 );
 
--- 임시 테이블2
+-- 답변 파일
 ALTER TABLE answer_file
-  ADD CONSTRAINT PK_answer_file -- 임시 테이블2 기본키
+  ADD CONSTRAINT PK_answer_file -- 답변 파일 기본키
     PRIMARY KEY (
       answer_file_no -- 새 컬럼
     );
 
 ALTER TABLE answer_file
   MODIFY COLUMN answer_file_no INTEGER NOT NULL AUTO_INCREMENT;
-
--- 구성품2
-CREATE TABLE basic (
-  cmp_no    INTEGER     NOT NULL, -- 기본메뉴얼번호
-  manual_no INTEGER     NOT NULL, -- 메뉴얼번호
-  name      VARCHAR(50) NOT NULL  -- 제목
-);
-
--- 구성품2
-ALTER TABLE basic
-  ADD CONSTRAINT PK_basic -- 구성품2 기본키
-    PRIMARY KEY (
-      cmp_no -- 기본메뉴얼번호
-    );
 
 -- 메뉴얼 페이지 타입
 CREATE TABLE manual_type (
@@ -1013,16 +956,6 @@ ALTER TABLE fboard_file
       fb_no -- 게시물 번호
     );
 
--- 구성품
-ALTER TABLE component
-  ADD CONSTRAINT FK_manual_TO_component -- 매뉴얼 -> 구성품
-    FOREIGN KEY (
-      manual_no -- 메뉴얼번호
-    )
-    REFERENCES manual ( -- 매뉴얼
-      manual_no -- 메뉴얼번호
-    );
-
 -- 매뉴얼댓글추천
 ALTER TABLE manual_rcm
   ADD CONSTRAINT FK_member_TO_manual_rcm -- 회원 -> 매뉴얼댓글추천
@@ -1083,19 +1016,9 @@ ALTER TABLE fboard_rcm
       fb_cmt_no -- 자유게시판 댓글 번호
     );
 
--- 주의사항
-ALTER TABLE precautions
-  ADD CONSTRAINT FK_manual_TO_precautions -- 매뉴얼 -> 주의사항
-    FOREIGN KEY (
-      manual_no -- 메뉴얼번호
-    )
-    REFERENCES manual ( -- 매뉴얼
-      manual_no -- 메뉴얼번호
-    );
-
--- 임시 테이블
+-- 고객문의파일
 ALTER TABLE question_file
-  ADD CONSTRAINT FK_question_TO_question_file -- 고객문의 -> 임시 테이블
+  ADD CONSTRAINT FK_question_TO_question_file -- 고객문의 -> 고객문의파일
     FOREIGN KEY (
       q_no -- 질문 번호
     )
@@ -1103,22 +1026,12 @@ ALTER TABLE question_file
       q_no -- 질문 번호
     );
 
--- 임시 테이블2
+-- 답변 파일
 ALTER TABLE answer_file
-  ADD CONSTRAINT FK_answer_TO_answer_file -- 고객문의답변 -> 임시 테이블2
+  ADD CONSTRAINT FK_answer_TO_answer_file -- 고객문의답변 -> 답변 파일
     FOREIGN KEY (
       ans_no -- 답변 번호
     )
     REFERENCES answer ( -- 고객문의답변
       ans_no -- 답변 번호
-    );
-
--- 구성품2
-ALTER TABLE basic
-  ADD CONSTRAINT FK_manual_TO_basic -- 매뉴얼 -> 구성품2
-    FOREIGN KEY (
-      manual_no -- 메뉴얼번호
-    )
-    REFERENCES manual ( -- 매뉴얼
-      manual_no -- 메뉴얼번호
     );
