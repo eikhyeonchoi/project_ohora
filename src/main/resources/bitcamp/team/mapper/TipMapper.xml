@@ -88,6 +88,7 @@
       <if test="prodName != null">or p.name like #{pattern1}</if>
       <if test="memName != null">or m.n_name like #{pattern1}</if>
       <if test="cont != null">or conts like #{pattern1}</if>
+      <if test="prodConts != null">or p.name like #{pattern1} and conts like #{pattern1}</if>
     </where>
   </select>
 </mapper>

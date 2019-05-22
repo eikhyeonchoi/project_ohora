@@ -16,4 +16,5 @@ public interface ProductDao {
   Product findNoByName(String name);
   Product findByNo(int no);
   Product findFileByNo(int no);
+  int update(Product product);
 }

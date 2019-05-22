@@ -96,7 +96,7 @@ $(document).ready(function(){
     if (data.status == 'success') {
       alert('성공했습니다!');
       for (var i = 0; i < data.pList.productFiles.length; i++) {
-        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[0].img).appendTo(fileDiv);
+        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[i].img).appendTo(fileDiv);
       }
     } else {
       alert('실패했습니다!\n' + data.error);
@@ -124,6 +124,10 @@ $(document).bind('loaded-user', function() {
   })
 
 }) // bind
+
+$('#go-product-update-btn').click(function() {
+  location.href = 'update.html?no=' + productNo;
+})
 
 function getQuerystring(key, default_) {
   if (default_==null) default_=""; 

@@ -80,6 +80,20 @@ public class ProductServiceImpl implements ProductService{
   public Product getFile(int no) {
     return productDao.findFileByNo(no);
   }
+
+  @Override
+  public int update(Product product) {
+    if (product.getName() != null) {
+      productDao.update(product);
+    }
+    
+    List<ProductFile> productFiles = product.getProductFiles();
+    if (productFiles != null) {
+      productFileDao.deleteByProductNo(product.getNo());
+      productFileDao.insert(productFiles);
+    }
+    return 1;
+  }
 }
 
 
