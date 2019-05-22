@@ -20,11 +20,15 @@ public class QuestionController {
   public Object list() throws Exception {
     List<Question> questions = questionService.list();
     HashMap<String,Object> content = new HashMap<>();
-    System.out.println(questions);
-    System.out.println(questions);
     content.put("list", questions);
 
     return content;
+  }
+
+  @GetMapping("detail")
+  public Object detail(int no) throws Exception {
+    Question question = questionService.get(no);
+    return question;
   }
 
 }

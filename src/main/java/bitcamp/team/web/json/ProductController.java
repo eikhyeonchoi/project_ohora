@@ -170,5 +170,35 @@ public class ProductController {
     }
     return content;
   } // add
-
+  
+  @PostMapping("update")
+  public Object update(Product product, Part[] productFile) {
+    this.uploadDir = servletContext.getRealPath("/upload/productfile");
+    HashMap<String,Object> contents = new HashMap<>();
+    ArrayList<ProductFile> files = new ArrayList<>();
+    try {
+      for (Part part : productFile) {
+        if (part.getSize() == 0) {
+          continue;
+        }
+        String filename = UUID.randomUUID().toString();
+        part.write(uploadDir + "/" + filename);
+        
+        ProductFile pfiles = new ProductFile();
+        pfiles.setImg(filename);
+        pfiles.setProductNo(product.getNo());
+        files.add(pfiles);
+      }
+      product.setProductFiles(files);
+      if (files.size() == 0) {
+        throw new RuntimeException("최소 한 개 이상의 제품 사진을 등록해야 합니다.");
+      }
+      productService.update(product);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
 }

@@ -155,17 +155,11 @@ public class TipController {
     try {
       List<Tip> searchList = new ArrayList<>();
       switch (searchType) {
-        case "prodName":
-          nums.put("prodName", searchType);
-          break;
-        case "memName":
-          nums.put("memName", searchType);
-          break;
-        case "cont":
-          nums.put("cont", searchType);
-          break;
-        default:
-          nums.put("error", "empty");
+        case "prodName": nums.put("prodName", searchType); break;
+        case "memName": nums.put("memName", searchType); break;
+        case "cont": nums.put("cont", searchType); break;
+        case "prodConts": nums.put("prodConts", searchType); break;
+        default: nums.put("error", "empty");
       }
       nums.put("keyword", keyword);
       searchList = tipService.search(nums);

@@ -341,7 +341,7 @@ insert into product(sctg_no, manufac_no, name) values(15,9,'AMD 냉장고 임시
 insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시값1');
 insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시값2');
 
--- question_category 임시값 '질문 카테고리' (자주묻는질문)
+-- faq_type 임시값 '질문 카테고리' (자주묻는질문)
 insert into faq_type(name) values('질문 유형 1');
 insert into faq_type(name) values('질문 유형 2');
 insert into faq_type(name) values('질문 유형 3');
@@ -358,9 +358,9 @@ insert into manufacturer(reg_no, name, tel, homepage) values('666-66-66666', '�
 insert into manufacturer(reg_no, name, tel, homepage) values('777-77-77777', '소니코리아','8602-1234', 'https://www.sony.co.kr/'); --7
 insert into manufacturer(reg_no, name, tel, homepage) values('888-88-88888', '인텔','5621-1234', 'https://www.intel.co.kr/'); --8
 insert into manufacturer(reg_no, name, tel, homepage) values('999-99-9999', 'AMD','5832-1234', 'https://www.amd.com/ko'); --9
-insert into manufacturer(reg_no, name, tel, homepage, member_no) values('111-44-777', 'bit-1','3424-1234', 'https://www.bit.com/ko', 4); --10
-insert into manufacturer(reg_no, name, tel, homepage, member_no) values('222-55-888', 'bit-2','2321-1234', 'https://www.camp.com/ko', 5); --11
-insert into manufacturer(reg_no, name, tel, homepage, member_no) values('333-66-9999', 'bit-3','6431-1234', 'https://www.ohora.com/ko', 6); --12
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('111-44-777', 'bit-1','3424-1234', 'https://www.bit.com/ko', 1); --10
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('222-55-888', 'bit-2','2321-1234', 'https://www.camp.com/ko', 1); --11
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('333-66-9999', 'bit-3','6431-1234', 'https://www.ohora.com/ko', 1); --12
 
 
 
