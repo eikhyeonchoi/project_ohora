@@ -17,34 +17,48 @@
       <h3></h3>
       <hr class="my-hr">
       <span> 
-      <label id="bit-input1" class="bit-input">테스트1</label> 
-      <label id="bit-input2" class="bit-input">문의 내용</label> 
-      <label id="bit-input3" class="bit-input">테스트3</label>
+      <label id="bit-qes-label1" class="bit-label"></label> 
+      <label id="bit-qes-label2" class="bit-label">문의 내용</label> 
+      <label id="bit-qes-label3" class="bit-label">테스트3</label>
       </span>
       <hr>
       <div class="col-sm-10">
-        <input type="text" class="my-class-title" id="memberNo" value="" placeholder=" 제목을 입력하세요.">
+        <input type="text" class="my-class-title" id="question-title" value=""
+          placeholder=" 제목을 입력하세요." readonly="readonly">
       </div>
       <br>
       <div class="col-sm-10">
-        <textarea class="my-text" id="question-content" rows="20" cols="90" placeholder=" 내용을 입력하세요."></textarea>
+        <textarea class="my-text" id="question-content" rows="20" cols="90"
+          placeholder=" 내용을 입력하세요." readonly="readonly"></textarea>
+      </div>
+      <div id="file-div">
+        <br>
+        <p id="file-p">첨부파일</p>
+        <p><button type="button">취소하기</button>&nbsp;<input type="file"></p>
+        <p><button type="button">취소하기</button>&nbsp;<input type="file"></p>
+        <p><button type="button">취소하기</button>&nbsp;<input type="file"></p>
       </div>
       <hr class="my-hr">
       <span> 
-      <label id="bit-input1" class="bit-input">테스트1</label> 
-      <label id="bit-input2" class="bit-input">답변 내용</label> 
-      <label id="bit-input3" class="bit-input">테스트3</label>
+      <label id="bit-ans-label1" class="bit-label"></label> 
+      <label id="bit-ans-label2" class="bit-label">답변 내용</label> 
+      <label id="bit-ans-label3" class="bit-label"></label>
       </span>
       <hr>
-      <div class="col-sm-10">
-        <input type="text" class="my-class-title" id="memberNo" readonly
-          value="">
-      </div>
       <br>
       <div class="col-sm-10">
-        <textarea class="my-text" id="answer-content" rows="20" cols="90">등록된 답변이 없습니다.</textarea>
+        <textarea class="my-text" id="answer-content" rows="20" cols="90" readonly="readonly"></textarea>
       </div>
     </form>
+    <br><br>
+    <div class="form-group row">
+    <div class="col-sm-10">
+      <a class="btn btn-primary" href='index.html'>목록</a> 
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
+      <button type="button" id="update-btn" class="btn btn-primary bit-view-item">변경</button>
+      <button type="button" id="add-btn" class="btn btn-primary bit-new-item">등록</button>
+    </div>
+  </div>
   </div>
   <!-- container -->
 
