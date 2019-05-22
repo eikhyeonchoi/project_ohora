@@ -8,10 +8,11 @@ import bitcamp.team.domain.Product;
 public interface ProductService {
   List<Product> list(Map<String, Object> param);
   List<Manufacturer> listManufacturer();
+  List<Product> getList(String name);
   Map<String, Object> findCategory();
   int add(Product product);
-  List<Product> getList(String name);
   int getNo(String name);
+  int update(Product product);
   String get(int no);
   Product getFile(int no);
 }

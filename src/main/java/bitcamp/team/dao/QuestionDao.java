@@ -6,4 +6,5 @@ import bitcamp.team.domain.Question;
 public interface QuestionDao {
 
   List<Question> findAll();
+  Question findByNo(int no);
 }

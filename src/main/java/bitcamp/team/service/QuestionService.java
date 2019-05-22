@@ -6,4 +6,5 @@ import bitcamp.team.domain.Question;
 public interface QuestionService {
 
   List<Question> list();
+  Question get(int no);
 }

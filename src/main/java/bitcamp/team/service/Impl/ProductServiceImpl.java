@@ -14,11 +14,11 @@ import bitcamp.team.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService{
- 
+
   ProductDao productDao;
   ManufacturerDao manufacturerDao;
   ProductFileDao productFileDao;
-  
+
   public ProductServiceImpl(
       ProductDao productDao, 
       ManufacturerDao manufacturerDao,
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService{
   @Override
   public List<Manufacturer> listManufacturer() {
     return manufacturerDao.findAllUseProductAdd();
-    
+
   }
 
   @Override
@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService{
       f.setProductNo(product.getNo());
     }
     productFileDao.insert(product.getProductFiles());
-    
+
     return count;
   }
 
@@ -64,28 +64,37 @@ public class ProductServiceImpl implements ProductService{
     Product product = productDao.findNoByName(name);
     return product.getNo();
   }
-  
+
   @Override
   public List<Product> getList(String name) {
     return productDao.findNoByNameList(name);
   }
-  
+
   @Override
   public String get(int no) {
     Product product = productDao.findByNo(no);
     return product.getName();
   }
-  
+
   @Override
   public Product getFile(int no) {
     return productDao.findFileByNo(no);
   }
+
+  @Override
+  public int update(Product product) {
+    if (product.getName() != null) {
+      productDao.update(product);
+    }
+
+    List<ProductFile> productFiles = product.getProductFiles();
+    if (productFiles != null) {
+      productFileDao.deleteByProductNo(product.getNo());
+      productFileDao.insert(productFiles);
+    }
+    return 1;
+  }
 }
-
-
-
-
-
 
 
 

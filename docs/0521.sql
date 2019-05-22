@@ -1035,3 +1035,5 @@ ALTER TABLE answer_file
     REFERENCES answer ( -- 고객문의답변
       ans_no -- 답변 번호
     );
+    
+    

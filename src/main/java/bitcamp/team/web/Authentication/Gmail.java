@@ -33,7 +33,6 @@ public class Gmail {
     try {
       MimeMessage message = new MimeMessage(session);
       message.setFrom(new InternetAddress(user));
-      System.out.println("이메일" + message.getFrom()[0]);
 
       // 수신자메일주소
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); 

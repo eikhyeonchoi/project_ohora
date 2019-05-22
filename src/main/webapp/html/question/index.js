@@ -15,7 +15,6 @@ $(document).ready(function() {
 $(document.body).bind('loaded-list', () => {
   $('.bit-view-link').click((e) => {
     e.preventDefault();
-    alert("호출!");
     location.href = 'view.html?no=' + $(e.target).attr('data-no');
   });
 });

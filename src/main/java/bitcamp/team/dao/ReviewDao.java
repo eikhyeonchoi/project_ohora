@@ -12,6 +12,7 @@ public interface ReviewDao {
   int increaseCount(int no);
   int delete(int no);
   int update(Review review);
+  int insert(Review review);
   
   int countAll(Map<String, Object> param);
   int countPage(int no);
