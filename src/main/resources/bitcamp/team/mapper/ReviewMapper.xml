@@ -14,7 +14,7 @@
     <result column="cnt" property="viewCount" />
 
     <association property="member" javaType="member">
-      <id column="member_no" property="no" />
+      <id column="member_no" property="memberNo" />
       <result column="memberName" property="name" />
     </association>
   </resultMap>
@@ -81,6 +81,12 @@
     where 
       rv_no = #{value};
   </select>
+  
+  <insert id="insert" parameterType="review">
+    insert into review (product_no, member_no, name, conts)
+    values
+    (#{productNo},#{memberNo}, #{title}, #{contents})
+  </insert>
   
   <update id="increaseCount" parameterType="int">
     update review

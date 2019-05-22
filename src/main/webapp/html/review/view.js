@@ -1,5 +1,6 @@
 var tbody = $('tbody'),
     templateSrc = $('#select-template').html();
+var addBtn = $('#review-add-btn')
 var trGenerator = Handlebars.compile(templateSrc);
 var detailNo = getQuerystring('no');
 var productName = decodeURIComponent(getQuerystring('name'));
@@ -22,6 +23,9 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
       //page
       pageNo = obj.pageNo;
       totalPage = obj.totalPage;
+      totalCount = obj.totalCount;
+      
+      console.log(totalCount);
       
       var currpage = pageNo % 5
       
@@ -184,9 +188,11 @@ $('#search-btn').click((e) => {
 
 ($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
     if(obj.status == 'fail') {
-      $('#add-btn').hide();
+      addBtn.hide();
     } else {
-      $('#add-btn').show();
+      addBtn.click(function() {
+        location.href='add.html?no=' + detailNo;
+      })
     }
 }));
     
