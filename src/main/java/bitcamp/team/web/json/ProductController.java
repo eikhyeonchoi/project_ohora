@@ -172,16 +172,15 @@ public class ProductController {
   } // add
   
   @PostMapping("update")
-  public Object update(Product product, Part[] productFile) throws Exception {
+  public Object update(Product product, Part[] productFile) {
+    this.uploadDir = servletContext.getRealPath("/upload/productfile");
     HashMap<String,Object> contents = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
-    String uploadDir = servletContext.getRealPath("/upload/productfile");
     try {
       for (Part part : productFile) {
         if (part.getSize() == 0) {
           continue;
         }
-        
         String filename = UUID.randomUUID().toString();
         part.write(uploadDir + "/" + filename);
         
@@ -191,7 +190,6 @@ public class ProductController {
         files.add(pfiles);
       }
       product.setProductFiles(files);
-      
       if (files.size() == 0) {
         throw new RuntimeException("최소 한 개 이상의 제품 사진을 등록해야 합니다.");
       }
