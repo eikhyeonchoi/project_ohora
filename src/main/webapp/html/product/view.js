@@ -94,7 +94,6 @@ $(document).ready(function(){
   
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
-      alert('성공했습니다!');
       for (var i = 0; i < data.pList.productFiles.length; i++) {
         $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[i].img).appendTo(fileDiv);
       }

@@ -21,12 +21,13 @@ $('#fileupload').fileupload({
     console.log('done()...');
     console.log(data.result);
     if(data.result.status == 'success'){
-      alert("성공했습니다.")
+      location.href = 'view.html?no='
+          + prodNo + '&name=' + $('#productName').val();
     } else { 
       alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
     }
-    $('#cancel').click(function() {
-      alert("뒤로가기!");
-    }) // click
   }
 });
+$('#cancel-btn').click(function() {
+  history.back();
+}) // click
