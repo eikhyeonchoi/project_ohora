@@ -20,4 +20,9 @@ public class QuestionServiceImpl implements QuestionService {
     return questionDao.findAll();
   }
 
+  @Override
+  public Question get(int no) {
+    return questionDao.findByNo(no);
+  }
+
 }

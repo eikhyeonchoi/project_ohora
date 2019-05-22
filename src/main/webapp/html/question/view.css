@@ -2,21 +2,25 @@ h3 {
 	text-align: center;
 }
 
-.bit-input {
+.bit-label {
 	border: 0px;
 	width: 250px;
 }
 
-#bit-input1 {
+#bit-qes-label1, #bit-ans-label1 {
 	margin-left: 5px;
 }
 
-#bit-input2 {
+#bit-qes-label2, #bit-ans-label2 {
+	font-weight: bold;
 	text-align: center;
+	position: absolute;
 }
 
-#bit-input3 {
+#bit-qes-label3, #bit-ans-label3 {
 	text-align: right;
+	position: absolute;
+	margin-left: 260px;
 }
 
 .my-hr {
@@ -32,13 +36,24 @@ hr {
 }
 
 .my-class-title {
+	margin-left: 30px;
+	padding: 5px;
 	width: 680px;
 	height: 40px;
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .my-text {
+	margin-left: 30px;
 	padding: 5px;
 	resize: none;
 }
 
+#file-p {
+	font-weight: bold;
+	text-align: left;
+}
+
+#file-div {
+	margin-left: 50px;
+}

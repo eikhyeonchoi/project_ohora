@@ -16,6 +16,7 @@ public class Question {
   
   private QuestionType questionType;
   private Member member;
+  private Answer answer;
   
   public int getNo() {
     return no;
@@ -72,11 +73,21 @@ public class Question {
     this.member = member;
   }
   
+  public Answer getAnswer() {
+    return answer;
+  }
+  public void setAnswer(Answer answer) {
+    this.answer = answer;
+  }
+  
   @Override
   public String toString() {
     return "Question [no=" + no + ", questionNo=" + questionNo + ", memberNo=" + memberNo
         + ", title=" + title + ", contents=" + contents + ", createdDate=" + createdDate
-        + ", status=" + status + ", questionType=" + questionType + ", member=" + member + "]";
+        + ", status=" + status + ", questionType=" + questionType + ", member=" + member
+        + ", answer=" + answer + "]";
   }
 
 }
+
+

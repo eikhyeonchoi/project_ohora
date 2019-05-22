@@ -32,6 +32,11 @@
       (#{productFile.productNo}, #{productFile.img})
     </foreach>
   </insert>
+  
+  <delete id="deleteByProductNo" parameterType="int">
+    delete from product_file
+    where product_no = #{value}
+  </delete>
 </mapper>
 
 

@@ -13,6 +13,7 @@ public interface TipService {
   int delete(int no);
   int confirm(int no);
   Tip get(int no);
-  List<Tip> list();
+  List<Tip> list(int pageNo, int pageSize);
   List<Tip> search(Map<String,Object> map);
+  int size();
 }

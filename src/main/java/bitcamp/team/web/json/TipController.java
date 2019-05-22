@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
@@ -28,8 +29,25 @@ public class TipController {
   @Autowired TipHistoryService tipHistoryService;
 
   @GetMapping("list")
-  public Object list() throws Exception {
-    List<Tip> tips = tipService.list();
+  public Object list(
+      @RequestParam(defaultValue = "1") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize
+      ) throws Exception {
+    if (pageSize < 10 || pageSize > 18) {
+      pageSize = 10;
+    }
+    int rowCount = tipService.size();
+    int totalPage = rowCount / pageSize;
+    
+    if (rowCount % pageSize > 0)
+      totalPage++;
+    
+    if (pageNo > totalPage) 
+      pageNo = totalPage;
+    if (pageNo < 1)
+      pageNo = 1;
+    
+    List<Tip> tips = tipService.list(pageNo, pageSize);
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", tips);
 
@@ -155,17 +173,11 @@ public class TipController {
     try {
       List<Tip> searchList = new ArrayList<>();
       switch (searchType) {
-        case "prodName":
-          nums.put("prodName", searchType);
-          break;
-        case "memName":
-          nums.put("memName", searchType);
-          break;
-        case "cont":
-          nums.put("cont", searchType);
-          break;
-        default:
-          nums.put("error", "empty");
+        case "prodName": nums.put("prodName", searchType); break;
+        case "memName": nums.put("memName", searchType); break;
+        case "cont": nums.put("cont", searchType); break;
+        case "prodConts": nums.put("prodConts", searchType); break;
+        default: nums.put("error", "empty");
       }
       nums.put("keyword", keyword);
       searchList = tipService.search(nums);

@@ -159,6 +159,15 @@
     on p.product_no = f.product_no
     where p.product_no = #{value}
   </select>
+  
+  <update id="update" parameterType="product">
+    update product
+      <set>
+        <if test="name != null">name = #{name}</if>
+      </set>
+    where
+      product_no = #{no}
+  </update>
 </mapper>
 
 

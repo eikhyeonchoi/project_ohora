@@ -11,7 +11,7 @@ fileDiv = $('#images-div');
 
 var tipBtn = $('#go-tip-btn');
 
-var userNo = 0,
+var userNo = '0',
 productNo = getQuerystring('no'),
 productName = decodeURIComponent(getQuerystring('name'));
 
@@ -31,7 +31,6 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
     $('#product-name').append('<p>' + productName + '</p>');
-
 
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
@@ -80,10 +79,11 @@ $(document).ready(function(){
 
 
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
     userNo = obj.user.no;
-    if (obj.user.type == 1) {
+    if (obj.user.type == '1') {
       memberDiv.show();
-    } else if (obj.user.type == 2 || obj.user.type == 3) {
+    } else if (obj.user.type == '2' || obj.user.type == '3') {
       memberDiv.show();
       managerAndCompanyDiv.show();
     }
@@ -94,9 +94,8 @@ $(document).ready(function(){
   
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
-      alert('성공했습니다!');
       for (var i = 0; i < data.pList.productFiles.length; i++) {
-        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[0].img).appendTo(fileDiv);
+        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[i].img).appendTo(fileDiv);
       }
     } else {
       alert('실패했습니다!\n' + data.error);
@@ -124,6 +123,10 @@ $(document).bind('loaded-user', function() {
   })
 
 }) // bind
+
+$('#go-product-update-btn').click(function() {
+  location.href = 'update.html?no=' + productNo;
+})
 
 function getQuerystring(key, default_) {
   if (default_==null) default_=""; 

@@ -28,18 +28,40 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="form-group row">
-      <select id="searchTag" name="searchTag">
-        <option value="">검색조건</option>
-        <option id="prodName" value="prodName">제품명</option>
-        <option id="memName" value="memName">작성자</option>
-        <option id="conts" value="cont">내용</option>
-      </select>
-      <div class="col-sm-5">
-        <input type="text" class="form-control-plaintext" id="search" name='search' placeholder="검색">
+
+    <div class="form-inline my-2 my-lg-0 justify-content-center">
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <div class="input-group mr-3">
+            <select id="searchTag" name="searchTag" class="custom-select">
+              <option value="">검색조건</option>
+              <option id="prodName" value="prodName">제품명</option>
+              <option id="memName" value="memName">작성자</option>
+              <option id="conts" value="cont">내용</option>
+              <option id="prodConts" value="cont">제품명 + 내용</option>
+            </select>
+          </div>
+        </div>
       </div>
+      <input type="text" class="form-control" id="search" name='search' placeholder="검색">
       <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
     </div>
+
+    <nav aria-label="목록 페이지 이동">
+      <ul class="pagination justify-content-center">
+        <li id="prevPage" class="page-item bt-prevPage"><a class="page-link"
+          href="?pageNo=0&pageSize=3"
+        >이전</a></li>
+        <li id="1stPage" class="page-item"><a class="page-link" href="#">1</a></li>
+        <li id="2ndPage" class="page-item"><a class="page-link" href="#">2</a></li>
+        <li id="3thPage" class="page-item"><a class="page-link" href="#">3</a></li>
+        <li id="4thPage" class="page-item"><a class="page-link" href="#">4</a></li>
+        <li id="5thPage" class="page-item"><a class="page-link" href="#">5</a></li>
+        <li id="nextPage" class="page-item bt-nextPage"><a class="page-link"
+          href="?pageNo=2&pageSize=3"
+        >다음</a></li>
+      </ul>
+    </nav>
 
     <script id="tr-template" type="text/x-handlebars-template">
     {{#each list}}

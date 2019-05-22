@@ -66,7 +66,6 @@ public class FboardController {
   public Object list() throws Exception {
     List<Fboard> boards = boardService.list();
     HashMap<String,Object> map = new HashMap<>();
-    System.out.println(boards);
     map.put("list", boards);
 
     return map;

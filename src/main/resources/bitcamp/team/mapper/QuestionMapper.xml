@@ -8,8 +8,8 @@
     <id column="q_no" property="no" />
     <result column="qtype_no" property="questionNo" />
     <result column="member_no" property="memberNo" />
-    <result column="titl" property="title" />
     <result column="conts" property="contents" />
+    <result column="titl" property="title" />
     <result column="cdt" property="createdDate" />
     <result column="status" property="status" />
   </resultMap>
@@ -30,6 +30,11 @@
     <association property="questionType" javaType="questionType">
       <id column="qtype_no" property="no" />
       <result column="typeName" property="name" />
+    </association>
+    <association property="answer" javaType="answer">
+      <id column="ans_no" property="no"/>
+      <result column="answerConts" property="content"/>
+      <result column="answerDate" property="createdDate"/>
     </association>
   </resultMap>
 
@@ -53,6 +58,26 @@
     q_no desc
   </select>
 
+  <select id="findByNo" resultMap="questionTypeMap" parameterType="int">
+    select 
+    q.titl,
+    q.cdt,
+    q.status,
+    q.conts,
+    m.n_name,
+    a.conts as answerConts,
+    a.cdt as answerDate
+  from
+    question q
+  left outer join
+    member m
+  on q.member_no = m.member_no
+  left outer join
+    answer a
+  on q.q_no = a.q_no
+    where 
+  q.q_no = #{value}
+  </select>
 </mapper>
 
 
