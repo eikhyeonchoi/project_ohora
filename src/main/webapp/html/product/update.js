@@ -6,9 +6,7 @@ $('#fileupload').fileupload({
   sequentialUploads: true,
   singleFileUploads: false,   
   add: function (e, data) {
-    $.each(data.productFiles, function (index, file) {
-      console.log('Added file: ' + file.name);
-    });
+    console.log('add!');
     $('#update-btn').click(function() {
       data.formData = {
           no: prodNo,
