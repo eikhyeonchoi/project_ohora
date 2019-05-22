@@ -77,8 +77,11 @@ public class NoticeController {
 
     List<Notice> notice = noticeService.list(pageNo, pageSize, keyword, searchType);
 
+    int[] nos = {1, 2, 3, 4, 5};
+
     HashMap<String, Object> content = new HashMap<>();
     content.put("list", notice);
+    content.put("nos", nos);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
