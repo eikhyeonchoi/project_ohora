@@ -30,9 +30,6 @@ $(document.body).bind('loaded-select', function() {
     sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
     singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.   
     add: function (e, data) {
-      $.each(data.productFiles, function (index, file) {
-        console.log('Added file: ' + file.name);
-      });
       $('#product-add-btn').click(function() {
         data.formData = {
             name: $('#productName').val(),

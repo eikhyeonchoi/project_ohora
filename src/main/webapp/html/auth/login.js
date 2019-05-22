@@ -17,7 +17,7 @@ $('#login-btn').click(() => {
   }
   
   if (data.status == 'success') {
-     location.href = "/bitcamp-team-project/html/index.html"
+     window.history.back();
 //    window.history.back();
 
   } else {
