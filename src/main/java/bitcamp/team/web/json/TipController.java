@@ -48,9 +48,15 @@ public class TipController {
       pageNo = 1;
     
     List<Tip> tips = tipService.list(pageNo, pageSize);
+    
+    int[] nos = {1, 2, 3, 4, 5};
+    
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", tips);
-
+    map.put("nos", nos);
+    map.put("pageNo", pageNo);
+    map.put("pageSize", pageSize);
+    map.put("totalPage", totalPage);
     return map;
   }
 
