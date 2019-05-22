@@ -100,7 +100,6 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
   console.log(obj);
   
   
-  
   tbody.html('');
   $(trGenerator(obj)).appendTo(tbody);
   

@@ -74,16 +74,18 @@
   </select>
   
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
-    select
-     rv_no as rno, 
-     name as reviewName, 
-     conts,
-     cdt, 
-     cnt 
-   from 
-     review
-    where 
-      rv_no = #{value};
+   select
+    r.rv_no as rno,
+    m.name as memberName,
+    r.name as reviewName,
+    r.conts,
+    r.cdt,
+    r.cnt
+   from
+    review r
+    join member m on r.member_no = m.member_no
+   where
+    r.rv_no = #{value};
   </select>
   
   <insert id="insert" parameterType="review">
