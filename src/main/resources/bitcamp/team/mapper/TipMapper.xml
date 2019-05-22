@@ -41,10 +41,11 @@
     on t.member_no = m.member_no
   </sql>
 
-  <select id="findAll" resultMap="tipMap">
+  <select id="findAll" resultMap="tipMap" parameterType="map">
     <include refid="join-select1"/>
     order by
       tip_no desc
+    <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if>
   </select>
   
   <select id="findByNo" resultMap="tipMap" parameterType="int">
@@ -90,6 +91,11 @@
       <if test="cont != null">or conts like #{pattern1}</if>
       <if test="prodConts != null">or p.name like #{pattern1} and conts like #{pattern1}</if>
     </where>
+      <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if>
+  </select>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from tip
   </select>
 </mapper>
 

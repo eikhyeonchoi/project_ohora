@@ -6,7 +6,7 @@ import java.util.Map;
 import bitcamp.team.domain.Tip;
 
 public interface TipDao {
-   List<Tip> findAll();
+   List<Tip> findAll(Map<String,Object> map);
    List<Tip> findByKeyword(String keyword);
    Tip findByNo(int no);
    int delete(int no);
@@ -15,4 +15,5 @@ public interface TipDao {
    int confirmTip(int no);
    int findNoByProductNo(int no);
    List<Tip> search(Map<String,Object> map);
+   int countAll();
 }

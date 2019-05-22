@@ -24,7 +24,7 @@ $.getJSON('../../app/json/auth/user', function(data) {
   if (data.status == "fail") {
     $('#add-btn').hide();
   } 
-  if (data.user.type == "3") {
+  if (data.user.type == '3') {
     $('.history-list').show();
     $('#rollback-btn').show();
   }
@@ -52,12 +52,9 @@ $.getJSON('/bitcamp-team-project/app/json/tip/confirm?productName=' + $('product
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
       function(obj) {
-    console.log(no);
     tbody.html(''); 
     $(trGenerator(obj)).appendTo(tbody);
-
     $(document.body).trigger('loaded-list');
-
   }); 
 }
 
@@ -126,7 +123,6 @@ function loadData(no) {
       }
     }, "json");
 
-    console.log($('#no').val());
     $.post('/bitcamp-team-project/app/json/tiphistory/add', {
       tipNo: $('#no').val(),
       contents: $('#contents').val(),
