@@ -4,40 +4,68 @@
 <meta charset="UTF-8">
 <title>faq</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1> 자주묻는 질문 - list</h1>
-    <a id='faq-add' href='view.html'>새 FAQ 등록</a>
-    <table>
-    <thead>
-      <tr> 
-        <th scope="col">질문유형</th>
-        <th scope="col">제목</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-    </table>
-  </div>
-  
-<script id="tr-template" type="text/x-handlebars-template">
-{{#each list}}
-  <tr class='faq-component'>
-    <td>{{questionCategory.name}}</td>
-    <td><a class='faq-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
-    <td><div class='faq-component-child'></div><td>
-  </tr>
-{{/each}}
-</script>
 
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="../header.js"></script>
-<script src="index.js"></script>
+    <div class='row'>
+      <h3 class='col-sm-6 offset-sm-4'>자주묻는질문 index</h3>
+      <button class='faq-add-btn btn btn-success btn-sm col-sm-2'>새 FAQ</button>
+    </div>
+
+    <hr class='head-line'>
+    <div class='row col-sm-12'>
+      <div class='faq-type-div col-sm-12'>
+        <i class="fas fa-circle"></i>
+      </div>
+    </div>
+    <hr class='head-line'>
+    
+    <div id='faq-div' class='faq-div col-sm-12'>
+    <h3>전체 FAQ</h3>
+    </div>
+
+  </div>
+  <!-- container -->
+
+  <script id="faq-type-template" type="text/x-handlebars-template">
+    {{#each faqCtg}}
+      <a href='#' class='faq-type col-sm-3' data-no='{{qcNo}}'>{{faqType.name}}</a>
+      <i class="fas fa-circle"></i>
+    {{/each}}
+  </script>
+
+  <script id="faq-template" type="text/x-handlebars-template">
+    <hr>
+    {{#each list}}  
+      <div class='faq-title'>
+        <p data-title='{{title}}'><i class="fas fa-angle-right"></i>  {{title}}</p>
+        <hr>
+      </div>
+      <div class='faq-contents'>
+        <p>{{contents}}</p>
+        <div class='managerDiv offset-sm-10'>
+          <button class='faq-update-btn btn btn-warning btn-sm' data-no='{{no}}' data-ctype='{{qcNo}}'>수정</button>
+          <button class='faq-delete-btn btn btn-dark btn-sm' data-no='{{no}}'>삭제</button>
+        </div>
+      </div>
+    {{/each}}
+  </script>
+  
+  
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

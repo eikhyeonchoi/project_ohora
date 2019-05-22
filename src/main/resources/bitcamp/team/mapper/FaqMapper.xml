@@ -7,13 +7,13 @@
 <mapper namespace="bitcamp.team.dao.FaqDao">
 
   <resultMap type="faq" id="faqMap">
-    <id column="faq_no" property="no" />
-    <result column="qctg_no" property="qcNo" />
-    <result column="titl" property="title" />
-    <result column="conts" property="contents" />
+    <id column="faq_no"      property="no" />
+    <result column="faq_type_no" property="qcNo" />
+    <result column="titl"    property="title" />
+    <result column="conts"   property="contents" />
 
-    <association property="questionCategory" javaType="questionCategory">
-      <id column="qctg_no" property="no" />
+    <association property="faqType" javaType="faqType">
+      <id column="faq_type_no"  property="no" />
       <result column="name" property="name" />
     </association>
   </resultMap>
@@ -21,52 +21,69 @@
 
   <select id="findAll" resultMap="faqMap">
     select
-    f.faq_no,
-    f.titl,
-    f.conts,
-    f.qctg_no,
-    qc.name
+      f.faq_no,
+      f.titl,
+      f.conts,
+      f.faq_type_no,
+      ft.name
     from
-    faq f
-    left outer join question_category qc on f.qctg_no = qc.qctg_no
+      faq f
+      left outer join faq_type ft on f.faq_type_no = ft.faq_type_no
     order by
-    f.qctg_no asc;
+      f.faq_type_no asc;
+  </select>
+
+  <select id="findCategoryList" resultMap="faqMap" parameterType="int">
+    select
+      f.faq_no,
+      f.titl,
+      f.conts,
+      f.faq_type_no,
+      ft.name
+    from
+      faq f
+      left outer join faq_type ft on f.faq_type_no = ft.faq_type_no
+    where
+      f.faq_type_no = #{value}
+    order by
+      f.faq_type_no asc;
+      
   </select>
 
   <select id='findCategoryName' resultMap="faqMap">
     select distinct
-    qc.qctg_no,
-    qc.name
+      ft.faq_type_no,
+      ft.name
     from
-    faq f
-    right outer join question_category qc on f.qctg_no = qc.qctg_no
+      faq f
+      right outer join faq_type ft on f.faq_type_no = ft.faq_type_no
     order by
-    qc.qctg_no asc;
+      ft.faq_type_no asc;
   </select>
 
   <select id="findByNo" resultMap="faqMap" parameterType="int">
     select
-    f.faq_no,
-    f.titl,
-    f.conts,
-    f.qctg_no,
-    qc.name
+      f.faq_no,
+      f.titl,
+      f.conts,
+      f.faq_type_no,
+      ft.name
     from
-    faq f
-    left outer join question_category qc on f.qctg_no = qc.qctg_no
+      faq f
+      left outer join faq_type ft on f.faq_type_no = ft.faq_type_no
     where
-    faq_no = #{value};
+      f.faq_no = #{value};
   </select>
 
   <insert id="insert" parameterType="faq">
     insert into
-    faq(qctg_no, titl, conts)
+    faq(faq_type_no, titl, conts)
     values(#{qcNo}, #{title}, #{contents})
   </insert>
 
   <delete id="delete" parameterType="int">
     delete from
-    faq
+      faq
     <where>
       faq_no = #{value};
     </where>
@@ -74,13 +91,13 @@
 
   <update id="update" parameterType="faq">
     update
-    faq
+      faq
     set
-    qctg_no = #{qcNo},
-    titl = #{title},
-    conts = #{contents}
+      faq_type_no = #{qcNo},
+      titl = #{title},
+      conts = #{contents}
     where
-    faq_no = #{no};
+      faq_no = #{no};
   </update>
   
 

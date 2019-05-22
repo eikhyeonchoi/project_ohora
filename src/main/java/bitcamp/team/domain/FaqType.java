@@ -3,7 +3,7 @@ package bitcamp.team.domain;
 // faq 카테고리다 헷갈리지말자.
 // faq 카테고리다 헷갈리지말자.
 // faq 카테고리다 헷갈리지말자.
-public class QuestionCategory {
+public class FaqType {
   
   private int no;
   private String name;

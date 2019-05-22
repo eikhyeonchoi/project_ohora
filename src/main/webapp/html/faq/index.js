@@ -3,53 +3,136 @@
  * index javascript
  * 
  */
-var tbody = $('tbody'),
-    templateSrc = $('#tr-template').html(),
-    trGenerator = Handlebars.compile(templateSrc)
+var faqTypeeSrc = $('#faq-type-template').html(),
+    faqTypeGenerator = Handlebars.compile(faqTypeeSrc),
+    faqSrc = $('#faq-template').html(),
+    faqGenerator = Handlebars.compile(faqSrc);
 
-$(document).ready(function() {
-  $('#faq-content').hide(); 
+var userType='';
+
+
+
+$(document).ready(function(){
+  $('.faq-add-btn').click(function() {
+    location.href='add.html';
+  })
   
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
-    if (obj.user.type == 3) {
-      $('#faq-add').show();
-    } else {
-      $('#faq-add').hide();
-    }
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj) {
+    userType = obj.user.type;
   }) // get
   
-  $.get('/bitcamp-team-project/app/json/faq/list', function(obj) {
-    // list = obj.list;
-    $(trGenerator(obj)).appendTo(tbody);
+  $.get('/bitcamp-team-project/app/json/faq/list', function(obj){
+    console.log(obj);
+    $(faqTypeGenerator(obj)).appendTo($('.faq-type-div'));
+    $(faqGenerator(obj)).appendTo('.faq-div');
+    $('.faq-contents').hide();
+
+    faqTitleClick();
     
     $(document.body).trigger({
-        type: 'loaded-list'});
+      type: 'loaded-type',
+      obj: obj
+    });
   }) // get
   
-}) // ready
+}); // ready
 
 
-$(document.body).bind('loaded-list', function() {
-  $('.faq-component').on('click', function(e) {
-    location.href = 'view.html?no=' + $(e.target).attr('data-no');
-  }); // on
-}); // bind
+// trigger 2개 bind
+$(document.body).bind('loaded-type', function(obj) {
+  if (userType != '3'){
+    $('.managerDiv').hide();
+    $('.faq-add-btn').hide();
+  }
+  
+
+  
+  $('.faq-delete-btn').off().click(function(e) {
+    $.get('/bitcamp-team-project/app/json/faq/delete?no=' + $(e.target).attr('data-no'), function(obj){
+      if(obj.status == 'success') {
+        location.reload();
+      } else {
+        swal('삭제실패', '삭제에 문제가 발생했습니다\n' + obj.message, "warning");
+      }
+    }) // get
+  }) // click
+  
+  
+  $('.faq-update-btn').off().click(function(e) {
+    var contents = $(e.target).closest('div').prev().text();
+    var title = $(e.target).parents('.faq-contents').prev().children().first().attr('data-title');
+    console.log(title);
+    $(e.target).closest('div').prev().remove();
+    $(e.target).closest('div').before('<textarea id="faq-contents-textarea" rows="5" cols="50">' + contents + '</textarea>');
+    $(e.target).before('<button id="faq-add-temp-btn" class="btn btn-primary btn-sm">등록</button>')
+    $(e.target).remove();
+    
+    $('#faq-add-temp-btn').off().click(function(){
+      $.post('/bitcamp-team-project/app/json/faq/update', {
+        no: $(e.target).attr('data-no'),
+        title: title,
+        contents: $('#faq-contents-textarea').val(),
+        qcNo: $(e.target).attr('data-ctype')
+      }, function(data) {
+        if(data.status == 'success') {
+          location.reload();
+        } else {
+          alert('변경실패.\n' + data.message);
+        }
+      }, "json")
+    }) // click
+  }) // click
+
+  
+  $('.faq-type').off().click(function(e) {
+    if ($(e.target).attr('data-no') == 1) {
+      $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).next().next().next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
+    } else if ($(e.target).attr('data-no') == 2) {
+      $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
+    } else if ($(e.target).attr('data-no') == 3) {
+      $(e.target).prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
+    } else {
+      $(e.target).prev().prev().prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
+      $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
+    }
+    $(e.target).css('font-size', '1.5em');
+    $(e.target).css('font-style', 'bold');
+    
+    $('.faq-div').children().remove();
+    $.get('/bitcamp-team-project/app/json/faq/categoryList?no=' + $(e.target).attr('data-no'), function(obj) {
+      console.log(obj);
+      $(faqGenerator(obj)).appendTo('.faq-div');
+      $('.faq-contents').hide();
+      
+      faqTitleClick();
+    }); // get
+  }) // click
+}) // bind
 
 
 
-/*
-var childTag = $(this).find('.faq-component-child');
-$.getJSON('/bitcamp-team-project/app/json/faq/detail?no=' + $(this).find('a').attr('data-no'), function(obj) {
-  childTag.html('');
-  $(trChildGenerator(obj)).appendTo(childTag);
-});
-*/
-
-
-
-
-
-
+function faqTitleClick() {
+  $('.faq-title').one('click', function(e) {
+    $(e.target).children().remove();
+    $(e.target).prepend('<i class="fas fa-angle-down"></i>')
+    $(e.target).css('font-size', '2em');
+    $(e.target).css('font-style', 'bold');
+    $(e.target).closest('div').before('<hr class="head-line">');
+    $(e.target).closest('div').next().show();
+    $(e.target).closest('div').next().after('<hr class="head-line">')
+    
+    $(document.body).trigger({
+      type: 'loaded-type'
+    });
+  }); // click
+}
 
 
 

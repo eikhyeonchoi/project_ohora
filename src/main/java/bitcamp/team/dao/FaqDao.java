@@ -6,6 +6,7 @@ import bitcamp.team.domain.Faq;
 public interface FaqDao {
   List<Faq> findAll();
   List<Faq> findCategoryName();
+  List<Faq> findCategoryList(int no);
   Faq findByNo(int no);
   int insert(Faq faq);
   int delete(int no);
