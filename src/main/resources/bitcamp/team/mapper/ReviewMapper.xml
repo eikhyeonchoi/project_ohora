@@ -49,6 +49,10 @@
     where
       r.product_no = #{selectNo}
       
+    <if test="searchType == 'name' and keyword != null">
+       <bind name="pattern1" value="'%' + keyword + '%'" />
+       and m.name like #{pattern1}
+    </if> 
     <if test="searchType == 'title' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
        and r.name like #{pattern1}
