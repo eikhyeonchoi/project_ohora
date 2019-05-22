@@ -20,14 +20,14 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
     '&searchType=' + $('#searchType').val(), (obj) => {
       
       console.log(detailNo);
+      console.log(obj.list);
       //page
       pageNo = obj.pageNo;
       totalPage = obj.totalPage;
       totalCount = obj.totalCount;
       
-      console.log(totalCount);
       
-      var currpage = pageNo % 5
+      var currpage = pageNo % 5;
       
       if($('#2ndPage > a').html() > totalPage) {
         $('#2ndPage').css('display', 'none');
