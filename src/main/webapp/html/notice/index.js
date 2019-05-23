@@ -118,6 +118,16 @@ $(document).on('click', '#nextPage > a', (e) => {
   loadList($('.ohr-page > a').html());
 });
 
+$('#keyword').keydown((e) => {
+  if (event.keyCode == 13) {
+  e.preventDefault();
+  for(var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(no);
+  }
+  loadList(1);
+  }
+});
+
 //검색
 $('#search-btn').click((e) => {
   for(var no = 1; no < 6; no++) {

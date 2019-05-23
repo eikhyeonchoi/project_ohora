@@ -33,18 +33,6 @@ $('#add-btn').click(() => {
   })
 });
 
-$('#delete-btn').click(() => {
-  $.getJSON('../../app/json/notice/delete?no=' + $('#no').val(), 
-          function(data) {
-    //$('#no').val()
-  })
-  .done(function(data) {location.href = "index.html";})
-  .fail(function(data) {
-    console.log(data)
-    alert('삭제 실패입니다!\n' + data.responseText);
-  })
-});
-
 $('#update-btn').click(() => {
   $.post('../../app/json/notice/update', {
     no: $('#no').val(),
