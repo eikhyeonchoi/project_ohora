@@ -80,6 +80,9 @@ public class NoticeController {
     int[] nos = {1, 2, 3, 4, 5};
 
     HashMap<String, Object> content = new HashMap<>();
+    if (notice.size() == 0) {
+      notice.set(0, new Notice());
+    }
     content.put("list", notice);
     content.put("nos", nos);
     content.put("pageNo", pageNo);

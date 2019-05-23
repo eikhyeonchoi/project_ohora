@@ -14,11 +14,9 @@ $(document).ready(function() {
   $.get('../../app/json/auth/user', function(obj){
     console.log(obj);
     var loginUser = obj.user.type;
-    if(loginUser != 3) {
-      $('#add-button').hide();
-    } else {
+    if(loginUser == 3) {
       $('#add-button').show();
-    }
+    } 
 })});
 
 function loadList(pn) {
@@ -70,14 +68,12 @@ function loadList(pn) {
     ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
     : (obj.totalPage / 5).toFixed(0) * 5;
     
-    console.log(maxPage);
-    
     if (pageNo > maxPage) {
       $('#nextPage').addClass('disabled');
     } else {
       $('#nextPage').removeClass('disabled');
     }
-
+    $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
   });
 } // loadList()
 
@@ -123,7 +119,6 @@ $(document).on('click', '#nextPage > a', (e) => {
 });
 
 //검색
-
 $('#search-btn').click((e) => {
   for(var no = 1; no < 6; no++) {
     $('#page-' + no + ' > a').text(no);
