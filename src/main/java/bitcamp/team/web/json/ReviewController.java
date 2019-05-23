@@ -32,9 +32,9 @@ public class ReviewController {
     if (pageSize < 10 || pageSize > 18)
       pageSize = 10;
 
-    int totalCount = reviewService.size(no);
-    int totalPage = totalCount / pageSize;
-    if (totalCount % pageSize > 0)
+    int rowCount = reviewService.size(no, keyword);
+    int totalPage = rowCount / pageSize;
+    if (rowCount % pageSize > 0)
       totalPage++;
 
     if (pageNo < 1)
@@ -44,12 +44,15 @@ public class ReviewController {
     
     List<Review> review = reviewService.get(no, pageNo, pageSize, keyword, searchType);
     
+    int[] nos = {1, 2, 3, 4, 5};
+    
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", review);
+    map.put("nos", nos);
     map.put("pageNo", pageNo);
     map.put("pageSize", pageSize);
+    map.put("totalCount", rowCount);
     map.put("totalPage", totalPage);
-    map.put("totalCount", totalCount);
     map.put("keyword", keyword);
     map.put("searchType", searchType);
 

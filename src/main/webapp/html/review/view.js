@@ -1,16 +1,19 @@
 var tbody = $('tbody'),
-    templateSrc = $('#select-template').html();
-var addBtn = $('#review-add-btn')
-var trGenerator = Handlebars.compile(templateSrc);
-var detailNo = getQuerystring('no');
-var productName = decodeURIComponent(getQuerystring('name'));
+    templateSrc = $('#select-template').html(),
+    pageNavSrc = $('#tr-pageNav').html(),
+    detailNo = getQuerystring('no'),
+    productName = decodeURIComponent(getQuerystring('name')),
+    addBtn = $('#review-add-btn');
+
+var trGenerator = Handlebars.compile(templateSrc),
+    pageGenerator = Handlebars.compile(pageNavSrc);
+
 var pageNo = 1,
-pageSize = 10,
-totalPage = 1,
-tbody = $('tbody'),
-currSpan = $('#currPage > span'),
-prevPageLi = $('#prevPage'),
-nextPageLi = $('#nextPage');
+    pageSize = 10,
+    totalPage = 1,
+    keyword = $('keyword'),
+    tbody = $('tbody'),
+    currSpan = $('#currPage > span');
 
 function loadList(pn) {
 $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo + 
@@ -19,91 +22,63 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
     '&keyword=' + $('#keyword').val() + 
     '&searchType=' + $('#searchType').val(), (obj) => {
       
-      console.log(detailNo);
-      console.log(obj.list);
+//      console.log(detailNo);
+//      console.log(obj.list);
       //page
       pageNo = obj.pageNo;
       totalPage = obj.totalPage;
-      totalCount = obj.totalCount;
-      
-      
       var currpage = pageNo % 5;
       
-      if($('#2ndPage > a').html() > totalPage) {
-        $('#2ndPage').css('display', 'none');
-      } else {
-        $('#2ndPage').css('display', '');
-      }
-
-      if($('#3thPage > a').html() > totalPage) {
-        $('#3thPage').css('display', 'none');
-      } else {
-        $('#3thPage').css('display', '');
-      }
-
-      if($('#4thPage > a').html() > totalPage) {
-        $('#4thPage').css('display', 'none');
-      } else {
-        $('#4thPage').css('display', '');
-      }
-
-      if($('#5thPage > a').html() > totalPage) {
-        $('#5thPage').css('display', 'none');
-      } else {
-        $('#5thPage').css('display', '');
+      console.log('pageNo : ' + pageNo);
+      console.log('totalPage : ' + totalPage);
+      
+      
+      tbody.html('');
+      $(trGenerator(obj)).appendTo(tbody);
+      
+      //page 버튼이 있을 경우 append 안 함
+      if($(document).find('#pageUl').find('#prevPage').val() != 0) {
+      $(pageGenerator(obj)).appendTo($('#pageUl'))
       }
       
-
-      if (currpage == 1) {
-        $('#1stPage').addClass('active');
-      } else {
-        $('#1stPage').removeClass('active');
-      }
-
-      if (currpage == 2) {
-        $('#2ndPage').addClass('active');
-      } else {
-        $('#2ndPage').removeClass('active');
-      }
-
-      if (currpage == 3) {
-        $('#3thPage').addClass('active');
-      } else {
-        $('#3thPage').removeClass('active');
-      }
-
-      if (currpage == 4) {
-        $('#4thPage').addClass('active');
-      } else {
-        $('#4thPage').removeClass('active');
-      }
-
-      if (currpage == 0) {
-        $('#5thPage').addClass('active');
-      } else {
-        $('#5thPage').removeClass('active');
-      } 
+      console.log(obj);
+      
+      for(var no of obj.nos) {
+        
+        if($('#page-' + no + ' > a').html() > totalPage) {
+          $('#page-' + no).hide();
+       } else {
+         $('#page-' + no).show();
+        }
+        
+        if ($('#page-' + no + ' > a').html() == pageNo) {
+          $('#page-' + no + ' > a').parent().addClass('active');
+        } else {
+          $('#page-' + no + ' > a').parent().removeClass('active');
+        }
+      } //for
+      
+      
       if (pageNo < 6) {
-        prevPageLi.addClass('disabled');
+        $('#prevPage').addClass('disabled');
       } else {
-        prevPageLi.removeClass('disabled');
+        $('#prevPage').removeClass('disabled');
       } 
-
-      var maxPage = (obj.totalPage / 5).toFixed(0) * 5
+      
+      var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0 
+      ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
+      : (obj.totalPage / 5).toFixed(0) * 5;
+      
+      console.log('maxPage : ' + maxPage);
+      
       
       if (pageNo > maxPage) {
-        nextPageLi.addClass('disabled');
+        $('#nextPage').addClass('disabled');
       } else {
-        nextPageLi.removeClass('disabled');
+        $('#nextPage').removeClass('disabled');
       }
-  
-  console.log(obj);
-  
-  
-  tbody.html('');
-  $(trGenerator(obj)).appendTo(tbody);
-  
-  currSpan.html(String(pageNo));
+      
+
   
   $('#product-name').html('');
   $('#product-name').append(productName);
@@ -114,77 +89,46 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
     window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
   });
   
-  $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
   
 })};
 
-var currPage = $(document.body).bind('loaded-list', ()=> {
+
+var currPage = $(document.body).bind('loaded-list', () => {
   currPage = pageNo;
 });
 
-var endPage = $(document.body).bind('loaded-list', ()=> {
+var endPage = $(document.body).bind('loaded-list', () => {
   endPage = totalPage
 });
 
-$('#1stPage > a').click((e) => {
+$(document).on('click', '.ohr-page', function (e) {
   e.preventDefault();
-  loadList($('#1stPage > a').html());
-});
-
-$('#2ndPage > a').click((e) => {
-  e.preventDefault();
-  loadList($('#2ndPage > a').html());
-});
-
-$('#3thPage > a').click((e) => {
-  e.preventDefault();
-  loadList($('#3thPage > a').html());
-});
-
-$('#4thPage > a').click((e) => {
-  e.preventDefault();
-  loadList($('#4thPage > a').html());
-});
-
-$('#5thPage > a').click((e) => {
-  e.preventDefault();
-  loadList($('#5thPage > a').html());
-});
-
-$('#prevPage > a').click((e) => {
-  e.preventDefault();
-  $('#1stPage > a').text(Number($('#1stPage > a').html()) - 5);
-  $('#2ndPage > a').text(Number($('#2ndPage > a').html()) - 5);
-  $('#3thPage > a').text(Number($('#3thPage > a').html()) - 5);
-  $('#4thPage > a').text(Number($('#4thPage > a').html()) - 5);
-  $('#5thPage > a').text(Number($('#5thPage > a').html()) - 5);
-  var pagecnt = $('#5thPage > a').html()
-  loadList(pagecnt);
-});
-
-$('#nextPage > a').click((e) => {
-  e.preventDefault();
-  $('#1stPage > a').text(Number($('#1stPage > a').html()) + 5);
-  $('#2ndPage > a').text(Number($('#2ndPage > a').html()) + 5);
-  $('#3thPage > a').text(Number($('#3thPage > a').html()) + 5);
-  $('#4thPage > a').text(Number($('#4thPage > a').html()) + 5);
-  $('#5thPage > a').text(Number($('#5thPage > a').html()) + 5);
-  var pagecnt = $('#1stPage > a').html()
-  loadList(pagecnt);
-});
+  loadList($(e.target).html());
+})
 
 loadList(1);
 
+
 // 검색
+$('#keyword').keydown((e) => {
+  if (event.keyCode == 13) {
+  e.preventDefault();
+  for(var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(no);
+  }
+  loadList(1);
+  }
+});
+
+//검색
 $('#search-btn').click((e) => {
-  $('#1stPage > a').text(1);
-  $('#2ndPage > a').text(2);
-  $('#3thPage > a').text(3);
-  $('#4thPage > a').text(4);
-  $('#5thPage > a').text(5);
+  for(var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(no);
+  }
   loadList(1);
 });
 
+//등록버튼
 ($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
     if(obj.status == 'fail') {
       addBtn.hide();
@@ -195,6 +139,7 @@ $('#search-btn').click((e) => {
     }
 }));
     
+
 
 function getQuerystring(key, default_)
 {

@@ -19,7 +19,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">아이디</th>
+        <th scope="col">작성자</th>
         <th scope="col">제목</th>
         <th scope="col">날짜</th>
         <th scope="col">조회수</th>
@@ -29,17 +29,8 @@
   </table>
   </div>
 
-    <nav aria-label="목록 페이지 이동">
-   <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item bt-prevPage"><a class="page-link"
-     href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="1stPage" class="page-item"><a class="page-link" href="#">1</a></li>
-    <li id="2ndPage" class="page-item"><a class="page-link" href="#">2</a></li>
-    <li id="3thPage" class="page-item"><a class="page-link" href="#">3</a></li>
-    <li id="4thPage" class="page-item"><a class="page-link" href="#">4</a></li>
-    <li id="5thPage" class="page-item"><a class="page-link" href="#">5</a></li>
-    <li id="nextPage" class="page-item bt-nextPage"><a class="page-link"
-     href="?pageNo=2&pageSize=3">다음</a></li>
+  <nav aria-label="목록 페이지 이동">
+   <ul class="pagination justify-content-center" id="pageUl">
    </ul>
   </nav>
   
@@ -70,6 +61,16 @@
   <td>{{viewCount}}</td>
 </tr>
 {{/each}}
+</script>
+
+ <script id="tr-pageNav" type="text/x-handlebars-template">
+  <ul class="pagination justify-content-center">
+  <li id="prevPage" class="page-item bt-prevPage"><a class="page-link" href="#">이전</a></li>
+    {{#each nos}} 
+      <li id="page-{{this}}" class="page-item ohr-page" data-no="{{this}}"><a class="page-link" href="#">{{this}}</a></li>
+    {{/each}} 
+  <li id="nextPage" class="page-item bt-nextPage"><a class="page-link" href="#">다음</a></li>
+  </ul>
 </script>
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>

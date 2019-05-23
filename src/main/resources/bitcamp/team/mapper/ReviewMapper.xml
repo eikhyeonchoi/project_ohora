@@ -124,19 +124,27 @@
   </update>
   
   <select id="countAll" resultType="int" parameterType="map">
-    select count(*) from review
-    <where>
-      <if test="keyword != null">
+    select
+     count(*) 
+    from
+     review r
+     join member m on m.member_no = r.member_no
+    where
+     product_no = #{no}
+      <if test="searchType == 'name' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
-        conts like #{pattern1}
+     and m.name like #{pattern1}
       </if>
-    </where>
+      <if test="searchType == 'title' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+     and r.name like #{pattern1}
+      </if>
+      <if test="searchType == 'contents' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+     and r.conts like #{pattern1}
+      </if>
   </select>
   
-  <select id="countPage" resultType="int" parameterType="int">
-    select count(*) from review
-    where product_no = #{value}
-  </select>
 
   
 
