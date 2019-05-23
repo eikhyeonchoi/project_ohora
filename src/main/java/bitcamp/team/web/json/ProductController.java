@@ -53,7 +53,7 @@ public class ProductController {
   public Object confirmTip(int no) {
     HashMap<String, Object> content = new HashMap<>();
     int memberNo = tipService.confirm(no);
-    if(memberNo == 0) {
+    if(memberNo == 1) {
       content.put("status","success");
     } else {
       content.put("status", "fail");

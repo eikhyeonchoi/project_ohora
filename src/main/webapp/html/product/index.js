@@ -12,8 +12,8 @@ tbody = $('tbody'),
 pageNavSrc = $('#tr-pageNav').html(),
 largeSrc = $('#large-category-template').html(),
 smallSrc = $('#small-category-template').html(),
-basicList = $('#basic-list-form-template').html();
-
+basicList = $('#basic-list-form-template').html(),
+formInline = $('.formInline');
 var largeCategoryGenerator = Handlebars.compile(largeSrc),
 smallCategoryGenerator = Handlebars.compile(smallSrc),
 basicListGenerator = Handlebars.compile(basicList),
@@ -33,10 +33,11 @@ $(document).ready(function() {
 
   $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
     $(largeCategoryGenerator(obj)).appendTo(searchSpan);
-    $(smallCategoryGenerator(obj)).appendTo(searchSpan);
+    $(smallCategoryGenerator(obj)).appendTo($('.input-group'));
 
-    searchSpan.append("<input id='searchWord' type='text'>")
-    .append("<button id='search-btn' type='button'>검색</button>");
+    formInline
+      .append("<input id='searchWord' type='text' class='form-control'>")
+      .append("<button id='search-btn' type='button' class='btn btn-success btn-sm'>검색</button>");
 
   });
 

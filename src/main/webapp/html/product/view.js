@@ -60,8 +60,9 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
     $('#go-tip-btn').hide();
+    console.log(obj);
     if (obj.status == 'fail') {
-      tipBtn.hide();
+      $('#go-tip-btn').hide();
     } else {
       if (userNo < 1){
         tipBtn.show();
