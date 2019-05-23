@@ -69,7 +69,7 @@
       join small_category sc on p.sctg_no=sc.sctg_no
       join large_category lc on sc.lctg_no=lc.lctg_no
     order by
-      sc.sctg_no asc;
+      sc.sctg_no asc
   </select>
   
   
@@ -105,7 +105,10 @@
       </if>
     </where>
     order by
-      p.product_no asc;
+      p.product_no asc
+      <if test="rowNo != null and size != null">
+        limit #{rowNo}, #{size}
+      </if>
   </select>
   
     
@@ -115,7 +118,7 @@
           keyProperty="no">
     insert into 
       product(sctg_no, manufac_no, name)
-    values (#{smallCategoryNo}, #{manufacturerNo}, #{name});
+    values (#{smallCategoryNo}, #{manufacturerNo}, #{name})
   </insert>
   
   <select id="findNoByName" resultMap="productMap" parameterType="string">
@@ -168,6 +171,19 @@
     where
       product_no = #{no}
   </update>
+  
+  <select id="countAll" resultType="int" parameterType="string">
+    select
+      count(*)
+    from
+      product
+    <where>
+      <if test="_parameter != null">
+        <bind name="pattern2" value="'%' + _parameter + '%'"/>
+        name like #{pattern2};
+      </if>
+    </where>
+  </select>
 </mapper>
 
 

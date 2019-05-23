@@ -17,7 +17,7 @@
     <button id='insert-btn' type="button">새 글</button><br>
     <span id="seachSpan"> </span>
     <h2>전체 제품 게시물 목록</h2>
-    <table id='basic-list-table'>
+    <table id='basic-list-table' class="table table-hover">
       <thead>
         <tr>
           <th scope="col">번호</th>
@@ -29,17 +29,33 @@
       <tbody></tbody>
     </table>
   </div>
+  
+  <nav aria-label="목록 페이지 이동">
+   <ul class="pagination justify-content-center" id="pageUl">
+   </ul>
+  </nav>
+  
+  <script id="tr-pageNav" type="text/x-handlebars-template">
+  <ul class="pagination justify-content-center">
+  <li id="prevPage" class="page-item bt-prevPage"><a class="page-link" href="#">이전</a></li>
+    {{#each nos}} 
+      <li id="page-{{this}}" class="page-item ohr-page" data-no="{{this}}"><a class="page-link" href="#">{{this}}</a></li>
+    {{/each}} 
+  <li id="nextPage" class="page-item bt-nextPage"><a class="page-link" href="#">다음</a></li>
+  </ul>
+  </script>
+  
   <script id="large-category-template" type="text/x-handlebars-template">
-<select id='lageCtgSelect'>
-    <option value='0' option:selected>대분류 선택</option>
-  {{#each largeList}}
-    <option value='{{productSmallCategory.productLargeCategory.no}}'>{{productSmallCategory.productLargeCategory.no}}{{productSmallCategory.productLargeCategory.name}}</option>
-  {{/each}}
-</select>
-</script>
+    <select id='lageCtgSelect' class="custom-select">
+      <option value='0' option:selected>대분류 선택</option>
+      {{#each largeList}}
+        <option value='{{productSmallCategory.productLargeCategory.no}}'>{{productSmallCategory.productLargeCategory.no}}{{productSmallCategory.productLargeCategory.name}}</option>
+      {{/each}}
+    </select>
+  </script>
 
 <script id="small-category-template" type="text/x-handlebars-template">
-<select id='smallCtgSelect'>
+<select id='smallCtgSelect' class="custom-select">
     <option value='0' option:selected>소분류 선택</option>
   {{#each smallList}}
     <option value='{{productSmallCategory.no}}'>{{productSmallCategory.no}}{{productSmallCategory.name}}</option>
@@ -57,7 +73,7 @@
 {{/each}}
 </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
