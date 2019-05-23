@@ -1,7 +1,6 @@
 package bitcamp.team.service;
 
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.domain.Tip;
 
@@ -13,7 +12,6 @@ public interface TipService {
   int delete(int no);
   int confirm(int no);
   Tip get(int no);
-  List<Tip> list(int pageNo, int pageSize);
-  List<Tip> search(Map<String,Object> map);
-  int size();
+  List<Tip> list(int pageNo, int pageSize, String keyword, String searchType);
+  int size(String keyword);
 }
