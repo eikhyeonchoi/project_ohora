@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 리스트</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>자유게시판 리스트</h1>
-    <p>
-      <button id="fboard-add-btn" type="button" class="btn btn-success btn-sm">새 글</button>
-    </p>
+
+    <div class='row'>
+      <h3 class='col-sm-6 offset-sm-4'>자유게시판 index</h3>
+    </div>
+    <br>
+
+    <!-- list -->
     <div class="bit-list">
       <table class="table table-hover">
         <thead>
@@ -32,24 +33,67 @@
       </table>
     </div>
 
-    <script id="tr-template" type="text/x-handlebars-template">
+
+    <!-- page -->
+    <div class='row offset-sm-3'>
+      <ul class="pagination">
+      </ul>
+    </div>
+
+
+    <div class='row'>
+      <!-- add -->
+      <button id='fboard-add-btn' class='btn btn-outline-primary btn-sm col-sm-1'>새 글</button>
+      
+      <!-- search -->
+      <div class="input-group col-sm-8 offset-sm-1">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색조건</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" data-condition='title'>제목</a> 
+            <a class="dropdown-item" href="#" data-condition='contents'>내용</a>
+            <a class="dropdown-item" href="#" data-condition='nickName'>닉네임</a>
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      </div>
+      <button id='fboard-search-btn' class='btn btn-info btn-sm col-sm-1'>검색</button>
+    </div>
+
+
+  </div><!-- .container -->
+  
+  
+  <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
-    <tr>
+    <tr class='fboard-detail' data-no='{{no}}'>
       <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link fboard-detail' href='#' data-no='{{no}}'>{{title}}</a></td>
+      <td scope='row'>{{title}}</td>
       <td scope='row'>{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
       <td scope='row'>{{viewCount}}</td>
     </tr>
   {{/each}}
   </script>
-
-  </div>
-  <!-- .container -->
+  
+  <script id="page-template" type="text/x-handlebars-template">
+  <li class="page-item">
+    <a class="page-link" href="#">Previous</a>
+  </li>
+    {{#each pageList}}
+      <li class="page-item"><a class="page-link" href="#">{{no}}</a></li>
+    {{/each}}
+  <li class="page-item">
+    <a class="page-link" href="#">Next</a>
+  </li>
+  </script>
+  
+  <!-- <a class='bit-view-link fboard-detail' href='#' data-no='{{no}}'></a> -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
 </body>

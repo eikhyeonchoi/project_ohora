@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   //methods
   $.fn.fullpage.setAllowScrolling(false);
-  
+
   new fullpage('#fullpage', {
     anchors:['firstPage', 'secondPage', 'thirdPage']
   });

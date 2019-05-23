@@ -12,49 +12,49 @@ import bitcamp.team.service.FboardService;
 @Service
 public class FboardServiceImpl implements FboardService {
 
-  FboardDao boardDao;
+  FboardDao fboardDao;
 
-  public FboardServiceImpl(FboardDao boardDao) {
-    this.boardDao = boardDao;
+  public FboardServiceImpl(FboardDao fboardDao) {
+    this.fboardDao = fboardDao;
   }
 
   @Override
-  public List<Fboard> list() {
-    return boardDao.findAll();
+  public List<Fboard> list(HashMap<String, Object> param) {
+    return fboardDao.findAll(param);
   }
 
   @Override
   public int add(Fboard board) {
-    return boardDao.insert(board);
+    return fboardDao.insert(board);
   }
 
   @Override
   public Fboard get(int no) {
-    Fboard board = boardDao.findByNo(no);
+    Fboard board = fboardDao.findByNo(no);
     if (board != null) {
-      boardDao.increaseCount(no);
+      fboardDao.increaseCount(no);
     }
     return board;
   }
 
   @Override
   public int update(Fboard board) {
-    return boardDao.update(board);
+    return fboardDao.update(board);
   }
 
   @Override
   public int delete(int no) {
-    return boardDao.delete(no);
+    return fboardDao.delete(no);
   }
 
   @Override
   public int size() {
-    return boardDao.countAll();
+    return fboardDao.countAll();
   }
 
   @Override
   public HashMap<String, Object> commentList(int no) {
-    ArrayList<FboardComment> requestList = (ArrayList<FboardComment>) boardDao.findCommentAll(no);
+    ArrayList<FboardComment> requestList = (ArrayList<FboardComment>) fboardDao.findCommentAll(no);
     ArrayList<FboardComment> parentComment = new ArrayList<FboardComment>();
     ArrayList<FboardComment> childComment = new ArrayList<FboardComment>();
     HashMap<String, Object> content = new HashMap<String, Object>();
@@ -74,21 +74,21 @@ public class FboardServiceImpl implements FboardService {
 
   @Override
   public int addComment(FboardComment fboardComment) {
-    return boardDao.insertComment(fboardComment);
+    return fboardDao.insertComment(fboardComment);
   }
 
   @Override
   public int deleteComment(int no) {
-    return boardDao.deleteComment(no);
+    return fboardDao.deleteComment(no);
   }
 
   @Override
   public int updateComment(HashMap<String, Object> param) {
-    return boardDao.updateComment(param);
+    return fboardDao.updateComment(param);
   }
 
   @Override
   public List<FboardComment> findReply(HashMap<String, Object> param) {
-    return boardDao.findReply(param);
+    return fboardDao.findReply(param);
   }
 }

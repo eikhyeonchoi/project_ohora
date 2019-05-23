@@ -127,6 +127,47 @@ values(4,
   '자주묻는질문 내용 자주묻는 질문 내용 자주묻는 질문 내용 자주묻는 질문 내용 자주묻는질문 내용 자주묻는질문 내용 자주묻는질문 내용 자주묻는질문 내용');
   
   
+insert into fboard(member_no, titl, conts) values(1, '제목01','내용01');
+insert into fboard(member_no, titl, conts) values(1, '제목02','내용02');
+insert into fboard(member_no, titl, conts) values(1, '제목03','내용03');
+insert into fboard(member_no, titl, conts) values(1, '제목04','내용04');
+insert into fboard(member_no, titl, conts) values(1, '제목05','내용05');
+insert into fboard(member_no, titl, conts) values(1, '제목06','내용06');
+insert into fboard(member_no, titl, conts) values(1, '제목07','내용07');
+insert into fboard(member_no, titl, conts) values(1, '제목08','내용08');
+insert into fboard(member_no, titl, conts) values(1, '제목09','내용09');
+insert into fboard(member_no, titl, conts) values(1, '제목10','내용10');
+insert into fboard(member_no, titl, conts) values(1, '제목11','내용11');
+insert into fboard(member_no, titl, conts) values(1, '제목12','내용12');
+insert into fboard(member_no, titl, conts) values(1, '제목13','내용13');
+insert into fboard(member_no, titl, conts) values(1, '제목14','내용14');
+insert into fboard(member_no, titl, conts) values(1, '제목15','내용15');
+insert into fboard(member_no, titl, conts) values(1, '제목16','내용16');
+insert into fboard(member_no, titl, conts) values(1, '제목17','내용17');
+insert into fboard(member_no, titl, conts) values(1, '제목18','내용18');
+insert into fboard(member_no, titl, conts) values(1, '제목19','내용19');
+insert into fboard(member_no, titl, conts) values(1, '제목20','내용20');
+insert into fboard(member_no, titl, conts) values(1, '제목21','내용21');
+insert into fboard(member_no, titl, conts) values(1, '제목22','내용22');
+insert into fboard(member_no, titl, conts) values(1, '제목23','내용23');
+insert into fboard(member_no, titl, conts) values(1, '제목24','내용24');
+insert into fboard(member_no, titl, conts) values(1, '제목25','내용25');
+insert into fboard(member_no, titl, conts) values(1, '제목26','내용26');
+insert into fboard(member_no, titl, conts) values(1, '제목27','내용27');
+insert into fboard(member_no, titl, conts) values(1, '제목28','내용28');
+insert into fboard(member_no, titl, conts) values(1, '제목29','내용29');
+insert into fboard(member_no, titl, conts) values(1, '제목30','내용30');
+insert into fboard(member_no, titl, conts) values(1, '제목31','내용31');
+insert into fboard(member_no, titl, conts) values(1, '제목32','내용32');
+insert into fboard(member_no, titl, conts) values(1, '제목33','내용33');
+insert into fboard(member_no, titl, conts) values(1, '제목34','내용34');
+insert into fboard(member_no, titl, conts) values(1, '제목35','내용35');
+insert into fboard(member_no, titl, conts) values(1, '제목36','내용36');
+insert into fboard(member_no, titl, conts) values(1, '제목37','내용37');
+insert into fboard(member_no, titl, conts) values(1, '제목38','내용38');
+insert into fboard(member_no, titl, conts) values(1, '제목39','내용39');
+insert into fboard(member_no, titl, conts) values(1, '제목40','내용40');
+
   
   
   

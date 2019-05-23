@@ -8,7 +8,7 @@ import bitcamp.team.domain.FboardComment;
 
 public interface FboardDao {
 
-   List<Fboard> findAll();
+   List<Fboard> findAll(HashMap<String, Object> param);
    Fboard findByNo(int no);
    int increaseCount(int no);
    int delete(int no);
