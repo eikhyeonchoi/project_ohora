@@ -8,10 +8,8 @@
 
 //헤더를먼저 로딩한 후 로그인 버튼을 활성화시킨다. (...맞나?)
 $(document.body).bind('loaded.header', function(data) {
-
   // 웹 페이지에 header.html을 삽입했으면 로그인 정보를 가져와 설정한다.
   loadLoginUser();
-  console.log($('#login-username'));
   // 로그아웃 버튼의 click 리스너를 등록한다.
   $('#logout-menu').click(function(e) {
     e.preventDefault();
