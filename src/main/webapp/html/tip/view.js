@@ -30,11 +30,6 @@ $.getJSON('../../app/json/auth/user', function(data) {
   }
   $(document).ready(function() {
     $('#updateUser').attr('placeholder', data.user.nickName);
-    if (data.user.type == null) {
-      $('#update-btn').hide();
-    } else {
-      $('#update-btn').show();
-    }
   });
 })
 
@@ -80,7 +75,6 @@ $(document.body).bind('loaded-list', () => {
           location.href = "view.html?no=" + param.split('=')[1];
         }
       } else {
-        alert('안됩니닷!');
       }
     });
   })
@@ -95,7 +89,6 @@ $('#add-btn').click(() => {
     if(data.status == 'success') {
       location.href = "index.html";
     } else {
-      alert('팁 생성 실패입니다.\n' + data.message);
     }
   }, "json")
 });
@@ -110,7 +103,6 @@ function loadData(no) {
   });
 
   $('#update-btn').click(() => {
-    console.log($('#updateUser').attr('placeholder'));
     $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
       name: $('#productName').val(),
       nickName: $('#updateUser').attr('placeholder'),
@@ -119,7 +111,7 @@ function loadData(no) {
       if (data.status == 'success') {
         location.href = "view.html?no=" + param.split('=')[1];
       } else {
-        alert('변경 실패 입니다.\n' +  data.message);
+        location.href = '/bitcamp-team-project/html/auth/login.html'; 
       }
     }, "json");
 
@@ -131,7 +123,7 @@ function loadData(no) {
       if (data.status == 'success') {
         alert('히스토리 저장중입니다.');
       } else {
-        alert('히스토리 추가 실패입니다.\n' + data.message) ;
+        location.href = '/bitcamp-team-project/html/auth/login.html';
       }
     }, "json")
   });
