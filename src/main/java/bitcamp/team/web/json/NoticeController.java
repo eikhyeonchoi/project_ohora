@@ -69,7 +69,8 @@ public class NoticeController {
     int totalPage = rowCount / pageSize;
     if (rowCount % pageSize > 0)
       totalPage++;
-
+    if (totalPage == 0)
+      totalPage = 1;
     if (pageNo < 1)
       pageNo = 1;
     else if (pageNo > totalPage)
@@ -80,9 +81,6 @@ public class NoticeController {
     int[] nos = {1, 2, 3, 4, 5};
 
     HashMap<String, Object> content = new HashMap<>();
-    if (notice.size() == 0) {
-      notice.set(0, new Notice());
-    }
     content.put("list", notice);
     content.put("nos", nos);
     content.put("pageNo", pageNo);
