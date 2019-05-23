@@ -6,13 +6,13 @@ public class Faq {
   private String contents;
   private int qcNo;
   
-  private QuestionCategory questionCategory;
+  private FaqType faqType;
   
-  public QuestionCategory getQuestionCategory() {
-    return questionCategory;
+  public FaqType getFaqType() {
+    return faqType;
   }
-  public void setQuestionCategory(QuestionCategory questionCategory) {
-    this.questionCategory = questionCategory;
+  public void setFaqType(FaqType faqType) {
+    this.faqType = faqType;
   }
   public int getQcNo() {
     return qcNo;

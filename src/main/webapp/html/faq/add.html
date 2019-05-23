@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="add.css">
+</head>
+<body>
+  <header class="bit-main-header"></header>
+  <div class="container">
+  
+    <div class='offset-sm-4'>
+      <h3>자주묻는 질문 add</h3>
+    </div>
+    <hr class='head-line'>
+    
+    <div class='input-group mb-3'>
+      <div class="dropdown input-group-prepend">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="faq-type-selected" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          FAQ 항목 선택
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        </div>
+      </div>
+      <input type="text" class="faq-title form-control" placeholder="제목을 입력해주세요" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    </div>
+
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">content</span>
+      </div>
+      <textarea class="faq-contents form-control" aria-label="With textarea"></textarea>
+    </div>
+    
+    <hr>
+    
+    <div class='offset-sm-5'>
+      <button id='faq-add-btn' class='btn btn-success btn-md'>등록</button>
+      <button id='faq-cancel-btn' class='btn btn-danger btn-md'>취소</button>
+    </div>
+    
+    
+
+
+  </div> <!-- container -->
+  
+    <script id="faq-type-template" type="text/x-handlebars-template">
+      {{#each faqCtg}}
+        <a class="dropdown-item" href="#" data-type-name='{{faqType.name}}' data-no='{{qcNo}}'>{{faqType.name}}</a>
+      {{/each}}
+  </script>
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="add.js"></script>
+</body>
+</html>

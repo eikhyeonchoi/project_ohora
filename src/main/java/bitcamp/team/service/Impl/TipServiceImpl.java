@@ -1,5 +1,6 @@
 package bitcamp.team.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,11 @@ public class TipServiceImpl implements TipService{
   }
 
   @Override
-  public List<Tip> list() {
-    return tipDao.findAll();
+  public List<Tip> list(int pageNo, int pageSize) {
+    HashMap<String,Object> contents = new HashMap<>();
+    contents.put("size", pageSize);
+    contents.put("rowNo", (pageNo - 1) * pageSize);
+    return tipDao.findAll(contents);
   }
   @Override
   public int delete(int no) {
@@ -52,5 +56,10 @@ public class TipServiceImpl implements TipService{
   @Override
   public List<Tip> search(Map<String,Object> map) {
     return tipDao.search(map);
+  }
+  
+  @Override
+  public int size() {
+    return tipDao.countAll();
   }
 }

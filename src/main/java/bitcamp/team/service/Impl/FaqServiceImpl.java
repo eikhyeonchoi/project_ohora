@@ -1,6 +1,7 @@
 package bitcamp.team.service.Impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.FaqDao;
@@ -42,6 +43,11 @@ public class FaqServiceImpl implements FaqService {
   @Override
   public int update(Faq faq) {
     return faqDao.update(faq);
+  }
+
+  @Override
+  public List<Faq> categoryList(int no) {
+    return faqDao.findCategoryList(no);
   }
 
 }

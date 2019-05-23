@@ -14,7 +14,7 @@
   <h1>리뷰 목록(list)</h1>
   <h4 id='product-name'></h4>
       
-  <button type="button" id="add-btn" class="btn btn-primary bit-view-item">등록</button> 
+  <button type="button" id="review-add-btn" class="btn btn-primary bit-view-item">등록</button> 
   
   <table class="table table-hover">
     <thead>
@@ -49,6 +49,7 @@
     <div class="col-sm-10">
      <div class="input-group mb-3">
       <select name="searchType" class="custom-select" id="searchType">
+       <option class="dropdown-item" value="name" id="search_name">아이디</option>
        <option class="dropdown-item" value="title" id="search_title">제목</option>
        <option class="dropdown-item" value="contents" id="search_contents">내용</option>
        <option class="dropdown-item" value="all" id="search_all">제목+내용</option>

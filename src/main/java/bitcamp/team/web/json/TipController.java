@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
@@ -28,11 +29,34 @@ public class TipController {
   @Autowired TipHistoryService tipHistoryService;
 
   @GetMapping("list")
-  public Object list() throws Exception {
-    List<Tip> tips = tipService.list();
+  public Object list(
+      @RequestParam(defaultValue = "1") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize
+      ) throws Exception {
+    if (pageSize < 10 || pageSize > 18) {
+      pageSize = 10;
+    }
+    int rowCount = tipService.size();
+    int totalPage = rowCount / pageSize;
+    
+    if (rowCount % pageSize > 0)
+      totalPage++;
+    
+    if (pageNo > totalPage) 
+      pageNo = totalPage;
+    if (pageNo < 1)
+      pageNo = 1;
+    
+    List<Tip> tips = tipService.list(pageNo, pageSize);
+    
+    int[] nos = {1, 2, 3, 4, 5};
+    
     HashMap<String,Object> map = new HashMap<>();
     map.put("list", tips);
-
+    map.put("nos", nos);
+    map.put("pageNo", pageNo);
+    map.put("pageSize", pageSize);
+    map.put("totalPage", totalPage);
     return map;
   }
 

@@ -22,6 +22,14 @@ public class FaqController {
   public Object list() {
     return faqService.list();
   } // list
+  
+  @GetMapping("categoryList")
+  public Object categoryList(int no) {
+    HashMap<String, Object> content = new HashMap<>();
+    content.put("list", faqService.categoryList(no));
+    
+    return content;
+  } // list
 
   @GetMapping("detail")
   public Object detail(int no) {
@@ -71,8 +79,6 @@ public class FaqController {
     try {
       if (faqService.update(faq) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-      
-      
       content.put("status", "success");
 
     } catch (Exception e) {

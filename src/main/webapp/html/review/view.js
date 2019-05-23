@@ -1,5 +1,6 @@
 var tbody = $('tbody'),
     templateSrc = $('#select-template').html();
+var addBtn = $('#review-add-btn')
 var trGenerator = Handlebars.compile(templateSrc);
 var detailNo = getQuerystring('no');
 var productName = decodeURIComponent(getQuerystring('name'));
@@ -19,11 +20,14 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
     '&searchType=' + $('#searchType').val(), (obj) => {
       
       console.log(detailNo);
+      console.log(obj.list);
       //page
       pageNo = obj.pageNo;
       totalPage = obj.totalPage;
+      totalCount = obj.totalCount;
       
-      var currpage = pageNo % 5
+      
+      var currpage = pageNo % 5;
       
       if($('#2ndPage > a').html() > totalPage) {
         $('#2ndPage').css('display', 'none');
@@ -94,7 +98,6 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
       }
   
   console.log(obj);
-  
   
   
   tbody.html('');
@@ -184,9 +187,11 @@ $('#search-btn').click((e) => {
 
 ($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
     if(obj.status == 'fail') {
-      $('#add-btn').hide();
+      addBtn.hide();
     } else {
-      $('#add-btn').show();
+      addBtn.click(function() {
+        location.href='add.html?no=' + detailNo;
+      })
     }
 }));
     

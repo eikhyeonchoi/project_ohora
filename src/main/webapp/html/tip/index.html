@@ -28,19 +28,39 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="form-group row">
-      <select id="searchTag" name="searchTag">
-        <option value="">검색조건</option>
-        <option id="prodName" value="prodName">제품명</option>
-        <option id="memName" value="memName">작성자</option>
-        <option id="conts" value="cont">내용</option>
-        <option id="prodConts" value="cont">제품명 + 내용</option>
-      </select>
-      <div class="col-sm-5">
-        <input type="text" class="form-control-plaintext" id="search" name='search' placeholder="검색">
+
+    <div class="form-inline my-2 my-lg-0 justify-content-center">
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <div class="input-group mr-3">
+            <select id="searchTag" name="searchTag" class="custom-select">
+              <option value="">검색조건</option>
+              <option id="prodName" value="prodName">제품명</option>
+              <option id="memName" value="memName">작성자</option>
+              <option id="conts" value="cont">내용</option>
+              <option id="prodConts" value="cont">제품명 + 내용</option>
+            </select>
+          </div>
+        </div>
       </div>
+      <input type="text" class="form-control" id="search" name='search' placeholder="검색">
       <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
     </div>
+
+    <nav aria-label="목록 페이지 이동">
+      <ul class="pagination justify-content-center" id="pageUI">
+      </ul>
+    </nav>
+
+  <script id="tr-pageNav" type="text/x-handlebars-template">
+  <ul class="pagination justify-content-center">
+  <li id="prevPage" class="page-item bt-prevPage"><a class="page-link" href="#">이전</a></li>
+    {{#each nos}} 
+      <li id="page-{{this}}" class="page-item ohr-page" data-no="{{this}}"><a class="page-link" href="#">{{this}}</a></li>
+    {{/each}} 
+  <li id="nextPage" class="page-item bt-nextPage"><a class="page-link" href="#">다음</a></li>
+  </ul>
+</script>
 
     <script id="tr-template" type="text/x-handlebars-template">
     {{#each list}}

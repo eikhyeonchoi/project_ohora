@@ -32,9 +32,9 @@ public class ReviewController {
     if (pageSize < 10 || pageSize > 18)
       pageSize = 10;
 
-    int rowCount = reviewService.size(no);
-    int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
+    int totalCount = reviewService.size(no);
+    int totalPage = totalCount / pageSize;
+    if (totalCount % pageSize > 0)
       totalPage++;
 
     if (pageNo < 1)
@@ -49,6 +49,7 @@ public class ReviewController {
     map.put("pageNo", pageNo);
     map.put("pageSize", pageSize);
     map.put("totalPage", totalPage);
+    map.put("totalCount", totalCount);
     map.put("keyword", keyword);
     map.put("searchType", searchType);
 
@@ -76,6 +77,22 @@ public class ReviewController {
     }
     return content;
   } 
+  
+  @PostMapping("add")
+  public Object add(Review review) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      reviewService.add(review);
+
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
 
 
   @PostMapping("update")
