@@ -1,5 +1,4 @@
 package bitcamp.team.web.json;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,32 +30,41 @@ public class TipController {
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize
+      @RequestParam(defaultValue = "10") int pageSize, 
+      String searchType, String keyword
       ) throws Exception {
-    if (pageSize < 10 || pageSize > 18) {
-      pageSize = 10;
-    }
-    int rowCount = tipService.size();
-    int totalPage = rowCount / pageSize;
-    
-    if (rowCount % pageSize > 0)
-      totalPage++;
-    
-    if (pageNo > totalPage) 
-      pageNo = totalPage;
-    if (pageNo < 1)
-      pageNo = 1;
-    
-    List<Tip> tips = tipService.list(pageNo, pageSize);
-    
-    int[] nos = {1, 2, 3, 4, 5};
-    
     HashMap<String,Object> map = new HashMap<>();
-    map.put("list", tips);
-    map.put("nos", nos);
-    map.put("pageNo", pageNo);
-    map.put("pageSize", pageSize);
-    map.put("totalPage", totalPage);
+    try {
+      if (pageSize < 10 || pageSize > 18) {
+        pageSize = 10;
+      }
+      int rowCount = tipService.size(keyword);
+      int totalPage = rowCount / pageSize;
+
+      if (rowCount % pageSize > 0)
+        totalPage++;
+
+      if (pageNo > totalPage) 
+        pageNo = totalPage;
+      if (pageNo < 1)
+        pageNo = 1;
+      List<Tip> tips = tipService.list(pageNo, pageSize, keyword, searchType);
+
+      int[] nos = {1, 2, 3, 4, 5};
+
+      map.put("list", tips);
+      map.put("nos", nos);
+      map.put("pageNo", pageNo);
+      map.put("pageSize", pageSize);
+      map.put("totalPage", totalPage);
+      map.put("keyword", keyword);
+      map.put("searchType", searchType);
+      map.put("status", "success");
+      
+    } catch (Exception e) {
+      map.put("status", "fail");
+      map.put("error", e.getMessage());
+    }
     return map;
   }
 
@@ -164,32 +172,6 @@ public class TipController {
       System.out.println(prd);
       contents.put("status", "success");
       contents.put("product", prd);
-    } catch (Exception e) {
-      contents.put("status", "fail");
-      contents.put("error", e.getMessage());
-    }
-
-    return contents;
-  }
-
-  @GetMapping("search")
-  public Object search(String searchType, String keyword) throws Exception {
-    HashMap<String,Object> contents = new HashMap<>();
-    HashMap<String,Object> nums = new HashMap<>();
-    try {
-      List<Tip> searchList = new ArrayList<>();
-      switch (searchType) {
-        case "prodName": nums.put("prodName", searchType); break;
-        case "memName": nums.put("memName", searchType); break;
-        case "cont": nums.put("cont", searchType); break;
-        case "prodConts": nums.put("prodConts", searchType); break;
-        default: nums.put("error", "empty");
-      }
-      nums.put("keyword", keyword);
-      searchList = tipService.search(nums);
-      contents.put("searchList", searchList);
-      contents.put("status", "success");
-
     } catch (Exception e) {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());

@@ -43,6 +43,15 @@
 
   <select id="findAll" resultMap="tipMap" parameterType="map">
     <include refid="join-select1"/>
+    <where>
+    <if test="keyword != null">
+      <bind name="pattern1" value="'%' + keyword + '%'"/>
+      <if test="prodName != null"> p.name like #{pattern1}</if>
+      <if test="memName != null"> m.n_name like #{pattern1}</if>
+      <if test="cont != null"> conts like #{pattern1}</if>
+      <if test="prodConts != null"> p.name like #{pattern1} or conts like #{pattern1}</if>
+    </if>
+    </where>
     order by
       tip_no desc
     <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if>
@@ -82,20 +91,23 @@
     values (#{productNo}, #{memberNo}, #{contents})
   </insert>
   
-  <select id="search" resultMap="tipMap" parameterType="map">
-    <include refid="join-select1"/>
-    <bind name="pattern1" value="'%' + keyword + '%'"/>
+  <select id="countAll" resultType="int" parameterType="string">
+    select
+      count(*)
+    from
+      tip t
+    left outer join
+      product p
+    on t.product_no = p.product_no 
+    left outer join
+      member m
+    on t.member_no = m.member_no
     <where>
-      <if test="prodName != null">or p.name like #{pattern1}</if>
-      <if test="memName != null">or m.n_name like #{pattern1}</if>
-      <if test="cont != null">or conts like #{pattern1}</if>
-      <if test="prodConts != null">or p.name like #{pattern1} and conts like #{pattern1}</if>
+      <if test="_parameter != null">
+        <bind name="pattern2" value="'%' + _parameter + '%'"/>
+        p.name like #{pattern2}
+      </if>
     </where>
-      <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if>
-  </select>
-  
-  <select id="countAll" resultType="int">
-    select count(*) from tip
   </select>
 </mapper>
 

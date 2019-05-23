@@ -69,7 +69,8 @@ public class NoticeController {
     int totalPage = rowCount / pageSize;
     if (rowCount % pageSize > 0)
       totalPage++;
-
+    if (totalPage == 0)
+      totalPage = 1;
     if (pageNo < 1)
       pageNo = 1;
     else if (pageNo > totalPage)
