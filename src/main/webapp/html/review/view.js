@@ -24,14 +24,13 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
       
 //      console.log(detailNo);
 //      console.log(obj.list);
-      //page
+//      page
       pageNo = obj.pageNo;
       totalPage = obj.totalPage;
       var currpage = pageNo % 5;
       
       console.log('pageNo : ' + pageNo);
       console.log('totalPage : ' + totalPage);
-      
       
       tbody.html('');
       $(trGenerator(obj)).appendTo(tbody);
@@ -58,7 +57,6 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
         }
       } //for
       
-      
       if (pageNo < 6) {
         $('#prevPage').addClass('disabled');
       } else {
@@ -77,9 +75,8 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
       } else {
         $('#nextPage').removeClass('disabled');
       }
-      
 
-  
+
   $('#product-name').html('');
   $('#product-name').append(productName);
   
@@ -88,7 +85,6 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
     e.preventDefault();
     window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
   });
-  
   
 })};
 
@@ -138,7 +134,6 @@ $('#search-btn').click((e) => {
       })
     }
 }));
-    
 
 
 function getQuerystring(key, default_)

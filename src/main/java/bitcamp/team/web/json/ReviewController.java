@@ -32,7 +32,7 @@ public class ReviewController {
     if (pageSize < 10 || pageSize > 18)
       pageSize = 10;
 
-    int rowCount = reviewService.size(no, keyword);
+    int rowCount = reviewService.size(no, keyword, searchType);
     int totalPage = rowCount / pageSize;
     if (rowCount % pageSize > 0)
       totalPage++;
@@ -55,7 +55,6 @@ public class ReviewController {
     map.put("totalPage", totalPage);
     map.put("keyword", keyword);
     map.put("searchType", searchType);
-
 
     return map;
   }
@@ -85,6 +84,11 @@ public class ReviewController {
   public Object add(Review review) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     try {
+      if (review.getTitle() == "") {
+        throw new RuntimeException("제목을 입력해 주세요");
+      } else if (review.getContents() == "") {
+        throw new RuntimeException("내용을 입력해 주세요");
+      }
       reviewService.add(review);
 
       content.put("status", "success");
@@ -102,6 +106,11 @@ public class ReviewController {
   public Object update(Review review) {
     HashMap<String,Object> content = new HashMap<>();
     try {
+      if (review.getTitle() == "") {
+        throw new RuntimeException("제목을 입력해 주세요");
+      } else if (review.getContents() == "") {
+        throw new RuntimeException("내용을 입력해 주세요");
+      }
       if (reviewService.update(review) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
