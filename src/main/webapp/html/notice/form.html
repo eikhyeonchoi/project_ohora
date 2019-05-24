@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../node_modules/blueimp-file-upload/css/jquery.fileupload.css">
   <link rel="stylesheet" href="form.css">
+   <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <body>
 
 <header class="bit-main-header"></header>
@@ -21,6 +23,14 @@
              name='no' readonly>
     </div>
   </div>
+  
+    <div class="form-group row">
+    <label for="contents" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-8">
+    <textarea name="contents" class="form-control-plaintext" placeholder="내용을 입력해주세요"></textarea>
+    </div>
+  </div>
+  
   <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label"></label>
     <div class="col-sm-10">
@@ -28,13 +38,8 @@
              name='title' placeholder="제목을 입력해주세요">
     </div>
   </div>
-  <div class="form-group row">
-    <label for="contents" class="col-sm-2 col-form-label"></label>
-    <div class="col-sm-8">
-    <textarea name="contents" class="contents" placeholder="내용을 입력해주세요"></textarea>
-    </div>
-  </div>
   
+    <input id="fileupload" type="file" name="files" multiple>
   
   <div class="form-group row">
     <div class="col-sm-10">

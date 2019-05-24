@@ -16,6 +16,15 @@ if (param) {
   }
 }
 
+$('#fileupload').fileupload({
+  url: '../../app/json/notice/upload',
+  dataType: 'json',
+  done: function (e, data) {
+    console.log(data.result);
+    console.log(data.result.files);
+  }
+});
+
 $('#add-btn').click(() => {
   $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
