@@ -25,9 +25,10 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">작성자</th>
+        <th scope="col">번호</th>
         <th scope="col">제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col">작성자</th>
+        <th scope="col">등록일</th>
         <th scope="col">조회수</th>
       </tr>
     </thead>
@@ -62,8 +63,9 @@
   <script id="select-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <td>{{member.name}}</a></td>
+  <td>{{no}}</a></td>
   <td><a class='review-a-class' href='view2.html' data-no='{{no}}'>{{title}}</a></td>
+  <td>{{member.name}}</a></td>
   <td>{{createdDate}}</td>
   <td>{{viewCount}}</td>
 </tr>
