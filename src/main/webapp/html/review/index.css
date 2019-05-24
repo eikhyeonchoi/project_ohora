@@ -1,5 +1,25 @@
+h1{
+ font-size : 50px;
+ text-align: center;
+ margin : 30px;
+} 
+
+div.product-name{
+	float:left;
+	margin-left:30px;
+	margin-top:5px;
+}
+
+div > h4 {font-size:25px;}
+
+div.add-btn{
+  float:right;
+  margin-bottom:15px;
+}
+
+
 th:nth-child(1) {
-  width: 50px;
+  width: 120px;
   text-align: center;
 }
 
@@ -9,7 +29,7 @@ th:nth-child(3) {
 }
 
 th:nth-child(4) {
-  width: 60px;
+  width: 70px;
 }
 
 td:nth-child(3) {
