@@ -63,9 +63,9 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
         $('#prevPage').removeClass('disabled');
       } 
       
-      var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0 
-      ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
-      : (obj.totalPage / 5).toFixed(0) * 5;
+      var maxPage = ((totalPage / 5).toFixed(0) * 5) % 5  == 0 && ((totalPage / 5).toFixed(0) * 5) / 5 < 1  
+      ? ((totalPage / 5).toFixed(0) * 5) - 5 
+      : (totalPage / 5).toFixed(0) * 5;
       
       console.log('maxPage : ' + maxPage);
       
@@ -76,18 +76,18 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
         $('#nextPage').removeClass('disabled');
       }
 
-
   $('#product-name').html('');
   $('#product-name').append(productName);
-  
+
   
   $('.review-a-class').click((e) => {
     e.preventDefault();
     window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
   });
   
+  $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
+  
 })};
-
 
 var currPage = $(document.body).bind('loaded-list', () => {
   currPage = pageNo;
@@ -97,12 +97,32 @@ var endPage = $(document.body).bind('loaded-list', () => {
   endPage = totalPage
 });
 
+
 $(document).on('click', '.ohr-page', function (e) {
   e.preventDefault();
   loadList($(e.target).html());
 })
 
+
 loadList(1);
+
+
+$(document).on('click', '#prevPage > a', (e) => {
+  e.preventDefault();
+  for(var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(Number($('#page-' + no + ' > a').html()) - 5);
+  }
+  console.log($('.ohr-page > a').html())
+  loadList(Number($('.ohr-page > a').html()) + 4);
+});
+
+$(document).on('click', '#nextPage > a', (e) => {
+  e.preventDefault();
+  for(var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(Number($('#page-' + no + ' > a').html()) + 5);
+  }
+  loadList($('.ohr-page > a').html());
+});
 
 
 // 검색
