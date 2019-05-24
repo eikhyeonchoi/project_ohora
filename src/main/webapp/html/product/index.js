@@ -22,6 +22,7 @@ pageGenerator = Handlebars.compile(pageNavSrc);
 
 $(document).ready(function() {
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    console.log(obj);
     $('#insert-btn').click(function() {
       if (obj.user.type < 2) {
         location.href = '/bitcamp-team-project/html/auth/login.html';

@@ -2,10 +2,6 @@ var h1 = $('h1'),
 el1 = $('.bit-new-item'),
 el2 = $('.bit-view-item');
 
-$(document).ready(function() {
-  $('#summernote').summernote();
-});
-
 var param = location.href.split('?')[1];
 if (param) {
   h1.html("공지사항"); 

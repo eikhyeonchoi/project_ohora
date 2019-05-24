@@ -1,10 +1,10 @@
 //헤더 가져오기
-(function() {
+$(document.body).ready(function() {
   $('.bit-main-header').load('/bitcamp-team-project/html/header.html',
       function (){
     $(document.body).trigger('loaded.header');
   });
-}) ();
+});
 
 //헤더를먼저 로딩한 후 로그인 버튼을 활성화시킨다. (...맞나?)
 $(document.body).bind('loaded.header', function(data) {
@@ -25,12 +25,13 @@ $(document.body).bind('loaded.header', function(data) {
 function loadLoginUser() {
   // 서버에서 로그인 한 사용자 정보를 가져온다.
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
+    console.log(data);
     if (data.status == 'success') {
       $("#bit-auth").hide();
-      $('#bit-login-state').toggleClass('bit-invisible', '');
+      $('#bit-login-state').show();
       $('#login-username').html(data.user.name);
     } else {
-      $('#bit-not-login-state').toggleClass('bit-invisible', '');
+      $('#bit-not-login-state').show();
     }
   });
 }
