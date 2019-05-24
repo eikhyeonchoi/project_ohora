@@ -167,6 +167,16 @@ insert into fboard(member_no, titl, conts) values(1, '제목37','내용37');
 insert into fboard(member_no, titl, conts) values(1, '제목38','내용38');
 insert into fboard(member_no, titl, conts) values(1, '제목39','내용39');
 insert into fboard(member_no, titl, conts) values(1, '제목40','내용40');
+insert into fboard(member_no, titl, conts) values(1, '제목41','내용41');
+insert into fboard(member_no, titl, conts) values(1, '제목42','내용42');
+insert into fboard(member_no, titl, conts) values(1, '제목43','내용43');
+insert into fboard(member_no, titl, conts) values(1, '제목44','내용44');
+insert into fboard(member_no, titl, conts) values(1, '제목45','내용45');
+insert into fboard(member_no, titl, conts) values(1, '제목46','내용46');
+insert into fboard(member_no, titl, conts) values(1, '제목47','내용47');
+insert into fboard(member_no, titl, conts) values(1, '제목48','내용48');
+insert into fboard(member_no, titl, conts) values(1, '제목49','내용49');
+insert into fboard(member_no, titl, conts) values(1, '제목50','내용50');
 
   
   

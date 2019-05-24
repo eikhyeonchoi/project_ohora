@@ -87,7 +87,7 @@
       </if>
     </where>
     order by
-      b.fb_no desc
+      b.fb_no asc
     <if test="size != null and pageNo != null">
       limit #{pageNo}, #{size}
     </if>

@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
-.pagination {
-	text-align: center;
-
-
 table tr th:nth-child(2), table tr td:nth-child(2) {
 	width: 400px;
 	text-align: center;
+}
+
+.pagination {
+	text-align: center;
+}
+
+.bit-list {
+	min-height: 500px;
 }
 
 

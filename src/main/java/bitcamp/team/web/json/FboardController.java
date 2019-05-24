@@ -79,8 +79,11 @@ public class FboardController {
     param.put("pageNo", (pageNo - 1) * pageSize);
     param.put("size", pageSize);
     
+    
     content.put("pageNo", pageNo);
     content.put("totalPage", totalPage);
+    content.put("rowCount", rowCount);
+    content.put("pageSize", pageSize);
     
     if(!search.equals("undefined")) {
       if (search.contains("t.")) {
