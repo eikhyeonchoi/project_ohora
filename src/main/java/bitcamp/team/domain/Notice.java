@@ -2,6 +2,7 @@ package bitcamp.team.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Notice implements Cloneable, Serializable {
@@ -13,6 +14,7 @@ public class Notice implements Cloneable, Serializable {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   protected Date createdDate;
   protected int viewCount;
+  protected List<NoticeFile> files;
 
   @Override
   public Notice clone() throws CloneNotSupportedException {
@@ -21,9 +23,20 @@ public class Notice implements Cloneable, Serializable {
 
   @Override
   public String toString() {
-    return "notice [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
-        + createdDate + ", viewCount=" + viewCount + "]";
+    return "Notice [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
+        + createdDate + ", viewCount=" + viewCount + ", files=" + files + "]";
   }
+
+
+  public List<NoticeFile> getFiles() {
+    return files;
+  }
+
+
+  public void setFiles(List<NoticeFile> files) {
+    this.files = files;
+  }
+
 
   public int getNo() {
     return no;
