@@ -107,6 +107,7 @@
     q.status,
     q.conts,
     m.n_name,
+    a.ans_no,
     a.conts as answerConts,
     a.cdt as answerDate
   from
@@ -151,6 +152,17 @@
     on q.q_no = qf.q_no
     where q.q_no = #{value}
   </select>
+  
+  <update id="status" parameterType="int" 
+  useGeneratedKeys="true"
+  keyColumn="status" keyProperty="status">
+  update 
+    question
+  set 
+    status = "답변 완료"
+  where 
+    q_no = #{no}
+  </update>
   
 </mapper>
 

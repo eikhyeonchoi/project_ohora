@@ -11,5 +11,5 @@ public interface QuestionDao {
   List<QuestionType> findType();
   Question findByNo(int no);
   Question findFileByNo(int no);
-
+  int status(int no);
 }

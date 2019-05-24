@@ -6,6 +6,8 @@ public class AnswerFile {
   private int answerNo;
   private String filePath;
   
+  private Answer answer;
+  
   public int getNo() {
     return no;
   }
@@ -25,9 +27,17 @@ public class AnswerFile {
     this.filePath = filePath;
   }
   
-  @Override
-  public String toString() {
-    return "AnswerFile [no=" + no + ", answerNo=" + answerNo + ", filePath=" + filePath + "]";
+  public Answer getAnswer() {
+    return answer;
   }
   
+  public void setAnswer(Answer answer) {
+    this.answer = answer;
+  }
+  
+  @Override
+  public String toString() {
+    return "AnswerFile [no=" + no + ", answerNo=" + answerNo + ", filePath=" + filePath
+        + ", answer=" + answer + "]";
+  }
 }
