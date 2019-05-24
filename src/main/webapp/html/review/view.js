@@ -147,7 +147,7 @@ $('#search-btn').click((e) => {
 //등록버튼
 ($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
     if(obj.status == 'fail') {
-      addBtn.hide();
+      addBtn.prop('disabled', true);
     } else {
       addBtn.click(function() {
         location.href='form.html?no=' + detailNo;
