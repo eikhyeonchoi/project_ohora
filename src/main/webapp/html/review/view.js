@@ -63,7 +63,7 @@ $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo +
         $('#prevPage').removeClass('disabled');
       } 
       
-      var maxPage = ((totalPage / 5).toFixed(0) * 5) % 5  == 0 && ((totalPage / 5).toFixed(0) * 5) / 5 < 1  
+      var maxPage = ((totalPage / 5).toFixed(0) * 5) % 5  == 0 && ((totalPage / 5).toFixed(0) * 5) / 5 == 1  
       ? ((totalPage / 5).toFixed(0) * 5) - 5 
       : (totalPage / 5).toFixed(0) * 5;
       
@@ -156,6 +156,7 @@ $('#search-btn').click((e) => {
 }));
 
 
+
 function getQuerystring(key, default_)
 {
   if (default_==null) default_=""; 
@@ -167,3 +168,6 @@ function getQuerystring(key, default_)
   else
     return qs[1];
 }
+
+
+

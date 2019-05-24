@@ -16,6 +16,7 @@
     <association property="member" javaType="member">
       <id column="member_no" property="memberNo" />
       <result column="memberName" property="name" />
+      <result column="nickName" property="nickName" />
     </association>
   </resultMap>
   
@@ -30,7 +31,7 @@
     select
       r.rv_no as rno,
       r.name as reviewName,
-      m.name as memberName, 
+      m.n_name as nickName, 
       r.cdt,
       r.cnt
     from
