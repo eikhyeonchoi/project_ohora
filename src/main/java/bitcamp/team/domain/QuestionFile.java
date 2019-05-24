@@ -1,15 +1,13 @@
 package bitcamp.team.domain;
 
-import java.io.Serializable;
+public class QuestionFile {
 
-public class QuestionFile implements Serializable{
-  
-  private static final long serialVersionUID = 1L;
-  
   private int no;
   private int questionNo;
   private String filePath;
-  
+
+  private Question question;
+
   public int getNo() {
     return no;
   }
@@ -28,10 +26,18 @@ public class QuestionFile implements Serializable{
   public void setFilePath(String filePath) {
     this.filePath = filePath;
   }
-  
+
+  public Question getQuestion() {
+    return question;
+  }
+  public void setQuestion(Question question) {
+    this.question = question;
+  }
   @Override
   public String toString() {
-    return "questionFile [no=" + no + ", questionNo=" + questionNo + ", filePath=" + filePath + "]";
+    return "QuestionFile [no=" + no + ", questionNo=" + questionNo + ", filePath=" + filePath
+        + ", question=" + question + "]";
   }
-  
+
+
 }

@@ -40,7 +40,6 @@ public class AuthController {
       HttpSession session) {
 
     Member member = memberService.get(email, password);
-    System.out.println(member);
     HashMap<String,Object> content = new HashMap<>();
 
     if (member == null) {
