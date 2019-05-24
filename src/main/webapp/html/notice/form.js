@@ -28,7 +28,7 @@ $('#fileupload').fileupload({
 $('#add-btn').click(() => {
   $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
-    contents: $('.contents').val()
+    contents: $('#contents').val()
   }, function(data) {
     if(data.status == 'fail'){
       alert('등록 실패입니다!\n' + data.message);

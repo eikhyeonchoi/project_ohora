@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import bitcamp.team.domain.Notice;
+import bitcamp.team.domain.NoticeFile;
 import bitcamp.team.service.NoticeService;
 
 @RestController("json/NoticeController")
@@ -25,10 +26,10 @@ public class NoticeController {
   @Autowired
   ServletContext servletContext;
 
-  @PostMapping(value = "upload", consumes = "multipart/form-data")
+  @PostMapping("upload")
   public Object upload(MultipartFile[] parts) {
     HashMap<String, Object> content = new HashMap<>();
-    ArrayList<MultipartFile> files = new ArrayList<>();
+    ArrayList<NoticeFile> files = new ArrayList<>();
     try {
       for (MultipartFile part : parts) {
         if (part.getSize() > 0) {
@@ -37,7 +38,6 @@ public class NoticeController {
           String orgName = part.getOriginalFilename();
           long orgSize = part.getSize();
           part.transferTo(new File(filepath));
-          files.add(part);
         } else {
           throw new RuntimeException("파일이 없습니다.");
         }

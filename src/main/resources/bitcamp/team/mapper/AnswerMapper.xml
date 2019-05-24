@@ -39,5 +39,17 @@
       answer(q_no, conts)
     values (#{questionNo}, #{content});
   </insert>
+  
+  <select id="findFileByNo" resultMap="answerFileMap" parameterType="int">
+    select
+      a.ans_no,
+      af.file_path
+    from
+      answer a
+    left outer join
+      answer_file af
+    on a.ans_no = af.ans_no
+    where a.ans_no = #{value}
+  </select>
 </mapper>
 

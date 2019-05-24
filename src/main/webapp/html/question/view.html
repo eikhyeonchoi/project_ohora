@@ -41,8 +41,8 @@
         <br>
         <p id="file-p">첨부파일</p>
         <p>
-          <input type="text" id="fileName" name="fileName"> <input type="file"
-            id="fileupload" name="questionFiles" multiple
+          <input type="text" id="fileName" name="fileName"> 
+          <input type="file" id="fileupload" name="questionFiles" multiple
             onchange="javascript:document.getElementById('fileName').value = this.value">
         </p>
       </div>
@@ -55,19 +55,19 @@
         <hr>
         <br>
         <div class="col-sm-10">
-          <textarea class="my-text" id="answer-content" rows="20" cols="90"></textarea>
+          <textarea class="my-text" id="answer-content" rows="20" cols="90" placeholder="답변을 작성해 주세요."></textarea>
         </div>
         <div id="ans-img-div">
-          <p id="file-pp">첨부파일</p>
-          <div id="images-div"></div>
+          <p id="ans-file-pp">첨부파일</p>
+          <div id="ans-images-div"></div>
         </div>
         <div id="ans-file-add-div">
           <br>
-          <p id="file-p">첨부파일</p>
+          <p id="ans-file-p">첨부파일</p>
           <p>
-            <input type="text" id="fileName" name="fileName"> <input type="file"
-              id="fileupload" name="questionFiles" multiple
-              onchange="javascript:document.getElementById('fileName').value = this.value">
+            <input type="text" id="ans-fileName" name="ans-fileName"> 
+            <input type="file" id="ans-fileupload" name="answerFiles" multiple
+              onchange="javascript:document.getElementById('ans-fileName').value = this.value">
           </p>
         </div>
       </div>
