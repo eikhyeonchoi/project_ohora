@@ -1,6 +1,7 @@
 package bitcamp.team.domain;
 
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Question {
@@ -17,6 +18,7 @@ public class Question {
   private QuestionType questionType;
   private Member member;
   private Answer answer;
+  private List<QuestionFile> questionFiles;
   
   public int getNo() {
     return no;
@@ -80,12 +82,19 @@ public class Question {
     this.answer = answer;
   }
   
+  public List<QuestionFile> getQuestionFiles() {
+    return questionFiles;
+  }
+  public void setQuestionFiles(List<QuestionFile> questionFiles) {
+    this.questionFiles = questionFiles;
+  }
+  
   @Override
   public String toString() {
     return "Question [no=" + no + ", questionNo=" + questionNo + ", memberNo=" + memberNo
         + ", title=" + title + ", contents=" + contents + ", createdDate=" + createdDate
         + ", status=" + status + ", questionType=" + questionType + ", member=" + member
-        + ", answer=" + answer + "]";
+        + ", answer=" + answer + ", questionFiles=" + questionFiles + "]";
   }
 
 }

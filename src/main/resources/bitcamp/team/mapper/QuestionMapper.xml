@@ -35,9 +35,28 @@
       <id column="ans_no" property="no"/>
       <result column="answerConts" property="content"/>
       <result column="answerDate" property="createdDate"/>
+      <collection property="answerFiles"      ofType="answerFile">
+        <id     column="answer_file_no"           property="no"/>
+        <result column="ans_no"                   property="answerNo"/>
+        <result column="file_path"                property="filePath"/>
+      </collection>
     </association>
   </resultMap>
 
+  <resultMap type="questionType" id="questionCategoryMap">
+    <id column="qtype_no" property="no"/>
+    <result column="conts" property="name"/>
+  </resultMap>
+  
+  <resultMap type="question" id="questionFileMap">
+    <id       column="q_no"         property="no"/>
+    <collection property="questionFiles"      ofType="questionFile">
+      <id     column="question_file_no"           property="no"/>
+      <result column="q_no"          property="questionNo"/>
+      <result column="file_path"                property="filePath"/>
+    </collection>
+  </resultMap>
+  
   <select id="findAll" resultMap="questionTypeMap">
     select
     q.q_no,
@@ -57,9 +76,32 @@
     order by
     q_no desc
   </select>
+  
+  <select id="findAllByMember" resultMap="questionTypeMap" parameterType="int">
+  select
+    q.q_no,
+    q.titl,
+    q.cdt,
+    q.status,
+    m.n_name,
+    t.conts as typeName
+  from
+    question q
+  left outer join
+    member m
+  on q.member_no = m.member_no
+  left outer join
+    question_type = t
+  on q.qtype_no = t.qtype_no
+  where 
+    q.member_no = #{value}
+  order by
+    q_no desc
+  </select>
 
   <select id="findByNo" resultMap="questionTypeMap" parameterType="int">
-    select 
+  select 
+    q.q_no,
     q.titl,
     q.cdt,
     q.status,
@@ -78,6 +120,38 @@
     where 
   q.q_no = #{value}
   </select>
+  
+  <select id="findType" resultMap="questionCategoryMap">
+    select
+      qtype_no,
+      conts
+    from
+      question_type
+    order by
+      qtype_no desc
+  </select>
+
+  <insert id="insert" parameterType="question"
+      useGeneratedKeys="true"
+      keyColumn="q_no"
+      keyProperty="no">
+    insert into 
+      question(qtype_no, member_no, conts, titl)
+    values (#{questionNo}, #{memberNo}, #{contents}, #{title});
+  </insert>
+  
+  <select id="findFileByNo" resultMap="questionFileMap" parameterType="int">
+    select
+      q.q_no,
+      qf.file_path
+    from
+      question q
+    left outer join
+      question_file qf
+    on q.q_no = qf.q_no
+    where q.q_no = #{value}
+  </select>
+  
 </mapper>
 
 
