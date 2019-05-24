@@ -58,9 +58,19 @@ public class ReviewServiceImpl implements ReviewService {
   }
   
   @Override
-  public int size(int no) {
-      return reviewDao.countPage(no);
+  public int size(int no, String keyword, String searchType) {
+    if (keyword != null) {
+      HashMap<String, Object> params = new HashMap<>();
+      params.put("no", no);
+      params.put("keyword", keyword);
+      params.put("searchType", searchType);
+
+      return reviewDao.countAll(params);
+    }
+    return reviewDao.countAll(null);
   }
+  
+  
   
   
 }
