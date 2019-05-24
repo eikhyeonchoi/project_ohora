@@ -16,7 +16,9 @@ $(document).ready(function() {
     var loginUser = obj.user.type;
     if(loginUser == 3) {
       $('#add-button').show();
-    } 
+    } else {
+      $('#add-button').hide();
+    }
 })});
 
 function loadList(pn) {

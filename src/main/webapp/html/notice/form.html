@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <title>게시물</title>
   <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
   <link rel="stylesheet" href="../../node_modules/blueimp-file-upload/css/jquery.fileupload.css">
-  <link rel="stylesheet" href="../form.css">
+  <link rel="stylesheet" href="form.css">
 <body>
 
 <header class="bit-main-header"></header>
@@ -32,7 +31,7 @@
   <div class="form-group row">
     <label for="contents" class="col-sm-2 col-form-label"></label>
     <div class="col-sm-8">
-    <textarea name="contents" id="summernote" class="contents"></textarea>
+    <textarea name="contents" class="contents" placeholder="내용을 입력해주세요"></textarea>
     </div>
   </div>
   
@@ -51,8 +50,7 @@
 <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="../header.js"></script>

@@ -6,13 +6,10 @@ $(document).ready(function() {
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
     console.log(obj);
     var loginUser = obj.user.type;
-    if(loginUser != 3) {
-      $('#update-btn').css('display', 'none');
-      $('#delete-btn').css('display', 'none');
-    } else {
-      $('#update-btn').css('display', '');
-      $('#delete-btn').css('display', '');
-    }
+    if(loginUser == 3) {
+      $('#update-btn').show();
+      $('#delete-btn').show();
+    } 
 })});
 
 var param = location.href.split('?')[1];
