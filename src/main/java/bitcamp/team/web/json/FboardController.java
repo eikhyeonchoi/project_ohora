@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
@@ -34,7 +35,6 @@ public class FboardController {
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
-
     }
 
     return content;
@@ -63,14 +63,44 @@ public class FboardController {
   }
 
   @GetMapping("list")
-  public Object list() throws Exception {
-    List<Fboard> boards = boardService.list();
-    HashMap<String,Object> map = new HashMap<>();
-    map.put("list", boards);
+  public Object list(
+      @RequestParam(defaultValue = "1") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize,
+      @RequestParam(defaultValue = "undefined" ,required = false) String search) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    HashMap<String,Object> content = new HashMap<>();
+    
+    int rowCount = boardService.size();
+    int totalPage = rowCount / pageSize;
+    if(rowCount % pageSize > 0) {
+      totalPage++;
+    }
+    
+    param.put("pageNo", (pageNo - 1) * pageSize);
+    param.put("size", pageSize);
+    
+    content.put("pageNo", pageNo);
+    content.put("totalPage", totalPage);
+    
+    if(!search.equals("undefined")) {
+      if (search.contains("t.")) {
+        param.put("title", search.substring(2));
+      } else if (search.contains("c.")) {
+        param.put("contents", search.substring(2));
+      } else if(search.contains("n.")){
+        param.put("nickName", search.substring(2));
+      }
+    }
+    
+    List<Fboard> boards = boardService.list(param);
+    content.put("list", boards);
 
-    return map;
+    return content;
   }
 
+  
+  
+  
   @PostMapping("update")
   public Object update(Fboard board) throws Exception {
     HashMap<String,Object> content = new HashMap<>();

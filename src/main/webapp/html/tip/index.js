@@ -10,68 +10,76 @@ var trGenerator = Handlebars.compile(templateSrc),
 pageGenerator = Handlebars.compile(pageNavSrc);
 
 function loadList(pn) {
-  console.log(pageNo);
-  $.getJSON('../../app/json/tip/list?pageNo=' + pn + "&pageSize=" + pageSize, 
-      function(obj) {
+  $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
+      + $('select#searchTag').val() + '&keyword=' + $('#search').val()
+      + '&pageNo=' + pn + '&pageSize' + pageSize
+      ,  function(obj) {
+        pageNo = obj.pageNo;
+        totalPage = obj.totalPage;
+        var currpage = pageNo % 5
+        
+        console.log(obj)
 
-    pageNo = obj.pageNo;
-    totalPage = obj.totalPage;
-    var currpage = pageNo % 5;
+        tbody.html('');
+        $(trGenerator(obj)).appendTo(tbody);
 
-    tbody.html(''); 
-    $(trGenerator(obj)).appendTo(tbody);
+        //page 버튼이 있을 경우 append 안 함
+        if($(document).find('#pageUl').find('#prevPage').val() != 0) {
+          $(pageGenerator(obj)).appendTo($('#pageUl'))
+        }
 
-    if ($(document).find('#pageUI').find('#prevPage').val() != 0) {
-      $(pageGenerator(obj)).appendTo($('#pageUI'));
-    }
+        for(var no of obj.nos) {
 
-    for(var no of obj.nos) {
+          if($('#page-' + no + ' > a').html() > totalPage) {
+            $('#page-' + no).hide();
+          } else {
+            $('#page-' + no).show();
+          }
 
-      if($('#page-' + no + ' > a').html() > totalPage) {
-        $('#page-' + no).hide();
-      } else {
-        $('#page-' + no).show();
-      }
+          if ($('#page-' + no + ' > a').html() == pageNo) {
+            $('#page-' + no + ' > a').parent().addClass('active');
+          } else {
+            $('#page-' + no + ' > a').parent().removeClass('active');
+          }
+        } //for
 
-      if ($('#page-' + no + ' > a').html() == pageNo) {
-        $('#page-' + no + ' > a').parent().addClass('active');
-      } else {
-        $('#page-' + no + ' > a').parent().removeClass('active');
-      }
-    } //for
 
-    if (pageNo < 6) {
-      $('#prevPage').addClass('disabled');
-    } else {
-      $('#prevPage').removeClass('disabled');
-    }
+        if (pageNo < 6) {
+          $('#prevPage').addClass('disabled');
+        } else {
+          $('#prevPage').removeClass('disabled');
+        } 
 
-    var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0 
-    ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
-        : ((obj.totalPage / 5).toFixed(0) * 5) * 5;
+        var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0 
+        ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
+            : (obj.totalPage / 5).toFixed(0) * 5;
 
-    if (pageNo > maxPage) {
-      $('#nextPage').addClass('disabled');
-    } else {
-      $('#nextPage').removeClass('disabled');
-    }
+        console.log(maxPage);
 
-    //$(document.body).trigger('loaded-list');
-  });
-} // loadList
+        if (pageNo > maxPage) {
+          $('#nextPage').addClass('disabled');
+        } else {
+          $('#nextPage').removeClass('disabled');
+        }
+        $(document.body).trigger('loaded-list');
+      });
+};
 
 var currPage = $(document.body).bind('loaded-list', () => {
   currPage = pageNo;
-})
+});
 
 var endPage = $(document.body).bind('loaded-list', () => {
-  endPage = totalPage;
-})
+  endPage = totalPage
+});
 
 $(document).on('click', '.ohr-page', function (e) {
   e.preventDefault();
+  console.log($(e.target).html())
   loadList($(e.target).html());
-});
+})
+
+loadList(1);
 
 $(document).on('click', '#prevPage > a', (e) => {
   e.preventDefault();
@@ -91,32 +99,25 @@ $(document).on('click', '#nextPage > a', (e) => {
 });
 
 $(document.body).bind('loaded-list', () => {
-  var alist = $('.bit-view-link').click((e) => {
+  $('.bit-view-link').click((e) => {
     e.preventDefault();
     location.href = 'view.html?no=' + $(e.target).attr('data-no');
   });
 });
+$('#search').keydown((e) => {
+  if (event.keyCode == 13) {
+    e.preventDefault();
+    for (var no = 1; no < 6; no++) {
+      $('#page-' + no + ' > a').text(no);
+    }
+    loadList(1);
+  }
+});
 
 $('#search-btn').click((e) => {
   e.preventDefault();
-  search($('select#searchTag').val(), $('#search').val());
+  for (var no = 1; no < 6; no++) {
+    $('#page-' + no + ' > a').text(no);
+  }
+  loadList(1);
 });
-
-function search(cond, val) {
-  $.getJSON('/bitcamp-team-project/app/json/tip/search?searchType=' 
-      + cond + '&keyword=' + val
-      , function(data) {
-        if (data.status == 'success') {
-          console.log(data.searchList);
-          tbody.html('');
-          $(trGenerator(data)).appendTo(tbody);
-
-          $(document.body).trigger('loaded-list');
-        } else {
-          alert('오류입니다!\n' + data.error);
-        }
-      });
-}
-loadList(1);
-
-

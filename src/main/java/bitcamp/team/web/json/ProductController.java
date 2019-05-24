@@ -53,7 +53,7 @@ public class ProductController {
   public Object confirmTip(int no) {
     HashMap<String, Object> content = new HashMap<>();
     int memberNo = tipService.confirm(no);
-    if(memberNo == 0) {
+    if(memberNo == 1) {
       content.put("status","success");
     } else {
       content.put("status", "fail");
@@ -98,32 +98,36 @@ public class ProductController {
 
   @GetMapping("list")
   public Object list(
+      @RequestParam(defaultValue = "1") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize,
       @RequestParam(required = false) int largeNo, 
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
-
-    HashMap<String, Object> param = new HashMap<>();
-    // 대분류 소분류 넣지않고 검색
-    if((largeNo == 0 && smallNo == 0) && !productName.equals("undefined")) {
-      param.put("productName", productName);
-    }
-
-    // 다 채워넣고 검색
-    if(largeNo != 0) {
-      param.put("largeNo", largeNo);
-
-      if (smallNo != 0) {
-        param.put("smallNo", smallNo);
-
-        if(!productName.equals("undefined")) {
-          param.put("productName", productName);
-        }
-      }
-    }
     HashMap<String, Object> returnMap = new HashMap<>();
-    returnMap.put("list", productService.list(param));
-    System.out.println("요청");
+    
+    if (pageSize < 10 || pageSize > 18) {
+      pageSize = 10;
+    }
+    int rowCount = productService.size(productName);
+    int totalPage = rowCount / pageSize;
 
+    if (rowCount % pageSize > 0)
+      totalPage++;
+
+    if (pageNo > totalPage) 
+      pageNo = totalPage;
+    if (pageNo < 1)
+      pageNo = 1;
+
+    int[] nos = {1, 2, 3, 4, 5};
+    
+    returnMap.put("list", productService.list(
+        pageNo, pageSize, largeNo, smallNo, productName));
+    returnMap.put("nos", nos);
+    returnMap.put("pageNo", pageNo);
+    returnMap.put("pageSize", pageSize);
+    returnMap.put("totalPage", totalPage);
+    
     return returnMap;
   } // list
 

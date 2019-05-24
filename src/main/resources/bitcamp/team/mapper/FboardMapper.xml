@@ -54,8 +54,15 @@
     from
     fboard
   </sql>
-
-  <select id="findAll" resultMap="boardMemberMap">
+  
+  <select id="countAll" resultType="int">
+    select 
+      count(*)
+    from
+      fboard
+  </select>
+  
+  <select id="findAll" resultMap="boardMemberMap" parameterType="map">
      select 
       b.fb_no,
       b.titl, 
@@ -64,12 +71,26 @@
       m.member_no,
       m.n_name 
     from
-      fboard b
-    left outer join
-      member m
-    on b.member_no = m.member_no 
+      fboard b left outer join member m on b.member_no = m.member_no 
+    <where>
+      <if test="title != null">
+        <bind name="titleSearch" value="'%' + title + '%'"/>
+          b.titl like #{titleSearch}
+      </if>
+      <if test="contents != null">
+        <bind name="contentsSearch" value="'%' + contents + '%'"/>
+          b.conts like #{contentsSearch}
+      </if>
+      <if test="nickName != null">
+        <bind name="nickNameSearch" value="'%' + nickName + '%'"/>
+          m.n_name like #{nickNameSearch}
+      </if>
+    </where>
     order by
-      fb_no desc
+      b.fb_no desc
+    <if test="size != null and pageNo != null">
+      limit #{pageNo}, #{size}
+    </if>
   </select>
 
   <select id="findByNo" resultMap="boardMemberMap" parameterType="int">
