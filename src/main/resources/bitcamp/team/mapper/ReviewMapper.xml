@@ -26,16 +26,6 @@
     <result column="name" property="name"/>
   </resultMap>
   
-  
-  <select id="findAll" resultMap="productMap">
-    select product_no, name
-     from 
-     product
-     order by
-     product_no asc;
-  </select>
-
-
   <select id="findByNo" resultMap="reviewMap" parameterType="map">
     select
       r.rv_no as rno,
@@ -67,9 +57,14 @@
            conts like #{pattern1}
     </if>
     
+    order by
+    rno desc
+    
     <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
+      limit #{rowNo}, #{size} 
     </if>
+    
+    
       
   </select>
   
