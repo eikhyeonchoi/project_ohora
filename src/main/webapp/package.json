@@ -15,6 +15,7 @@
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "paginationjs": "^2.1.4",
     "popper.js": "^1.15.0",
     "sweetalert": "^2.1.2"
   },
