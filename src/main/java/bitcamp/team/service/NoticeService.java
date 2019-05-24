@@ -2,6 +2,7 @@ package bitcamp.team.service;
 
 import java.util.List;
 import bitcamp.team.domain.Notice;
+import bitcamp.team.domain.NoticeFile;
 
 public interface NoticeService {
   List<Notice> list(int pageNo, int pageSize, String keyword, String searchType);
@@ -15,4 +16,6 @@ public interface NoticeService {
   int delete(int no);
 
   int size(String keyword);
+
+  int upload(List<NoticeFile> files);
 }

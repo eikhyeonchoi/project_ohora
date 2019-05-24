@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.NoticeDao;
 import bitcamp.team.domain.Notice;
+import bitcamp.team.domain.NoticeFile;
 import bitcamp.team.service.NoticeService;
 
 @Service
@@ -60,6 +61,11 @@ public class NoticeServiceImpl implements NoticeService {
       return noticeDao.countAll(params);
     }
     return noticeDao.countAll(null);
+  }
+
+  @Override
+  public int upload(List<NoticeFile> files) {
+    return noticeDao.uploadFile(files);
   }
 
 

@@ -3,6 +3,7 @@ package bitcamp.team.dao;
 import java.util.List;
 import java.util.Map;
 import bitcamp.team.domain.Notice;
+import bitcamp.team.domain.NoticeFile;
 
 public interface NoticeDao {
   int insert(Notice notice);
@@ -18,4 +19,6 @@ public interface NoticeDao {
   int delete(int no);
 
   int countAll(Map<String, Object> param);
+
+  int uploadFile(List<NoticeFile> files);
 }

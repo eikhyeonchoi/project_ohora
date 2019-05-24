@@ -2,10 +2,6 @@ var h1 = $('h1'),
 el1 = $('.bit-new-item'),
 el2 = $('.bit-view-item');
 
-$(document).ready(function() {
-  $('#summernote').summernote();
-});
-
 var param = location.href.split('?')[1];
 if (param) {
   h1.html("공지사항"); 
@@ -20,10 +16,19 @@ if (param) {
   }
 }
 
+$('#fileupload').fileupload({
+  url: '../../app/json/notice/upload',
+  dataType: 'json',
+  done: function (e, data) {
+    console.log(data.result);
+    console.log(data.result.files);
+  }
+});
+
 $('#add-btn').click(() => {
   $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
-    contents: $('.contents').val()
+    contents: $('#contents').val()
   }, function(data) {
     if(data.status == 'fail'){
       alert('등록 실패입니다!\n' + data.message);

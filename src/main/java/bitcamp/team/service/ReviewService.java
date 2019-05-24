@@ -10,5 +10,5 @@ public interface ReviewService {
   int add(Review review);
   int delete(int no);
   int update(Review review);
-  int size(int no);
+  int size(int no, String keyword, String searchType);
 }

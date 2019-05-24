@@ -7,3 +7,7 @@
 tbody tr {
 	min-width: 500px;
 }
+
+canvas.horizon{
+	margin: 30px;
+}

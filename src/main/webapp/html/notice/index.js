@@ -16,7 +16,9 @@ $(document).ready(function() {
     var loginUser = obj.user.type;
     if(loginUser == 3) {
       $('#add-button').show();
-    } 
+    } else {
+      $('#add-button').hide();
+    }
 })});
 
 function loadList(pn) {
@@ -32,7 +34,6 @@ function loadList(pn) {
     
     pageNo = obj.pageNo;
     totalPage = obj.totalPage;
-    var currpage = pageNo % 5
 
     tbody.html('');
     $(trGenerator(obj)).appendTo(tbody);
@@ -64,7 +65,7 @@ function loadList(pn) {
       $('#prevPage').removeClass('disabled');
     } 
     
-    var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0 
+    var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) / 5 == 1 && ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0  
     ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
     : (obj.totalPage / 5).toFixed(0) * 5;
     
@@ -76,14 +77,6 @@ function loadList(pn) {
     $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
   });
 } // loadList()
-
-var currPage = $(document.body).bind('loaded-list', () => {
-  currPage = pageNo;
-});
-
-var endPage = $(document.body).bind('loaded-list', () => {
-  endPage = totalPage
-});
 
 $(document).on('click', '.ohr-page', function (e) {
   e.preventDefault();

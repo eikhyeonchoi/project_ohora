@@ -56,8 +56,42 @@ $(document).ready(function(){
     console.log('디자인 => ' + design);
     console.log('a/s만족도 => ' + asStf);
     console.log('사용만족도 => ' + useful);
+    
+    // 만족도 차트
+    new Chart(document.getElementById("horizontalBar"), {
+      "type": "horizontalBar",
+      "data": {
+        "labels": ["총 만족도", "가격 만족도", "사용 난이도", "이해도", "디자인", "a/s만족도", "사용 만족도"],
+        "datasets": [{
+          "label": "만족도 그래프",
+          "data": [satisAver, price, level, understand, design, asStf, useful],
+          "fill": false,
+          "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
+            "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
+            "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
+          ],
+          "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
+          ],
+          "borderWidth": 1
+        }]
+      },
+      "options": {
+        "scales": {
+          "xAxes": [{
+            "ticks": {
+              "min": 0,
+              "max": 5,
+              "stepSize": 0.5,
+              "beginAtZero": true
+            }
+          }]
+        }
+      }
+    });
   }) //get
 
+  
   $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
     $('#go-tip-btn').hide();
     console.log(obj);
@@ -140,6 +174,8 @@ function getQuerystring(key, default_) {
   else
     return qs[1];
 } // getQuerystring
+
+
 
 
 

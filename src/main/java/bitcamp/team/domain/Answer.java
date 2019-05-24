@@ -1,6 +1,7 @@
 package bitcamp.team.domain;
 
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Answer {
@@ -10,6 +11,9 @@ public class Answer {
   private String content;
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date createdDate;
+  
+  private Question question;
+  private List<AnswerFile> answerFiles;
   
   public int getNo() {
     return no;
@@ -36,10 +40,27 @@ public class Answer {
     this.createdDate = createdDate;
   }
   
+  public Question getQuestion() {
+    return question;
+  }
+  
+  public void setQuestion(Question question) {
+    this.question = question;
+  }
+  
+  public List<AnswerFile> getAnswerFiles() {
+    return answerFiles;
+  }
+  
+  public void setAnswerFiles(List<AnswerFile> answerFiles) {
+    this.answerFiles = answerFiles;
+  }
+  
   @Override
   public String toString() {
     return "Answer [no=" + no + ", questionNo=" + questionNo + ", content=" + content
-        + ", createdDate=" + createdDate + "]";
+        + ", createdDate=" + createdDate + ", question=" + question + ", answerFiles=" + answerFiles
+        + "]";
   }
   
 }

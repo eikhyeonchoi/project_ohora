@@ -61,6 +61,7 @@ function loadList(pn) {
         } else {
           $('#nextPage').removeClass('disabled');
         }
+        
         $(document.body).trigger('loaded-list');
       });
 };
@@ -121,3 +122,4 @@ $('#search-btn').click((e) => {
   }
   loadList(1);
 });
+

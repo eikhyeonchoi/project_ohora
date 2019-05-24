@@ -1,6 +1,11 @@
 package bitcamp.team.domain;
 
-public class ProductFile {
+import java.io.Serializable;
+
+public class ProductFile implements Serializable{
+  
+  private static final long serialVersionUID = 1L;
+  
   private int no;
   private int productNo;
   private String img;

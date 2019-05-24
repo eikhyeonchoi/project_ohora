@@ -21,7 +21,7 @@ $(document.body).bind('loaded-user', function(obj){
     },
     function(data) {
       if (data.status == 'success') {
-        location.href = "index.html";
+        window.history.back();
       } else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
@@ -30,6 +30,37 @@ $(document.body).bind('loaded-user', function(obj){
   
 }) // bind
 
+// 목록
+$('#list-btn').click(() => {
+    window.history.back();
+  })
+  
+  
+// 글자수 세기
+  $(function(){
+    $('input.form-control-plaintext').keyup(function(){
+    bytesHandler(this);
+     });
+   });
+
+  function getTextLength(str) {
+    var len = 0;
+
+    for (var i = 0; i < str.length; i++) {
+    if (encodeURIComponent(str.charAt(i)).length == 6) {
+      len++;
+    }
+      len++;
+    }
+      return len;
+  }
+
+    function bytesHandler(obj){
+      var text = $(obj).val();
+      $('p.bytes').text(getTextLength(text) + '/80');
+    }
+
+    
 
 function getQuerystring(key, default_)
 {

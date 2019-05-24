@@ -49,11 +49,39 @@ hr {
 	resize: none;
 }
 
-#file-p {
+#file-p, #ans-file-p {
 	font-weight: bold;
 	text-align: left;
 }
 
-#file-div {
+#file-pp, #ans-file-pp {
+	font-weight: bold;
 	margin-left: 50px;
+	margin-top: 10px;
+}
+
+#file-add-div, #ans-file-add-div {
+	margin-left: 50px;
+}
+
+#qtype-span {
+	font-weight: bold;
+}
+
+#qtype-p {
+	margin-left: 45px;
+}
+
+img {
+	vertical-align: middle;
+	border-style: none;
+	width: auto;
+	height: auto;
+	max-width: 200px;
+	max-height: 200px;
+	margin: 10px;
+}
+
+#images-div, #ans-images-div {
+	text-align: center;
 }

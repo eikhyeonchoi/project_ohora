@@ -1,14 +1,20 @@
 package bitcamp.team.web.json;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import bitcamp.team.domain.Notice;
+import bitcamp.team.domain.NoticeFile;
 import bitcamp.team.service.NoticeService;
 
 @RestController("json/NoticeController")
@@ -17,6 +23,33 @@ public class NoticeController {
 
   @Autowired
   NoticeService noticeService;
+  @Autowired
+  ServletContext servletContext;
+
+  @PostMapping("upload")
+  public Object upload(MultipartFile[] parts) {
+    HashMap<String, Object> content = new HashMap<>();
+    ArrayList<NoticeFile> files = new ArrayList<>();
+    try {
+      for (MultipartFile part : parts) {
+        if (part.getSize() > 0) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = servletContext.getRealPath("/upload/notice/" + filename);
+          String orgName = part.getOriginalFilename();
+          long orgSize = part.getSize();
+          part.transferTo(new File(filepath));
+        } else {
+          throw new RuntimeException("파일이 없습니다.");
+        }
+      }
+      content.put("files", files);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 
   @PostMapping("add")
   public Object add(Notice notice) {
