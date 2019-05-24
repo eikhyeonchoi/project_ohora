@@ -21,7 +21,7 @@ $(document.body).bind('loaded-user', function(obj){
     },
     function(data) {
       if (data.status == 'success') {
-        location.href = "index.html";
+        window.history.back();
       } else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
@@ -29,6 +29,11 @@ $(document.body).bind('loaded-user', function(obj){
   }); // add click
   
 }) // bind
+
+// 목록
+$('#list-btn').click(() => {
+    window.history.back();
+  })
 
 
 function getQuerystring(key, default_)

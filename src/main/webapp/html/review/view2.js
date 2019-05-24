@@ -16,14 +16,12 @@ var detailNo = getQuerystring('no');
 //    console.log(data.member.name);
 //    console.log(obj.user.type);
     
-    if (obj.user.type == 3) {
-      $('#update-btn').show();
-      $('#delete-btn').show();
-    }
     
-    if(obj.status=='success' && obj.user.name == data.member.name) {
+    if((obj.status=='success' && obj.user.name == data.member.name) || obj.user.type==3 ) {
       $('#update-btn').show();
       $('#delete-btn').show();
+      $('#review-title' ).prop('readonly', false);
+      $('#review-contents').prop('readonly', false);
     } else {
       $('#review-title' ).prop('readonly', true);
       $('#review-contents').prop('readonly', true);
@@ -31,8 +29,8 @@ var detailNo = getQuerystring('no');
     
   })}));
   
-  
-$('#delete-btn').click(() => {
+  //삭제
+  $('#delete-btn').click(() => {
   $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + detailNo, function(data) {
     })
     .done(function(data) {window.history.back();})
@@ -42,20 +40,27 @@ $('#delete-btn').click(() => {
     })
   });
 
-  
+  //수정
   $('#update-btn').click(() => {
     $.post('/bitcamp-team-project/app/json/review/update?no=' + detailNo, {
       title: $('#review-title').val(), 
       contents: $('#review-contents').val()
     }, function(data) {
       if (data.status == 'success') {
-        console.log(data.user);
-        location.href = "index.html";
+//        console.log(data.user);
+        window.history.back();
       } else {
         alert('변경 실패 입니다.\n' +  data.message);
       }
     }, "json")
   });
+  
+  
+  //목록
+  $('#list-btn').click(() => {
+    window.history.back();
+  })
+  
   
   
   function getQuerystring(key, default_)

@@ -130,7 +130,7 @@ $('#search-btn').click((e) => {
       addBtn.hide();
     } else {
       addBtn.click(function() {
-        location.href='add.html?no=' + detailNo;
+        location.href='form.html?no=' + detailNo;
       })
     }
 }));
