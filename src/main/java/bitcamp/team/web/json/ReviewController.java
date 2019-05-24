@@ -89,6 +89,11 @@ public class ReviewController {
       } else if (review.getContents() == "") {
         throw new RuntimeException("내용을 입력해 주세요");
       }
+      
+      if (review.getTitle().length() > 40) {
+        throw new RuntimeException("제목 길이는 40자 까지 가능합니다");
+      }
+      
       reviewService.add(review);
 
       content.put("status", "success");
@@ -111,6 +116,11 @@ public class ReviewController {
       } else if (review.getContents() == "") {
         throw new RuntimeException("내용을 입력해 주세요");
       }
+      
+      if (review.getTitle().length() > 40) {
+        throw new RuntimeException("제목 길이는 40자 까지 가능합니다");
+      }
+      
       if (reviewService.update(review) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");

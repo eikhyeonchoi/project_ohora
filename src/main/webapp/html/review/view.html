@@ -7,21 +7,28 @@
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
 <header class="bit-main-header"></header>
-<div class="container">
-  <h1>리뷰 목록(list)</h1>
-  <h4 id='product-name'></h4>
-      
-  <button type="button" id="review-add-btn" class="btn btn-primary bit-view-item">등록</button> 
+<div class="container"> 
+  <h1>REVIEW</h1>
   
+  <div class="product-name">
+    <h4><p class="text-primary" id='product-name'></p></h4>
+  </div>
+  
+  <div class="add-btn">
+    <button type="button" id="review-add-btn" class="btn btn-primary add-btn">등록</button>
+  </div> 
+      
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">작성자</th>
+        <th scope="col">번호</th>
         <th scope="col">제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col">작성자</th>
+        <th scope="col">등록일</th>
         <th scope="col">조회수</th>
       </tr>
     </thead>
@@ -50,13 +57,15 @@
    </div>
    <input id="keyword" class="form-control mr-sm-2" placeholder="검색" aria-label="검색">
    <button type="button" id="search-btn" class="btn btn-outline-primary my-2 my-sm-0">검색</button>
+   
   </form>
 
   <script id="select-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <td>{{member.name}}</a></td>
+  <td>{{no}}</a></td>
   <td><a class='review-a-class' href='view2.html' data-no='{{no}}'>{{title}}</a></td>
+  <td>{{member.nickName}}</a></td>
   <td>{{createdDate}}</td>
   <td>{{viewCount}}</td>
 </tr>

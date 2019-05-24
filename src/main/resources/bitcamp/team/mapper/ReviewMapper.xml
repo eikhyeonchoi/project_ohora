@@ -16,6 +16,7 @@
     <association property="member" javaType="member">
       <id column="member_no" property="memberNo" />
       <result column="memberName" property="name" />
+      <result column="nickName" property="nickName" />
     </association>
   </resultMap>
   
@@ -26,21 +27,11 @@
     <result column="name" property="name"/>
   </resultMap>
   
-  
-  <select id="findAll" resultMap="productMap">
-    select product_no, name
-     from 
-     product
-     order by
-     product_no asc;
-  </select>
-
-
   <select id="findByNo" resultMap="reviewMap" parameterType="map">
     select
       r.rv_no as rno,
       r.name as reviewName,
-      m.name as memberName, 
+      m.n_name as nickName, 
       r.cdt,
       r.cnt
     from
@@ -67,9 +58,14 @@
            conts like #{pattern1}
     </if>
     
+    order by
+    rno desc
+    
     <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
+      limit #{rowNo}, #{size} 
     </if>
+    
+    
       
   </select>
   
