@@ -54,7 +54,7 @@
     </where>
     order by
       tip_no desc
-    <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if>
+    <!-- <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if> -->
   </select>
   
   <select id="findByNo" resultMap="tipMap" parameterType="int">

@@ -6,6 +6,7 @@
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
 >
+<link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -17,7 +18,7 @@
     <h1>티키위키</h1>
     <div class="bit-list">
       <table class="table table-hover">
-        <thead>
+      <thead>
           <tr>
             <th scope="col">번호</th>
             <th scope="col">제품명</th>
@@ -28,12 +29,6 @@
         <tbody></tbody>
       </table>
     </div>
-
- 
-  <nav aria-label="목록 페이지 이동">
-   <ul class="pagination justify-content-center" id="pageUl">
-   </ul>
-  </nav>
 
     <div class="form-inline my-2 my-lg-0 justify-content-center">
       <div class="form-group row">
@@ -52,34 +47,28 @@
       <input type="text" class="form-control" id="search" name='search' placeholder="검색">
       <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
     </div>
+    <div id="pagination-container"></div>
   </div> <!-- .container -->
   
-  <script id="tr-pageNav" type="text/x-handlebars-template">
-    <ul class="pagination justify-content-center">
-      <li id="prevPage" class="page-item bt-prevPage"><a class="page-link" href="#">이전</a></li>
-      {{#each nos}} 
-        <li id="page-{{this}}" class="page-item ohr-page" data-no="{{this}}"><a class="page-link" href="#">{{this}}</a></li>
-      {{/each}} 
-      <li id="nextPage" class="page-item bt-nextPage"><a class="page-link" href="#">다음</a></li>
-    </ul>
-  </script>
 
   <script id="tr-template" type="text/x-handlebars-template">
-    {{#each list}}
+    {{#each data}}
     <tr>
-      <th scope='row'>{{no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{product.no}}'>{{product.name}}</a></td>
-      <td scope='row'>{{member.nickName}}</td>
-      <td scope='row'>{{createdDate}}</td>
+      <th scope='row'>{{data.no}}</th>
+      <td scope='row'><a class='bit-view-link' href='#' data-no='{{data.product.no}}'>{{data.product.name}}</a></td>
+      <td scope='row'>{{data.member.nickName}}</td>
+      <td scope='row'>{{data.createdDate}}</td>
     </tr>
     {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
-  <script src="index.js"></script>
+  <script src="index2.js"></script>
 </body>
 </html>
 

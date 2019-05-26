@@ -39,8 +39,10 @@ public class TipServiceImpl implements TipService{
         default: ;
       }
     }
-    if (keyword != null) {
-      contents.put("keyword", keyword);
+    if (keyword != null ) {
+      if (keyword.equals("")) {
+        contents.put("keyword", keyword);
+      }
     }
     contents.put("size", pageSize);
     contents.put("rowNo", (pageNo - 1) * pageSize);
