@@ -33,6 +33,8 @@ public class TipController {
       @RequestParam(defaultValue = "10") int pageSize, 
       String searchType, String keyword
       ) throws Exception {
+    System.out.println("searchType => " + searchType);
+    System.out.println("keyword => " + keyword);
     HashMap<String,Object> map = new HashMap<>();
     try {
       if (pageSize < 10 || pageSize > 18) {
@@ -57,6 +59,7 @@ public class TipController {
       map.put("pageNo", pageNo);
       map.put("pageSize", pageSize);
       map.put("totalPage", totalPage);
+      map.put("rowCount", rowCount);
       map.put("keyword", keyword);
       map.put("searchType", searchType);
       map.put("status", "success");
