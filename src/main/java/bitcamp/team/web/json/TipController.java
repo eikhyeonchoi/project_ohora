@@ -33,8 +33,6 @@ public class TipController {
       List<Tip> tips = tipService.list(keyword, searchType);
 
       map.put("list", tips);
-      map.put("keyword", keyword);
-      map.put("searchType", searchType);
       map.put("status", "success");
       
     } catch (Exception e) {

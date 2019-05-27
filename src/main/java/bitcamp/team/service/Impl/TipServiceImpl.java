@@ -28,7 +28,6 @@ public class TipServiceImpl implements TipService{
 
   @Override
   public List<Tip> list(String keyword, String searchType) {
-
     HashMap<String,Object> contents = new HashMap<>();
     if (searchType != null) {
       switch (searchType) {
@@ -40,7 +39,7 @@ public class TipServiceImpl implements TipService{
       }
     }
     if (keyword != null ) {
-      if (keyword.equals("")) {
+      if (!keyword.equals("")) {
         contents.put("keyword", keyword);
       }
     }

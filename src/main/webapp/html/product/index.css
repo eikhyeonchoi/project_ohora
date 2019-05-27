@@ -11,3 +11,8 @@ tbody tr {
 canvas.horizon{
 	margin: 30px;
 }
+
+#pagination-container {
+	width: 450px;
+  margin: 0 auto;
+}

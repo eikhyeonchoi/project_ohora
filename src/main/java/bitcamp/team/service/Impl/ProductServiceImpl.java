@@ -101,10 +101,9 @@ public class ProductServiceImpl implements ProductService{
 
   @Override
   public int update(Product product) {
-    if (product.getName() != null) {
+    if (product != null) {
       productDao.update(product);
     }
-
     List<ProductFile> productFiles = product.getProductFiles();
     if (productFiles != null) {
       productFileDao.deleteByProductNo(product.getNo());

@@ -1,19 +1,12 @@
-/**
- * 
- *  product
- *  view javascript
- *  
- */
-var nonMemberDiv = $('#non-member-div'),
+var productNo = (location.href.split('?')[1]).split('=')[1],
+productName = '',
+nonMemberDiv = $('#non-member-div'),
 memberDiv = $('#common-member-div'),
 managerAndCompanyDiv = $('#company-manager-div'),
 fileDiv = $('#images-div');
 
-var tipBtn = $('#go-tip-btn');
 
-var userNo = '0',
-productNo = getQuerystring('no'),
-productName = decodeURIComponent(getQuerystring('name'));
+var tipBtn = $('#go-tip-btn');
 
 var total = 0,
 satisAver = 0,
@@ -23,6 +16,13 @@ design = 0,
 asStf = 0,
 useful = 0,
 price = 0;
+$.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
+    , function(product) {
+  productName = product.productName;
+  if (product.status == 'success') {
+    $('#product-name').html(productName);
+  }
+});
 
 $(document).ready(function(){
 
@@ -49,14 +49,6 @@ $(document).ready(function(){
     asStf = (asStf / (obj.totalColumn)).toFixed(2);
     useful = (useful / (obj.totalColumn)).toFixed(2);
 
-    console.log('총 만족도 => ' + satisAver);
-    console.log('가격만족도 => ' + price);
-    console.log('사용난이도 => ' + level);
-    console.log('이해도 => ' + understand);
-    console.log('디자인 => ' + design);
-    console.log('a/s만족도 => ' + asStf);
-    console.log('사용만족도 => ' + useful);
-    
     // 만족도 차트
     new Chart(document.getElementById("horizontalBar"), {
       "type": "horizontalBar",
@@ -69,11 +61,11 @@ $(document).ready(function(){
           "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
             "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
             "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
-          ],
-          "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
-          ],
-          "borderWidth": 1
+            ],
+            "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
+              ],
+              "borderWidth": 1
         }]
       },
       "options": {
@@ -91,7 +83,7 @@ $(document).ready(function(){
     });
   }) //get
 
-  
+
   $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
     $('#go-tip-btn').hide();
     console.log(obj);
@@ -131,13 +123,13 @@ $(document).ready(function(){
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
-        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[i].img).appendTo(fileDiv);
+        $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' 
+            + data.pList.productFiles[i].img).appendTo(fileDiv);
       }
     } else {
       alert('실패했습니다!\n' + data.error);
     }
   });
-
 }) // ready
 
 
@@ -163,18 +155,6 @@ $(document).bind('loaded-user', function() {
 $('#go-product-update-btn').click(function() {
   location.href = 'update.html?no=' + productNo;
 })
-
-function getQuerystring(key, default_) {
-  if (default_==null) default_=""; 
-  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
-  var qs = regex.exec(window.location.href);
-  if(qs == null)
-    return default_;
-  else
-    return qs[1];
-} // getQuerystring
-
 
 
 
