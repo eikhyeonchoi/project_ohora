@@ -1,14 +1,10 @@
-var tbody = $('tbody'),
-    templateSrc = $('#tr-template').html();
+var tbody = $('tbody');
 var page = $('#pagination-container');
-var rowCount = 0;
-var template = Handlebars.compile(templateSrc);
 
-(function() {
+function loadList() {
   $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
       + $('select#searchTag').val() + '&keyword=' + $('#search').val()
-      ,  function(obj) {
-        rowCount = obj.rowCount;
+      , function(obj) {
         page.pagination({
           dataSource: obj,
           locator: 'list',
@@ -25,5 +21,25 @@ var template = Handlebars.compile(templateSrc);
             tbody.html(html);
           }
         });
+        $(document.body).trigger('loaded-list');
       });
-})();
+};
+
+$(document.body).bind('loaded-list', () => {
+  $('.bit-view-link').click((e) => {
+    e.preventDefault();
+    location.href = 'view.html?no=' + $(e.target).attr('data-no');
+  });
+});
+
+$('#search').keydown((e) => {
+  if (event.keyCode == 13) {
+    e.preventDefault();
+    loadList();
+  }
+});
+
+$('#search-btn').click((e) => {
+  e.preventDefault();
+  loadList();
+});

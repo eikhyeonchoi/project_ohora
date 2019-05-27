@@ -98,35 +98,12 @@ public class ProductController {
 
   @GetMapping("list")
   public Object list(
-      @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize,
       @RequestParam(required = false) int largeNo, 
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
     HashMap<String, Object> returnMap = new HashMap<>();
     
-    if (pageSize < 10 || pageSize > 18) {
-      pageSize = 10;
-    }
-    int rowCount = productService.size(productName);
-    int totalPage = rowCount / pageSize;
-
-    if (rowCount % pageSize > 0)
-      totalPage++;
-
-    if (pageNo > totalPage) 
-      pageNo = totalPage;
-    if (pageNo < 1)
-      pageNo = 1;
-
-    int[] nos = {1, 2, 3, 4, 5};
-    
-    returnMap.put("list", productService.list(
-        pageNo, pageSize, largeNo, smallNo, productName));
-    returnMap.put("nos", nos);
-    returnMap.put("pageNo", pageNo);
-    returnMap.put("pageSize", pageSize);
-    returnMap.put("totalPage", totalPage);
+    returnMap.put("list", productService.list(largeNo, smallNo, productName));
     
     return returnMap;
   } // list

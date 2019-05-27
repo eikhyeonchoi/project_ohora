@@ -29,8 +29,7 @@ public class ProductServiceImpl implements ProductService{
   }
 
   @Override
-  public List<Product> list(
-      int pageNo, int pageSize, int largeNo, int smallNo, String productName) {
+  public List<Product> list(int largeNo, int smallNo, String productName) {
 
     HashMap<String, Object> param = new HashMap<>();
     // 대분류 소분류 넣지않고 검색
@@ -49,10 +48,6 @@ public class ProductServiceImpl implements ProductService{
         }
       }
     }
-    System.out.println("pageSize => " + pageSize);
-    param.put("size", pageSize);
-    param.put("rowNo", (pageNo - 1) * pageSize);
-    
     return productDao.findAll(param);
   }
 
@@ -116,15 +111,6 @@ public class ProductServiceImpl implements ProductService{
       productFileDao.insert(productFiles);
     }
     return 1;
-  }
-
-  @Override
-  public int size(String productName) {
-    if (productName != null) {
-      if (!productName.equals("undefined"))
-        return productDao.countAll(productName);
-    }
-    return productDao.countAll(null);
   }
 }
 
