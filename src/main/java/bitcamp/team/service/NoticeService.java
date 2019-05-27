@@ -18,4 +18,6 @@ public interface NoticeService {
   int size(String keyword);
 
   int upload(List<NoticeFile> files);
+
+  Notice getFile(int no);
 }

@@ -3,22 +3,11 @@ package bitcamp.team.domain;
 public class NoticeFile {
   private int no;
   private int noticeNo;
-  private String filename;
-  private long filesize;
-  private Notice notice;
+  private String filePath;
 
   @Override
   public String toString() {
-    return "NoticeFile [no=" + no + ", noticeNo=" + noticeNo + ", filename=" + filename
-        + ", filesize=" + filesize + ", notice=" + notice + "]";
-  }
-
-  public Notice getNotice() {
-    return notice;
-  }
-
-  public void setNotice(Notice notice) {
-    this.notice = notice;
+    return "NoticeFile [no=" + no + ", noticeNo=" + noticeNo + ", filePath=" + filePath + "]";
   }
 
   public int getNo() {
@@ -37,20 +26,12 @@ public class NoticeFile {
     this.noticeNo = noticeNo;
   }
 
-  public String getFilename() {
-    return filename;
+  public String getFilePath() {
+    return filePath;
   }
 
-  public void setFilename(String filename) {
-    this.filename = filename;
-  }
-
-  public long getFilesize() {
-    return filesize;
-  }
-
-  public void setFilesize(long filesize) {
-    this.filesize = filesize;
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 
 

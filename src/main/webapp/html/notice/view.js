@@ -12,6 +12,25 @@ $(document).ready(function() {
     } 
 })});
 
+
+$(document).bind('load-file', function() {
+  $.getJSON('/bitcamp-team-project/app/json/notice/files?no=' + param.split('=')[1], 
+      function(data) {
+    console.log(data.files.noticeFile)
+    if (data.status == 'success') {
+      if (data.files.noticeFile[0].filePath != null) {
+        for (var i = 0; i < data.files.noticeFile.length; i++) {
+          $('<img>').attr('src', '/bitcamp-team-project/upload/notice/' + data.files.noticeFile[i].filePath).appendTo($('#images-div'));
+        }
+      } else {
+        $('#img-div').hide();
+      }
+    } else {
+      alert('실패했습니다!\n' + data.error);
+    }
+  });
+}) //load-file
+
 var param = location.href.split('?')[1];
 if (param) {
   h1.html("공지사항"); 
@@ -78,6 +97,6 @@ function loadData(no) {
     $('#createdDate').val(data.createdDate),
     $('#viewCount').val(data.viewCount);
   });
-
+  $(document).trigger('load-file');
 }
 
