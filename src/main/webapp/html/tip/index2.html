@@ -50,17 +50,6 @@
     <div id="pagination-container"></div>
   </div> <!-- .container -->
   
-
-  <script id="tr-template" type="text/x-handlebars-template">
-    {{#each data}}
-    <tr>
-      <th scope='row'>{{data.no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{data.product.no}}'>{{data.product.name}}</a></td>
-      <td scope='row'>{{data.member.nickName}}</td>
-      <td scope='row'>{{data.createdDate}}</td>
-    </tr>
-    {{/each}}
-  </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css"></script>

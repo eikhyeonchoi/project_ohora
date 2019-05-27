@@ -54,7 +54,6 @@
     </where>
     order by
       tip_no desc
-    <!-- <if test="rowNo != null and size != null">limit #{rowNo}, #{size}</if> -->
   </select>
   
   <select id="findByNo" resultMap="tipMap" parameterType="int">
@@ -90,25 +89,6 @@
     insert into tip (product_no, member_no, conts)
     values (#{productNo}, #{memberNo}, #{contents})
   </insert>
-  
-  <select id="countAll" resultType="int" parameterType="string">
-    select
-      count(*)
-    from
-      tip t
-    left outer join
-      product p
-    on t.product_no = p.product_no 
-    left outer join
-      member m
-    on t.member_no = m.member_no
-    <where>
-      <if test="_parameter != null">
-        <bind name="pattern2" value="'%' + _parameter + '%'"/>
-        p.name like #{pattern2}
-      </if>
-    </where>
-  </select>
 </mapper>
 
 

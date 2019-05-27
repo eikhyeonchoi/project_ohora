@@ -27,7 +27,7 @@ public class TipServiceImpl implements TipService{
   }
 
   @Override
-  public List<Tip> list(int pageNo, int pageSize, String keyword, String searchType) {
+  public List<Tip> list(String keyword, String searchType) {
 
     HashMap<String,Object> contents = new HashMap<>();
     if (searchType != null) {
@@ -44,8 +44,6 @@ public class TipServiceImpl implements TipService{
         contents.put("keyword", keyword);
       }
     }
-    contents.put("size", pageSize);
-    contents.put("rowNo", (pageNo - 1) * pageSize);
     return tipDao.findAll(contents);
   }
   @Override
@@ -65,13 +63,5 @@ public class TipServiceImpl implements TipService{
   @Override
   public int getNo(int no) {
     return tipDao.findNoByProductNo(no);
-  }
-
-  @Override
-  public int size(String keyword) {
-    if (keyword != null) {
-      return tipDao.countAll(keyword);
-    }
-    return tipDao.countAll(null);
   }
 }
