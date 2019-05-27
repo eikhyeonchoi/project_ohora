@@ -5,7 +5,7 @@ import bitcamp.team.domain.Notice;
 import bitcamp.team.domain.NoticeFile;
 
 public interface NoticeService {
-  List<Notice> list(int pageNo, int pageSize, String keyword, String searchType);
+  List<Notice> list(String keyword, String searchType);
 
   int add(Notice notice);
 

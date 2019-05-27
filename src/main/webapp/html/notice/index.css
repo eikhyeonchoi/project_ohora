@@ -16,3 +16,11 @@ td:nth-child(4) {
   text-align: center;
 }
 
+#pagination-container {
+  width: 400px;
+  margin: 0 auto;
+}
+
+#table-list {
+	text-align: center;
+}

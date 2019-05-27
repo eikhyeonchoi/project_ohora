@@ -51,9 +51,6 @@
     </where>
     order by
     ntc_no desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
   </select>
 
   <select id="findByNo" resultMap="noticeMap" parameterType="int">

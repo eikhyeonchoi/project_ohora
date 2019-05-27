@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Notice;
 import bitcamp.team.domain.NoticeFile;
@@ -77,33 +76,12 @@ public class NoticeController {
   }
 
   @GetMapping("list")
-  public Object list(@RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize, String keyword, String searchType) {
+  public Object list(String keyword, String searchType) {
 
-    if (pageSize < 10 || pageSize > 18)
-      pageSize = 10;
-
-    int rowCount = noticeService.size(keyword);
-    int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
-      totalPage++;
-    if (totalPage == 0)
-      totalPage = 1;
-    if (pageNo < 1)
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    List<Notice> notice = noticeService.list(pageNo, pageSize, keyword, searchType);
-
-    int[] nos = {1, 2, 3, 4, 5};
+    List<Notice> notice = noticeService.list(keyword, searchType);
 
     HashMap<String, Object> content = new HashMap<>();
     content.put("list", notice);
-    content.put("nos", nos);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
     content.put("keyword", keyword);
     content.put("searchType", searchType);
 

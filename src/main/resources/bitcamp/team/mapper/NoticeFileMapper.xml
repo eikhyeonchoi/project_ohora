@@ -19,4 +19,20 @@
       </foreach>
   </insert>
   
+  <select id="findByNo" resultMap="noticeFileMap" parameterType="int">
+    select
+        file_no,
+        notice_no,
+        name
+    from
+    notice_file
+    where
+    notice_no = #{value}
+  </select>
+  
+  <delete id="deleteByNo" parameterType="int">
+    delete from notice_file
+    where notice_no = #{no}
+  </delete>
+  
   </mapper>

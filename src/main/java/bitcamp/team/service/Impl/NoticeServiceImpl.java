@@ -21,10 +21,8 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public List<Notice> list(int pageNo, int pageSize, String keyword, String searchType) {
+  public List<Notice> list(String keyword, String searchType) {
     HashMap<String, Object> params = new HashMap<>();
-    params.put("size", pageSize);
-    params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("searchType", searchType);
     params.put("keyword", keyword);
 
@@ -61,7 +59,13 @@ public class NoticeServiceImpl implements NoticeService {
 
   @Override
   public int delete(int no) {
-    return noticeDao.delete(no);
+
+    List<NoticeFile> noticeFiles = noticeFileDao.findByNo(no);
+    for (NoticeFile file : noticeFiles) {
+      noticeFileDao.deleteByNo(file.getNoticeNo());
+    }
+    int count = noticeDao.delete(no);
+    return count;
   }
 
   @Override

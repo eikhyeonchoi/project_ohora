@@ -9,7 +9,7 @@ $(document).ready(function() {
     if(loginUser == 3) {
       $('#update-btn').show();
       $('#delete-btn').show();
-    } 
+    }
 })});
 
 
@@ -18,7 +18,7 @@ $(document).bind('load-file', function() {
       function(data) {
     console.log(data.files.noticeFile)
     if (data.status == 'success') {
-      if (data.files.noticeFile[0].filePath != null) {
+      if (typeof data.files.noticeFile != "undefind") {
         for (var i = 0; i < data.files.noticeFile.length; i++) {
           $('<img>').attr('src', '/bitcamp-team-project/upload/notice/' + data.files.noticeFile[i].filePath).appendTo($('#images-div'));
         }
