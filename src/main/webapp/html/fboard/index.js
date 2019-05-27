@@ -126,16 +126,12 @@ function loadList(no) {
     tbody.children().remove();
     $(trGenerator(obj)).appendTo(tbody);
     
-    var nos2 = 6;
+    var pageBlock = 5;
+    var maxPage = (obj.rowCount / (pageBlock * obj.pageSize)).toFixed();
     
-    
-    var maxPage = (obj.rowCount / (nos2 * obj.pageSize)).toFixed();
-    
-    if(obj.rowCount % (nos2 * obj.pageSize) > 0){
+    if(obj.rowCount % (pageBlock * obj.pageSize) > 0){
       maxPage++;
     }
-    
-    
     
     var nos = [1,2,3,4,5];
     var pageObj = {
@@ -145,7 +141,6 @@ function loadList(no) {
     if ($('#prevPage').length == 0) {
       $(pageGenerator(pageObj)).appendTo('.pagination');
     }
-
 
     for (var no of nos){
       if($('#page-' + no + ' > a').html() > obj.totalPage) {
