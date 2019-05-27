@@ -23,4 +23,7 @@ public interface FboardDao {
    int deleteComment(int no);
    int updateComment(HashMap<String, Object> param);
    List<FboardComment> findReply(HashMap<String, Object> paramMap);
+   
+   // 전체삭제
+   int deleteCommentFboard(int no);
 } 

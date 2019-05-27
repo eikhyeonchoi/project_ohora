@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.FboardFileDao">
+
+  <resultMap type="fboardFile" id="fboardFileMap">
+    <id column="fb_file_no" property="fileNo" />
+    <result column="fb_no" property="fboardNo" />
+    <result column="file" property="filepath" />
+  </resultMap>
+
+
+  <insert id="insert" parameterType="list">
+    insert into
+      fboard_file (fb_no, file)
+    values
+    <foreach collection="list" item="fboardFile" separator=",">
+      (#{fboardFile.fboardNo}, #{fboardFile.filepath})
+    </foreach>
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      fboard_file
+    where 
+      fb_no = #{value}
+  </delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
+
+

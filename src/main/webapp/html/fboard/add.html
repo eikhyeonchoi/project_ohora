@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -23,16 +22,36 @@
     <div class="form-group row">
       <label for="contents" class="col-sm-2 col-form-label">내용</label>
       <div class="col-sm-10">
-        <textarea class="form-control" id="contents" name='contents' rows='5'></textarea>
+        <textarea class="form-control" id="contents" name='contents' rows='13'></textarea>
       </div>
     </div>
-    <button type="button" id="add-btn"class="btn btn-success btn-sm bit-new-item">등록</button>
-  </div>
-  <!-- container -->
+
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="fboard-file-input" name='fboardFiles' aria-describedby="inputGroupFileAddon04" multiple> 
+        <label class="custom-file-label" for="fboard-file-input">select file</label>
+      </div>
+    </div>
+    
+    <br>
+    <br>
+    <div class='row'>
+      <button type="button" id="fboard-add-btn" class="btn btn-success btn-sm col-sm-2">등록</button>
+      <button type="button" id="fboard-cancel-btn" class="btn btn-danger btn-sm col-sm-2">취소</button>
+    </div>
+    
+  </div> <!-- container -->
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
   <script src="../header.js"></script>
   <script src="add.js"></script>
 </body>

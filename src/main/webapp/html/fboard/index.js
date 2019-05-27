@@ -6,12 +6,28 @@
  */
 
 var tbody = $('tbody'),
-templateSrc = $('#tr-template').html(),
-trGenerator = Handlebars.compile(templateSrc),
-pageSrc = $('#page-template').html(),
-pageGenerator = Handlebars.compile(pageSrc),
-rowCount,
-pageNo=1;
+    page = $('.page-container'),
+    templateSrc = $('#tr-template').html(),
+    trGenerator = Handlebars.compile(templateSrc);
+
+(function() {
+  $.getJSON('/bitcamp-team-project/app/json/fboard/list',  function(obj) {
+        page.pagination({
+          dataSource: obj,
+          locator: 'list',
+          showGoInput: true,
+          showGoButton: true,
+          callback: function(data, pagination) {
+            tbody.children().remove();
+            var pageObj = {list: data};
+            $(trGenerator(pageObj)).appendTo(tbody);
+            
+            $(document.body).trigger('loaded-list');
+          }
+        });
+      });
+})();
+
 
 $(document).ready(function(){
   $('#fboard-search-btn').prop('disabled', true);
@@ -30,24 +46,12 @@ $(document).ready(function(){
 }) // ready
 
 
-loadList(1);
-
-
 $(document.body).bind('loaded-user', function(obj){
 }) // bind
 
 
 //trigger 3개 받는 bind
 $(document.body).bind('loaded-list', function(obj){
-
-  $('.li-page > a').off().on('click', function(e) {
-    e.preventDefault();
-    $(e.target).parent().addClass('active');
-    $('.li-page').not($(e.target).parent()).removeClass('active');
-    loadList($(e.target).attr('data-no'));
-  });
-
-
   $('.fboard-detail').off().click(function() {
     location.href = 'view.html?no=' + $(this).attr('data-no');
   }) // click
@@ -61,6 +65,7 @@ $(document.body).bind('loaded-list', function(obj){
     })
   }) // click
 }) // bind
+
 
 $(document.body).bind('condition-selected', function(obj){
   $('#fboard-search-btn').prop('disabled', false);
@@ -95,82 +100,7 @@ $(document.body).bind('condition-selected', function(obj){
     }
   }) // click
 
-
 }) // bind
-
-$(document).on('click', '#prevPage > a', function(e) {
-  e.preventDefault();
-  window.pageNo--;
-  for(var i = 1; i <= 5; i++) {
-    $('.fboard-page-' + i).text(Number($('.fboard-page-' + i).html())-5);
-    $('.fboard-page-' + i).attr('data-no', Number($('.fboard-page-' + i).html()));
-  } // for
-  loadList($('.li-page > a').html());
-})  // click
-
-  
-$(document).on('click', '#nextPage > a', function(e) {
-  e.preventDefault();
-  window.pageNo++;
-  for(var i = 1; i <= 5; i++) {
-    $('.fboard-page-' + i).text(Number($('.fboard-page-' + i).html())+5);
-    $('.fboard-page-' + i).attr('data-no', Number($('.fboard-page-' + i).html()));
-  } // for
-  loadList($('.li-page > a').html());
-})  // click
-
-function loadList(no) {
-  $.get('/bitcamp-team-project/app/json/fboard/list?pageNo= ' + no, function(obj){
-    console.log(obj);
-    
-    tbody.children().remove();
-    $(trGenerator(obj)).appendTo(tbody);
-    
-    var pageBlock = 5;
-    var maxPage = (obj.rowCount / (pageBlock * obj.pageSize)).toFixed();
-    
-    if(obj.rowCount % (pageBlock * obj.pageSize) > 0){
-      maxPage++;
-    }
-    
-    var nos = [1,2,3,4,5];
-    var pageObj = {
-        nos: nos
-    };
-
-    if ($('#prevPage').length == 0) {
-      $(pageGenerator(pageObj)).appendTo('.pagination');
-    }
-
-    for (var no of nos){
-      if($('#page-' + no + ' > a').html() > obj.totalPage) {
-        $('#page-' + no).hide();
-        
-      } else {
-        $('#page-' + no).show();
-      }
-    }
-
-    console.log(maxPage, window.pageNo)
-    if (maxPage == window.pageNo) {
-      $('#nextPage').addClass('disabled');
-    } else {
-      $('#nextPage').removeClass('disabled');
-    }
-    
-    
-    if (obj.pageNo < 6) {
-      $('#prevPage').addClass('disabled');
-    } else {
-      $('#prevPage').removeClass('disabled');
-    } 
-    
-
-    $(document.body).trigger('loaded-list');
-
-  }) // get
-} // loadedList(no)
-
 
 
 

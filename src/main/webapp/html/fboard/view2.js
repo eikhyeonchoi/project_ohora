@@ -25,13 +25,12 @@ $(document).ready(function() {
     $('#contents').val(obj.board.contents);
     $('#createdDate').val(obj.board.createdDate);
     $('#viewCount').val(obj.board.viewCount);
-    
-    if (obj.board.fboardFiles[0].filepath != null) {
-      for(var file of obj.board.fboardFiles) {
-        $('#img-div').append("<img src='/bitcamp-team-project/upload/fboardfile/" + file.filepath + "' width='auto' height='auto'>");
-      }
+    var path = obj.path;
+    for(var file of obj.board.fboardFiles) {
+      $('#img-div').append("<img src='/bitcamp-team-project/upload/fboardfile/" + file.filepath + "' width='auto' height='auto'>");
     }
-    
+
+
     $(document.body).trigger({
       type: 'loaded-detail',
       mNo: obj.board.memberNo
@@ -87,6 +86,7 @@ $(document.body).bind('loaded-detail', function(data){
   deleteBtn.click(() => {
     $.getJSON('../../app/json/fboard/delete?no=' + boardNo, function(obj) {
       if (obj.status == 'success') {
+        alert('삭제완료');
         location.href = "index.html";
       } else {
         alert('삭제 실패 입니다.\n' +  obj.message);
@@ -101,7 +101,7 @@ $(document.body).bind('loaded-detail', function(data){
       contents: $('#contents').val()
     }, function(obj) {
       if (obj.status == 'success') {
-        location.href = 'index.html';
+        alert('변경완료');
       } else {
         alert('변경 실패 입니다.\n' +  obj.message);
       }
@@ -180,8 +180,6 @@ function callUserInform(data){
     if(obj.user.no != data.mNo){
       deleteBtn.hide();
       updateBtn.hide();
-      $('#fboard-file-div').hide();
-      
       $('#title').prop('disabled', true);
       $('#contents').prop('disabled', true);
     } 
@@ -250,7 +248,7 @@ function ajaxDeleteComment(){
 
       $.get('/bitcamp-team-project/app/json/fboard/deleteComment?no=' +commentNo, function(obj) {
         if (obj.status == 'success') {
-          swal('삭제완료', getCurrentTime(), "success");
+          location.reload();
         } else {
           alert('삭제 실패 입니다.\n' +  obj.message);
         }
@@ -267,24 +265,13 @@ function ajaxDeleteComment(){
 
 
 function ajaxUpdateComment(){
-  $('.comment-update-btn').click(function(e) {
-    e.preventDefault();
-    var commentNo = 0;
-    $(e.target).closest('div').prev().children().eq(1).text(getCurrentTime());
-
-    if(window.newCommentNo == undefined) {
-      commentNo = $(e.target).attr('data-no');
-    } else {
-      commentNo = window.newCommentNo;
-    }
-
     $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
       no: commentNo,
       contents: $(e.target).prev().prev().val(),
       updateDate: getCurrentTime()
     }, function(obj) {
       if (obj.status == 'success') {
-        swal('수정완료', getCurrentTime(), "success");
+        location.reload();
       } else {
         alert('변경 실패 입니다.\n' +  obj.message);
       }
@@ -294,42 +281,19 @@ function ajaxUpdateComment(){
 
 
 function ajaxAddComment(){
-  window.count = 0;
-  if (count == 0) {
-    count++;
-    var obj = {
-        list: [
-          {
-            contents: $('#comment-contents').val(),
-            createdDate: getCurrentTime,
-            member: {nickName: userNickName}
-          }]}
-
-    if($('#comment-contents').val().length == 0){
-      alert('내용을 입력해주세요');
-      return;
+  $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
+    memberNo: userNo,
+    fboardNo: boardNo,
+    contents: $('#comment-contents').val(),
+    depth: 0,
+    parentId: 0
+  }, function(obj) {
+    if (obj.status == 'success') {
+      location.reload();
+    } else {
+      alert('등록 실패 입니다.\n' +  obj.message);
     }
-
-    $(commentListGenerator(obj)).appendTo($('.comment-child'));
-    requestAddComment();
-    $('#comment-contents').val('');
-  } else {
-
-    var userClone = $('.fboard-comment-list-form').children().first().clone();
-    var commentClone = $('.fboard-comment-list-form').children().eq(1).clone();
-    userClone.find('.user-nickname').text(userNickName);
-    userClone.find('.created-date').text(getCurrentTime);
-    commentClone.find('input').val($('#comment-contents').val());
-
-    if($('#comment-contents').val().length == 0){
-      alert('내용을 입력해주세요');
-      return;
-    }
-
-    $('.fboard-comment-list-form').append(userClone).append(cocmmentClone).append('<br>');
-    requestAddComment();
-    $('#comment-contents').val('');
-  }
+  }, "json") // post
 
   $(document.body).trigger({
     type: 'activated-comment-update-delete-btn'
@@ -340,26 +304,6 @@ function ajaxAddComment(){
   });
 } // ajaxAddComment
 
-
-function requestAddComment(){
-  $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
-    memberNo: userNo,
-    fboardNo: boardNo,
-    contents: $('#comment-contents').val(),
-    depth: 0,
-    parentId: 0
-  }, function(obj) {
-    if (obj.status == 'success') {userNo
-      window.newCommentNo = obj.fboardNo;
-    } else {
-      alert('등록 실패 입니다.\n' +  obj.message);
-    }
-  }, "json") // post
-
-} // requestAddComment
-
-
-//////////////////////////////////////////////////////////reply
 //////////////////////////////////////////////////////////reply
 //////////////////////////////////////////////////////////reply
 

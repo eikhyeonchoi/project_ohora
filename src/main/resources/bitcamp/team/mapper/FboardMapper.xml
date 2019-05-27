@@ -5,26 +5,33 @@
 <mapper namespace="bitcamp.team.dao.FboardDao">
 
   <resultMap type="fboard" id="boardMap">
-    <id column="fb_no" property="no" />
+    <id column="fb_no"         property="no" />
     <result column="member_no" property="memberNo" />
-    <result column="titl" property="title" />
-    <result column="conts" property="contents" />
-    <result column="cdt" property="createdDate" />
-    <result column="cnt" property="viewCount" />
+    <result column="titl"      property="title" />
+    <result column="conts"     property="contents" />
+    <result column="cdt"       property="createdDate" />
+    <result column="cnt"       property="viewCount" />
   </resultMap>
   
   <resultMap type="fboard" id="boardMemberMap">
-    <id column="fb_no" property="no" />
+    <id column="fb_no"         property="no" />
     <result column="member_no" property="memberNo" />
-    <result column="titl" property="title" />
-    <result column="conts" property="contents" />
-    <result column="cdt" property="createdDate" />
-    <result column="cnt" property="viewCount" />
+    <result column="titl"      property="title" />
+    <result column="conts"     property="contents" />
+    <result column="cdt"       property="createdDate" />
+    <result column="cnt"       property="viewCount" />
+    
     <association property="member" javaType="member">
-      <id column="member_no" property="no" />
-      <result column="email" property="email" />
+      <id column="member_no"  property="no" />
+      <result column="email"  property="email" />
       <result column="n_name" property="nickName" />
     </association>
+    
+    <collection property="fboardFiles"  ofType="fboardFile">
+      <id     column="fb_file_no"  property="fileNo"/>
+      <result column="fb_no"       property="fboardNo"/>
+      <result column="file"        property="filepath"/>
+    </collection>
   </resultMap>
 
 
@@ -41,8 +48,9 @@
       <id column="member_no" property="no" />
       <result column="n_name" property="nickName" />
     </association>
+    
   </resultMap>
-
+  
   <sql id="select1">
     select
     fb_no,
@@ -101,12 +109,12 @@
       b.cdt,
       b.cnt,
       m.member_no,
-      m.n_name 
+      m.n_name,
+      ff.file
     from
       fboard b
-    left outer join
-      member m
-    on b.member_no = m.member_no 
+      left join member m on b.member_no = m.member_no
+      left join fboard_file ff on b.fb_no = ff.fb_no
     where 
       b.fb_no = #{value}
   </select>
@@ -119,7 +127,7 @@
     #{value}
   </update>
   
-  <insert id="insert" parameterType="fboard">
+  <insert id="insert" parameterType="fboard" useGeneratedKeys="true" keyProperty="no">
     insert into fboard (member_no, titl, conts)
     values
     (#{memberNo}, #{title}, #{contents})
@@ -168,6 +176,13 @@
       fboard_cmt
     where
       fb_cmt_no = #{value}
+  </delete>
+  
+  <delete id="deleteCommentFboard" parameterType="int">
+    delete from
+      fboard_cmt
+    where
+      fb_no = #{value}
   </delete>
   
   <update id="updateComment" parameterType="map">
