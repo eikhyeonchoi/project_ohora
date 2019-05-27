@@ -17,5 +17,4 @@ public interface ProductDao {
   Product findByNo(int no);
   Product findFileByNo(int no);
   int update(Product product);
-  int countAll(String keyword);
 }

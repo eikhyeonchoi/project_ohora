@@ -12,6 +12,5 @@ public interface TipService {
   int delete(int no);
   int confirm(int no);
   Tip get(int no);
-  List<Tip> list(int pageNo, int pageSize, String keyword, String searchType);
-  int size(String keyword);
+  List<Tip> list(String keyword, String searchType);
 }

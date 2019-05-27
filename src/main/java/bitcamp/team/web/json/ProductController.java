@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,18 +22,20 @@ public class ProductController {
 
   String uploadDir;
 
-  @Autowired ProductService productService;
-  @Autowired SatisfyService satisfyService;
-  @Autowired TipService tipService;
-  @Autowired ServletContext servletContext;
+  ProductService productService;
+  SatisfyService satisfyService;
+  TipService tipService;
+  ServletContext servletContext;
 
   public ProductController(
       ProductService productService,
       SatisfyService satisfyService, 
-      TipService tipService) {
+      TipService tipService,
+      ServletContext servletContext) {
     this.productService = productService;
     this.satisfyService = satisfyService;
     this.tipService = tipService;
+    this.servletContext = servletContext;
   }
 
   @GetMapping("ctgList")
@@ -62,7 +63,21 @@ public class ProductController {
     return content;
   } // confirmTip
 
-
+  @GetMapping("detail")
+  public Object detail(int no) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      String productName = productService.get(no);
+      content.put("productName", productName);
+      content.put("status", "successs");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("error", e.getMessage());
+    }
+    return content;
+  }
+  
   @GetMapping("findReviewedMember")
   public Object findReviewedMember(int uNo, int pNo) {
     HashMap<String, Object> content = new HashMap<>();
@@ -98,35 +113,12 @@ public class ProductController {
 
   @GetMapping("list")
   public Object list(
-      @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize,
       @RequestParam(required = false) int largeNo, 
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
     HashMap<String, Object> returnMap = new HashMap<>();
     
-    if (pageSize < 10 || pageSize > 18) {
-      pageSize = 10;
-    }
-    int rowCount = productService.size(productName);
-    int totalPage = rowCount / pageSize;
-
-    if (rowCount % pageSize > 0)
-      totalPage++;
-
-    if (pageNo > totalPage) 
-      pageNo = totalPage;
-    if (pageNo < 1)
-      pageNo = 1;
-
-    int[] nos = {1, 2, 3, 4, 5};
-    
-    returnMap.put("list", productService.list(
-        pageNo, pageSize, largeNo, smallNo, productName));
-    returnMap.put("nos", nos);
-    returnMap.put("pageNo", pageNo);
-    returnMap.put("pageSize", pageSize);
-    returnMap.put("totalPage", totalPage);
+    returnMap.put("list", productService.list(largeNo, smallNo, productName));
     
     return returnMap;
   } // list
@@ -180,7 +172,11 @@ public class ProductController {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
     HashMap<String,Object> contents = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
+    String orderName = productService.get(product.getNo());
     try {
+      if (product.getName().equals("")) {
+        product.setName(orderName);
+      }
       for (Part part : productFile) {
         if (part.getSize() == 0) {
           continue;
