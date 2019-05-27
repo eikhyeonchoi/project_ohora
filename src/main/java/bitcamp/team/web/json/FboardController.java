@@ -69,22 +69,22 @@ public class FboardController {
       @RequestParam(defaultValue = "undefined" ,required = false) String search) throws Exception {
     HashMap<String,Object> param = new HashMap<>();
     HashMap<String,Object> content = new HashMap<>();
-    
+
     int rowCount = boardService.size();
     int totalPage = rowCount / pageSize;
     if(rowCount % pageSize > 0) {
       totalPage++;
     }
-    
+
     param.put("pageNo", (pageNo - 1) * pageSize);
     param.put("size", pageSize);
-    
-    
+
+
     content.put("pageNo", pageNo);
     content.put("totalPage", totalPage);
     content.put("rowCount", rowCount);
     content.put("pageSize", pageSize);
-    
+
     if(!search.equals("undefined")) {
       if (search.contains("t.")) {
         param.put("title", search.substring(2));
@@ -94,16 +94,16 @@ public class FboardController {
         param.put("nickName", search.substring(2));
       }
     }
-    
+
     List<Fboard> boards = boardService.list(param);
     content.put("list", boards);
 
     return content;
   }
 
-  
-  
-  
+
+
+
   @PostMapping("update")
   public Object update(Fboard board) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -130,7 +130,7 @@ public class FboardController {
     HashMap<String,Object> content = new HashMap<>();
 
     try {
-      
+
       if (boardService.addComment(comment) == 0) 
         throw new Exception("저장 실패");
       else {
@@ -167,7 +167,7 @@ public class FboardController {
     paramMap.put("no",no);
     paramMap.put("contents",contents);
     paramMap.put("updateDate",updateDate);
-    
+
     try {
       if (boardService.updateComment(paramMap) == 0) 
         throw new Exception("해당 번호의 게시물이 없습니다.");
@@ -185,10 +185,10 @@ public class FboardController {
   public Object findReply(int fboardNo, int parentNo) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> param = new HashMap<>();
-    
+
     param.put("fboardNo", fboardNo);
     param.put("parentNo", parentNo);
-    
+
     content.put("replyList", boardService.findReply(param));
     return content;
   }

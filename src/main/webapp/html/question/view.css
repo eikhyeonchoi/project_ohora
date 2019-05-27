@@ -49,7 +49,7 @@ hr {
 	resize: none;
 }
 
-#file-p, #ans-file-p {
+#file-p, #ans-file-p, #ans-update-file-p {
 	font-weight: bold;
 	text-align: left;
 }
@@ -60,7 +60,7 @@ hr {
 	margin-top: 10px;
 }
 
-#file-add-div, #ans-file-add-div {
+#file-add-div, #ans-file-add-div, #ans-file-update-div {
 	margin-left: 50px;
 }
 

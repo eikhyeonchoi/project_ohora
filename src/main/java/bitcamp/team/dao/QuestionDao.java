@@ -12,4 +12,5 @@ public interface QuestionDao {
   Question findByNo(int no);
   Question findFileByNo(int no);
   int status(int no);
+  int delete(int no);
 }

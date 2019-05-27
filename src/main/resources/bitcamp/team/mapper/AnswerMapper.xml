@@ -51,5 +51,27 @@
     on a.ans_no = af.ans_no
     where a.ans_no = #{value}
   </select>
+  
+  <update id="update" parameterType="answer">
+    update answer
+      <set>
+        <if test="content != null">conts = #{content}</if>
+      </set>
+    where
+      q_no = #{questionNo};
+  </update>
+  
+  <select id="findAnsNoByQno" parameterType="int" resultType="int">
+      select
+        ans_no
+      from 
+        answer
+      where q_no = #{value}
+  </select>
+  
+  <delete id="deleteByQnsNo" parameterType="int">
+    delete from answer
+    where q_no = #{value}
+  </delete>
 </mapper>
 

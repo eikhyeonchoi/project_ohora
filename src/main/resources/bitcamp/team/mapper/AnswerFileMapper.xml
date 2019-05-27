@@ -21,6 +21,10 @@
       </foreach>
   </insert>
   
+  <delete id="deleteByAnswerNo" parameterType="int">
+    delete from answer_file
+    where ans_no = #{value}
+  </delete>
  
 </mapper>
 
