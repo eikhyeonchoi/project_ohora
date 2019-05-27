@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.team.dao.NoticeFileDao">
+
+  <resultMap type="noticeFile" id="noticeFileMap">
+    <id column="file_no" property="no" />
+    <result column="notice_no" property="noticeNo" />
+    <result column="name" property="filePath" />
+  </resultMap>
+    
+  <insert id="insert" parameterType="list">
+    insert into 
+      notice_file (notice_no, name)
+    values 
+      <foreach collection="list" item="noticeFile" separator=",">
+        (#{noticeFile.noticeNo}, #{noticeFile.filePath})
+      </foreach>
+  </insert>
+  
+  <select id="findByNo" resultMap="noticeFileMap" parameterType="int">
+    select
+        file_no,
+        notice_no,
+        name
+    from
+    notice_file
+    where
+    notice_no = #{value}
+  </select>
+  
+  <delete id="deleteByNo" parameterType="int">
+    delete from notice_file
+    where notice_no = #{no}
+  </delete>
+  
+  </mapper>

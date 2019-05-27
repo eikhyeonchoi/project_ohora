@@ -106,9 +106,6 @@
     </where>
     order by
       p.product_no asc
-      <if test="rowNo != null and size != null">
-        limit #{rowNo}, #{size}
-      </if>
   </select>
   
     
@@ -171,19 +168,6 @@
     where
       product_no = #{no}
   </update>
-  
-  <select id="countAll" resultType="int" parameterType="string">
-    select
-      count(*)
-    from
-      product
-    <where>
-      <if test="_parameter != null">
-        <bind name="pattern2" value="'%' + _parameter + '%'"/>
-        name like #{pattern2};
-      </if>
-    </where>
-  </select>
 </mapper>
 
 

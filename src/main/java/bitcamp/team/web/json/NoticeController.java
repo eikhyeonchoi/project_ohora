@@ -1,18 +1,16 @@
 package bitcamp.team.web.json;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import bitcamp.team.domain.Notice;
 import bitcamp.team.domain.NoticeFile;
 import bitcamp.team.service.NoticeService;
@@ -20,46 +18,32 @@ import bitcamp.team.service.NoticeService;
 @RestController("json/NoticeController")
 @RequestMapping("/json/notice")
 public class NoticeController {
-
   @Autowired
   NoticeService noticeService;
   @Autowired
   ServletContext servletContext;
 
-  @PostMapping("upload")
-  public Object upload(MultipartFile[] parts) {
+  @PostMapping("add")
+  public Object add(Part[] noticeFile, Notice notice) {
     HashMap<String, Object> content = new HashMap<>();
     ArrayList<NoticeFile> files = new ArrayList<>();
-    try {
-      for (MultipartFile part : parts) {
-        if (part.getSize() > 0) {
-          String filename = UUID.randomUUID().toString();
-          String filepath = servletContext.getRealPath("/upload/notice/" + filename);
-          String orgName = part.getOriginalFilename();
-          long orgSize = part.getSize();
-          part.transferTo(new File(filepath));
-        } else {
-          throw new RuntimeException("파일이 없습니다.");
-        }
-      }
-      content.put("files", files);
-      content.put("status", "success");
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
-    }
-    return content;
-  }
-
-  @PostMapping("add")
-  public Object add(Notice notice) {
-    HashMap<String, Object> content = new HashMap<>();
-
     try {
       if (notice.getTitle() == "") {
         throw new RuntimeException("제목을 입력해 주세요");
       } else if (notice.getContents() == "") {
         throw new RuntimeException("내용을 입력해 주세요");
+      }
+      if (noticeFile != null) {
+        for (Part part : noticeFile) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = servletContext.getRealPath("/upload/notice/" + filename);
+          part.write(filepath);
+
+          NoticeFile file = new NoticeFile();
+          file.setFilePath(filename);
+          files.add(file);
+        }
+        notice.setNoticeFile(files);
       }
       noticeService.add(notice);
       content.put("status", "success");
@@ -92,33 +76,12 @@ public class NoticeController {
   }
 
   @GetMapping("list")
-  public Object list(@RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize, String keyword, String searchType) {
+  public Object list(String keyword, String searchType) {
 
-    if (pageSize < 10 || pageSize > 18)
-      pageSize = 10;
-
-    int rowCount = noticeService.size(keyword);
-    int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
-      totalPage++;
-    if (totalPage == 0)
-      totalPage = 1;
-    if (pageNo < 1)
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    List<Notice> notice = noticeService.list(pageNo, pageSize, keyword, searchType);
-
-    int[] nos = {1, 2, 3, 4, 5};
+    List<Notice> notice = noticeService.list(keyword, searchType);
 
     HashMap<String, Object> content = new HashMap<>();
     content.put("list", notice);
-    content.put("nos", nos);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
     content.put("keyword", keyword);
     content.put("searchType", searchType);
 
@@ -138,6 +101,20 @@ public class NoticeController {
       content.put("message", e.getMessage());
     }
     return content;
+  }
+
+  @GetMapping("files")
+  public Object files(int no) {
+    HashMap<String, Object> contents = new HashMap<>();
+    try {
+      Notice files = noticeService.getFile(no);
+      contents.put("files", files);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
   }
 
 }

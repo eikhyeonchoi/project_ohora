@@ -8,33 +8,34 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Notice implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
 
-  protected int no;
-  protected String title;
-  protected String contents;
+  private int no;
+  private String title;
+  private String contents;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  protected Date createdDate;
-  protected int viewCount;
-  protected List<NoticeFile> files;
+  private Date createdDate;
+  private int viewCount;
+  private List<NoticeFile> noticeFile;
 
   @Override
   public Notice clone() throws CloneNotSupportedException {
     return (Notice) super.clone();
   }
 
+
   @Override
   public String toString() {
     return "Notice [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
-        + createdDate + ", viewCount=" + viewCount + ", files=" + files + "]";
+        + createdDate + ", viewCount=" + viewCount + ", noticeFile=" + noticeFile + "]";
   }
 
 
-  public List<NoticeFile> getFiles() {
-    return files;
+  public List<NoticeFile> getNoticeFile() {
+    return noticeFile;
   }
 
 
-  public void setFiles(List<NoticeFile> files) {
-    this.files = files;
+  public void setNoticeFile(List<NoticeFile> noticeFile) {
+    this.noticeFile = noticeFile;
   }
 
 

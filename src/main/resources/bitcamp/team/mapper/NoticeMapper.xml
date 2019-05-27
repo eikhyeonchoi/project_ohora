@@ -11,6 +11,15 @@
     <result column="cdt" property="createdDate" />
     <result column="cnt" property="viewCount" />
   </resultMap>
+  
+  <resultMap type="notice" id="noticeFileMap">
+    <id       column="ntc_no"         property="no"/>
+    <collection property="noticeFile"      ofType="noticeFile">
+      <id     column="file_no"           property="no"/>
+      <result column="notice_no"          property="noticeNo"/>
+      <result column="name"                property="filePath"/>
+    </collection>
+  </resultMap>
 
   <sql id="select1">
     select
@@ -42,9 +51,6 @@
     </where>
     order by
     ntc_no desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
   </select>
 
   <select id="findByNo" resultMap="noticeMap" parameterType="int">
@@ -60,7 +66,7 @@
     where ntc_no = #{value}
   </update>
 
-  <insert id="insert" parameterType="notice">
+  <insert id="insert" parameterType="notice" useGeneratedKeys="true" keyProperty="no">
     insert into notice(titl, conts)
     values(#{title}, #{contents})
   </insert>
@@ -86,5 +92,17 @@
         titl like #{pattern1}
       </if>
     </where>
+  </select>
+  
+  <select id="findFileByNo" resultMap="noticeFileMap" parameterType="int">
+    select
+      n.ntc_no,
+      nf.name
+    from
+      notice n
+    left outer join
+      notice_file nf
+    on n.ntc_no = nf.notice_no
+    where n.ntc_no = #{value}
   </select>
 </mapper>
