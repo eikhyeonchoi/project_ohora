@@ -16,8 +16,6 @@ $('#fileupload').fileupload({
     });
   },
   done: function(e, data) {
-    console.log('done()...');
-    console.log(data.result);
     if(data.result.status == 'success'){
       location.href = 'view.html?no='
           + prodNo + '&name=' + $('#productName').val();

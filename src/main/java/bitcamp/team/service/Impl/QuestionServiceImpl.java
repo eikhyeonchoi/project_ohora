@@ -40,6 +40,14 @@ public class QuestionServiceImpl implements QuestionService {
   }
 
   @Override
+  public List<Question> typeList(int no, boolean check) {
+    if (check)
+      return questionDao.findByTypeCheck(no);
+    else 
+      return questionDao.findByType(no);
+  }
+
+  @Override
   public Question get(int no) {
     return questionDao.findByNo(no);
   }

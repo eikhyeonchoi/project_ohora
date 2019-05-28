@@ -2,10 +2,14 @@ var tbody = $('tbody'),
 addBtn = $('#add-btn'),
 dltBtn = $('#delete-btn'),
 deleteNo,
+qtyNo,
+no,
 status;
 templateSre = $('#tr-template').html(),
 trGenerator = Handlebars.compile(templateSre);
 
+var typeSrc = $('#questionType-template').html();
+var questionTypeGenerator = Handlebars.compile(typeSrc);
 var memberType;
 
 $(document).ready(function() {
@@ -22,6 +26,48 @@ $(document).ready(function() {
         }
         $(trGenerator(data)).appendTo(tbody);
 
+        $("#answer-ck").change(function(){
+          no = $('#question-type option:selected').val();
+          if($("#answer-ck").is(":checked")) {
+            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=true", function(data) {
+              $('tbody').html("");
+              $(trGenerator(data)).appendTo(tbody);
+
+              $(document.body).trigger('loaded-list');
+            })
+          } else {
+            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=false", function(data) {
+              $('tbody').html("");
+              $(trGenerator(data)).appendTo(tbody);
+
+              $(document.body).trigger('loaded-list');
+            })
+          }
+        });
+
+        $.get('/bitcamp-team-project/app/json/question/questionList', function(data){
+          $(questionTypeGenerator(data)).appendTo('#qtype-p');
+
+          $('#question-type').off().change(function() {
+            qtyNo = $(this).val()
+            if($("#answer-ck").is(":checked")) {
+              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=true", function(data) {
+                $('tbody').html("");
+                $(trGenerator(data)).appendTo(tbody);
+
+                $(document.body).trigger('loaded-list');
+              })
+            } else {
+              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=false", function(data) {
+                $('tbody').html("");
+                $(trGenerator(data)).appendTo(tbody);
+
+                $(document.body).trigger('loaded-list');
+              })
+            }
+          });
+        }) // get
+
         $(document.body).trigger('loaded-list');
       }) //getJSON
 
@@ -32,7 +78,9 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-list', () => {
 
+
   if (memberType == 1 || memberType == 2) {
+    $('#master-option').hide();
     $('#my-question-title').html('나의 문의내역');
     $('.my-question').hide();
   } else {
@@ -41,12 +89,12 @@ $(document.body).bind('loaded-list', () => {
     $('.question-ck').hide();
   }
 
-  $('.bit-view-link').click((e) => {
+  $('.bit-view-link').off().click((e) => {
     e.preventDefault();
     location.href = 'view.html?no=' + $(e.target).attr('data-no');
   });
 
-});
+}); //bind(loaded-list)
 
 addBtn.click(function() {
   location.href = 'view.html';

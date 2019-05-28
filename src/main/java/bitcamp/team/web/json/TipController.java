@@ -1,6 +1,7 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,8 @@ public class TipController {
   @Autowired ProductService productService;
   @Autowired MemberService memberService;
   @Autowired TipHistoryService tipHistoryService;
-
+  @Autowired HttpSession httpSession;
+  
   @GetMapping("list")
   public Object list(String searchType, String keyword) throws Exception {
     HashMap<String,Object> map = new HashMap<>();
@@ -49,22 +51,20 @@ public class TipController {
   }
 
   @PostMapping("add")
-  public Object add(Tip tip, Member member, Product product) throws Exception {
+  public Object add(Tip tip, Product product) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
       int prodNo = productService.getNo(product.getName());
-      String nickName = member.getNickName();
-
-      tips.setMemberNo(memberService.getNo(nickName));
+      Member member = (Member)httpSession.getAttribute("loginUser");
+      tips.setMemberNo(member.getNo());
       tips.setProductNo(prodNo);
       tipService.add(tips);
 
       TipHistory his = new TipHistory();
-      System.out.println("tip_no==>" + tipService.getNo(prodNo));
       his.setTipNo(tipService.getNo(prodNo));
       his.setContents(tips.getContents());
-      his.setNickName(nickName);
+      his.setNickName(member.getNickName());
       tipHistoryService.add(his);
 
       contents.put("status", "success");
@@ -76,16 +76,17 @@ public class TipController {
   }
 
   @PostMapping("update")
-  public Object update(Tip tip, Member member,Product product) throws Exception {
+  public Object update(Tip tip, Product product) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
-      tips.setMemberNo(memberService.getNo(member.getNickName()));
+      Member member = (Member) httpSession.getAttribute("loginUser");
+      tips.setMemberNo(member.getNo());
       tips.setProductNo(productService.getNo(product.getName()));
       if(tipService.update(tips) == 0)
         throw new RuntimeException("해당 번호의 팁이 존재하지 않습니다.");
-
       contents.put("status", "success");
+      
     } catch (Exception e) {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
