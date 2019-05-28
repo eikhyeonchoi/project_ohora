@@ -1,21 +1,13 @@
-var param = location.href.split('?')[1];
+var tip_No = location.href.split('?')[1].split('=')[1];
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
 var type = sessionStorage.getItem('type'),
     nickName = sessionStorage.getItem('nickName');
 
-$(document).ready(() => {
-  $('h1').html("티키위키 팁 조회");
-  loadData(param.split('=')[1]);
-  loadList(param.split('=')[1]);
-  var el = $('.bit-new-item');
-  for (e of el) {
-    e.style.display = 'none';
-  }
-});
-
 $(document).ready(function() {
+  loadData(tip_No);
+  loadList(tip_No);
   $('.history-list').hide();
   $('#rollback-btn').hide();
   if (type == null) {
@@ -47,18 +39,18 @@ $(document.body).bind('loaded-list', () => {
       if (data.status == "success") {
         var r = confirm('롤백 하시겠습니까?');
         if (r == true) {
-          $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + param.split('=')[1], {
+          $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + tip_No, {
             name: $('#productName').val(),
             hisNo: hisNo
           }, function(obj) {
             if (obj.status == 'success') {
-              location.href = "view.html?no=" + param.split('=')[1];
+              location.href = "view.html?no=" + tip_No;
             } else {
               alert('롤백에 실패했습니다.\n' + data.message);
             }
           }, "json")
         } else {
-          location.href = "view.html?no=" + param.split('=')[1];
+          location.href = "view.html?no=" + tip_No;
         }
       } else {
       }
@@ -76,12 +68,12 @@ function loadData(no) {
   });
 
   $('#update-btn').click(() => {
-    $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
+    $.post('/bitcamp-team-project/app/json/tip/update?no=' + tip_No, {
       name: $('#productName').val(),
       contents: $('#contents').val()
     }, function(data) {
       if (data.status == 'success') {
-        location.href = "view.html?no=" + param.split('=')[1];
+        location.href = "view.html?no=" + tip_No;
       } else {
         location.href = '/bitcamp-team-project/html/auth/login.html'; 
       }
