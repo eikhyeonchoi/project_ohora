@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.bit-main-header {
+  min-height: 60px;
+}
+
+#bit-login-state img {
+  height: 30px;
+}
+
+#bit-not-login-state {
+  padding-right:5px;
+}
+
+#bit-login-state {
+  padding-right:5px;
+}
+
+#bit-auth-div {
+  padding-right:5px;
+}
+
+#login-username {
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+}
+
+#ohr-header {
+    font-size: 27px;
+    font-weight: bold;
+    font-family: 
+}
+
