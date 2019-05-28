@@ -23,14 +23,11 @@
       <button id="delete-btn" type="button" class="btn btn-success btn-sm">선택 삭제</button>
       <button id="add-btn" type="button" class="btn btn-success btn-sm">문의 하기</button>
     </p>
-    <div>
-      <select>
-        <option>선택1</option>
-        <option>선택2</option>
-        <option>선택3</option>
-        <option>선택4</option>
-      </select>
-      <input type="checkbox">
+    <div id="master-option">
+      <a id="qtype-p">
+        <span id="qtype-span">문의 유형&nbsp;&nbsp;</span>
+      </a>
+      <span id="checkBox-span">미답변 질문만 보기<input id="answer-ck" type="checkbox"></span>
     </div>
     <div class="bit-list">
       <table class="table table-hover">
@@ -49,7 +46,7 @@
       <p id="noDataP"></p>
     </div>
 
-    <script id="tr-template" type="text/x-handlebars-template">
+  <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
     <tr>
       <th scope='row'>[{{questionType.name}}]</th>
@@ -63,6 +60,14 @@
   </script>
   </div>
   <!-- .container -->
+  <script id="questionType-template" type="text/x-handlebars-template">
+    <select id="question-type">
+      <option value="0" selected>유형을 선택하세요.</option>
+    {{#each type}}
+      <option value='{{no}}'>{{name}}</option>
+    {{/each}}
+    </select>
+  </script>
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>

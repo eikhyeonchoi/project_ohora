@@ -1,6 +1,5 @@
 var param = location.href.split('?')[1];
-var memberNo,
-qNo,
+var qNo,
 aNo,
 memberType;
 var questionLabel1 = $('#bit-qes-label1'),
@@ -21,7 +20,6 @@ $(document).ready(function() {
 
   $.get('/bitcamp-team-project/app/json/auth/user' ,function(data) {
     memberType = data.user.type;
-    memberNo = data.user.no;
     $("#update-btn").hide();
     $("#file-update-btn").hide();
 
@@ -135,7 +133,6 @@ $('#fileupload').fileupload({ // 질문 파일등록
     $('#fileAdd-btn').click(function() {
       data.formData = {
         questionNo: $('#question-type option:selected').val(),
-        memberNo: memberNo,
         title: $('#question-title').val(),
         contents: $('#question-content').val()
       };
@@ -155,7 +152,6 @@ $('#add-btn').click(function() {
   if (memberType != 3) {
     $.post('/bitcamp-team-project/app/json/question/add',{
       questionNo: $('#question-type option:selected').val(),
-      memberNo: memberNo,
       title: $('#question-title').val(),
       contents: $('#question-content').val()
     },function(data) {

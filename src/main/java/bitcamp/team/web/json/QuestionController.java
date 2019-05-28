@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Question;
 import bitcamp.team.domain.QuestionFile;
 import bitcamp.team.domain.QuestionType;
@@ -28,8 +30,27 @@ public class QuestionController {
 
   @GetMapping("list")
   public Object list(int no) throws Exception {
-    List<Question> questions = questionService.list(no);
     HashMap<String,Object> content = new HashMap<>();
+    List<Question> questions = questionService.list(no);
+    content.put("list", questions);
+
+    return content;
+  }
+  
+  @GetMapping("answerOkList")
+  public Object answerOkList() throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    List<Question> questions = questionService.answerOkList();
+    content.put("list", questions);
+
+    return content;
+  }
+  
+  
+  @GetMapping("typeList")
+  public Object typeList(int no) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    List<Question> questions = questionService.typeList(no);
     content.put("list", questions);
 
     return content;
@@ -50,7 +71,7 @@ public class QuestionController {
   } // listManufacturer
 
   @RequestMapping("add")
-  public Object add(Question question, @RequestParam(required = false) Part[] questionFiles) {
+  public Object add(Question question, @RequestParam(required = false) Part[] questionFiles, HttpSession session) {  
     this.uploadDir = servletContext.getRealPath("/upload/questionfile");
     HashMap<String,Object> content = new HashMap<>();
     ArrayList<QuestionFile> files = new ArrayList<>();
@@ -73,6 +94,8 @@ public class QuestionController {
           } // for(Part)
           question.setQuestionFiles(files);
         } // if(파일 올릴때)
+        Member loginUser = (Member)session.getAttribute("loginUser");
+        question.setMemberNo(loginUser.getNo());
         questionService.add(question);
         content.put("status", "success");
       } // else(오류 안났을때)

@@ -8,6 +8,8 @@ public interface QuestionService {
   int add(Question question);
 
   List<Question> list(int no);
+  List<Question> typeList(int no);
+  List<Question> answerOkList();
   List<QuestionType> listQuestionType();
   Question get(int no);
   Question getFile(int no);
