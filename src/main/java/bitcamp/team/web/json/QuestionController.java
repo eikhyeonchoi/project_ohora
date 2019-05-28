@@ -98,4 +98,20 @@ public class QuestionController {
   }
 
 
+  @GetMapping("delete")
+  public Object delete(int no, String status) {    
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (questionService.delete(no, status) == 0)
+        throw new Exception("삭제중 오류가 발생했습니다.");
+
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  };
+
+
 }

@@ -59,19 +59,51 @@ public class AnswerController {
     return content;
   } // add
 
-    @GetMapping("files")
-    public Object files(int no) {
-      HashMap<String,Object> contents = new HashMap<>();
-      try {
-        Answer files = answerService.getFile(no);
-        contents.put("files", files);
-        contents.put("status", "success");
-      } catch (Exception e) {
-        contents.put("status", "fail");
-        contents.put("error", e.getMessage());
-      }
-      return contents;
+  @GetMapping("files")
+  public Object files(int no) {
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      Answer files = answerService.getFile(no);
+      contents.put("files", files);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
+
+  @RequestMapping("update")
+  public Object update(Answer answer, @RequestParam(required = false) Part[] answerUpdateFiles) {
+    this.uploadDir = servletContext.getRealPath("/upload/answerfile");
+    HashMap<String,Object> content = new HashMap<>();
+    ArrayList<AnswerFile> files = new ArrayList<>();
+
+    try {
+      if (answer.getContent().equals("")) {
+        throw new Exception("답변을 입력하세요.");
+      } else {
+        if (answerUpdateFiles != null) {
+          for (Part part : answerUpdateFiles) {
+            String filename = UUID.randomUUID().toString();
+            String filepath = uploadDir + "/" + filename; 
+            part.write(filepath);
+
+            AnswerFile ansFiles = new AnswerFile();
+            ansFiles.setFilePath(filename);
+            ansFiles.setAnswerNo(answer.getNo());
+            files.add(ansFiles);
+          } // for(Part)
+          answer.setAnswerFiles(files);
+        } // if(파일 올릴때)
+        answerService.update(answer);
+        content.put("status", "success");
+      } // else(오류 안났을때)
+    } catch (Exception e) {
+      content.put("status","fail");
+      content.put("error",e.getMessage());
     }
 
-
+    return content;
+  };
 }

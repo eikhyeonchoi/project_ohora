@@ -35,6 +35,7 @@ public class AnswerServiceImpl implements AnswerService {
       for (AnswerFile files : answerFiles) {
         files.setAnswerNo(answer.getNo());
       } // for
+
       answerFileDao.insert(answer.getAnswerFiles());
     } // if
     return count;
@@ -45,5 +46,21 @@ public class AnswerServiceImpl implements AnswerService {
     return answerDao.findFileByNo(no);
   }
 
+  @Override
+  public int update(Answer answer) {
+    if (answer.getContent() != null) {
+      answerDao.update(answer);
+    }
+    List<AnswerFile> answerFiles = answer.getAnswerFiles();
+    answerFileDao.deleteByAnswerNo(answer.getNo());
+    if (answerFiles != null) {
+      for (AnswerFile files : answerFiles) {
+        files.setAnswerNo(answer.getNo());
+      } // for
+      answerFileDao.insert(answer.getAnswerFiles());
+    } 
+
+    return 1;
+  }
 
 }

@@ -22,10 +22,13 @@ $(document).ready(function() {
   $.get('/bitcamp-team-project/app/json/auth/user' ,function(data) {
     memberType = data.user.type;
     memberNo = data.user.no;
+    $("#update-btn").hide();
+    $("#file-update-btn").hide();
 
     if (param) {
       $('#file-add-div').hide();
       $("#qtype-p").hide();
+      $('#ans-file-update-div').hide();
       $('.user-qes').attr("readonly",true);
 
       if (memberType == 1 || memberType == 2) {
@@ -104,9 +107,15 @@ function loadData(no) {
       $('#ans-file-pp').hide();
 
     } else {
+      if (memberType == 3) {
+        $('#ans-file-add-div').hide();
+        $('#ans-file-update-div').show();
+        $('#add-btn').hide();
+        $('#fileAdd-btn').hide();
+        $("#update-btn").show();
+      }
       answerContent.val(data.answer.content),
       answerLabel3.html('답변일: ' + data.answer.createdDate)
-      console.log(data.answer.no)
       aNo = data.answer.no
       $(document).trigger('load-ans-file');
     }
@@ -124,7 +133,6 @@ $('#fileupload').fileupload({ // 질문 파일등록
     $('#fileAdd-btn').show();
     $('#add-btn').hide();
     $('#fileAdd-btn').click(function() {
-      alert('질문파일등록')
       data.formData = {
         questionNo: $('#question-type option:selected').val(),
         memberNo: memberNo,
@@ -196,6 +204,47 @@ $('#ans-fileupload').fileupload({ // 답변 파일등록
     }
   }
 }) // fileupload
+
+$("#update-btn").click(function() {
+  $.post('/bitcamp-team-project/app/json/answer/update',{
+    no: aNo,
+    questionNo: qNo,
+    content: $('#answer-content').val()
+  },function(data) {
+    if(data.status == 'success') {
+      location.href='index.html';
+    } else {
+      alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
+    }
+  }, "json") 
+})
+
+$('#ans-update-fileupload').fileupload({
+  url: '/bitcamp-team-project/app/json/answer/update', // 서버에 요청할 URL
+  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+  sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
+  singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기 (add 한번만 호출)..
+  add: function (e, data) { // 파일을 모두 업로드한후 호출.
+    $('#file-update-btn').show();
+    $('#update-btn').hide();
+    $('#file-update-btn').click(function() {
+      data.formData = {
+          no: aNo,
+          questionNo: qNo,
+          content: $('#answer-content').val()
+      };
+      data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
+    });
+  },
+  done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
+    if(data.result.status == 'success'){
+      location.href='index.html';
+    } else { 
+      alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+    }
+  }
+}) // fileupload
+
 
 
 

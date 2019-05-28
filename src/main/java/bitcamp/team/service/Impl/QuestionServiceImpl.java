@@ -2,6 +2,8 @@ package bitcamp.team.service.Impl;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import bitcamp.team.dao.AnswerDao;
+import bitcamp.team.dao.AnswerFileDao;
 import bitcamp.team.dao.QuestionDao;
 import bitcamp.team.dao.QuestionFileDao;
 import bitcamp.team.domain.Question;
@@ -14,12 +16,18 @@ public class QuestionServiceImpl implements QuestionService {
 
   QuestionDao questionDao;
   QuestionFileDao questionFileDao;
+  AnswerDao answerDao;
+  AnswerFileDao answerFileDao;
 
   public QuestionServiceImpl(
       QuestionDao questionDao,
-      QuestionFileDao questionFileDao) {
+      QuestionFileDao questionFileDao,
+      AnswerDao answerDao,
+      AnswerFileDao answerFileDao) {
     this.questionDao = questionDao;
     this.questionFileDao = questionFileDao;
+    this.answerDao = answerDao;
+    this.answerFileDao = answerFileDao;
   }
 
   @Override
@@ -57,6 +65,17 @@ public class QuestionServiceImpl implements QuestionService {
   @Override
   public Question getFile(int no) {
     return questionDao.findFileByNo(no);
+  }
+
+  @Override
+  public int delete(int no, String status) {
+    if (status.equals("답변 완료")) {
+      int ansNo = answerDao.findAnsNoByQno(no);
+      answerFileDao.deleteByAnswerNo(ansNo);
+      answerDao.deleteByQnsNo(no);
+    } 
+    questionFileDao.deleteByQnsNo(no);
+    return questionDao.delete(no);
   }
 
 }

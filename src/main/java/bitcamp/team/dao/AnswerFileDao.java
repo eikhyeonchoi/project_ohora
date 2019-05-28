@@ -5,4 +5,5 @@ import bitcamp.team.domain.AnswerFile;
 
 public interface AnswerFileDao {
   int insert(List<AnswerFile> answerFiles);
+  int deleteByAnswerNo(int no);
 }

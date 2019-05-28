@@ -11,5 +11,5 @@ public interface QuestionService {
   List<QuestionType> listQuestionType();
   Question get(int no);
   Question getFile(int no);
-
+  int delete(int no, String status);
 }
