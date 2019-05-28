@@ -6,7 +6,11 @@ import bitcamp.team.domain.NoticeFile;
 public interface NoticeFileDao {
   int insert(List<NoticeFile> files);
 
-  List<NoticeFile> findByNo(int noticeNo);
+  List<NoticeFile> findByNoticeNo(int noticeNo);
 
   int deleteByNo(int noticeNo);
+
+  NoticeFile findByNo(int no);
+
+  int delete(int no);
 }
