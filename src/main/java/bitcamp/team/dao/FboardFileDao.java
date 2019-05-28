@@ -6,5 +6,5 @@ import bitcamp.team.domain.FboardFile;
 public interface FboardFileDao {
 
   int insert(List<FboardFile> fboardFiles);
-  int delete(int no);
+  int deleteByFboardNo(int no);
 }

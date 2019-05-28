@@ -55,12 +55,26 @@ public class FboardServiceImpl implements FboardService {
 
   @Override
   public int update(Fboard board) {
-    return fboardDao.update(board);
+    int count = 0;
+    if (board.getContents() != null && board.getTitle() != null) {
+      count = fboardDao.update(board);
+    }
+    
+    List<FboardFile> fboardFiles = board.getFboardFiles();
+    fboardFileDao.deleteByFboardNo(board.getNo());
+    if(fboardFiles != null) {
+      for(FboardFile file : fboardFiles) {
+        file.setFboardNo(board.getNo());
+      } // for
+      fboardFileDao.insert(board.getFboardFiles());
+    } // if
+    
+    return count;
   }
 
   @Override
   public int delete(int no) {
-    fboardFileDao.delete(no);
+    fboardFileDao.deleteByFboardNo(no);
     fboardDao.deleteCommentFboard(no);
     return fboardDao.delete(no);
   }

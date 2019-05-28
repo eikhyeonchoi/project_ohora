@@ -17,9 +17,11 @@ $(document).ready(function(){
     location.href='add.html';
   })
   
+  
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj) {
     userType = obj.user.type;
   }) // get
+  
   
   $.get('/bitcamp-team-project/app/json/faq/list', function(obj){
     console.log(obj);
@@ -119,9 +121,10 @@ $(document.body).bind('loaded-type', function(obj) {
 
 
 function faqTitleClick() {
-  $('.faq-title').one('click', function(e) {
-    $(e.target).children().remove();
-    $(e.target).prepend('<i class="fas fa-angle-down"></i>')
+  $('.faq-title > p').one('click', function(e) {
+    console.log($(e.target));
+    //'<i class="fas fa-angle-down"></i>'
+    $(e.target).find('i').replaceWith('<i class="fas fa-angle-down mr-sm-2"></i>');
     $(e.target).css('font-size', '2em');
     $(e.target).css('font-style', 'bold');
     $(e.target).closest('div').before('<hr class="head-line">');

@@ -17,6 +17,10 @@ $(document).ready(function() {
 }) // ready
 
 $(document.body).bind('loaded-user', function(obj){
+  $('#fboard-cancel-btn').click(function() {
+    location.href = 'index.html';
+  })
+  
   
   $('#fboard-file-input').fileupload({
     url: '/bitcamp-team-project/app/json/fboard/add', 
@@ -46,8 +50,7 @@ $(document.body).bind('loaded-user', function(obj){
   $('#fboard-add-btn').off().click(function() {
     $.post('/bitcamp-team-project/app/json/fboard/add', {
       title: $('#title').val(),
-      contents: $('#contents').val(),
-      memberNo: obj.userNo
+      contents: $('#contents').val()
     }, function(obj) {
       if (obj.status == 'success') {
         location.href = 'index.html';

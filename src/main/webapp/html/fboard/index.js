@@ -53,7 +53,7 @@ $(document.body).bind('loaded-user', function(obj){
 //trigger 3개 받는 bind
 $(document.body).bind('loaded-list', function(obj){
   $('.fboard-detail').off().click(function() {
-    location.href = 'view.html?no=' + $(this).attr('data-no');
+    location.href = 'view2.html?no=' + $(this).attr('data-no');
   }) // click
 
   $('.dropdown-item').off().click(function(e) {
