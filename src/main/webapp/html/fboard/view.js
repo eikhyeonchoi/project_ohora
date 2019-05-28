@@ -94,7 +94,34 @@ $(document.body).bind('loaded-detail', function(data){
     }) // get
   }); // delete click
 
-  updateBtn.click(() => {
+  /*
+  $('#fboard-file-input').fileupload({
+    url: '/bitcamp-team-project/app/json/fboard/update', 
+    dataType: 'json',
+    sequentialUploads: true,
+    singleFileUploads: false,
+    add: function (e, data) {
+      updateBtn.off().click(function() {
+        data.formData = {
+            no: boardNo,
+            title: $('#title').val(),
+            contents: $('#contents').val()
+        };
+        data.submit();
+      });
+    },
+    done: function (e, data) {
+      console.log(data);
+      if(data.result.status == 'success'){
+        location.href='index.html';
+      } else { 
+        alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+      }
+    }
+  }) // fileupload
+  */
+  
+  updateBtn.off().click(() => {
     $.post('/bitcamp-team-project/app/json/fboard/update', {
       no: boardNo,
       title: $('#title').val(),
