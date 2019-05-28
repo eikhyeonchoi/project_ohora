@@ -104,6 +104,12 @@ body {
   }
 }
 
+#ohr-manual-img{
+    background-image: url(aaa.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
 #ohr-ph-circle p{
 	min-height:80px;
 }
@@ -111,3 +117,17 @@ body {
 #ohr-ph-circle h2{
 	padding-top: 10px;
 }
+
+#ohr-carousel-2 {
+	background-image: url(aaa.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+#ohr-bottom-1 {
+	background-image: url(aaa.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
