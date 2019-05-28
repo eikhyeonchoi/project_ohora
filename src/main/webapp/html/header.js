@@ -1,5 +1,6 @@
 //헤더 가져오기
 $(document.body).ready(function() {
+  loadLoginUser();
   $('.bit-main-header').load('/bitcamp-team-project/html/header.html',
       function (){
     $(document.body).trigger('loaded.header');

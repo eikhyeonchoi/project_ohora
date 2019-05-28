@@ -18,7 +18,6 @@ var userNo = sessionStorage.getItem('no'), // 로그인한 사람
 
 $(document).ready(function() {
   $.get('../../app/json/fboard/detail?no=' + boardNo, function(obj) {
-    console.log(obj);
     $('#memberNo').val(obj.board.member.nickName);
     $('#title').val(obj.board.title);
     $('#contents').val(obj.board.contents);
@@ -42,7 +41,6 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-detail', function(data){
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
-    console.log(obj);
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
 
 
