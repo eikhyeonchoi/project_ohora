@@ -6,21 +6,19 @@ smallSrc = $('#small-category-template').html(),
 formInline = $('.formInline'),
 basicSrc = $('#basic-list-form-template').html();
 var largeCategoryGenerator = Handlebars.compile(largeSrc),
-smallCategoryGenerator = Handlebars.compile(smallSrc),
-listGenerator = Handlebars.compile(basicSrc);
+    smallCategoryGenerator = Handlebars.compile(smallSrc),
+    listGenerator = Handlebars.compile(basicSrc);
 
+var type = sessionStorage.getItem('type');
 
 $(document).ready(function() {
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
-    console.log(obj);
-    $('#insert-btn').click(function() {
-      if (obj.user.type < 2) {
-        location.href = '/bitcamp-team-project/html/auth/login.html';
-      } else {
-        location.href = 'add.html';
-      }
-    })
-  }) // get
+  $('#insert-btn').click(function() {
+    if (type < 2) {
+      location.href = '/bitcamp-team-project/html/auth/login.html';
+    } else {
+      location.href = 'add.html';
+    }
+  });
 
   $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
     $(largeCategoryGenerator(obj)).appendTo(searchSpan);
@@ -29,7 +27,6 @@ $(document).ready(function() {
     formInline
     .append("<input id='searchWord' type='text' class='form-control'>")
     .append("<button id='search-btn' type='button' class='btn btn-success btn-sm'>검색</button>");
-
   });
 
   loadList();
@@ -40,7 +37,7 @@ function loadList() {
       + '&smallNo=' + 0 
       + '&productName=' + 'undefined', function(obj){
     paging(obj);
-    
+
   }) // get
 }
 
@@ -78,7 +75,7 @@ $(document.body).bind('loaded', ()=>{
   $('#search-btn').click(function(){
     searchSrc();
   }) // click
-  
+
   $('#searchWord').keydown((e) => {
     if (event.keyCode == 13) {
       e.preventDefault();

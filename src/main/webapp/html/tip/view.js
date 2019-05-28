@@ -2,47 +2,33 @@ var param = location.href.split('?')[1];
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
-if (param) {
-  $('h1').html("팁 조회");
+var type = sessionStorage.getItem('type'),
+    nickName = sessionStorage.getItem('nickName');
+
+$(document).ready(() => {
+  $('h1').html("티키위키 팁 조회");
   loadData(param.split('=')[1]);
   loadList(param.split('=')[1]);
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
-} else {
-  $('h1').html("팁 생성");
-  var el = $('.bit-view-item');
-  for (e of el) {
-    e.style.display = 'none';
-  }
-}
+});
 
-$.getJSON('../../app/json/auth/user', function(data) {
+$(document).ready(function() {
   $('.history-list').hide();
   $('#rollback-btn').hide();
-  if (data.status == "fail") {
-    $('#add-btn').hide();
+  if (type == null) {
+    $('#update-btn').hide();
   } 
-  if (data.user.type == '3') {
+  if (type == 3) {
     $('.history-list').show();
     $('#rollback-btn').show();
   }
   $(document).ready(function() {
-    $('#updateUser').attr('placeholder', data.user.nickName);
+    $('#updateUser').attr('placeholder', nickName);
   });
-})
-
-$.getJSON('/bitcamp-team-project/app/json/tip/confirm?productName=' + $('productName').val(), 
-    function(obj) {
-  if (obj.confirm == 'empty') {
-    $('#add-btn').show();
-    $('#update-btn').hide();
-  } else {
-    $('#add-btn').hide();
-    $('#update-btn').show();
-  }
-})
+});
 
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
@@ -80,19 +66,6 @@ $(document.body).bind('loaded-list', () => {
   })
 });
 
-$('#add-btn').click(() => {
-  $.post('/bitcamp-team-project/app/json/tip/add', {
-    name:     $('productName').val(),
-    nickName: $('#updateUser').attr('placeholder'),
-    contents: $('#contents').val()
-  }, function(data) {
-    if(data.status == 'success') {
-      location.href = "index.html";
-    } else {
-    }
-  }, "json")
-});
-
 function loadData(no) {
   $.getJSON('../../app/json/tip/detail?no=' + no, function(data) {
     $('#no').val(data.no);
@@ -105,7 +78,6 @@ function loadData(no) {
   $('#update-btn').click(() => {
     $.post('/bitcamp-team-project/app/json/tip/update?no=' + param.split('=')[1], {
       name: $('#productName').val(),
-      nickName: $('#updateUser').attr('placeholder'),
       contents: $('#contents').val()
     }, function(data) {
       if (data.status == 'success') {
@@ -118,7 +90,6 @@ function loadData(no) {
     $.post('/bitcamp-team-project/app/json/tiphistory/add', {
       tipNo: $('#no').val(),
       contents: $('#contents').val(),
-      nickName: $('#updateUser').attr('placeholder')
     }, function(data) {
       if (data.status == 'success') {
         alert('히스토리 저장중입니다.');

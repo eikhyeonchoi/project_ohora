@@ -8,30 +8,15 @@ $('#login-btn').click(() => {
     password: $('#password').val()
   }, 
   function(data) {
-    headers: ("Content-Type", "application/x-www-form-urlencoded");
-  
-  if ($('#saveEmail').is(":checked")) {
-    window.localStorage.email = $('#email').val();
-  } else {
-    window.localStorage.removeItem("email");
-  }
-  
-  if (data.status == 'success') {
-     window.history.back();
-//    window.history.back();
-
-  } else {
-    alert('로그인 실패입니다!\n' + data.message);
-  }
-
+    if ($('#saveEmail').is(":checked")) {
+      window.localStorage.email = $('#email').val();
+    } else {
+      window.localStorage.removeItem("email");
+    }
+    if (data.status == 'success') {
+      location.href = document.referrer;
+    } else {
+      alert('로그인 실패입니다!\n' + data.message);
+    }
   })
 });
-
-//var qs = 'email=' + email + '&password=' + password;
-//xhr.send(qs);
-
-
-
-
-
-

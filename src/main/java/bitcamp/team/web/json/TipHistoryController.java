@@ -1,11 +1,12 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Member;
 import bitcamp.team.domain.TipHistory;
 import bitcamp.team.service.TipHistoryService;
 import bitcamp.team.service.TipService;
@@ -16,9 +17,19 @@ import bitcamp.team.service.TipService;
 @RequestMapping("/json/tiphistory")
 public class TipHistoryController {
 
-  @Autowired TipService tipService;
-  @Autowired TipHistoryService tipHistoryService;
-
+  TipService tipService;
+  TipHistoryService tipHistoryService;
+  HttpSession httpSession;
+  
+  public TipHistoryController(
+      TipService tipService,
+      TipHistoryService tipHistoryService,
+      HttpSession httpSession) {
+    this.tipService = tipService;
+    this.tipHistoryService = tipHistoryService;
+    this.httpSession = httpSession;
+  }
+  
   @GetMapping("list")
   public Object list(int no) throws Exception {
     List<TipHistory> history = tipHistoryService.get(no);
@@ -44,6 +55,8 @@ public class TipHistoryController {
     HashMap<String,Object> contents = new HashMap<>();
     
     try {
+      Member member = (Member) httpSession.getAttribute("loginUser");
+      tipHistory.setNickName(member.getNickName());
       tipHistoryService.add(tipHistory);
       contents.put("status", "success");
 
