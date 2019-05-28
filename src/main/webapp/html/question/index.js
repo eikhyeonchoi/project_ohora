@@ -3,6 +3,7 @@ addBtn = $('#add-btn'),
 dltBtn = $('#delete-btn'),
 deleteNo,
 qtyNo,
+no,
 status;
 templateSre = $('#tr-template').html(),
 trGenerator = Handlebars.compile(templateSre);
@@ -26,18 +27,21 @@ $(document).ready(function() {
         $(trGenerator(data)).appendTo(tbody);
 
         $("#answer-ck").change(function(){
+          no = $('#question-type option:selected').val();
           if($("#answer-ck").is(":checked")) {
-            $.getJSON('/bitcamp-team-project/app/json/question/answerOkList', function(data) {
-              if (data.list[0] == null) {
-                $('#noDataP').html("등록된 질문이 없습니다.");
-              }
+            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=true", function(data) {
               $('tbody').html("");
               $(trGenerator(data)).appendTo(tbody);
 
               $(document.body).trigger('loaded-list');
-            });
+            })
           } else {
-            location.reload();
+            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=false", function(data) {
+              $('tbody').html("");
+              $(trGenerator(data)).appendTo(tbody);
+
+              $(document.body).trigger('loaded-list');
+            })
           }
         });
 
@@ -46,12 +50,21 @@ $(document).ready(function() {
 
           $('#question-type').off().change(function() {
             qtyNo = $(this).val()
-            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo, function(data) {
-              $('tbody').html("");
-              $(trGenerator(data)).appendTo(tbody);
+            if($("#answer-ck").is(":checked")) {
+              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=true", function(data) {
+                $('tbody').html("");
+                $(trGenerator(data)).appendTo(tbody);
 
-              $(document.body).trigger('loaded-list');
-            })
+                $(document.body).trigger('loaded-list');
+              })
+            } else {
+              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=false", function(data) {
+                $('tbody').html("");
+                $(trGenerator(data)).appendTo(tbody);
+
+                $(document.body).trigger('loaded-list');
+              })
+            }
           });
         }) // get
 

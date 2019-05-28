@@ -38,19 +38,13 @@ public class QuestionServiceImpl implements QuestionService {
       return questionDao.findAll();
     }
   }
-  
-  @Override
-  public List<Question> answerOkList() {
-      return questionDao.findByStatus();
-  }
 
   @Override
-  public List<Question> typeList(int no) {
-    if (no == 0) {
-      return questionDao.findAll();
-    } else {
+  public List<Question> typeList(int no, boolean check) {
+    if (check)
+      return questionDao.findByTypeCheck(no);
+    else 
       return questionDao.findByType(no);
-    }
   }
 
   @Override

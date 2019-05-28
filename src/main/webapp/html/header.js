@@ -26,7 +26,6 @@ $(document.body).bind('loaded.header', function(data) {
 function loadLoginUser() {
   // 서버에서 로그인 한 사용자 정보를 가져온다.
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
     if (data.status == 'success') {
       $("#bit-auth").hide();
       $('#bit-login-state').show();

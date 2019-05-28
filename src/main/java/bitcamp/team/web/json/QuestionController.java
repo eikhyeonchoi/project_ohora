@@ -37,20 +37,11 @@ public class QuestionController {
     return content;
   }
   
-  @GetMapping("answerOkList")
-  public Object answerOkList() throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-    List<Question> questions = questionService.answerOkList();
-    content.put("list", questions);
-
-    return content;
-  }
-  
-  
   @GetMapping("typeList")
-  public Object typeList(int no) throws Exception {
+  public Object typeList(int no, @RequestParam(required = false) boolean check) throws Exception {
+    System.out.println(no);
     HashMap<String,Object> content = new HashMap<>();
-    List<Question> questions = questionService.typeList(no);
+    List<Question> questions = questionService.typeList(no,check);
     content.put("list", questions);
 
     return content;
