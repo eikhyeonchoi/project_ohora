@@ -79,6 +79,7 @@
       </association>
     </collection>
   </resultMap>
+
   <select id="findAll" resultMap="manualAllMap" parameterType="map">
     select
       m.manual_no,

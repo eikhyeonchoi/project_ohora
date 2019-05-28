@@ -1,5 +1,6 @@
 package bitcamp.team.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManualDao;
@@ -30,6 +31,24 @@ public class ManualServiceImpl implements ManualService {
   @Override
   public List<ManualFile> typeFileList(int no) {
     return manualFileDao.findByTypeNo(no);
+  }
+
+  @Override
+  public List<Manual> list(String keyword, String searchType) {
+    HashMap<String,Object> contents = new HashMap<>();
+    switch(searchType) {
+      case "product": contents.put("product", searchType); break;
+      case "manualFile": contents.put("manualFile", searchType); break;
+      case "all": contents.put("all", searchType); break;
+      default: break;
+    }
+    if (keyword != null) {
+      if (!keyword.equals("")) {
+        contents.put("keyword", keyword);
+      }
+    }
+    
+    return manualDao.findAll(contents);
   }
   
   

@@ -5,7 +5,6 @@ memberDiv = $('#common-member-div'),
 managerAndCompanyDiv = $('#company-manager-div'),
 fileDiv = $('#images-div');
 
-
 var tipBtn = $('#go-tip-btn');
 
 var total = 0,
@@ -16,6 +15,11 @@ design = 0,
 asStf = 0,
 useful = 0,
 price = 0;
+
+var no = sessionStorage.getItem('no'),
+    type = sessionStorage.getItem('type');
+console.log(sessionStorage.getItem('no'));
+console.log(sessionStorage.getItem('type'));
 $.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
     , function(product) {
   productName = product.productName;
@@ -25,10 +29,14 @@ $.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
 });
 
 $(document).ready(function(){
-
   managerAndCompanyDiv.hide();
   memberDiv.hide();
-
+  if (type == 1) {
+    memberDiv.show();
+  } else if (type == 2 || type == 3) {
+    memberDiv.show();
+    managerAndCompanyDiv.show();
+  }
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
     $('#product-name').append('<p>' + productName + '</p>');
 
@@ -83,43 +91,29 @@ $(document).ready(function(){
     });
   }) //get
 
-
-  $.get('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
-    $('#go-tip-btn').hide();
-    console.log(obj);
-    if (obj.status == 'fail') {
-      $('#go-tip-btn').hide();
+  $.getJSON('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, 
+      function(obj){
+    if (obj.tipCount == 1) {
+      tipBtn.show();
+      tipBtn.text('팁 보러가기');
+      tipBtn.click(function() {
+        location.href = '../tip/view.html?no=' + productNo;
+      });
     } else {
-      if (userNo < 1){
+      console.log(type);
+      if (type < 1) {
         tipBtn.show();
-        tipBtn.text('팁보러가기');
-        tipBtn.click(function() {
-          location.href = '../tip/view.html?no=' + productNo;
-        })
-      } else if (userNo >= 1){
+        tipBtn.text('팁 없음');
+      } else {
         tipBtn.show();
         tipBtn.text('팁 등록하기');
         tipBtn.click(function() {
           location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
-        })
+        });
       }
     }
-  }) // get
-
-
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
-    userNo = obj.user.no;
-    if (obj.user.type == '1') {
-      memberDiv.show();
-    } else if (obj.user.type == '2' || obj.user.type == '3') {
-      memberDiv.show();
-      managerAndCompanyDiv.show();
-    }
-    $(document.body).trigger({
-      type: 'loaded-user'
-    });
-  }) // get
-
+  }); // get
+  
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
@@ -130,17 +124,17 @@ $(document).ready(function(){
       alert('실패했습니다!\n' + data.error);
     }
   });
-}) // ready
-
+}); // ready
 
 $(document).bind('loaded-user', function() {
   $('#go-satisfy-add-btn').click(function() {
-    $.get('/bitcamp-team-project/app/json/product/findReviewedMember?uNo=' + userNo + '&pNo=' + productNo ,function(obj) {
+    $.get('/bitcamp-team-project/app/json/product/findReviewedMember?uNo=' 
+        + no + '&pNo=' + productNo , function(obj) {
       if (obj.status == 'fail') {
         alert('이미 만족도를 등록하셨습니다');
         $('#go-satisfy-add-btn').prop('disabled',true);
       } else {
-        location.href = '../satisfy/add.html?userNo=' + userNo + '&productNo=' + productNo;
+        location.href = '../satisfy/add.html?userNo=' + no + '&productNo=' + productNo;
       }
     }) // get
   }) // click
@@ -156,6 +150,8 @@ $('#go-product-update-btn').click(function() {
   location.href = 'update.html?no=' + productNo;
 })
 
-
+$(function(){
+  $('html').removeClass('no-js');
+})
 
 

@@ -34,12 +34,13 @@ $(document).ready(function() {
 
   loadList();
 })
+
 function loadList() {
   $.get('/bitcamp-team-project/app/json/product/list?largeNo=' + 0
       + '&smallNo=' + 0 
       + '&productName=' + 'undefined', function(obj){
     paging(obj);
-    $(document.body).trigger('loaded');
+    
   }) // get
 }
 
@@ -52,6 +53,7 @@ function paging(obj) {
       tbody.children().remove();
       var pageSrc = {list : data};
       $(listGenerator(pageSrc)).appendTo(tbody);
+      $(document.body).trigger('loaded');
     }
   })
 };

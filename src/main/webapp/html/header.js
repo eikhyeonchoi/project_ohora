@@ -15,6 +15,7 @@ $(document.body).bind('loaded.header', function(data) {
     e.preventDefault();
     $.get('/bitcamp-team-project/app/json/auth/logout', () => {
       location.href = "index.html";
+      sessionStorage.clear();
     });
   });
 });
@@ -25,10 +26,16 @@ $(document.body).bind('loaded.header', function(data) {
 function loadLoginUser() {
   // 서버에서 로그인 한 사용자 정보를 가져온다.
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
+    console.log(data);
     if (data.status == 'success') {
       $("#bit-auth").hide();
       $('#bit-login-state').show();
       $('#login-username').html(data.user.name);
+      
+      sessionStorage.setItem('no', data.user.no);
+      sessionStorage.setItem('type', data.user.type);
+      sessionStorage.setItem('nickName', data.user.nickName);
+      
     } else {
       $('#bit-not-login-state').show();
     }

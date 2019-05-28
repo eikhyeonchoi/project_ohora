@@ -98,6 +98,50 @@
   order by
     q_no desc
   </select>
+  
+  <select id="findByType" resultMap="questionTypeMap" parameterType="int">
+  select
+    q.q_no,
+    q.titl,
+    q.cdt,
+    q.status,
+    m.n_name,
+    t.conts as typeName
+  from
+    question q
+  left outer join
+    member m
+  on q.member_no = m.member_no
+  left outer join
+    question_type = t
+  on q.qtype_no = t.qtype_no
+  where 
+    q.qtype_no = #{value}
+  order by
+    q_no desc
+  </select>
+  
+   <select id="findByStatus" resultMap="questionTypeMap" parameterType="int">
+  select
+    q.q_no,
+    q.titl,
+    q.cdt,
+    q.status,
+    m.n_name,
+    t.conts as typeName
+  from
+    question q
+  left outer join
+    member m
+  on q.member_no = m.member_no
+  left outer join
+    question_type = t
+  on q.qtype_no = t.qtype_no
+  where 
+    q.status = "답변 대기중"
+  order by
+    q_no desc
+  </select>
 
   <select id="findByNo" resultMap="questionTypeMap" parameterType="int">
   select 

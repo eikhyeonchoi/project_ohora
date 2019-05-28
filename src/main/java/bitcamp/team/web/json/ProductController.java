@@ -53,11 +53,16 @@ public class ProductController {
   @GetMapping("confirmTip")
   public Object confirmTip(int no) {
     HashMap<String, Object> content = new HashMap<>();
-    int memberNo = tipService.confirm(no);
-    if(memberNo == 1) {
-      content.put("status","success");
-    } else {
-      content.put("status", "fail");
+    try {
+      int tipCount = tipService.confirm(no);
+      if(tipCount == 1) {
+        content.put("status","success");
+        content.put("tipCount", tipCount);
+      } else {
+        content.put("status", "fail");
+      }
+    } catch (Exception e) {
+      content.put("error", e.getMessage());
     }
 
     return content;
@@ -70,14 +75,14 @@ public class ProductController {
       String productName = productService.get(no);
       content.put("productName", productName);
       content.put("status", "successs");
-      
+
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("error", e.getMessage());
     }
     return content;
   }
-  
+
   @GetMapping("findReviewedMember")
   public Object findReviewedMember(int uNo, int pNo) {
     HashMap<String, Object> content = new HashMap<>();
@@ -117,9 +122,9 @@ public class ProductController {
       @RequestParam(required = false) int smallNo, 
       @RequestParam(defaultValue = "undefined", required = false) String productName) {
     HashMap<String, Object> returnMap = new HashMap<>();
-    
+
     returnMap.put("list", productService.list(largeNo, smallNo, productName));
-    
+
     return returnMap;
   } // list
 
@@ -140,7 +145,7 @@ public class ProductController {
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
         part.write(filepath);
-        
+
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
         System.out.println(productFile);
@@ -166,7 +171,7 @@ public class ProductController {
     }
     return content;
   } // add
-  
+
   @PostMapping("update")
   public Object update(Product product, Part[] productFile) {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
@@ -183,7 +188,7 @@ public class ProductController {
         }
         String filename = UUID.randomUUID().toString();
         part.write(uploadDir + "/" + filename);
-        
+
         ProductFile pfiles = new ProductFile();
         pfiles.setImg(filename);
         pfiles.setProductNo(product.getNo());
