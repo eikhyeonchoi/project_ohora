@@ -30,10 +30,13 @@ function loadLoginUser() {
       $("#bit-auth").hide();
       $('#bit-login-state').show();
       $('#login-username').html(data.user.name);
+      console.log(data.user.type + ', ' + data.user.no);
       
       sessionStorage.setItem('no', data.user.no);
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
+      
+      $(document.body).trigger('loaded.loginuser');
       
     } else {
       $('#bit-not-login-state').show();
