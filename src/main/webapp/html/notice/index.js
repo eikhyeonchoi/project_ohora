@@ -4,15 +4,12 @@ trGenerator = Handlebars.compile(templateSrc),
 page = $('#pagination-container');
 
 $(document).ready(function() {
-  $.get('../../app/json/auth/user', function(obj){
-    console.log(obj);
-    var loginUser = obj.user.type;
-    if(loginUser == 3) {
-      $('#add-button').show();
-    } else {
-      $('#add-button').hide();
-    }
-})});
+  if(sessionStorage.getItem('type') == 3) {
+    $('#add-button').show();
+  } else {
+    $('#add-button').hide();
+  }
+}); // ready
 
 (function loadList(pn) {
   $.getJSON('../../app/json/notice/list?keyword=' + $('#keyword').val() + 
@@ -46,11 +43,11 @@ $(document.body).bind('loaded-list', () => {
 
 $('#keyword').keydown((e) => {
   if (event.keyCode == 13) {
-  e.preventDefault();
-  for(var no = 1; no < 6; no++) {
-    $('#page-' + no + ' > a').text(no);
-  }
-  loadList(1);
+    e.preventDefault();
+    for(var no = 1; no < 6; no++) {
+      $('#page-' + no + ' > a').text(no);
+    }
+    loadList(1);
   }
 });
 

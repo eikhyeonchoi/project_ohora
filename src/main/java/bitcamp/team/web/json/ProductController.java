@@ -175,9 +175,12 @@ public class ProductController {
   @PostMapping("update")
   public Object update(Product product, Part[] productFile) {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
+    
     HashMap<String,Object> contents = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
+    
     String orderName = productService.get(product.getNo());
+    
     try {
       if (product.getName().equals("")) {
         product.setName(orderName);

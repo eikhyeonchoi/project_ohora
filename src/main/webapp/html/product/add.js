@@ -1,23 +1,19 @@
-/**
- * 
- *  product
- *  add javascript
- */
-
 var smallSrc = $('#small-category-template').html(),
-manuSrc = $('#manufacturor-template').html(),
-div = $('#selectDiv');
+    manuSrc = $('#manufacturor-template').html(),
+    div = $('#selectDiv');
 
 var smallCategoryGenerator = Handlebars.compile(smallSrc),
-manufacturerGenerator = Handlebars.compile(manuSrc);
+    manufacturerGenerator = Handlebars.compile(manuSrc);
 
 $(document).ready(function() {
-  $.get('/bitcamp-team-project/app/json/product/manuList', function(obj){
+  $.get('/bitcamp-team-project/app/json/product/manuList', 
+      function(obj){
     $(manufacturerGenerator(obj)).appendTo(div);
     $(div).append('<br>');
   }) // get
 
-  $.get('/bitcamp-team-project/app/json/product/ctgList', function(obj){
+  $.get('/bitcamp-team-project/app/json/product/ctgList', 
+      function(obj){
     $(smallCategoryGenerator(obj)).appendTo(div);
     $(document.body).trigger('loaded-select');
   }) // get
@@ -30,7 +26,7 @@ $(document.body).bind('loaded-select', function() {
     sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
     singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.   
     add: function (e, data) {
-      $('#product-add-btn').click(function() {
+      $('#product-add-btn').off().click(function() {
         data.formData = {
             name: $('#productName').val(),
             smallCategoryNo: $('#smallCtgSelect option:selected').val(),
@@ -40,8 +36,6 @@ $(document.body).bind('loaded-select', function() {
       });
     },
     done: function(e, data) {
-      console.log('done()...');
-      console.log(data.result);
       if(data.result.status == 'success'){
         location.href='index.html';
       } else { 
