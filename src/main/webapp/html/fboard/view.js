@@ -6,13 +6,13 @@
  */
 
 var boardNo = getQuerystring('no'),
-deleteBtn = $('#delete-btn'),
-updateBtn = $('#update-btn'),
-tbody = $('tbody'),
-commentListSrc = $('#comment-list').html(),
-replySrc = $('#reply-list').html(),
-commentListGenerator = Handlebars.compile(commentListSrc),
-replyGenerator = Handlebars.compile(replySrc);
+    deleteBtn = $('#delete-btn'),
+    updateBtn = $('#update-btn'),
+    tbody = $('tbody'),
+    commentListSrc = $('#comment-list').html(),
+    replySrc = $('#reply-list').html(),
+    commentListGenerator = Handlebars.compile(commentListSrc),
+    replyGenerator = Handlebars.compile(replySrc);
 
 var userNo = 0,
 userNickName = '';
@@ -94,7 +94,6 @@ $(document.body).bind('loaded-detail', function(data){
     }) // get
   }); // delete click
 
-  /*
   $('#fboard-file-input').fileupload({
     url: '/bitcamp-team-project/app/json/fboard/update', 
     dataType: 'json',
@@ -104,6 +103,7 @@ $(document.body).bind('loaded-detail', function(data){
       updateBtn.off().click(function() {
         data.formData = {
             no: boardNo,
+            memberNo: userNo,
             title: $('#title').val(),
             contents: $('#contents').val()
         };
@@ -119,11 +119,12 @@ $(document.body).bind('loaded-detail', function(data){
       }
     }
   }) // fileupload
-  */
   
-  updateBtn.off().click(() => {
+  
+  updateBtn.off().click(function(){
     $.post('/bitcamp-team-project/app/json/fboard/update', {
       no: boardNo,
+      memberNo: userNo,
       title: $('#title').val(),
       contents: $('#contents').val()
     }, function(obj) {

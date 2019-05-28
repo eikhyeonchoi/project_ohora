@@ -89,7 +89,7 @@
     </where>
   </delete>
 
-  <update id="update" parameterType="faq">
+  <update id="update" parameterType="faq" useGeneratedKeys="true" keyProperty="no">
     update
       faq
     set

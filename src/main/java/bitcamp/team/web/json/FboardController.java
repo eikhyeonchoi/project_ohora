@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
 import bitcamp.team.domain.FboardFile;
+import bitcamp.team.domain.Member;
 import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
 
@@ -26,6 +28,7 @@ public class FboardController {
   @Autowired FboardService boardService;
   @Autowired MemberService memberService;
   @Autowired ServletContext servletContext;
+  @Autowired HttpSession httpSession;
 
   @RequestMapping("add")
   public Object add(
@@ -34,8 +37,17 @@ public class FboardController {
     String uploadDir = servletContext.getRealPath("/upload/fboardfile");
     ArrayList<FboardFile> files = new ArrayList<>();
 
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    board.setMemberNo(member.getNo());
+
     HashMap<String,Object> content = new HashMap<>();
     try {
+      if (board.getTitle() == "")
+        throw new Exception("제목을 입력하세요");
+      
+      if (board.getContents() == "")
+        throw new Exception("내용을 입력하세요");
+      
       if(fboardFiles != null) {
         for(Part part : fboardFiles) {
           String filename = UUID.randomUUID().toString();
@@ -47,7 +59,7 @@ public class FboardController {
           files.add(fboardFile);
         } // for
         board.setFboardFiles(files);
-      }
+      } // if
       boardService.add(board);
       content.put("status", "success");
       
@@ -112,9 +124,36 @@ public class FboardController {
   
   
   @PostMapping("update")
-  public Object update(Fboard board) throws Exception {
+  public Object update(Fboard board,
+      @RequestParam(required = false) Part[] fboardFiles) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
+    ArrayList<FboardFile> files = new ArrayList<>();
+    
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    board.setMemberNo(member.getNo());
+    
+    String uploadDir = servletContext.getRealPath("/upload/fboardfile");
+    
     try {
+      if (board.getTitle() == "")
+        throw new Exception("제목을 입력하세요");
+      
+      if (board.getContents() == "")
+        throw new Exception("내용을 입력하세요");
+      
+      if(fboardFiles != null) {
+        for(Part part : fboardFiles) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = uploadDir + "/" + filename;
+          part.write(filepath);
+          
+          FboardFile fboardFile = new FboardFile();
+          fboardFile.setFilepath(filename);
+          files.add(fboardFile);
+        } // for
+        board.setFboardFiles(files);
+      } // if
+      
       if (boardService.update(board) == 0) 
         throw new Exception("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
@@ -135,6 +174,9 @@ public class FboardController {
   @PostMapping("addComment")
   public Object addComment(FboardComment comment) {
     HashMap<String,Object> content = new HashMap<>();
+   
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    comment.setMemberNo(member.getNo());
 
     try {
       

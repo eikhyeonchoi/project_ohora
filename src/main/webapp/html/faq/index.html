@@ -30,7 +30,7 @@
     <div id='faq-div' class='faq-div col-sm-12'>
     <h3>전체 FAQ</h3>
     </div>
-
+    
   </div>
   <!-- container -->
 
@@ -45,7 +45,9 @@
     <hr>
     {{#each list}}  
       <div class='faq-title'>
-        <p data-title='{{title}}'><i class="fas fa-angle-right"></i>  {{title}}</p>
+        <p data-title='{{title}}'>
+          <i class="fas fa-angle-right"></i>{{title}}
+        </p>
         <hr>
       </div>
       <div class='faq-contents'>
