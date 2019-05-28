@@ -7,10 +7,8 @@ function loadList() {
   $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
       + $('select#searchTag').val() + '&keyword=' + $('#search').val()
       , function(obj) {
-        console.log(obj);
         page.pagination({
-          dataSource: obj,
-          locator: 'list',
+          dataSource: obj.list,
           showGoInput: true,
           showGoButton: true,
           callback: function(data, pagination) {

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.team.dao.ManualFileDao">
+
+  <resultMap type="manualFile" id="manualFileMap">
+    <id       column="mfile_no"           property="no"/>
+    <result   column="manual_no"          property="manualNo"/>
+    <result   column="manual_type_no"     property="type"/>
+    <result   column="conts"              property="contents"/>
+    <result   column="file"              property="file"/>
+    <association property="manualType" javaType="manualType">
+      <id     column="manual_type_no" property="no"/>
+      <result column="name"        property="name"/>
+    </association>
+  </resultMap>
+
+  <select id="findByTypeNo" resultMap="manualFileMap" parameterType="int">
+    select
+      f.mfile_no,
+      f.manual_no,
+      f.conts,
+      f.file,
+      t.name
+    from
+      manual_file f
+    left outer join
+      manual_type t
+    on 
+      f.manual_type_no = t.manual_type_no
+    where
+      f.manual_type_no = #{value}
+    order by
+      f.mfile_no desc
+  </select>
+
+  <insert id="insert" parameterType="manual" 
+    useGeneratedKeys="true" keyColumn="manual_no" keyProperty="no">
+    insert into
+      manual(product_no, conts, cnt, vlink) 
+    values(#{productNo}, #{contents}, #{viewCount}, #{vLink})
+  </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

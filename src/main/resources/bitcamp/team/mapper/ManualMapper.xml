@@ -6,39 +6,174 @@
 
 <mapper namespace="bitcamp.team.dao.ManualDao">
 
-  <resultMap type="board" id="manualMap">
-    <id column="manual_no"      property="no" />
-    <result column="product_no" property="productNo" />
-    <result column="conts"      property="contents" />
-    <result column="cnt"        property="viewCount" />
-    <result column="vlink"      property="vLink" />
-
-    <association property="manualFile" javaType="manualFile">
-      <id column="mfile_no"      property="no" />
-      <result column="manual_no" property="manualNo" />
-      <result column="img"       property="img" />
-      <result column="type"      property="type" />
-    </association>
-
-    <!-- 
-    <association property="manualPrecaution" javaType="manualPrecaution">
-      <id column="pcautions_no"   property="no" />
-      <result column="manual_no"  property="manualNo" />
-      <result column="titl"       property="title" />
-      <result column="contents"   property="contents" />
-      <result column="media"      property="media" />
-    </association>
-
-    <association property="manualComponent" javaType="manualComponent">
-      <id column="cmp_no"          property="no" />
-      <result column="manual_no"   property="manualNo" />
-      <result column="name"        property="name" />
-      <result column="explanation" property="expl" />
-      <result column="img"         property="img" />
-    </association>
-     -->
+  <resultMap type="manual" id="manualMap">
+    <id     column="manual_no"      property="no"/>
+    <result column="product_no"     property="productNo"/>
+    <result column="cnt"            property="viewCount"/>
+    <result column="name"           property="name"/> 
   </resultMap>
 
+  <resultMap type="manual" id="manualFilelMap">
+    <id     column="manual_no"      property="no" />
+    <result column="product_no" property="productNo" />
+    <result column="cnt"        property="viewCount" />
+    <result column="name"      property="name" />
+
+    <collection property="manualFile" javaType="manualFile">
+      <id column="mfile_no"           property="no"/>
+      <result column="manual_no"      property="manualNo"/>
+      <result column="manual_type_no" property="typeNo"/>
+      <result column="conts"          property="contents" />
+      <result column="file"           property="file" />
+      <association property="manualType" javaType="manualType">
+        <id     column="manual_type_no"   property="no"/>
+        <result column="name"             property="name"/>
+      </association>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="manual" id="manualProductMap">
+    <id     column="manual_no"      property="no"/>
+    <result column="product_no"     property="productNo"/>
+    <result column="cnt"            property="viewCount"/>
+    <result column="name"           property="name"/>
+    <association property="product" javaType="product">
+      <id     column="product_no"   property="no"/>
+      <result column="sctg_no"      property="smallCategoryNo"/>
+      <result column="manufac_no"   property="manufacturerNo"/>
+      <result column="name"         property="name"/>
+      <collection property="productFiles" ofType="productFile">
+        <id     column="pfile_no"     property="no"/>
+        <result column="product_no"   property="productNo"/>
+        <result column="img"          property="image"/>
+      </collection>
+    </association>
+  </resultMap>
+  
+  <resultMap type="manual" id="manualAllMap">
+    <id     column="manual_no"      property="no"/>
+    <result column="product_no"     property="productNo"/>
+    <result column="cnt"            property="viewCount"/>
+    <result column="name"           property="name"/>
+    <association property="product" javaType="product">
+      <id     column="product_no"   property="no"/>
+      <result column="sctg_no"      property="smallCategoryNo"/>
+      <result column="manufac_no"   property="manufacturerNo"/>
+      <result column="name"         property="name"/>
+      <collection property="productFiles" ofType="productFile">
+        <id     column="pfile_no"     property="no"/>
+        <result column="product_no"   property="productNo"/>
+        <result column="img"          property="image"/>
+      </collection>
+    </association>
+    
+    <collection property="manualFile" javaType="manualFile">
+      <id column="mfile_no"           property="no"/>
+      <result column="manual_no"      property="manualNo"/>
+      <result column="manual_type_no" property="typeNo"/>
+      <result column="conts"          property="contents" />
+      <result column="file"           property="file" />
+      <association property="manualType" javaType="manualType">
+        <id     column="manual_type_no"   property="no"/>
+        <result column="name"             property="name"/>
+      </association>
+    </collection>
+  </resultMap>
+  <select id="findAll" resultMap="manualAllMap" parameterType="map">
+    select
+      m.manual_no,
+      m.product_no,
+      m.cnt,
+      m.name,
+      p.product_no,
+      p.sctg_no,
+      p.manufac_no,
+      p.name,
+      f.pfile_no,
+      f.product_no,
+      f.img,
+      i.mfile_no,
+      i.manual_no,
+      i.manual_type_no,
+      i.conts,
+      i.file,
+      t.manual_type_no,
+      t.name
+    from
+      manual m
+    left outer join
+      product p
+    on
+      m.product_no = p.product_no
+    left outer join
+      product_file f
+    on
+      p.product_no = f.product_no
+    left outer join
+      manual_file i
+    on
+      m.manual_no = i.manual_no
+    left outer join
+      manual_type t
+    on
+      i.manual_type_no = t.manual_type_no
+    order by
+      m.manual_no desc
+  </select>
+  
+  <select id="findAllByProduct" resultMap="manualProductMap" parameterType="map">
+    select
+      m.manual_no,
+      m.product_no,
+      m.cnt,
+      m.name,
+      p.product_no,
+      p.sctg_no,
+      p.manufac_no,
+      p.name,
+      f.pfile_no,
+      f.product_no,
+      f.img
+    from
+      manual m
+    left outer join
+      product p
+    on
+      m.product_no = p.product_no
+    left outer join
+      product_file f
+    on
+      p.product_no = f.product_no
+    order by
+      m.manual_no desc
+  </select>
+  
+  <select id="findAllByManualFile" resultMap="manualFilelMap" parameterType="map">
+    select
+      m.manual_no,
+      m.product_no,
+      m.cnt,
+      m.name,
+      f.mfile_no,
+      f.manual_no,
+      f.manual_type_no,
+      f.conts,
+      f.file,
+      t.manual_type_no,
+      t.name
+    from
+      manual m
+    left outer join
+      manual_file f
+    on
+      m.manual_no = f.manual_no
+    left outer join
+      manual_type t
+    on
+      f.manual_type_no = t.manual_type_no
+    order by
+      m.manual_no desc
+  </select>
 
   <insert id="insert" parameterType="manual" 
     useGeneratedKeys="true" keyColumn="manual_no" keyProperty="no">

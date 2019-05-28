@@ -164,6 +164,11 @@
     q_no = #{no}
   </update>
   
+  <delete id="delete" parameterType="int">
+    delete from question
+    where q_no = #{value}
+  </delete>
+  
 </mapper>
 
 

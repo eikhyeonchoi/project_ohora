@@ -12,6 +12,7 @@
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -22,6 +23,15 @@
       <button id="delete-btn" type="button" class="btn btn-success btn-sm">선택 삭제</button>
       <button id="add-btn" type="button" class="btn btn-success btn-sm">문의 하기</button>
     </p>
+    <div>
+      <select>
+        <option>선택1</option>
+        <option>선택2</option>
+        <option>선택3</option>
+        <option>선택4</option>
+      </select>
+      <input type="checkbox">
+    </div>
     <div class="bit-list">
       <table class="table table-hover">
         <thead>
@@ -36,6 +46,7 @@
         </thead>
         <tbody></tbody>
       </table>
+      <p id="noDataP"></p>
     </div>
 
     <script id="tr-template" type="text/x-handlebars-template">
@@ -46,7 +57,7 @@
       <td scope='row' class="my-question">{{member.nickName}}</td>
       <td scope='row'>{{createdDate}}</td>
       <td scope='row'>{{status}}</td>
-      <td scope='row' class="question-ck"><input type="checkbox"></td>
+      <td scope='row' class="question-ck"><input type="checkbox" name="delete-Ck" data-no='{{no}}' data-status='{{status}}'></td>
     </tr>
   {{/each}}
   </script>
