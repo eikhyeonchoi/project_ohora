@@ -16,17 +16,41 @@ if (param) {
   }
 }
 
+
+$(document).ready(function() {
+  $.getJSON('/bitcamp-team-project/app/json/notice/files?no=' + param.split('=')[1], 
+      function(data) {
+    console.log(data.files.noticeFile)
+    if (data.status == 'success') {
+      if (typeof data.files.noticeFile != "undefind") {
+        for (var i = 0; i < data.files.noticeFile.length; i++) {
+          $('<img>').attr('src', '/bitcamp-team-project/upload/notice/' + data.files.noticeFile[i].filePath).appendTo($('#images-div'));
+        }
+      } else {
+        $('#img-div').hide();
+      }
+    } else {
+      alert('실패했습니다!\n' + data.error);
+    }
+  });
+}); //load-file
+
 $('#fileupload').fileupload({
   url: '../../app/json/notice/add',
   dataType: 'json',         
   sequentialUploads: true,  
   singleFileUploads: false, 
   add: function (e, data) { 
-    $('#fileAdd-btn').show();
-    $('#add-btn').hide();
-    $('#fileAdd-btn').click(function() {
-      console.log()
+    $('#add-btn').off().click(function() {
       data.formData = {
+        title: $('#title').val(), 
+        contents: $('#contents').val()
+      };
+      data.submit(); 
+    });
+    $('#update-btn').off().click(function() {
+      data.formData = {
+        no: $('#no').val(),
         title: $('#title').val(), 
         contents: $('#contents').val()
       };
@@ -43,7 +67,7 @@ $('#fileupload').fileupload({
   }
 }) // fileupload
 
-$('#add-btn').click(() => {
+$('#add-btn').off().click(() => {
   $.post( '../../app/json/notice/add',{
     title: $('#title').val(), 
     contents: $('#contents').val()
@@ -56,7 +80,7 @@ $('#add-btn').click(() => {
   })
 });
 
-$('#update-btn').click(() => {
+$('#update-btn').off().click(() => {
   $.post('../../app/json/notice/update', {
     no: $('#no').val(),
     title: $('#title').val(), 
@@ -77,10 +101,8 @@ function loadData(no) {
   $.getJSON('../../app/json/notice/detail?no=' + no, function(data) {
     $('#no').val(data.no),
     $('#title').val(data.title),
-    $('#contents').val(data.contents),
-    $('#createdDate').val(data.createdDate),
-    $('#viewCount').val(data.viewCount);
+    $('#contents').val(data.contents)
   });
-
+  $(document).trigger('load-file');
 }
 

@@ -54,13 +54,16 @@ public class NoticeServiceImpl implements NoticeService {
 
   @Override
   public int update(Notice notice) {
+    if (notice.getNoticeFile() != null) {
+      noticeFileDao.insert(notice.getNoticeFile());
+    }
     return noticeDao.update(notice);
   }
 
   @Override
   public int delete(int no) {
 
-    List<NoticeFile> noticeFiles = noticeFileDao.findByNo(no);
+    List<NoticeFile> noticeFiles = noticeFileDao.findByNoticeNo(no);
     for (NoticeFile file : noticeFiles) {
       noticeFileDao.deleteByNo(file.getNoticeNo());
     }
@@ -89,5 +92,7 @@ public class NoticeServiceImpl implements NoticeService {
     return noticeDao.findFileByNo(no);
   }
 
-
+  public int fileDelete(int no) {
+    return noticeFileDao.deleteByNo(no);
+  }
 }
