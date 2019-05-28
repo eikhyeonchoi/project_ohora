@@ -4,8 +4,9 @@ var detailNo = location.href.split('?')[1].split('=')[1],
     templateSrc = $('#select-template').html(),
     productName = '',
     addBtn = $('#review-add-btn');
-var trGenerator = Handlebars.compile(templateSrc);
 
+var trGenerator = Handlebars.compile(templateSrc);
+var type = sessionStorage.getItem('type');
 function loadList() {
   $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo + 
       '&keyword=' + $('#keyword').val() + 
@@ -48,13 +49,13 @@ $('#search-btn').click((e) => {
 });
 
 //등록버튼
-($.getJSON('/bitcamp-team-project/app/json/auth/user', function(obj){
-  if(obj.status == 'fail') {
+$(document).ready(() => {
+  if(type == null) {
     addBtn.prop('disabled', true);
   } else {
     addBtn.click(function() {
       location.href='form.html?no=' + detailNo;
     })
   }
-}));
+});
 

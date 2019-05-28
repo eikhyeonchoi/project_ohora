@@ -115,13 +115,15 @@
   left outer join
     question_type = t
   on q.qtype_no = t.qtype_no
+  <if test="_parameter != 0">
   where 
     q.qtype_no = #{value}
+  </if>
   order by
     q_no desc
   </select>
   
-   <select id="findByStatus" resultMap="questionTypeMap" parameterType="int">
+  <select id="findByTypeCheck" resultMap="questionTypeMap" parameterType="int">
   select
     q.q_no,
     q.titl,
@@ -138,7 +140,10 @@
     question_type = t
   on q.qtype_no = t.qtype_no
   where 
-    q.status = "답변 대기중"
+    <if test="_parameter != 0">
+    q.qtype_no = #{value} AND
+    </if>
+   q.status = "답변 대기중"
   order by
     q_no desc
   </select>

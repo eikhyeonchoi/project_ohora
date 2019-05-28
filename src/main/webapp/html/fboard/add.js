@@ -5,23 +5,13 @@
  * 
  */
 
-$(document).ready(function() {
- 
-  
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
-    $(document.body).trigger({
-      type: 'loaded-user',
-      userNo: obj.user.no
-    }) // trigger
-  }) // get
-}) // ready
+var userNo = sessionStorage.getItem('no');
 
-$(document.body).bind('loaded-user', function(obj){
+$(document).ready(function() {
   $('#fboard-cancel-btn').click(function() {
     location.href = 'index.html';
   })
-  
-  
+
   $('#fboard-file-input').fileupload({
     url: '/bitcamp-team-project/app/json/fboard/add', 
     dataType: 'json',
@@ -32,7 +22,7 @@ $(document.body).bind('loaded-user', function(obj){
         data.formData = {
             title: $('#title').val(),
             contents: $('#contents').val(),
-            memberNo: obj.userNo
+            memberNo: userNo
         };
         data.submit();
       });
@@ -46,7 +36,7 @@ $(document.body).bind('loaded-user', function(obj){
       }
     }
   }) // fileupload
-  
+
   $('#fboard-add-btn').off().click(function() {
     $.post('/bitcamp-team-project/app/json/fboard/add', {
       title: $('#title').val(),
@@ -59,6 +49,24 @@ $(document.body).bind('loaded-user', function(obj){
       }
     }, "json") 
   })
+
+
+}) // ready
+
+
+/*
+  
+  $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
+    $(document.body).trigger({
+      type: 'loaded-user',
+      userNo: obj.user.no
+    }) // trigger
+  }) // get
+
+ */
+
+$(document.body).bind('loaded-user', function(obj){
+ 
 }) // bind
 
 
@@ -73,7 +81,7 @@ function fileCheckById(id){
 
 
 /*
-    
+
     $('#fboard-file-input').off().fileupload({
       url: '/bitcamp-team-project/app/json/fboard/add', 
       dataType: 'json',
@@ -114,7 +122,7 @@ function fileCheckById(id){
         }
       }, "json")
     }); // add click
-  
+
 
 
  */

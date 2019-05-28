@@ -3,28 +3,37 @@
  * index javascript
  * 
  */
+/*
+if(document.referrer.includes('auth/login')) {
+  if (self.name != 'reload') {
+    self.name = 'reload';
+    self.location.reload(true);
+  } else self.name = '';
+}
+ */
 var faqTypeeSrc = $('#faq-type-template').html(),
     faqTypeGenerator = Handlebars.compile(faqTypeeSrc),
     faqSrc = $('#faq-template').html(),
     faqGenerator = Handlebars.compile(faqSrc);
 
-var userType='';
-
-
+var userType = sessionStorage.getItem('type');
 
 $(document).ready(function(){
+  
   $('.faq-add-btn').click(function() {
     location.href='add.html';
   })
   
-  
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj) {
-    userType = obj.user.type;
-  }) // get
-  
-  
   $.get('/bitcamp-team-project/app/json/faq/list', function(obj){
     console.log(obj);
+    if (obj.faqCtg.length == 0){
+      $('.faq-type-div').append('<p>등록된 category 없습니다</p>')
+    }
+    
+    if (obj.list.length == 0) {
+      $('#faq-div').append('<p>등록된 FAQ가 없습니다</p>')
+    }
+    
     $(faqTypeGenerator(obj)).appendTo($('.faq-type-div'));
     $(faqGenerator(obj)).appendTo('.faq-div');
     $('.faq-contents').hide();
@@ -42,11 +51,10 @@ $(document).ready(function(){
 
 // trigger 2개 bind
 $(document.body).bind('loaded-type', function(obj) {
-  if (userType != '3'){
+  if (window.userType != '3'){
     $('.managerDiv').hide();
     $('.faq-add-btn').hide();
   }
-  
 
   
   $('.faq-delete-btn').off().click(function(e) {
@@ -87,19 +95,19 @@ $(document.body).bind('loaded-type', function(obj) {
 
   
   $('.faq-type').off().click(function(e) {
-    if ($(e.target).attr('data-no') == 1) {
+    if ($(e.target).attr('data-no') == 5) {
       $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).next().next().next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
-    } else if ($(e.target).attr('data-no') == 2) {
+    } else if ($(e.target).attr('data-no') == 6) {
       $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).next().next().next().next().css('font-size', '1em').css('font-style', 'normal');
-    } else if ($(e.target).attr('data-no') == 3) {
+    } else if ($(e.target).attr('data-no') == 7) {
       $(e.target).prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).next().next().css('font-size', '1em').css('font-style', 'normal');
-    } else {
+    } else if ($(e.target).attr('data-no') == 8) {
       $(e.target).prev().prev().prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).prev().prev().prev().prev().css('font-size', '1em').css('font-style', 'normal');
       $(e.target).prev().prev().css('font-size', '1em').css('font-style', 'normal');
@@ -125,7 +133,7 @@ function faqTitleClick() {
     console.log($(e.target));
     //'<i class="fas fa-angle-down"></i>'
     $(e.target).find('i').replaceWith('<i class="fas fa-angle-down mr-sm-2"></i>');
-    $(e.target).css('font-size', '2em');
+    $(e.target).css('font-size', '1.5em');
     $(e.target).css('font-style', 'bold');
     $(e.target).closest('div').before('<hr class="head-line">');
     $(e.target).closest('div').next().show();

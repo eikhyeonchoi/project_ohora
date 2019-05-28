@@ -4,7 +4,8 @@ nonMemberDiv = $('#non-member-div'),
 memberDiv = $('#common-member-div'),
 managerAndCompanyDiv = $('#company-manager-div'),
 fileDiv = $('#images-div');
-
+var no = sessionStorage.getItem('no'),
+type = sessionStorage.getItem('type');
 var tipBtn = $('#go-tip-btn');
 
 var total = 0,
@@ -16,10 +17,17 @@ asStf = 0,
 useful = 0,
 price = 0;
 
-var no = sessionStorage.getItem('no'),
-    type = sessionStorage.getItem('type');
-console.log(sessionStorage.getItem('no'));
-console.log(sessionStorage.getItem('type'));
+$(document.body).bind('loaded.loginuser', () => {
+  type = sessionStorage.getItem('type');
+  function check() {
+    if (type > 0) {
+      memberDiv.show();
+    } else if (type > 1) {
+      managerAndCompanyDiv.show();
+    }
+  }
+});
+
 $.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
     , function(product) {
   productName = product.productName;
@@ -31,12 +39,7 @@ $.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
 $(document).ready(function(){
   managerAndCompanyDiv.hide();
   memberDiv.hide();
-  if (type == 1) {
-    memberDiv.show();
-  } else if (type == 2 || type == 3) {
-    memberDiv.show();
-    managerAndCompanyDiv.show();
-  }
+  
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
     $('#product-name').append('<p>' + productName + '</p>');
 
@@ -100,7 +103,6 @@ $(document).ready(function(){
         location.href = '../tip/view.html?no=' + productNo;
       });
     } else {
-      console.log(type);
       if (type < 1) {
         tipBtn.show();
         tipBtn.text('팁 없음');
@@ -113,7 +115,7 @@ $(document).ready(function(){
       }
     }
   }); // get
-  
+
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
@@ -124,19 +126,21 @@ $(document).ready(function(){
       alert('실패했습니다!\n' + data.error);
     }
   });
+  
+  $(document.body).trigger('loaded-user');
 }); // ready
 
 $(document).bind('loaded-user', function() {
   $('#go-satisfy-add-btn').click(function() {
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?uNo=' 
         + no + '&pNo=' + productNo , function(obj) {
-      if (obj.status == 'fail') {
-        alert('이미 만족도를 등록하셨습니다');
-        $('#go-satisfy-add-btn').prop('disabled',true);
-      } else {
-        location.href = '../satisfy/add.html?userNo=' + no + '&productNo=' + productNo;
-      }
-    }) // get
+          if (obj.status == 'fail') {
+            alert('이미 만족도를 등록하셨습니다');
+            $('#go-satisfy-add-btn').prop('disabled',true);
+          } else {
+            location.href = '../satisfy/add.html?productNo=' + productNo;
+          }
+        }) // get
   }) // click
 
 
