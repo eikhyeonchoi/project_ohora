@@ -1,6 +1,10 @@
 package bitcamp.team.web.json;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
+import bitcamp.team.domain.FboardFile;
 import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
 
@@ -20,18 +25,32 @@ public class FboardController {
 
   @Autowired FboardService boardService;
   @Autowired MemberService memberService;
+  @Autowired ServletContext servletContext;
 
-  @PostMapping("add")
-  public Object add(Fboard board) throws Exception {
-    // 자게 글쓸때 작성자 이름을 남기기위해 HttpServletRequest를 사용한다.
+  @RequestMapping("add")
+  public Object add(
+      Fboard board,
+      @RequestParam(required = false) Part[] fboardFiles) throws Exception {
+    String uploadDir = servletContext.getRealPath("/upload/fboardfile");
+    ArrayList<FboardFile> files = new ArrayList<>();
 
     HashMap<String,Object> content = new HashMap<>();
     try {
-      System.out.println(board);
+      if(fboardFiles != null) {
+        for(Part part : fboardFiles) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = uploadDir + "/" + filename;
+          part.write(filepath);
+          
+          FboardFile fboardFile = new FboardFile();
+          fboardFile.setFilepath(filename);
+          files.add(fboardFile);
+        } // for
+        board.setFboardFiles(files);
+      }
       boardService.add(board);
-
       content.put("status", "success");
-
+      
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -40,20 +59,25 @@ public class FboardController {
     return content;
   }
 
+  
+  
   @GetMapping("detail")
   public Object detail(int no) throws Exception {
-    Fboard board = boardService.get(no);
-    return board;
+    HashMap<String, Object> content = new HashMap<>();
+    content.put("board",  boardService.get(no));
+    content.put("path",  servletContext.getRealPath("/upload/fboardfile"));
+    return content;
   }
 
   @GetMapping("delete")
   public Object delete(int no) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     try {
+      
+      
       if (boardService.delete(no) == 0)
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
-
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -64,27 +88,10 @@ public class FboardController {
 
   @GetMapping("list")
   public Object list(
-      @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize,
       @RequestParam(defaultValue = "undefined" ,required = false) String search) throws Exception {
     HashMap<String,Object> param = new HashMap<>();
     HashMap<String,Object> content = new HashMap<>();
-
-    int rowCount = boardService.size();
-    int totalPage = rowCount / pageSize;
-    if(rowCount % pageSize > 0) {
-      totalPage++;
-    }
-
-    param.put("pageNo", (pageNo - 1) * pageSize);
-    param.put("size", pageSize);
-
-
-    content.put("pageNo", pageNo);
-    content.put("totalPage", totalPage);
-    content.put("rowCount", rowCount);
-    content.put("pageSize", pageSize);
-
+    
     if(!search.equals("undefined")) {
       if (search.contains("t.")) {
         param.put("title", search.substring(2));
@@ -94,16 +101,16 @@ public class FboardController {
         param.put("nickName", search.substring(2));
       }
     }
-
+    
     List<Fboard> boards = boardService.list(param);
     content.put("list", boards);
 
     return content;
   }
 
-
-
-
+  
+  
+  
   @PostMapping("update")
   public Object update(Fboard board) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -130,7 +137,7 @@ public class FboardController {
     HashMap<String,Object> content = new HashMap<>();
 
     try {
-
+      
       if (boardService.addComment(comment) == 0) 
         throw new Exception("저장 실패");
       else {
@@ -167,7 +174,7 @@ public class FboardController {
     paramMap.put("no",no);
     paramMap.put("contents",contents);
     paramMap.put("updateDate",updateDate);
-
+    
     try {
       if (boardService.updateComment(paramMap) == 0) 
         throw new Exception("해당 번호의 게시물이 없습니다.");
@@ -185,10 +192,10 @@ public class FboardController {
   public Object findReply(int fboardNo, int parentNo) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> param = new HashMap<>();
-
+    
     param.put("fboardNo", fboardNo);
     param.put("parentNo", parentNo);
-
+    
     content.put("replyList", boardService.findReply(param));
     return content;
   }

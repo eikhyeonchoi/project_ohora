@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>자유게시판 리스트</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -16,7 +17,6 @@
       <h3 class='col-sm-6 offset-sm-4'>자유게시판 index</h3>
     </div>
     <br>
-
     <!-- list -->
     <div class="bit-list">
       <table class="table table-hover">
@@ -33,15 +33,10 @@
       </table>
     </div>
 
-
     <!-- page -->
-    <div class='row offset-sm-3'>
-      <ul class="pagination">
-      </ul>
-    </div>
+    <div class='row offset-sm-3 page-container'></div>
 
-
-    <div class='row'>
+    <div class='row mt-sm-5'>
       <!-- add -->
       <button id='fboard-add-btn' class='btn btn-outline-primary btn-sm col-sm-1'>새 글</button>
       
@@ -75,23 +70,13 @@
     </tr>
   {{/each}}
   </script>
-  
-  <script id="page-template" type="text/x-handlebars-template">
-  <li id='prevPage' class="page-item">
-    <a class="page-link" href="#">Previous</a>
-  </li>
-    {{#each nos}}
-      <li id='page-{{this}}' class="page-item li-page"><a class="page-link fboard-page-{{this}}" href="#" data-no='{{this}}'>{{this}}</a></li>
-    {{/each}}
-  <li id='nextPage' class="page-item">
-    <a  class="page-link" href="#">Next</a>
-  </li>
-  </script>
+
   
   <!-- <a class='bit-view-link fboard-detail' href='#' data-no='{{no}}'></a> -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>

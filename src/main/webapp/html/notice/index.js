@@ -1,14 +1,7 @@
-var pageNo = 1,
-pageSize = 10,
-totalPage = 1,
-keyword = $('keyword'),
-tbody = $('tbody'),
-currSpan = $('#currPage > span'),
+var tbody = $('tbody'),
 templateSrc = $('#tr-template').html(),
-pageNavSrc = $('#tr-pageNav').html(); 
-
-var trGenerator = Handlebars.compile(templateSrc),
-pageGenerator = Handlebars.compile(pageNavSrc);
+trGenerator = Handlebars.compile(templateSrc),
+page = $('#pagination-container');
 
 $(document).ready(function() {
   $.get('../../app/json/auth/user', function(obj){
@@ -21,69 +14,25 @@ $(document).ready(function() {
     }
 })});
 
-function loadList(pn) {
-
-  $.getJSON('../../app/json/notice/list?pageNo=' + pn + 
-          '&pageSize=' + pageSize + 
-          '&keyword=' + $('#keyword').val() + 
+(function loadList(pn) {
+  $.getJSON('../../app/json/notice/list?keyword=' + $('#keyword').val() + 
           '&searchType=' + $('#searchType').val(), 
           function (obj){
-
-    //page
-    console.log(obj);
-    
-    pageNo = obj.pageNo;
-    totalPage = obj.totalPage;
-
-    tbody.html('');
-    $(trGenerator(obj)).appendTo(tbody);
-    
-    //page 버튼이 있을 경우 append 안 함
-    if($(document).find('#pageUl').find('#prevPage').val() != 0) {
-    $(pageGenerator(obj)).appendTo($('#pageUl'))
-    }
-    
-    for(var no of obj.nos) {
-      
-      if($('#page-' + no + ' > a').html() > totalPage) {
-        $('#page-' + no).hide();
-     } else {
-       $('#page-' + no).show();
+    console.log(obj)
+    page.pagination({
+      dataSource: obj,
+      locator: 'list',
+      showGoInput: true,
+      showGoButton: true,
+      callback: function(data, pagination) {
+        tbody.children().remove();
+        var pageObj = {list: data};
+        $(trGenerator(pageObj)).appendTo(tbody);
       }
-      
-      if ($('#page-' + no + ' > a').html() == pageNo) {
-        $('#page-' + no + ' > a').parent().addClass('active');
-      } else {
-        $('#page-' + no + ' > a').parent().removeClass('active');
-      }
-    } //for
-    
-    
-    if (pageNo < 6) {
-      $('#prevPage').addClass('disabled');
-    } else {
-      $('#prevPage').removeClass('disabled');
-    } 
-    
-    var maxPage = ((obj.totalPage / 5).toFixed(0) * 5) / 5 == 1 && ((obj.totalPage / 5).toFixed(0) * 5) % 5 == 0  
-    ? ((obj.totalPage / 5).toFixed(0) * 5) - 5 
-    : (obj.totalPage / 5).toFixed(0) * 5;
-    
-    if (pageNo > maxPage) {
-      $('#nextPage').addClass('disabled');
-    } else {
-      $('#nextPage').removeClass('disabled');
-    }
-    $(document.body).trigger('loaded-list', ['pageNo', pageNo, 'totalPage', totalPage]);
+    });
+    $(document.body).trigger('loaded-list');
   });
-} // loadList()
-
-$(document).on('click', '.ohr-page', function (e) {
-  e.preventDefault();
-  loadList($(e.target).html());
-})
-
-loadList(1);
+})();
 
 //detail 링크
 $(document.body).bind('loaded-list', () => {
@@ -94,22 +43,6 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
-$(document).on('click', '#prevPage > a', (e) => {
-  e.preventDefault();
-  for(var no = 1; no < 6; no++) {
-    $('#page-' + no + ' > a').text(Number($('#page-' + no + ' > a').html()) - 5);
-  }
-  console.log($('.ohr-page > a').html())
-  loadList(Number($('.ohr-page > a').html()) + 4);
-});
-
-$(document).on('click', '#nextPage > a', (e) => {
-  e.preventDefault();
-  for(var no = 1; no < 6; no++) {
-    $('#page-' + no + ' > a').text(Number($('#page-' + no + ' > a').html()) + 5);
-  }
-  loadList($('.ohr-page > a').html());
-});
 
 $('#keyword').keydown((e) => {
   if (event.keyCode == 13) {

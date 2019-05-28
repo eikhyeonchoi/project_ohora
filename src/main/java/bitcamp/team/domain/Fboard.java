@@ -1,6 +1,7 @@
 package bitcamp.team.domain;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Fboard implements Serializable {
@@ -15,6 +16,15 @@ public class Fboard implements Serializable {
   private int viewCount;
   
   private Member member;
+  private List<FboardFile> fboardFiles;
+
+  public List<FboardFile> getFboardFiles() {
+    return fboardFiles;
+  }
+
+  public void setFboardFiles(List<FboardFile> fboardFiles) {
+    this.fboardFiles = fboardFiles;
+  }
 
   public Member getMember() {
     return member;

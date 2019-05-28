@@ -17,13 +17,31 @@ if (param) {
 }
 
 $('#fileupload').fileupload({
-  url: '../../app/json/notice/upload',
-  dataType: 'json',
-  done: function (e, data) {
-    console.log(data.result);
-    console.log(data.result.files);
+  url: '../../app/json/notice/add',
+  dataType: 'json',         
+  sequentialUploads: true,  
+  singleFileUploads: false, 
+  add: function (e, data) { 
+    $('#fileAdd-btn').show();
+    $('#add-btn').hide();
+    $('#fileAdd-btn').click(function() {
+      console.log()
+      data.formData = {
+        title: $('#title').val(), 
+        contents: $('#contents').val()
+      };
+      data.submit(); 
+    });
+  },
+  done: function (e, data) { 
+    console.log(data.result.message)
+    if(data.result.status == 'success'){
+      location.href='index.html';
+    } else { 
+      alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+    }
   }
-});
+}) // fileupload
 
 $('#add-btn').click(() => {
   $.post( '../../app/json/notice/add',{
@@ -44,7 +62,7 @@ $('#update-btn').click(() => {
     title: $('#title').val(), 
     contents: $('#contents').val()
   }, function() {
-  
+
   })
   .done(function() {
     location.href = "index.html";

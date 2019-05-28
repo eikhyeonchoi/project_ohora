@@ -17,19 +17,23 @@ public class ReviewServiceImpl implements ReviewService {
   }
   
   @Override
-  public List<Review> list() {
-    return reviewDao.findAll();
-  }
-  
-  @Override
-  public List<Review> get(int no,int pageNo, int pageSize, String keyword, String searchType) {
+  public List<Review> get(int no,String keyword, String searchType) {
     HashMap<String, Object> params = new HashMap<>();
     params.put("selectNo", no);
-    params.put("size", pageSize);
-    params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("searchType", searchType);
     params.put("keyword", keyword);
-
+    switch(searchType) {
+      case "name": params.put("name", searchType); break;
+      case "title": params.put("title", searchType); break;
+      case "contents": params.put("contents", searchType); break;
+      case "all": params.put("all", searchType); break;
+      default: ;
+    }
+    if (keyword != null) {
+      if (!keyword.equals("")) {
+        params.put("keyword", keyword);
+      }
+    }
     return reviewDao.findByNo(params);
   }
   
@@ -56,21 +60,4 @@ public class ReviewServiceImpl implements ReviewService {
   public int update(Review review) {
     return reviewDao.update(review);
   }
-  
-  @Override
-  public int size(int no, String keyword, String searchType) {
-    if (keyword != null) {
-      HashMap<String, Object> params = new HashMap<>();
-      params.put("no", no);
-      params.put("keyword", keyword);
-      params.put("searchType", searchType);
-
-      return reviewDao.countAll(params);
-    }
-    return reviewDao.countAll(null);
-  }
-  
-  
-  
-  
 }

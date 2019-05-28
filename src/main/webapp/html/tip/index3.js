@@ -1,8 +1,8 @@
 var tbody = $('tbody'),
-    templateSrc = $('#tr-template').html();
-var page = $('#pagination-container');
-var rowCount = 0;
-var template = Handlebars.compile(templateSrc);
+    page = $('#pagination-container'),
+    rowCount = 0,
+    pageSrc = $('#pagination-template').html(),
+    pageGenerator = Handlebars.compile(pageSrc);
 
 (function() {
   $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
@@ -13,6 +13,16 @@ var template = Handlebars.compile(templateSrc);
           dataSource: obj,
           locator: 'list',
           callback: function(data, pagination) {
+            tbody.children().remove();
+            var pageObj = {list: data};
+            $(pageGenerator(pageObj)).appendTo(tbody);
+          }
+        });
+      });
+})();
+
+/*
+
             var html = '<tr>';
             for (var i = 0; i < data.length; i++) {
               html += '<th scope="row">' + data[i].no + '</th>' +
@@ -23,7 +33,5 @@ var template = Handlebars.compile(templateSrc);
               html += '</tr>';
             }
             tbody.html(html);
-          }
-        });
-      });
-})();
+          
+*/

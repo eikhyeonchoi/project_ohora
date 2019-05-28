@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>티키위키</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
->
-<link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -50,25 +48,23 @@
     <div id="pagination-container"></div>
   </div> <!-- .container -->
   
-
-  <script id="tr-template" type="text/x-handlebars-template">
-    {{#each data}}
-    <tr>
-      <th scope='row'>{{data.no}}</th>
-      <td scope='row'><a class='bit-view-link' href='#' data-no='{{data.product.no}}'>{{data.product.name}}</a></td>
-      <td scope='row'>{{data.member.nickName}}</td>
-      <td scope='row'>{{data.createdDate}}</td>
-    </tr>
+  <script id="pagination-template" type="text/x-handlebars-template">
+    {{#each list}}
+      <tr>
+        <th scope='row'>{{no}}</th>
+        <td scope="row"><a class="bit-view-link" href="#" data-no='{{productNo}}'>{{product.name}}</a></td>
+        <td>{{member.nickName}}</td>
+        <td>{{createdDate}}</td>
+      </tr>
     {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
-  <script src="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="../header.js"></script>
-  <script src="index2.js"></script>
+  <script src="index3.js"></script>
 </body>
 </html>
 

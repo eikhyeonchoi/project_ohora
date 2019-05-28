@@ -6,7 +6,7 @@ import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 
 public interface ProductService {
-  List<Product> list(int pageNo, int pageSize, int largeNo, int smallNo, String productName);
+  List<Product> list(int largeNo, int smallNo, String productName);
   List<Manufacturer> listManufacturer();
   List<Product> getList(String name);
   Map<String, Object> findCategory();
@@ -15,5 +15,4 @@ public interface ProductService {
   int update(Product product);
   String get(int no);
   Product getFile(int no);
-  int size(String productName);
 }

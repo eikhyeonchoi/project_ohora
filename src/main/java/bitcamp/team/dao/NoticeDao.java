@@ -21,4 +21,6 @@ public interface NoticeDao {
   int countAll(Map<String, Object> param);
 
   int uploadFile(List<NoticeFile> files);
+
+  Notice findFileByNo(int no);
 }

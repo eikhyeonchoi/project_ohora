@@ -5,17 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.FboardDao;
+import bitcamp.team.dao.FboardFileDao;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
+import bitcamp.team.domain.FboardFile;
+import bitcamp.team.domain.QuestionFile;
 import bitcamp.team.service.FboardService;
 
 @Service
 public class FboardServiceImpl implements FboardService {
 
   FboardDao fboardDao;
+  FboardFileDao fboardFileDao;
 
-  public FboardServiceImpl(FboardDao fboardDao) {
+  public FboardServiceImpl(
+      FboardDao fboardDao,
+      FboardFileDao fboardFileDao) {
     this.fboardDao = fboardDao;
+    this.fboardFileDao = fboardFileDao;
   }
 
   @Override
@@ -25,7 +32,16 @@ public class FboardServiceImpl implements FboardService {
 
   @Override
   public int add(Fboard board) {
-    return fboardDao.insert(board);
+    int count = fboardDao.insert(board);
+    if (board.getFboardFiles() != null) {
+      List<FboardFile> fboardFiles = board.getFboardFiles();
+      for (FboardFile file : fboardFiles) {
+        System.out.println(board.getNo());
+        file.setFboardNo(board.getNo());
+      } // for
+      fboardFileDao.insert(fboardFiles);
+    } // if
+    return count;
   }
 
   @Override
@@ -44,6 +60,8 @@ public class FboardServiceImpl implements FboardService {
 
   @Override
   public int delete(int no) {
+    fboardFileDao.delete(no);
+    fboardDao.deleteCommentFboard(no);
     return fboardDao.delete(no);
   }
 

@@ -14,5 +14,4 @@ public interface TipDao {
    int update(Tip tip);
    int confirmTip(int no);
    int findNoByProductNo(int no);
-   int countAll(String keyword);
 }

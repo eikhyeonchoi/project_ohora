@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 조회</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -23,19 +22,19 @@
           <button type="button" id="update-btn" class="btn btn-warning btn-sm">변경</button>
         </div>
       </div>
-
+      
       <div class='row col-sm-12'>
         <div class='row col-sm-4 pl-sm-0'>
           <label for="memberNo" class="col-sm-4 col-form-label">작성자</label> <input type="text"
             class="form-control-plaintext col-sm-8" id="memberNo" name='memberNo' readonly>
         </div>
         <div class="row col-sm-5">
-          <label for="createdDate" class="col-sm-4 col-form-label">작성일</label> <input type="text"
-            class="form-control-plaintext col-sm-8" id="createdDate" readonly>
+          <label for="createdDate" class="col-sm-4 col-form-label">작성일</label> 
+          <input type="text" class="form-control-plaintext col-sm-8" id="createdDate" readonly>
         </div>
         <div class="row col-sm-3">
-          <label for="viewCount" class="col-sm-8 col-form-label">조회수</label> <input type="text"
-            class="form-control-plaintext col-sm-4" id="viewCount" readonly>
+          <label for="viewCount" class="col-sm-8 col-form-label">조회수</label> 
+          <input type="text" class="form-control-plaintext col-sm-4" id="viewCount" readonly>
         </div>
       </div>
       <br>
@@ -52,15 +51,8 @@
           <textarea class="form-control" id="contents" name='contents' rows='10'></textarea>
         </div>
       </div>
-
-      <div id='img-div' class="form-group row"></div>
-
-      <div id='fboard-file-div' class="input-group">
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="fboard-file-input" name='fboardFiles'
-            aria-describedby="inputGroupFileAddon04" multiple> <label
-            class="custom-file-label" for="fboard-file-input">select file</label>
-        </div>
+      
+      <div id='img-div' class="form-group row">
       </div>
 
     </form>

@@ -37,9 +37,8 @@
     from
       review r
       join member m on m.member_no = r.member_no
-    where
+    <where>
       r.product_no = #{selectNo}
-      
     <if test="searchType == 'name' and keyword != null">
        <bind name="pattern1" value="'%' + keyword + '%'" />
        and m.name like #{pattern1}
@@ -54,19 +53,11 @@
     </if>
     <if test="searchType == 'all' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
-       and r.name  like #{pattern1} or
-           conts like #{pattern1}
+       and r.name like #{pattern1} or conts like #{pattern1}
     </if>
-    
+    </where>
     order by
-    rno desc
-    
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size} 
-    </if>
-    
-    
-      
+      rno desc
   </select>
   
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
@@ -118,34 +109,4 @@
     where
       rv_no = #{no};
   </update>
-  
-  
-  <select id="countAll" resultType="int" parameterType="map">
-    select
-      count(*)
-    from
-      review r
-      join member m on m.member_no = r.member_no
-    where
-       product_no = #{no}
-        <if test="searchType == 'name' and keyword != null">
-          <bind name="pattern1" value="'%' + keyword + '%'" />
-       and m.name like #{pattern1}
-        </if>
-        <if test="searchType == 'title' and keyword != null">
-          <bind name="pattern1" value="'%' + keyword + '%'" />
-       and r.name like #{pattern1}
-        </if>
-        <if test="searchType == 'contents' and keyword != null">
-          <bind name="pattern1" value="'%' + keyword + '%'" />
-       and r.conts like #{pattern1}
-        </if>
-        <if test="searchType == 'all' and keyword != null">
-          <bind name="pattern1" value="'%' + keyword + '%'" />
-        and r.name  like #{pattern1} 
-        or conts like #{pattern1}
-        </if>
-  </select>
-
-
 </mapper>
