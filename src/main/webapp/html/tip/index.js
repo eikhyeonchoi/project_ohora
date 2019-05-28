@@ -15,9 +15,9 @@ function loadList() {
             tbody.children().remove();
             var pageObj = {list: data};
             $(pageGenerator(pageObj)).appendTo(tbody);
+            $(document.body).trigger('loaded-list');
           }
         });
-        $(document.body).trigger('loaded-list');
       });
 };
 

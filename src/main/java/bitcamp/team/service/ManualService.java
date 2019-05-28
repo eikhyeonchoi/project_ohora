@@ -7,4 +7,5 @@ import bitcamp.team.domain.ManualFile;
 public interface ManualService {
   int add(Manual manual);
   List<ManualFile> typeFileList(int no);
+  List<Manual> list(String keyword, String searchType);
 }
