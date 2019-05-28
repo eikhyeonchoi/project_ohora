@@ -1,19 +1,20 @@
 var searchSpan = $('#seachSpan'),
-tbody = $('tbody'),
-page = $('#pagination-container'),
-largeSrc = $('#large-category-template').html(),
-smallSrc = $('#small-category-template').html(),
-formInline = $('.formInline'),
-basicSrc = $('#basic-list-form-template').html();
+    tbody = $('tbody'),
+    page = $('#pagination-container'),
+    largeSrc = $('#large-category-template').html(),
+    smallSrc = $('#small-category-template').html(),
+    formInline = $('.formInline'),
+    basicSrc = $('#basic-list-form-template').html(),
+    type = sessionStorage.getItem('type');
+
 var largeCategoryGenerator = Handlebars.compile(largeSrc),
     smallCategoryGenerator = Handlebars.compile(smallSrc),
     listGenerator = Handlebars.compile(basicSrc);
 
-var type = sessionStorage.getItem('type');
 
 $(document).ready(function() {
   $('#insert-btn').click(function() {
-    if (type < 2) {
+    if (type < 1) {
       location.href = '/bitcamp-team-project/html/auth/login.html';
     } else {
       location.href = 'add.html';

@@ -3,7 +3,6 @@ var tbody = $('tbody'),
 var trGenerator = Handlebars.compile(templateSrc);
 
 ($.getJSON('/bitcamp-team-project/app/json/satisfy/list', (obj) => {
-  console.log(obj);
   $(trGenerator(obj)).appendTo(tbody);
   $(document.body).trigger('loaded-list');
 }));
@@ -12,7 +11,7 @@ var trGenerator = Handlebars.compile(templateSrc);
 $(document.body).bind('loaded-list', () => {
   $('.product-a-class').click((e) => {
     e.preventDefault();
-    window.location.href = 'view.html?no=' + 
+    location.href = 'view.html?no=' + 
       $(e.target).attr('data-no');
   });
 });

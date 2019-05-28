@@ -1,30 +1,29 @@
 var productNo = (location.href.split('?')[1]).split('=')[1],
-productName = '',
-nonMemberDiv = $('#non-member-div'),
-memberDiv = $('#common-member-div'),
-managerAndCompanyDiv = $('#company-manager-div'),
-fileDiv = $('#images-div');
-var no = sessionStorage.getItem('no'),
-type = sessionStorage.getItem('type');
-var tipBtn = $('#go-tip-btn');
+    productName = '',
+    nonMemberDiv = $('#non-member-div'),
+    memberDiv = $('#common-member-div'),
+    managerAndCompanyDiv = $('#company-manager-div'),
+    fileDiv = $('#images-div'),
+    no = sessionStorage.getItem('no'),
+    type = sessionStorage.getItem('type'),
+    tipBtn = $('#go-tip-btn');
 
 var total = 0,
-satisAver = 0,
-level = 0,
-understand = 0,
-design = 0,
-asStf = 0,
-useful = 0,
-price = 0;
+    satisAver = 0,
+    level = 0,
+    understand = 0,
+    design = 0,
+    asStf = 0,
+    useful = 0,
+    price = 0;
 
 $(document.body).bind('loaded.loginuser', () => {
   type = sessionStorage.getItem('type');
-  function check() {
-    if (type > 0) {
-      memberDiv.show();
-    } else if (type > 1) {
-      managerAndCompanyDiv.show();
-    }
+  if (type > 1) {
+    managerAndCompanyDiv.show();
+    memberDiv.show();
+  } else if (type == 1) {
+    memberDiv.show();
   }
 });
 
@@ -61,7 +60,7 @@ $(document).ready(function(){
     useful = (useful / (obj.totalColumn)).toFixed(2);
 
     // 만족도 차트
-    new Chart(document.getElementById("horizontalBar"), {
+    new Chart($("horizontalBar"), {
       "type": "horizontalBar",
       "data": {
         "labels": ["총 만족도", "가격 만족도", "사용 난이도", "이해도", "디자인", "a/s만족도", "사용 만족도"],
@@ -147,15 +146,8 @@ $(document).bind('loaded-user', function() {
   $('#go-reivew-btn').click(function() {
     location.href = '../review/view.html?no=' + productNo + '&name=' + productName;
   })
-
 }) // bind
 
 $('#go-product-update-btn').click(function() {
   location.href = 'update.html?no=' + productNo;
 })
-
-$(function(){
-  $('html').removeClass('no-js');
-})
-
-

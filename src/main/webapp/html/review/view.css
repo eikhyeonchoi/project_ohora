@@ -32,8 +32,6 @@ div.add-btn{
   margin-bottom:15px;
 }
 
-
-
 th:nth-child(1) {
   width: 55px;
   text-align: center;
@@ -77,3 +75,11 @@ td:nth-child(5)  {
   text-align: center;
 }
 
+#pagination-container {
+	width: 200px;
+	margin: 0 auto;
+}
+
+#review-add-btn {
+	margin-left: 25px;
+}
