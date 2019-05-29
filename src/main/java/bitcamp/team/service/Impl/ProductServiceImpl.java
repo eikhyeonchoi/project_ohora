@@ -62,7 +62,6 @@ public class ProductServiceImpl implements ProductService{
   @Override
   public List<Manufacturer> listManufacturer() {
     return manufacturerDao.findAllUseProductAdd();
-
   }
 
   @Override
