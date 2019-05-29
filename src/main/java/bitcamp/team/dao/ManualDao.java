@@ -6,7 +6,6 @@ import bitcamp.team.domain.Manual;
 
 public interface ManualDao {
   int insert(Manual manual);
+  Manual findFileByNo(int no);
   List<Manual> findAll(Map<String,Object> map);
-  List<Manual> findAllByProduct(Map<String,Object> map);
-  List<Manual> findAllByManualFile(Map<String,Object> map);
 }

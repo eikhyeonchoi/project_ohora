@@ -7,7 +7,7 @@ import bitcamp.team.domain.QuestionType;
 public interface QuestionService {
   int add(Question question);
 
-  List<Question> list(int no);
+  List<Question> list(int type, int no);
   List<Question> typeList(int no ,boolean check);
   List<QuestionType> listQuestionType();
   Question get(int no);

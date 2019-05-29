@@ -4,13 +4,33 @@ dltBtn = $('#delete-btn'),
 deleteNo,
 qtyNo,
 no,
-status;
+status,
+page = $('.page-container');
 templateSre = $('#tr-template').html(),
 trGenerator = Handlebars.compile(templateSre);
 
 var typeSrc = $('#questionType-template').html();
 var questionTypeGenerator = Handlebars.compile(typeSrc);
 var memberType;
+
+var typeList = function(no, check) {
+  $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=" + check, function(data) {
+    page.pagination({
+      dataSource: data,
+      locator: 'list',
+      showGoInput: true,
+      showGoButton: true,
+      callback: function(data, pagination) {
+        tbody.children().remove();
+        var pageObj = {list: data};
+        $(trGenerator(pageObj)).appendTo(tbody);
+
+        $(document.body).trigger('loaded-list');
+      } //callback
+    }); //page.pagination
+  }) //getJSON
+
+}; //typeList
 
 $(document).ready(function() {
 
@@ -20,56 +40,48 @@ $(document).ready(function() {
     } else {
       memberType = data.user.type;
 
-      $.getJSON('/bitcamp-team-project/app/json/question/list?no=' + memberType, function(data) {
+      $.getJSON('/bitcamp-team-project/app/json/question/list?type=' + memberType, function(data) {
         if (data.list[0] == null) {
           $('#noDataP').html("등록된 질문이 없습니다.");
         }
-        $(trGenerator(data)).appendTo(tbody);
+        page.pagination({
+          dataSource: data,
+          locator: 'list',
+          showGoInput: true,
+          showGoButton: true,
+          callback: function(data, pagination) {
+            tbody.children().remove();
+            var pageObj = {list: data};
+            $(trGenerator(pageObj)).appendTo(tbody);
 
-        $("#answer-ck").change(function(){
-          no = $('#question-type option:selected').val();
+            $(document.body).trigger('loaded-list');
+          } //callback
+        }); //page.pagination
+      }) //getJSON
+
+      $("#answer-ck").change(function(){
+        no = $('#question-type option:selected').val();
+        if($("#answer-ck").is(":checked")) {
+          typeList(no, true);
+        } else {
+          typeList(no, false);
+        }
+      });
+
+      $.get('/bitcamp-team-project/app/json/question/questionList', function(data){
+        $(questionTypeGenerator(data)).appendTo('#qtype-p');
+
+        $('#question-type').off().change(function() {
+          qtyNo = $(this).val()
           if($("#answer-ck").is(":checked")) {
-            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=true", function(data) {
-              $('tbody').html("");
-              $(trGenerator(data)).appendTo(tbody);
-
-              $(document.body).trigger('loaded-list');
-            })
+            typeList(qtyNo, true);
           } else {
-            $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + no + "&check=false", function(data) {
-              $('tbody').html("");
-              $(trGenerator(data)).appendTo(tbody);
-
-              $(document.body).trigger('loaded-list');
-            })
+            typeList(qtyNo, false);
           }
         });
+      }) // get
 
-        $.get('/bitcamp-team-project/app/json/question/questionList', function(data){
-          $(questionTypeGenerator(data)).appendTo('#qtype-p');
-
-          $('#question-type').off().change(function() {
-            qtyNo = $(this).val()
-            if($("#answer-ck").is(":checked")) {
-              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=true", function(data) {
-                $('tbody').html("");
-                $(trGenerator(data)).appendTo(tbody);
-
-                $(document.body).trigger('loaded-list');
-              })
-            } else {
-              $.getJSON('/bitcamp-team-project/app/json/question/typeList?no=' + qtyNo + "&check=false", function(data) {
-                $('tbody').html("");
-                $(trGenerator(data)).appendTo(tbody);
-
-                $(document.body).trigger('loaded-list');
-              })
-            }
-          });
-        }) // get
-
-        $(document.body).trigger('loaded-list');
-      }) //getJSON
+      $(document.body).trigger('loaded-list');
 
     } // else 
   }); //get(user)

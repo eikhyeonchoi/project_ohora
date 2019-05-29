@@ -31,8 +31,8 @@ public class QuestionServiceImpl implements QuestionService {
   }
 
   @Override
-  public List<Question> list(int no) {
-    if (no == 1 || no == 2) {
+  public List<Question> list(int type, int no) {
+    if (type == 1 || type == 2) {
       return questionDao.findAllByMember(no);
     } else {
       return questionDao.findAll();

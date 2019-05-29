@@ -5,64 +5,82 @@ import java.util.List;
 public class Manual {
   private int no;
   private int productNo;
-  private String contents;
   private int viewCount;
-  private String vLink;
+  private String name;
+
+  private Product product;
+  private Manufacturer manufacturer;
   private List<ManualFile> manualFile;
+  private List<ProductFile> productFile;
   
-  /*
-  private List<ManualComponent> manualComponent;
-  private List<ManualPrecaution> manualPrecaution;
-  */
-  
-  public List<ManualFile> getManualFile() {
-    return manualFile;
+  public Product getProduct() {
+    return product;
   }
-  public void setManualFile(List<ManualFile> manualFile) {
-    this.manualFile = manualFile;
+
+  public void setProduct(Product product) {
+    this.product = product;
   }
-  /*
-  public List<ManualComponent> getManualComponent() {
-    return manualComponent;
+
+  public Manufacturer getManufacturer() {
+    return manufacturer;
   }
-  public void setManualComponent(List<ManualComponent> manualComponent) {
-    this.manualComponent = manualComponent;
+
+  public void setManufacturer(Manufacturer manufacturer) {
+    this.manufacturer = manufacturer;
   }
-  public List<ManualPrecaution> getManualPrecaution() {
-    return manualPrecaution;
+
+  public List<ProductFile> getProductFile() {
+    return productFile;
   }
-  public void setManualPrecaution(List<ManualPrecaution> manualPrecaution) {
-    this.manualPrecaution = manualPrecaution;
+
+  public void setProductFile(List<ProductFile> productFile) {
+    this.productFile = productFile;
   }
-  */
+
   public int getNo() {
     return no;
   }
+
   public void setNo(int no) {
     this.no = no;
   }
+
   public int getProductNo() {
     return productNo;
   }
+
   public void setProductNo(int productNo) {
     this.productNo = productNo;
   }
-  public String getContents() {
-    return contents;
-  }
-  public void setContents(String contents) {
-    this.contents = contents;
-  }
+
   public int getViewCount() {
     return viewCount;
   }
+
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public String getvLink() {
-    return vLink;
+
+  public String getName() {
+    return name;
   }
-  public void setvLink(String vLink) {
-    this.vLink = vLink;
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public List<ManualFile> getManualFile() {
+    return manualFile;
+  }
+
+  public void setManualFile(List<ManualFile> manualFile) {
+    this.manualFile = manualFile;
+  }
+
+  @Override
+  public String toString() {
+    return "Manual [no=" + no + ", productNo=" + productNo + ", viewCount=" + viewCount + ", name="
+        + name + ", product=" + product + ", manufacturer=" + manufacturer + ", manualFile="
+        + manualFile + ", productFile=" + productFile + "]";
   }
 }

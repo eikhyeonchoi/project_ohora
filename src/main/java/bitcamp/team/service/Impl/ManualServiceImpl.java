@@ -24,8 +24,13 @@ public class ManualServiceImpl implements ManualService {
   
   @Override
   public int add(Manual manual) {
-    manualDao.insert(manual);
-    return manualFileDao.insert(manual.getManualFile());
+    int count = manualDao.insert(manual);
+    List<ManualFile> manualFiles = manual.getManualFile();
+    for (ManualFile f : manualFiles) {
+      f.setManualNo(manual.getNo());
+    }
+    manualFileDao.insert(manual.getManualFile());
+    return count;
   }
 
   @Override
@@ -36,20 +41,26 @@ public class ManualServiceImpl implements ManualService {
   @Override
   public List<Manual> list(String keyword, String searchType) {
     HashMap<String,Object> contents = new HashMap<>();
-    switch(searchType) {
-      case "product": contents.put("product", searchType); break;
-      case "manualFile": contents.put("manualFile", searchType); break;
-      case "all": contents.put("all", searchType); break;
-      default: break;
-    }
-    if (keyword != null) {
-      if (!keyword.equals("")) {
-        contents.put("keyword", keyword);
+    System.out.println("keyword => " + keyword);
+    System.out.println("searchType => " + searchType);
+    if (searchType != null) {
+      switch (searchType) {
+        case "prodName": contents.put("prodName", searchType);
+        case "manufacturer": contents.put("manufacturer", searchType);
+        default: ;
       }
     }
-    
+    if (keyword != null) {
+      if (!keyword.equals(""))
+        contents.put("keyword", keyword);
+    }
+    System.out.println("keyword => " + keyword);
+    System.out.println("searchType => " + searchType);
     return manualDao.findAll(contents);
   }
-  
-  
+
+  @Override
+  public Manual getFile(int no) {
+    return manualDao.findFileByNo(no);
+  }
 }
