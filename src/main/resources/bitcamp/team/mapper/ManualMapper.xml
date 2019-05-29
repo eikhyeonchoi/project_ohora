@@ -118,6 +118,17 @@
       manual_type t
     on
       i.manual_type_no = t.manual_type_no
+    <where>
+      <if test="product != null">
+        <if test="keyword != null">
+          <bind name="pattern1" value="'%' + keyword + '%'"/>
+         p.name = #{pattern1}
+      </if>
+      <if test="all != null">
+        
+      </if>
+    </if>
+    </where>
     order by
       m.manual_no desc
   </select>
