@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var productNo = (location.href.split('?')[1]).split('=')[1],
 productName = '',
 nonMemberDiv = $('#non-member-div'),
@@ -8,7 +7,8 @@ fileDiv = $('#images-div'),
 no = sessionStorage.getItem('no'),
 type = sessionStorage.getItem('type'),
 tipBtn = $('#go-tip-btn');
-=======
+
+
 var productNo = location.href.split('?')[1].split('=')[1],
     productName = '',
     nonMemberDiv = $('#non-member-div'),
@@ -18,7 +18,6 @@ var productNo = location.href.split('?')[1].split('=')[1],
     no = sessionStorage.getItem('no'),
     type = sessionStorage.getItem('type'),
     tipBtn = $('#go-tip-btn');
->>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
 
 var total = 0,
 satisAver = 0,
@@ -88,7 +87,6 @@ $(document).ready(function(){
     design = (design / (obj.totalColumn)).toFixed(2);
     asStf = (asStf / (obj.totalColumn)).toFixed(2);
     useful = (useful / (obj.totalColumn)).toFixed(2);
-<<<<<<< HEAD
     
     var empty = 0;
     
@@ -99,7 +97,6 @@ $(document).ready(function(){
         data: {
           labels: [
             '이 제품의 총만족도'
-=======
 
     // 만족도 차트
     new Chart($("#horizontalBar"), {
@@ -113,7 +110,6 @@ $(document).ready(function(){
           "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
             "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
             "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
->>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
             ],
             datasets: [{
               data: [empty ,5-empty],

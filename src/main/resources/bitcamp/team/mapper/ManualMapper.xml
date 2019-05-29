@@ -119,12 +119,6 @@
     values(#{productNo}, #{name})
   </insert>
   
-  <delete id="deleteByProductNo" parameterType="int">
-    delete from 
-      product_file
-    where 
-      product_no = #{value}
-  </delete>
   <select id="findFileByNo" parameterType="int" resultMap="manualFileMap">
     select 
       * 
@@ -136,6 +130,13 @@
       m.manual_no = f.manual_no
     where m.manual_no = #{value}
   </select>
+  
+  <delete id="deleteByProductNo" parameterType="int">
+    delete from 
+      product_file
+    where 
+      product_no = #{value}
+  </delete>
 </mapper>
 
 
