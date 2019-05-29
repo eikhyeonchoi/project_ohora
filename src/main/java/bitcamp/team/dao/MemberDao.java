@@ -8,13 +8,8 @@ import bitcamp.team.domain.Member;
 public interface MemberDao {
   int insert(Member member);
   List<Member> findAll();
-  List<Member> findByKeyword(String keyword);
   Member findByNo(int no);
   Member findByEmailPassword(Map<String,Object> paramMap);
   Member findNoByNickName(String nickName);
   Member findByEmail(String email);
-  int update(Member member);
-  int delete(int no);
-  int deleteCompany(String email);
-  int countAll();
 }

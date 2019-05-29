@@ -77,12 +77,5 @@
       email=#{email}
       and pwd = password(#{password})
   </select>
-  
-  <delete id="deleteCompany" parameterType="String">
-    delete from member where email = #{email}
-  </delete>
 
-  <select id="countAll" resultType="int">
-    select count(*) from member
-  </select>
 </mapper>
