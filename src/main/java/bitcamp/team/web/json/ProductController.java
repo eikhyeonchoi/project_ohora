@@ -102,11 +102,9 @@ public class ProductController {
 
   @GetMapping("files")
   public Object files(int no) {
-    System.out.println("files 내부 ==> " + no);
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Product pList = productService.getFile(no);
-      System.out.println(pList);
       contents.put("pList", pList);
       contents.put("status", "success");
     } catch (Exception e) {
@@ -140,7 +138,6 @@ public class ProductController {
           product.getSmallCategoryNo() == 0 || 
           product.getManufacturerNo() == 0)
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
-      System.out.println(product);
       for (Part part : productFiles) {
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
@@ -148,7 +145,6 @@ public class ProductController {
 
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
-        System.out.println(productFile);
         files.add(productFile);
       }
       product.setProductFiles(files);
@@ -162,7 +158,6 @@ public class ProductController {
         throw new RuntimeException("최소 한개 사진을 등록해야 합니다.");
       } else {
         productService.add(product);
-        System.out.println("add 마침");
         content.put("status", "success");
       }
     } catch (Exception e) {

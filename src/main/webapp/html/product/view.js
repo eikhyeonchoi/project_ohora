@@ -1,4 +1,4 @@
-var productNo = (location.href.split('?')[1]).split('=')[1],
+var productNo = location.href.split('?')[1].split('=')[1],
     productName = '',
     nonMemberDiv = $('#non-member-div'),
     memberDiv = $('#common-member-div'),
@@ -60,7 +60,7 @@ $(document).ready(function(){
     useful = (useful / (obj.totalColumn)).toFixed(2);
 
     // 만족도 차트
-    new Chart($("horizontalBar"), {
+    new Chart($("#horizontalBar"), {
       "type": "horizontalBar",
       "data": {
         "labels": ["총 만족도", "가격 만족도", "사용 난이도", "이해도", "디자인", "a/s만족도", "사용 만족도"],
