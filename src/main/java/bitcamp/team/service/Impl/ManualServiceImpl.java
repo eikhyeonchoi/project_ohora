@@ -38,7 +38,6 @@ public class ManualServiceImpl implements ManualService {
     HashMap<String,Object> contents = new HashMap<>();
     switch(searchType) {
       case "product": contents.put("product", searchType); break;
-      case "manualFile": contents.put("manualFile", searchType); break;
       case "all": contents.put("all", searchType); break;
       default: break;
     }
@@ -47,9 +46,6 @@ public class ManualServiceImpl implements ManualService {
         contents.put("keyword", keyword);
       }
     }
-    
     return manualDao.findAll(contents);
   }
-  
-  
 }

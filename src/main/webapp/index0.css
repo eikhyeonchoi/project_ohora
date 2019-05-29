@@ -1,3 +1,18 @@
+.bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -88,3 +103,31 @@ body {
     margin-top: 7rem;
   }
 }
+
+#ohr-manual-img{
+    background-image: url(aaa.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#ohr-ph-circle p{
+	min-height:80px;
+}
+
+#ohr-ph-circle h2{
+	padding-top: 10px;
+}
+
+#ohr-carousel-2 {
+	background-image: url(aaa.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+#ohr-bottom-1 {
+	background-image: url(aaa.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+

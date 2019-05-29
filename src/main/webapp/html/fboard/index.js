@@ -31,23 +31,17 @@ var tbody = $('tbody'),
 
 $(document).ready(function(){
   $('#fboard-search-btn').prop('disabled', true);
-  $.get('/bitcamp-team-project/app/json/auth/user', function(obj) {
-    $('#fboard-add-btn').click(function(){
-      if(obj.status == 'success') {
-        location.href = 'add.html';
-      } else {
-        location.href = '../auth/login.html';
-      }
-    })
-    $(document.body).trigger({
-      type: 'loaded-user'
-    }); // trigger
-  }) // get
+  
+  $('#fboard-add-btn').click(function(){
+    if(sessionStorage.getItem('no') != null) {
+      location.href = 'add.html';
+    } else {
+      location.href = '../auth/login.html';
+    }
+  });
+  
 }) // ready
 
-
-$(document.body).bind('loaded-user', function(obj){
-}) // bind
 
 
 //trigger 3개 받는 bind
@@ -92,7 +86,21 @@ $(document.body).bind('condition-selected', function(obj){
       }
 
       $.get('/bitcamp-team-project/app/json/fboard/list?search=' + search , function(obj) {
-        $(trGenerator(obj)).appendTo(tbody);
+        // $(trGenerator(obj)).appendTo(tbody);
+        page.pagination({
+          dataSource: obj,
+          locator: 'list',
+          showGoInput: true,
+          showGoButton: true,
+          callback: function(data, pagination) {
+            console.log(data);
+            var pageObj = {list: data};
+            $(trGenerator(pageObj)).appendTo(tbody);
+            
+            $(document.body).trigger('loaded-list');
+          }
+        });
+        
         $(document.body).trigger({
           type: 'loaded-list'
         }) // trigger
@@ -103,4 +111,29 @@ $(document.body).bind('condition-selected', function(obj){
 }) // bind
 
 
+/*
+ * 
+ *        
+
+          page.pagination({
+          dataSource: obj,
+          locator: 'list',
+          showGoInput: true,
+          showGoButton: true,
+          callback: function(data, pagination) {
+            tbody.children().remove();
+            var pageObj = {list: data};
+            $(trGenerator(pageObj)).appendTo(tbody);
+            
+            $(document.body).trigger('loaded-list');
+          }
+        });
+        
+        
+        
+ * 
+ * 
+ * 
+ * 
+ */
 

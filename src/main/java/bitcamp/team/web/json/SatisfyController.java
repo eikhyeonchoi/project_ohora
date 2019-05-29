@@ -1,9 +1,7 @@
 package bitcamp.team.web.json;
 
 import java.util.HashMap;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,15 @@ import bitcamp.team.service.SatisfyService;
 @RequestMapping("/json/satisfy")
 public class SatisfyController {
   
-  @Autowired SatisfyService satisfyService;
+  SatisfyService satisfyService;
+  HttpSession httpSession;
+  
+  public SatisfyController(
+      SatisfyService satisfyService,
+      HttpSession httpSession) {
+    this.satisfyService = satisfyService;
+    this.httpSession = httpSession;
+  }
   
   @GetMapping("list")
   public Object list() throws Exception {
@@ -36,6 +42,8 @@ public class SatisfyController {
     HashMap<String,Object> content = new HashMap<>();
     
     try {
+      Member member = (Member) httpSession.getAttribute("loginUser");
+      satisfy.setmNo(member.getNo());
       if (satisfy.getLevel() > 5 || satisfy.getLevel() < 0) {
         throw new Exception("0~5 숫자 입력");
       } else if (satisfy.getUnderstand() > 5 || satisfy.getUnderstand() < 0) {

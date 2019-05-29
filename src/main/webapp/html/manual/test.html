@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.css" />
+<link rel="shortcut icon" href="/bitcamp-team-project/images/favicon.ico">
+</head>
+<body>
+
+  <div id="fullpage">
+    <div class="section">
+    
+    
+      <!-- 1 slide -->
+      <div class="slide" id="s1" data-anchor="slide1">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-12 col-xl-8">
+            
+            
+              <div class="page-header v2 bordered">
+                <h1>zzzzzzzzzzzzzzzzzzzzzzzzz</h1>
+                <small>1단계</small>
+              </div>
+              
+              <h5>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</h5>
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+
+                    <select id="type" class="form-control form-control-lg ui-select">
+                      <option value="집전체">zzzzzzzzzz</option>
+                      <option value="개인실">zzzzzzzzzz</option>
+                      <option value="다인실">zzzzzzzzzzzzz</option>
+                    </select>
+
+                  </div>
+                </div>
+                
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select id="maxp" class="form-control form-control-lg ui-select">
+                      <option value="1">최대 1명 숙박 가능</option>
+                      <option value="2">최대 2명 숙박 가능</option>
+                      <option value="3">최대 3명 숙박 가능</option>
+                      <option value="4">최대 4명 숙박 가능</option>
+                      <option value="5">최대 5명 숙박 가능</option>
+                      <option value="6">최대 6명 숙박 가능</option>
+                      <option value="7">최대 7명 숙박 가능</option>
+                      <option value="8">최대 8명 숙박 가능</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="form-group">
+                <label for="area">지역을 간단하게 입력해주세요.</label> <input id="area" type="text"
+                  class="form-control form-control-lg" placeholder="지역을 입력하세요.">
+              </div>
+              
+              
+              <div class="row justify-content-between">
+                <div class="form-group action col-4"></div>
+                <div class="form-group action offset-md-4">
+                  <button type="button" class="btn btn-lg btn-primary heun-form-next">다음</button>
+                </div>
+              </div>
+              
+              
+            </div> <!-- col col-lg-12 col-xl-8 -->
+          </div> <!-- row justify-content-md-center -->
+        </div> <!-- container -->
+      </div> <!-- 1 slide -->
+      
+      
+      
+      <div class="slide">
+        <div class='container'></div>
+      </div>
+      <div class="slide">
+        <div class='container'></div>
+      </div>
+      <div class="slide">
+        <div class='container'></div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+      //options here
+      autoScrolling : true,
+      scrollHorizontally : true
+    });
+    
+    //methods
+    $.fn.fullpage.setAllowScrolling(true);
+  });
+</script>
+
+
+
+</html>
