@@ -27,6 +27,8 @@ function loadLoginUser() {
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
       sessionStorage.setItem('name', data.user.name);
+      sessionStorage.setItem('email', data.user.email);
+      sessionStorage.setItem('tel', data.user.tel);
       
       $(document.body).trigger('loaded.loginuser');
       

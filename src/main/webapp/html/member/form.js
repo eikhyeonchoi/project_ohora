@@ -140,7 +140,8 @@ function telCheck() {
   if(tel2.val() != "" && tel3.val() != ""){
     tp.html("");
     telCk = true;
-    tel = tel1.val() + tel2.val() + tel3.val();
+    tel = tel1.val() + "-" + tel2.val() + "-" + tel3.val();
+    alert(tel);
   } else {
     tp.html("전화번호를 입력해 주세요.");
     telCk = false;
