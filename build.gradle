@@ -56,6 +56,12 @@ dependencies {
     // 이메일 인증 처리 라이브러리
     compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
     
+    // 썸네일 라이브러리 05/29 추가 - 익현
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+
+    // 썸네일 관련 라이브러리 05/29 추가 - 익현
+    compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+
 }
 
 

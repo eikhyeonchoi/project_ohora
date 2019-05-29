@@ -3,57 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <title>제품 add</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1>제품 add</h1>
+    <h3>제품 ADD</h3>
     <div id='selectDiv'></div>
-    제품이름: <input id="productName" type="text"><br>
-    사진:     <input id="fileupload" type="file" name="productFiles" multiple><br>
     
-    <button id="product-add-btn" type="button">등록</button>
-    <button id="product-cancel-btn" type="button">취소</button>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">제품 이름</span>
+      </div>
+    <input type="text" id='productName' class="form-control" aria-label="productName" aria-describedby="basic-addon1">
+    </div>
+    
+   <div class="custom-file">
+     <input id="fileupload" type="file" name="productFiles" class="custom-file-input">
+     <label class="custom-file-label" for="fileupload">Choose file</label>
+   </div>
+   
+   <div class='row col-sm-12 mt-sm-2 offset-sm-2'>
+     <button id="product-add-btn" type="button" class='btn btn-sm btn-success'>등록</button>
+     <button id="product-cancel-btn" type="button" class='btn btn-sm btn-danger'>취소</button>
+   </div>
     <div id="images-div"></div>
-    
-    
-  </div> <!-- .container -->
-  
-<script id="small-category-template" type="text/x-handlebars-template">
-<select id='smallCtgSelect'>
-    <option value='0' option:selected>소분류 선택</option>
-  {{#each smallList}}
-    <option value='{{productSmallCategory.no}}'>{{productSmallCategory.name}}</option>
-  {{/each}}
-</select>
-</script>
-  
-<script id="manufacturor-template" type="text/x-handlebars-template">
-<select id='manufacturerSelect'>
-    <option value='0' option:selected>제조사 선택</option>
-  {{#each manuList}}
-    <option value='{{no}}'>{{name}}</option>
-  {{/each}}
-</select>
-</script>
 
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-<script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
-<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>  
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="../header.js"></script>
-<script src="add.js"></script>
+
+  </div> <!-- .container -->
+
+  <script id="small-category-template" type="text/x-handlebars-template">
+  <div class='input-group mb-3'>
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="smallCtgSelect">소분류</label>
+    </div>
+    <select id='smallCtgSelect' class='custom-select'>
+      <option value='0' option:selected>소분류 선택</option>
+    {{#each smallList}}
+      <option value='{{productSmallCategory.no}}'>{{productSmallCategory.name}}</option>
+    {{/each}}
+    </select>
+  </div>
+  </script>
+
+  <script id="manufacturor-template" type="text/x-handlebars-template">
+  <div class='input-group'>
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="manufacturerSelect">제조사</label>
+    </div>
+    <select id='manufacturerSelect' class='custom-select'>
+      <option value='0' option:selected>제조사 선택</option>
+    {{#each manuList}}
+      <option value='{{no}}'>{{name}}</option>
+    {{/each}}
+    </select>
+  </div>
+  </script>
+
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="add.js"></script>
 
 </body>
 </html>

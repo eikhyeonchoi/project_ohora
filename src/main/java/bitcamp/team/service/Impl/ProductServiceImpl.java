@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import bitcamp.team.dao.ManualDao;
 import bitcamp.team.dao.ManufacturerDao;
 import bitcamp.team.dao.ProductDao;
 import bitcamp.team.dao.ProductFileDao;
+import bitcamp.team.dao.ReviewDao;
+import bitcamp.team.dao.SatisfyDao;
+import bitcamp.team.dao.TipDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
@@ -18,14 +22,26 @@ public class ProductServiceImpl implements ProductService{
   ProductDao productDao;
   ManufacturerDao manufacturerDao;
   ProductFileDao productFileDao;
+  SatisfyDao satisfyDao;
+  ReviewDao reviewDao;
+  TipDao tipDao;
+  ManualDao manualDao;
 
   public ProductServiceImpl(
       ProductDao productDao, 
       ManufacturerDao manufacturerDao,
-      ProductFileDao productFileDao) {
+      ProductFileDao productFileDao,
+      SatisfyDao satisfyDao,
+      ReviewDao reviewDao,
+      TipDao tipDao,
+      ManualDao manualDao) {
     this.productDao = productDao;
     this.manufacturerDao = manufacturerDao;
     this.productFileDao = productFileDao;
+    this.satisfyDao = satisfyDao;
+    this.reviewDao = reviewDao;
+    this.tipDao = tipDao;
+    this.manualDao = manualDao;
   }
 
   @Override
@@ -111,6 +127,21 @@ public class ProductServiceImpl implements ProductService{
     }
     return 1;
   }
+  
+  @Override
+  public int deleteProduct(int no) {
+    satisfyDao.deleteByProductNo(no);
+    reviewDao.deleteByProductNo(no);
+    productFileDao.deleteByProductNo(no);
+    tipDao.deleteByProductNo(no);
+    manualDao.deleteByProductNo(no);
+    int count = productDao.delete(no);
+    return count;
+  }
+  
+  
+  
+  
 }
 
 

@@ -109,4 +109,15 @@
     where
       rv_no = #{no};
   </update>
+  
+  <delete id='deleteByProductNo' parameterType="int">
+    delete from
+      satisfy
+    where
+      product_no = #{value}
+  </delete>
+  
+  
+  
+  
 </mapper>

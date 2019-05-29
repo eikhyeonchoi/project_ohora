@@ -7,4 +7,7 @@ import bitcamp.team.domain.Manual;
 public interface ManualDao {
   int insert(Manual manual);
   List<Manual> findAll(Map<String,Object> map);
+  
+  
+  int deleteByProductNo(int no);
 }

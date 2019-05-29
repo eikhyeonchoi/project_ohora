@@ -193,7 +193,13 @@
       manual(product_no, conts, cnt, vlink) 
     values(#{productNo}, #{contents}, #{viewCount}, #{vLink})
   </insert>
-
+  
+  <delete id="deleteByProductNo" parameterType="int">
+    delete from 
+      product_file
+    where 
+      product_no = #{value}
+  </delete>
 </mapper>
 
 
