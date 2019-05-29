@@ -76,7 +76,7 @@
     order by
     q_no desc
   </select>
-  
+    
   <select id="findAllByMember" resultMap="questionTypeMap" parameterType="int">
   select
     q.q_no,

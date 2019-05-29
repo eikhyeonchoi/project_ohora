@@ -29,9 +29,10 @@ public class QuestionController {
   @Autowired ServletContext servletContext;
 
   @GetMapping("list")
-  public Object list(int no) throws Exception {
+  public Object list(int type, HttpSession session) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    List<Question> questions = questionService.list(no);
+    Member member = (Member) session.getAttribute("loginUser");
+    List<Question> questions = questionService.list(type, member.getNo());
     content.put("list", questions);
 
     return content;

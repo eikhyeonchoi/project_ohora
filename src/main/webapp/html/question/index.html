@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <style>
 .question-ck {
- font: bold;
+	font: bold;
 }
 </style>
 <title>문의 내역</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -24,10 +25,8 @@
       <button id="add-btn" type="button" class="btn btn-success btn-sm">문의 하기</button>
     </p>
     <div id="master-option">
-      <a id="qtype-p">
-        <span id="qtype-span">문의 유형&nbsp;&nbsp;</span>
-      </a>
-      <span id="checkBox-span">미답변 질문만 보기<input id="answer-ck" type="checkbox"></span>
+      <a id="qtype-p"> <span id="qtype-span">문의 유형&nbsp;&nbsp;</span>
+      </a> <span id="checkBox-span">미답변 질문만 보기<input id="answer-ck" type="checkbox"></span>
     </div>
     <div class="bit-list">
       <table class="table table-hover">
@@ -46,7 +45,9 @@
       <p id="noDataP"></p>
     </div>
 
-  <script id="tr-template" type="text/x-handlebars-template">
+    <div class='row offset-sm-3 page-container'></div>
+    <br id="my-br">
+    <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
     <tr>
       <th scope='row'>[{{questionType.name}}]</th>
@@ -72,7 +73,9 @@
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
 </body>
