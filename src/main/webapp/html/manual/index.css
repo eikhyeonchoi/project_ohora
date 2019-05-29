@@ -22,6 +22,14 @@ td:nth-child(3) {
   width: 100px;
 }
 
+p.card-text {
+  max-height: 4.8em;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 #pagination-container {
   width: 350px;
   margin: 0 auto;
