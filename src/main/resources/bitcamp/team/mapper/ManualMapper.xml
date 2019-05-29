@@ -42,64 +42,46 @@
       <result column="sctg_no"      property="smallCategoryNo"/>
       <result column="manufac_no"   property="manufacturerNo"/>
       <result column="name"         property="name"/>
+      <association property="manufacturer" javaType="manufacturer">
+        <id     column="manufac_no"   property="no"/>
+        <result column="name"         property="name"/>
+        <result column="member_no"    property="memberNo"/>
+      </association>
       <collection property="productFiles" ofType="productFile">
         <id     column="pfile_no"     property="no"/>
         <result column="product_no"   property="productNo"/>
-        <result column="img"          property="image"/>
+        <result column="img"          property="img"/>
       </collection>
     </association>
   </resultMap>
   
   <resultMap type="manual" id="manualAllMap">
     <id     column="manual_no"      property="no"/>
-    <result column="product_no"     property="productNo"/>
     <result column="cnt"            property="viewCount"/>
     <result column="name"           property="name"/>
     <association property="product" javaType="product">
       <id     column="product_no"   property="no"/>
-      <result column="sctg_no"      property="smallCategoryNo"/>
       <result column="manufac_no"   property="manufacturerNo"/>
       <result column="name"         property="name"/>
+      <association property="manufacturer" javaType="manufacturer">
+        <id       column="manufac_no"   property="no"/>
+        <result   column="manuName"         property="name"/>
+      </association>
       <collection property="productFiles" ofType="productFile">
         <id     column="pfile_no"     property="no"/>
         <result column="product_no"   property="productNo"/>
-        <result column="img"          property="image"/>
+        <result column="img"          property="img"/>
       </collection>
     </association>
-    
-    <collection property="manualFile" javaType="manualFile">
-      <id column="mfile_no"           property="no"/>
-      <result column="manual_no"      property="manualNo"/>
-      <result column="manual_type_no" property="typeNo"/>
-      <result column="conts"          property="contents" />
-      <result column="file"           property="file" />
-      <association property="manualType" javaType="manualType">
-        <id     column="manual_type_no"   property="no"/>
-        <result column="name"             property="name"/>
-      </association>
-    </collection>
   </resultMap>
 
   <select id="findAll" resultMap="manualAllMap" parameterType="map">
     select
       m.manual_no,
-      m.product_no,
-      m.cnt,
       m.name,
+      m.cnt,
       p.product_no,
-      p.sctg_no,
-      p.manufac_no,
-      p.name,
-      f.pfile_no,
-      f.product_no,
-      f.img,
-      i.mfile_no,
-      i.manual_no,
-      i.manual_type_no,
-      i.conts,
-      i.file,
-      t.manual_type_no,
-      t.name
+      ma.name as manuName
     from
       manual m
     left outer join
@@ -111,78 +93,21 @@
     on
       p.product_no = f.product_no
     left outer join
-      manual_file i
+      manufacturer ma
     on
-      m.manual_no = i.manual_no
-    left outer join
-      manual_type t
-    on
-      i.manual_type_no = t.manual_type_no
+      p.manufac_no = ma.manufac_no
     <where>
-      <if test="product != null">
-        <if test="keyword != null">
-          <bind name="pattern1" value="'%' + keyword + '%'"/>
-         p.name = #{pattern1}
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'"/>
+        <choose>
+	        <when test="prodName != null">p.name like #{pattern1}</when>
+	        <when test="manufacturer != null">ma.name like #{pattern1}</when>
+	        <otherwise>
+	          p.name like #{pattern1} or ma.name like #{pattern1}
+	        </otherwise>
+      </choose>
       </if>
-      <if test="all != null">
-        
-      </if>
-    </if>
     </where>
-    order by
-      m.manual_no desc
-  </select>
-  
-  <select id="findAllByProduct" resultMap="manualProductMap" parameterType="map">
-    select
-      m.manual_no,
-      m.product_no,
-      m.cnt,
-      m.name,
-      p.product_no,
-      p.sctg_no,
-      p.manufac_no,
-      p.name,
-      f.pfile_no,
-      f.product_no,
-      f.img
-    from
-      manual m
-    left outer join
-      product p
-    on
-      m.product_no = p.product_no
-    left outer join
-      product_file f
-    on
-      p.product_no = f.product_no
-    order by
-      m.manual_no desc
-  </select>
-  
-  <select id="findAllByManualFile" resultMap="manualFilelMap" parameterType="map">
-    select
-      m.manual_no,
-      m.product_no,
-      m.cnt,
-      m.name,
-      f.mfile_no,
-      f.manual_no,
-      f.manual_type_no,
-      f.conts,
-      f.file,
-      t.manual_type_no,
-      t.name
-    from
-      manual m
-    left outer join
-      manual_file f
-    on
-      m.manual_no = f.manual_no
-    left outer join
-      manual_type t
-    on
-      f.manual_type_no = t.manual_type_no
     order by
       m.manual_no desc
   </select>
@@ -190,8 +115,8 @@
   <insert id="insert" parameterType="manual" 
     useGeneratedKeys="true" keyColumn="manual_no" keyProperty="no">
     insert into
-      manual(product_no, conts, cnt, vlink) 
-    values(#{productNo}, #{contents}, #{viewCount}, #{vLink})
+      manual(product_no, name) 
+    values(#{productNo}, #{name})
   </insert>
   
   <delete id="deleteByProductNo" parameterType="int">
@@ -200,14 +125,18 @@
     where 
       product_no = #{value}
   </delete>
+  <select id="findFileByNo" parameterType="int" resultMap="manualFileMap">
+    select 
+      * 
+    from 
+      manual m
+    left join
+      manual_file f
+    on 
+      m.manual_no = f.manual_no
+    where m.manual_no = #{value}
+  </select>
 </mapper>
-
-
-
-
-
-
-
 
 
 

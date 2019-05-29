@@ -11,15 +11,91 @@
 </head>
 <body>
   <header class="bit-main-header"></header>
-<div class="wrapper">
-  <div class="div1">1</div>
-  <div class="div2">2</div>
-  <div class="div3">3</div>
-  <div class="div4">4</div>
-</div>
+  <h5>
+    <b id="user-nickName"></b>님의 Ohora <b>회원정보 페이지</b>
+  </h5>
+  <div class="wrap">
+
+    <div class="item">
+      <div class="inner">
+        <div class="frame">
+          <h4>회원 정보</h4>
+          <p id="myP-p">
+            안전한 정보보호를 위해 일부만 확인가능하며,<br> 수정화면에서 정확한 회원정보 확인이 가능합니다.
+          </p>
+        </div>
+        <div class="text">
+          <dl>
+            <dt>이메일</dt>
+            <dd id="user-email"></dd>
+            <dt>전화번호</dt>
+            <dd id="user-tel"></dd>
+          </dl>
+          <button id="update-btn" type="button" class="mybtn btn btn-outline-danger">수정</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="inner">
+        <div class="frame">
+          <h4>비밀번호 수정</h4>
+          <p id="myP-p">
+            비밀번호를 주기적으로 변경하여, <br> 소중한 개인정보를 안전하게 보호하세요
+          </p>
+        </div>
+        <div class="text">
+          <dl>
+            <dt>최근 변경일</dt>
+            <dd>2019.05.29</dd>
+          </dl>
+          <button id="psw-update-btn" type="button" class="mybtn btn btn-outline-danger">변경</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item myItem">
+      <div class="inner myinner">
+        <div class="frame myframe">
+          <h4>내가 쓴 게시물</h4>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab"
+              href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a></li>
+            <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab"
+              href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab"
+              href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" id="title-tab" data-toggle="tab"
+              href="#title" role="tab" aria-controls="title" aria-selected="false">title</a></li>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel"
+              aria-labelledby="home-tab">
+              <p>테스트1</p>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <p>테스트2</p>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <p>테스트3</p>
+            </div>
+            <div class="tab-pane fade" id="title" role="tabpanel" aria-labelledby="title-tab">
+              <p>테스트4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div></div>
+    <hr>
+    <p id="footer-p">© OHORA Corp. All rights reserved.</p>
+  </div>
   <!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>

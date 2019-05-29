@@ -1,9 +1,5 @@
 package bitcamp.team.web.json;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.renderable.ParameterBlock;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -116,11 +112,9 @@ public class ProductController {
 
   @GetMapping("files")
   public Object files(int no) {
-    System.out.println("files 내부 ==> " + no);
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Product pList = productService.getFile(no);
-      System.out.println(pList);
       contents.put("pList", pList);
       contents.put("status", "success");
     } catch (Exception e) {
@@ -179,7 +173,6 @@ public class ProductController {
         throw new RuntimeException("최소 한개 사진을 등록해야 합니다.");
       } else {
         productService.add(product);
-        System.out.println("add 마침");
         content.put("status", "success");
       }
     } catch (Exception e) {

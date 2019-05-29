@@ -48,6 +48,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
   public Manufacturer get(int no) {
     return manufacturerDao.findByNo(no);
   }
+  @Override
+  public Manufacturer get(String keyword) {
+    return manufacturerDao.findNameByNickName(keyword);
+  }
 
   @Override
   public int update(Manufacturer manufacturer) {
@@ -62,4 +66,5 @@ public class ManufacturerServiceImpl implements ManufacturerService {
   public int size() {
     return manufacturerDao.countAll();
   }
+
 }

@@ -104,7 +104,6 @@ public class ManufacturerController {
 
   @GetMapping("search")
   public Object search(String keyword) throws Exception {
-    System.out.println("==>" + keyword);
     HashMap<String,Object> map = new HashMap<>();
     try {
       List<Manufacturer> manufacturers = manufacturerService.list(keyword);
@@ -117,6 +116,20 @@ public class ManufacturerController {
     }
 
     return map;
+  }
+  
+  @GetMapping("find")
+  public Object find(String keyword) {
+    HashMap<String,Object> contents = new HashMap<>();
+    try {
+      contents.put("name", manufacturerService.get(keyword));
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    
+    return contents;
   }
 }
 
