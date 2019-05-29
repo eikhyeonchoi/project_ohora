@@ -13,7 +13,7 @@
     <result column="name"           property="name"/> 
   </resultMap>
 
-  <resultMap type="manual" id="manualFilelMap">
+  <resultMap type="manual" id="manualFileMap">
     <id     column="manual_no"      property="no" />
     <result column="product_no" property="productNo" />
     <result column="cnt"        property="viewCount" />

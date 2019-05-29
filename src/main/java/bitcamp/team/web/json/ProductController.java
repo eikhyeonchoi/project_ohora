@@ -1,5 +1,7 @@
 package bitcamp.team.web.json;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -45,7 +47,7 @@ public class ProductController {
     this.reviewService = reviewService;
     this.servletContext = servletContext;
   }
-  
+
 
   @GetMapping("ctgList")
   public Object ctgList() {
@@ -148,20 +150,20 @@ public class ProductController {
           product.getSmallCategoryNo() == 0 || 
           product.getManufacturerNo() == 0)
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
-      
+
       for (Part part : productFiles) {
         String filename = UUID.randomUUID().toString() + ".png";
         String filepath = uploadDir + "/"  +filename;
         part.write(filepath);
-        
+
         part.write(filepath);
-        
+
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
-        
+
         files.add(productFile);
       } // for
-      
+
       product.setProductFiles(files);
       if (product.getSmallCategoryNo() == 0) {
         throw new RuntimeException("소분류를 선택해주세요!");
@@ -185,12 +187,12 @@ public class ProductController {
   @PostMapping("update")
   public Object update(Product product, Part[] productFile) {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
-    
+
     HashMap<String,Object> contents = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
-    
+
     String orderName = productService.get(product.getNo());
-    
+
     try {
       if (product.getName().equals("")) {
         product.setName(orderName);
@@ -219,8 +221,8 @@ public class ProductController {
     }
     return contents;
   }
-  
-  
+
+
   @GetMapping("delete")
   public Object delete(int no) {
     HashMap<String, Object> content = new HashMap<>();
@@ -236,8 +238,8 @@ public class ProductController {
     return content;
   } // delete
 
-  
-  
+
+
   @SuppressWarnings("unused")
   private void makeThumbnail(String filePath, String fileName) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
@@ -251,6 +253,6 @@ public class ProductController {
     File thumbFile = new File(thumbName);
     ImageIO.write(destImg, ".png", thumbFile);
   } // makeThumbnail
-  
-  
+
+
 }
