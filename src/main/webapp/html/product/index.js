@@ -17,17 +17,21 @@ $(document).ready(function() {
     if (type < 1) {
       location.href = '/bitcamp-team-project/html/auth/login.html';
     } else {
+      if (type == 1){
+        alert('기업회원 또는 관리자만 등록할 수 있습니다');
+        return;
+      }
       location.href = 'add.html';
     }
-  });
+  }); // click
 
   $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
-    $(largeCategoryGenerator(obj)).appendTo(searchSpan);
-    $(smallCategoryGenerator(obj)).appendTo($('.input-group'));
+    $(largeCategoryGenerator(obj)).appendTo($('#category-div'));
+    $(smallCategoryGenerator(obj)).appendTo($('#category-div'));
 
     formInline
-    .append("<input id='searchWord' type='text' class='form-control'>")
-    .append("<button id='search-btn' type='button' class='btn btn-success btn-sm'>검색</button>");
+    .append("<div class='ml-sm-1'><input id='searchWord' type='text' class='form-control'>")
+    .append("<button id='search-btn' type='button' class='btn btn-success btn-sm'>검색</button></div>");
   });
 
   loadList();
@@ -84,7 +88,7 @@ $(document.body).bind('loaded', ()=>{
     }
   })
   afterLoadedClickEvent();
-
+  
 }) // bind
 
 function searchSrc() {

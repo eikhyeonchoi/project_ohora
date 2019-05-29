@@ -89,6 +89,13 @@
     insert into tip (product_no, member_no, conts)
     values (#{productNo}, #{memberNo}, #{contents})
   </insert>
+  
+  <delete id="deleteByProductNo" parameterType="int">
+    delete from 
+      product_file
+    where 
+      product_no = #{value}
+  </delete>
 </mapper>
 
 

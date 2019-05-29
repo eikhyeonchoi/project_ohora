@@ -4,49 +4,57 @@
 <meta charset="UTF-8">
 <title>제품 변경</title>
 <link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
->
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
   <header class="bit-main-header"></header>
   <div class="container">
-    <h1></h1>
+    <h3>제품 UPDATE</h3>
+    
     <form>
       <div class="form-group row bit-view-item">
         <div class="col-sm-10">
           <input type="hidden" class="form-control-plaintext" id="no" name='no' readonly>
         </div>
       </div>
+
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">제품명</span>
+        </div>
+        <input type="text" class="form-control" id="productName" name='productName'>
+      </div>
+
+      <div class="custom-file">
+        <input type="file" id="fileupload" name='productFile' class='custom-file-input'>
+        <label class="custom-file-label" for="fileupload">Choose file</label>
+      </div>
+
       <div class="form-group row">
-        <label for="productName" class="col-sm-2 col-form-label">제품명</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="productName" name='productName'>
+        <div class="col-sm-4 mt-sm-2">
+          <button type="button" id="update-btn" class="btn btn-success btn-sm">변경</button>
+          <button type="button" id="cancel-btn" class="btn btn-danger btn-sm">취소</button>
         </div>
       </div>
-      <div class="form-group row">
-        첨부파일 : <input type="file" id="fileupload" name='productFile' multiple>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <button type="button" id="cancel-btn" class="btn btn-primary btn-sm">취소</button>
-          <button type="button" id="update-btn" class="btn btn-warning btn-sm">변경</button>
-        </div>
-      </div>
+      
     </form>
+
   </div>
   <!-- container -->
+
+
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
   <script
-    src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"
-  ></script>
+    src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>

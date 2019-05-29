@@ -8,4 +8,7 @@ public interface ManualDao {
   int insert(Manual manual);
   Manual findFileByNo(int no);
   List<Manual> findAll(Map<String,Object> map);
+  
+  
+  int deleteByProductNo(int no);
 }

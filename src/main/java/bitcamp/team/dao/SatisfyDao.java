@@ -10,4 +10,6 @@ public interface SatisfyDao {
   int countAll(int no);
   int insert(Satisfy satisfy);
   int findByMemberNo(Map<String, Object> param);
+  
+  int deleteByProductNo(int no);
 }

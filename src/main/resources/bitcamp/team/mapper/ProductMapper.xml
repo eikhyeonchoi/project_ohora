@@ -168,6 +168,16 @@
     where
       product_no = #{no}
   </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      product
+    where  
+      product_no = #{value}
+  </delete>
+  
+  
+  
 </mapper>
 
 

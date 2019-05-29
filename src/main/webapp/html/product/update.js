@@ -17,7 +17,7 @@ $('#fileupload').fileupload({
   done: function(e, data) {
     if(data.result.status == 'success'){
       location.href = 'view.html?no='
-          + prodNo + '&name=' + $('#productName').val();
+          + prodNo;
     } else { 
       alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
     }

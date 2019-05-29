@@ -15,4 +15,5 @@ public interface ProductService {
   int update(Product product);
   String get(int no);
   Product getFile(int no);
+  int deleteProduct(int no);
 }

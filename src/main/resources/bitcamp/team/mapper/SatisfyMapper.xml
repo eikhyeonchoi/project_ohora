@@ -94,7 +94,12 @@
       product_no=#{pNo}
   </select>
   
-  
+  <delete id='deleteByProductNo' parameterType="int">
+    delete from
+      satisfy
+    where
+      product_no = #{value}
+  </delete>
   
   
   

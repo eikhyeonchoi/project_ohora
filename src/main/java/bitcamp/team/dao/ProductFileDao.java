@@ -7,4 +7,6 @@ public interface ProductFileDao {
   List<ProductFile> findByProductNo(int no);
   int insert(List<ProductFile> productFiles);
   int deleteByProductNo(int no);
+  
+  
 }

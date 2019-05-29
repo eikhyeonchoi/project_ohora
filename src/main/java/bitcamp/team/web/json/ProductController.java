@@ -3,16 +3,21 @@ package bitcamp.team.web.json;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import org.imgscalr.Scalr;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
 import bitcamp.team.service.ProductService;
+import bitcamp.team.service.ReviewService;
 import bitcamp.team.service.SatisfyService;
 import bitcamp.team.service.TipService;
 
@@ -25,18 +30,22 @@ public class ProductController {
   ProductService productService;
   SatisfyService satisfyService;
   TipService tipService;
+  ReviewService reviewService;
   ServletContext servletContext;
 
   public ProductController(
       ProductService productService,
       SatisfyService satisfyService, 
       TipService tipService,
+      ReviewService reviewService,
       ServletContext servletContext) {
     this.productService = productService;
     this.satisfyService = satisfyService;
     this.tipService = tipService;
+    this.reviewService = reviewService;
     this.servletContext = servletContext;
   }
+  
 
   @GetMapping("ctgList")
   public Object ctgList() {
@@ -84,11 +93,12 @@ public class ProductController {
   }
 
   @GetMapping("findReviewedMember")
-  public Object findReviewedMember(int uNo, int pNo) {
+  public Object findReviewedMember(int pNo, HttpSession httpSession) {
     HashMap<String, Object> content = new HashMap<>();
     HashMap<String, Object> paramMap = new HashMap<>();
 
-    paramMap.put("uNo", uNo);
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    paramMap.put("uNo", member.getNo());
     paramMap.put("pNo", pNo);
     int memberNo = satisfyService.getReviewedMember(paramMap);
 
@@ -138,15 +148,20 @@ public class ProductController {
           product.getSmallCategoryNo() == 0 || 
           product.getManufacturerNo() == 0)
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
+      
       for (Part part : productFiles) {
-        String filename = UUID.randomUUID().toString();
+        String filename = UUID.randomUUID().toString() + ".png";
         String filepath = uploadDir + "/"  +filename;
         part.write(filepath);
-
+        
+        part.write(filepath);
+        
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
+        
         files.add(productFile);
-      }
+      } // for
+      
       product.setProductFiles(files);
       if (product.getSmallCategoryNo() == 0) {
         throw new RuntimeException("소분류를 선택해주세요!");
@@ -185,7 +200,7 @@ public class ProductController {
           continue;
         }
         String filename = UUID.randomUUID().toString();
-        part.write(uploadDir + "/" + filename);
+        part.write(filename);
 
         ProductFile pfiles = new ProductFile();
         pfiles.setImg(filename);
@@ -204,4 +219,38 @@ public class ProductController {
     }
     return contents;
   }
+  
+  
+  @GetMapping("delete")
+  public Object delete(int no) {
+    HashMap<String, Object> content = new HashMap<>();
+    try {
+      if (productService.deleteProduct(no) == 0) {
+        throw new Exception("해당 번호의 제품이 없습니다");
+      }
+      content.put("status", "success");
+    } catch(Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  } // delete
+
+  
+  
+  @SuppressWarnings("unused")
+  private void makeThumbnail(String filePath, String fileName) throws Exception { 
+    BufferedImage srcImg = ImageIO.read(new File(filePath)); 
+    int dw = 250, dh = 150; 
+    int ow = srcImg.getWidth(); int oh = srcImg.getHeight(); 
+    int nw = ow; int nh = (ow * dh) / dw;
+    if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } 
+    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
+    BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
+    String thumbName = filePath + "THUMB_" + fileName; 
+    File thumbFile = new File(thumbName);
+    ImageIO.write(destImg, ".png", thumbFile);
+  } // makeThumbnail
+  
+  
 }
