@@ -43,27 +43,6 @@ function loadLoginUser() {
 }
 
 
-//header.html이 웹 페이지에 삽입된 후 로그인 정보를 받아온다. 
-function loadLoginUser() {
-  // 서버에서 로그인 한 사용자 정보를 가져온다.
-  $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
-    if (data.status == 'success') {
-      $("#bit-auth").hide();
-      $('#bit-not-login-state').hide();
-      $('#bit-login-state').show();
-      $('#login-username').html(data.user.name);
-      
-      sessionStorage.setItem('no', data.user.no);
-      sessionStorage.setItem('type', data.user.type);
-      sessionStorage.setItem('nickName', data.user.nickName);
-      
-    } else {
-      $('#bit-not-login-state').show();
-      $('#bit-login-state').hide();
-    }
-  });
-}
 
 
 
