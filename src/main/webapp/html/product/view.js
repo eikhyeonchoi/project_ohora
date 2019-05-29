@@ -1,4 +1,4 @@
-var productNo = (location.href.split('?')[1]).split('=')[1],
+var productNo = location.href.split('?')[1].split('=')[1],
     productName = '',
     nonMemberDiv = $('#non-member-div'),
     memberDiv = $('#common-member-div'),

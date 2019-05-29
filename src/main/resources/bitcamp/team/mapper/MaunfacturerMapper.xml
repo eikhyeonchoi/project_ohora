@@ -13,7 +13,17 @@
     <result column="member_no" property="memberNo" />
     <result column="address" property="address" />
   </resultMap>
-
+  
+  <resultMap type="manufacturer" id="findNickNameMap">
+    <id     column="manufac_no"   property="no"/>
+    <result column="name"         property="name"/>
+    <result column="member_no"         property="memberNo"/>
+    <association property="member" javaType="member">
+      <id     column="member_no"    property="no"/>
+      <result column="n_name"       property="nickName"/>
+    </association>
+  </resultMap>
+  
   <sql id="default-columns">
   select
     manufac_no,
@@ -91,7 +101,10 @@
     where
       manufac_no = #{no}
   </delete>
-
+  
+  <select id="findNameByNickName" resultMap="findNickNameMap" parameterType="string">
+    select
+  </select>
 </mapper>
 
 

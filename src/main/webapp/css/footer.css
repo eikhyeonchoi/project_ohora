@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.ohr-footer-div {
+	position: relative;
+	/*border-top: 3px solid #f1f3f6;*/
+	padding-top: 3px;
+}
+
+#ohr-btt {
+    color: #5faeb6;
+}
+
