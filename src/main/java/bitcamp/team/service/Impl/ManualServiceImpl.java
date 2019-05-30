@@ -63,4 +63,9 @@ public class ManualServiceImpl implements ManualService {
   public Manual getFile(int no) {
     return manualDao.findFileByNo(no);
   }
+
+  @Override
+  public Manual get(int no) {
+    return manualDao.findByNo(no);
+  }
 }
