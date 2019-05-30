@@ -100,4 +100,20 @@ public class ManualController {
     
     return content;
   }
+  
+  @GetMapping("detail")
+  public Object detail(int no) {
+    HashMap<String,Object> contents = new HashMap<>();
+    
+    try {
+      Manual manual = manualService.get(no);
+      contents.put("manual", manual);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    
+    return contents;
+  }
 }

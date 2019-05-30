@@ -1,3 +1,7 @@
+img {
+	width: 250px;
+	height: 0 auto;
+}
 th:nth-child(1) {
   width: 500px;
   text-align: center;
@@ -24,6 +28,12 @@ td:nth-child(3) {
 div.tableRow {
 	min-height: 1098px;
 }
+div.simpleConts {
+	min-width: 210px;
+}
+div.pic {
+	min-width: 210px;
+}
 p.card-text {
   max-height: 4.8em;
   overflow: hidden;
@@ -31,7 +41,6 @@ p.card-text {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
-
 #pagination-container {
   width: 350px;
   margin: 0 auto;

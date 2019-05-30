@@ -117,7 +117,20 @@
       manual(product_no, name) 
     values(#{productNo}, #{name})
   </insert>
-
+  
+  <select id="findByNo" parameterType="int" resultMap="manualAllMap">
+    select 
+      * 
+    from 
+      manual m
+    left join
+      product p
+    on 
+      m.product_no = p.product_no
+    where
+      m.product_no = #{value}
+  </select>
+  
   <select id="findFileByNo" parameterType="int" resultMap="manualFileMap">
     select 
       * 
