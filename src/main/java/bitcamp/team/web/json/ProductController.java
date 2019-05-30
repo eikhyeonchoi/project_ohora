@@ -153,14 +153,9 @@ public class ProductController {
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
 
       for (Part part : productFiles) {
-<<<<<<< HEAD
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
         part.write(filepath);
-=======
-        String filename = UUID.randomUUID().toString()/* + ".png" */;
-        String filepath = uploadDir + "/"  + filename;
->>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
 
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
