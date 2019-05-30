@@ -1,6 +1,6 @@
 //헤더 가져오기
 $(document.body).ready(function() {
-  $('.bit-main-header').load('/bitcamp-team-project/html/header.html',
+  $('.ohr-main-header').load('/bitcamp-team-project/html/header.html',
       function (){
     $(document.body).trigger('loaded.header');
   });
@@ -24,9 +24,14 @@ $(document.body).bind('loaded.header', function(data) {
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
     if (data.status == 'success') {
+      $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
       $('#bit-login-state').show();
-      $('#login-username').html(data.user.name);
+      $('#login-username').html(data.user.nickName);
+      $('#login-username').click(function(){
+        location.href = '/bitcamp-team-project/html/myPage/index.html';  
+      });
+      
       sessionStorage.setItem('no', data.user.no);
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
@@ -38,6 +43,7 @@ function loadLoginUser() {
       
     } else {
       $('#bit-not-login-state').show();
+      $('#bit-login-state').hide();
     }
   });
 }
