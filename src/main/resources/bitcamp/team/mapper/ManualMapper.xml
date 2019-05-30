@@ -31,29 +31,6 @@
     </collection>
   </resultMap>
   
-  <resultMap type="manual" id="manualProductMap">
-    <id     column="manual_no"      property="no"/>
-    <result column="product_no"     property="productNo"/>
-    <result column="cnt"            property="viewCount"/>
-    <result column="name"           property="name"/>
-    <association property="product" javaType="product">
-      <id     column="product_no"   property="no"/>
-      <result column="sctg_no"      property="smallCategoryNo"/>
-      <result column="manufac_no"   property="manufacturerNo"/>
-      <result column="name"         property="name"/>
-      <association property="manufacturer" javaType="manufacturer">
-        <id     column="manufac_no"   property="no"/>
-        <result column="name"         property="name"/>
-        <result column="member_no"    property="memberNo"/>
-      </association>
-      <collection property="productFiles" ofType="productFile">
-        <id     column="pfile_no"     property="no"/>
-        <result column="product_no"   property="productNo"/>
-        <result column="img"          property="img"/>
-      </collection>
-    </association>
-  </resultMap>
-  
   <resultMap type="manual" id="manualAllMap">
     <id     column="manual_no"      property="no"/>
     <result column="cnt"            property="viewCount"/>
@@ -73,6 +50,46 @@
       </collection>
     </association>
   </resultMap>
+  
+  <resultMap type="manual" id="manualDetailMap">
+    <id     column="manual_no"      property="no"/>
+    <result column="cnt"            property="viewCount"/>
+    <result column="name"           property="name"/>
+    <association property="product" javaType="product">
+      <id     column="product_no"   property="no"/>
+      <result column="manufac_no"   property="manufacturerNo"/>
+      <result column="name"         property="name"/>
+      <association property="productSmallCategory" javaType="productSmallCategory">
+        <id     column="sctg_no"      property="no"/>
+        <result column="lctg_no"      property="largeCategoryNo"/>
+        <result column="sName"         property="name"/>
+        <association property="productLargeCategory" javaType="productLargeCategory">
+          <id   column="lctg_no"      property="no"/>
+          <result column="lName"         property="name"/>
+        </association>
+      </association>
+      <association property="manufacturer" javaType="manufacturer">
+        <id       column="manufac_no"   property="no"/>
+        <result   column="manuName"         property="name"/>
+      </association>
+      <collection property="productFiles" ofType="productFile">
+        <id     column="pfile_no"     property="no"/>
+        <result column="product_no"   property="productNo"/>
+        <result column="img"          property="img"/>
+      </collection>
+    </association>
+    <collection property="manualFile" ofType="manualFile">
+      <id       column="mfile_no"     property="no"/>
+      <result   column="manualNo"     property="manualNo"/>
+      <result   column="typeNo"       property="typeNo"/>
+      <result   column="conts"        property="contents"/>
+      <result   column="file"         property="file"/>
+      <association property="manualType" javaType="manualType">
+        <id     column="manual_type_no"   property="no"/>
+        <result column="typeName"             property="name"/>
+      </association>
+    </collection>
+  </resultMap>
 
   <select id="findAll" resultMap="manualAllMap" parameterType="map">
     select
@@ -80,6 +97,7 @@
       m.name,
       m.cnt,
       p.product_no,
+      f.img,
       ma.name as manuName
     from
       manual m
@@ -118,15 +136,27 @@
     values(#{productNo}, #{name})
   </insert>
   
-  <select id="findByNo" parameterType="int" resultMap="manualAllMap">
+  <select id="findByNo" parameterType="int" resultMap="manualDetailMap">
     select 
-      * 
+      m.manual_no,
+      m.name,
+      m.cnt,
+      f.conts,
+      f.manual_type_no as typeNo, 
+      t.manual_type_no,
+      t.name as typeName,
+      p.product_no,
+      s.name as sName,
+      l.name as lName,
+      ma.name as manuName
     from 
       manual m
-    left join
-      product p
-    on 
-      m.product_no = p.product_no
+    left join product p on m.product_no = p.product_no
+    left join manufacturer ma on ma.manufac_no = p.manufac_no
+    left join manual_file f on m.manual_no = f.manual_no
+    left join manual_type t on f.manual_type_no = t.manual_type_no
+    left join small_category s on p.sctg_no = s.sctg_no
+    left join large_category l on s.lctg_no = l.lctg_no
     where
       m.product_no = #{value}
   </select>

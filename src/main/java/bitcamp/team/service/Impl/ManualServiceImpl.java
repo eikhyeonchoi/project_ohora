@@ -65,7 +65,7 @@ public class ManualServiceImpl implements ManualService {
   }
 
   @Override
-  public Manual get(int no) {
+  public List<Manual> get(int no) {
     return manualDao.findByNo(no);
   }
 }

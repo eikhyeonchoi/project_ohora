@@ -14,6 +14,7 @@ import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.ManualFile;
 import bitcamp.team.domain.Product;
 import bitcamp.team.service.ManualService;
+import bitcamp.team.service.ManufacturerService;
 import bitcamp.team.service.ProductService;
 
 @RestController("json/ManualController")
@@ -23,15 +24,18 @@ public class ManualController {
   String uploadDir;
   ManualService manualService;
   ProductService productService;
+  ManufacturerService manufacturerService;
   ServletContext servletContext;
 
   public ManualController(
       ManualService manualService, 
       ServletContext servletContext,
-      ProductService productService) {
+      ProductService productService,
+      ManufacturerService manufacturerService) {
     this.manualService = manualService;
     this.servletContext = servletContext;
     this.productService = productService;
+    this.manufacturerService = manufacturerService;
   }
   
   @GetMapping("list")
@@ -109,7 +113,8 @@ public class ManualController {
     HashMap<String,Object> contents = new HashMap<>();
     
     try {
-      Manual manual = manualService.get(no);
+      manufacturerService.get(no);
+      List<Manual> manual = manualService.get(no);
       contents.put("manual", manual);
       contents.put("status", "success");
     } catch (Exception e) {
