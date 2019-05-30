@@ -1,5 +1,91 @@
+.header {
+	width: 290px;
+	height: 45px;
+	background-color: rgb(158, 158, 158);
+	opacity: 0.7; 
+	border-radius: 2px 2px 0px 0px;
+	text-align: center;
+}
+
+.headerRow {
+	margin: 5px;
+	display: inline-block;
+}
+
+.header-name {
+	font-weight: normal;
+	font: 24px HanSans;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	display: inline-block;
+}
+
+.header-conts {
+	font-weight: normal;
+  font: 16px HanSans;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: inline-block;
+}
+
+.category {
+	border: 1px solid gray;
+	border-radius: 2px 2px 0px 0px;
+	height: 45px;
+	text-align: left;
+}
+.categoryItem {
+	margin-left: 20px;
+	font: 24px HanSans;
+}
+
+.simpleConts {
+	margin: 30px; 
+}
+
+.nav-link {
+	color: white;
+}
+
+.tab-content {
+	min-height: 700px;
+	padding: 30px;
+	font: 30px;
+}
+
+.show {
+	font-weight: bold;
+}
+
+a.active {
+	font-weight: bold;
+}
+#myTab {
+	background: gray;
+}
+#productName {
+	width: 200px;
+	font: 40px HanSans;
+	font-weight: bold;
+	max-height: 4.8em;
+  overflow: hidden;
+}
+#memberName {
+	width: 120px;
+	font: 16px HanSans;
+	font-style: italic;
+	padding: 25px;
+}
+#slice {
+	width: 5px;
+	height: 20px;
+	background-color: rgb(255, 255, 255);
+	display: inline-block;
+}
+
+
 img {
-	width: 250px;
+	width: 400px;
 	height: 0 auto;
 }
 th:nth-child(1) {

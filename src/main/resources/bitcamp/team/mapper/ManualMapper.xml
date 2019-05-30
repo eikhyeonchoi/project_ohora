@@ -59,6 +59,15 @@
       <id     column="product_no"   property="no"/>
       <result column="manufac_no"   property="manufacturerNo"/>
       <result column="name"         property="name"/>
+      <association property="productSmallCategory" javaType="productSmallCategory">
+        <id     column="sctg_no"      property="no"/>
+        <result column="lctg_no"      property="largeCategoryNo"/>
+        <result column="sName"         property="name"/>
+        <association property="productLargeCategory" javaType="productLargeCategory">
+          <id   column="lctg_no"      property="no"/>
+          <result column="lName"         property="name"/>
+        </association>
+      </association>
       <association property="manufacturer" javaType="manufacturer">
         <id       column="manufac_no"   property="no"/>
         <result   column="manuName"         property="name"/>
@@ -88,6 +97,7 @@
       m.name,
       m.cnt,
       p.product_no,
+      f.img,
       ma.name as manuName
     from
       manual m
@@ -136,17 +146,17 @@
       t.manual_type_no,
       t.name as typeName,
       p.product_no,
+      s.name as sName,
+      l.name as lName,
       ma.name as manuName
     from 
       manual m
-    left join product p
-    on m.product_no = p.product_no
-    left join manufacturer ma
-    on ma.manufac_no = p.manufac_no
-    left join manual_file f
-    on m.manual_no = f.manual_no
-    left join manual_type t
-    on f.manual_type_no = t.manual_type_no
+    left join product p on m.product_no = p.product_no
+    left join manufacturer ma on ma.manufac_no = p.manufac_no
+    left join manual_file f on m.manual_no = f.manual_no
+    left join manual_type t on f.manual_type_no = t.manual_type_no
+    left join small_category s on p.sctg_no = s.sctg_no
+    left join large_category l on s.lctg_no = l.lctg_no
     where
       m.product_no = #{value}
   </select>

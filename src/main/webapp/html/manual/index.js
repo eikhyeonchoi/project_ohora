@@ -25,7 +25,6 @@ function loadList() {
       + $('select#searchTag').val() + '&keyword=' + $('#search').val()
       , function(obj) {
         if (obj.status == "success") {
-        console.log(obj);
         page.pagination({
           dataSource: obj.list,
           showGoInput: true,
