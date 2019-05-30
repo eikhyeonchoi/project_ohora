@@ -152,9 +152,8 @@ public class ProductController {
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
 
       for (Part part : productFiles) {
-        String filename = UUID.randomUUID().toString() + ".png";
-        String filepath = uploadDir + "/"  +filename;
-        part.write(filepath);
+        String filename = UUID.randomUUID().toString()/* + ".png" */;
+        String filepath = uploadDir + "/"  + filename;
 
         part.write(filepath);
 
@@ -202,7 +201,8 @@ public class ProductController {
           continue;
         }
         String filename = UUID.randomUUID().toString();
-        part.write(filename);
+        String filepath = uploadDir + "/" + filename;
+        part.write(filepath);
 
         ProductFile pfiles = new ProductFile();
         pfiles.setImg(filename);
