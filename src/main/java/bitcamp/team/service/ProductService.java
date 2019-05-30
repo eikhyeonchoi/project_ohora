@@ -1,5 +1,6 @@
 package bitcamp.team.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import bitcamp.team.domain.Manufacturer;
@@ -13,7 +14,7 @@ public interface ProductService {
   int add(Product product);
   int getNo(String name);
   int update(Product product);
-  String get(int no);
+  Product get(int no);
   Product getFile(int no);
-  int deleteProduct(int no);
+  int deleteProduct(HashMap<String, Object> paramNumbers);
 }

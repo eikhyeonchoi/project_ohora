@@ -11,10 +11,12 @@ import bitcamp.team.dao.ProductFileDao;
 import bitcamp.team.dao.ReviewDao;
 import bitcamp.team.dao.SatisfyDao;
 import bitcamp.team.dao.TipDao;
+import bitcamp.team.dao.TipHistoryDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
 import bitcamp.team.service.ProductService;
+import bitcamp.team.service.TipService;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -24,8 +26,9 @@ public class ProductServiceImpl implements ProductService{
   ProductFileDao productFileDao;
   SatisfyDao satisfyDao;
   ReviewDao reviewDao;
-  TipDao tipDao;
   ManualDao manualDao;
+  TipDao tipDao;
+  TipHistoryDao tipHistoryDao;
 
   public ProductServiceImpl(
       ProductDao productDao, 
@@ -34,14 +37,16 @@ public class ProductServiceImpl implements ProductService{
       SatisfyDao satisfyDao,
       ReviewDao reviewDao,
       TipDao tipDao,
-      ManualDao manualDao) {
+      ManualDao manualDao,
+      TipHistoryDao tipHistoryDao) {
     this.productDao = productDao;
     this.manufacturerDao = manufacturerDao;
     this.productFileDao = productFileDao;
     this.satisfyDao = satisfyDao;
     this.reviewDao = reviewDao;
-    this.tipDao = tipDao;
     this.manualDao = manualDao;
+    this.tipDao = tipDao;
+    this.tipHistoryDao = tipHistoryDao;
   }
 
   @Override
@@ -104,9 +109,9 @@ public class ProductServiceImpl implements ProductService{
   }
 
   @Override
-  public String get(int no) {
+  public Product get(int no) {
     Product product = productDao.findByNo(no);
-    return product.getName();
+    return product;
   }
 
   @Override
@@ -128,18 +133,26 @@ public class ProductServiceImpl implements ProductService{
   }
   
   @Override
-  public int deleteProduct(int no) {
-    satisfyDao.deleteByProductNo(no);
-    reviewDao.deleteByProductNo(no);
-    productFileDao.deleteByProductNo(no);
-    tipDao.deleteByProductNo(no);
-    manualDao.deleteByProductNo(no);
-    int count = productDao.delete(no);
+  public int deleteProduct(HashMap<String, Object> paramNumbers) {
+    int productNo = (int) paramNumbers.get("productNo");
+    int tipNo = (int) paramNumbers.get("tipNo");
+    
+    int count = 0;
+    satisfyDao.deleteByProductNo(productNo);
+    reviewDao.deleteByProductNo(productNo);
+    productFileDao.deleteByProductNo(productNo);
+    
+    if (tipNo != 0) {
+      tipHistoryDao.deleteByTipNo(tipNo);
+    }
+    
+    tipDao.deleteByProductNo(productNo);
+    manualDao.deleteByProductNo(productNo);
+    if (productDao.delete(productNo) != 0) {
+      count++;
+    }
     return count;
   }
-  
-  
-  
   
 }
 

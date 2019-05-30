@@ -8,12 +8,14 @@ var smallCategoryGenerator = Handlebars.compile(smallSrc),
 $(document).ready(function() {
   $.get('/bitcamp-team-project/app/json/product/manuList', 
       function(obj){
+    console.log(obj);
     $(manufacturerGenerator(obj)).appendTo(div);
     $(div).append('<br>');
   }) // get
 
   $.get('/bitcamp-team-project/app/json/product/ctgList', 
       function(obj){
+    console.log(obj);
     $(smallCategoryGenerator(obj)).appendTo(div);
     $(document.body).trigger('loaded-select');
   }) // get

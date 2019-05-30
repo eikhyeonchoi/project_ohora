@@ -11,6 +11,31 @@ public class Product {
   private Manufacturer manufacturer;
   private ProductSmallCategory productSmallCategory;
   private List<ProductFile> productFiles;
+  
+  private Tip tip;
+  
+  @Override
+  public String toString() {
+    return "Product [no=" + no + ", smallCategoryNo=" + smallCategoryNo + ", manufacturerNo="
+        + manufacturerNo + ", name=" + name + ", manufacturer=" + manufacturer
+        + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles + "]";
+  }
+  public Tip getTip() {
+    return tip;
+  }
+
+  public void setTip(Tip tip) {
+    this.tip = tip;
+  }
+
+  public List<ProductFile> getProductFiles() {
+    return productFiles;
+  }
+
+  public void setProductFiles(List<ProductFile> productFiles) {
+    this.productFiles = productFiles;
+  }
+
   public int getNo() {
     return no;
   }
@@ -55,22 +80,8 @@ public class Product {
     this.productSmallCategory = productSmallCategory;
   }
 
-  public List<ProductFile> getProductFiles() {
-    return productFiles;
-  }
-
-  public void setProductFiles(List<ProductFile> productFiles) {
-    this.productFiles = productFiles;
-  }
 
   public void setNo(int no) {
     this.no = no;
-  }
-
-  @Override
-  public String toString() {
-    return "Product [no=" + no + ", smallCategoryNo=" + smallCategoryNo + ", manufacturerNo="
-        + manufacturerNo + ", name=" + name + ", manufacturer=" + manufacturer
-        + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles + "]";
   }
 }

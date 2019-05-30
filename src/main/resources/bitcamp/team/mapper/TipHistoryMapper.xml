@@ -82,6 +82,14 @@
     delete from tip_history
     where this_no = #{value}
   </delete>
+  
+  
+  <delete id="deleteByTipNo" parameterType="int">
+    delete from
+      tip_history
+    where
+      tip_no = #{value}
+  </delete>
 </mapper>
 
 

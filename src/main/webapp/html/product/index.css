@@ -16,3 +16,8 @@ canvas.horizon{
 	width: 450px;
   margin: 0 auto;
 }
+
+#product-div {
+	min-height: 1071px;
+}
+

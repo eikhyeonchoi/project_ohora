@@ -20,21 +20,13 @@
       <div id='category-div' class="input-group offset-sm-1"></div>
     </div>
     
-    <hr>
-    <table id='basic-list-table' class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제품명</th>
-          <th scope="col">제조사</th>
-        </tr>
-      </thead>
+    <div id='product-div' class='row mt-sm-3'>
+    </div> <!-- product-div -->
+    
+    <div id="pagination-container"></div>
+    
+  </div> <!-- container -->
 
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <div id="pagination-container"></div>
 
   <script id="large-category-template" type="text/x-handlebars-template">
     <select id='lageCtgSelect' class="custom-select">
@@ -63,6 +55,31 @@
     </tr>
     {{/each}}
   </script>
+  
+  
+  <script id="card-template" type="text/x-handlebars-template">
+    {{#each list}}
+      <div class="col-md-4 product-component">
+        <div class="card mb-4 shadow-sm">
+          {{#each productFiles}}
+          <img src='/bitcamp-team-project/upload/productfile/{{img}}_thumb' width="235px" height="225px">
+          {{/each}}
+          <div class="card-body">
+            <p class="card-text">{{name}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary product-view-btn" data-no='{{no}}' data-name='{{name}}'>View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary product-edit-btn" data-no='{{no}}' data-name='{{name}}'>Edit</button>
+              </div>
+              <small class="text-muted">{{manufacturer.name}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </script>
+
+  
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>

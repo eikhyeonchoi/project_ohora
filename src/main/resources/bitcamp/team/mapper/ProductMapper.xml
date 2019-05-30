@@ -5,11 +5,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="bitcamp.team.dao.ProductDao">
+
+
   <resultMap type="product" id="productMap">
     <id     column="product_no"   property="no"/>
     <result column="sctg_no"      property="smallCategoryNo"/>
     <result column="manufac_no"   property="manufacturerNo"/>
     <result column="productName"         property="name"/>
+    
     <association property="manufacturer" javaType="manufacturer">
       <id column="manufac_no"    property="no"/>
       <result column="reg_no"    property="registerNo"/>
@@ -27,17 +30,27 @@
         <result column="largeName"      property="name"/>
       </association>
     </association>
-    </resultMap>
     
-    <resultMap type="product" id="productFileMap">
-      <id       column="product_no"         property="no"/>
-      <result   column="name"               property="name"/>
-      <collection property="productFiles"      ofType="productFile">
-        <id     column="pfile_no"           property="no"/>
-        <result column="productNo"          property="productNo"/>
-        <result column="img"                property="img"/>
-      </collection>
-    </resultMap>
+    <association property="tip" javaType="tip">
+      <id column="tip_no"       property="no"/>
+    </association>
+    
+    <collection property="productFiles" ofType="productFile" >
+      <id column="pfile_no"       property="no"/>
+      <result column="product_no" property="productNo"/>
+      <result column="img"        property="img"/>
+    </collection>
+  </resultMap>
+    
+  <resultMap type="product" id="productFileMap">
+    <id       column="product_no"         property="no"/>
+    <result   column="name"               property="name"/>
+    <collection property="productFiles"      ofType="productFile">
+      <id     column="pfile_no"           property="no"/>
+      <result column="productNo"          property="productNo"/>
+      <result column="img"                property="img"/>
+    </collection>
+  </resultMap>
   
   <resultMap type="manufacturer" id="manufacturertMap">
     <id     column="manufac_no"   property="no"/>
@@ -46,15 +59,16 @@
     <result column="tel"      property="smallCategoryNo"/>
     <result column="homepage"      property="smallCategoryNo"/>
   </resultMap>
+  
   <select id="findLargeCategory" resultMap="productMap" >
     select distinct
       lc.lctg_no,
       lc.name as largeName
    from
       product p
-      join manufacturer mf on p.manufac_no=mf.manufac_no
-      join small_category sc on p.sctg_no=sc.sctg_no
-      join large_category lc on sc.lctg_no=lc.lctg_no
+      right join manufacturer mf on p.manufac_no=mf.manufac_no
+      right join small_category sc on p.sctg_no=sc.sctg_no
+      right join large_category lc on sc.lctg_no=lc.lctg_no
     order by
       lc.lctg_no asc;
   </select>
@@ -65,9 +79,9 @@
       sc.name as smallName
    from
       product p
-      join manufacturer mf on p.manufac_no=mf.manufac_no
-      join small_category sc on p.sctg_no=sc.sctg_no
-      join large_category lc on sc.lctg_no=lc.lctg_no
+      right join manufacturer mf on p.manufac_no=mf.manufac_no
+      right join small_category sc on p.sctg_no=sc.sctg_no
+      right join large_category lc on sc.lctg_no=lc.lctg_no
     order by
       sc.sctg_no asc
   </select>
@@ -84,12 +98,16 @@
       p.product_no,
       p.sctg_no,
       p.manufac_no,
-      p.name as productName
+      p.name as productName,
+      pf.pfile_no,
+      pf.product_no,
+      pf.img
     from
       product p
       join manufacturer mf on p.manufac_no=mf.manufac_no
       join small_category sc on p.sctg_no=sc.sctg_no
       join large_category lc on sc.lctg_no=lc.lctg_no
+      left join product_file pf on p.product_no=pf.product_no
     <where>
       <if test="largeNo != null">
         lc.lctg_no=#{largeNo} and
@@ -127,6 +145,7 @@
       name = #{value}
   </select>
   
+  
   <select id="findNoByNameList" resultMap="productMap" parameterType="map">
     <bind name="pattern1" value="'%' + _parameter + '%'"/>
     select
@@ -137,14 +156,19 @@
       name like #{pattern1}
   </select>
   
+  
   <select id="findByNo" resultMap="productMap" parameterType="int">
     select
-      name as productName
+      p.name as productName,
+      t.tip_no
     from
-      product
+      product p
+      left join tip t on p.product_no = t.product_no
     where
-      product_no = #{value}
+      p.product_no = #{value}
   </select>
+  
+  
   <select id="findFileByNo" resultMap="productFileMap" parameterType="int">
     select
       p.product_no,
@@ -175,8 +199,6 @@
     where  
       product_no = #{value}
   </delete>
-  
-  
   
 </mapper>
 
