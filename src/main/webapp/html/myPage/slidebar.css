@@ -1,0 +1,59 @@
+.sidebar {
+	margin-top: 67px;
+	background-color: #343a40;
+	width: 230px;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: -200px;
+	z-index: 9999;
+}
+
+.sidebar-content {
+	position: absolute;
+	top: 20px;
+	left: 70px;
+	color: #fff;
+}
+
+.sidebar-btn {
+	position: absolute;
+	top: 200px;
+	left: 240px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 15px;
+}
+
+.photo0 {
+	margin-bottom: 20px;
+	margin-left: 28px;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border: 2px solid black;
+	border-radius: 50%;
+}
+
+/* 리스트 관련 css */
+.list-group-item {
+	background-color: #343a40;
+}
+
+#user-nickName-div {
+	margin-bottom: 20px;
+}
+
+#user-nickName-span {
+	color: lightcoral;
+	margin-left: 20px;
+}
+
+
+
+
+

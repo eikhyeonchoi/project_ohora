@@ -13,7 +13,7 @@ $(document.body).bind('loaded-user', function() {
   
 });
 
-$('#cancel-btn').click(function() {
+$('#cancel-btn').click(function() { 
   location.replace('index.html');
 });
 

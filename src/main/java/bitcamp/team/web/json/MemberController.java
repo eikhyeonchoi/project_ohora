@@ -36,27 +36,6 @@ public class MemberController {
     return content;
   }
 
-  @GetMapping("detail")
-  public Object detail(int no) throws Exception {
-    Member member = memberService.get(no);
-    return member;
-  }
-
-  @GetMapping("nickName")
-  public Object detail(String nickName) throws Exception {
-    int abcd = memberService.authEmail(nickName);
-    return abcd;
-  }
-
-  @GetMapping("list")
-  public Object list() throws Exception {
-    HashMap<String,Object> map = new HashMap<>();
-    List<Member> members = memberService.list();
-    map.put("list", members);
-
-    return map;
-  }
-
   @GetMapping("email")
   public Object Authentication (String email) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -79,6 +58,35 @@ public class MemberController {
       return content;
     }
   }
+
+  @GetMapping("nickName")
+  public Object detail(String nickName) throws Exception {
+    int abcd = memberService.authEmail(nickName);
+    return abcd;
+  }
+
+  @GetMapping("password")
+  public Object password(String password) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    return content;
+  }
+
+  @GetMapping("detail")
+  public Object detail(int no) throws Exception {
+    Member member = memberService.get(no);
+    return member;
+  }
+
+  @GetMapping("list")
+  public Object list() throws Exception {
+    HashMap<String,Object> map = new HashMap<>();
+    List<Member> members = memberService.list();
+    map.put("list", members);
+
+    return map;
+  }
+
 }
 
 

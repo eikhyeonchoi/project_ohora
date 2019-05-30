@@ -104,5 +104,20 @@ dd {
 	width: 790px;
 }
 
+div {
+	border: 1px solid black; 
+}
 
+.row {
+	min-width: 300px; 
+	min-height: 300px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.my-inner {
+	height: 50px;
+	width: 50px; 
+	
+}
 
