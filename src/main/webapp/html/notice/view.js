@@ -66,7 +66,7 @@ function loadData(no) {
   $.getJSON('../../app/json/notice/detail?no=' + no, function(data) {
     $('#no').val(data.no),
     $('#title').val(data.title),
-    $('#contents').val(data.contents),
+    $('#contents').html(data.contents),
     $('#createdDate').val(data.createdDate),
     $('#viewCount').val(data.viewCount);
   });

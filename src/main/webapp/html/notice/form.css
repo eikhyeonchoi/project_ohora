@@ -1,5 +1,24 @@
 
+.ql-editor {
+  min-height: 400px;
+  height: 600px;
+}
 
-#title {
-  border: 2px;
+.form-control-plaintext {
+  border: solid 1px #ccc;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.editor {
+	min-height: 200px;
+}
+
+#ntc-btns {
+	float: right;
+}
+
+#h1-title {
+	text-align: center;
+	color: #212529;
 }

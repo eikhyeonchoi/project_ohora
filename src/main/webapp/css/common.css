@@ -33,3 +33,21 @@ div.container {
   margin: 0px 10px;
 }
 
+
+.btn-primary {
+    background-color: white;
+    border: solid 1px #ccc;
+    color: #212529; 
+}
+
+.btn-primary:hover {
+    background-color: #ccc;
+    border: solid 1px #ccc;
+    color: white;
+}
+
+.btn-primary:active {
+    background-color: gray;
+    border: solid 1px #ccc;
+    color: white;
+}
