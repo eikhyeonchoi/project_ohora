@@ -18,7 +18,6 @@
     <result column="product_no" property="productNo" />
     <result column="cnt"        property="viewCount" />
     <result column="name"      property="name" />
-
     <collection property="manualFile" javaType="manualFile">
       <id column="mfile_no"           property="no"/>
       <result column="manual_no"      property="manualNo"/>
@@ -119,6 +118,19 @@
     values(#{productNo}, #{name})
   </insert>
   
+  <select id="findByNo" parameterType="int" resultMap="manualAllMap">
+    select 
+      * 
+    from 
+      manual m
+    left join
+      product p
+    on 
+      m.product_no = p.product_no
+    where
+      m.product_no = #{value}
+  </select>
+  
   <select id="findFileByNo" parameterType="int" resultMap="manualFileMap">
     select 
       * 
@@ -130,13 +142,6 @@
       m.manual_no = f.manual_no
     where m.manual_no = #{value}
   </select>
-  
-  <delete id="deleteByProductNo" parameterType="int">
-    delete from 
-      product_file
-    where 
-      product_no = #{value}
-  </delete>
 </mapper>
 
 
