@@ -35,7 +35,23 @@ if (param) {
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean']                                         // remove formatting button
-        ]
+        ],
+        imageUpload: {
+            url: '../../app/json/notice/add', // server url. If the url is empty then the base64 returns
+            dataType: 'json',
+            method: 'POST', // change query method, default 'POST'
+            name: 'image', // custom form name
+            withCredentials: false, // withCredentials
+            headers: {}, // add custom headers, example { token: 'your-token'}
+            // personalize successful callback and call next function to insert new url to the editor
+            callbackOK: (serverResponse, next) => {
+                next(serverResponse);
+            },
+            // personalize failed callback
+            callbackKO: serverError => {
+                alert(serverError);
+            }
+        }
     },
     placeholder: '내용을 입력해주세요.',
     theme: 'snow'  // or 'bubble'
@@ -44,91 +60,7 @@ if (param) {
 })();
 
 
-$('#fileupload').fileupload({
-  url: '../../app/json/notice/add',        // 서버에 요청할 URL
-  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
-  sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
-  singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.
-  autoUpload: false,        // 파일을 추가할 때 자동 업로딩 하지 않도록 설정.
-  disableImageResize: /Android(?!.*Chrome)|Opera/
-    .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정 비활성 시키기
-    previewMaxWidth: 150,   // 미리보기 이미지 너비
-    previewMaxHeight: 150,  // 미리보기 이미지 높이 
-    previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
-
-    processalways: function(e, data) {
-      var imagesDiv = $('#images-div');
-      imagesDiv.html("");
-      for (var i = 0; i < data.files.length; i++) {
-        try {
-          if (data.files[i].preview.toDataURL) {
-            $('<div class="col card-panel p0 ml20"><img src="' + data.files[i].preview.toDataURL() +'"></div>').appendTo(imagesDiv);
-          }
-        } catch (err) {
-        }
-      }
-      $('.file-path').css('border-color','#26a69a');
-      var fileNames
-      $.each(data.files, function (index, file) {
-        if(index == 0){
-          fileNames = file.name;
-        } else {
-          fileNames = fileNames + ', '+file.name;
-        }
-      });
-      $('.file-path').val(fileNames);
-
-      $('#add-btn').off().click(function() {
-      });
-        data.formData = {
-         data: encodeURIComponent(JSON.stringify({
-          title: $('#title').val(), 
-          contents: $('#contents').val()
-        })
-        )};
-        var response = data.submit();
-        response.complete(function (result){
-          location.href='index.html';
-        })
-      },
-    done: function (e, data) {}
-}); 
-
-
 /*
-function selectLocalImage() {
-  const input = document.createElement('input');
-  input.setAttribute('type', 'file');
-  input.click();
-  
-  input.onchange = function() {
-    const fd = new FormData();
-    const file = $(this)[0].files[0];
-    fd.append('image', file);
-    
-    $.ajax({
-      type: 'post',
-      enctype: 'multipart/form-data',
-      url: '/bitcamp-team-project/upload/notice',
-      data: fd,
-      processData: false,
-      contentType: false,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader($("#_csrf_header").val(), $("#_csrf").val());
-      },
-      success: function(data) {
-        const range = quill.getSelection();
-        quill.insertEnbed(range.index, 'image', 'http://localhost:8080/bitcamp-team-project/upload' + data);
-      },
-      error: function(err) {
-        console.error("Error: " + err);
-      }
-       
-    }); //ajax
-  }
-}
-
-
 $(document).ready(function() {
   $.getJSON('/bitcamp-team-project/app/json/notice/files?no=' + param.split('=')[1], 
       function(data) {

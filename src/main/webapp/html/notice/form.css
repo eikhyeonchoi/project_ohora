@@ -1,7 +1,7 @@
 
 .ql-editor {
   min-height: 400px;
-  height: 600px;
+  max-height: 400px;
 }
 
 .form-control-plaintext {
