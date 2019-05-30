@@ -1,15 +1,4 @@
-var productNo = (location.href.split('?')[1]).split('=')[1],
-productName = '',
-nonMemberDiv = $('#non-member-div'),
-memberDiv = $('#common-member-div'),
-managerAndCompanyDiv = $('#company-manager-div'),
-fileDiv = $('#images-div'),
-no = sessionStorage.getItem('no'),
-type = sessionStorage.getItem('type'),
-tipBtn = $('#go-tip-btn');
-
-
-var productNo = location.href.split('?')[1].split('=')[1],
+var productNo = getQuerystring('no'),
     productName = '',
     nonMemberDiv = $('#non-member-div'),
     memberDiv = $('#common-member-div'),
@@ -20,13 +9,15 @@ var productNo = location.href.split('?')[1].split('=')[1],
     tipBtn = $('#go-tip-btn');
 
 var total = 0,
-satisAver = 0,
-level = 0,
-understand = 0,
-design = 0,
-asStf = 0,
-useful = 0,
-price = 0;
+    satisAver = 0,
+    level = 0,
+    understand = 0,
+    design = 0,
+    asStf = 0,
+    useful = 0,
+    price = 0;
+
+var tipNo = 0;
 
 $(document.body).bind('loaded.loginuser', () => {
   type = sessionStorage.getItem('type');
@@ -42,20 +33,26 @@ $(document.body).bind('loaded.loginuser', () => {
   }
 });
 
-$.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo
-    , function(product) {
-  productName = product.productName;
-  if (product.status == 'success') {
+
+$.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo, function(obj) {
+  console.log(obj);
+  productName = obj.product.name;
+  if (obj.status == 'success') {
     $('#product-name').html(productName);
   }
+  if (obj.product.tip != null) {
+    window.tipNo = obj.product.tip.no;
+  }
+  console.log(window.tipNo);
 });
+
+
 
 $(document).ready(function(){
   $('#product-delete-btn').hide();
   
   $('#product-delete-btn').click(function() {
-    console.log('delete start');
-    $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo, function(obj){
+    $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
       if (obj.status == 'success') {
         location.href = 'index.html';
         
@@ -70,7 +67,6 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, (obj) => {
     $('#product-name').html(productName);
-
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
       price += el.priceStf,
@@ -228,6 +224,13 @@ $(document).ready(function(){
   $(document.body).trigger('loaded-user');
 }); // ready
 
+
+
+
+
+
+
+
 $(document).bind('loaded-user', function() {
   $('#go-satisfy-add-btn').click(function() {
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
@@ -296,8 +299,16 @@ Chart.plugins.register({
 });
 
 
-
-
+function getQuerystring(key, default_){
+  if (default_==null) default_=""; 
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+  var qs = regex.exec(window.location.href);
+  if(qs == null)
+    return default_;
+  else
+    return qs[1];
+} // getQuerystring
 
 
 

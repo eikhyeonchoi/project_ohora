@@ -92,7 +92,7 @@
   
   <delete id="deleteByProductNo" parameterType="int">
     delete from 
-      product_file
+      tip
     where 
       product_no = #{value}
   </delete>

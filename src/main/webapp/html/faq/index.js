@@ -146,9 +146,9 @@ function faqTitleClick() {
     $(e.target).find('i').replaceWith('<i class="fas fa-angle-down mr-sm-2"></i>');
     $(e.target).css('font-size', '1.5em');
     $(e.target).css('font-style', 'bold');
-    $(e.target).closest('div').before('<hr class="head-line">');
+    $(e.target).closest('div').before('<hr>');
     $(e.target).closest('div').next().show();
-    $(e.target).closest('div').next().after('<hr class="head-line">')
+    $(e.target).closest('div').next().after('<hr>')
 
     $(document.body).trigger({
       type: 'loaded-type'

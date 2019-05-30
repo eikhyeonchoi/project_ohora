@@ -11,4 +11,6 @@ public interface TipHistoryDao {
    int insert(TipHistory tip);
    int update(TipHistory tip);
    int countAll();
+   int deleteByTipNo(int no);
 }
+

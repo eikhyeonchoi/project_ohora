@@ -143,7 +143,8 @@ public class TipController {
     System.out.println(no);
     HashMap<String,Object> contents = new HashMap<>();
     try {
-      String prd = productService.get(no);
+      Product product = productService.get(no);
+      String prd = product.getName();
       System.out.println(prd);
       contents.put("status", "success");
       contents.put("product", prd);

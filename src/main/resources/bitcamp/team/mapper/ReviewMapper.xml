@@ -112,9 +112,9 @@
   
   <delete id='deleteByProductNo' parameterType="int">
     delete from
-      satisfy
+      review
     where
-      product_no = #{value}
+      product_no=#{value}
   </delete>
   
   

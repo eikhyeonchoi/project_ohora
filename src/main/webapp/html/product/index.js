@@ -5,10 +5,12 @@ var searchSpan = $('#seachSpan'),
     smallSrc = $('#small-category-template').html(),
     formInline = $('.formInline'),
     basicSrc = $('#basic-list-form-template').html(),
+    cardSrc = $('#card-template').html(),
     type = sessionStorage.getItem('type');
 
 var largeCategoryGenerator = Handlebars.compile(largeSrc),
     smallCategoryGenerator = Handlebars.compile(smallSrc),
+    cardGenerator = Handlebars.compile(cardSrc),
     listGenerator = Handlebars.compile(basicSrc);
 
 
@@ -42,6 +44,8 @@ function loadList() {
       + '&smallNo=' + 0 
       + '&productName=' + 'undefined', function(obj){
     paging(obj);
+    
+    console.log(obj);
 
   }) // get
 }
@@ -50,11 +54,13 @@ function paging(obj) {
   page.pagination({
     dataSource: obj.list,
     showGoInput: true,
+    pageSize: 9,
     showGoButton: true,
     callback: function(data, pagination) {
-      tbody.children().remove();
+      $('#product-div').children().remove();
       var pageSrc = {list : data};
-      $(listGenerator(pageSrc)).appendTo(tbody);
+      // $(listGenerator(pageSrc)).appendTo(tbody);
+      $(cardGenerator(pageSrc)).appendTo($('#product-div'));
       $(document.body).trigger('loaded');
     }
   })
@@ -109,7 +115,7 @@ $(document.body).bind('loaded-search-list', ()=> {
 
 
 function afterLoadedClickEvent(){
-  $('.product-a-class').click((e) => {
+  $('.product-view-btn').click((e) => {
     location.href= 'view.html?no=' + $(e.target).attr('data-no');
   })
 }

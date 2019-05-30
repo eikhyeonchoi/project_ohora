@@ -83,8 +83,8 @@ public class ProductController {
   public Object detail(int no) {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      String productName = productService.get(no);
-      content.put("productName", productName);
+      Product product = productService.get(no);
+      content.put("product", product);
       content.put("status", "successs");
 
     } catch (Exception e) {
@@ -137,8 +137,9 @@ public class ProductController {
 
     return returnMap;
   } // list
-
-
+  
+  
+  
   @PostMapping("add")
   public Object add(Product product, Part[] productFiles) {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
@@ -152,16 +153,20 @@ public class ProductController {
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
 
       for (Part part : productFiles) {
-        String filename = UUID.randomUUID().toString() + ".png";
+        String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
-        part.write(filepath);
-
         part.write(filepath);
 
         ProductFile productFile = new ProductFile();
         productFile.setImg(filename);
 
         files.add(productFile);
+        
+        try {
+          makeThumbnail(filepath);
+        } catch(Exception e) {
+          throw new RuntimeException("썸네일 생성중 오류발생");
+        }
       } // for
 
       product.setProductFiles(files);
@@ -176,6 +181,7 @@ public class ProductController {
       } else {
         productService.add(product);
         content.put("status", "success");
+        
       }
     } catch (Exception e) {
       content.put("status", "fail");
@@ -184,6 +190,8 @@ public class ProductController {
     return content;
   } // add
 
+  
+  
   @PostMapping("update")
   public Object update(Product product, Part[] productFile) {
     this.uploadDir = servletContext.getRealPath("/upload/productfile");
@@ -191,7 +199,8 @@ public class ProductController {
     HashMap<String,Object> contents = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
 
-    String orderName = productService.get(product.getNo());
+    Product getProduct = productService.get(product.getNo());
+    String orderName = getProduct.getName();
 
     try {
       if (product.getName().equals("")) {
@@ -202,7 +211,8 @@ public class ProductController {
           continue;
         }
         String filename = UUID.randomUUID().toString();
-        part.write(filename);
+        String filepath = uploadDir + "/" + filename;
+        part.write(filepath);
 
         ProductFile pfiles = new ProductFile();
         pfiles.setImg(filename);
@@ -224,10 +234,16 @@ public class ProductController {
 
 
   @GetMapping("delete")
-  public Object delete(int no) {
+  public Object delete(int no,
+      @RequestParam(required = false) int tipNo) {
     HashMap<String, Object> content = new HashMap<>();
+    HashMap<String, Object> paramNumbers = new HashMap<>();
+    
+    paramNumbers.put("productNo", no);
+    paramNumbers.put("tipNo", tipNo);
+    
     try {
-      if (productService.deleteProduct(no) == 0) {
+      if (productService.deleteProduct(paramNumbers) == 0) {
         throw new Exception("해당 번호의 제품이 없습니다");
       }
       content.put("status", "success");
@@ -239,19 +255,18 @@ public class ProductController {
   } // delete
 
 
-
-  @SuppressWarnings("unused")
-  private void makeThumbnail(String filePath, String fileName) throws Exception { 
+  private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
-    int dw = 250, dh = 150; 
-    int ow = srcImg.getWidth(); int oh = srcImg.getHeight(); 
-    int nw = ow; int nh = (ow * dh) / dw;
+    int dw = 235, dh = 225; 
+    int ow = srcImg.getWidth(); 
+    int oh = srcImg.getHeight(); 
+    int nw = ow; 
+    int nh = (ow * dh) / dw;
     if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } 
     BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
     BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
-    String thumbName = filePath + "THUMB_" + fileName; 
-    File thumbFile = new File(thumbName);
-    ImageIO.write(destImg, ".png", thumbFile);
+    File thumbFile = new File(filePath + "_thumb");
+    ImageIO.write(destImg, "jpg", thumbFile);
   } // makeThumbnail
 
 

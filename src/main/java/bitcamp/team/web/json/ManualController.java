@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.ManualFile;
+import bitcamp.team.domain.Product;
 import bitcamp.team.service.ManualService;
 import bitcamp.team.service.ProductService;
 
@@ -89,7 +90,9 @@ public class ManualController {
       }
       
       manual.setManualFile(files);
-      manual.setName(productService.get(no));
+      
+      Product product = productService.get(no);
+      manual.setName(product.getName());
       
       manualService.add(manual);
       content.put("status", "success");
