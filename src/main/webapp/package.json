@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.7.1",
     "blueimp-file-upload": "^9.30.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",

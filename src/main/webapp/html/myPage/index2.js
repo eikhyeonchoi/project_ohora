@@ -1,12 +1,13 @@
 var nickName = '',
 email = '',
 tel = '',
-lock = $('#lockImg');
+lock = $('#lock-img');
+input1 = $('#input-div');
 
 
 
 $(document.body).ready(function() {
-  $('#lock-img').hide();
+  input1.hide();
   $(document.body).bind('loaded.loginuser', function() {
     nickName = sessionStorage.getItem('nickName');
     email = sessionStorage.getItem('email');
@@ -25,10 +26,20 @@ $(document).bind('loaded-user', function() {
     lock.addClass('animated ' + 'bounce');
     window.setTimeout( function(){
       lock.removeClass('animated ' + 'bounce');
-      alert('가즈아')
+      showInput()
     }, 2000);
   });
+
 });
+
+function showInput() {
+  lock.hide();
+  input1.show();
+  input1.addClass('animated ' + 'bounceInRight');
+  window.setTimeout( function(){
+    input1.removeClass('animated ' + 'bounceInRight');
+  }, 3000);
+};
 
 //전화번호를 **로 바꿔주는 함수
 function secretTel (tel) {

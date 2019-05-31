@@ -4,14 +4,11 @@
 }
 
 #my-title {
-	margin-top: 40px;
-	text-align: center;
-}
-
-h4 {
+	margin: 25px 0px 20px 45px;
 }
 
 dt {
+	min-height: 20px;
 	float: left;
 }
 
@@ -21,18 +18,15 @@ dd {
 }
 
 .mybtn {
+	margin-bottom: 20px;
 	width: 70px;
 }
 
 .row {
-	min-width: 300px;
-	min-height: 300px;
-	padding: 10px;
-	margin: 10px;
-}
-
-.my-row {
 	border: 1px solid #BDBDBD;
+	box-sizing: border-box;
+	min-width: 300px;
+	margin: 10px;
 	background-color: white;
 }
 
@@ -43,3 +37,24 @@ dd {
 body {
 	background-color: #F2F2F2
 }
+
+.my-col {
+	margin: 20px;
+	box-sizing: border-box;
+}
+
+#tel-dl {
+	min-height: 70px;
+}
+
+.my-img {
+	width: 100%;
+	height: auto;
+}
+
+.animated {
+  animation-duration: 3s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+

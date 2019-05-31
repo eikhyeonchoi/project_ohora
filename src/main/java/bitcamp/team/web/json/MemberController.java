@@ -66,9 +66,14 @@ public class MemberController {
   }
 
   @GetMapping("password")
-  public Object password(String password) throws Exception {
+  public Object password(String email, String password) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-
+    Member member = memberService.getEmailPassword(email, password);
+    if (member != null) {
+      content.put("status", "success");
+    } else {
+      content.put("status", "fail");
+    }
     return content;
   }
 

@@ -39,7 +39,7 @@ public class AuthController {
       String password,
       HttpSession session) {
 
-    Member member = memberService.get(email, password);
+    Member member = memberService.getEmailPassword(email, password);
     HashMap<String,Object> content = new HashMap<>();
 
     if (member == null) {

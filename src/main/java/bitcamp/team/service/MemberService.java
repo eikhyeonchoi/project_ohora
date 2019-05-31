@@ -7,7 +7,7 @@ public interface MemberService {
   List<Member> list();
   int add(Member member);
   Member get(int no);
-  Member get(String email, String password);
+  Member getEmailPassword(String email, String password);
   int getNo(String nickName);
   int authEmail(String nickName);
   int getEmail(String email);
