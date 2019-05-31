@@ -29,7 +29,7 @@ function loadLoginUser() {
       $('#bit-login-state').show();
       $('#login-username').html(data.user.nickName);
       $('#login-username').click(function(){
-        location.href = '/bitcamp-team-project/html/myPage/index.html';  
+        location.href = '/bitcamp-team-project/html/myPage/password.html';  
       });
       
       sessionStorage.setItem('no', data.user.no);

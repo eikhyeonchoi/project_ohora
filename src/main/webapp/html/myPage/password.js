@@ -14,7 +14,7 @@ $(document.body).bind('loaded-user', function() {
 });
 
 $('#cancel-btn').click(function() { 
-  location.replace('index.html');
+  location.replace('/bitcamp-team-project/index.html');
 });
 
 $('#confirm-btn').click(function() {
