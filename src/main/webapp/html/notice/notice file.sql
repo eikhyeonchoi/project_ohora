@@ -7,3 +7,7 @@ create table notice_file (
     references notice (ntc_no)
 );
 
+ALTER TABLE notice
+  MODIFY COLUMN conts mediumtext NOT NULL;
+
+
