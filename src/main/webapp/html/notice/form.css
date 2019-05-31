@@ -1,13 +1,17 @@
+#quillEditor {
+	min-height: 410px;
+	max-height: 410px;
+}
 
 .ql-editor {
-  min-height: 400px;
-  max-height: 400px;
+	min-height: 400px;
+	max-height: 400px;
 }
 
 .form-control-plaintext {
-  border: solid 1px #ccc;
-  padding-left: 15px;
-  padding-right: 15px;
+	border: solid 1px #ccc;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .editor {

@@ -151,7 +151,6 @@ public class ProductController {
           product.getSmallCategoryNo() == 0 || 
           product.getManufacturerNo() == 0)
         throw new Exception("필수 입력 사항을 입력하지 않았습니다");
-
       for (Part part : productFiles) {
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
@@ -218,6 +217,13 @@ public class ProductController {
         pfiles.setImg(filename);
         pfiles.setProductNo(product.getNo());
         files.add(pfiles);
+        
+        try {
+          makeThumbnail(filepath);
+        } catch(Exception e) {
+          throw new RuntimeException("썸네일 생성중 오류발생");
+        }
+        
       }
       product.setProductFiles(files);
       if (files.size() == 0) {
@@ -257,7 +263,7 @@ public class ProductController {
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
-    int dw = 235, dh = 225; 
+    int dw = 350, dh = 350; 
     int ow = srcImg.getWidth(); 
     int oh = srcImg.getHeight(); 
     int nw = ow; 

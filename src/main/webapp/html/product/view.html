@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/chart.js/dist/Chart.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
@@ -30,9 +31,9 @@
 
     <div class='row'>
       <div id='non-member-div' class='col-sm-6'>
-        <button id='go-manual-btn' class="btn btn-sm btn-light">메뉴얼 보러가기</button>
-        <button id='go-reivew-btn' class="btn btn-sm btn-light">리뷰 보러가기</button>
-        <button id='go-tip-btn' class="btn btn-sm btn-light">팁 보러가기</button>
+        <button id='go-manual-btn' class="btn btn-sm btn-light">메뉴얼</button>
+        <button id='go-reivew-btn' class="btn btn-sm btn-light">리뷰</button>
+        <button id='go-tip-btn' class="btn btn-sm btn-light">팁</button>
       </div>
 
       <div id='common-member-div' class='col-sm-2 offset-sm-4 pr-sm-0 pl-sm-4'>
@@ -50,16 +51,17 @@
       </div>
     </div>
 
-    <canvas id="horizontalBar" class="horizon"></canvas>
-  </div>
-  <!-- container -->
-
+    <canvas id="chart-div"></canvas>
+  </div><!-- container -->
+  
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="../header.js"></script>
+  <script src="../footer.js"></script>
   <script src="view.js"></script>
 </body>
 </html>

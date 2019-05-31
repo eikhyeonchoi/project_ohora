@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -23,10 +24,9 @@
     <div id='product-div' class='row mt-sm-3'>
     </div> <!-- product-div -->
     
-    <div id="pagination-container"></div>
+    <div id="pagination-container" class='mb-sm-5'></div>
     
   </div> <!-- container -->
-
 
   <script id="large-category-template" type="text/x-handlebars-template">
     <select id='lageCtgSelect' class="custom-select">
@@ -69,7 +69,6 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-outline-secondary product-view-btn" data-no='{{no}}' data-name='{{name}}'>View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary product-edit-btn" data-no='{{no}}' data-name='{{name}}'>Edit</button>
               </div>
               <small class="text-muted">{{manufacturer.name}}</small>
             </div>
@@ -85,7 +84,9 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="../header.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/bitcamp-team-project/html/header.js"></script>
+  <script src="/bitcamp-team-project/html/footer.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

@@ -1,21 +1,21 @@
 var productNo = getQuerystring('no'),
-    productName = '',
-    nonMemberDiv = $('#non-member-div'),
-    memberDiv = $('#common-member-div'),
-    managerAndCompanyDiv = $('#company-manager-div'),
-    fileDiv = $('#images-div'),
-    no = sessionStorage.getItem('no'),
-    type = sessionStorage.getItem('type'),
-    tipBtn = $('#go-tip-btn');
+productName = '',
+nonMemberDiv = $('#non-member-div'),
+memberDiv = $('#common-member-div'),
+managerAndCompanyDiv = $('#company-manager-div'),
+fileDiv = $('#images-div'),
+no = sessionStorage.getItem('no'),
+type = sessionStorage.getItem('type'),
+tipBtn = $('#go-tip-btn');
 
 var total = 0,
-    satisAver = 0,
-    level = 0,
-    understand = 0,
-    design = 0,
-    asStf = 0,
-    useful = 0,
-    price = 0;
+satisAver = 0,
+level = 0,
+understand = 0,
+design = 0,
+asStf = 0,
+useful = 0,
+price = 0;
 
 var tipNo = 0;
 
@@ -27,7 +27,7 @@ $(document.body).bind('loaded.loginuser', () => {
   } else if (type == 1) {
     memberDiv.show();
   }
-  
+
   if (type == 3){
     $('#product-delete-btn').show();
   }
@@ -43,25 +43,25 @@ $.getJSON('/bitcamp-team-project/app/json/product/detail?no=' + productNo, funct
   if (obj.product.tip != null) {
     window.tipNo = obj.product.tip.no;
   }
-  console.log(window.tipNo);
+  console.log('tipNo => '+window.tipNo);
 });
 
 
 
 $(document).ready(function(){
   $('#product-delete-btn').hide();
-  
+
   $('#product-delete-btn').click(function() {
     $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
       if (obj.status == 'success') {
         location.href = 'index.html';
-        
+
       } else {
         alert('삭제 실패!! \n' + obj.message);
       }
     })
   });
-  
+
   managerAndCompanyDiv.hide();
   memberDiv.hide();
 
@@ -83,9 +83,9 @@ $(document).ready(function(){
     design = (design / (obj.totalColumn)).toFixed(2);
     asStf = (asStf / (obj.totalColumn)).toFixed(2);
     useful = (useful / (obj.totalColumn)).toFixed(2);
-    
+
     var empty = 0;
-    
+
     if (isNaN(satisAver)) {
       console.log('값이 없습니다');
       new Chart($('#pie-div'), {
@@ -144,9 +144,9 @@ $(document).ready(function(){
         } // option
       }); // pie chart
     }
-    
+
     // 만족도 차트
-    new Chart($("#horizontalBar"), {
+    new Chart($("#chart-div"), {
       type: "polarArea",
       data: {
         labels: ["가격 만족도", "사용 난이도", "이해도", "디자인", "a/s만족도", "사용 만족도"],
@@ -160,8 +160,8 @@ $(document).ready(function(){
             "rgba(11, 83, 69, 0.7)",
             "rgba(120, 66, 18, 0.7)",
             "rgba(23, 32, 42, 0.7)"
-          ] //,
-          /*
+            ] //,
+        /*
           borderColor: [
             "rgb(255, 159, 64)",
             "rgb(255, 205, 86)",
@@ -170,7 +170,7 @@ $(document).ready(function(){
             "rgb(153, 102, 255)",
             "rgb(201, 203, 207)"
           ]
-          */
+         */
         }]
       },
       options: {
@@ -199,10 +199,12 @@ $(document).ready(function(){
     } else {
       if (type < 1) {
         tipBtn.show();
-        tipBtn.text('팁 없음');
+        tipBtn.click(function() {
+          swal("팁 보기 오류", "등록된 팁이 존재하지 않습니다", "info");
+        });
       } else {
         tipBtn.show();
-        tipBtn.text('팁 등록하기');
+        tipBtn.text('팁 등록');
         tipBtn.click(function() {
           location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
         });
@@ -225,22 +227,16 @@ $(document).ready(function(){
 }); // ready
 
 
-
-
-
-
-
-
 $(document).bind('loaded-user', function() {
   $('#go-satisfy-add-btn').click(function() {
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
-          if (obj.status == 'fail') {
-            alert('이미 만족도를 등록하셨습니다');
-            $('#go-satisfy-add-btn').prop('disabled',true);
-          } else {
-            location.href = '../satisfy/add.html?productNo=' + productNo;
-          }
-        }) // get
+      if (obj.status == 'fail') {
+        alert('이미 만족도를 등록하셨습니다');
+        $('#go-satisfy-add-btn').prop('disabled',true);
+      } else {
+        location.href = '../satisfy/add.html?productNo=' + productNo;
+      }
+    }) // get
   }) // click
 
 
