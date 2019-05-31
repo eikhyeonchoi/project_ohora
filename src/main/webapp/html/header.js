@@ -44,6 +44,7 @@ function loadLoginUser() {
     } else {
       $('#bit-not-login-state').show();
       $('#bit-login-state').hide();
+      $("#bit-auth-div").show();
     }
   });
 }

@@ -37,7 +37,7 @@ if (param) {
         ['clean']                                         // remove formatting button
         ],
         imageUpload: {
-            url: '../../app/json/notice/add', // server url. If the url is empty then the base64 returns
+            url: '../../app/json/notice/upload', // server url. If the url is empty then the base64 returns
             dataType: 'json',
             method: 'POST', // change query method, default 'POST'
             name: 'image', // custom form name

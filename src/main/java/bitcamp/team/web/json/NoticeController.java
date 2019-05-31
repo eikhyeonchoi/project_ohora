@@ -23,6 +23,25 @@ public class NoticeController {
   @Autowired
   ServletContext servletContext;
 
+  @PostMapping("upload")
+  public Object upload(Part[] noticeFile) {
+    ArrayList<NoticeFile> files = new ArrayList<>();
+
+    try {
+      for (Part part : noticeFile) {
+        String filename = UUID.randomUUID().toString();
+        String filepath = servletContext.getRealPath("/upload/notice/" + filename);
+        part.write(filepath);
+        NoticeFile file = new NoticeFile();
+        file.setFilePath(filename);
+        files.add(file);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return files;
+  }
+
   @PostMapping("add")
   public Object add(Part[] noticeFile, Notice notice) {
     HashMap<String, Object> content = new HashMap<>();
