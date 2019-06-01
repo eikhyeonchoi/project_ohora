@@ -9,6 +9,7 @@ div.manual {
 .categoryItem {
 	margin-left: 20px;
 	font: 14px HanSans;
+	color: white;
 }
 
 .simpleConts {
@@ -23,6 +24,7 @@ div.manual {
 	min-height: 700px;
 	padding: 30px;
 	font: 30px;
+	color: white;
 }
 
 .show {
@@ -40,29 +42,23 @@ div.manual {
 a.active {
 	font-weight: bold;
 }
-#myTab {
-	background: gray;
-}
-#productName {
-	width: 200px;
-	font: 40px HanSans;
-	font-weight: bold;
-	max-height: 4.8em;
-  overflow: hidden;
-}
-#memberName {
-	width: 120px;
-	font: 16px HanSans;
-	font-style: italic;
-	padding: 25px;
-}
-#slice {
-	width: 5px;
-	height: 20px;
-	background-color: rgb(255, 255, 255);
-	display: inline-block;
-}
 
+.tableRow {
+  min-height: 1098px;
+}
+.simpleConts {
+  min-width: 210px;
+}
+.pic {
+  min-width: 210px;
+}
+.card-text {
+  max-height: 4.8em;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 
 img {
 	width: 400px;
@@ -91,23 +87,37 @@ td:nth-child(3) {
   text-align: center;
   width: 100px;
 }
-div.tableRow {
-	min-height: 1098px;
+
+body {
+	background: black;
 }
-div.simpleConts {
-	min-width: 210px;
-}
-div.pic {
-	min-width: 210px;
-}
-p.card-text {
-  max-height: 4.8em;
-  overflow: hidden;
-  display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
+
 #pagination-container {
   width: 350px;
   margin: 0 auto;
+}
+
+#myTab {
+  background: gray;
+  margin: auto;
+  width: 1000px;
+}
+#productName {
+  width: 200px;
+  font: 40px HanSans;
+  color: white;
+  font-weight: bold;
+  max-height: 4.8em;
+  overflow: hidden;
+}
+#memberName {
+  width: 120px;
+  font: 16px HanSans;
+  color: white;
+  padding: 25px;
+}
+
+#contents {
+  font: 16px HanSans;
+  color: white;
 }
