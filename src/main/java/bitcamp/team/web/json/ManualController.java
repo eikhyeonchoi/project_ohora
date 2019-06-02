@@ -115,7 +115,13 @@ public class ManualController {
     try {
       manufacturerService.get(no);
       List<Manual> manual = manualService.get(no);
+      List<ManualFile> mFile = manual.get(0).getManualFile();
+      ManualFile typeNo = new ManualFile();
+      for (ManualFile cont : mFile) {
+        typeNo.setTypeNo(cont.getTypeNo());
+      }
       contents.put("manual", manual);
+      contents.put("mFile", mFile);
       contents.put("status", "success");
     } catch (Exception e) {
       contents.put("status", "fail");

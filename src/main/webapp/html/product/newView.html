@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>product view</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
@@ -13,28 +14,53 @@
   <header class="ohr-main-header"></header>
   <div class="container-fluid">
   
-    <div class='row'>
-      <div id='product-div' class='col-sm-4 pl-sm-0 pr-sm-0'>
-        <div id='product-inform-div' class='mt-sm-5'>
+    <div id='main-div' class='row mt-sm-1'>
+      <div id='product-div' class='col-sm-3 pl-sm-0 pr-sm-0'>
+        <div id='product-inform-div' class='col-sm-12'>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <i class="far fa-question-circle"></i>
+          <p>이 제품의 대해 더 많은 정보를 보고싶다면 ??</p>
         </div>
         
         <div id='product-hover-div' class='col-sm-12' style="display: none;">
           <div id='product-thumbnail-img-div' class='mt-sm-5'></div>
-          <button type="button" class='btn btn-outline-dark btn-block'>메뉴얼</button>
-          <button type="button" class='btn btn-outline-dark btn-block'>리뷰</button>
-          <button type="button" class='btn btn-outline-dark btn-block'>팁</button>
+          <div id='btn-div' class='mt-sm-5'>
+            <button id='manual-btn' type="button" class='btn btn-outline-dark btn-block'>메뉴얼</button>
+            <button id='review-btn' type="button" class='btn btn-outline-dark btn-block'>리뷰</button>
+            <button id='tip-btn' type="button" class='btn btn-outline-dark btn-block'>팁</button>
+            <button id='satisfy-btn' type="button" class='btn btn-outline-dark btn-block'>만족도 평가</button>
+            <button id='product-update-btn' type="button" class='btn btn-outline-dark btn-block'>제품 수정</button>
+            <button id='product-delete-btn' type="button" class='btn btn-outline-dark btn-block'>제품 삭제</button>
+          </div>
         </div>
       </div>
       
-      <div id='fixed-background-div' class='col-sm-8 pl-sm-0 pr-sm-0'>
-        <img src='/bitcamp-team-project/upload/productfile/lc_notebook.jpg' style="width: 99%; height: auto;">
+      <div id='fixed-background-div' class='col-sm-9 pl-sm-0 pr-sm-0'>
+        <div id='img-div-by-large-category' class='col-sm-12'></div>
+        <div id='chart-div' class='col-sm-12 ' style="display: none;">
+          <div id='chart-div-top' class='row'>
+            <div id='user-evaluation-div' class='col-sm-6'>
+            </div>
+            <div id='pie-canvas-div' class='col-sm-6 p-sm-0'>
+              <canvas id="pie-canvas" height='0'></canvas>
+            </div>
+          </div>
+          <div id='chart-div-bottom'>
+            <canvas id="bar-canvas" height='0'></canvas>
+          </div>
+        </div>
       </div>
+      
     </div>
-    
-
     
     
   </div> <!-- container -->
+  
   
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>

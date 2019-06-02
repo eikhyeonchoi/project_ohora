@@ -33,6 +33,7 @@ function loadList() {
           callback: function(data, pagination) {
             divRow.children().remove();
             var pageObj = {list: data};
+            console.log(pageObj);
             $(pageGenerator(pageObj)).appendTo(divRow);
             $(document.body).trigger('loaded-list');
           }

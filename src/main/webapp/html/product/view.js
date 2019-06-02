@@ -106,8 +106,8 @@ $(document).ready(function(){
           elements: {
             center: {
               text: 0,
-              fontStyle: 'Helvetica', //Default Arial
-              sidePadding: 15 //Default 20 (as a percentage)
+              fontStyle: 'Helvetica', // Default Arial
+              sidePadding: 15 // Default 20 (as a percentage)
             }
           },
           cutoutPercentage:70,
@@ -134,8 +134,8 @@ $(document).ready(function(){
           elements: {
             center: {
               text: satisAver,
-              fontStyle: 'Helvetica', //Default Arial
-              sidePadding: 15 //Default 20 (as a percentage)
+              fontStyle: 'Helvetica', // Default Arial
+              sidePadding: 15 // Default 20 (as a percentage)
             }
           },
           cutoutPercentage:70,
@@ -147,47 +147,38 @@ $(document).ready(function(){
 
     // 만족도 차트
     new Chart($("#chart-div"), {
-      type: "polarArea",
+      type: "bar",
       data: {
+        label: "만족도 그래프",
         labels: ["가격 만족도", "사용 난이도", "이해도", "디자인", "a/s만족도", "사용 만족도"],
         datasets: [{
           data: [price, level, understand, design, asStf, useful],
           fill: false,
-          backgroundColor: [
-            "rgba(77, 86, 86, 0.7)",
-            "rgba(21, 67, 96, 0.7)",
-            "rgba(123, 125, 125, 0.7)",
-            "rgba(11, 83, 69, 0.7)",
-            "rgba(120, 66, 18, 0.7)",
-            "rgba(23, 32, 42, 0.7)"
-            ] //,
-        /*
-          borderColor: [
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(201, 203, 207)"
+          backgroundColor: ["rgba(255, 159, 64, 0.8)",
+            "rgba(255, 205, 86, 0.8)", "rgba(75, 192, 192, 0.8)", "rgba(54, 162, 235, 0.8)",
+            "rgba(153, 102, 255, 0.8)", "rgba(201, 203, 207, 0.8)"
           ]
-         */
         }]
       },
       options: {
-        "scales": {
-          "xAxes": [{
-            "ticks": {
-              "min": 0,
-              "max": 5,
-              "stepSize": 0.5,
-              "beginAtZero": true
+        scales: {
+          yAxes: [{
+            barThickness: 6,
+            ticks: {
+              min: 0,
+              max: 5,
+              stepSize: 0.5,
+              beginAtZero: true
             }
+          }],
+          xAxes: [{
+            barThickness: 6,
           }]
         }
       }
-    }); // chart
+    });
 
-  }) //get
+  }) // get
 
   $.getJSON('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, 
       function(obj){
@@ -250,14 +241,14 @@ $('#go-product-update-btn').click(function() {
 })
 
 
-//도넛 차트에서 필요한 plugin
+// 도넛 차트에서 필요한 plugin
 Chart.plugins.register({
   beforeDraw: function (chart) {
     if (chart.config.options.elements.center) {
-      //Get ctx from string
+      // Get ctx from string
       var ctx = chart.chart.ctx;
 
-      //Get options from the center object in options
+      // Get options from the center object in options
       var centerConfig = chart.config.options.elements.center;
       var fontSize = centerConfig.fontSize || '50';
       var fontStyle = centerConfig.fontStyle || 'Arial';
@@ -265,10 +256,11 @@ Chart.plugins.register({
       var color = centerConfig.color || '#000';
       var sidePadding = centerConfig.sidePadding || 20;
       var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
-      //Start with a base font of 30px
+      // Start with a base font of 30px
       ctx.font = fontSize + "px " + fontStyle;
 
-      //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+      // Get the width of the string and also the width of the element minus 10
+      // to give it 5px side padding
       var stringWidth = ctx.measureText(txt).width;
       var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
 
@@ -280,7 +272,7 @@ Chart.plugins.register({
       // Pick a new font size so it will not be larger than the height of label.
       var fontSizeToUse = Math.min(newFontSize, elementHeight);
 
-      //Set font settings to draw it correctly.
+      // Set font settings to draw it correctly.
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
@@ -288,7 +280,7 @@ Chart.plugins.register({
       ctx.font = fontSizeToUse+"px " + fontStyle;
       ctx.fillStyle = color;
 
-      //Draw text in center
+      // Draw text in center
       ctx.fillText(txt, centerX, centerY);
     }
   }

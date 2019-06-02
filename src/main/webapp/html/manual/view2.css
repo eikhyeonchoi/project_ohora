@@ -1,0 +1,160 @@
+div.manual {
+	width: 1600px;
+}
+
+.category {
+	height: 45px;
+	text-align: left;
+}
+.categoryItem {
+	margin-left: 20px;
+	font: 14px HanSans;
+	color: white;
+}
+
+.simpleConts {
+	margin: 30px; 
+}
+
+.nav-link {
+	color: white;
+}
+
+.tab-content {
+	min-height: 700px;
+	padding: 30px;
+	font: 30px;
+	color: white;
+}
+
+.innerForm1 {
+	background-color: black; 
+}
+.innerForm2 {
+  background-color: gray; 
+}
+.innerForm3 {
+  background-color: blue; 
+}
+.innerForm4 {
+  background-color: navy; 
+}
+
+.show {
+	font-weight: bold;
+}
+
+a.active {
+	font-weight: bold;
+}
+
+.tableRow {
+  min-height: 1098px;
+}
+.simpleConts {
+  min-width: 210px;
+}
+.pic {
+  min-width: 210px;
+}
+.card-text {
+  max-height: 4.8em;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+img {
+	width: 400px;
+	height: 0 auto;
+}
+th:nth-child(1) {
+  width: 500px;
+  text-align: center;
+}
+
+th:nth-child(2) {
+  text-align: center;
+  width: 100px;
+}
+
+th:nth-child(3) {
+	text-align: center;
+  width: 100px;
+}
+
+td:nth-child(2) {
+  text-align: center;
+}
+
+td:nth-child(3) {
+  text-align: center;
+  width: 100px;
+}
+
+body {
+	background: black;
+}
+
+#conts1 {
+  background-color: orange;
+}
+
+#window2 {
+  background-color: pink;
+}
+
+#window3 {
+  background-color: gray;
+}
+
+#window4 {
+  background-color: skyblue;
+}
+
+#pagination-container {
+  width: 350px;
+  margin: 0 auto;
+}
+
+#myTab {
+  background: gray;
+  margin: auto;
+  width: 1000px;
+}
+#productName {
+  width: 200px;
+  font: 40px HanSans;
+  color: white;
+  font-weight: bold;
+  max-height: 4.8em;
+  overflow: hidden;
+}
+#memberName {
+  width: 120px;
+  font: 16px HanSans;
+  color: white;
+  padding: 25px;
+}
+
+#contents {
+  font: 16px HanSans;
+  color: white;
+}
+
+section:nth-child(2n-1) {
+  padding: 30px;
+  background: gray;
+  margin: 5px auto;
+  width: 80vw;
+  height: 100vh;
+}
+
+section:nth-child(2n) {
+  padding: 30px;
+  background: black;
+  margin: 5px auto;
+  width: 80vw;
+  height: 100vh;
+}

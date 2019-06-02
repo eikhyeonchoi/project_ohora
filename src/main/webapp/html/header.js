@@ -23,6 +23,7 @@ $(document.body).bind('loaded.header', function(data) {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
+    console.log(data);
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
@@ -45,6 +46,9 @@ function loadLoginUser() {
       $('#bit-not-login-state').show();
       $('#bit-login-state').hide();
       $("#bit-auth-div").show();
+      
+      // fail 일때도 trigger 보내줘야함 // 0602 최익현 추가
+      $(document.body).trigger('loaded.loginuser');
     }
   });
 }

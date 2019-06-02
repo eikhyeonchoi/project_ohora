@@ -1,42 +1,14 @@
-.header {
-	width: 290px;
-	height: 45px;
-	background-color: rgb(158, 158, 158);
-	opacity: 0.7; 
-	border-radius: 2px 2px 0px 0px;
-	text-align: center;
-}
-
-.headerRow {
-	margin: 5px;
-	display: inline-block;
-}
-
-.header-name {
-	font-weight: normal;
-	font: 24px HanSans;
-	color: rgb(255, 255, 255);
-	text-align: center;
-	display: inline-block;
-}
-
-.header-conts {
-	font-weight: normal;
-  font: 16px HanSans;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  display: inline-block;
+div.manual {
+	width: 1600px;
 }
 
 .category {
-	border: 1px solid gray;
-	border-radius: 2px 2px 0px 0px;
 	height: 45px;
 	text-align: left;
 }
 .categoryItem {
 	margin-left: 20px;
-	font: 24px HanSans;
+	font: 14px HanSans;
 }
 
 .simpleConts {
@@ -55,6 +27,14 @@
 
 .show {
 	font-weight: bold;
+}
+
+.innerForm {
+	padding: 30px;
+	background: gray;
+	margin: 5px auto;
+	height: 300px;
+  width:800px;
 }
 
 a.active {
