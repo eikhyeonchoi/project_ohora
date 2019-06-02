@@ -14,8 +14,8 @@
   <header class="ohr-main-header"></header>
   <div class="container-fluid">
   
-    <div id='main-div' class='row'>
-      <div id='product-div' class='col-sm-4 pl-sm-0 pr-sm-0'>
+    <div id='main-div' class='row mt-sm-1'>
+      <div id='product-div' class='col-sm-3 pl-sm-0 pr-sm-0'>
         <div id='product-inform-div' class='col-sm-12'>
           <br>
           <br>
@@ -29,18 +29,30 @@
         
         <div id='product-hover-div' class='col-sm-12' style="display: none;">
           <div id='product-thumbnail-img-div' class='mt-sm-5'></div>
-          <div id='non-member-view-div' class=''>
-            <button type="button" class='btn btn-outline-dark btn-block btn-sm'>메뉴얼</button>
-            <button type="button" class='btn btn-outline-dark btn-block btn-sm'>리뷰</button>
-            <button type="button" class='btn btn-outline-dark btn-block btn-sm'>팁</button>
+          <div id='btn-div' class='mt-sm-5'>
+            <button id='manual-btn' type="button" class='btn btn-outline-dark btn-block'>메뉴얼</button>
+            <button id='review-btn' type="button" class='btn btn-outline-dark btn-block'>리뷰</button>
+            <button id='tip-btn' type="button" class='btn btn-outline-dark btn-block'>팁</button>
+            <button id='satisfy-btn' type="button" class='btn btn-outline-dark btn-block'>만족도 평가</button>
+            <button id='product-update-btn' type="button" class='btn btn-outline-dark btn-block'>제품 수정</button>
+            <button id='product-delete-btn' type="button" class='btn btn-outline-dark btn-block'>제품 삭제</button>
           </div>
         </div>
       </div>
       
-      <div id='fixed-background-div' class='col-sm-8 pl-sm-0 pr-sm-0'>
-        <div id='img-div-by-large-category' class='col-sm-12' style="display: none;"></div>
-        <div id='chart-div' class='col-sm-12'>
-          <canvas id="pie-canvas" width="100%" height="50%"></canvas>
+      <div id='fixed-background-div' class='col-sm-9 pl-sm-0 pr-sm-0'>
+        <div id='img-div-by-large-category' class='col-sm-12'></div>
+        <div id='chart-div' class='col-sm-12 ' style="display: none;">
+          <div id='chart-div-top' class='row'>
+            <div id='user-evaluation-div' class='col-sm-6'>
+            </div>
+            <div id='pie-canvas-div' class='col-sm-6 p-sm-0'>
+              <canvas id="pie-canvas" height='0'></canvas>
+            </div>
+          </div>
+          <div id='chart-div-bottom'>
+            <canvas id="bar-canvas" height='0'></canvas>
+          </div>
         </div>
       </div>
       
