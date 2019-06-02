@@ -6,6 +6,7 @@
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
 >
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="view2.css">
@@ -54,43 +55,48 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="generalContents" 
            role="tabpanel" aria-labelledby="general-tab">
-           <div id="carouselExam" class="carousel slide carousel-fade" data-ride="carousel">
-              <div class="carousel-inner innerForm">
-                
-              </div>
+         <div class="innerForm1">
+           <section id="conts1">
+             <div class="animated fadeIn">
+               <h2></h2>
+             </div>
+           </section>
+           <section id="conts2">
+             <div class="animated fadeIn">
+               <h2></h2>
+             </div>
+           </section>
+           <section id="conts3">
+             <div class="animated fadeIn">
+               <h2></h2>
+             </div>
+           </section>
+           <section id="conts4">
+             <div class="animated fadeIn">
+               <h2></h2>
+             </div>
+           </section>
         </div>
+      </div>
       <div class="tab-pane fade" id="configureContents" 
            role="tabpanel" aria-labelledby="configure-tab">
-           <section class="inner2 carousel slide carousel-fade" data-ride="carousel"></section>
+           <div class="innerForm2"></div>
       </div>
       <div class="tab-pane fade" id="warningContents" 
            role="tabpanel" aria-labelledby="warning-tab">
-           <section class="inner3 carousel slide carousel-fade" data-ride="carousel"></section>
+           <div class="innerForm3"></div>
       </div>
       <div class="tab-pane fade" id="replyContents" 
            role="tabpanel" aria-labelledby="reply-tab">
-           <section class="inner4 carousel slide carousel-fade" data-ride="carousel"></section>
+           <div class="innerForm4"></div>
       </div>
     </div>
-  </div>
   </div>
   <!-- container -->
   
   <script type="text/x-handlebars-template" id="section-template">
     {{#each mFile}}
-    {{#if actived}}
-    <section class="carousel-item active">
-      <div class="d-block w-100">
-        <h2 id="innerText d-block w-100">{{contents}}</h2>
-      </div>
-    </section>
-    {{else}}
-    <section class="carousel-item">
-      <div class="d-block w-100">
-        <h2 id="innerText d-block w-100">{{contents}}</h2>
-      </div>
-    </section>
-    {{/if}}
+    
     {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>

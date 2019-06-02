@@ -27,16 +27,21 @@ div.manual {
 	color: white;
 }
 
-.show {
-	font-weight: bold;
+.innerForm1 {
+	background-color: black; 
+}
+.innerForm2 {
+  background-color: gray; 
+}
+.innerForm3 {
+  background-color: blue; 
+}
+.innerForm4 {
+  background-color: navy; 
 }
 
-.innerForm {
-	padding: 30px;
-	background: gray;
-	margin: 5px auto;
-	height: 300px;
-  width:800px;
+.show {
+	font-weight: bold;
 }
 
 a.active {
@@ -92,6 +97,22 @@ body {
 	background: black;
 }
 
+#conts1 {
+  background-color: orange;
+}
+
+#window2 {
+  background-color: pink;
+}
+
+#window3 {
+  background-color: gray;
+}
+
+#window4 {
+  background-color: skyblue;
+}
+
 #pagination-container {
   width: 350px;
   margin: 0 auto;
@@ -120,4 +141,20 @@ body {
 #contents {
   font: 16px HanSans;
   color: white;
+}
+
+section:nth-child(2n-1) {
+  padding: 30px;
+  background: gray;
+  margin: 5px auto;
+  width: 80vw;
+  height: 100vh;
+}
+
+section:nth-child(2n) {
+  padding: 30px;
+  background: black;
+  margin: 5px auto;
+  width: 80vw;
+  height: 100vh;
 }
