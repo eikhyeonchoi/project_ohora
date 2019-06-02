@@ -114,7 +114,8 @@ body {
 }
 
 #ohr-carousel-1 {
-	background-image: url(../upload/main/1.png);
+	background-color: #ccc;
+	/*background-image: url(../upload/main/1.svg);*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -122,10 +123,12 @@ body {
 #ohr-carousel-1 div {
 	width: 500px;
 	background-color: #0d194731;
+	float: right;
 	color: white;
 }
 
 #ohr-carousel-2 {
+	background-color: #ccc;
     background-image: url(../upload/main/2.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
