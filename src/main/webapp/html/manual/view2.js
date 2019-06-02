@@ -2,10 +2,11 @@ var productNo = location.href.split('?')[1].split('=')[1];
 var type = sessionStorage.getItem('type'),
     nickName = sessionStorage.getItem('nickName'),
     category = $('.categoryItem'),
-    section = $('.innerForm'),
-    template = $('#section-template').html();
+    section = $('.innerForm');
 
-var sectionTemp = Handlebars.compile(template);
+
+var scrollEvent = false;
+var count = 0;
 
 $(document).ready(() => {
   carousel = $('#carouselExam');
@@ -25,10 +26,8 @@ $(document).ready(() => {
     if (data.status == 'success') {
       $('#memberName').text(data.manual[0].product.manufacturer.name);
       $('#productName').text(data.manual[0].name);
-      console.log(data.mFile);
-      $(data.mFile[0]).attr('actived', true);
-      $(sectionTemp(data)).appendTo(section);
-
+      console.log(data.manual[0]);
+      //for (var i = 0; i < data)
       category.text(data.manual[0].product.productSmallCategory.productLargeCategory.name + ' > '
           + data.manual[0].product.productSmallCategory.name + ' > '
           + data.manual[0].name);
@@ -36,14 +35,30 @@ $(document).ready(() => {
       alert('실패했습니다\n' + data.error);
     }
   });
-  $('body').on('wheel mousewheel DOMMouseScroll', function(event) {
-    var delta = event.wheelDelta || -event.detail ||
-    event.originalEvent.wheelDelta || -event.originalEvent.detail;
-    if (delta) {
-      $(this).carousel((delta > 0 ? 'prev' : 'next'));
-    }
-  });
 });
 
-
-
+$("html, body").on('mousewheel', function (e) {
+  var m = e.originalEvent.wheelDelta;
+  var sb = $("#conts1").height();
+  
+  if (m > 1 && scrollEvent == false && count >= 1) {
+    scrollEvent = true;
+    count--;
+     $("html, body").stop().animate(
+         {scrollTop: sb*count},
+         {duration:300, 
+          complete: function() {
+            scrollEvent = false;
+         }
+      });
+  } else if (m < 1 && scrollEvent == false && count < 3) {
+    scrollEvent = true;
+    count++;
+     $("html, body").stop().animate(
+         {scrollTop: sb*count},
+         {duration:300,
+          complete: function () {
+          scrollEvent = false;
+          }});
+  }
+});
