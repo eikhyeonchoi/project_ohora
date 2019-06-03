@@ -1,20 +1,24 @@
 /**
  * 
  */
-
-
 $(document).ready(function() {
   $('#fullpage').fullpage({
-    //options here
     licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-    autoScrolling:true,
-    scrollHorizontally: true
+    autoScrolling: false,
+    navigationPosition: 'right',
+    scrollHorizontally: false,
+    loopHorizontal: false,
+    controlArrows: false,
   });
-
-  //methods
+  
   $.fn.fullpage.setAllowScrolling(false);
+});
 
-  new fullpage('#fullpage', {
-    anchors:['firstPage', 'secondPage', 'thirdPage']
-  });
+$('.next-page-btn').click(function(){
+  fullpage_api.moveSlideRight();
+  
+});
+
+$('.prev-page-btn').click(function(){
+  fullpage_api.moveSlideLeft();
 });
