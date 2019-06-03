@@ -36,7 +36,6 @@ $(document).ready(() => {
     }
   });
 });
-
 $("html, body").on('mousewheel', function (e) {
   var m = e.originalEvent.wheelDelta;
   var sb = $("#conts1").height();
@@ -62,3 +61,4 @@ $("html, body").on('mousewheel', function (e) {
           }});
   }
 });
+
