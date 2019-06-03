@@ -2,9 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 list</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="view.css">
@@ -12,66 +11,68 @@
 <body>
   <header class="ohr-main-header"></header>
   <div class="container">
-    <h1>REVIEW</h1>
-    <div class="product-name">
-      <h4></h4>
-      <p class="text-primary" id='product-name'></p>
+  <h1> REVIEW </h1>
+  
+<form>
+   <div class="form-group row bit-view-item" style="display:none">
+    <label for="no" class="col-sm-2 col-form-label" >번호</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control-plaintext" id="review-no" 
+             name='no' readonly>
     </div>
-
-    <button type="button" id="review-add-btn" class="btn btn-primary add-btn">등록</button>
-
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">등록일</th>
-          <th scope="col">조회수</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    
-    <div id="pagination-container"></div>
-    <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
-      <div class="form-group row">
-        <label for="title" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-          <div class="input-group mb-3">
-            <select name="searchType" class="custom-select" id="searchType">
-              <option class="dropdown-item" value="name" id="search_name">아이디</option>
-              <option class="dropdown-item" value="title" id="search_title">제목</option>
-              <option class="dropdown-item" value="contents" id="search_contents">내용</option>
-              <option class="dropdown-item" value="all" id="search_all">제목+내용</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <input id="keyword" class="form-control mr-sm-2" placeholder="검색" aria-label="검색">
-      <button type="button" id="search-btn" class="btn btn-outline-primary my-2 my-sm-0">검색</button>
-    </form>
   </div>
-  <!-- container -->
+   <div class="form-group row bit-view-item">
+    <label for="id" class="col-sm-2 col-form-label">작성자</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control-plaintext" id="review-id" 
+             name='no' readonly>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label">제목</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control-plaintext" id="review-title" 
+             name='title'>
+      <p class="bytes"></p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="contents" class="col-sm-2 col-form-label">내용</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="review-contents" 
+                name='contents' rows='12'></textarea>
+    </div>
+  </div>
+  <div class="form-group row bit-view-item">
+    <label for="createdDate" class="col-sm-2 col-form-label">작성일</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" 
+          id="review-createdDate" name="createdDate">
+    </div>
+  </div>
+  <div class="form-group row bit-view-item">
+    <label for="viewCount" class="col-sm-2 col-form-label">조회수</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" 
+          id="review-viewCount" name="viewCount">
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="button" id="list-btn"  class="btn btn-primary bit-view-item">목록</button>
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item" style="display:none">삭제</button> 
+      <button type="button" id="update-btn" class="btn btn-primary bit-view-item" style="display:none">변경</button>
+    </div>
+  </div>
+</form>
 
-  <script id="select-template" type="text/x-handlebars-template">
-  {{#each list}}
-  <tr>
-    <td>{{no}}</td>
-    <td><a class='review-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
-    <td>{{member.nickName}}</a></td>
-    <td>{{createdDate}}</td>
-    <td>{{viewCount}}</td>
-  </tr>
-  {{/each}}
-  </script>
-
-  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
-  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../header.js"></script>
-  <script src="view.js"></script>
+</div>
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
+<script src="view2.js"></script>
 </body>
 </html>

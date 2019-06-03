@@ -11,7 +11,7 @@ $(document).ready(function() {
   }
 }); // ready
 
-(function loadList(pn) {
+function loadList() {
   $.getJSON('../../app/json/notice/list?keyword=' + $('#keyword').val() + 
           '&searchType=' + $('#searchType').val(), 
           function (obj){
@@ -29,7 +29,7 @@ $(document).ready(function() {
     });
     $(document.body).trigger('loaded-list');
   });
-})();
+};
 
 //detail 링크
 $(document.body).bind('loaded-list', () => {
@@ -44,17 +44,13 @@ $(document.body).bind('loaded-list', () => {
 $('#keyword').keydown((e) => {
   if (event.keyCode == 13) {
     e.preventDefault();
-    for(var no = 1; no < 6; no++) {
-      $('#page-' + no + ' > a').text(no);
-    }
-    loadList(1);
+    loadList();
   }
 });
 
 //검색
 $('#search-btn').click((e) => {
-  for(var no = 1; no < 6; no++) {
-    $('#page-' + no + ' > a').text(no);
-  }
-  loadList(1);
+  loadList();
 });
+
+loadList();

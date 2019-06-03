@@ -11,7 +11,10 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<!-- Custom styles for this template -->
+ <link rel="stylesheet"
+ href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.css">
+ <link rel="stylesheet"
+ href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick-theme.css">
 <link href="index.css" rel="stylesheet">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
@@ -21,7 +24,7 @@
  <header class="ohr-main-header"></header>
 
  <main role="main">
- 
+
  <section class="jumbotron text-center">
   <div class="container">
    <h1 class="jumbotron-heading">리뷰</h1>
@@ -36,47 +39,156 @@
     </div>
     <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
     <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
-  </form>
+   </form>
  </section>
 
  <div class="album py-5 bg-light">
   <div class="container">
 
-
    <div class="row">
-    <div class="col-md-4">
-     <div class="card mb-4 shadow-sm">
+    <div id="card-div" class="multiple-items"></div>
+    
+    
+    <div class="col-sm-4">
+     <div class="card sm-4 shadow-sm">
       <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-       xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
+       preserveAspectRatio="xMidYMid slice" focusable="false"
        role="img" aria-label="Placeholder: Thumbnail">
        <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-      <div class="card-body">
-       <p class="card-text">This is a wider card with supporting text below as a natural lead-in
-        to additional content. This content is a little bit longer.</p>
-       <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-        </div>
-        <small class="text-muted">9 mins</small>
-       </div>
+            <div class="card-body">
+              <p class="card-text">
+                <h5>{{product.name}}</h5>
+                <h7>{{product.manufacturer.name}}</h7>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
       </div>
      </div>
     </div>
-  </div>
-
   
- </div>
- </div>
+  <div class="col-sm-4">
+     <div class="card sm-4 shadow-sm">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+       preserveAspectRatio="xMidYMid slice" focusable="false"
+       role="img" aria-label="Placeholder: Thumbnail">
+       <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
+       <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">
+                <h5>{{product.name}}</h5>
+                <h7>{{product.manufacturer.name}}</h7>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
+      </div>
+     </div>
+    </div>
+  
+  <div class="col-sm-4">
+     <div class="card sm-4 shadow-sm">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+       preserveAspectRatio="xMidYMid slice" focusable="false"
+       role="img" aria-label="Placeholder: Thumbnail">
+       <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
+       <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">
+                <h5>{{product.name}}</h5>
+                <h7>{{product.manufacturer.name}}</h7>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
+      </div>
+     </div>
+    </div>
+    
+    <div class="col-sm-4">
+     <div class="card sm-4 shadow-sm">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+       preserveAspectRatio="xMidYMid slice" focusable="false"
+       role="img" aria-label="Placeholder: Thumbnail">
+       <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
+       <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">
+                <h5>{{product.name}}</h5>
+                <h7>{{product.manufacturer.name}}</h7>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
+      </div>
+     </div>
+    </div>
+    
+    
+    
+   </div>
 
+  </div>
+ </div>
  </main>
 
+<!-- 
+ <script id="ohr-card-tr" type="text/x-handlebars-template">
+    {{#each list}}
+    <div class="col-sm-4">
+     <div class="card sm-4 shadow-sm">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+       preserveAspectRatio="xMidYMid slice" focusable="false"
+       role="img" aria-label="Placeholder: Thumbnail">
+       <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
+       <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">
+                <h5>{{product.name}}</h5>
+                <h7>{{product.manufacturer.name}}</h7>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
+      </div>
+     </div>
+    </div>
+    {{/each}}
+  </script>
+   -->
+  
  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.min.js"></script>
  <script src="../header.js"></script>
  <script src="index.js"></script>
 </body>

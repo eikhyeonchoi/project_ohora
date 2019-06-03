@@ -17,7 +17,7 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin-bottom: 0;
-  background-color: #fff;
+  background-color: #383d41;
 }
 @media (min-width: 768px) {
   .jumbotron {
@@ -38,6 +38,15 @@
   max-width: 40rem;
 }
 
+.ohr-thumbnail {
+	min-height: 150px;
+	min-width: 150px;
+	max-height: 150px;
+	max-width: 150px;
+	border: solid 1px;
+	background-color: #ccc;
+}
+
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -47,6 +56,7 @@ footer p {
   margin-bottom: .25rem;
 }
 
-.slick-prev:before, .slick-next:before {
-	color: black;
+#ohr-review-div > h2 {
+	color: white;
 }
+
