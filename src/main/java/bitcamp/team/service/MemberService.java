@@ -11,4 +11,5 @@ public interface MemberService {
   int getNo(String nickName);
   int authEmail(String nickName);
   int getEmail(String email);
+  int updatePassword(Member member);
 }

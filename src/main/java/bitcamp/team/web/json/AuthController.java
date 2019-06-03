@@ -68,7 +68,6 @@ public class AuthController {
   public Object user(HttpSession session) throws Exception {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
-
     HashMap<String,Object> content = new HashMap<>();
 
     if (loginUser != null) {

@@ -13,6 +13,8 @@
     <result column="n_name" property="nickName" />
     <result column="type" property="type" />
     <result column="ban" property="ban" />
+    <result column="file_path" property="filePath" />
+    <result column="pwd_udt" property="passwordUpdateDate" />
   </resultMap>
  
   <sql id="default-columns">
@@ -23,7 +25,8 @@
     n_name,
     type,
     ban,
-    pwd
+    pwd,
+    pwd_udt
   </sql>
 
   <select id="findAll" resultMap="memberMap" parameterType="map">
@@ -77,5 +80,16 @@
       email=#{email}
       and pwd = password(#{password})
   </select>
+  
+ <update id="updatePassword" parameterType="member"> 
+    update 
+      member
+    <set>
+      <if test="password != null">pwd = password(#{password})</if>,
+      <if test="passwordUpdateDate != null">pwd_udt = #{passwordUpdateDate}</if>
+    </set>
+    where 
+      member_no = #{no}
+  </update>
 
 </mapper>

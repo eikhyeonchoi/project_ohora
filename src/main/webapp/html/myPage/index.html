@@ -40,71 +40,92 @@
 
     <div class="row my-row">
 
-      <div class="col-sm-6">
-        <div class="col-sm-10 my-col">
+      <div class="col-sm-6  my-col">
+        <div class="col-sm-10">
           <h4>비밀번호 수정</h4>
         </div>
         <div class="col-md-12">
           <div class="col-md-10">
-            <p id="myP-p">
+            <p class="myP-p">
               비밀번호를 주기적으로 변경하여,<br> 소중한 개인정보를 안전하게 보호하세요.
             </p>
           </div>
           <div class="col-md-10">
             <dl>
-              <dt>최근 변경일</dt>
-              <dd id="date-dd">2019.05.29</dd>
+              <dt style="margin-bottom: 20px;">최근 변경일</dt>
+              <dd id="date-dd"></dd>
             </dl>
           </div>
           <div class="col-sm-10">
-            <button id="psw-update-btn" type="button" class="mybtn btn btn-outline-dark">변경</button>
+            <button id="psw-update-btn" type="button" class="mybtn btn btn-outline-dark" style="margin-right: 200px;">수정</button>
           </div>
         </div>
       </div>
 
-      <div class='col-sm-6'>
-        <div class="col-sm-6 offset-3 mt-sm-4">
-          <img class="img-responsive my-img" alt="비밀번호" src="자물쇠.png" id="lockImg">
-        </div>
-      </div>
-
-    </div>
-    <!-- row -->
-
-    <div class="row my-row">
-
-      <div class="col-sm-6">
-        <div class="col-md-10 my-col">
+      <div class="col-sm-6  my-col">
+        <div class="col-md-10">
           <h4>회원정보 변경</h4>
         </div>
         <div class="col-md-12">
           <div class="col-md-12">
-            <p id="myP-pp">
-              안전한 정보보호를 위해 일부만 확인가능하며,<br> 수정화면에서 정확한 회원정보 확인이 가능합니다.
+            <p class="myP-p">
+              안전한 정보보호를 위해 일부만 확인가능하며,<br> 변경화면에서 정확한 회원정보 확인이 가능합니다.
             </p>
           </div>
           <div class="col-md-10">
             <dl id="tel-dl">
               <dt>이메일</dt>
               <dd id="user-email"></dd>
-              <dt>전화번호</dt>
+              <dt id="tel-dt">전화번호</dt>
               <dd id="user-tel"></dd>
             </dl>
           </div>
           <div class="col-md-10">
-            <button id="update-btn" type="button" class="mybtn btn btn-outline-dark">수정</button>
+            <button id="update-btn" type="button" class="mybtn btn btn-outline-dark">변경</button>
           </div>
-        </div>
-      </div>
-
-      <div class='col-sm-6' id="input-div2">
-        <div class="col-sm-6 offset-3 mt-sm-5 pt-sm-4">
-          <img class="img-responsive my-img" alt="회원" src="유저.png">
         </div>
       </div>
 
     </div>
     <!-- row -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">비밀번호 수정</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="oldPwd">현재 비밀번호</label> <input type="password" class="form-control"
+                id="oldPwd" placeholder="현재 비밀번호를 입력해주세요.">
+              <p class="pwd-p" id="oldPwd-p"></p>
+            </div>
+
+            <div class="form-group">
+              <label for="newPwd">새 비밀번호</label> <input type="password" class="form-control"
+                id="newPwd" placeholder="새로운 비밀번호를 입력해주세요.">
+              <p class="pwd-p" id="newPwd-p"></p>
+            </div>
+            <div class="form-group">
+              <label for="newPwd-agree">비밀번호 확인</label> <input type="password" class="form-control"
+                id="newPwd-agree" placeholder="비밀번호를 한번더 입력해주세요.">
+              <p class="pwd-p" id="newPwd-agree-p"></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="password-udt-cns-btn">취소</button>
+            <button type="button" class="btn btn-outline-dark" id="password-udt-btn">변경</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <!-- container -->
 

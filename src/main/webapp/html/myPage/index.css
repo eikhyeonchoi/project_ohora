@@ -1,6 +1,18 @@
-.my-row:hover {
+.row {
+	flex-wrap: nowrap;
+}
+
+.my-col:hover {
 	border: 1px solid #0B3861;
 	text-decoration: none;
+}
+
+.my-col {
+	border: 1px solid #BDBDBD;
+	box-sizing: border-box;
+	min-width: 300px;
+	padding: 20px;
+	background-color: white;
 }
 
 #my-title {
@@ -8,6 +20,7 @@
 }
 
 dt {
+	margin-left: -15px;
 	min-height: 20px;
 	float: left;
 }
@@ -18,16 +31,8 @@ dd {
 }
 
 .mybtn {
-	margin-bottom: 20px;
+	margin-left: -15px;
 	width: 70px;
-}
-
-.row {
-	border: 1px solid #BDBDBD;
-	box-sizing: border-box;
-	min-width: 300px;
-	margin: 10px;
-	background-color: white;
 }
 
 .container {
@@ -39,7 +44,7 @@ body {
 }
 
 .my-col {
-	margin: 20px;
+	margin: 10px;
 	box-sizing: border-box;
 }
 
@@ -47,14 +52,18 @@ body {
 	min-height: 70px;
 }
 
-.my-img {
-	width: 100%;
-	height: auto;
+.myP-p {
+	color: #A4A4A4;
+	margin-bottom: 30px;
+	margin-top: 20px;
+	margin-left: -15px;
 }
 
-.animated {
-  animation-duration: 3s;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
+#psw-update-btn {
+	margin-top: 50px;
 }
 
+.pwd-p {
+	margin-top: 10px;
+	color: red;
+}

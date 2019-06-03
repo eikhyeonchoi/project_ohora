@@ -67,4 +67,9 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findByEmailPassword(paramMap);
   }
 
+  @Override
+  public int updatePassword(Member member) {
+    return memberDao.updatePassword(member);
+  }
+
 }

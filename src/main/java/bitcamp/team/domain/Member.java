@@ -1,5 +1,7 @@
 package bitcamp.team.domain;
 import java.io.Serializable;
+import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -12,6 +14,9 @@ public class Member implements Serializable {
   private String tel;
   private String type;
   private boolean ban;
+  private String filePath;
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  private Date passwordUpdateDate;
 
   public int getNo() {
     return no;
@@ -61,11 +66,24 @@ public class Member implements Serializable {
   public void setBan(boolean ban) {
     this.ban = ban;
   }
+  public String getFilePath() {
+    return filePath;
+  }
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
+  }
+  public Date getPasswordUpdateDate() {
+    return passwordUpdateDate;
+  }
+  public void setPasswordUpdateDate(Date passwordUpdateDate) {
+    this.passwordUpdateDate = passwordUpdateDate;
+  }
 
   @Override
   public String toString() {
     return "Member [no=" + no + ", email=" + email + ", name=" + name + ", password=" + password
-        + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban + "]";
+        + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban
+        + ", filePath=" + filePath + ", passwordUpdateDate=" + passwordUpdateDate + "]";
   }
 
 }

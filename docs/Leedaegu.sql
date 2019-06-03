@@ -1,3 +1,6 @@
 
---ALTER TABLE question
---MODIFY COLUMN status varchar(30) NOT NULL DEFAULT '답변 대기중';
+ALTER TABLE member
+add file_path varchar(255) NOT NULL DEFAULT 'user.jpg';
+
+ALTER TABLE member
+add pwd_udt datetime NULL;

@@ -23,7 +23,7 @@ $(document.body).bind('loaded.header', function(data) {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
+    console.log(data)
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
@@ -39,6 +39,7 @@ function loadLoginUser() {
       sessionStorage.setItem('name', data.user.name);
       sessionStorage.setItem('email', data.user.email);
       sessionStorage.setItem('tel', data.user.tel);
+      sessionStorage.setItem('pwdUpdateDate', data.user.passwordUpdateDate);
       
       $(document.body).trigger('loaded.loginuser');
       
