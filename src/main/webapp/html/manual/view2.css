@@ -101,15 +101,15 @@ body {
   background-color: orange;
 }
 
-#window2 {
+#conts2 {
   background-color: pink;
 }
 
-#window3 {
+#conts3 {
   background-color: gray;
 }
 
-#window4 {
+#conts4 {
   background-color: skyblue;
 }
 
@@ -143,17 +143,9 @@ body {
   color: white;
 }
 
-section:nth-child(2n-1) {
+.inner_container {
   padding: 30px;
   background: gray;
-  margin: 5px auto;
-  width: 80vw;
-  height: 100vh;
-}
-
-section:nth-child(2n) {
-  padding: 30px;
-  background: black;
   margin: 5px auto;
   width: 80vw;
   height: 100vh;

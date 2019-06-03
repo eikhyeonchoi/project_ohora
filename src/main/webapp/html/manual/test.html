@@ -3,117 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.min.css" />
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<link rel="stylesheet" href="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.css" />
-<link rel="shortcut icon" href="/bitcamp-team-project/images/favicon.ico">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="test.css">
 </head>
 <body>
-
-  <div id="fullpage">
-    <div class="section">
-    
-    
-      <!-- 1 slide -->
-      <div class="slide" id="s1" data-anchor="slide1">
-        <div class="container">
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-12 col-xl-8">
-            
-            
-              <div class="page-header v2 bordered">
-                <h1>zzzzzzzzzzzzzzzzzzzzzzzzz</h1>
-                <small>1단계</small>
-              </div>
-              
-              <h5>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</h5>
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-
-                    <select id="type" class="form-control form-control-lg ui-select">
-                      <option value="집전체">zzzzzzzzzz</option>
-                      <option value="개인실">zzzzzzzzzz</option>
-                      <option value="다인실">zzzzzzzzzzzzz</option>
-                    </select>
-
-                  </div>
+  <div id='main-div'>
+    <header class="ohr-main-header"></header>
+    <div id="fullpage">
+      <div class="section">
+      
+      
+      
+        <div class="slide" id="s1" data-anchor="slide1" style="background-color: green;">
+          <div class='container'>
+            <div class="row justify-content-center">
+              <div class='col col-sm-12 manual-add-slide-main'>
+                <div>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
                 </div>
-                
-                
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <select id="maxp" class="form-control form-control-lg ui-select">
-                      <option value="1">최대 1명 숙박 가능</option>
-                      <option value="2">최대 2명 숙박 가능</option>
-                      <option value="3">최대 3명 숙박 가능</option>
-                      <option value="4">최대 4명 숙박 가능</option>
-                      <option value="5">최대 5명 숙박 가능</option>
-                      <option value="6">최대 6명 숙박 가능</option>
-                      <option value="7">최대 7명 숙박 가능</option>
-                      <option value="8">최대 8명 숙박 가능</option>
-                    </select>
+                <div class="row justify-content-between">
+                  <div class="col-sm-2">
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" class="btn btn-sm btn-info btn-block next-page-btn">다음</button>
                   </div>
                 </div>
               </div>
-              
-              
-              <div class="form-group">
-                <label for="area">지역을 간단하게 입력해주세요.</label> <input id="area" type="text"
-                  class="form-control form-control-lg" placeholder="지역을 입력하세요.">
-              </div>
-              
-              
-              <div class="row justify-content-between">
-                <div class="form-group action col-4"></div>
-                <div class="form-group action offset-md-4">
-                  <button type="button" class="btn btn-lg btn-primary heun-form-next">다음</button>
+            </div>
+          </div> <!-- container -->
+        </div><!-- 1 slide -->
+        
+        
+        
+        
+        
+        <div class="slide" id="s2" data-anchor="slide2" style="background-color: black;">
+          <div class='container'>
+            <div class="row justify-content-center">
+              <div class='col col-sm-12 manual-add-slide-main'>
+                <div >
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                  <h1>2222222222222222</h1>
+                </div>
+                <div class="row justify-content-between">
+                  <div class="col-2">
+                    <button type="button" class="btn btn-sm btn-info btn-block prev-page-btn">이전</button>
+                  </div>
+                  <div class="col-2">
+                  </div>
                 </div>
               </div>
-              
-              
-            </div> <!-- col col-lg-12 col-xl-8 -->
-          </div> <!-- row justify-content-md-center -->
-        </div> <!-- container -->
-      </div> <!-- 1 slide -->
-      
-      
-      
-      <div class="slide">
-        <div class='container'></div>
-      </div>
-      <div class="slide">
-        <div class='container'></div>
-      </div>
-      <div class="slide">
-        <div class='container'></div>
-      </div>
-    </div>
-  </div>
-
-
+            </div>
+          </div>
+        </div> <!-- 2 slide -->
+        
+        
+      </div> <!-- section -->
+    </div> <!-- fullpage -->
+  </div> <!-- main -->
 
 </body>
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#fullpage').fullpage({
-      //options here
-      autoScrolling : true,
-      scrollHorizontally : true
-    });
-    
-    //methods
-    $.fn.fullpage.setAllowScrolling(true);
-  });
-</script>
-
-
-
+<script src="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.extensions.min.js"></script>
+<script src="../header.js"></script>
+<script src="test.js"></script>
 </html>
