@@ -1,6 +1,8 @@
+
 var tr = $('#ohr-card-tr').html(),
 cardDiv = $('#card-div'),
 trGenerator = Handlebars.compile(tr);
+
 
 $(document).ready(function(){
   $('.multiple-items').slick({
