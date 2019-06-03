@@ -1,61 +1,81 @@
 var detailNo = location.href.split('?')[1].split('=')[1],
-    tbody = $('tbody'),
-    page = $('#pagination-container'),
-    templateSrc = $('#select-template').html(),
-    productName = '',
-    addBtn = $('#review-add-btn');
+type = sessionStorage.getItem('type'),
+name = sessionStorage.getItem('name');
 
-var trGenerator = Handlebars.compile(templateSrc);
-var type = sessionStorage.getItem('type');
-function loadList() {
-  $.getJSON('/bitcamp-team-project/app/json/review/detail?no=' + detailNo + 
-      '&keyword=' + $('#keyword').val() + 
-      '&searchType=' + $('#searchType').val(), (obj) => {
-        productName = obj.productName;
-        page.pagination({
-          dataSource: obj.list,
-          showGoInput: true,
-          showGoButton: true,
-          callback: function(data, pagination) {
-            tbody.children().remove();
-            var pageSrc = {list: data};
-            $(trGenerator(pageSrc)).appendTo(tbody);
-          }
-        });
-        $('#product-name').html('');
-        $('#product-name').append(productName);
+($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
+  $('#review-no').val(data.no),
+  $('#review-id').val(data.member.name),
+  $('#review-title').val(data.title),
+  $('#review-contents').val(data.contents),
+  $('#review-createdDate').val(data.createdDate),
+  $('#review-viewCount').val(data.viewCount);
+}));
 
-        $('.review-a-class').click((e) => {
-          e.preventDefault();
-          window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
-        });
-        $(document.body).trigger('loaded-list');
-      })
-};
 
-loadList();
+($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
+  if (name == data.member.name || type == 3) {
+    $('#update-btn').show();
+    $('#delete-btn').show();
+    $('#review-title' ).prop('readonly', false);
+    $('#review-contents').prop('readonly', false);
 
-//검색
-$('#keyword').keydown((e) => {
-  if (event.keyCode == 13) {
-    e.preventDefault();
-    loadList();
-  }
-});
-
-//검색
-$('#search-btn').click((e) => {
-  loadList();
-});
-
-//등록버튼
-$(document).ready(() => {
-  if(type == null) {
-    addBtn.prop('disabled', true);
   } else {
-    addBtn.click(function() {
-      location.href='form.html?no=' + detailNo;
-    })
+    $('#review-title' ).prop('readonly', true);
+    $('#review-contents').prop('readonly', true);
   }
+
+}));
+
+//삭제
+$('#delete-btn').click(() => {
+  $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + detailNo, function(data) {
+  })
+  .done(function(data) {
+    location.href = document.referrer;
+    }
+  ).fail(function(data) {
+    alert('삭제 실패입니다!\n' + data.responseText);
+  })
 });
 
+//수정
+$('#update-btn').click(() => {
+  $.post('/bitcamp-team-project/app/json/review/update?no=' + detailNo, {
+    title: $('#review-title').val(), 
+    contents: $('#review-contents').val()
+  }, function(data) {
+    if (data.status == 'success') {
+      location.href = document.referrer;
+    } else {
+      alert('변경 실패 입니다.\n' +  data.message);
+    }
+  }, "json")
+});
+
+//목록
+$('#list-btn').click(() => {
+  location.href = document.referrer;
+})
+
+//글자수 세기
+$(function(){
+  $('input.form-control-plaintext').keyup(function(){
+    bytesHandler(this);
+  });
+});
+
+function getTextLength(str) {
+  var len = 0;
+  for (var i = 0; i < str.length; i++) {
+    if (encodeURIComponent(str.charAt(i)).length == 6) {
+      len++;
+    }
+    len++;
+  }
+  return len;
+}
+
+function bytesHandler(obj){
+  var text = $(obj).val(); 
+  $('p.bytes').text(getTextLength(text) + '/80');
+}

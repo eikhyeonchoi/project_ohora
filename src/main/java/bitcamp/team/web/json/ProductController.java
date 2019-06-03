@@ -263,7 +263,7 @@ public class ProductController {
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
-    int dw = 350, dh = 350; 
+    int dw = 235, dh = 225; 
     int ow = srcImg.getWidth(); 
     int oh = srcImg.getHeight(); 
     int nw = ow; 

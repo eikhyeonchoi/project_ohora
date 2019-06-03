@@ -11,7 +11,7 @@
     <id     column="product_no"   property="no"/>
     <result column="sctg_no"      property="smallCategoryNo"/>
     <result column="manufac_no"   property="manufacturerNo"/>
-    <result column="productName"         property="name"/>
+    <result column="productName"  property="name"/>
     
     <association property="manufacturer" javaType="manufacturer">
       <id column="manufac_no"    property="no"/>

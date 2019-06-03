@@ -134,6 +134,12 @@
 	background: #424c55;
 }
 
-
+/*
+@media (min-width: 1010px) {
+	.ohr-header-nav{
+	border: solid 5px;
+	}
+}
+*/
 
 

@@ -18,69 +18,120 @@
       <result column="memberName" property="name" />
       <result column="nickName" property="nickName" />
     </association>
+
+    <association property="product" javaType="product">
+      <id column="product_no" property="no" />
+      <result column="name" property="name" />
+      <collection property="productFiles" ofType="productFile">
+        <id column="pfile_no" property="no" />
+        <result column="product_no" property="productNo" />
+        <result column="img" property="img" />
+      </collection>
+    </association>
   </resultMap>
-  
+
   <resultMap type="product" id="productMap">
-    <id column="product_no" property="no"/>
-    <result column="sctg_no" property="smallCategoryNo"/>
-    <result column="manufac_no" property="manufacturerNo"/>
-    <result column="name" property="name"/>
+    <id column="product_no" property="no" />
+    <result column="sctg_no" property="smallCategoryNo" />
+    <result column="manufac_no" property="manufacturerNo" />
+    <result column="name" property="name" />
+
+    <collection property="productFiles" ofType="productFile">
+      <id column="pfile_no" property="no" />
+      <result column="product_no" property="productNo" />
+      <result column="img" property="img" />
+    </collection>
+    
+    <collection property="manufacturer" javaType="manufacturer">
+        <id       column="manufac_no"   property="no"/>
+        <result   column="manuName"         property="name"/>
+      </collection>
   </resultMap>
-  
-  <select id="findByNo" resultMap="reviewMap" parameterType="map">
-    select
-      r.rv_no as rno,
-      r.name as reviewName,
-      m.n_name as nickName, 
-      r.cdt,
-      r.cnt
+
+  <select id="findProd" resultMap="reviewMap" parameterType="string">
+    select DISTINCT
+      r.product_no,
+      p.name,
+      p.manufac_no,
+      p.name as manuName
     from
-      review r
-      join member m on m.member_no = r.member_no
+      review r join product p 
+      on 
+      r.product_no = p.product_no
     <where>
-      r.product_no = #{selectNo}
-    <if test="searchType == 'name' and keyword != null">
-       <bind name="pattern1" value="'%' + keyword + '%'" />
-       and m.name like #{pattern1}
-    </if> 
-    <if test="searchType == 'title' and keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'" />
-       and r.name like #{pattern1}
-    </if>
-    <if test="searchType == 'contents' and keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'" />
-       and conts like #{pattern1}
-    </if>
-    <if test="searchType == 'all' and keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'" />
-       and r.name like #{pattern1} or conts like #{pattern1}
-    </if>
+      <if test="_parameter != null">
+        <bind name="pattern1" value="'%' + _parameter + '%'" />
+        p.name like #{pattern1}
+      </if>
     </where>
     order by
-      rno desc
+    product_no desc
   </select>
   
+  <!-- 썸네일 가져오기 
+  <select id="findByProdNo" resultMap="reviewMap" parameterType="int">
+  select DISTINCT
+    r.rv_no as rno,
+    p.product_no as productNo,
+    p.name as productName,
+    
+  </select>
+ -->
+ 
+  <select id="findByNo" resultMap="reviewMap" parameterType="map">
+    select
+    r.rv_no as rno,
+    r.name as reviewName,
+    m.n_name as nickName,
+    r.cdt,
+    r.cnt
+    from
+    review r
+    join member m on m.member_no = r.member_no
+    <where>
+      r.product_no = #{selectNo}
+      <if test="searchType == 'name' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and m.name like #{pattern1}
+      </if>
+      <if test="searchType == 'title' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and r.name like #{pattern1}
+      </if>
+      <if test="searchType == 'contents' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and conts like #{pattern1}
+      </if>
+      <if test="searchType == 'all' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and r.name like #{pattern1} or conts like #{pattern1}
+      </if>
+    </where>
+    order by
+    rno desc
+  </select>
+
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
-   select
+    select
     r.rv_no as rno,
     m.name as memberName,
     r.name as reviewName,
     r.conts,
     r.cdt,
     r.cnt
-   from
+    from
     review r
     join member m on r.member_no = m.member_no
-   where
+    where
     r.rv_no = #{value};
   </select>
-  
+
   <insert id="insert" parameterType="review">
     insert into review (product_no, member_no, name, conts)
     values
     (#{productNo},#{memberNo}, #{title}, #{contents})
   </insert>
-  
+
   <update id="increaseCount" parameterType="int">
     update review
     set
@@ -88,36 +139,37 @@
     where rv_no =
     #{value}
   </update>
-  
-  
+
+
   <delete id="delete" parameterType="int">
-    delete 
+    delete
     from
-      review
+    review
     where
-      rv_no = #{value};
+    rv_no = #{value};
   </delete>
-  
-  
+
+
   <update id="update" parameterType="review">
     update
-      review
+    review
     <set>
-      <if test="title != null">name = #{title}</if>,
+      <if test="title != null">name = #{title}</if>
+      ,
       <if test="contents != null">conts = #{contents}</if>
     </set>
     where
-      rv_no = #{no};
+    rv_no = #{no};
   </update>
-  
+
   <delete id='deleteByProductNo' parameterType="int">
     delete from
-      review
+    review
     where
-      product_no=#{value}
+    product_no=#{value}
   </delete>
-  
-  
-  
-  
+
+
+
+
 </mapper>

@@ -47,7 +47,9 @@ $(document.body).bind('loaded.loginuser', () => {
 $(document).ready(function(){
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, function(obj) {
     console.log(obj);
-    window.productName = obj.list[0].product.name;
+    if (obj.totalColumn != 0) {
+      window.productName = obj.list[0].product.name;
+    }
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
       price += el.priceStf,
@@ -65,7 +67,10 @@ $(document).ready(function(){
     asStf = (asStf / (obj.totalColumn)).toFixed(2);
     useful = (useful / (obj.totalColumn)).toFixed(2);
 
-    $(document.body).trigger('loaded-satisfy');
+    $(document.body).trigger({
+      type: 'loaded-satisfy',
+      totalColumn: obj.totalColumn
+    });
   });
 
 
@@ -82,10 +87,10 @@ $(document).ready(function(){
       $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_pad.jpg' style='width: 100%; height: 100%;'>");
       $('#product-inform-div').prepend('<i class="fas fa-mobile-alt" style="font-size: 5em;"></i>');
     } else if(largeCategory.includes('카메라')) {
-      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_camera.jpg' style='width: 100%; height: 100%;'>");
+      $('#img-div-by-large-category').append("<imgcountAll src='/bitcamp-team-project/upload/productfile/lc_camera.jpg' style='width: 100%; height: 100%;'>");
       $('#product-inform-div').prepend('<i class="fas fa-camera" style="font-size: 5em;"></i>');
     } else if(largeCategory.includes('노트북')) {
-      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_notebook.png' style='width: 100%; height: 100%;'>");
+      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_notebook.jpg' style='width: 100%; height: 100%;'>");
       $('#product-inform-div').prepend('<i class="fas fa-laptop" style="font-size: 5em;"></i>');
     } else if(largeCategory.includes('가전')) {
       $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_appliances.jpg' style='width: 100%; height: 100%;'>");
@@ -113,13 +118,13 @@ $(document).ready(function(){
 $(document.body).bind('loaded-product', function(data){
   $("#product-div").mouseenter(function() {
     $(this).css('background-color', 'white');
-    $(this).children().eq(0).css('display', 'none');
-    $(this).children().eq(1).css('display', '');
+    $(this).children().eq(0).fadeOut('fast');
+    $(this).children().eq(1).fadeIn('fast');
 
   }).mouseleave(function() {
     $(this).css('background-color', 'black');
-    $(this).children().eq(0).css('display', '');
-    $(this).children().eq(1).css('display', 'none');
+    $(this).children().eq(0).fadeIn('fast');
+    $(this).children().eq(1).fadeOut('fast');
   });
 
   reviewBtn.click(function() {
@@ -173,7 +178,7 @@ $(document.body).bind('loaded-product', function(data){
 
 }) // bind loaded-product
 
-$(document.body).bind('loaded-satisfy', function(){
+$(document.body).bind('loaded-satisfy', function(data){
   var obj = {
       name01: '가격 만족도',
       name02: '사용 난이도',
@@ -190,8 +195,10 @@ $(document.body).bind('loaded-satisfy', function(){
   }
 
   if (isValidScore(satisAver) == true) { 
-    $('#user-evaluation-div').append('<h3>' + window.productName + ' 의 대한 사용자들의</h3>');
+    // $('#user-evaluation-div').append('<h3>' + window.productName + '</h3>');
+    $('#user-evaluation-div').append('<h3>사용자들의</h3>');
     $('#user-evaluation-div').append('<h3>평균만족도는 ?</h3>');
+    
     if (satisAver >= 4.00) {
       $('#user-evaluation-div').append('<i class="far fa-smile-beam" style="font-size: 5em; color: green;"></i>');
       $('#user-evaluation-div').append('<h3>good</h3>');
@@ -202,21 +209,23 @@ $(document.body).bind('loaded-satisfy', function(){
       $('#user-evaluation-div').append('<i class="far fa-frown" style="font-size: 5em; color: red;"></i>');
       $('#user-evaluation-div').append('<h3>bad</h3>');
     }
+    $('#user-evaluation-div').append('<button type="button" class="btn btn-info">만족도 평가 수<span class="badge badge-light">'+ data.totalColumn +'</span></button>');
     generatePieChart('pie-canvas', satisAver);
     generateBarChart('bar-canvas', obj);
   } else {
-    $('#user-evaluation-div').append('<h3>아직 등록된 만족도 정보가 없습니다</h3>');
+    $('#user-evaluation-div').append('<br><br><h3>아직 등록된 만족도 정보가 없습니다</h3>');
     generatePieChart('pie-canvas', 0);
     generateBarChart('bar-canvas', obj);
   }
 
 
   $("#fixed-background-div").mouseenter(function() {
-    $(this).children().eq(0).css('display', 'none');
-    $(this).children().eq(1).css('display', '');
+    //$(this).children().eq(0).css('display', 'none');
+    $(this).children().eq(0).fadeOut('fast');
+    $(this).children().eq(1).fadeIn('fast');
   }).mouseleave(function() {
-    $(this).children().eq(0).css('display', '');
-    $(this).children().eq(1).css('display', 'none');
+    $(this).children().eq(0).fadeIn('fast');
+    $(this).children().eq(1).fadeOut('fast');
 
   });  
 });

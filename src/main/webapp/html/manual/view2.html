@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>매뉴얼 디테일</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
->
-<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="view2.css">
@@ -55,27 +52,11 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="generalContents" 
            role="tabpanel" aria-labelledby="general-tab">
-         <div class="innerForm1">
-           <section id="conts1">
-             <div class="animated fadeIn">
-               <h2></h2>
-             </div>
-           </section>
-           <section id="conts2">
-             <div class="animated fadeIn">
-               <h2></h2>
-             </div>
-           </section>
-           <section id="conts3">
-             <div class="animated fadeIn">
-               <h2></h2>
-             </div>
-           </section>
-           <section id="conts4">
-             <div class="animated fadeIn">
-               <h2></h2>
-             </div>
-           </section>
+         <div class="inner_container">
+           <section id="conts1"></section>
+           <section id="conts2"></section>
+           <section id="conts3"></section>
+           <section id="conts4"></section>
         </div>
       </div>
       <div class="tab-pane fade" id="configureContents" 
@@ -93,13 +74,8 @@
     </div>
   </div>
   <!-- container -->
-  
-  <script type="text/x-handlebars-template" id="section-template">
-    {{#each mFile}}
-    
-    {{/each}}
-  </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/jquery-mousewheel/jquery.mousewheel.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
