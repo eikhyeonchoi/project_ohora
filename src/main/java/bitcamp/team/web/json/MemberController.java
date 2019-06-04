@@ -1,6 +1,5 @@
 
 package bitcamp.team.web.json;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -95,12 +94,14 @@ public class MemberController {
 
   @RequestMapping("updatePassword")
   public Object updatePassword(Member member, String pwdUpdateDate) throws Exception {
+    HashMap<String,Object> paramMap = new HashMap<>();
     HashMap<String,Object> content = new HashMap<>();
+
+    paramMap.put("no", member.getNo());
+    paramMap.put("password", member.getPassword());
+    paramMap.put("passwordUpdateDate", pwdUpdateDate);
     try {
-      System.out.println(pwdUpdateDate);
-      System.out.println(Date.valueOf((pwdUpdateDate)));
-      System.out.println("EEEEEEEEEEEEEEEAsy");
-      memberService.updatePassword(member);
+      memberService.updatePassword(paramMap);
       content.put("status", "success");
 
     } catch (Exception e) {

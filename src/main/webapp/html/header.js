@@ -14,7 +14,7 @@ $(document.body).bind('loaded.header', function(data) {
   $('#logout-menu').click(function(e) {
     e.preventDefault();
     $.get('/bitcamp-team-project/app/json/auth/logout', () => {
-      location.href = "index.html";
+      location.href = "/bitcamp-team-project/index.html";
       sessionStorage.clear();
     });
   });
@@ -23,7 +23,6 @@ $(document.body).bind('loaded.header', function(data) {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data)
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();

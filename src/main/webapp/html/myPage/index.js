@@ -1,6 +1,7 @@
 var nickName = '',
 email = '',
 tel = '',
+name = '',
 oldPwd = $('#oldPwd'),
 oldPwdP = $('#oldPwd-p'),
 oldPwdStatus = false,
@@ -18,27 +19,39 @@ $(document.body).ready(function() {
     nickName = sessionStorage.getItem('nickName');
     email = sessionStorage.getItem('email');
     tel = sessionStorage.getItem('tel');
+    name = sessionStorage.getItem('name');
     pwdUpdateDate = sessionStorage.getItem('pwdUpdateDate');
     window.memberNo = sessionStorage.getItem('no');
 
     $('#user-nickName').html(nickName);
     $('#user-email').html(email);
     $('#user-tel').html(secretTel(tel));
-    $('#date-dd').html(pwdUpdateDate);
-
+    if (pwdUpdateDate.length == 4) {
+      $('#date-dd').html("변경하신적이 없습니다.");
+    } else {
+      $('#date-dd').html(pwdUpdateDate);
+    }
     $(document).trigger("loaded-user");
   });
 });
 
 $(document).bind('loaded-user', function() {
   $('#psw-update-btn').click(function() {
-    $('.modal').modal();
+    $('.pwd-moadl').modal();
 
     $(document).trigger("view-modal");
+  });
+
+  $('#update-btn').click(function() {
+    $('.member-moadl').modal();
+
+    $(document).trigger("member-view-modal");
   });
 });
 
 $(document).bind('view-modal', function() {
+  newPwd.attr('disabled',true);
+  newPwdAgree.attr('disabled',true);
   $('#password-udt-btn').attr('disabled',true);
 
   oldPwd.keyup(function() {
@@ -55,11 +68,23 @@ $(document).bind('view-modal', function() {
           oldPwdP.html('');
           oldPwd.removeClass('is-invalid');
           oldPwd.addClass('is-valid');
+          newPwd.attr('disabled',false);
+          newPwdAgree.attr('disabled',false);
           oldPwdStatus = true;
           udtBtnCk();
         } else {
           oldPwd.removeClass('is-valid');
           oldPwd.addClass(' is-invalid');
+          newPwd.attr('disabled',true);
+          newPwd.val("");
+          newPwdAgree.attr('disabled',true);
+          newPwdAgree.val("");
+          newPwd.removeClass('is-invalid');
+          newPwd.removeClass('is-valid');
+          newPwdP.html("")
+          newPwdAgree.removeClass('is-invalid');
+          newPwdAgree.removeClass('is-valid');
+          newPwdAgreeP.html("")
           oldPwdP.html('올바른 비밀번호를 입력해주세요.');
           oldPwdStatus = false;
           udtBtnCk();
@@ -78,6 +103,12 @@ $(document).bind('view-modal', function() {
     } else {
       if (!regex.test(newPwd.val())) {
         newPwdP.html('영문 대소문자, 숫자, 특수문자를 혼용하여 8~15자를 입력해주세요.');
+        newPwd.removeClass('is-valid');
+        newPwd.addClass(' is-invalid');
+        newPwdStatus = false;
+        udtBtnCk();
+      } else if (newPwd.val() == oldPwd.val()) {
+        newPwdP.html('이전과 같은 비밀번호를 사용하실 수 없습니다.');
         newPwd.removeClass('is-valid');
         newPwd.addClass(' is-invalid');
         newPwdStatus = false;
@@ -135,9 +166,13 @@ $('#password-udt-btn').click(function() {
   },function(data) {
     if(data.status == 'success'){
       alert("변경이 완료되었습니다!");
-      location.reload();
+      $.get('/bitcamp-team-project/app/json/auth/logout', () => {
+        location.href = "/bitcamp-team-project/index.html";
+        sessionStorage.clear();
+      });
+
     } else { 
-      alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
+      alert(data.error);
     }
   }, "json")
 })
@@ -154,6 +189,23 @@ $('#password-udt-cns-btn').click(function() {
   newPwdStatus = false;
   newPwdAgreeStatus = false;
 })
+
+$(document).bind('member-view-modal', function() {
+  $('#member-udt-btn').hide();
+  $('#name').val(name);
+  $('#nickName').val(nickName);
+  var tels = tel.split("-");
+  $('#tel1').val(tels[0]);
+  $('#tel2').val(tels[1]);
+  $('#tel3').val(tels[2]);
+
+});
+
+
+
+
+
+
 
 //전화번호를 **로 바꿔주는 함수
 function secretTel (tel) {
