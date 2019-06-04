@@ -11,9 +11,8 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
- <link rel="stylesheet"
- href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.css">
- <link rel="stylesheet"
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
  href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick-theme.css">
 <link href="index.css" rel="stylesheet">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -24,31 +23,28 @@
  <header class="ohr-main-header"></header>
 
  <main role="main">
-
+ <div class="container-fluid">
  <section class="jumbotron text-center">
-  <div class="container">
-   <h1 class="jumbotron-heading">리뷰</h1>
-   <p class="lead text-muted">사용자가 작성한 리뷰를 볼 수 있습니다.</p>
+  <h1 class="jumbotron-heading">리뷰</h1>
+  <p class="lead text-muted">사용자가 작성한 리뷰를 볼 수 있습니다.</p>
 
-   <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
-    <div class="form-group row">
-     <label for="title" class="col-sm-2 col-form-label"></label>
-     <div class="col-sm-10">
-      <div class="input-group mb-3"></div>
-     </div>
+  <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+   <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+     <div class="input-group mb-3"></div>
     </div>
-    <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
-    <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
-   </form>
- </section>
-
- <div class="album py-5 bg-light">
-  <div class="container">
-
-   <div class="row">
-    <div id="card-div" class="multiple-items"></div>
-    
    </div>
+   <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
+   <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+  </form>
+  </section>
+
+  <div class="album py-5 bg-light">
+
+    <div class="row col-sm-10 offset-sm-1">
+     <div id="card-div" class="col-sm-12"></div>
+    </div>
 
   </div>
  </div>
@@ -56,32 +52,33 @@
 
  <script id="ohr-card-tr" type="text/x-handlebars-template">
     {{#each list}}
-    <div class="col-sm-4">
-     <div class="card sm-4 shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-       preserveAspectRatio="xMidYMid slice" focusable="false"
-       role="img" aria-label="Placeholder: Thumbnail">
-       <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
-       <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+    <div class="col-sm-4 ohr-card-1stdiv">
+     <div class="card sm-4 shadow-sm ohr-card-2nddiv">
+      {{#each product.productFiles}}
+          <img src='/bitcamp-team-project/upload/productfile/{{img}}_thumb' width="215px" height="225px">
+          {{/each}}
             <div class="card-body">
               <p class="card-text">
-                <h5>{{product.name}}</h5>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="{{product.name}}">
+                  <a>{{product.name}}</a>
+                </span>
+                <br>
                 <h7>{{product.manufacturer.name}}</h7>
               </p>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center ohr-btn-div">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
                           data-no='{{product.no}}'>View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"
+                          data-no='{{product.no}}'>Edit</button>
                 </div>
-                <small class="text-muted">{{viewCount}}</small>
               </div>
       </div>
      </div>
     </div>
     {{/each}}
   </script>
-  
+
  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
