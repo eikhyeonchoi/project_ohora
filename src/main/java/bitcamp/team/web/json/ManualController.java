@@ -130,4 +130,32 @@ public class ManualController {
     
     return contents;
   }
+  
+  
+  
+  @GetMapping("allProductName")
+  public Object allProductName() {
+    HashMap<String, Object> content = new HashMap<>();
+    content.put("allProduct", manualService.getAllProduct());
+    return content;
+  }
+  
+  
+  
+  @PostMapping("tempAdd")
+  public Object tempAdd(Part[] manualFiles) {
+    HashMap<String, Object> content = new HashMap<>();
+    ArrayList<ManualFile> files = new ArrayList<>();
+    
+    for (Part part : manualFiles) {
+      ManualFile manualFile = new ManualFile();
+      String filename = UUID.randomUUID().toString();
+      System.out.println(filename);
+      manualFile.setFile(filename);
+    }
+    
+    
+    
+    return content;
+  }
 }
