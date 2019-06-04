@@ -69,7 +69,7 @@ public class AuthController {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
     HashMap<String,Object> content = new HashMap<>();
-
+    
     if (loginUser != null) {
       content.put("status", "success");
       content.put("user", loginUser);

@@ -68,8 +68,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int updatePassword(Member member) {
-    return memberDao.updatePassword(member);
+  public int updatePassword(HashMap<String,Object> param) {
+    return memberDao.updatePassword(param);
   }
 
 }

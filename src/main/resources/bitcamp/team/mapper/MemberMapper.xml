@@ -81,7 +81,7 @@
       and pwd = password(#{password})
   </select>
   
- <update id="updatePassword" parameterType="member"> 
+ <update id="updatePassword" parameterType="map"> 
     update 
       member
     <set>

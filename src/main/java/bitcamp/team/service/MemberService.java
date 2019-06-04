@@ -1,5 +1,6 @@
 package bitcamp.team.service;
 
+import java.util.HashMap;
 import java.util.List;
 import bitcamp.team.domain.Member;
 
@@ -11,5 +12,5 @@ public interface MemberService {
   int getNo(String nickName);
   int authEmail(String nickName);
   int getEmail(String email);
-  int updatePassword(Member member);
+  int updatePassword(HashMap<String,Object> param);
 }
