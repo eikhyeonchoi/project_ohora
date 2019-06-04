@@ -26,7 +26,8 @@ $(document).ready(function() {
 
     if (obj.board.fboardFiles[0].filepath != null) {
       for(var file of obj.board.fboardFiles) {
-        $('#img-div').append("<img src='/bitcamp-team-project/upload/fboardfile/" + file.filepath + "' width='auto' height='auto'>");
+        $('#img-div').append("<img src='/bitcamp-team-project/upload/fboardfile/" 
+            + file.filepath + "' width='auto' height='auto'>");
       }
     }
     
