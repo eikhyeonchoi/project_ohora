@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import bitcamp.team.domain.Product;
 import bitcamp.team.domain.Review;
 import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
@@ -38,12 +37,9 @@ public class ReviewController {
   public Object detail(int no, String keyword, String searchType) throws Exception {
     List<Review> review = reviewService.get(no, keyword, searchType);
 
-    Product product = productService.get(no);
-    String productName = product.getName();
     HashMap<String, Object> map = new HashMap<>();
     try {
       map.put("list", review);
-      map.put("productName", productName);
       map.put("status", "success");
     } catch (Exception e) {
       map.put("status", "fail");

@@ -92,14 +92,11 @@
 
     <!-- pwd-moadl -->
     <div class="pwd-moadl modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">비밀번호 수정</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
             <div class="form-group">
@@ -130,53 +127,70 @@
 
     <!-- member-moadl -->
     <div class="member-moadl modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">회원정보 변경</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
-          
             <div class="form-row align-items-center">
               <div class="col-md-7 my-1">
-                <label for="name">이름</label> <input type="text"
-                  class="form-control" id="inlineFormInputName" placeholder="Jane Doe">
+                <label for="name">이름</label> 
+                <input type="text" class="form-control" id="name"
+                 aria-describedby="nameHelp" placeholder="이름을 입력하세요." readonly="readonly"> 
+                <small id="nameHelp" class="form-text text-muted">* 개명으로 이름이 변경된 경우에만 변경해주세요.</small>
               </div>
               <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary">수정</button>
+                <button type="submit" class="btn btn-primary" id="name-udt-btn">수정</button>
+                <button type="submit" class="btn btn-primary name-btn" id="name-udt-cn-btn">취소</button>
+                <button type="submit" class="btn btn-primary name-btn" id="name-real-udt-btn">변경완료</button>
+              </div>
+              <p class="member-p" id="memberName-p"></p>
+            </div>
+            <div class="form-row align-items-center">
+              <div class="col-md-7 my-1">
+                <label for="nickName">별명</label> 
+                <input type="text" class="form-control" id="nickName" placeholder="닉네임을 입력하세요." readonly="readonly">
+              </div>
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary" id="nickName-udt-btn">수정</button>
+                <button type="submit" class="btn btn-primary" id="nickName-udt-cn-btn">취소</button>
+                <button type="submit" class="btn btn-primary" id="nickName-real-udt-btn">변경완료</button>
+              </div>
+              <p class="member-p" id="memberNickname-p"></p>
+            </div>
+            <div class="form-row align-items-center">
+              <div class="col-md-3 my-1" id="tel1-div">
+                <label for="tel1">전화 번호</label> 
+                <select class="form-control" id="tel1" 
+                style='background-color:#e9ecef' onFocus='this.initialSelect = this.selectedIndex;'
+                  onChange='this.selectedIndex = this.initialSelect;'>
+                  <option selected>010</option>
+                  <option>011</option>
+                  <option>016</option>
+                  <option>017</option>
+                  <option>018</option>
+                  <option>019</option>
+                </select>
+              </div>
+              <div class="col-md-2 my-1" id="tel2-div">
+                <input type="text" class="form-control tel-group" id="tel2" readonly="readonly">
+              </div>
+              <div class="col-md-2 my-1" id="tel3-div">
+                <input type="text" class="form-control tel-group" id="tel3" readonly="readonly">
+              </div>
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary tel-group" id="tel-udt-btn">수정</button>
+                <button type="submit" class="btn btn-primary tel-group" id="tel-udt-cn-btn">취소</button>
+                <button type="submit" class="btn btn-primary tel-group" id="tel-real-udt-btn">변경완료</button>
               </div>
             </div>
-            
-            <div class="form-group">
-              <label for="name">이름</label> <input type="text" class="form-control" id="name"
-                aria-describedby="nameHelp" placeholder="이름을 입력하세요."> <small id="nameHelp"
-                class="form-text text-muted">* 개명으로 이름이 변경된 경우에만 변경해주세요.</small>
-            </div>
-            <div class="form-group">
-              <label for="nickName">별명</label> <input type="text" class="form-control" id="nickName"
-                placeholder="이름을 입력하세요.">
-            </div>
-            <div class="form-row">
-              <div class="col-md-4 mb-3">
-                <label for="tel1">전화 번호</label> <input type="text" class="form-control" id="tel1">
-              </div>
-              <div class="col-md-4 mb-3 tel-div">
-                <input type="text" class="form-control" id="tel2">
-              </div>
-              <div class="col-md-4 mb-3 tel-div">
-                <input type="text" class="form-control" id="tel3">
-              </div>
-            </div>
+
             <!-- form-row -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="member-udt-cns-btn">취소</button>
-            <button type="button" class="btn btn-outline-dark" id="member-udt-btn-one">변경</button>
-            <button type="button" class="btn btn-outline-dark" id="member-udt-btn">변경완료</button>
+            <button type="button" class="btn btn-secondary" id="member-udt-cns-btn">닫기</button>
           </div>
         </div>
       </div>

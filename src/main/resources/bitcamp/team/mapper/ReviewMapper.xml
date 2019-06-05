@@ -64,7 +64,8 @@
       mf.name as manufacturerName,
       pf.img
     from
-      review r join product p 
+      review r 
+      join product p 
       on 
       r.product_no = p.product_no
       
@@ -88,14 +89,22 @@
  
   <select id="findByNo" resultMap="reviewMap" parameterType="map">
     select
-    r.rv_no as rno,
-    r.name as reviewName,
-    m.n_name as nickName,
-    r.cdt,
-    r.cnt
+      r.rv_no as rno,
+      r.name as reviewName,
+      r.product_no,
+      r.cdt,
+      r.cnt,
+      m.n_name as nickName,
+      p.name,
+      p.manufac_no,
+      mf.name as manufacturerName,
+      pf.img
     from
-    review r
-    join member m on m.member_no = r.member_no
+      review r
+      join member m on r.member_no = m.member_no
+      left join product p on r.product_no = p.product_no
+      left join manufacturer mf on p.manufac_no = mf.manufac_no
+      left join product_file pf on p.product_no = pf.product_no
     <where>
       r.product_no = #{selectNo}
       <if test="searchType == 'name' and keyword != null">
@@ -121,17 +130,17 @@
 
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
-    r.rv_no as rno,
-    m.name as memberName,
-    r.name as reviewName,
-    r.conts,
-    r.cdt,
-    r.cnt
+      r.rv_no as rno,
+      m.name as memberName,
+      r.name as reviewName,
+      r.conts,
+      r.cdt,
+      r.cnt
     from
-    review r
-    join member m on r.member_no = m.member_no
+      review r
+      join member m on r.member_no = m.member_no
     where
-    r.rv_no = #{value};
+      r.rv_no = #{value};
   </select>
 
   <insert id="insert" parameterType="review">

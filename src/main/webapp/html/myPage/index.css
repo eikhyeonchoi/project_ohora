@@ -63,11 +63,29 @@ body {
 	margin-top: 50px;
 }
 
-.pwd-p {
+.pwd-p, .member-p {
 	margin-top: 10px;
 	color: red;
 }
 
-.tel-div {
+.tel-group {
+	margin-top: 26px;
+}
+
+#name-udt-btn, #name-real-udt-btn, #name-udt-cn-btn {
+	margin-top: 7px;
+}
+
+#nickName-udt-btn, #nickName-real-udt-btn, #nickName-udt-cn-btn {
 	margin-top: 27px;
 }
+
+#memberName-p, #memberNickname-p {
+	margin-top: 0px;
+	margin-left: 11px;
+}
+
+#tel2, #tel3 {
+	text-align: center;
+}
+

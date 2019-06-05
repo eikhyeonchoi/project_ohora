@@ -110,6 +110,38 @@ public class MemberController {
     }
     return content;
   }
+  
+  @RequestMapping("updateName")
+  public Object updateName(Member member) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    System.out.println(member);
+    try {
+      memberService.updateName(member);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  @RequestMapping("updateNickname")
+  public Object updateNickname(Member member) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    System.out.println(member);
+    try {
+      memberService.updateNickname(member);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 }
 
 

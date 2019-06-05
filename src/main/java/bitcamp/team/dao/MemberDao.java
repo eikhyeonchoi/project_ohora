@@ -13,5 +13,8 @@ public interface MemberDao {
   Member findByEmailPassword(Map<String,Object> paramMap);
   Member findNoByNickName(String nickName);
   Member findByEmail(String email);
+  Member findByEmail2(Map<String,Object> paramMap);
   int updatePassword(HashMap<String,Object> param);
+  int updateName(Member member);
+  int updateNickname(Member member);
 }

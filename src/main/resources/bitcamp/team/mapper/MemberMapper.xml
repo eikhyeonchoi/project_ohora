@@ -81,7 +81,16 @@
       and pwd = password(#{password})
   </select>
   
- <update id="updatePassword" parameterType="map"> 
+  <select id="findByEmail2" resultMap="memberMap" parameterType="map">
+    select
+  <include refid="default-columns"/>
+    from
+      member
+    where
+      email=#{email}
+  </select>
+  
+  <update id="updatePassword" parameterType="map"> 
     update 
       member
     <set>
@@ -92,4 +101,26 @@
       member_no = #{no}
   </update>
 
+  <update id="updateName" parameterType="member"> 
+    update 
+      member
+    <set>
+      <if test="name != null">name = #{name}</if>,
+    </set>
+    where 
+      member_no = #{no}
+  </update>
+  
+  <update id="updateNickname" parameterType="member"> 
+    update 
+      member
+    <set>
+      <if test="nickName != null">n_name = #{nickName}</if>,
+    </set>
+    where 
+      member_no = #{no}
+  </update>
+  
 </mapper>
+
+
