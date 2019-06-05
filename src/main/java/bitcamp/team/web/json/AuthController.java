@@ -49,7 +49,19 @@ public class AuthController {
       session.setAttribute("loginUser", member);
       content.put("status", "success");
     }
+    return content;
+  }
 
+  @GetMapping("login2")
+  public Object login2(
+      String email,
+      HttpSession session) {
+
+    Member member = memberService.getEmail2(email);
+    HashMap<String,Object> content = new HashMap<>();
+
+    session.setAttribute("loginUser", member);
+    content.put("status", "success");
     return content;
   }
 
@@ -69,7 +81,7 @@ public class AuthController {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
     HashMap<String,Object> content = new HashMap<>();
-    
+
     if (loginUser != null) {
       content.put("status", "success");
       content.put("user", loginUser);
@@ -79,8 +91,8 @@ public class AuthController {
     }
     return content;
   }
-  
-  
+
+
 }
 
 
