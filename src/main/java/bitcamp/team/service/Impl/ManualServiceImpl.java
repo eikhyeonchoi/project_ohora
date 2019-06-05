@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManualDao;
 import bitcamp.team.dao.ManualFileDao;
+import bitcamp.team.dao.ProductDao;
 import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.ManualFile;
+import bitcamp.team.domain.Product;
 import bitcamp.team.service.ManualService;
 
 @Service
@@ -14,12 +16,15 @@ public class ManualServiceImpl implements ManualService {
 
   ManualDao manualDao;
   ManualFileDao manualFileDao;
+  ProductDao productDao;
   
   public ManualServiceImpl(
       ManualDao manualDao,
-      ManualFileDao manualFileDao) {
+      ManualFileDao manualFileDao,
+      ProductDao productDao) {
     this.manualDao = manualDao;
     this.manualFileDao = manualFileDao;
+    this.productDao = productDao;
   }
   
   @Override
@@ -68,4 +73,12 @@ public class ManualServiceImpl implements ManualService {
   public List<Manual> get(int no) {
     return manualDao.findByNo(no);
   }
+
+  @Override
+  public List<Product> getAllProduct() {
+    return productDao.findAllUseManual();
+  }
+  
+  
+  
 }

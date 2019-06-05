@@ -3,6 +3,7 @@ package bitcamp.team.service;
 import java.util.List;
 import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.ManualFile;
+import bitcamp.team.domain.Product;
 
 public interface ManualService {
   int add(Manual manual);
@@ -10,4 +11,5 @@ public interface ManualService {
   List<Manual> get(int no);
   List<Manual> list(String keyword, String searchType);
   List<ManualFile> typeFileList(int no);
+  List<Product> getAllProduct();
 }

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.min.css" />
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -14,71 +15,147 @@
     <header class="ohr-main-header"></header>
     <div id="fullpage">
       <div class="section">
-      
-      
-      
-        <div class="slide" id="s1" data-anchor="slide1" style="background-color: green;">
+
+        <div class="slide" id="s1" data-anchor="slide1" style="background-color: white;">
           <div class='container'>
             <div class="row justify-content-center">
-              <div class='col col-sm-12 manual-add-slide-main'>
-                <div>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                </div>
-                <div class="row justify-content-between">
-                  <div class="col-sm-2">
+              <div class='col col-sm-12'>
+
+                <div class='col-sm-12'>
+                  <div class='row' style="font-weight: 500; font-size: 35px;">
+                    <span>매뉴얼 등록</span> <span class="badge badge-secondary"
+                      style="padding-top: 11px;">STEP 1</span>
                   </div>
+                  <h5>기본정보 입력</h5>
+                  <hr>
+                </div>
+                <!-- 
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <label class="custom-file-label" for="fboard-file-input">select file</label>
+                    </div>
+                  </div>
+                </div>
+                 -->
+
+                <div>
+                  <h1>ddd</h1>
+                   파일업로드 : <input type="file" id="manual-file-input-01" multiple>
+                  <div id='image-div'></div>
+                </div>
+
+                <div class="row justify-content-between">
+                  <div class="col-sm-2"></div>
                   <div class="col-sm-2">
                     <button type="button" class="btn btn-sm btn-info btn-block next-page-btn">다음</button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div> <!-- container -->
+
+              </div> <!-- col-sm-12 -->
+            </div> <!-- justify-content-center -->
+          </div><!-- container -->
         </div><!-- 1 slide -->
-        
-        
-        
-        
-        
-        <div class="slide" id="s2" data-anchor="slide2" style="background-color: black;">
+
+
+
+
+
+        <div class="slide" id="s2" data-anchor="slide2" style="background-color: gray;">
           <div class='container'>
             <div class="row justify-content-center">
-              <div class='col col-sm-12 manual-add-slide-main'>
-                <div >
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
-                  <h1>2222222222222222</h1>
+              <div class='col col-sm-12'>
+
+                <div class='row'>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="manual-file-input-02"
+                        name='manualFiles' aria-describedby="inputGroupFileAddon04" multiple>
+                      <label class="custom-file-label" for="fboard-file-input">select file</label>
+                    </div>
+                  </div>
                 </div>
+
+                <div>
+                  <button id='manual-add-btn' type="button" class='btn btn-success btn-sm'>등록</button>
+                </div>
+
                 <div class="row justify-content-between">
                   <div class="col-2">
                     <button type="button" class="btn btn-sm btn-info btn-block prev-page-btn">이전</button>
                   </div>
-                  <div class="col-2">
-                  </div>
+                  <div class="col-2"></div>
                 </div>
               </div>
             </div>
           </div>
-        </div> <!-- 2 slide -->
-        
-        
-      </div> <!-- section -->
-    </div> <!-- fullpage -->
-  </div> <!-- main -->
+        </div>
+        <!-- 2 slide -->
+
+
+      </div>
+      <!-- section -->
+    </div>
+    <!-- fullpage -->
+  </div>
+  <!-- main -->
+
+
+  <div id='manual-add-intro' class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">메뉴얼 등록</h5>
+        </div>
+        <div class="modal-body">
+          <p>제품을 선택해주세요</p>
+          <p>등록된 제품의 대해서만 메뉴얼 등록이 가능합니다</p>
+        </div>
+        <div class="modal-footer col-sm-12 justify-content-between">
+          <div class='col-4'>
+            <button id='modal-cancel-btn' type="button" class="btn btn-danger btn-block">취소</button>
+          </div>
+          <div class='col-4'>
+            <button id='modal-product-add-btn' type="button" class="btn btn-light btn-block">제품등록</button>
+          </div>
+          <div class='col-4'>
+            <button id='modal-ok-btn' type="button" class="btn btn-info btn-block">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script id="product-template" type="text/x-handlebars-template">
+  <div class='input-group'>
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="productSelector">제품</label>
+    </div>
+    <select id='productSelector' class='custom-select'>
+      <option value='0' option:selected>선택</option>
+      {{#each allProduct}}
+        <option value='{{no}}'>{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  </script>
+
 
 </body>
 <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.extensions.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
 <script src="../header.js"></script>
 <script src="test.js"></script>
 </html>

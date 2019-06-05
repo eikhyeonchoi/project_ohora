@@ -14,15 +14,12 @@
       }
 
 .jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
   margin-bottom: 0;
   background-color: #383d41;
 }
 @media (min-width: 768px) {
   .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+  padding: 0px 0px 5px 0px;
   }
 }
 
@@ -58,5 +55,36 @@ footer p {
 
 #ohr-review-div > h2 {
 	color: white;
+	font-weight: bold;
+	margin-top: .5rem;
+}
+
+#ohr-product-img {
+	background-repeat: no-repeat;
+	height: 225px;
+	background-position: center;
+}
+
+#ohr-product-name {
+	text-align: left;
+    color: #343a40;
+}
+
+#ohr-tr-title {
+    width: 400px;
+    display: none;
+}
+
+#review-add-btn {
+	float: right;
+}
+
+#ohr-product-manufacturer-name {
+	text-shadow: 0 0 1px white;
+}
+
+#pagination-container {
+  width: 400px;
+  margin: 0 auto;
 }
 

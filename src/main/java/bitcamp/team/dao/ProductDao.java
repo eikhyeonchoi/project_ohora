@@ -7,6 +7,7 @@ import bitcamp.team.domain.ProductLargeCategory;
 import bitcamp.team.domain.ProductSmallCategory;
 
 public interface ProductDao {
+  List<Product> findAllUseManual();
   List<Product> findAll(Map<String, Object> param);
   List<ProductLargeCategory> findLargeCategory();
   List<ProductSmallCategory> findSmallCategory();

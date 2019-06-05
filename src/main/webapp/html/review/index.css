@@ -51,3 +51,36 @@ footer p {
 	color: black;
 }
 
+.ohr-card-2nddiv {
+    min-width: 220px;
+    min-height: 375px;
+    max-height: 375px;
+}
+
+.slick-slide img {
+    border-bottom: solid 1px #ccc;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-body {
+	padding-top: 5px;
+}
+
+.card-text a {
+	font-size: 18px;
+	font-weight: bold;
+	color: #555753;
+	display: inline-block;
+	width: 170px;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ohr-btn-div {
+	margin-top: 10px;
+	float: left;
+}
+

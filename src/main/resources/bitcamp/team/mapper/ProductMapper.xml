@@ -92,6 +92,15 @@
       sc.name as 소분류,
   
    -->
+   
+   <select id="findAllUseManual" resultMap="productMap">
+     select 
+       product_no,
+       name as productName
+     from 
+       product;
+   </select>
+   
   <select id="findAll" resultMap="productMap" parameterType="map">
     select
       mf.name as manufacturerName,
