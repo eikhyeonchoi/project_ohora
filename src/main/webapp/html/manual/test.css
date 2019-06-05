@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
 
-h2 {
+.slide {
+	overflow: auto;
 }
 
-
-.manual-add-slide-main {
+#add {
+	text-align: center;
 }
+

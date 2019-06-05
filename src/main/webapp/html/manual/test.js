@@ -4,10 +4,32 @@
  * 
  */
 var productNo = getQuerystring('no'),
-productName = '';
-productSrc = $('#product-template').html();
+    productName = '';
+    productSrc = $('#product-template').html(),
+    addContentSrc = $('#additional-template').html();
+    
 
-var productGenerator = Handlebars.compile(productSrc);
+var productGenerator = Handlebars.compile(productSrc),
+    contentGenerator = Handlebars.compile(addContentSrc);
+
+var checkList = [];
+
+var fileCountCheck = 0,
+    pdfCheck = 0;
+
+var slide = [
+  {
+    id: $('#s1')
+  },
+  {
+    id: $('#s2')
+  },
+  {
+    id: $('#s3')
+  }
+]; 
+
+
 
 $(document).ready(function() {
   if(productNo == '') {
@@ -42,6 +64,7 @@ $(document).ready(function() {
     autoScrolling: false,
     navigationPosition: 'right',
     scrollHorizontally: false,
+    scrollOverflow: true,
     loopHorizontal: false,
     controlArrows: false,
     anchors: ['firstPage']
@@ -51,67 +74,63 @@ $(document).ready(function() {
 });
 
 
+$('#add-content').click(function(e) {
+  e.preventDefault();
+  $(contentGenerator()).appendTo($('#content-div'));
+  fullpage_api.reBuild();
+});
+
+
 manualFileUpload('manual-file-input-01');
 
 
-$('.next-page-btn').click(function(){
-  fullpage_api.moveTo('firstPage', 1);
-});
 
-$('.prev-page-btn').click(function(){
+$('.next-page-btn').click(function() {
+  fullpage_api.moveSlideRight();
+}); // click
+
+$('.prev-page-btn').click(function() {
   fullpage_api.moveSlideLeft();
-});
-
+}); // click
 
 
 
 
 function manualFileUpload(id, obj) {
   $('#' + id).fileupload({
-    url: '/bitcamp-team-project/app/json/manual/tempAdd', 
+    url: '/bitcamp-team-project/app/json/manual/tempAdd',
     dataType: 'json',
     sequentialUploads: true,
     singleFileUploads: false,
-    disableImageResize: /Android(?!.*Chrome)|Opera/
-      .test(window.navigator && navigator.userAgent),
-    previewMaxWidth: 100,
-    previewMaxHeight: 100,
+    autoUpload: false,
+    previewMaxWidth: 200,
+    previewMaxHeight: 111, 
     previewCrop: true,
     processalways: function(e, data) {
-      console.log('fileuploadprocessalways()...');
-      console.log(data.files);
+      window.fileCount++;
       for (var i = 0; i < data.files.length; i++) {
+        checkList.push(data.files[i].type);
         try {
-          if (data.files[i].preview.toDataURL) {
-            console.log(data.files[i].preview.toDataURL());
-            $("<img>").attr('src', data.files[i].preview.toDataURL())
-            .css('width', '100px')
-            .appendTo($('#image-div'));
+          if (data.files[i].type.includes('pdf')) {
+            window.pdfCheck++;
+            $("<img>").attr('src', '/bitcamp-team-project/upload/manualfile/pdf.jpg').css('width', '192px').css('height', '111px').appendTo($('.img-div'));
           }
-        } catch (err) {}
+          if (data.files[i].preview.toDataURL) {
+            // console.log(data.files[i].preview.toDataURL());
+            $("<img>").attr('src', data.files[i].preview.toDataURL()).css('width', '192px').css('height', '111px').appendTo($('.img-div'));
+          }
+        } catch (err) {
+        }
       }
-    }, 
-    add: function (e, data) {
+      $('#manual-add-btn').unbind("click");
       $('#manual-add-btn').click(function() {
-        /* obj로 받은 값 넣으면 됨
-      data.formData = {
-          title: $('#title').val(),
-          contents: $('#contents').val(),
-          memberNo: obj.userNo
-      };
-         */
-        data.submit();
+          data.submit();
       });
-    },
+    }, 
     done: function (e, data) {
       console.log(data);
-      if(data.result.status == 'success'){
-        alert('success');
-      } else { 
-        alert("fail");
-      }
     }
-  }); // fileuplaod
+  });
 } // manualFileUpload
 
 
