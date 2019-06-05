@@ -5,11 +5,7 @@ category = $('.categoryItem');
 
 var scrollEvent = false;
 var count = 0;
-var gCount = 0;
-var cCount = 0;
-var wCount = 0;
-var rCount = 0;
-var contsCount = 0;
+
 $(document).ready(() => {
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
@@ -27,35 +23,44 @@ $(document).ready(() => {
     if (data.status == 'success') {
       $('#memberName').text(data.manual[0].product.manufacturer.name);
       $('#productName').text(data.manual[0].name);
+      
       for (var i = 0; i < data.mFile.length; i++) {
-        var contents = '<section id="conts">' + data.mFile[i].contents + '</section>';
+        if (data.mFile[i].typeNo == 5) {
+          var summarize = '<section id="sumconts">' + data.mFile[i].contents + '</section>'
+          $(summarize).appendTo($('#contents'));
+        }
+        var contents = '<section id="conts">'
+          + '<span id="textconts">' + data.mFile[i].contents + '</span>'
+          + '<span id="textimg"><img src="' + data.mFile[i].file + '"></span>'
+          + '</section>';
         $(contents).appendTo($('.innerForm' + data.mFile[i].typeNo));
       }
       mouseWheelAction($('.innerForm1 > section[id=conts]').length);
 
-    $('#general-tab').click(function(e) {
-      e.preventDefault();
-      mouseWheelAction($('.innerForm1 > section[id=conts]').length);
-    });
-
-    $('#configure-tab').click(function(e) {
-      e.preventDefault();
-      mouseWheelAction($('.innerForm2 > section[id=conts]').length);
-    });
-
-    $('#warning-tab').click(function(e) {
-      e.preventDefault();
-      mouseWheelAction($('.innerForm3 > section[id=conts]').length);
-    });
-    
-    $('#reply-tab').click(function(e) {
-      e.preventDefault();
-      mouseWheelAction($('.innerForm4 > section[id=conts]').length);
-    });
-
-    category.text(data.manual[0].product.productSmallCategory.productLargeCategory.name + ' > '
-    + data.manual[0].product.productSmallCategory.name + ' > '
-    + data.manual[0].name);
+      $('#general-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm1 > section[id=conts]').length);
+      });
+  
+      $('#configure-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm2 > section[id=conts]').length);
+      });
+  
+      $('#warning-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm3 > section[id=conts]').length);
+      });
+      
+      $('#reply-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm4 > section[id=conts]').length);
+      });
+  
+      category.text(data.manual[0].product.productSmallCategory.productLargeCategory.name + ' > '
+      + data.manual[0].product.productSmallCategory.name + ' > '
+      + data.manual[0].name);
+      
     } else {
       alert('실패했습니다\n' + data.error);
     }
@@ -91,4 +96,22 @@ function mouseWheelAction(cnt) {
       );
     }
   });
+}
+
+var info, tab;
+
+$(function() {
+  tab = this.getElementById("manual_container");
+  info = this.getElementById("info_container");
+  winResize();
+  $(window).bind({resize: winResize, scroll: winScroll});
+});
+
+function winResize() {
+  tab.style.top = info.offsetHeight + "px";
+}
+
+function winScroll() {
+  var op = 1 - (window.pageYOffset / info.offsetHeight);
+  info.style.opacity = op;
 }
