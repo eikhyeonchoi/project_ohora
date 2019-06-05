@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 list</title>
+<title>오호라</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -16,8 +16,8 @@
   <div class="container">
   
   <div id="ohr-review-div">
-   <h2 class="jumbotron-heading" id="ohr-product-name">제품명</h2>
-   <p class="lead text-muted" id="ohr-product-manufacturer-name">기업명</p>
+  <div id="ohr-product-img">
+   </div>
     </div>
 
   </div>
@@ -25,19 +25,16 @@
  
  
   <div class="container">
-    <h1>REVIEW</h1>
-    <div class="product-name">
-      <h4></h4>
-      <p class="text-primary" id='product-name'></p>
-    </div>
-
-    <button type="button" id="review-add-btn" class="btn btn-primary add-btn">등록</button>
-
-    <table class="table table-hover">
+ 
+   <h2 class="jumbotron-heading" id="ohr-product-name">제품명</h2>
+   <p class="lead text-muted" id="ohr-product-manufacturer-name">기업명</p>
+   <hr>
+   
+    <table class="table table-hover" id="ohr-rev-table">
       <thead>
         <tr>
           <th scope="col">번호</th>
-          <th scope="col">제목</th>
+          <th scope="col" id="ohr-tr-title">제목</th>
           <th scope="col">작성자</th>
           <th scope="col">등록일</th>
           <th scope="col">조회수</th>
@@ -45,9 +42,11 @@
       </thead>
       <tbody></tbody>
     </table>
-    
+    <button type="button" id="review-add-btn" class="btn btn-sm btn-secondary add-btn">등록</button>
+    <br>
+    <br>
     <div id="pagination-container"></div>
-    <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+    <form class="form-inline my-2 my-lg-0 justify-content-center" id="review-search">
       <div class="form-group row">
         <label for="title" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
@@ -61,8 +60,9 @@
           </div>
         </div>
       </div>
+      
       <input id="keyword" class="form-control mr-sm-2" placeholder="검색" aria-label="검색">
-      <button type="button" id="search-btn" class="btn btn-outline-primary my-2 my-sm-0">검색</button>
+      <button type="button" id="search-btn" class="btn btn-outline-secondary my-2 my-sm-0">검색</button>
     </form>
   </div>
   <!-- container -->

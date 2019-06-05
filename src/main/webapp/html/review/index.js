@@ -22,20 +22,16 @@ function loadList() {
       arrows: true
     });
     
+    //prodView 링크
+    $('#ohr-view-link').off().click((e) => {
+      console.log('sss')
+      window.location.href = 'prodView.html?no=' + 
+      $(e.target).attr('data-no');
+    });
 
   });
   $(document.body).trigger('loaded-list');
 };
-
-
-//detail 링크
-$(document.body).bind('loaded-list', () => {
-
-  $('.bit-view-link').click((e) => {
-    window.location.href = 'prodView.html?no=' + 
-    $(e.target).attr('data-no');
-  });
-});
 
 
 $('#keyword').keydown((e) => {
