@@ -1,19 +1,18 @@
 var productNo = location.href.split('?')[1].split('=')[1];
 var type = sessionStorage.getItem('type'),
-nickName = sessionStorage.getItem('nickName');
-general = $('#generalContents'),
-config  = $('#configureContents'),
-warning = $('#warningContents'),
-reply   = $('#replyContents'),
+nickName = sessionStorage.getItem('nickName'),
 category = $('.categoryItem');
 
+var scrollEvent = false;
+var count = 0;
+
 $(document).ready(() => {
-  carousel = $('#carouselExam');
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
         $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' 
             + data.pList.productFiles[i].img).appendTo(fileDiv);
+        
       }
     } else {
       alert('실패했습니다!\n' + data.error);
@@ -25,67 +24,94 @@ $(document).ready(() => {
     if (data.status == 'success') {
       $('#memberName').text(data.manual[0].product.manufacturer.name);
       $('#productName').text(data.manual[0].name);
-      for (var i of data.manual[0].manualFile) {
-        switch (i.manualType.no) {
-        case 1:
-//        console.log($(i.contents).length);
-//        $(article).appendTo('.inner1'); break;
-//        case 2: $(article).appendTo('.inner2');  break;
-//        case 3: $(article).appendTo('.inner3');  break;
-//        case 4: $(article).appendTo('.inner4');  break;
-        case 5: $('#contents').text(i.contents); break;
-        default: ;
+      
+      for (var i = 0; i < data.mFile.length; i++) {
+        if (data.mFile[i].typeNo == 5) {
+          var summarize = '<section id="sumconts">' + data.mFile[i].contents + '</section>'
+          $(summarize).appendTo($('#contents'));
         }
+        var contents = '<section id="conts">'
+          + '<span id="textconts">' + data.mFile[i].contents + '</span>'
+          + '<span id="textimg"><img src="' + data.mFile[i].file + '"></span>'
+          + '</section>';
+        $(contents).appendTo($('.innerForm' + data.mFile[i].typeNo));
       }
+      mouseWheelAction($('.innerForm1 > section[id=conts]').length);
+
+      $('#general-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm1 > section[id=conts]').length);
+      });
+  
+      $('#configure-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm2 > section[id=conts]').length);
+      });
+  
+      $('#warning-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm3 > section[id=conts]').length);
+      });
+      
+      $('#reply-tab').click(function(e) {
+        e.preventDefault();
+        mouseWheelAction($('.innerForm4 > section[id=conts]').length);
+      });
+  
       category.text(data.manual[0].product.productSmallCategory.productLargeCategory.name + ' > '
-          + data.manual[0].product.productSmallCategory.name + ' > '
-          + data.manual[0].name);
+      + data.manual[0].product.productSmallCategory.name + ' > '
+      + data.manual[0].name);
+      
     } else {
       alert('실패했습니다\n' + data.error);
     }
   });
-  $(carousel).each(function (index) {
-    $('#carouselExam').on("wheel mousewheel DOMMouseScroll", function(e) {
-      var delta = 0;
-      if (!event) event = window.event;
-      if (event.wheelDelta) {
-        delta = event.wheelDelta / 120;
-        if (window.opera) delta = -delta;
-      } else if (event.detail)
-        delta = -event.detail / 3;
-      var moveTop = $(window).scrollTop();
-      var car = $(carousel).eq(index);
-      if (delta < 0) {
-        if ($(car).next() != undefined) {
-          try {
-            moveTop = $(car).next().offset().top;
-          } catch (e) {
-          }
-        } else {
-          if ($(car).prev() != undefined) {
-            try {
-              moveTop = $(car).prev().offset().top;
-            } catch (e) {
+});
+function mouseWheelAction(cnt) {
+  $("html, body").on('mousewheel', function (e) {
+    var m = e.originalEvent.wheelDelta;
+    var sb = $("#conts").height();
+
+    if (m > 1 && scrollEvent == false && count >= 1) {
+      scrollEvent = true;
+      count--;
+      $("html, body").stop().animate(
+          {scrollTop: sb*count},
+          {duration:300, 
+            complete: function() {
+              scrollEvent = false;
+            }
+          });
+    } else if (m < 1 && scrollEvent == false 
+        && count < (cnt + 2)) {
+      scrollEvent = true;
+      count++;
+      $("html, body").stop().animate(
+          {scrollTop: sb*count},
+          {duration:300,
+            complete: function () {
+              scrollEvent = false;
             }
           }
-        }
-        $('html.body').stop().animate({
-          scrollTop: moveTop + 'px'
-        }, {
-          duration: 800, complete: function () {
-
-          }
-        })
-      }
-    })
-  })
-  /*$('body').on('wheel mousewheel DOMMouseScroll', function(event) {
-    var delta = event.wheelDelta || -event.detail || event.originalEvent.wheelDelta || -event.originalEvent.detail;
-    if (delta) {
-      $(this).carousel((delta > 0 ? 'prev' : 'next'));
+      );
     }
-  });*/
+  });
+}
+
+var info, tab;
+
+$(function() {
+  tab = this.getElementById("manual_container");
+  info = this.getElementById("info_container");
+  winResize();
+  $(window).bind({resize: winResize, scroll: winScroll});
 });
 
+function winResize() {
+  tab.style.top = info.offsetHeight + "px";
+}
 
-
+function winScroll() {
+  var op = 1 - (window.pageYOffset / info.offsetHeight);
+  info.style.opacity = op;
+}

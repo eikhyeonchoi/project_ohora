@@ -2,10 +2,15 @@
 body {
 	background: black;
 }
-
+hr {
+	border-top: 1px solid white;
+	width: 70%;
+	position: absolute;
+	margin: auto;
+}
 div.manual {
 	position: relative;
-	width: 1600px;
+	width: 90vw;
 	margin: auto;
 }
 /**/
@@ -26,13 +31,13 @@ div.manual {
 /* 제품 간단 정보 */
 .simpleConts {
 	margin: 0px;
-	min-width: 210px;
-	min-height: 250px;
 }
 
+.summar {
+}
 /* 제품명 */
 #productName {
-	width: 200px;
+	width: 40%;
 	font: 40px HanSans;
 	color: white;
 	font-weight: bold;
@@ -43,22 +48,21 @@ div.manual {
 #memberName {
 	width: 120px;
 	font: 16px HanSans;
+	font-weight: bold;
 	color: white;
-	padding: 25px;
+	padding-bottom: 15px;
 }
 /* 제품 요약 설명 */
 #contents {
+	padding: 20px;
 	font: 16px HanSans;
 	color: white;
 }
 /* 사진 정보 */
 #fileDiv {
-	margin-left: 200px;
-	float: right;
-}
-
-img {
-	width: 300px;
+	text-align: center;
+	margin: auto;
+	width: 70vw;
 }
 
 .pic {
@@ -66,9 +70,9 @@ img {
 }
 
 #info_container {
-	margin: auto;
   position: fixed;
-  
+	width: 90vw;
+  height: 200vh;
 }
 
 /**/

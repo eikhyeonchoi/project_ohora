@@ -12,6 +12,7 @@ $(document).ready(() => {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
         $('<img>').attr('src', '/bitcamp-team-project/upload/productfile/' 
             + data.pList.productFiles[i].img).appendTo(fileDiv);
+        
       }
     } else {
       alert('실패했습니다!\n' + data.error);
@@ -66,7 +67,6 @@ $(document).ready(() => {
     }
   });
 });
-
 function mouseWheelAction(cnt) {
   $("html, body").on('mousewheel', function (e) {
     var m = e.originalEvent.wheelDelta;
@@ -83,7 +83,7 @@ function mouseWheelAction(cnt) {
             }
           });
     } else if (m < 1 && scrollEvent == false 
-        && count < cnt) {
+        && count < (cnt + 2)) {
       scrollEvent = true;
       count++;
       $("html, body").stop().animate(
