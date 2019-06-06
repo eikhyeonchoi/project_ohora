@@ -25,21 +25,9 @@ $("html, body").on('mousewheel', function (e) {
           scrollEvent = false;
           }});
   }
-});
-
-$("#bt01").click(function() {
-  var position = $("#window1").offset();
-  $("body").stop().animate({scrollTop:position.top}, 500);
-});
-$("#bt02").click(function() {
-  var position = $("#window2").offset();
-  $("body").stop().animate({scrollTop:position.top}, 500);
-});
-$("#bt03").click(function() {
-  var position = $("#window3").offset();
-  $("body").stop().animate({scrollTop:position.top}, 500);
-});
-$("#bt04").click(function() {
-  var position = $("#window4").offset();
-  $("body").stop().animate({scrollTop:position.top}, 500);
+  if (m == 1) {
+    $('#window1').fadeIn();
+  } else if (m == 2) {
+    $('#window1').fadeOut();
+  }
 });
