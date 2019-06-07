@@ -51,7 +51,7 @@ function loadList() {
 
         $('.review-a-class').click((e) => {
           e.preventDefault();
-          window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
+          window.location.href = 'view.html?no=' +  $(e.target).attr('data-no');
         });
         $(document.body).trigger('loaded-list');
       })

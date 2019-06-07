@@ -21,12 +21,15 @@
    <span id="ohr-product-grade">만족도: </span>
    </p>
    </div>
+   <div>
    <button type="button" class="btn btn-sm btn-secondary" id="ohr-satisfy-btn">만족도 평가</button>
+   <button type="button" id="review-add-btn" class="btn btn-sm btn-secondary add-btn">리뷰 등록</button>
+   </div>
  </section>
  
  
   <div class="container">
-  
+  <h2 id="ohr-rev-head">제품 리뷰</h2>
     <table class="table table-hover" id="ohr-rev-table">
       <thead>
         <tr>
@@ -39,9 +42,6 @@
       </thead>
       <tbody></tbody>
     </table>
-    <button type="button" id="review-add-btn" class="btn btn-sm btn-secondary add-btn">등록</button>
-    <br>
-    <br>
     <div id="pagination-container"></div>
     <form class="form-inline my-2 my-lg-0 justify-content-center" id="review-search">
       <div class="form-group row">

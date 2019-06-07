@@ -1,38 +1,39 @@
 .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 
 .jumbotron {
-  margin-bottom: 0;
-  background-color: #383d41;
+	margin-bottom: 0;
+	background-color: #383d41;
 }
-@media (min-width: 768px) {
-  .jumbotron {
-  padding: 0px 0px 5px 0px;
-  }
+
+@media ( min-width : 768px) {
+	.jumbotron {
+		padding: 0px 0px 5px 0px;
+	}
 }
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+	max-width: 40rem;
 }
 
 .ohr-thumbnail {
@@ -45,12 +46,12 @@
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+	margin-bottom: .25rem;
 }
 
 #ohr-review-div {
@@ -59,13 +60,13 @@ footer p {
 	margin-right: 10rem;
 }
 
-#ohr-review-div > h2 {
+#ohr-review-div>h2 {
 	color: white;
 	font-weight: bold;
 	margin: .5rem;
 	position: absolute;
-   top: 12.5rem;
-   left: 16.2rem;
+	top: 12.5rem;
+	left: 16.2rem;
 }
 
 #ohr-product-img {
@@ -77,7 +78,7 @@ footer p {
 }
 
 #ohr-product-name {
-    color: white;
+	color: white;
 }
 
 #ohr-product-manufacturer-name {
@@ -89,7 +90,7 @@ footer p {
 	left: 16.2rem;
 }
 
-#ohr-product-grade{
+#ohr-product-grade {
 	font-weight: bold;
 	color: #6c757d;
 	position: absolute;
@@ -103,16 +104,18 @@ footer p {
 	top: 17rem;
 }
 
-#ohr-tr-title {
-    width: 400px;
+#review-add-btn {
+	position: absolute;
+	right: 40rem;
+	top: 17rem;
 }
 
-#review-add-btn {
-	float: right;
+#ohr-tr-title {
+	width: 400px;
 }
 
 #pagination-container {
-  width: 400px;
-  margin: 0 auto;
+	width: 400px;
+	margin: 0 auto;
 }
 

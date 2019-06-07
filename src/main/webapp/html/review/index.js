@@ -23,7 +23,7 @@ function loadList() {
     });
     
     //prodView 링크
-    $('#ohr-view-link').off().click((e) => {
+    $('.ohr-view-link').off().click((e) => {
       window.location.href = 'prodView.html?no=' + 
       $(e.target).attr('data-no');
     });
