@@ -2,24 +2,25 @@ package bitcamp.team.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Review;
-import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
+import bitcamp.team.service.SatisfyService;
 
 @RestController("json/ReviewController")
 @RequestMapping("/json/review")
 public class ReviewController {
 
   ReviewService reviewService;
-  ProductService productService;
+  SatisfyService satisfyService;
 
-  public ReviewController(ReviewService reviewService, ProductService productService) {
+  public ReviewController(ReviewService reviewService, SatisfyService satisfyService) {
     this.reviewService = reviewService;
-    this.productService = productService;
+    this.satisfyService = satisfyService;
   }
 
   @GetMapping("list")
@@ -35,11 +36,13 @@ public class ReviewController {
 
   @GetMapping("detail")
   public Object detail(int no, String keyword, String searchType) throws Exception {
-    List<Review> review = reviewService.get(no, keyword, searchType);
-
     HashMap<String, Object> map = new HashMap<>();
+    List<Review> review = reviewService.get(no, keyword, searchType);
+    Map<String, Object> satisfy = satisfyService.get(no);
+
     try {
       map.put("list", review);
+      map.put("satisfy", satisfy);
       map.put("status", "success");
     } catch (Exception e) {
       map.put("status", "fail");

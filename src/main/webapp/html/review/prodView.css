@@ -53,34 +53,62 @@ footer p {
   margin-bottom: .25rem;
 }
 
+#ohr-review-div {
+	height: 250px;
+	margin-left: 10rem;
+	margin-right: 10rem;
+}
+
 #ohr-review-div > h2 {
 	color: white;
 	font-weight: bold;
-	margin-top: .5rem;
+	margin: .5rem;
+	position: absolute;
+   top: 12.5rem;
+   left: 16.2rem;
 }
 
 #ohr-product-img {
-	background-repeat: no-repeat;
-	height: 225px;
-	background-position: center;
+	width: 100px;
+	height: 110px;
+	border: solid 1px white;
+	position: absolute;
+	top: 12rem;
 }
 
 #ohr-product-name {
-	text-align: left;
-    color: #343a40;
-}
-
-#ohr-tr-title {
-    width: 400px;
-    display: none;
-}
-
-#review-add-btn {
-	float: right;
+    color: white;
 }
 
 #ohr-product-manufacturer-name {
 	text-shadow: 0 0 1px white;
+	height: 2rem;
+	margin: .5rem;
+	position: absolute;
+	top: 14.5rem;
+	left: 16.2rem;
+}
+
+#ohr-product-grade{
+	font-weight: bold;
+	color: #6c757d;
+	position: absolute;
+	top: 15.5rem;
+	left: 21.75rem;
+}
+
+#ohr-satisfy-btn {
+	position: absolute;
+	right: 45rem;
+	top: 17rem;
+}
+
+#ohr-tr-title {
+    width: 400px;
+}
+
+#review-add-btn {
+	float: right;
 }
 
 #pagination-container {
