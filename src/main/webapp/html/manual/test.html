@@ -20,7 +20,8 @@
           <div class='container'>
             <div class="row justify-content-center">
               <div class='col col-sm-12'>
-
+              
+                <button id='temp-btn' type="button">임시</button>
                 <div class='col-sm-12'>
                   <div class='row mb-sm-2' style="font-weight: 500; font-size: 30px;">
                     <span>매뉴얼 등록</span> <span class="badge badge-secondary"style="padding-top: 11px;">STEP 1</span>
@@ -31,19 +32,19 @@
                 
                 <div id='content-div' class='col-sm-12'>
                   <div class='row mb-sm-5'>
-                    <div class='col-sm-3 img-div'></div>
+                    <div class='col-sm-3 img-div' style="text-align: center;"></div>
                     <div class='col-sm-9'>
                       <div class="input-group mb-sm-3">
                         <div class="custom-file">
-                          <label class="custom-file-label" for="manual-file-input-01">Choose file</label>
-                          <input type="file" class="custom-file-input" id="manual-file-input-01">
+                          <label class="custom-file-label">Choose file</label>
+                          <input type="file" class="custom-file-input pdf-file-input" name='basicManualFiles'>
                         </div>
                       </div>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">설명</span>
                         </div>
-                        <textarea class="form-control" placeholder="pdf 파일의 대한 설명을 입력하세요"></textarea>
+                        <textarea class="form-control" placeholder="pdf 파일의 대한 설명을 입력하세요" name="basicContents"></textarea>
                       </div>
                     </div>
                   </div>
@@ -177,19 +178,19 @@
 
   <script id="additional-template" type="text/x-handlebars-template">
   <div class='row mb-sm-5'>
-    <div class='col-sm-3 img-div'></div>
+    <div class='col-sm-3 img-div' style="text-align: center;"></div>
     <div class='col-sm-9'>
       <div class="input-group mb-sm-3">
         <div class="custom-file">
-          <label class="custom-file-label" for="manual-file-input-01">Choose file</label>
-          <input type="file" class="custom-file-input manual-file-input">
+          <label class="custom-file-label">Choose file</label>
+          <input type="file" class="custom-file-input manual-file-input" name='basicManualFiles'>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">설명</span>
         </div>
-        <textarea class="form-control" placeholder="이미지 파일에 대한 설명을 입력해주세요"></textarea>
+        <textarea class="form-control" placeholder="이미지 파일에 대한 설명을 입력해주세요" name="basicContents"></textarea>
       </div>
     </div>
   </div>
