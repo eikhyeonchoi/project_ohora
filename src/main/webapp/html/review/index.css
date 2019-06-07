@@ -79,6 +79,10 @@ footer p {
 	text-overflow: ellipsis;
 }
 
+.card-text a:hover {
+	cursor: pointer;
+}
+
 .ohr-btn-div {
 	margin-top: 10px;
 	float: left;
