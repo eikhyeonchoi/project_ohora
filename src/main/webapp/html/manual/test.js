@@ -7,7 +7,6 @@ var productNo = getQuerystring('no'),
     productName = '';
     productSrc = $('#product-template').html(),
     addContentSrc = $('#additional-template').html();
-    
 
 var productGenerator = Handlebars.compile(productSrc),
     contentGenerator = Handlebars.compile(addContentSrc);
@@ -16,6 +15,9 @@ var checkList = [];
 
 var fileCountCheck = 0,
     pdfCheck = 0;
+
+var basicPartsList = [],
+    basicContentsList = [];
 
 var slide = [
   {
@@ -27,8 +29,7 @@ var slide = [
   {
     id: $('#s3')
   }
-]; 
-
+]; // 슬라이드 객체화
 
 
 $(document).ready(function() {
@@ -61,7 +62,6 @@ $(document).ready(function() {
 
   $('#fullpage').fullpage({
     licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-    autoScrolling: false,
     navigationPosition: 'right',
     scrollHorizontally: false,
     scrollOverflow: true,
@@ -71,62 +71,82 @@ $(document).ready(function() {
   });
 
   $.fn.fullpage.setAllowScrolling(false);
+  
+  $(document.body).trigger('loaded-required')
 });
 
+$(document.body).bind('loaded-required', function() {
+  $('.next-page-btn').click(function() {
+    window.basicContentsList = [];
+    $('textarea[name="basicContents"]').each(function(index, item) {
+      window.basicContentsList.push($(item).val());
+    });
+    console.log(basicPartsList);
+    console.log(basicContentsList);
+    
+    // fullpage_api.moveSlideRight();
+  }); // click
+  
+  $('.prev-page-btn').click(function() {
+    fullpage_api.moveSlideLeft();
+  }); // click
+  
+  var data = encodeURIComponent(JSON.stringify({
+    basicManualFiles: basicPartsList,
+    contents: basicContentsList
+  }));
+  
+  $('#temp-btn').click(function() {
+    $.post('/bitcamp-team-project/app/json/manual/tempAdd', {
+      data: data
+    }, function(obj) {
+    }, "json")
+  });
+  
+  manualFileUpload('pdf-file-input');
+  
+  
+}); // bind
 
 $('#add-content').click(function(e) {
   e.preventDefault();
   $(contentGenerator()).appendTo($('#content-div'));
   fullpage_api.reBuild();
+  $(document.body).trigger('loaded-content');
 });
 
-
-manualFileUpload('manual-file-input-01');
-
-
-
-$('.next-page-btn').click(function() {
-  fullpage_api.moveSlideRight();
-}); // click
-
-$('.prev-page-btn').click(function() {
-  fullpage_api.moveSlideLeft();
-}); // click
+$(document.body).bind('loaded-content', function() {
+  manualFileUpload('manual-file-input');
+})
 
 
-
-
-function manualFileUpload(id, obj) {
-  $('#' + id).fileupload({
+function manualFileUpload(clazz, obj) {
+  $('.' + clazz).fileupload({
     url: '/bitcamp-team-project/app/json/manual/tempAdd',
     dataType: 'json',
     sequentialUploads: true,
     singleFileUploads: false,
     autoUpload: false,
-    previewMaxWidth: 200,
-    previewMaxHeight: 111, 
+    previewMaxWidth: 172,
+    previewMaxHeight: 110, 
     previewCrop: true,
     processalways: function(e, data) {
-      window.fileCount++;
-      for (var i = 0; i < data.files.length; i++) {
-        checkList.push(data.files[i].type);
-        try {
-          if (data.files[i].type.includes('pdf')) {
-            window.pdfCheck++;
-            $("<img>").attr('src', '/bitcamp-team-project/upload/manualfile/pdf.jpg').css('width', '192px').css('height', '111px').appendTo($('.img-div'));
-          }
-          if (data.files[i].preview.toDataURL) {
-            // console.log(data.files[i].preview.toDataURL());
-            $("<img>").attr('src', data.files[i].preview.toDataURL()).css('width', '192px').css('height', '111px').appendTo($('.img-div'));
-          }
-        } catch (err) {
-        }
+      console.log(data);
+      $(e.target).parents().eq(2).prev().html('');
+      if (data.files[0].type == "image/jpeg") {
+        var image = $('<img>').attr('src', data.files[0].preview.toDataURL());
+        $(e.target).parents().eq(2).prev().append(image)
+        console.log('image ++ ');
       }
-      $('#manual-add-btn').unbind("click");
-      $('#manual-add-btn').click(function() {
-          data.submit();
-      });
-    }, 
+      if (data.files[0].type == "application/pdf") {
+        window.pdfCheck++;
+        $(e.target).parents().eq(2).prev().append('<i class="far fa-file-pdf" style="font-size: 8em;"></i>')
+        console.log('pdf ++ ');
+      }
+      
+      basicPartsList.push(data);
+      
+    },
     done: function (e, data) {
       console.log(data);
     }
@@ -144,23 +164,4 @@ function getQuerystring(key, default_){
   else
     return qs[1];
 } // getQuerystring
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
