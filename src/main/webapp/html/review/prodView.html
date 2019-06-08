@@ -13,23 +13,23 @@
   <header class="ohr-main-header"></header>
   
    <section class="jumbotron text-center">
-  <div class="container">
-  
-  <div id="ohr-review-div">
-  <div id="ohr-product-img">
+  <div class="row" id="ohr-review-div">
+    <img id="ohr-product-img" src="">
+   <h2 class="jumbotron-heading" id="ohr-product-name">제품명</h2>
+   <p>
+   <span class="lead text-muted" id="ohr-product-manufacturer-name">기업명</span>
+   <span id="ohr-product-grade">만족도: </span>
+   </p>
    </div>
-    </div>
-
-  </div>
+   <div>
+   <button type="button" class="btn btn-sm btn-secondary" id="ohr-satisfy-btn">만족도 평가</button>
+   <button type="button" id="review-add-btn" class="btn btn-sm btn-secondary add-btn">리뷰 등록</button>
+   </div>
  </section>
  
  
   <div class="container">
- 
-   <h2 class="jumbotron-heading" id="ohr-product-name">제품명</h2>
-   <p class="lead text-muted" id="ohr-product-manufacturer-name">기업명</p>
-   <hr>
-   
+  <h2 id="ohr-rev-head">제품 리뷰</h2>
     <table class="table table-hover" id="ohr-rev-table">
       <thead>
         <tr>
@@ -42,9 +42,6 @@
       </thead>
       <tbody></tbody>
     </table>
-    <button type="button" id="review-add-btn" class="btn btn-sm btn-secondary add-btn">등록</button>
-    <br>
-    <br>
     <div id="pagination-container"></div>
     <form class="form-inline my-2 my-lg-0 justify-content-center" id="review-search">
       <div class="form-group row">

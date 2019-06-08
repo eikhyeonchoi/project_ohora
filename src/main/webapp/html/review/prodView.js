@@ -2,7 +2,8 @@ var detailNo = location.href.split('?')[1].split('=')[1],
     tbody = $('tbody'),
     page = $('#pagination-container'),
     templateSrc = $('#select-template').html(),
-    addBtn = $('#review-add-btn');
+    addBtn = $('#review-add-btn'),
+    total = 0;
 
 var trGenerator = Handlebars.compile(templateSrc);
 var type = sessionStorage.getItem('type');
@@ -11,6 +12,18 @@ function loadList() {
       '&keyword=' + $('#keyword').val() + 
       '&searchType=' + $('#searchType').val(), (obj) => {
         console.log(obj);
+        for (var el of obj.satisfy.list) {
+          total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful;
+        }
+        
+        var grade = (total / (obj.satisfy.totalColumn * 6)).toFixed(2);
+        if(grade == 'NaN') {
+          $('#ohr-product-grade').html('');
+          $('#ohr-product-grade').html('만족도: 등록되어 있지 않습니다.');
+        } else {
+        $('#ohr-product-grade').html('');
+        $('#ohr-product-grade').html('만족도: ' + grade);
+        }
         
         var productName = obj.list[0].product.name,
             manuName = obj.list[0].product.manufacturer.name,
@@ -27,8 +40,8 @@ function loadList() {
           }
         });
         
-        $('#ohr-product-img').css('background-image', '');
-        $('#ohr-product-img').css('background-image', 'url(/bitcamp-team-project/upload/productfile/' + prodImg + '_thumb)');
+        $('#ohr-product-img').attr('src', '');
+        $('#ohr-product-img').attr('src', '/bitcamp-team-project/upload/productfile/' + prodImg + '_thumb');
         
         $('#ohr-product-name').html('');
         $('#ohr-product-name').append(productName);
@@ -38,7 +51,7 @@ function loadList() {
 
         $('.review-a-class').click((e) => {
           e.preventDefault();
-          window.location.href = 'view2.html?no=' +  $(e.target).attr('data-no');
+          window.location.href = 'view.html?no=' +  $(e.target).attr('data-no');
         });
         $(document.body).trigger('loaded-list');
       })
@@ -69,4 +82,15 @@ $(document).ready(() => {
     })
   }
 });
+
+$('#ohr-satisfy-btn').click(function() {
+  $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + detailNo, function(obj) {
+    if (obj.status == 'fail') {
+      swal("만족도 평가 오류", "이미 만족도를 등록하셨습니다", "warning");
+      $('#go-satisfy-add-btn').prop('disabled',true);
+    } else {
+      location.href = '../satisfy/add.html?productNo=' + detailNo;
+    }
+  }) // get
+}); // click
 

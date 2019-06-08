@@ -3,10 +3,12 @@ type = sessionStorage.getItem('type'),
 name = sessionStorage.getItem('name');
 
 ($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
+	console.log(data)
+	$('#review-prod-no').val(data.productNo),
   $('#review-no').val(data.no),
-  $('#review-id').val(data.member.name),
+  $('#review-id').val(data.member.nickName),
   $('#review-title').val(data.title),
-  $('#review-contents').val(data.contents),
+  $('#review-contents').html(data.contents),
   $('#review-createdDate').val(data.createdDate),
   $('#review-viewCount').val(data.viewCount);
 }));
@@ -31,7 +33,7 @@ $('#delete-btn').click(() => {
   $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + detailNo, function(data) {
   })
   .done(function(data) {
-    location.href = document.referrer;
+	  location.href = 'prodView.html?no=' + $('#review-prod-no').val();
     }
   ).fail(function(data) {
     alert('삭제 실패입니다!\n' + data.responseText);
@@ -40,21 +42,12 @@ $('#delete-btn').click(() => {
 
 //수정
 $('#update-btn').click(() => {
-  $.post('/bitcamp-team-project/app/json/review/update?no=' + detailNo, {
-    title: $('#review-title').val(), 
-    contents: $('#review-contents').val()
-  }, function(data) {
-    if (data.status == 'success') {
-      location.href = document.referrer;
-    } else {
-      alert('변경 실패 입니다.\n' +  data.message);
-    }
-  }, "json")
+	location.href = 'form.html?no=' + $('#review-no').val();
 });
 
 //목록
 $('#list-btn').click(() => {
-  location.href = document.referrer;
+  location.href = 'prodView.html?no=' + $('#review-prod-no').val();
 })
 
 //글자수 세기

@@ -1,38 +1,39 @@
 .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 
 .jumbotron {
-  margin-bottom: 0;
-  background-color: #383d41;
+	margin-bottom: 0;
+	background-color: #383d41;
 }
-@media (min-width: 768px) {
-  .jumbotron {
-  padding: 0px 0px 5px 0px;
-  }
+
+@media ( min-width : 768px) {
+	.jumbotron {
+		padding: 0px 0px 5px 0px;
+	}
 }
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+	max-width: 40rem;
 }
 
 .ohr-thumbnail {
@@ -45,46 +46,82 @@
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+	margin-bottom: .25rem;
 }
 
-#ohr-review-div > h2 {
+#ohr-review-div {
+	height: 250px;
+	margin-left: 10rem;
+	margin-right: 10rem;
+}
+
+#ohr-review-div>h2 {
 	color: white;
 	font-weight: bold;
-	margin-top: .5rem;
+	margin: .5rem;
+	position: absolute;
+	top: 12.5rem;
+	left: 16.2rem;
 }
 
 #ohr-product-img {
-	background-repeat: no-repeat;
-	height: 225px;
-	background-position: center;
+	width: 100px;
+	height: 110px;
+	border: solid 1px white;
+	position: absolute;
+	top: 12rem;
 }
 
 #ohr-product-name {
-	text-align: left;
-    color: #343a40;
-}
-
-#ohr-tr-title {
-    width: 400px;
-    display: none;
-}
-
-#review-add-btn {
-	float: right;
+	color: white;
 }
 
 #ohr-product-manufacturer-name {
 	text-shadow: 0 0 1px white;
+	height: 2rem;
+	margin: .5rem;
+	position: absolute;
+	top: 14.5rem;
+	left: 16.2rem;
+}
+
+#ohr-product-grade {
+	font-weight: bold;
+	color: #6c757d;
+	position: absolute;
+	top: 15.5rem;
+	left: 21.75rem;
+}
+
+#ohr-satisfy-btn {
+	position: absolute;
+	/*
+	right: 45rem;
+	*/
+	right: 59rem;
+	top: 17rem;
+}
+
+#review-add-btn {
+	position: absolute;
+	/*
+	right: 40rem;
+	*/
+	right: 54rem;
+	top: 17rem;
+}
+
+#ohr-tr-title {
+	width: 400px;
 }
 
 #pagination-container {
-  width: 400px;
-  margin: 0 auto;
+	width: 400px;
+	margin: 0 auto;
 }
 
