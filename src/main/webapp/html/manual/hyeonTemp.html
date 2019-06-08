@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.min.css" />
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
+</head>
+<body>
+
+  <div class='container'>
+    <form id='basic-form'>
+      <div class='row mb-sm-5'>
+        <div class='col-sm-3 img-div' style="text-align: center;"></div>
+        <div class='col-sm-9'>
+          <div class="input-group mb-sm-4 mt-sm-3">
+            <div class="custom-file">
+              <label class="custom-file-label">Choose file</label>
+              <input type="file" class="custom-file-input basic-manual-input" name='basicManualFiles' onchange='loadImg(this);'>
+            </div>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">설명</span>
+            </div>
+            <textarea class="form-control" placeholder="pdf 파일의 대한 설명을 입력하세요" name="contents"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button id='btn'>전송</button>
+  </div>
+
+<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/form-serializer/dist/jquery.serialize-object.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/fullpage.js/dist/fullpage.extensions.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/fullpage.js/vendors/scrolloverflow.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+<script src="hyeonTemp.js"></script>
+</body>
+</html>

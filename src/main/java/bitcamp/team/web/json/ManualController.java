@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import bitcamp.team.domain.Manual;
@@ -147,15 +148,38 @@ public class ManualController {
   }
   
   
-  
-  @PostMapping("tempAdd")
-  public Object tempAdd(HttpServletRequest request) throws IOException, ServletException {
+  @PostMapping("hyeonTemp")
+  public Object hyeonTemp(
+      Part[] basicManualFiles, 
+      String[] basicContents,
+      @RequestParam(required = false) Part[] componentManualFiles,
+      @RequestParam(required = false) String[] componentContents,
+      int productNo) throws IOException, ServletException {
+    
+    System.out.println(productNo);
+    
     HashMap<String, Object> content = new HashMap<>();
-    ArrayList<ManualFile> files = new ArrayList<>();
-    Collection<Part> parts = request.getParts();
-    for (Part part : parts) {
+    
+    for (Part part : basicManualFiles) {
+      String filename = UUID.randomUUID().toString();
+      System.out.println(filename);
     }
+    
+    for (String s : basicContents) {
+      System.out.println(s);
+    }
+    
     
     return content;
   }
+  
 }
+
+
+
+
+
+
+
+
+

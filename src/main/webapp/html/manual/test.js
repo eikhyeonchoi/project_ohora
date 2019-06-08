@@ -6,18 +6,13 @@
 var productNo = getQuerystring('no'),
     productName = '';
     productSrc = $('#product-template').html(),
-    addContentSrc = $('#additional-template').html();
+    basicContentSrc = $('#basic-additional-template').html(),
+    componentContentSrc = $('#component-additional-template').html();
 
 var productGenerator = Handlebars.compile(productSrc),
-    contentGenerator = Handlebars.compile(addContentSrc);
+    addContentGenerator = Handlebars.compile(basicContentSrc),
+    componentContentGenerator = Handlebars.compile(componentContentSrc);
 
-var checkList = [];
-
-var fileCountCheck = 0,
-    pdfCheck = 0;
-
-var basicPartsList = [],
-    basicContentsList = [];
 
 var slide = [
   {
@@ -75,83 +70,151 @@ $(document).ready(function() {
   $(document.body).trigger('loaded-required')
 });
 
+
+
+
 $(document.body).bind('loaded-required', function() {
-  $('.next-page-btn').click(function() {
-    window.basicContentsList = [];
-    $('textarea[name="basicContents"]').each(function(index, item) {
-      window.basicContentsList.push($(item).val());
-    });
-    console.log(basicPartsList);
-    console.log(basicContentsList);
+  
+  $('.next-page-btn').click(function(e) {
+    if($(e.target).closest('.slide').attr('id') == 's1') {
+      var length = $('#basic-form input').length;
+      for (index = 0; index <= length; index++) {
+        if ($("input[name='basicManualFiles']").eq(index).val() == '') {
+          swal("파일 입력 오류", "파일이 비어있습니다\n 파일을 입력해주세요(PDF파일은 필수 입니다)", "warning");
+          return;
+        }
+        if ($("textarea[name='basicContents']").eq(index).val() == '') {
+          swal("내용 입력오류", "파일추가시, 내용입력을 필수사항 입니다", "warning");
+          return;
+        }
+      }
+      // ajaxFileUpload('basic-form');
+    }
     
-    // fullpage_api.moveSlideRight();
+    if($(e.target).closest('.slide').attr('id') == 's2') {
+      var length = $('#component-form input').length;
+      for (index = 0; index <= length; index++) {
+        if ($("input[name='componentManualFiles']").eq(index).val() == '') {
+          swal("파일 입력 오류", "파일이 비어있습니다\n필요 없으시면, 왼쪽 x버튼을 눌러 삭제해주세요", "warning");
+          return;
+        }
+        if ($("textarea[name='componentContents']").eq(index).val() == '') {
+          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
+          return;
+        }
+      }
+      // ajaxFileUpload('component-form');
+    }
+    
+     fullpage_api.moveSlideRight();
   }); // click
   
   $('.prev-page-btn').click(function() {
     fullpage_api.moveSlideLeft();
   }); // click
-  
-  var data = encodeURIComponent(JSON.stringify({
-    basicManualFiles: basicPartsList,
-    contents: basicContentsList
-  }));
-  
-  $('#temp-btn').click(function() {
-    $.post('/bitcamp-team-project/app/json/manual/tempAdd', {
-      data: data
-    }, function(obj) {
-    }, "json")
-  });
-  
-  manualFileUpload('pdf-file-input');
-  
-  
 }); // bind
 
-$('#add-content').click(function(e) {
+
+
+
+$('#basic-add-content').click(function(e) {
   e.preventDefault();
-  $(contentGenerator()).appendTo($('#content-div'));
+  $(addContentGenerator()).appendTo($('#basic-content-div'));
   fullpage_api.reBuild();
   $(document.body).trigger('loaded-content');
 });
 
+$('#component-add-content').click(function(e) {
+  e.preventDefault();
+  $(componentContentGenerator()).appendTo($('#component-content-div'));
+  fullpage_api.reBuild();
+  $(document.body).trigger('loaded-content');
+});
+
+
+
 $(document.body).bind('loaded-content', function() {
-  manualFileUpload('manual-file-input');
+  $('.close-contents').off().click(function(e){
+    e.preventDefault();
+    $(e.target).parents().eq(2).remove();
+  });
 })
 
 
-function manualFileUpload(clazz, obj) {
-  $('.' + clazz).fileupload({
-    url: '/bitcamp-team-project/app/json/manual/tempAdd',
-    dataType: 'json',
-    sequentialUploads: true,
-    singleFileUploads: false,
-    autoUpload: false,
-    previewMaxWidth: 172,
-    previewMaxHeight: 110, 
-    previewCrop: true,
-    processalways: function(e, data) {
-      console.log(data);
-      $(e.target).parents().eq(2).prev().html('');
-      if (data.files[0].type == "image/jpeg") {
-        var image = $('<img>').attr('src', data.files[0].preview.toDataURL());
-        $(e.target).parents().eq(2).prev().append(image)
-        console.log('image ++ ');
-      }
-      if (data.files[0].type == "application/pdf") {
-        window.pdfCheck++;
-        $(e.target).parents().eq(2).prev().append('<i class="far fa-file-pdf" style="font-size: 8em;"></i>')
-        console.log('pdf ++ ');
-      }
-      
-      basicPartsList.push(data);
-      
-    },
-    done: function (e, data) {
-      console.log(data);
-    }
+
+
+
+
+
+function ajaxFileUpload(formId) {
+  var form = $('#' + formId);
+  var formdata = false;
+  if (window.FormData){
+    formdata = new FormData(form[0]);
+  }
+  formdata.append('productNo', productNo);
+  
+  var formAction = form.attr('action');
+  $.ajax({
+    url         : '/bitcamp-team-project/app/json/manual/hyeonTemp',
+    data        : formdata ? formdata : form.serialize(),
+        cache       : false,
+        contentType : false,
+        processData : false,
+        type        : 'POST',
+        success     : function(data, textStatus, jqXHR){
+          console.log('전송완료');
+        }
   });
-} // manualFileUpload
+}
+
+
+
+function settingToImageAndName(value) {
+  var target = $(value);
+  if(value.files && value.files[0]){
+    var fileValue = $(value).val().split("\\");
+    var fileName = fileValue[fileValue.length-1];
+    
+    var strFilePath = target.val();
+    var strExt = strFilePath.split('.').pop().toLowerCase();
+    if ($.inArray(strExt, ['jpg','jpeg','png']) == -1){
+      alert('jpg, jpeg, png 파일만 업로드 가능합니다');
+      target.val('');
+      return;
+    } 
+    
+    target.prev().text(fileName + ' 이 선택되었습니다');
+    
+    var reader  = new FileReader();
+    reader.onload = function(e) {
+      var image = $('<img>').attr('src', e.target.result).css('width', '185px').css('height','140px');
+      target.parents().eq(2).prev().html('');
+      target.parents().eq(2).prev().append(image)
+    }
+    reader.readAsDataURL(value.files[0]);
+  }
+} // loadImg
+
+
+
+function CheckuploadFileExt(objFile) {
+  var target = $(objFile);
+  
+  var strFilePath = target.val();
+  var strExt = strFilePath.split('.').pop().toLowerCase();
+  if ($.inArray(strExt, ["pdf"]) == -1){
+    alert('pdf 파일만 업로드 가능합니다');
+    target.val('');
+    
+  } else {
+    var fileValue = target.val().split("\\");
+    var fileName = fileValue[fileValue.length-1];
+    target.prev().text(fileName + ' 이 선택되었습니다');
+    target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
+  }
+} // CheckuploadFileExt
+
 
 
 function getQuerystring(key, default_){
