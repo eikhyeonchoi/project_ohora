@@ -73,7 +73,7 @@ $(document.body).bind('loaded-user', function(obj){
       memberNo: userNo,
       productNo: productNo,
       title: $('#review-title').val(),
-      contents: $('#review-contents').val()
+      contents: $(".ql-editor").html()
     },
     function(data) {
       if (data.status == 'success') {
@@ -88,7 +88,7 @@ $(document.body).bind('loaded-user', function(obj){
 
 //목록
 $('#list-btn').click(() => {
-  location.href = document.referrer;
+  location.href = 'prodView.html?no=' + $('#review-prod-no').val();;
 })
 
 
@@ -128,9 +128,10 @@ function getQuerystring(key, default_){
 
 function loadData(no) {
 
-  $.getJSON('../../app/json/review/detail?no=' + no, function(data) {
-    $('#no').val(data.no),
-    $('#title').val(data.title),
+  $.getJSON('../../app/json/review/detail2?no=' + no, function(data) {
+	  $('#review-prod-no').val(data.productNo),
+	  $('#no').val(data.no),
+    $('#review-title').val(data.title),
     $(".ql-editor").html(data.contents)
   });
   $(document).trigger('load-file');

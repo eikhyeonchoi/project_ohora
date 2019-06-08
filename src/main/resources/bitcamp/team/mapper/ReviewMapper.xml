@@ -131,7 +131,9 @@
   <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
       r.rv_no as rno,
+      r.product_no,
       m.name as memberName,
+      m.n_name as nickName,
       r.name as reviewName,
       r.conts,
       r.cdt,

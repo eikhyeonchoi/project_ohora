@@ -100,13 +100,19 @@ footer p {
 
 #ohr-satisfy-btn {
 	position: absolute;
+	/*
 	right: 45rem;
+	*/
+	right: 59rem;
 	top: 17rem;
 }
 
 #review-add-btn {
 	position: absolute;
+	/*
 	right: 40rem;
+	*/
+	right: 54rem;
 	top: 17rem;
 }
 
