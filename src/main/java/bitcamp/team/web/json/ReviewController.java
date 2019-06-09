@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Review;
+import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
 import bitcamp.team.service.SatisfyService;
 
@@ -17,10 +18,12 @@ public class ReviewController {
 
   ReviewService reviewService;
   SatisfyService satisfyService;
+  ProductService productService;
 
-  public ReviewController(ReviewService reviewService, SatisfyService satisfyService) {
+  public ReviewController(ReviewService reviewService, SatisfyService satisfyService, ProductService productService) {
     this.reviewService = reviewService;
     this.satisfyService = satisfyService;
+    this.productService = productService;
   }
 
   @GetMapping("list")
@@ -38,8 +41,9 @@ public class ReviewController {
   public Object detail(int no, String keyword, String searchType) throws Exception {
     HashMap<String, Object> map = new HashMap<>();
     List<Review> review = reviewService.get(no, keyword, searchType);
+    productService.get(no);
     Map<String, Object> satisfy = satisfyService.get(no);
-
+    
     try {
       map.put("list", review);
       map.put("satisfy", satisfy);
@@ -54,7 +58,17 @@ public class ReviewController {
 
   @GetMapping("detail2")
   public Object detail2(int no) throws Exception {
+	HashMap<String, Object> contents = new HashMap<>();
     Review review = reviewService.get2(no);
+    
+    try {
+    	contents.put("review", review);
+    	contents.put("status", "success");
+      } catch (Exception e) {
+    	  contents.put("status", "fail");
+    	  contents.put("error", e.getMessage());
+
+      }
     return review;
   }
 
