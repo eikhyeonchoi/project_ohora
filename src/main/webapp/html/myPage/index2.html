@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>기업 정보</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+  crossorigin="anonymous">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="slidebar.css">
+<link rel="stylesheet" href="index2.css">
+</head>
+<body>
+  <header class="ohr-main-header"></header>
+  <aside class="sidebar">
+    <!-- 사이드 바 -->
+    <div class="sidebar-content">
+      <img class="photo0" src="정연.jpg">
+      <div id="user-nickName-div">
+        <span id="user-nickName-span"></span>님 환영합니다.
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">내정보 수정</li>
+        <li class="list-group-item">내가쓴 게시물</li>
+      </ul>
+      <br>
+    </div>
+    <button>
+      <span class="sidebar-btn"><i class="fas fa-chevron-right"></i></span>
+    </button>
+  </aside>
+
+  <div class="container">
+    <h3 id="my-title">기업 정보</h3>
+    <hr>
+<form>
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">회사 명</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" name='name'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="homepage" class="col-sm-2 col-form-label">홈페이지</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="homepage" name='homepage'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="registerNo" class="col-sm-2 col-form-label">사업자 등록 번호</label>
+        <div class="col-sm-10">
+          <input type='text' class="form-control" id="registerNo" name='registerNo'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
+        <div class="col-sm-10">
+          <input type='text' class="form-control" id="tel" name='tel'>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="button" id="update-btn" class="btn btn-warning btn-sm bit-view-item">변경</button>
+          <button type="button" id="add-btn" class="btn btn-success btn-sm bit-new-item">등록</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- container -->
+
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="slidebar.js"></script>
+  <script src="index2.js"></script>
+</body>
+</html>
