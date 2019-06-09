@@ -131,9 +131,23 @@ public class MemberController {
   public Object updateNickname(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
 
-    System.out.println(member);
     try {
       memberService.updateNickname(member);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  @RequestMapping("updateTel")
+  public Object updateTel(Member member) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      memberService.updateTel(member);
       content.put("status", "success");
 
     } catch (Exception e) {

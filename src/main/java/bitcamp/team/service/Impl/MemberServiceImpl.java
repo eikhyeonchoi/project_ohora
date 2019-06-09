@@ -90,5 +90,9 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.updateNickname(member);
   }
   
+  @Override
+  public int updateTel(Member member) {
+    return memberDao.updateTel(member);
+  }
   
 }

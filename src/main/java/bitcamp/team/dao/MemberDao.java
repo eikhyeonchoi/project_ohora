@@ -17,4 +17,6 @@ public interface MemberDao {
   int updatePassword(HashMap<String,Object> param);
   int updateName(Member member);
   int updateNickname(Member member);
+  int updateTel(Member member);
+
 }

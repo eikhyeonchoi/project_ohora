@@ -121,6 +121,15 @@
       member_no = #{no}
   </update>
   
+  <update id="updateTel" parameterType="member"> 
+    update 
+      member
+    <set>
+      <if test="tel != null">tel = #{tel}</if>,
+    </set>
+    where 
+      member_no = #{no}
+  </update>
 </mapper>
 
 

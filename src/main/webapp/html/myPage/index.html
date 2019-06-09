@@ -163,9 +163,7 @@
             <div class="form-row align-items-center">
               <div class="col-md-3 my-1" id="tel1-div">
                 <label for="tel1">전화 번호</label> 
-                <select class="form-control" id="tel1" 
-                style='background-color:#e9ecef' onFocus='this.initialSelect = this.selectedIndex;'
-                  onChange='this.selectedIndex = this.initialSelect;'>
+                <select class="form-control" id="tel1">
                   <option selected>010</option>
                   <option>011</option>
                   <option>016</option>
@@ -175,10 +173,12 @@
                 </select>
               </div>
               <div class="col-md-2 my-1" id="tel2-div">
-                <input type="text" class="form-control tel-group" id="tel2" readonly="readonly">
+                <input type="number" class="form-control tel-group" id="tel2" 
+                onkeydown="javascript: return event.keyCode == 69 ? false : true" readonly="readonly">
               </div>
               <div class="col-md-2 my-1" id="tel3-div">
-                <input type="text" class="form-control tel-group" id="tel3" readonly="readonly">
+                <input type="number" class="form-control tel-group" id="tel3" 
+                onkeydown="javascript: return event.keyCode == 69 ? false : true" readonly="readonly">
               </div>
               <div class="col-auto my-1">
                 <button type="submit" class="btn btn-primary tel-group" id="tel-udt-btn">수정</button>

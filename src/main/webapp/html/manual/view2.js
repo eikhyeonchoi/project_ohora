@@ -28,6 +28,7 @@ $(document).ready(() => {
       for (var i = 0; i < data.mFile.length; i++) {
         if (data.mFile[i].typeNo == 5) {
           var summarize = '<section id="sumconts">' + data.mFile[i].contents + '</section>'
+                        + '<br>';
           $(summarize).appendTo($('#contents'));
         }
         var contents = '<section id="conts">'
