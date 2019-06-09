@@ -7,11 +7,15 @@ var productNo = getQuerystring('no'),
     productName = '';
     productSrc = $('#product-template').html(),
     basicContentSrc = $('#basic-additional-template').html(),
-    componentContentSrc = $('#component-additional-template').html();
+    componentContentSrc = $('#component-additional-template').html(),
+    cautionContentSrc = $('#caution-additional-template').html(),
+    videoContentSrc = $('#video-additional-template').html();
 
 var productGenerator = Handlebars.compile(productSrc),
     addContentGenerator = Handlebars.compile(basicContentSrc),
-    componentContentGenerator = Handlebars.compile(componentContentSrc);
+    componentContentGenerator = Handlebars.compile(componentContentSrc),
+    cautionContentGenerator = Handlebars.compile(cautionContentSrc),
+    videoContentGenerator = Handlebars.compile(videoContentSrc);
 
 
 var slide = [
@@ -23,6 +27,9 @@ var slide = [
   },
   {
     id: $('#s3')
+  },
+  {
+    id: $('#s4')
   }
 ]; // 슬라이드 객체화
 
@@ -62,7 +69,35 @@ $(document).ready(function() {
     scrollOverflow: true,
     loopHorizontal: false,
     controlArrows: false,
-    anchors: ['firstPage']
+    anchors: ['firstPage'],
+    onSlideLeave: function( section, origin, destination, direction){
+      var leavingSlide = this;
+      
+      if(section.index == 0 && origin.index == 0 && direction == 'right'){
+        swal({
+          title: "추가 사항 입력",
+          text: "구성품, 주의사항, 동영상 링크 등 추가사항을 입력하시겠습니까?",
+          icon: "info",
+          buttons: true
+        })
+        .then((value) => {
+          if (value) {
+            swal("구성품 파일 업로드", "구성품의 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
+          } else {
+            fullpage_api.moveSlideLeft();
+            $('.next-page-btn').replaceWith($('#add-btn'));
+          }
+        });
+      }
+
+      if(section.index == 0 && origin.index == 1 && direction == 'right'){
+        swal("주의사항 이미지 업로드", "주의사항 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
+      }
+      
+      if(section.index == 0 && origin.index == 2 && direction == 'right'){
+        swal("동영상 링크 업로드", "동영상 링크, 설명을 업로드하는 페이지 입니다", "info");
+      }
+    }
   });
 
   $.fn.fullpage.setAllowScrolling(false);
@@ -77,28 +112,42 @@ $(document.body).bind('loaded-required', function() {
   
   $('.next-page-btn').click(function(e) {
     if($(e.target).closest('.slide').attr('id') == 's1') {
-      var length = $('#basic-form input').length;
+      var length = $('#basic-content-div input').length;
       for (index = 0; index <= length; index++) {
         if ($("input[name='basicManualFiles']").eq(index).val() == '') {
           swal("파일 입력 오류", "파일이 비어있습니다\n 파일을 입력해주세요(PDF파일은 필수 입니다)", "warning");
           return;
         }
         if ($("textarea[name='basicContents']").eq(index).val() == '') {
-          swal("내용 입력오류", "파일추가시, 내용입력을 필수사항 입니다", "warning");
+          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
           return;
         }
       }
-      // ajaxFileUpload('basic-form');
     }
     
     if($(e.target).closest('.slide').attr('id') == 's2') {
-      var length = $('#component-form input').length;
+      var length = $('#component-content-div input').length;
       for (index = 0; index <= length; index++) {
         if ($("input[name='componentManualFiles']").eq(index).val() == '') {
           swal("파일 입력 오류", "파일이 비어있습니다\n필요 없으시면, 왼쪽 x버튼을 눌러 삭제해주세요", "warning");
           return;
         }
         if ($("textarea[name='componentContents']").eq(index).val() == '') {
+          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
+          return;
+        }
+      }
+      // ajaxFileUpload('component-form');
+    }
+    
+    if($(e.target).closest('.slide').attr('id') == 's3') {
+      var length = $('#caution-content-div input').length;
+      for (index = 0; index <= length; index++) {
+        if ($("input[name='cautionManualFiles']").eq(index).val() == '') {
+          swal("파일 입력 오류", "파일이 비어있습니다\n필요 없으시면, 왼쪽 x버튼을 눌러 삭제해주세요", "warning");
+          return;
+        }
+        if ($("textarea[name='cautionContents']").eq(index).val() == '') {
           swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
           return;
         }
@@ -115,6 +164,7 @@ $(document.body).bind('loaded-required', function() {
 }); // bind
 
 
+textareaValidCheck('contents');
 
 
 $('#basic-add-content').click(function(e) {
@@ -131,18 +181,94 @@ $('#component-add-content').click(function(e) {
   $(document.body).trigger('loaded-content');
 });
 
+$('#caution-add-content').click(function(e) {
+  e.preventDefault();
+  $(cautionContentGenerator()).appendTo($('#caution-content-div'));
+  fullpage_api.reBuild();
+  $(document.body).trigger('loaded-content');
+});
+
+$('#video-add-content').click(function(e) {
+  e.preventDefault();
+  $(videoContentGenerator()).appendTo($('#video-content-div'));
+  fullpage_api.reBuild();
+  $(document.body).trigger('loaded-content');
+});
 
 
 $(document.body).bind('loaded-content', function() {
-  $('.close-contents').off().click(function(e){
-    e.preventDefault();
-    $(e.target).parents().eq(2).remove();
+  textareaValidCheck('contents');
+  inputTextValidCheck('video-input-text');
+  
+  $('.fa-times-circle').off().click(function(e){
+    $(e.target).parents().eq(1).remove();
   });
 })
 
 
 
+$('#add-btn').click(function(e) {
+  if ($(e.target).closest('.slide').attr('id') == 's1') {
+    confirmBeforeRegistration();
+  } else {
+    var length = $('#video-content-div input').length;
+    for (index = 0; index <= length; index++) {
+      if ($("input[name='videoLinks']").eq(index).val() == '') {
+        swal("동영상 링크 입력 오류", "동영상 링크 목록이 비었습니다\n 필요 없으신 경우, 왼쪽 x버튼을 눌러주세요", "warning");
+        return;
+      }
+      if ($("textarea[name='videoContents']").eq(index).val() == '') {
+        swal("내용 입력오류", "비디오 링크 추가시, 설명은 필수입니다", "warning");
+        return;
+      }
+      if($("input[name='videoLinks']").eq(index).val() != '' && $("textarea[name='videoContents']").eq(index).val() != '') {
+        confirmBeforeRegistration();
+      }
+    }
+  }
+});
 
+
+function confirmBeforeRegistration() {
+  swal({
+    title: "게시물 등록확인",
+    text: "등록하시겠습니까??",
+    icon: "info",
+    buttons: true
+  })
+  .then((value) => {
+    if (value) {
+      ajaxFileUpload('total-form');
+    } else {
+      swal("등록 취소", "취소되었습니다", "error");
+    }
+  });
+}
+
+
+function inputTextValidCheck(clazz) {
+  $('.' + clazz).off().keyup(function(e) {
+    if($(e.target).val() != '') {
+      $(e.target).removeClass('is-invalid');
+      $(e.target).addClass('is-valid');
+    } else {
+      $(e.target).removeClass('is-valid');
+      $(e.target).addClass('is-invalid');
+    }
+  });
+}
+
+function textareaValidCheck(clazz) {
+  $('.' + clazz).off().keyup(function(e) {
+    if($(e.target).val() != '') {
+      $(e.target).removeClass('is-invalid');
+      $(e.target).addClass('is-valid');
+    } else {
+      $(e.target).removeClass('is-valid');
+      $(e.target).addClass('is-invalid');
+    }
+  });
+} // textareaValidCheck
 
 
 
@@ -184,7 +310,9 @@ function settingToImageAndName(value) {
       return;
     } 
     
-    target.prev().text(fileName + ' 이 선택되었습니다');
+    target.removeClass('is-invalid');
+    target.addClass('is-valid');
+    target.next().text(fileName + ' 이 선택되었습니다');
     
     var reader  = new FileReader();
     reader.onload = function(e) {
@@ -210,7 +338,9 @@ function CheckuploadFileExt(objFile) {
   } else {
     var fileValue = target.val().split("\\");
     var fileName = fileValue[fileValue.length-1];
-    target.prev().text(fileName + ' 이 선택되었습니다');
+    target.removeClass('is-invalid');
+    target.addClass('is-valid');
+    target.next().text(fileName + ' 이 선택되었습니다');
     target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
   }
 } // CheckuploadFileExt
@@ -227,4 +357,3 @@ function getQuerystring(key, default_){
   else
     return qs[1];
 } // getQuerystring
-
