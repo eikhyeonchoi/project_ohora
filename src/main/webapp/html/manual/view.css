@@ -5,7 +5,7 @@ body {
 
 .manual {
   position: relative;
-  width: 90vw;
+  width: 90%;
   margin: auto;
 }
 /**/
@@ -33,7 +33,7 @@ body {
 /* 제품명 */
 #productName {
   width: 40%;
-  font: 40px HanSans;
+  font: 150% HanSans;
   color: black;
   font-weight: bold;
   max-height: 4.8em;
@@ -42,7 +42,7 @@ body {
 /* 제조사 */
 #memberName {
   width: 120px;
-  font: 16px HanSans;
+  font: 1em HanSans;
   font-weight: bold;
   margin: auto 0;
   color: black;
@@ -78,18 +78,24 @@ hr {
 /**/
 
 /* 탭 정보 */
+/* 탭 창 */
+#myTabContent {
+  min-height: 100vh;
+}
+
 /* 탭 선택 창 */
 #myTab {
   background: white;
   width: 100%;
   color: black;
-  max-width: 1100px;
+  max-width: 100%;
   min-width: 200px;
 }
 
 /* 메뉴얼 창 */
 #manual_container {
   position: absolute;
+  width: 770px;
   background-color: white;
   top: 0;
 }
@@ -97,10 +103,10 @@ hr {
 /* 탭 하위 태그 자식들 */
 #conts {
   padding: 20px;
-  width: 70vw;
+  width: 770px;
   height: 100vh;
   margin: auto;
-  max-width: 1000px;
+  max-width: 100%;
   min-width: 200px;
   text-align: center;
 }
