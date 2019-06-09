@@ -14,57 +14,51 @@
   <header class="ohr-main-header"></header>
   <div class="container manual">
     <div id="info_container">
-      <div class="category">
-        <div class="categoryItem"></div>
-      </div>
-      <div class="form-group row simpleConts">
-        <div class="form-group col summar">
-          <div class="form-group row">
+        <div class="category">
+          <div class="categoryItem"></div>
+        </div>
+        <div class="form-group row simpleConts">
+          <div class="form-group col summar">
             <div class="form-control-plaintext" id="productName"></div>
             <div class="form-control-plaintext" id="memberName"></div>
+            <div class="form-control-plaintext" id="contents"></div>
           </div>
-          <div class="form-control-plaintext" id="contents"></div>
+        </div>
+        <div id="fileDiv"></div>
+      </div>
+      <div id="manual_container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
+          data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
+          aria-selected="true">일반 매뉴얼</a></li>
+        <li class="nav-item"><a class="nav-link" id="configure-tab" data-toggle="tab"
+          href="#configureContents" role="tab" aria-controls="profile" aria-selected="false"
+        >구성품 매뉴얼</a></li>
+        <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
+          href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
+        >주의사항 매뉴얼</a></li>
+        <li class="nav-item"><a class="nav-link" id="reply-tab" data-toggle="tab"
+          href="#replyContents" role="tab" aria-controls="contact" aria-selected="false"
+        >매뉴얼 댓글</a></li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="generalContents" role="tabpanel"
+          aria-labelledby="general-tab">
+          <div class="innerForm1"></div>
+        </div>
+        <div class="tab-pane fade" id="configureContents" role="tabpanel"
+          aria-labelledby="configure-tab">
+          <div class="innerForm2"></div>
+        </div>
+        <div class="tab-pane fade" id="warningContents" role="tabpanel" aria-labelledby="warning-tab">
+          <div class="innerForm3"></div>
+        </div>
+        <div class="tab-pane fade" id="replyContents" role="tabpanel" aria-labelledby="reply-tab">
+          <div class="innerForm4"></div>
         </div>
       </div>
-      <div id="fileDiv"></div>
-    </div>
-    <div id="manual_container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
-        data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
-        aria-selected="true"
-      >일반 매뉴얼</a></li>
-      <li class="nav-item"><a class="nav-link" id="configure-tab" data-toggle="tab"
-        href="#configureContents" role="tab" aria-controls="profile" aria-selected="false"
-      >구성품 매뉴얼</a></li>
-      <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
-        href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
-      >주의사항 매뉴얼</a></li>
-      <li class="nav-item"><a class="nav-link" id="reply-tab" data-toggle="tab"
-        href="#replyContents" role="tab" aria-controls="contact" aria-selected="false"
-      >매뉴얼 댓글</a></li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="generalContents" role="tabpanel"
-        aria-labelledby="general-tab"
-      >
-        <div class="innerForm1"></div>
-      </div>
-      <div class="tab-pane fade" id="configureContents" role="tabpanel"
-        aria-labelledby="configure-tab"
-      >
-        <div class="innerForm2"></div>
-      </div>
-      <div class="tab-pane fade" id="warningContents" role="tabpanel" aria-labelledby="warning-tab">
-        <div class="innerForm3"></div>
-      </div>
-      <div class="tab-pane fade" id="replyContents" role="tabpanel" aria-labelledby="reply-tab">
-        <div class="innerForm4"></div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- container -->
+    </div> <!-- manual_container -->
+  </div><!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

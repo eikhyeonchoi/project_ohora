@@ -1,9 +1,9 @@
 /* 배경 */
 body {
-  background: white;
+  background: #f9f9f9;
 }
 
-div.manual {
+.manual {
   position: relative;
   width: 90vw;
   margin: auto;
@@ -43,18 +43,20 @@ div.manual {
 #memberName {
   width: 120px;
   font: 16px HanSans;
+  font-weight: bold;
+  margin: auto 0;
   color: black;
-  padding: 25px;
+  padding-bottom: 15px;
 }
 /* 제품 요약 설명 */
 #contents {
+	text-align: center;
   font: 16px HanSans;
   color: black;
 }
 /* 사진 정보 */
 #fileDiv {
-  margin: auto;
-  width: 70%;
+  text-align: center;
 }
 
 .pic {
@@ -63,27 +65,35 @@ div.manual {
 
 #info_container {
   position: fixed;
-  width: 90vw;
+  text-align: center;
+  float: inherit;
   height: 200vh;
 }
 
+
+hr {
+  background-color: white;
+  height: 10px;
+}
 /**/
 
 /* 탭 정보 */
 /* 탭 선택 창 */
 #myTab {
   background: white;
-  width: 80vw;
+  width: 100%;
   color: black;
-  margin: auto;
   max-width: 1100px;
   min-width: 200px;
 }
+
+/* 메뉴얼 창 */
 #manual_container {
   position: absolute;
   background-color: white;
   top: 0;
 }
+
 /* 탭 하위 태그 자식들 */
 #conts {
   padding: 20px;
@@ -98,7 +108,7 @@ div.manual {
 
 /* 각 태그 눌리기 전 상태 */
 .nav-link {
-  color: black;
+  color: gray;
 }
 
 /* 탭 하단 영역 */
@@ -120,6 +130,7 @@ div.manual {
   float: left;
 }
 
+/* 탭 하단 사진 */
 #textimg {
   width: 50%;
   max-width: 300px;

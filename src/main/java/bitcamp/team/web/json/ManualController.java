@@ -150,23 +150,76 @@ public class ManualController {
   
   @PostMapping("hyeonTemp")
   public Object hyeonTemp(
+      int productNo,
       Part[] basicManualFiles, 
       String[] basicContents,
       @RequestParam(required = false) Part[] componentManualFiles,
       @RequestParam(required = false) String[] componentContents,
-      int productNo) throws IOException, ServletException {
+      @RequestParam(required = false) Part[] cautionManualFiles,
+      @RequestParam(required = false) String[] cautionContents,
+      @RequestParam(required = false) String[] videoLinks,
+      @RequestParam(required = false) String[] videoContents
+      ) throws IOException, ServletException {
     
     System.out.println(productNo);
     
     HashMap<String, Object> content = new HashMap<>();
     
-    for (Part part : basicManualFiles) {
-      String filename = UUID.randomUUID().toString();
-      System.out.println(filename);
+    if(basicManualFiles != null) {
+      System.out.println("basic files");
+      for (Part part : basicManualFiles) {
+        String filename = UUID.randomUUID().toString();
+        System.out.println(filename);
+      }
     }
     
-    for (String s : basicContents) {
-      System.out.println(s);
+    if (componentManualFiles != null) {
+      System.out.println("component files");
+      for (Part part : componentManualFiles) {
+        String filename = UUID.randomUUID().toString();
+        System.out.println(filename);
+      }
+    }
+    
+    if (cautionManualFiles != null) {
+      System.out.println("caution files");
+      for (Part part : cautionManualFiles) {
+        String filename = UUID.randomUUID().toString();
+        System.out.println(filename);
+      }
+    }
+    
+    if (basicContents != null) {
+      System.out.println("basic contents");
+      for (String s : basicContents) {
+        System.out.println(s);
+      }
+    }
+    
+    if (componentContents != null) {
+      System.out.println("component contents");
+      for (String s : componentContents) {
+        System.out.println(s);
+      }
+    }
+    
+    if (cautionContents != null) {
+      System.out.println("caution contents");
+      for (String s : cautionContents) {
+        System.out.println(s);
+      }
+    }
+    if (videoLinks != null) {
+      System.out.println("video links");
+      for (String s : videoLinks) {
+        System.out.println(s);
+      }
+    }
+    if (videoContents != null) {
+      System.out.println("video contents");
+      for (String s : videoContents) {
+        System.out.println(s);
+      }
     }
     
     

@@ -15,11 +15,11 @@
     <header class="ohr-main-header"></header>
     <div id="fullpage">
       <div class="section">
-
+      <form id='total-form'>
 
         <!-- slide 1 -->
         <!-- slide 1 -->
-        <div class="slide" id="s1" data-anchor="slide1" style="background-color: white;">
+        <div class="slide" id="s1" data-anchor="slide1">
           <div class='container'>
             <div class="row justify-content-center">
               <div class='col col-sm-12'>
@@ -32,28 +32,25 @@
                   <hr>
                 </div>
                 
-                <form id='basic-form'>
                   <div id='basic-content-div' class='col-sm-12'>
                     <div class='row mb-sm-5'>
                       <div class='col-sm-4 img-div' style="text-align: center; font-size: 8em;"></div>
                       <div class='col-sm-8'>
                         <div class="input-group mb-sm-4 mt-sm-3">
                           <div class="custom-file">
-                            <label class="custom-file-label">Choose file</label>
-                            <input type="file" class="custom-file-input" name='basicManualFiles' onchange='CheckuploadFileExt(this);'>
+                            <input id='pdf-input' type="file" class="custom-file-input form-control is-invalid" name='basicManualFiles' onchange='CheckuploadFileExt(this);' required>
+                            <label class="custom-file-label" for='pdf-input'>매뉴얼에 사용될 PDF파일 선택</label>
                           </div>
                         </div>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">설명</span>
                           </div>
-                          <textarea class="form-control" placeholder="pdf 파일의 대한 설명을 입력하세요" name="basicContents"></textarea>
+                          <textarea class="form-control is-invalid contents" placeholder="pdf 파일의 대한 설명을 입력하세요" name="basicContents"></textarea>
                         </div>
                       </div>
                     </div>
                   </div>
-                </form>
-                
                 
                 <div id='add' class='col-sm-12 mt-sm-5'>
                   <a id='basic-add-content' href='#'><i class="fas fa-plus"></i> 이미지를 추가하시려면 <i class="fas fa-plus"></i></a>
@@ -73,11 +70,9 @@
 
 
 
-
-
         <!-- slide 2 -->
         <!-- slide 2 -->
-        <div class="slide" id="s2" data-anchor="slide2" style="background-color: white;">
+        <div class="slide" id="s2" data-anchor="slide2">
           <div class='container'>
             <div class="row justify-content-center">
               <div class='col col-sm-12'>
@@ -90,10 +85,8 @@
                   <hr>
                 </div>
                 
-                <form id='component-form'>
                   <div id='component-content-div'>
                   </div>
-                </form>
                 
                 
                 <div id='add' class='col-sm-12 mt-sm-5'>
@@ -116,40 +109,83 @@
         
         
 
-
-        <div class="slide" id="s3" data-anchor="slide3" style="background-color: gray;">
+        <!-- slide 3 -->
+        <!-- slide 3 -->
+        <div class="slide" id="s3" data-anchor="slide3">
           <div class='container'>
             <div class="row justify-content-center">
               <div class='col col-sm-12'>
 
-                <div class='row'>
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="manual-file-input-02"
-                        name='manualFiles' aria-describedby="inputGroupFileAddon04" multiple>
-                      <label class="custom-file-label" for="fboard-file-input">select file</label>
-                    </div>
+                <div class='col-sm-12'>
+                  <div class='row mb-sm-2' style="font-weight: 500; font-size: 30px;">
+                    <span>매뉴얼 등록</span> <span class="badge badge-secondary"style="padding-top: 11px;">STEP 3</span>
                   </div>
+                  <h5>주의사항 이미지 입력</h5>
+                  <hr>
                 </div>
-
-                <div>
-                  <button id='manual-add-btn' type="button" class='btn btn-success btn-sm'>등록</button>
+                
+                  <div id='caution-content-div'>
+                  </div>
+                
+                
+                <div id='add' class='col-sm-12 mt-sm-5'>
+                  <a id='caution-add-content' href='#'><i class="fas fa-plus"></i> 이미지를 추가하시려면 <i class="fas fa-plus"></i></a>
                 </div>
-
+                
                 <div class="row justify-content-between">
-                  <div class="col-2">
+                  <div class="col-sm-2">
                     <button type="button" class="btn btn-sm btn-info btn-block prev-page-btn">이전</button>
                   </div>
-                  <div class="col-2">
-                  <button type="button" id='manul-add-btn' class="btn btn-sm btn-success btn-block">등록</button>
+                  <div class="col-sm-2">
+                    <button type="button" class="btn btn-sm btn-info btn-block next-page-btn">다음</button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+
+              </div> <!-- col-sm-12 -->
+            </div> <!-- justify-content-center -->
+          </div><!-- container -->
         </div><!-- 3 slide -->
+        
+        
 
+        <!-- slide 4 -->
+        <!-- slide 4 -->
+        <div class="slide" id="s4" data-anchor="slide4">
+          <div class='container'>
+            <div class="row justify-content-center">
+              <div class='col col-sm-12'>
 
+                <div class='col-sm-12'>
+                  <div class='row mb-sm-2' style="font-weight: 500; font-size: 30px;">
+                    <span>매뉴얼 등록</span> <span class="badge badge-secondary"style="padding-top: 11px;">STEP 4</span>
+                  </div>
+                  <h5>관련 동영상 링크 입력</h5>
+                  <hr>
+                </div>
+                
+                  <div id='video-content-div'>
+                  </div>
+                
+                
+                <div id='add' class='col-sm-12 mt-sm-5'>
+                  <a id='video-add-content' href='#'><i class="fas fa-plus"></i> 동영상 링크를 추가하시려면 <i class="fas fa-plus"></i></a>
+                </div>
+                
+                <div class="row justify-content-between">
+                  <div class="col-sm-2">
+                    <button type="button" class="btn btn-sm btn-info btn-block prev-page-btn">이전</button>
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" id='add-btn' class="btn btn-sm btn-success btn-block">등록</button>
+                  </div>
+                </div>
+
+              </div> <!-- col-sm-12 -->
+            </div> <!-- justify-content-center -->
+          </div><!-- container -->
+        </div><!-- 4 slide -->
+ 
+      </form>
       </div>
       <!-- section -->
     </div>
@@ -166,7 +202,7 @@
           <h5 class="modal-title">메뉴얼 등록</h5>
         </div>
         <div class="modal-body">
-          <p>제품을 선택해주세요</p>
+          <h5>제품을 선택해주세요</h5>
           <p>등록된 제품의 대해서만 메뉴얼 등록이 가능합니다</p>
         </div>
         <div class="modal-footer col-sm-12 justify-content-between">
@@ -202,21 +238,21 @@
   <script id="basic-additional-template" type="text/x-handlebars-template">
   <div class='row mb-sm-5'>
     <div class='row' style='text-align: center;'>
-      <a class='close-contents' href='#'><i class="far fa-times-circle" style='font-size: 2em'></i></a>
+      <i class="far fa-times-circle" style='font-size: 2em'></i>
     </div>
     <div class='col-sm-4 img-div' style="text-align: center;"></div>
     <div class='col-sm-8'>
       <div class="input-group mb-sm-4 mt-sm-3">
         <div class="custom-file">
+          <input type="file" class="custom-file-input basic-manual-input form-control is-invalid" name='basicManualFiles' onchange='settingToImageAndName(this);' required>
           <label class="custom-file-label">Choose file</label>
-          <input type="file" class="custom-file-input basic-manual-input" name='basicManualFiles' onchange='settingToImageAndName(this);'>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">설명</span>
         </div>
-        <textarea class="form-control" placeholder="이미지 파일의 대한 설명을 입력하세요" name="basicContents"></textarea>
+        <textarea class="form-control is-invalid contents" placeholder="이미지 파일의 대한 설명을 입력하세요" name="basicContents"></textarea>
       </div>
     </div>
   </div>
@@ -225,21 +261,66 @@
   <script id="component-additional-template" type="text/x-handlebars-template">
   <div class='row mb-sm-5'>
     <div class='row' style='text-align: center;'>
-      <a class='close-contents' href='#'><i class="far fa-times-circle" style='font-size: 2em'></i></a>
+      <i class="far fa-times-circle" style='font-size: 2em'></i>
     </div>
     <div class='col-sm-4 img-div' style="text-align: center;"></div>
     <div class='col-sm-8'>
       <div class="input-group mb-sm-4 mt-sm-3">
         <div class="custom-file">
+          <input type="file" class="custom-file-input component-manual-input form-control is-invalid" name='componentManualFiles' onchange='settingToImageAndName(this);' required>
           <label class="custom-file-label">Choose file</label>
-          <input type="file" class="custom-file-input component-manual-input" name='componentManualFiles' onchange='settingToImageAndName(this);'>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">설명</span>
         </div>
-        <textarea class="form-control" placeholder="이미지 파일의 대한 설명을 입력하세요" name="componentContents"></textarea>
+        <textarea class="form-control is-invalid contents" placeholder="이미지 파일의 대한 설명을 입력하세요" name="componentContents"></textarea>
+      </div>
+    </div>
+  </div>
+  </script>
+  
+  <script id="caution-additional-template" type="text/x-handlebars-template">
+  <div class='row mb-sm-5'>
+    <div class='row' style='text-align: center;'>
+      <i class="far fa-times-circle" style='font-size: 2em'></i>
+    </div>
+    <div class='col-sm-4 img-div' style="text-align: center;"></div>
+    <div class='col-sm-8'>
+      <div class="input-group mb-sm-4 mt-sm-3">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input caution-manual-input form-control is-invalid" name='cautionManualFiles' onchange='settingToImageAndName(this);' required>
+          <label class="custom-file-label">Choose file</label>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">설명</span>
+        </div>
+        <textarea class="form-control is-invalid contents" placeholder="이미지 파일의 대한 설명을 입력하세요" name="cautionContents"></textarea>
+      </div>
+    </div>
+  </div>
+  </script>
+  
+  <script id="video-additional-template" type="text/x-handlebars-template">
+  <div class='row'>
+    <div class='col-sm-1'>
+      <i class="far fa-times-circle" style='font-size: 2em'></i>
+    </div>
+    <div class='col-sm-11'>
+      <div class="input-group mb-sm-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">link</span>
+        </div>
+        <input type="text" class="form-control is-invalid video-input-text" name='videoLinks'>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">설명</span>
+        </div>
+        <textarea class="form-control is-invalid contents" placeholder="동영상링크의 대한 설명을 입력하세요" name="videoContents"></textarea>
       </div>
     </div>
   </div>

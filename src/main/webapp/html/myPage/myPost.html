@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>내가쓴 게시물 목록</title>
+<link rel="stylesheet"
+	href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="slidebar.css">
+<link rel="stylesheet" href="myPost.css">
+</head>
+<body>
+	<header class="ohr-main-header"></header>
+	<aside class="sidebar">
+		<!-- 사이드 바 -->
+		<div class="sidebar-content">
+			<img class="photo0" src="정연.jpg">
+			<div id="user-nickName-div">
+				<span id="user-nickName-span"></span>님 환영합니다.
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">내정보 수정</li>
+				<li class="list-group-item">내가쓴 게시물</li>
+			</ul>
+			<br>
+		</div>
+		<button>
+			<span class="sidebar-btn"><i class="fas fa-chevron-right"></i></span>
+		</button>
+	</aside>
+
+	<div class="container">
+		<h3 id="my-title">내가쓴 게시물</h3>
+		<hr>
+		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+			<li class="nav-item"><a class="nav-link active"
+				id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+				aria-controls="pills-home" aria-selected="true">자유게시판</a></li>
+			<li class="nav-item"><a class="nav-link" id="pills-profile-tab"
+				data-toggle="pill" href="#pills-profile" role="tab"
+				aria-controls="pills-profile" aria-selected="false">리뷰</a></li>
+			<li class="nav-item"><a class="nav-link" id="pills-contact-tab"
+				data-toggle="pill" href="#pills-contact" role="tab"
+				aria-controls="pills-contact" aria-selected="false">티키위키</a></li>
+		</ul>
+		<div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="pills-home"
+				role="tabpanel" aria-labelledby="pills-home-tab">자유게시판</div>
+			<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+				aria-labelledby="pills-profile-tab"></div>
+			<div class="tab-pane fade" id="pills-contact" role="tabpanel"
+				aria-labelledby="pills-contact-tab">...</div>
+		</div>
+	</div>
+	<!-- container -->
+
+	<script
+		src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+	<script src="../header.js"></script>
+	<script src="slidebar.js"></script>
+	<script src="myPost.js"></script>
+</body>
+</html>
