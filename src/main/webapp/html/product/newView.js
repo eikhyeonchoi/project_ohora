@@ -47,9 +47,6 @@ $(document.body).bind('loaded.loginuser', () => {
 $(document).ready(function(){
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, function(obj) {
     console.log(obj);
-    if (obj.totalColumn != 0) {
-      window.productName = obj.list[0].product.name;
-    }
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
       price += el.priceStf,
@@ -76,6 +73,7 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/product/detail?no=' + productNo, function(obj) {
     console.log(obj);
+    window.productName = obj.product.name;
 
     $('#product-inform-div').prepend('<hr class="head-line">');
     $('#product-inform-div').prepend('<h5>'+ obj.product.manufacturer.name +'</h5>');
@@ -128,21 +126,95 @@ $(document.body).bind('loaded-product', function(data){
   });
 
   reviewBtn.click(function() {
-    location.href = '../review/view.html?no=' + productNo + '&name=' + productName;
+    location.href = '../review/prodView.html?no=' + productNo;
   })
   
   manualBtn.click(function() {
-    
-    // location.href = '../manual/add.html?no=' + productNo + '&name=' + productName;
+    $.get('/bitcamp-team-project/app/json/product/confirmManual?pNo=' + productNo, function(obj) {
+      console.log(obj);
+      
+      if (obj.manualCount == 1) {
+        console.log(obj.manualCount)
+        swal('매뉴얼 이미 있음', 'detail 완성되면 링크걸어야함', 'warning');
+        //
+        // 매뉴얼 detail 경로
+        // 매뉴얼 detail 경로
+        // 매뉴얼 detail 경로
+        //
+      } else {
+        if (window.type == 1 || window.type == 0){
+          swal('매뉴얼 알림', '매뉴얼이 등록되어 있지 않습니다', 'info');
+        } else {
+          swal({
+            title: "매뉴얼 알림",
+            text: "매뉴얼이 등록되어있지 않습니다\n 매뉴얼을 등록하러 가시겠습니까?",
+            icon: "info",
+            buttons: {
+              no: {
+                text: '아니오',
+                value: 'no'
+              },
+              yes: {
+                text: '등록',
+                value: 'yes'
+              }
+            },
+          })
+          .then((value) => {
+            switch(value){
+              case 'yes': 
+                location.href = '../manual/add.html?no='+ productNo + '&name=' + productName;
+                break;
+              case  'no':
+                swal('매뉴얼 등록 취소', '취소 하셨습니다', 'warning');
+                break;
+              default:
+                swal('매뉴얼 등록 취소', '취소 하셨습니다', 'warning');
+                break;
+            }
+          });
+        }
+      }
+    }) // get
   })
 
   satisfyBtn.click(function() {
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
-      if (obj.status == 'fail') {
+      if (obj.satisfyCount == 1) {
         swal("만족도 평가 오류", "이미 만족도를 등록하셨습니다", "warning");
         $('#go-satisfy-add-btn').prop('disabled',true);
+        
       } else {
-        location.href = '../satisfy/add.html?productNo=' + productNo;
+        starGenerator('level-rate');
+        starGenerator('understand-rate');
+        starGenerator('design-rate');
+        starGenerator('as-rate');
+        starGenerator('convenience-rate');
+        starGenerator('price-rate');
+        
+        $('#satisfy-add-modal').modal({backdrop: 'static', keyboard: false});
+        
+        $('#modal-cancel-btn').click(function() {
+          $('#satisfy-add-modal').modal('hide');
+        }); // click
+        
+        $('#modal-ok-btn').click(function() {
+          $.post('/bitcamp-team-project/app/json/satisfy/add',{
+            pdNo: productNo,
+            level: Number($('#level-score').text()),
+            understand: Number($('#understand-score').text()),
+            design: Number($('#design-score').text()),
+            asStf: Number($('#as-score').text()),
+            useful: Number($('#convenience-score').text()),
+            priceStf: Number($('#price-score').text())
+          }, function(data) {
+            if (data.status == 'success'){
+              location.reload();
+            } else {
+              swal("등록 실패!",'data.message','warning');
+            }
+          })
+        }); // click
       }
     }) // get
   }) // click
@@ -153,13 +225,36 @@ $(document.body).bind('loaded-product', function(data){
       if (obj.tipCount == 1){
         location.href = '../tip/view.html?no=' + productNo;
       } else {
-        if (window.type < 1){
-          alert('이 제품의 대한 팁이 존재하지 않습니다');
+        if (window.type == 0){
+          swal('팁 없음', '등록된 팁이 존재하지 않습니다', 'warning');
         } else {
-          swal("팁 보기 오류", "등록된 팁이 존재하지 않습니다\n 팁을 등록해주세요", "info");
-          tipBtn.text('팁등록');
-          tipBtn.click(function() {
-            location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
+          swal({
+            title: "팁 보기 오류",
+            text: "등록된 팁이 존재하지 않습니다\n 팁을 등록하시겠습니까?",
+            icon: "info",
+            buttons: {
+              no: {
+                text: '아니오',
+                value: 'no'
+              },
+              yes: {
+                text: '등록',
+                value: 'yes'
+              }
+            },
+          })
+          .then((value) => {
+            switch(value){
+              case 'yes': 
+                location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
+                break;
+              case  'no':
+                swal('팁 등록 취소', '취소 하셨습니다', 'warning');
+                break;
+              default:
+                swal('팁 등록 취소', '취소 하셨습니다', 'warning');
+                break;
+            }
           });
         }
       }
@@ -235,6 +330,15 @@ $(document.body).bind('loaded-satisfy', function(data){
   });  
 });
 
+
+function starGenerator(id) {
+  $('#' + id).bind('rated' ,function(e, value) {
+    $(e.target).parent().next().text(value);
+    console.log($(e.target).parent().prev().text() + ' => ' + value);
+  });
+  $('#' + id).bind('over' ,function(e, value) {
+    $(this).attr('title', value);
+  });}
 
 
 
