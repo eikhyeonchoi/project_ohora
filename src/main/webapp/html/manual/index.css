@@ -1,3 +1,7 @@
+body {
+	background: #F9F9F9;
+}
+
 th:nth-child(1) {
   width: 500px;
   text-align: center;
@@ -34,5 +38,4 @@ p.card-text {
 
 #pagination-container {
   width: 350px;
-  margin: 0 auto;
 }

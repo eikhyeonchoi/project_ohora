@@ -46,8 +46,6 @@ public class ManualServiceImpl implements ManualService {
   @Override
   public List<Manual> list(String keyword, String searchType) {
     HashMap<String,Object> contents = new HashMap<>();
-    System.out.println("keyword => " + keyword);
-    System.out.println("searchType => " + searchType);
     if (searchType != null) {
       switch (searchType) {
         case "prodName": contents.put("prodName", searchType);
@@ -59,8 +57,6 @@ public class ManualServiceImpl implements ManualService {
       if (!keyword.equals(""))
         contents.put("keyword", keyword);
     }
-    System.out.println("keyword => " + keyword);
-    System.out.println("searchType => " + searchType);
     return manualDao.findAll(contents);
   }
 
@@ -71,6 +67,7 @@ public class ManualServiceImpl implements ManualService {
 
   @Override
   public List<Manual> get(int no) {
+    manualDao.increaseCount(no);
     return manualDao.findByNo(no);
   }
 
