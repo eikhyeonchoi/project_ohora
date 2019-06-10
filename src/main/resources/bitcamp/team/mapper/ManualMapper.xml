@@ -180,6 +180,15 @@
       manual_no = #{value}
   </delete>
   
+  <select id="confirmManual" resultType="int" parameterType="int">
+    select 
+      count(*) 
+    from 
+      manual 
+    where 
+      product_no = #{value}
+  </select>
+  
 </mapper>
 
 

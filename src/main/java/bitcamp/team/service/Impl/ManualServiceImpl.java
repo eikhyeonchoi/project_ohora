@@ -78,6 +78,11 @@ public class ManualServiceImpl implements ManualService {
   public List<Product> getAllProduct() {
     return productDao.findAllUseManual();
   }
+
+  @Override
+  public int confirm(int no) {
+    return manualDao.confirmManual(no);
+  }
   
   
   

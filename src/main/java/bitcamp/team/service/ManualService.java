@@ -12,4 +12,5 @@ public interface ManualService {
   List<Manual> list(String keyword, String searchType);
   List<ManualFile> typeFileList(int no);
   List<Product> getAllProduct();
+  int confirm(int no);
 }
