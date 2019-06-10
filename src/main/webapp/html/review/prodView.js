@@ -12,6 +12,8 @@ function loadList() {
       '&keyword=' + $('#keyword').val() + 
       '&searchType=' + $('#searchType').val(), (obj) => {
         console.log(obj);
+        console.log(obj.product.name);
+        console.log(obj.product.manufacturer.name);
         for (var el of obj.satisfy.list) {
           total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful;
         }
@@ -25,9 +27,9 @@ function loadList() {
         $('#ohr-product-grade').html('만족도: ' + grade);
         }
         
-        var productName = obj.list[0].product.name,
-            manuName = obj.list[0].product.manufacturer.name,
-            prodImg = obj.list[0].product.productFiles[0].img;
+        var productName = obj.product.name,
+            manuName = obj.product.manufacturer.name,
+            prodImg = obj.product.productFiles[0].img;
         
         page.pagination({
           dataSource: obj.list,

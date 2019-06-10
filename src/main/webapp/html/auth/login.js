@@ -14,7 +14,8 @@ $('#login-btn').click(() => {
       window.localStorage.removeItem("email");
     }
     if (data.status == 'success') {
-      location.href = document.referrer;
+      var prevLoc = document.referrer;
+      location.href = prevLoc;
     } else {
       alert('로그인 실패입니다!\n' + data.message);
     }

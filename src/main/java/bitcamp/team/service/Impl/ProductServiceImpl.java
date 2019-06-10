@@ -16,10 +16,9 @@ import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
 import bitcamp.team.service.ProductService;
-import bitcamp.team.service.TipService;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
   ProductDao productDao;
   ManufacturerDao manufacturerDao;
@@ -30,15 +29,9 @@ public class ProductServiceImpl implements ProductService{
   TipDao tipDao;
   TipHistoryDao tipHistoryDao;
 
-  public ProductServiceImpl(
-      ProductDao productDao, 
-      ManufacturerDao manufacturerDao,
-      ProductFileDao productFileDao,
-      SatisfyDao satisfyDao,
-      ReviewDao reviewDao,
-      TipDao tipDao,
-      ManualDao manualDao,
-      TipHistoryDao tipHistoryDao) {
+  public ProductServiceImpl(ProductDao productDao, ManufacturerDao manufacturerDao,
+      ProductFileDao productFileDao, SatisfyDao satisfyDao, ReviewDao reviewDao, TipDao tipDao,
+      ManualDao manualDao, TipHistoryDao tipHistoryDao) {
     this.productDao = productDao;
     this.manufacturerDao = manufacturerDao;
     this.productFileDao = productFileDao;
@@ -54,17 +47,17 @@ public class ProductServiceImpl implements ProductService{
 
     HashMap<String, Object> param = new HashMap<>();
     // 대분류 소분류 넣지않고 검색
-    if((largeNo == 0 && smallNo == 0) && !productName.equals("undefined")) {
+    if ((largeNo == 0 && smallNo == 0) && !productName.equals("undefined")) {
       param.put("productName", productName);
     }
     // 다 채워넣고 검색
-    if(largeNo != 0) {
+    if (largeNo != 0) {
       param.put("largeNo", largeNo);
 
       if (smallNo != 0) {
         param.put("smallNo", smallNo);
 
-        if(!productName.equals("undefined")) {
+        if (!productName.equals("undefined")) {
           param.put("productName", productName);
         }
       }
@@ -131,21 +124,21 @@ public class ProductServiceImpl implements ProductService{
     }
     return 1;
   }
-  
+
   @Override
   public int deleteProduct(HashMap<String, Object> paramNumbers) {
     int productNo = (int) paramNumbers.get("productNo");
     int tipNo = (int) paramNumbers.get("tipNo");
-    
+
     int count = 0;
     satisfyDao.deleteByProductNo(productNo);
     reviewDao.deleteByProductNo(productNo);
     productFileDao.deleteByProductNo(productNo);
-    
+
     if (tipNo != 0) {
       tipHistoryDao.deleteByTipNo(tipNo);
     }
-    
+
     tipDao.deleteByProductNo(productNo);
     manualDao.deleteByProductNo(productNo);
     if (productDao.delete(productNo) != 0) {
@@ -153,10 +146,16 @@ public class ProductServiceImpl implements ProductService{
     }
     return count;
   }
-  
+
+  @Override
+  public List<Product> list2(int largeNo, int smallNo, String keyword, String listType) {
+    HashMap<String, Object> param = new HashMap<>();
+
+    param.put("keyword", keyword);
+    param.put("listType", listType);
+    return productDao.findAll2(param);
+  }
+
 }
-
-
-
 
 

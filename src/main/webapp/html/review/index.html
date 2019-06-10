@@ -35,14 +35,22 @@
      <div class="input-group mb-3"></div>
     </div>
    </div>
+   <div id="search">
    <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
    <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+   </div>
   </form>
   </section>
 
   <div class="album py-5 bg-light">
-
+    
+      
     <div class="row col-sm-10 offset-sm-1">
+   <div id="listType">
+       <button type="button" class="btn btn-secondary my-2 my-sm-0 btn-sm" id="list_desc">최신순</button>
+       <button type="button" class="btn btn-secondary my-2 my-sm-0 btn-sm" id="list_asc">오래된순</button>
+       <button type="button" class="btn btn-secondary my-2 my-sm-0 btn-sm" id="list_many">리뷰 많은 순</button>
+      </div>
      <div id="card-div" class="col-sm-12"></div>
     </div>
 
@@ -54,21 +62,21 @@
     {{#each list}}
     <div class="col-sm-4 ohr-card-1stdiv">
      <div class="card sm-4 shadow-sm ohr-card-2nddiv">
-      {{#each product.productFiles}}
+      {{#each productFiles}}
           <img src='/bitcamp-team-project/upload/productfile/{{img}}_thumb' width="215px" height="225px">
           {{/each}}
             <div class="card-body">
               <p class="card-text">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="{{product.name}}">
-                  <a href="prodView.html?no={{product.no}}">{{product.name}}</a>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="{{name}}">
+                  <a href="prodView.html?no={{no}}">{{name}}</a>
                 </span>
                 <br>
-                <h7>{{product.manufacturer.name}}</h7>
+                <h7>{{manufacturer.name}}</h7>
               </p>
               <div class="d-flex justify-content-between align-items-center ohr-btn-div">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary ohr-view-link"
-                          data-no='{{product.no}}'>View</button>
+                          data-no='{{no}}'>View</button>
                 </div>
               </div>
       </div>

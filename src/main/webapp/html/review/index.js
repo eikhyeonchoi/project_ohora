@@ -1,15 +1,19 @@
 var tr = $('#ohr-card-tr').html(),
 cardDiv = $('#card-div'),
 trGenerator = Handlebars.compile(tr);
-
+var listType = '';
 
 $(document).ready(function(){
 })
 
-function loadList() {
-  $.getJSON('../../app/json/review/list?keyword=' + $('#keyword').val(), 
+function loadList(listType) {
+  $.getJSON('../../app/json/review/list?largeNo=' + 0
+          + '&smallNo=' + 0
+          + '&keyword=' + $('#keyword').val()
+          + '&listType=' + listType, 
           function (obj){
     console.log(obj)
+    console.log($('#listType').val())
 
     cardDiv.html('');
     $(trGenerator(obj)).appendTo(cardDiv);
@@ -33,6 +37,7 @@ function loadList() {
 };
 
 
+
 $('#keyword').keydown((e) => {
   if (event.keyCode == 13) {
     e.preventDefault();
@@ -47,4 +52,18 @@ $('#search-btn').click((e) => {
   loadList();
 });
 
-loadList();
+$('#list_desc').click((e) => {
+  cardDiv.slick('unslick');
+  listType = '';
+  loadList(listType);
+});
+
+$('#list_asc').click((e) => {
+  cardDiv.slick('unslick');
+  listType = 'asc';
+  console.log(listType);
+  loadList(listType);
+});
+
+loadList(listType);
+
