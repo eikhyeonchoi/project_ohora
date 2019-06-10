@@ -51,8 +51,15 @@ footer p {
 	color: black;
 }
 
+.ohr-card-1stdiv {
+	max-width: 225px;
+    min-height: 375px;
+    max-height: 375px;
+}
+
 .ohr-card-2nddiv {
     min-width: 220px;
+    max-width: 225px;
     min-height: 375px;
     max-height: 375px;
 }
