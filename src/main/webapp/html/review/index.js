@@ -42,14 +42,16 @@ $('#keyword').keydown((e) => {
   if (event.keyCode == 13) {
     e.preventDefault();
     cardDiv.slick('unslick');
-    loadList();
+    listType = '';
+    loadList(listType);
   }
 });
 
 //검색
 $('#search-btn').click((e) => {
   cardDiv.slick('unslick');
-  loadList();
+  listType = '';
+  loadList(listType);
 });
 
 $('#list_desc').click((e) => {

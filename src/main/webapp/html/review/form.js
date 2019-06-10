@@ -83,7 +83,7 @@ $(document.body).bind('loaded-user', function(obj){
     function(data) {
       
       if (data.status == 'success') {
-        location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+        location.href = 'prodView.html?no=' + productNo;
       }else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
@@ -94,7 +94,7 @@ $(document.body).bind('loaded-user', function(obj){
 
 //목록
 $('#list-btn').click(() => {
-  location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+  location.href = 'prodView.html?no=' + productNo;
 })
 
 

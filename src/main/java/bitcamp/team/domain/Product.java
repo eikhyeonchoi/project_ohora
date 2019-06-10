@@ -11,15 +11,25 @@ public class Product {
   private Manufacturer manufacturer;
   private ProductSmallCategory productSmallCategory;
   private List<ProductFile> productFiles;
-  
+
   private Tip tip;
-  
+  private Review review;
+
   @Override
   public String toString() {
     return "Product [no=" + no + ", smallCategoryNo=" + smallCategoryNo + ", manufacturerNo="
         + manufacturerNo + ", name=" + name + ", manufacturer=" + manufacturer
         + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles + "]";
   }
+
+  public Review getReview() {
+    return review;
+  }
+
+  public void setReview(Review review) {
+    this.review = review;
+  }
+
   public Tip getTip() {
     return tip;
   }
