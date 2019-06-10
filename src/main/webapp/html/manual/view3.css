@@ -1,13 +1,8 @@
 /* 배경 */
 body {
-  background: black;
+  background: #f9f9f9;
 }
 
-.manual {
-  position: relative;
-  width: 90%;
-  margin: auto;
-}
 /**/
 
 /* 대분류-소분류-제품명 */
@@ -17,94 +12,61 @@ body {
   text-align: left;
 }
 
-/* 제품명 */
+/* 카테고리 */
 .categoryItem {
-  font: 14px HanSans;
-  color: white;
+  font: 1em HanSans;
+  color: black;
 }
 
-/* 제품 간단 정보 */
-.simpleConts {
-  margin: 0px;
-}
-
-.summar {
-}
 /* 제품명 */
 #productName {
-  width: 40%;
-  font: 40px HanSans;
-  color: white;
+  font: 1.5em HanSans;
+  color: black;
   font-weight: bold;
   max-height: 4.8em;
   overflow: hidden;
 }
+
 /* 제조사 */
 #memberName {
-  width: 120px;
-  font: 16px HanSans;
+  font: 1em HanSans;
   font-weight: bold;
-  margin: auto 0;
-  color: white;
-  padding-bottom: 15px;
+  color: black;
 }
+
 /* 제품 요약 설명 */
 #contents {
-  text-align: center;
-  font: 16px HanSans;
-  color: white;
+	text-align: center;
+  font: 1.5em HanSans;
+  color: black;
 }
 /* 사진 정보 */
 #fileDiv {
   text-align: center;
 }
 
-.pic {
-  min-width: 210px;
+.contPhoto {
+	max-width: 100%;
 }
 
-#info_container {
-  position: fixed;
-  text-align: center;
-  float: inherit;
-  height: 200vh;
-}
-
-
-hr {
-  background-color: black;
-  height: 10px;
-}
 /**/
 
 /* 탭 정보 */
 /* 탭 창 */
 #myTabContent {
-	min-height: 100vh;
-}
-/* 탭 선택 창 */
-#myTab {
-  background: black;
-  width: 100%;
-  color: white;
-  max-width: 100%;
-  min-width: 200px;
+  min-height: 100vh;
 }
 
-/* 메뉴얼 창 */
-#manual_container {
-  position: absolute;
-  width: 770px;
-  background-color: black;
-  top: 0;
+/* 탭 선택 창 */
+#myTab {
+  background: white;
+  color: black;
+  max-width: 100%;
 }
 
 /* 탭 하위 태그 자식들 */
 #conts {
-  width: 770px;
-  height: 100vh;
   max-width: 100%;
-  min-width: 200px;
   text-align: center;
 }
 
@@ -116,8 +78,7 @@ hr {
 
 /* 탭 하단 영역 */
 .tab-content {
-  padding: 30px;
-  color: white;
+  color: black;
 }
 
 /* 탭 눌렀을 때 굵게 표시 */
@@ -127,7 +88,7 @@ hr {
 
 /* 탭 하단 글 내용 */
 #textconts {
-  width: 50%;
+	min-height: 100vh;
   min-width: 300px;
   font-size: 30px;
   float: left;
@@ -135,9 +96,8 @@ hr {
 
 /* 탭 하단 사진 */
 #textimg {
-  width: 50%;
+	min-height: 100vh;
   max-width: 300px;
   min-width: 100px;
-  margin: auto;
   float: right;
 }
