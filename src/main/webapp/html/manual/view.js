@@ -67,6 +67,7 @@ $(document).ready(() => {
     }
   });
 });
+
 function mouseWheelAction(cnt) {
   $("html, body").on('mousewheel', function (e) {
     var m = e.originalEvent.wheelDelta;

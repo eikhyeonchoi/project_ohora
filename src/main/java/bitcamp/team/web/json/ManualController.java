@@ -1,5 +1,7 @@
 package bitcamp.team.web.json;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -7,10 +9,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import org.imgscalr.Scalr;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,41 +48,41 @@ public class ManualController {
     this.productService = productService;
     this.manufacturerService = manufacturerService;
   }
-  
+
   @GetMapping("list")
   public Object list(String keyword, String searchType) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
-    
+
     try {
       List<Manual> list = manualService.list(keyword, searchType);
-      
+
       contents.put("list", list);
       contents.put("status", "success");
     } catch (Exception e) {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
     }
-    
+
     return contents;
   }
-  
+
   @GetMapping("files")
   public Object files(int no) {
     HashMap<String,Object> content = new HashMap<>();
-    
+
     try {
       Manual mList = manualService.getFile(no);
-      
+
       content.put("mList", mList);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("error", e.getMessage());
     }
-    
+
     return content;
   }
-  
+
   @PostMapping("add")
   public Object add(String contents, int no, int type, Part[] manualFiles) {
     HashMap<String,Object> content = new HashMap<>();
@@ -86,39 +90,39 @@ public class ManualController {
     Manual manual = new Manual();
     this.uploadDir = servletContext.getRealPath("/upload/manualFile");
     try {
-      
+
       for (Part part : manualFiles) {
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/" + filename;
         part.write(filepath);
-        
+
         ManualFile manualFile = new ManualFile();
-        
+
         manualFile.setFile(filename);
         manualFile.setContents(contents);
         manualFile.setTypeNo(type);
         files.add(manualFile);
       }
-      
+
       manual.setManualFile(files);
-      
+
       Product product = productService.get(no);
       manual.setName(product.getName());
-      
+
       manualService.add(manual);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("error", e.getMessage());
     }
-    
+
     return content;
   }
-  
+
   @GetMapping("detail")
   public Object detail(int no) {
     HashMap<String,Object> contents = new HashMap<>();
-    
+
     try {
       manufacturerService.get(no);
       List<Manual> manual = manualService.get(no);
@@ -134,23 +138,24 @@ public class ManualController {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
     }
-    
+
     return contents;
   }
-  
-  
-  
+
+
+
   @GetMapping("allProductName")
   public Object allProductName() {
     HashMap<String, Object> content = new HashMap<>();
     content.put("allProduct", manualService.getAllProduct());
     return content;
   }
-  
-  
+
+
   @PostMapping("hyeonTemp")
   public Object hyeonTemp(
-      int productNo,
+      @RequestParam(defaultValue = "0") int productNo,
+      @RequestParam(defaultValue = "undefined") String productName,
       Part[] basicManualFiles, 
       String[] basicContents,
       @RequestParam(required = false) Part[] componentManualFiles,
@@ -160,72 +165,134 @@ public class ManualController {
       @RequestParam(required = false) String[] videoLinks,
       @RequestParam(required = false) String[] videoContents
       ) throws IOException, ServletException {
-    
-    System.out.println(productNo);
-    
+    String uploadDir = servletContext.getRealPath("/upload/manualfile");
+
     HashMap<String, Object> content = new HashMap<>();
+    ArrayList<ManualFile> files = new ArrayList<>(); 
     
-    if(basicManualFiles != null) {
-      System.out.println("basic files");
-      for (Part part : basicManualFiles) {
-        String filename = UUID.randomUUID().toString();
-        System.out.println(filename);
+    try {
+
+      if(basicManualFiles != null) {
+        System.out.println("basic files, contents");
+        for (int i = 0; i < basicManualFiles.length; i++) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = uploadDir + "/" + filename;
+          basicManualFiles[i].write(filepath);
+
+          ManualFile manualFile = new ManualFile();
+          manualFile.setFile(filename);
+          manualFile.setContents(basicContents[i]);
+          manualFile.setTypeNo(1);
+          files.add(manualFile);
+
+          try {
+            if (!basicManualFiles[i].getContentType().equals("application/pdf") ||
+                !basicManualFiles[i].getSubmittedFileName().contains("pdf")) {
+              makeThumbnail(filepath, 500, 500);
+            }
+          } catch(Exception e) {
+            throw new RuntimeException("basic files 썸네일 생성중 오류발생");
+          }
+        } // for
       }
-    }
-    
-    if (componentManualFiles != null) {
-      System.out.println("component files");
-      for (Part part : componentManualFiles) {
-        String filename = UUID.randomUUID().toString();
-        System.out.println(filename);
+
+      if (componentManualFiles != null) {
+        System.out.println("component files, contents");
+        for (int i = 0; i < componentManualFiles.length; i++) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = uploadDir + "/" + filename;
+          componentManualFiles[i].write(filepath);
+
+          ManualFile manualFile = new ManualFile();
+          manualFile.setFile(filename);
+          manualFile.setContents(componentContents[i]);
+          manualFile.setTypeNo(2);
+          files.add(manualFile);
+
+          try {
+            if (!componentManualFiles[i].getContentType().equals("application/pdf") ||
+                !componentManualFiles[i].getSubmittedFileName().contains("pdf")) {
+              makeThumbnail(filepath, 500, 500);
+            }
+          } catch(Exception e) {
+            throw new RuntimeException("component files썸네일 생성중 오류발생");
+          }
+        }
       }
-    }
-    
-    if (cautionManualFiles != null) {
-      System.out.println("caution files");
-      for (Part part : cautionManualFiles) {
-        String filename = UUID.randomUUID().toString();
-        System.out.println(filename);
+
+      if (cautionManualFiles != null) {
+        System.out.println("caution files, contents");
+        for (int i = 0; i < cautionManualFiles.length; i++) {
+          String filename = UUID.randomUUID().toString();
+          String filepath = uploadDir + "/" + filename;
+          cautionManualFiles[i].write(filepath);
+
+          ManualFile manualFile = new ManualFile();
+          manualFile.setFile(filename);
+          manualFile.setContents(cautionContents[i]);
+          manualFile.setTypeNo(3);
+          files.add(manualFile);
+
+          try {
+            if (!cautionManualFiles[i].getContentType().equals("application/pdf") ||
+                !cautionManualFiles[i].getSubmittedFileName().contains("pdf")) {
+              makeThumbnail(filepath, 500, 500);
+            }
+          } catch(Exception e) {
+            throw new RuntimeException("caution 썸네일 생성중 오류발생");
+          }
+        }
       }
-    }
-    
-    if (basicContents != null) {
-      System.out.println("basic contents");
-      for (String s : basicContents) {
-        System.out.println(s);
+
+      if (videoLinks != null) {
+        System.out.println("video links");
+        for (int i = 0; i < videoLinks.length; i++) {
+          ManualFile manualFile = new ManualFile();
+          manualFile.setFile(videoLinks[i]);
+          manualFile.setContents(videoContents[i]);
+          manualFile.setTypeNo(4);
+          files.add(manualFile);
+        }
       }
-    }
-    
-    if (componentContents != null) {
-      System.out.println("component contents");
-      for (String s : componentContents) {
-        System.out.println(s);
+      
+      Manual manual = new Manual();
+      manual.setProductNo(productNo);
+      manual.setName(productName);
+      manual.setManualFile(files);
+      
+      if (productNo == 0 || productName == "undefined") {
+        throw new Exception("제품번호 또는 제품이름이 없습니다");
+        
+      } else {
+        manualService.add(manual);
+        content.put("status", "success");
       }
+      
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
     }
-    
-    if (cautionContents != null) {
-      System.out.println("caution contents");
-      for (String s : cautionContents) {
-        System.out.println(s);
-      }
-    }
-    if (videoLinks != null) {
-      System.out.println("video links");
-      for (String s : videoLinks) {
-        System.out.println(s);
-      }
-    }
-    if (videoContents != null) {
-      System.out.println("video contents");
-      for (String s : videoContents) {
-        System.out.println(s);
-      }
-    }
-    
-    
+
+
     return content;
   }
-  
+
+
+
+  private void makeThumbnail(String filePath, int width, int height) throws Exception { 
+    BufferedImage srcImg = ImageIO.read(new File(filePath)); 
+    int dw = width, dh = height; 
+    int ow = srcImg.getWidth(); 
+    int oh = srcImg.getHeight(); 
+    int nw = ow; 
+    int nh = (ow * dh) / dw;
+    if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } 
+    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
+    BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
+    File thumbFile = new File(filePath + "_thumb");
+    ImageIO.write(destImg, "jpg", thumbFile);
+  } // makeThumbnail
 }
 
 

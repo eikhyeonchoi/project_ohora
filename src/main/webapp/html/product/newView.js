@@ -130,6 +130,11 @@ $(document.body).bind('loaded-product', function(data){
   reviewBtn.click(function() {
     location.href = '../review/view.html?no=' + productNo + '&name=' + productName;
   })
+  
+  manualBtn.click(function() {
+    
+    // location.href = '../manual/add.html?no=' + productNo + '&name=' + productName;
+  })
 
   satisfyBtn.click(function() {
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {

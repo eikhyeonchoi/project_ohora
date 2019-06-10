@@ -31,10 +31,10 @@ public class ManualServiceImpl implements ManualService {
   public int add(Manual manual) {
     int count = manualDao.insert(manual);
     List<ManualFile> manualFiles = manual.getManualFile();
-    for (ManualFile f : manualFiles) {
-      f.setManualNo(manual.getNo());
+    for (ManualFile file : manualFiles) {
+      file.setManualNo(manual.getNo());
     }
-    manualFileDao.insert(manual.getManualFile());
+    manualFileDao.insert(manualFiles);
     return count;
   }
 

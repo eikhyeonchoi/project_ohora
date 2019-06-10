@@ -94,11 +94,18 @@
    -->
    
    <select id="findAllUseManual" resultMap="productMap">
-     select 
-       product_no,
-       name as productName
-     from 
-       product;
+    select 
+      product_no,
+      name as productName
+    from 
+      product p
+    where
+      p.product_no not in 
+      (select 
+        m.product_no 
+      from 
+        manual m
+      );
    </select>
    
   <select id="findAll" resultMap="productMap" parameterType="map">

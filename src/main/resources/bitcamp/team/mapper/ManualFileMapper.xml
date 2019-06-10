@@ -37,11 +37,18 @@
       f.mfile_no desc
   </select>
 
-  <insert id="insert" parameterType="manual" 
-    useGeneratedKeys="true" keyColumn="manual_no" keyProperty="no">
+  <insert id="insert" parameterType="list">
     insert into
-      manual(product_no, conts, cnt, vlink) 
-    values(#{productNo}, #{contents}, #{viewCount}, #{vLink})
+      manual_file(manual_no, manual_type_no, conts, file)
+    values
+    <foreach collection="list" item="manualFile" separator=",">
+      (
+       #{manualFile.manualNo},
+       #{manualFile.typeNo},
+       #{manualFile.contents},
+       #{manualFile.file}
+       )
+    </foreach>
   </insert>
 
 </mapper>
