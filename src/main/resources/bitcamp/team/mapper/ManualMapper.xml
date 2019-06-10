@@ -189,6 +189,13 @@
       product_no = #{value}
   </select>
   
+  <update id="increaseCount" parameterType="int">
+    update manual
+    set
+      cnt = cnt + 1
+    where
+      product_no = #{value}
+  </update>
 </mapper>
 
 
