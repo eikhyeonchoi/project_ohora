@@ -3,29 +3,35 @@ var type = sessionStorage.getItem('type'),
 nickName = sessionStorage.getItem('nickName'),
 category = $('.categoryItem');
 
-var scrollEvent = false;
-var count = 0;
-
-var scene = [
-  {
-    id: $('#s1')
-  },
-  {
-    id: $('#s2')
-  }
-];
-
 $(document).ready(() => {
   
   $('#fullpage').fullpage({
     licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
     scrollOverflow: true,
-    scrollHorizontally: false,
-    anchors: ['firstPage']
+    anchors: ['firstPage'],
+    onLeave: function (section, origin) {
+      if (origin.index == 0 && section.index == 1) {
+        $('.info').removeClass('animated fadeOut');
+        $('.info').addClass('animated fadeIn');
+        $('.contsTab').removeClass('animated fadeIn');
+        $('.contsTab').addClass('animated fadeOut');
+      }
+      if (origin.index == 1 && section.index == 0) {
+        $('.info').removeClass('animated fadeIn');
+        $('.contsTab').removeClass('animated fadeOut');
+        $('.info').addClass('animated fadeOut');
+        $('.contsTab').addClass('animated fadeIn');
+      }
+    },
+    afterLoad: function (section, origin) {
+      if (origin.anchor == 'firstPage') {
+        $('.info').addClass('animated fadeIn');
+      }
+    }
   });
   
   $.fn.fullpage.setAutoScrolling(true);
-  
+  $.fn.fullpage.setAllowScrolling(true, 'down');
   
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
@@ -56,37 +62,20 @@ $(document).ready(() => {
           + '</section>';
         $(contents).appendTo($('.innerForm' + data.mFile[i].typeNo));
       }
-      fullpage_api.reBuild();
       category.text(data.manual[0].product.productSmallCategory.productLargeCategory.name + ' > '
       + data.manual[0].product.productSmallCategory.name + ' > '
       + data.manual[0].name);
       
+      fullpage_api.reBuild();
     } else {
       alert('실패했습니다\n' + data.error);
     }
-    
-    $(document.body).trigger('loaded-slide');
   });
 });
 
-$(document.body).bind('loaded-slide', function() {
-  $('#general-tab').click(function(e) {
-    e.preventDefault();
-    fullpage_api.reBuild();
-  });
 
-  $('#configure-tab').click(function(e) {
-    e.preventDefault();
-    fullpage_api.reBuild();
-  });
 
-  $('#warning-tab').click(function(e) {
-    e.preventDefault();
-    fullpage_api.reBuild();
-  });
-  
-  $('#reply-tab').click(function(e) {
-    e.preventDefault();
-    fullpage_api.reBuild();
-  });
-})
+
+
+
+
