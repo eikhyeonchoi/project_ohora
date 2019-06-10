@@ -1,5 +1,5 @@
 var productNo = getQuerystring('no'),
-    userNo;
+userNo;
 
 var h1 = $('h1'),
 el1 = $('.bit-new-item'),
@@ -21,6 +21,11 @@ if (param) {
 $(document).ready(function() {
   $(document.body).bind('loaded.header', function(){
     userNo = sessionStorage.getItem('no');
+    console.log(userNo);
+    if(userNo == null) {
+      alert('글을 쓸 권한이 없습니다.\n로그인 후 이용해주세요.');
+      location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+    }
     $(document.body).trigger('loaded-user');
   })
 }); // ready
@@ -45,20 +50,20 @@ $(document).ready(function() {
         ['clean']                                         // remove formatting button
         ],
         imageUpload: {
-            url: '', // server url. If the url is empty then the base64 returns
-            dataType: 'json',
-            method: 'POST', // change query method, default 'POST'
-            name: 'image', // custom form name
-            withCredentials: false, // withCredentials
-            headers: {}, // add custom headers, example { token: 'your-token'}
-            // personalize successful callback and call next function to insert new url to the editor
-            callbackOK: (serverResponse, next) => {
-                next(serverResponse);
-            },
-            // personalize failed callback
-            callbackKO: serverError => {
-                alert(serverError);
-            }
+          url: '', // server url. If the url is empty then the base64 returns
+          dataType: 'json',
+          method: 'POST', // change query method, default 'POST'
+          name: 'image', // custom form name
+          withCredentials: false, // withCredentials
+          headers: {}, // add custom headers, example { token: 'your-token'}
+          // personalize successful callback and call next function to insert new url to the editor
+          callbackOK: (serverResponse, next) => {
+            next(serverResponse);
+          },
+          // personalize failed callback
+          callbackKO: serverError => {
+            alert(serverError);
+          }
         }
     },
     placeholder: '내용을 입력해주세요.',
@@ -76,9 +81,10 @@ $(document.body).bind('loaded-user', function(obj){
       contents: $(".ql-editor").html()
     },
     function(data) {
+      
       if (data.status == 'success') {
-        window.history.back();
-      } else {
+        location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+      }else {
         alert('등록 실패 입니다.\n' +  data.message);
       }
     }, "json")
@@ -88,7 +94,7 @@ $(document.body).bind('loaded-user', function(obj){
 
 //목록
 $('#list-btn').click(() => {
-  location.href = 'prodView.html?no=' + $('#review-prod-no').val();;
+  location.href = 'prodView.html?no=' + $('#review-prod-no').val();
 })
 
 
@@ -129,8 +135,8 @@ function getQuerystring(key, default_){
 function loadData(no) {
 
   $.getJSON('../../app/json/review/detail2?no=' + no, function(data) {
-	  $('#review-prod-no').val(data.productNo),
-	  $('#no').val(data.no),
+    $('#review-prod-no').val(data.productNo),
+    $('#no').val(data.no),
     $('#review-title').val(data.title),
     $(".ql-editor").html(data.contents)
   });

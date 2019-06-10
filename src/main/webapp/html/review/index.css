@@ -94,4 +94,9 @@ footer p {
 	margin-top: 10px;
 	float: left;
 }
+#listType {
+    padding-bottom: 5px;
+	position: relative;
+	left: 2rem;
+}
 

@@ -58,6 +58,7 @@
 
   <select id="findProd" resultMap="reviewMap" parameterType="string">
     select DISTINCT
+      r.rv_no as rno,
       r.product_no,
       p.name,
       p.manufac_no,
@@ -65,7 +66,7 @@
       pf.img
     from
       review r 
-      join product p 
+      right join product p 
       on 
       r.product_no = p.product_no
       
