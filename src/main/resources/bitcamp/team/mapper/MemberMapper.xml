@@ -26,7 +26,8 @@
     type,
     ban,
     pwd,
-    pwd_udt
+    pwd_udt,
+    file_path
   </sql>
 
   <select id="findAll" resultMap="memberMap" parameterType="map">
@@ -130,6 +131,26 @@
     where 
       member_no = #{no}
   </update>
+  
+  <update id="updatePhoto" parameterType="member"> 
+    update 
+      member
+    <set>
+      <if test="filePath != null">file_path = #{filePath}</if>,
+    </set>
+    where 
+      member_no = #{no}
+  </update>
+  
+ <update id="deletePhoto" parameterType="int"> 
+    update 
+      member
+    set
+      file_path = 'user.jpg'
+    where 
+      member_no = #{value}
+  </update>
+  
 </mapper>
 
 

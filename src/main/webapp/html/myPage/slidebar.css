@@ -1,56 +1,76 @@
 .sidebar {
-	margin-top: 67px;
-	background-color: #343a40;
-	width: 230px;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: -200px;
-	z-index: 9999;
+  padding-right: 30px;
+  margin-top: 67px;
+  background-color: #343a40;
+  width: 230px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -200px;
+  z-index: 9999;
 }
 
 .sidebar-content {
-	position: absolute;
-	top: 20px;
-	left: 70px;
-	color: #fff;
+  padding-right: 30px;
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  color: #fff;
 }
 
 .sidebar-btn {
-	position: absolute;
-	top: 200px;
-	left: 240px;
-	width: 20px;
-	height: 20px;
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	border: none;
-	border-radius: 15px;
+  position: absolute;
+  top: 200px;
+  left: 240px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 15px;
 }
 
 .photo0 {
-	margin-bottom: 20px;
-	margin-left: 28px;
-	width: 100px;
-	height: 100px;
-	object-fit: cover;
-	border: 2px solid black;
-	border-radius: 50%;
+  margin-bottom: 20px;
+  margin-left: 28px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid black;
+  border-radius: 50%;
 }
 
 /* 리스트 관련 css */
 .list-group-item {
-	background-color: #343a40;
+  background-color: #343a40;
 }
 
-#user-nickName-div {
-	margin-bottom: 20px;
+#Profile-udt-btn, #Profile-dlt-btn {
+  margin-left: 33px;
+  margin-bottom: 40px;
 }
 
-#user-nickName-span {
-	color: lightcoral;
-	margin-left: 20px;
+#photo-icon-back {
+  opacity: 0;
+  transition: opacity 1s;
+  top: 1px;
+  left: 29px;
+  background-color: #2E2E2E;
+  border-radius: 50%;
+  width: 98px;
+  height: 98px;
+  position: absolute;
+  text-align: center;
 }
 
+#photo-icon {
+  margin-top: 29px;
+  color: #E6E6E6;
+  font-size: 40px;
+}
 
+#photo-icon-back:hover {
+  opacity: 1;
+  background-color: rgba(46, 46, 46, 0.8);
+}

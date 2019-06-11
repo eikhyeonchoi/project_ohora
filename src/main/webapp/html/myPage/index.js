@@ -470,7 +470,6 @@ function leadingZeros(n, digits) {
 function logOut() {
 	$.ajax({
 		url     : '/bitcamp-team-project/app/json/auth/logout',
-		data    : {email: $('#email').val()},
 		type    : 'GET',
 		sendDataType : 'json',
 		async   : false
@@ -483,7 +482,6 @@ function logOut() {
 function logIn() {
 	$.ajax({
 		url     : '/bitcamp-team-project/app/json/auth/login2?email=' + email,
-		data    : {email: $('#email').val()},
 		type    : 'GET',
 		sendDataType : 'json',
 		async   : false

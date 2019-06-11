@@ -17,6 +17,7 @@ public interface MemberService {
   int updateName(Member member);
   int updateNickname(Member member);
   int updateTel(Member member);
-  int updatePhoto(String memberFile, int memberNo);
+  int updatePhoto(Member member);
+  int deletePhoto(int no);
 
 }

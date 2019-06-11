@@ -665,7 +665,7 @@ ALTER TABLE answer_file
 
 -- 메뉴얼 페이지 타입
 CREATE TABLE manual_type (
-  manual_type_no INTEGER     NOT NULL AUTO_INCREMENT, -- 유형번호
+  manual_type_no INTEGER     NOT NULL , -- 유형번호
   name           VARCHAR(50) NOT NULL  -- 유형이름
 );
 
@@ -675,6 +675,9 @@ ALTER TABLE manual_type
     PRIMARY KEY (
       manual_type_no -- 유형번호
     );
+
+ALTER TABLE manual_type
+  MODIFY COLUMN manual_type_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 매뉴얼
 ALTER TABLE manual

@@ -28,7 +28,7 @@
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.2"
+    "@fortawesome/fontawesome-free": "^5.9.0"
   },
   "description": ""
 }

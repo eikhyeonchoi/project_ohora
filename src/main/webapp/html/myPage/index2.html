@@ -5,9 +5,8 @@
 <title>기업 정보</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-  crossorigin="anonymous">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
@@ -16,20 +15,24 @@
 </head>
 <body>
   <header class="ohr-main-header"></header>
+  
+  <!-- 사이드 바 -->
   <aside class="sidebar">
-    <!-- 사이드 바 -->
-    <div class="sidebar-content">
-      <img class="photo0" src="정연.jpg">
-      <div id="user-nickName-div">
-        <span id="user-nickName-span"></span>님 환영합니다.
-      </div>
+    <div class="sidebar-content pr-sm-5">
+      <img class="photo0">
+      <span id="photo-icon-back" style="cursor: pointer"> 
+        <i class="fas fa-cog" id="photo-icon"></i>
+      </span>
+      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">프로필
+        삭제</button>
+      <input type="file" id="profile-fileupload" name="memberFile" style="display: none;">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">내정보 수정</li>
         <li class="list-group-item">내가쓴 게시물</li>
       </ul>
       <br>
     </div>
-    <button>
+    <button id="slide-btn">
       <span class="sidebar-btn"><i class="fas fa-chevron-right"></i></span>
     </button>
   </aside>
@@ -91,8 +94,11 @@
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
   <!-- 주소검색 버튼을 누르면 주소검색 폼을 띄우는 함수 -->

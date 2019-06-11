@@ -1,4 +1,3 @@
-
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
@@ -168,12 +167,11 @@ public class MemberController {
     this.uploadDir = servletContext.getRealPath("/upload/memberfile");
     HashMap<String,Object> content = new HashMap<>();
     try {
-      System.out.println(member.getNo());
       String filename = UUID.randomUUID().toString();
       String filepath = uploadDir + "/" + filename; 
       memberFile.write(filepath);
-      System.out.println(filename);
-//      memberService.updatePhoto(filename, memberNo);
+      member.setFilePath(filename);
+      memberService.updatePhoto(member);
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -181,7 +179,22 @@ public class MemberController {
       content.put("error",e.getMessage());
     }
     return content;
-  } 
+  }
+
+  @GetMapping("deleteFile")
+  public Object deleteFile(int no) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (memberService.deletePhoto(no) == 0)
+        throw new Exception("삭제중 오류가 발생했습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("error", e.getMessage());
+    }
+    return content;
+  };
 
 }
 

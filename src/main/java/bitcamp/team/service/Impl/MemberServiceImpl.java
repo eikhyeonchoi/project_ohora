@@ -97,8 +97,14 @@ public class MemberServiceImpl implements MemberService {
   
 
   @Override
-  public int updatePhoto(String memberFile, int memberNo) {
-    return memberDao.updatePhoto(memberFile, memberNo);
+  public int updatePhoto(Member member) {
+    return memberDao.updatePhoto(member);
+  }
+  
+
+  @Override
+  public int deletePhoto(int no) {
+    return memberDao.deletePhoto(no);
   }
   
   

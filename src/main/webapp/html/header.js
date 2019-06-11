@@ -40,6 +40,7 @@ function loadLoginUser() {
       sessionStorage.setItem('email', data.user.email);
       sessionStorage.setItem('tel', data.user.tel);
       sessionStorage.setItem('pwdUpdateDate', data.user.passwordUpdateDate);
+      sessionStorage.setItem('filePath', data.user.filePath);
       
       $(document.body).trigger('loaded.loginuser');
       
