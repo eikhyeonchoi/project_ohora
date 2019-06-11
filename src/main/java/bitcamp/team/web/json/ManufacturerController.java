@@ -31,10 +31,8 @@ public class ManufacturerController {
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
-
     }
     return content;
-
   }
 
   // 기업회원가입
@@ -56,6 +54,22 @@ public class ManufacturerController {
     return content;
   }
 
+  @PostMapping("update")
+  public Object update(Manufacturer manufacturer) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      System.out.println(manufacturer);
+      if (manufacturerService.update(manufacturer) == 0) 
+        throw new RuntimeException("해당 번호의 회원이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  } // update
+
   @GetMapping("delete")
   public Object delete(int no) throws Exception {
 
@@ -74,8 +88,25 @@ public class ManufacturerController {
   @GetMapping("detail")
   public Object detail(int no) throws Exception {
     Manufacturer manufacturer = manufacturerService.get(no);
+    System.out.println(manufacturer);
     return manufacturer;
   }
+
+  @GetMapping("findByMemberNo")
+  public Object findByMemberNo(int no) throws Exception {
+    HashMap<String,Object> map = new HashMap<>();
+    try {
+      Manufacturer manufacturer = manufacturerService.findByMemberNo(no);
+      map.put("manufacturer", manufacturer);
+      map.put("status", "success");
+
+    } catch(Exception e) {
+      map.put("stauts", "fail");
+      map.put("message", e.getMessage());
+    }
+    return map;
+  }
+
 
   @GetMapping("list")
   public Object list() throws Exception {
@@ -83,23 +114,6 @@ public class ManufacturerController {
     List<Manufacturer> manufacturers = manufacturerService.list();
     map.put("list", manufacturers);
     return map;
-  }
-
-  @PostMapping("update")
-  public Object update(Manufacturer manufacturer) throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-    try {
-
-      if (manufacturerService.update(manufacturer) == 0) 
-        throw new Exception("해당 번호의 제조사가 없습니다.");
-
-      content.put("status", "success");
-
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
-    }
-    return content;
   }
 
   @GetMapping("search")
@@ -117,20 +131,7 @@ public class ManufacturerController {
 
     return map;
   }
-  
-  @GetMapping("find")
-  public Object find(String keyword) {
-    HashMap<String,Object> contents = new HashMap<>();
-    try {
-      contents.put("name", manufacturerService.get(keyword));
-      contents.put("status", "success");
-    } catch (Exception e) {
-      contents.put("status", "fail");
-      contents.put("error", e.getMessage());
-    }
-    
-    return contents;
-  }
+
 }
 
 

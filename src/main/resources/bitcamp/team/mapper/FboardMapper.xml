@@ -70,6 +70,13 @@
       fboard
   </select>
   
+  <select id="findByMemberNo" resultMap="boardMap" parameterType="int">
+    select *
+    from
+      fboard
+    where member_no = #{value}
+  </select>
+   
   <select id="findAll" resultMap="boardMemberMap" parameterType="map">
      select 
       b.fb_no,
