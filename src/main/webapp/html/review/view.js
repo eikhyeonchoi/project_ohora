@@ -6,11 +6,11 @@ name = sessionStorage.getItem('name');
 	console.log(data)
 	$('#review-prod-no').val(data.productNo),
   $('#review-no').val(data.no),
-  $('#review-id').val(data.member.nickName),
-  $('#review-title').val(data.title),
+  $('#review-id').html(data.member.nickName),
+  $('#review-title').html(data.title),
   $('#review-contents').html(data.contents),
-  $('#review-createdDate').val(data.createdDate),
-  $('#review-viewCount').val(data.viewCount);
+  $('#review-createdDate').html(data.createdDate + '   |'),
+  $('#review-viewCount').html(data.viewCount + ' 읽음');
 }));
 
 
@@ -18,12 +18,6 @@ name = sessionStorage.getItem('name');
   if (name == data.member.name || type == 3) {
     $('#update-btn').show();
     $('#delete-btn').show();
-    $('#review-title' ).prop('readonly', false);
-    $('#review-contents').prop('readonly', false);
-
-  } else {
-    $('#review-title' ).prop('readonly', true);
-    $('#review-contents').prop('readonly', true);
   }
 
 }));

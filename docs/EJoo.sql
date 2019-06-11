@@ -10,4 +10,7 @@ create table notice_file (
 ALTER TABLE notice
   MODIFY COLUMN conts mediumtext NOT NULL;
 
+  
+ALTER TABLE review
+  MODIFY COLUMN conts mediumtext NOT NULL;
 

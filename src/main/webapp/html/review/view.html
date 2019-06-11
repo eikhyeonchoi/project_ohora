@@ -11,60 +11,46 @@
 <body>
   <header class="ohr-main-header"></header>
   <div class="container">
-  <h1> REVIEW </h1>
-  
-<form>
+<form id="ohr-review-view">
 
 	<div id="review-prod-no"></div>
 
-   <div class="form-group row bit-view-item" style="display:none">
-    <label for="no" class="col-sm-2 col-form-label" >번호</label>
+   <div class="form-group row bit-view-item" id="review-no-div">
     <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="review-no" 
-             name='no' readonly>
+      <p id="review-no"></p>
     </div>
   </div>
-   <div class="form-group row bit-view-item">
-    <label for="id" class="col-sm-2 col-form-label">작성자</label>
+  
+  <div class="form-group row" id="review-title-div">
     <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="review-id" 
-             name='no' readonly>
+      <p id="review-title"></p>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">제목</label>
+  
+   <div class="form-group row bit-view-item" id="review-id-div">
     <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="review-title" 
-             name='title'>
-      <p class="bytes"></p>
+      <div id="review-id-img"></div>
+      <span id="review-id"></span>
+      <span id="review-createdDate"></span>
+      <span id="review-viewCount"></span>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="contents" class="col-sm-2 col-form-label">내용</label>
+  
+  <hr>
+  
+  <div class="form-group row" id="review-contents-div">
     <div class="col-sm-10">
       <p id="review-contents"></p>
     </div>
   </div>
-  <div class="form-group row bit-view-item">
-    <label for="createdDate" class="col-sm-2 col-form-label">작성일</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" 
-          id="review-createdDate" name="createdDate">
-    </div>
-  </div>
-  <div class="form-group row bit-view-item">
-    <label for="viewCount" class="col-sm-2 col-form-label">조회수</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" 
-          id="review-viewCount" name="viewCount">
-    </div>
-  </div>
   
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="button" id="list-btn"  class="btn btn-primary bit-view-item">목록</button>
-      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item" style="display:none">삭제</button> 
+  <hr>
+  
+  <div class="form-group row" id="ohr-rev-btn">
+    <div class="col-sm-12">
       <button type="button" id="update-btn" class="btn btn-primary bit-view-item" style="display:none">변경</button>
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item" style="display:none">삭제</button> 
+      <button type="button" id="list-btn"  class="btn btn-primary bit-view-item">목록</button>
     </div>
   </div>
 </form>
