@@ -10,7 +10,14 @@ public class Satisfy {
   private double asStf;
   private double useful;
   private double priceStf;
+  private String eval;
   
+  public String getEval() {
+    return eval;
+  }
+  public void setEval(String eval) {
+    this.eval = eval;
+  }
   private Product product;
   private Member member;
   public int getNo() {

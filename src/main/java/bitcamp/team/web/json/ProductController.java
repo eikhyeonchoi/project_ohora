@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
+import bitcamp.team.domain.Satisfy;
 import bitcamp.team.service.ManualService;
 import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
@@ -126,14 +126,14 @@ public class ProductController {
     Member member = (Member) httpSession.getAttribute("loginUser");
     paramMap.put("uNo", member.getNo());
     paramMap.put("pNo", pNo);
-    int memberNo = satisfyService.getReviewedMember(paramMap);
+    Satisfy satisfy = satisfyService.getReviewedMember(paramMap);
 
-    if(memberNo == 0) {
+    if(satisfy != null) {
       content.put("status","success");
-      content.put("satisfyCount",memberNo);
+      content.put("satisfy", satisfy);
     } else {
       content.put("status", "fail");
-      content.put("satisfyCount",memberNo);
+      content.put("satisfy", satisfy);
     }
     return content;
   } // findReviewedMember

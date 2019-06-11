@@ -18,28 +18,28 @@
   <header class="ohr-main-header"></header>
   <div class="album py-5 bg-light">
     <div class="container">
-      <h1>매뉴얼</h1>
-      <button id='insert-btn' type="button" class="btn btn-warning btn-sm">새 글</button>
-      <div class="tableRow row">
-      </div>
+        <section class="jumbotron text-center">
+          <h1 class="jumbotron-heading">매뉴얼</h1>
+          <p class="lead text-muted">그동안 잘 몰랐던 매뉴얼을 손쉽게 볼 수 있습니다.</p>
       
-      <div class="form-inline my-2 my-lg-0 justify-content-center">
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <div class="input-group mr-3">
-              <select id="searchTag" name="searchTag" class="custom-select">
-                <option value="">검색조건</option>
-                <option id="prodName" value="prodName">제품명</option>
-                <option id="manufacturer" value="manufacturer">기업</option>
-              </select>
+          <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <div class="input-group mb-3"></div>
+              </div>
             </div>
+          <div id="search">
+            <input id="keyword" class="form-control mr-sm-2" 
+                   placeholder="제품명으로 검색하기" aria-label="검색">
+            <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
           </div>
-        </div>
-        <input type="text" class="form-control" id="search" name='search' placeholder="검색">
-        <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
+        </form>
+        <button type="button" id="manual-add-btn" class="btn-sm btn-secondary row mh-2">
+        매뉴얼 추가</button>
+       </section>
+      <div class="tableRow row"></div>
+      <div class="row mx-sm-auto" id="pagination-container"></div>
       </div>
-      <div id="pagination-container"></div>
-    </div>
   </div>
   <!-- .container -->
   <script id="pagination-template" type="text/x-handlebars-template">

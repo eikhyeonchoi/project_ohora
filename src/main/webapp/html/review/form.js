@@ -1,31 +1,20 @@
 var productNo = getQuerystring('no'),
-userNo;
-
-var h1 = $('h1'),
-el1 = $('.bit-new-item'),
-el2 = $('.bit-view-item');
-var param = location.href.split('?')[1];
-if (param) {
-  $('h1').html("리뷰 쓰기"); 
-  loadData(param.split('=')[1]);
-  for (e of el1) {
-    e.style.display = 'none';
-  }
-} else {
-  $('h1').html("리뷰 수정")
-  for (e of el2) {
-    e.style.display = 'none';
-  }
-}
+    reviewNo = getQuerystring('rNo')
+    userNo = 0;
 
 $(document).ready(function() {
   $(document.body).bind('loaded.header', function(){
     userNo = sessionStorage.getItem('no');
-    console.log(userNo);
+    
     if(userNo == null) {
       alert('글을 쓸 권한이 없습니다.\n로그인 후 이용해주세요.');
       location.href = 'prodView.html?no=' + $('#review-prod-no').val();
     }
+    
+    if(reviewNo != '') {
+      loadData(reviewNo);
+    }
+    
     $(document.body).trigger('loaded-user');
   })
 }); // ready
@@ -74,6 +63,7 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-user', function(obj){
   $('#add-btn').click(function() {
+    if(reviewNo == '') {
     $.post('/bitcamp-team-project/app/json/review/add', {
       memberNo: userNo,
       productNo: productNo,
@@ -88,6 +78,23 @@ $(document.body).bind('loaded-user', function(obj){
         alert('등록 실패 입니다.\n' +  data.message);
       }
     }, "json")
+    } else {
+      $.post('/bitcamp-team-project/app/json/review/update', {
+        no: reviewNo,
+        memberNo: userNo,
+        productNo: productNo,
+        title: $('#review-title').val(),
+        contents: $(".ql-editor").html()
+      },
+      function(data) {
+        
+        if (data.status == 'success') {
+          location.href = 'prodView.html?no=' + productNo;
+        }else {
+          alert('등록 실패 입니다.\n' +  data.message);
+        }
+      }, "json")
+    }
   }); // add click
 
 }) // bind

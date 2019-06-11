@@ -41,7 +41,8 @@ $(document).ready(function() {
       $(productGenerator(obj)).appendTo($('.modal-body'));
     }); // get
 
-    $('#manual-add-intro').modal({backdrop: 'static', keyboard: false});
+    //{backdrop: 'static', keyboard: false}
+    $('#manual-add-intro').modal();
     $('#modal-cancel-btn').click(function() {
       location.href = '../../index.html';
     }); // click
