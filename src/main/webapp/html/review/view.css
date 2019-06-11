@@ -1,50 +1,55 @@
-.bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+#ohr-review-view {
+	padding-top: 1em;
+}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 
 .jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 0;
-  background-color: #fff;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	margin-bottom: 0;
+	background-color: #fff;
 }
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
+
+@media ( min-width : 768px) {
+	.jumbotron {
+		padding-top: 6rem;
+		padding-bottom: 6rem;
+	}
 }
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+	max-width: 40rem;
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+	margin-bottom: .25rem;
 }
 
 .slick-prev:before, .slick-next:before {
@@ -52,15 +57,15 @@ footer p {
 }
 
 .ohr-card-2nddiv {
-    min-width: 220px;
-    min-height: 375px;
-    max-height: 375px;
+	min-width: 220px;
+	min-height: 375px;
+	max-height: 375px;
 }
 
 .slick-slide img {
-    border-bottom: solid 1px #ccc;
-    margin-left: auto;
-    margin-right: auto;
+	border-bottom: solid 1px #ccc;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .card-body {
@@ -88,3 +93,62 @@ footer p {
 	float: left;
 }
 
+#review-no {
+	margin: 0px;
+}
+
+#review-title {
+	font-size: 38px;
+	margin: 0px;
+}
+
+#review-title-div {
+	margin-bottom: 0;
+}
+
+#review-contents-div div p p img {
+	max-width: 50rem;
+}
+
+#review-id-img {
+	background-color: white;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #000;
+	border-radius: 50px;
+	text-align: left;
+	margin: 0;
+	font-size: 12px;
+	vertical-align: middle;
+	line-height: 150px;
+}
+
+#review-id {
+	margin: 0px;
+	font-size: 16px;
+	position: absolute;
+	top: 0;
+	left: 4em;
+}
+
+#review-createdDate {
+	margin: 0;
+	position: absolute;
+	top: 1.5em;
+	left: 5em;
+}
+
+#review-viewCount {
+	position: absolute;
+	top: 1.5em;
+	left: 12em;
+}
+
+#review-contents-div {
+	margin-top: 30px;
+}
+
+#ohr-rev-btn {
+	float: right;
+	padding-bottom: 1rem;
+}

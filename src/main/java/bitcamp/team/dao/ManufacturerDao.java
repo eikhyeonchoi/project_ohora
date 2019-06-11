@@ -9,9 +9,8 @@ public interface ManufacturerDao {
   List<Manufacturer> findAll();
   List<Manufacturer> findAllUseProductAdd();
   List<Manufacturer> findByKeyword(String keyword);
-  Manufacturer findNameByNickName(String keyword);
   Manufacturer findByNo(int no);
-  int update(Manufacturer member);
+  Manufacturer findByMemberNo(int no);
   int delete(int no);
-  int countAll();
+  int update(Manufacturer manufacturer);
 }

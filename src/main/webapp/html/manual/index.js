@@ -13,7 +13,7 @@ $(document).ready(function() {
       insert.show();
       
       insert.click(function() {
-        location.href = 'add2.html';
+        location.href = 'add.html';
       })
     }
   })
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 function loadList() {
   $.getJSON('/bitcamp-team-project/app/json/manual/list?searchType='
-      + $('select#searchTag').val() + '&keyword=' + $('#search').val()
+      + $('select#searchTag').val() + '&keyword=' + $('#keyword').val()
       , function(obj) {
         if (obj.status == "success") {
         page.pagination({
@@ -51,7 +51,7 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
-$('#search').keydown((e) => {
+$('#keyword').keydown((e) => {
   if (event.keyCode == 13) {
     e.preventDefault();
     loadList();
@@ -62,5 +62,10 @@ $('#search-btn').click((e) => {
   e.preventDefault();
   loadList();
 });
+
+$('#manual-add-btn').click((e) => {
+  e.preventDefault();
+  location.href = 'add.html';
+})
 
 loadList();

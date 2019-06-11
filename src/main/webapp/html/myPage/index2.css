@@ -1,3 +1,28 @@
 #my-title {
 	margin: 25px 0px 20px 45px;
 }
+
+.my-address {
+	margin-left: 3px;
+}
+
+.addressInput {
+	margin-bottom: 4px;
+}
+
+#my-button-group1 {
+	width: 100%;
+}
+
+#my-button-group2 {
+	text-align: center;
+	margin: 0 auto;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+

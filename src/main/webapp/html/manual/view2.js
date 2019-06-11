@@ -56,9 +56,10 @@ $(document).ready(() => {
           var summarize = '<section>' + data.mFile[i].contents + '</section>'
           $(summarize).appendTo($('#contents'));
         }
+        console.log(data.mFile[i].file);
         var contents = '<section class="row justify-content-between" id="conts">'
           + '<span class="col-sm-4" id="textconts">' + data.mFile[i].contents + '</span>'
-          + '<span class="col-sm-4" id="textimg"><img src="' + data.mFile[i].file + '"></span>'
+          + '<span class="col-sm-4" id="textimg"><img src="/bitcamp-team-project/upload/manualfile/' + data.mFile[i].file + '_thumb"></span>'
           + '</section>';
         $(contents).appendTo($('.innerForm' + data.mFile[i].typeNo));
       }

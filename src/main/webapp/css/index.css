@@ -114,13 +114,13 @@ body {
 }
 
 #ohr-carousel-1 {
-	background-color: #ccc; /*색상 변경하기!*/
+	background-color: #e7e6ec;
 	background-image: url(../upload/main/1.svg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
 #ohr-carousel-1 > div {
-	text-shadow: 0 0 2px #343a40;
+	text-shadow: 0 0 2px black;
 }
 
 #ohr-carousel-2 {
@@ -134,7 +134,7 @@ body {
 }
 
 #ohr-carousel-3 {
-	background-color: #ccc;
+	background-color: #eeeeec;
     background-image: url(../upload/main/3.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
