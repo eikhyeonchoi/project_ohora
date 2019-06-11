@@ -63,4 +63,9 @@ $('#search-btn').click((e) => {
   loadList();
 });
 
+$('#manual-add-btn').click((e) => {
+  e.preventDefault();
+  location.href = 'add.html';
+})
+
 loadList();

@@ -36,6 +36,17 @@ p.card-text {
     -webkit-box-orient: vertical;
 }
 
+img {
+	height: 250px;
+	width: 250px;
+}
+
+.download {
+	border: 1px solid gray;
+	height: 300px;
+	width: 300px;
+}
+
 #pagination-container {
   width: 350px;
 }
