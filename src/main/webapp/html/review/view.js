@@ -36,7 +36,7 @@ $('#delete-btn').click(() => {
 
 //수정
 $('#update-btn').click(() => {
-	location.href = 'form.html?no=' + $('#review-no').val();
+	location.href = 'form.html?no=' + $('#review-prod-no').val() + '&rNo=' + $('#review-no').val();
 });
 
 //목록
