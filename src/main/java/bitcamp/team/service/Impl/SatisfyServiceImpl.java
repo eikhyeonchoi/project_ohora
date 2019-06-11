@@ -36,7 +36,7 @@ public class SatisfyServiceImpl implements SatisfyService {
   }
 
   @Override
-  public int getReviewedMember(Map<String, Object> param) {
+  public Satisfy getReviewedMember(Map<String, Object> param) {
     return satisfyDao.findByMemberNo(param);
   }
 }

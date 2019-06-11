@@ -23,6 +23,12 @@ satisfyBtn = $('#satisfy-btn'),
 productUpdateBtn = $('#product-update-btn'),
 productDeleteBtn = $('#product-delete-btn');
 
+
+var scoreTempate = $('#my-score-template').html();
+
+var scoreGenerator = Handlebars.compile(scoreTempate);
+
+
 $(document.body).bind('loaded.loginuser', () => {
   window.type = Number(sessionStorage.getItem('type'));
   satisfyBtn.hide();
@@ -179,44 +185,88 @@ $(document.body).bind('loaded-product', function(data){
   })
 
   satisfyBtn.click(function() {
+    $('#satisfy-add-modal').modal({backdrop: 'static', keyboard: false});
+    
     $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
-      if (obj.satisfyCount == 1) {
-        swal("만족도 평가 오류", "이미 만족도를 등록하셨습니다", "warning");
-        $('#go-satisfy-add-btn').prop('disabled',true);
+      console.log(obj);
+      var scoreList = [{
+          name: '난이도',
+          score: obj.satisfy.level},
+        {name: '이해도',
+          score: obj.satisfy.understand},
+        {name: '디자인',
+          score: obj.satisfy.design},
+        {name: 'A/S',
+          score: obj.satisfy.asStf},
+        {name: '편의성',
+          score: obj.satisfy.useful},
+        {name: '가격',
+          score: obj.satisfy.priceStf}];
+      
+      var scoreObj = {
+          scoreList: scoreList,
+          eval: obj.satisfy.eval
+          };
+      console.log(scoreObj);
+      
+      if(obj.status == 'success') {
+        $(scoreGenerator(scoreObj)).appendTo($('#my-score'));
+        ReloadScripts('rateit');
         
-      } else {
-        starGenerator('level-rate');
-        starGenerator('understand-rate');
-        starGenerator('design-rate');
-        starGenerator('as-rate');
-        starGenerator('convenience-rate');
-        starGenerator('price-rate');
-        
-        $('#satisfy-add-modal').modal({backdrop: 'static', keyboard: false});
-        
-        $('#modal-cancel-btn').click(function() {
-          $('#satisfy-add-modal').modal('hide');
-        }); // click
-        
-        $('#modal-ok-btn').click(function() {
-          $.post('/bitcamp-team-project/app/json/satisfy/add',{
-            pdNo: productNo,
-            level: Number($('#level-score').text()),
-            understand: Number($('#understand-score').text()),
-            design: Number($('#design-score').text()),
-            asStf: Number($('#as-score').text()),
-            useful: Number($('#convenience-score').text()),
-            priceStf: Number($('#price-score').text())
-          }, function(data) {
-            if (data.status == 'success'){
-              location.reload();
-            } else {
-              swal("등록 실패!",'data.message','warning');
-            }
-          })
-        }); // click
+        $('#eval, #modal-ok-btn').hover(function() {
+          $(this).css('opacity', '0.2');
+          $('#modal-ok-btn').parent()
+                            .removeClass('col-4')
+                            .addClass('col-5')
+                            .append('<p>이미 만족도를 등록했습니다</p>');
+          $('#modal-ok-btn').remove();
+        })
       }
     }) // get
+    
+    
+    $('#a-my-score').click(function(e) {
+      e.preventDefault();
+      $('#my-score-modal-footer').show();
+      $('#eval-modal-footer').hide();
+    })
+    
+    
+    $('#a-eval').click(function(e) {
+      e.preventDefault();
+      starGenerator('level-rate');
+      starGenerator('understand-rate');
+      starGenerator('design-rate');
+      starGenerator('as-rate');
+      starGenerator('convenience-rate');
+      starGenerator('price-rate');
+      $('#my-score-modal-footer').hide();
+      $('#eval-modal-footer').show();
+    })
+    
+    
+    $('#modal-cancel-btn').click(function() {
+      $('#satisfy-add-modal').modal('hide');
+    }); // click
+    
+    $('#modal-ok-btn').click(function() {
+      $.post('/bitcamp-team-project/app/json/satisfy/add',{
+        pdNo: productNo,
+        level: $('#level-backing').val(),
+        understand: $('#understand-backing').val(),
+        design: $('#design-backing').val(),
+        asStf: $('#as-backing').val(),
+        useful: $('#convenience-backing').val(),
+        priceStf: $('#price-backing').val()
+      }, function(data) {
+        if (data.status == 'success'){
+          location.reload();
+        } else {
+          swal("등록 실패!",'data.message','warning');
+        }
+      })
+    }); // click
+    
   }) // click
 
 
@@ -338,7 +388,8 @@ function starGenerator(id) {
   });
   $('#' + id).bind('over' ,function(e, value) {
     $(this).attr('title', value);
-  });}
+  });
+}
 
 
 
@@ -475,5 +526,26 @@ Chart.plugins.register({
     }
   }
 });
+
+
+function ReloadScripts(value) {
+  var scriptTag = $('script[src]');
+  var src;
+  
+  for (var i = 0; i < scriptTag.length; i++) {
+    if(scriptTag[i].src.includes(value)) {
+      src = scriptTag[i].src;
+      scriptTag[i].parentNode.removeChild(scriptTag[i]);
+      try {
+        var x = document.createElement('script');
+        x.type = 'text/javascript';
+        x.src = src;
+        document.getElementsByTagName('head')[0].appendChild(x);
+      }
+      catch (e) {}
+      break;
+    } // for
+  }
+}; // ReloadScripts​
 
 

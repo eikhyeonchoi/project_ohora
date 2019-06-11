@@ -188,7 +188,7 @@ public class ManualController {
           try {
             if (!basicManualFiles[i].getContentType().equals("application/pdf") ||
                 !basicManualFiles[i].getSubmittedFileName().contains("pdf")) {
-              makeThumbnail(filepath, 500, 500);
+              makeThumbnail(filepath, 300, 300);
             }
           } catch(Exception e) {
             throw new RuntimeException("basic files 썸네일 생성중 오류발생");
@@ -212,7 +212,7 @@ public class ManualController {
           try {
             if (!componentManualFiles[i].getContentType().equals("application/pdf") ||
                 !componentManualFiles[i].getSubmittedFileName().contains("pdf")) {
-              makeThumbnail(filepath, 500, 500);
+              makeThumbnail(filepath, 300, 300);
             }
           } catch(Exception e) {
             throw new RuntimeException("component files썸네일 생성중 오류발생");
@@ -236,7 +236,7 @@ public class ManualController {
           try {
             if (!cautionManualFiles[i].getContentType().equals("application/pdf") ||
                 !cautionManualFiles[i].getSubmittedFileName().contains("pdf")) {
-              makeThumbnail(filepath, 500, 500);
+              makeThumbnail(filepath, 300, 300);
             }
           } catch(Exception e) {
             throw new RuntimeException("caution 썸네일 생성중 오류발생");

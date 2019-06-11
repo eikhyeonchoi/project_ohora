@@ -67,86 +67,111 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title">만족도 등록</h5>
+          <h5 class="modal-title">만족도</h5>
         </div> <!-- modal-header -->
         
         <div class="modal-body">
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>난이도</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="level-backing">
-              <div class='rateit' id='level-rate' data-rateit-backingfld="#level-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+          
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#my-score" id='a-my-score'>내 평가</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#eval" id='a-eval'>평가하기</a>
+            </li>
+          </ul>
+          
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="my-score">
+            </div>
+            
+            <div class="tab-pane fade" id="eval">
+              <div class='row mt-sm-3'>
+                <div class='col-sm-2 offset-sm-1'>난이도</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="level-backing">
+                  <div class='rateit' id='level-rate' data-rateit-backingfld="#level-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='level-score' class='col-sm-3'> 0 
+                </div>
+              </div>
+              
+              <div class='row'>
+                <div class='col-sm-2 offset-sm-1'>이해도</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="understand-backing">
+                  <div class='rateit' id='understand-rate' data-rateit-backingfld="#understand-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='understand-score' class='col-sm-3'> 0 
+                </div>
+              </div>
+              
+              <div class='row'>
+                <div class='col-sm-2 offset-sm-1'>디자인</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="design-backing">
+                  <div class='rateit' id='design-rate' data-rateit-backingfld="#design-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='design-score' class='col-sm-3'> 0 
+                </div>
+              </div>
+              
+              <div class='row'>
+                <div class='col-sm-2 offset-sm-1'>A/S</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="as-backing">
+                  <div class='rateit' id='as-rate' data-rateit-backingfld="#as-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='as-score' class='col-sm-3'> 0 
+                </div>
+              </div>
+              
+              <div class='row'>
+                <div class='col-sm-2 offset-sm-1'>편의성</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="convenience-backing">
+                  <div class='rateit' id='convenience-rate' data-rateit-backingfld="#convenience-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='convenience-score' class='col-sm-3'> 0 
+                </div>
+              </div>
+              
+              <div class='row'>
+                <div class='col-sm-2 offset-sm-1'>가격</div>
+                <div class='col-sm-6 pl-sm-0'>
+                  <input type="range" value="2.5" step="0.25" id="price-backing">
+                  <div class='rateit' id='price-rate' data-rateit-backingfld="#price-backing"
+                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                  </div>
+                </div>
+                <div id='price-score' class='col-sm-3'> 0 
+                </div>
               </div>
             </div>
-            <div id='level-score' class='col-sm-3'> 0 
-            </div>
           </div>
-          
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>이해도</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="understand-backing">
-              <div class='rateit' id='understand-rate' data-rateit-backingfld="#understand-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-              </div>
-            </div>
-            <div id='understand-score' class='col-sm-3'> 0 
-            </div>
-          </div>
-          
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>디자인</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="design-backing">
-              <div class='rateit' id='design-rate' data-rateit-backingfld="#design-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-              </div>
-            </div>
-            <div id='design-score' class='col-sm-3'> 0 
-            </div>
-          </div>
-          
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>A/S</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="as-backing">
-              <div class='rateit' id='as-rate' data-rateit-backingfld="#as-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-              </div>
-            </div>
-            <div id='as-score' class='col-sm-3'> 0 
-            </div>
-          </div>
-          
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>편의성</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="convenience-backing">
-              <div class='rateit' id='convenience-rate' data-rateit-backingfld="#convenience-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-              </div>
-            </div>
-            <div id='convenience-score' class='col-sm-3'> 0 
-            </div>
-          </div>
-          
-          <div class='row'>
-            <div class='col-sm-2 offset-sm-1'>가격</div>
-            <div class='col-sm-6 pl-sm-0'>
-              <input type="range" value="2.5" step="0.25" id="price-backing">
-              <div class='rateit' id='price-rate' data-rateit-backingfld="#price-backing"
-                data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-              </div>
-            </div>
-            <div id='price-score' class='col-sm-3'> 0 
-            </div>
-          </div>
-          
-          
+        
         </div> <!-- modal-body -->
         
-        <div class="modal-footer col-sm-12 justify-content-between">
+        <div id='my-score-modal-footer' class="modal-footer col-sm-12 justify-content-between">
+          <div class='col-4'>
+            <button id='' type="button" class="btn btn-outline-danger btn-block">삭제</button>
+          </div>
+          <div class='col-4'>
+            <button id='' type="button" class="btn btn-outline-success btn-block">수정</button>
+          </div>
+        </div> <!-- modal-footer -->
+        
+        <div id='eval-modal-footer' class="modal-footer col-sm-12 justify-content-between" style="display: none;">
           <div class='col-4'>
             <button id='modal-cancel-btn' type="button" class="btn btn-outline-danger btn-block">취소</button>
           </div>
@@ -161,12 +186,47 @@
   
   
   
+  <div class='row mt-sm-2'>
+    <div class='col-sm-2 offset-sm-1'>난이도</div>
+    <div class='col-sm-6 pl-sm-0'>
+      <div class="rateit" data-rateit-ispreset="true" data-rateit-readonly="true">
+      </div>
+    </div>
+    <div id='level-my-score' class='col-sm-3'> 0 
+    </div>
+  </div>
+  
+  
+  <script id="my-score-template" type="text/x-handlebars-template">
+  {{#each scoreList}}
+  <div class='row mt-sm-2'>
+    <div class='col-sm-2 offset-sm-1'>
+      {{name}}
+    </div>
+    <div class='col-sm-6 pl-sm-0'>
+      <div class="rateit" data-rateit-value="{{score}}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+    </div>
+    <div class='col-sm-3'>
+      {{score}}
+    </div>
+  </div>
+  {{/each}}
+  <div class='row mt-sm-3'>
+    <div class='col-sm-3 offset-sm-1'>
+      <p>내 한줄평</p>
+    </div>
+    <div class='col-sm-10'>
+      <textarea value='{{eval}}'></textarea>
+    </div>
+  </div>
+  </script>
+  
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="../header.js"></script>
   <script src="../footer.js"></script>

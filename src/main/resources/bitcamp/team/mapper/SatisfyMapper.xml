@@ -16,7 +16,7 @@
     <result column="as_stf"     property="asStf"/>
     <result column="useful"    property="useful"/>
     <result column="price_stf"    property="priceStf"/>
-    
+    <result column="eval"    property="eval"/>
     
     <association property="member" javaType="member">
       <id column="member_no"   property="no"/>
@@ -83,9 +83,9 @@
         #{priceStf}); 
   </insert>
   
-  <select id='findByMemberNo' resultType="int" parameterType="map">
+  <select id='findByMemberNo' resultMap="satisfyMap" parameterType="map">
     select
-      count(*)
+      *
     from
       satisfy
     where
