@@ -142,7 +142,8 @@
       m.name,
       m.cnt,
       f.conts,
-      f.manual_type_no as typeNo, 
+      f.manual_type_no as typeNo,
+      f.file, 
       t.manual_type_no,
       t.name as typeName,
       p.product_no,
@@ -189,6 +190,13 @@
       product_no = #{value}
   </select>
   
+  <update id="increaseCount" parameterType="int">
+    update manual
+    set
+      cnt = cnt + 1
+    where
+      product_no = #{value}
+  </update>
 </mapper>
 
 

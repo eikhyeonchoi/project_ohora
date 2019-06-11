@@ -1,3 +1,7 @@
+body {
+	background: #F9F9F9;
+}
+
 th:nth-child(1) {
   width: 500px;
   text-align: center;
@@ -32,7 +36,17 @@ p.card-text {
     -webkit-box-orient: vertical;
 }
 
+img {
+	height: 250px;
+	width: 250px;
+}
+
+.download {
+	border: 1px solid gray;
+	height: 300px;
+	width: 300px;
+}
+
 #pagination-container {
   width: 350px;
-  margin: 0 auto;
 }

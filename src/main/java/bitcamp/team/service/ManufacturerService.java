@@ -9,8 +9,8 @@ public interface ManufacturerService {
   int add(Manufacturer member);
   int add2(Manufacturer member);
   Manufacturer get(int no);
-  Manufacturer get(String keyword);
-  int update(Manufacturer member);
+  Manufacturer findByMemberNo(int no);
   int delete(int no);
-  int size();
+  int update(Manufacturer manufacturer);
+
 }
