@@ -4,7 +4,7 @@
  * 
  */
 var productNo = getQuerystring('no'),
-    productName = getQuerystring('name'),
+    productName = decodeURIComponent(getQuerystring('name')),
     productSrc = $('#product-template').html(),
     basicContentSrc = $('#basic-additional-template').html(),
     componentContentSrc = $('#component-additional-template').html(),

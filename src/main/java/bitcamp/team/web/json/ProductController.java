@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
+import bitcamp.team.service.ManualService;
 import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
 import bitcamp.team.service.SatisfyService;
@@ -34,18 +36,21 @@ public class ProductController {
   TipService tipService;
   ReviewService reviewService;
   ServletContext servletContext;
+  ManualService manualService;
 
   public ProductController(
       ProductService productService,
       SatisfyService satisfyService, 
       TipService tipService,
       ReviewService reviewService,
+      ManualService manualService,
       ServletContext servletContext) {
     this.productService = productService;
     this.satisfyService = satisfyService;
     this.tipService = tipService;
     this.reviewService = reviewService;
     this.servletContext = servletContext;
+    this.manualService = manualService;
   }
 
 
@@ -78,6 +83,25 @@ public class ProductController {
 
     return content;
   } // confirmTip
+  
+  @GetMapping("confirmManual")
+  public Object confirmManual(int pNo) {
+    HashMap<String, Object> content = new HashMap<>();
+    try {
+      int manualCount = manualService.confirm(pNo);
+      if(manualCount == 1) {
+        content.put("status","success");
+        content.put("manualCount", manualCount);
+      } else {
+        content.put("status", "fail");
+        content.put("manualCount", 0);
+      }
+    } catch (Exception e) {
+      content.put("error", e.getMessage());
+    }
+    
+    return content;
+  } // confirmTip
 
   @GetMapping("detail")
   public Object detail(int no) {
@@ -106,8 +130,10 @@ public class ProductController {
 
     if(memberNo == 0) {
       content.put("status","success");
+      content.put("satisfyCount",memberNo);
     } else {
       content.put("status", "fail");
+      content.put("satisfyCount",memberNo);
     }
     return content;
   } // findReviewedMember

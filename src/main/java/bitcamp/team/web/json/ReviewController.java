@@ -31,9 +31,13 @@ public class ReviewController {
   @GetMapping("list")
   public Object list(int largeNo, int smallNo, String keyword, String listType) throws Exception {
     HashMap<String, Object> contents = new HashMap<>();
-    List<Product> list = productService.list2(largeNo, smallNo, keyword, listType);
-
-    contents.put("list", list);
+    if (listType == "many") {
+      List<Review> list = reviewService.list(keyword);
+      contents.put("list", list);
+    } else {
+      List<Product> list = productService.list2(largeNo, smallNo, keyword, listType);
+      contents.put("list", list);
+    }
     contents.put("keyword", keyword);
 
     return contents;
