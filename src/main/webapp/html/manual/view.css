@@ -88,10 +88,10 @@ body {
 
 /* 탭 하단 글 내용 */
 #textconts {
+	max-width: 100%;
   min-height: 100vh;
   min-width: 300px;
-  font-size: 30px;
-  float: left;
+  font-size: 2em;
 }
 
 /* 탭 하단 사진 */
@@ -99,5 +99,4 @@ body {
   min-height: 100vh;
   max-width: 300px;
   min-width: 100px;
-  float: right;
 }
