@@ -20,6 +20,8 @@
     <!-- 사이드 바 -->
     <div class="sidebar-content">
       <img class="photo0" src="정연.jpg">
+       <input type="file" id="profile-fileupload" name="memberFile"
+        style="display: none;">
       <div id="user-nickName-div">
         <span id="user-nickName-span"></span>님 환영합니다.
       </div>
@@ -136,10 +138,10 @@
           <div class="modal-body">
             <div class="form-row align-items-center">
               <div class="col-md-7 my-1">
-                <label for="name">이름</label> 
-                <input type="text" class="form-control" id="name"
-                 aria-describedby="nameHelp" placeholder="이름을 입력하세요." readonly="readonly"> 
-                <small id="nameHelp" class="form-text text-muted">* 개명으로 이름이 변경된 경우에만 변경해주세요.</small>
+                <label for="name">이름</label> <input type="text" class="form-control" id="name"
+                  aria-describedby="nameHelp" placeholder="이름을 입력하세요." readonly="readonly">
+                <small id="nameHelp" class="form-text text-muted">* 개명으로 이름이 변경된 경우에만
+                  변경해주세요.</small>
               </div>
               <div class="col-auto my-1">
                 <button type="submit" class="btn btn-primary" id="name-udt-btn">수정</button>
@@ -150,8 +152,8 @@
             </div>
             <div class="form-row align-items-center">
               <div class="col-md-7 my-1">
-                <label for="nickName">별명</label> 
-                <input type="text" class="form-control" id="nickName" placeholder="닉네임을 입력하세요." readonly="readonly">
+                <label for="nickName">별명</label> <input type="text" class="form-control"
+                  id="nickName" placeholder="닉네임을 입력하세요." readonly="readonly">
               </div>
               <div class="col-auto my-1">
                 <button type="submit" class="btn btn-primary" id="nickName-udt-btn">수정</button>
@@ -162,8 +164,7 @@
             </div>
             <div class="form-row align-items-center">
               <div class="col-md-3 my-1" id="tel1-div">
-                <label for="tel1">전화 번호</label> 
-                <select class="form-control" id="tel1">
+                <label for="tel1">전화 번호</label> <select class="form-control" id="tel1">
                   <option selected>010</option>
                   <option>011</option>
                   <option>016</option>
@@ -173,12 +174,14 @@
                 </select>
               </div>
               <div class="col-md-2 my-1" id="tel2-div">
-                <input type="number" class="form-control tel-group" id="tel2" 
-                onkeydown="javascript: return event.keyCode == 69 ? false : true" readonly="readonly">
+                <input type="number" class="form-control tel-group" id="tel2"
+                  onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                  readonly="readonly">
               </div>
               <div class="col-md-2 my-1" id="tel3-div">
-                <input type="number" class="form-control tel-group" id="tel3" 
-                onkeydown="javascript: return event.keyCode == 69 ? false : true" readonly="readonly">
+                <input type="number" class="form-control tel-group" id="tel3"
+                  onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                  readonly="readonly">
               </div>
               <div class="col-auto my-1">
                 <button type="submit" class="btn btn-primary tel-group" id="tel-udt-btn">수정</button>
@@ -199,11 +202,13 @@
 
   </div>
   <!-- container -->
-
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
-  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
   <script src="slidebar.js"></script>

@@ -2,7 +2,10 @@
 package bitcamp.team.web.json;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +20,10 @@ import bitcamp.team.web.Authentication.RandomNo;
 @RequestMapping("/json/member")
 public class MemberController {
 
+  String uploadDir;
+
   @Autowired MemberService memberService;
+  @Autowired ServletContext servletContext;
 
   @PostMapping("add")
   public Object add(Member member, HttpSession session) throws Exception {
@@ -110,7 +116,7 @@ public class MemberController {
     }
     return content;
   }
-  
+
   @RequestMapping("updateName")
   public Object updateName(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -126,7 +132,7 @@ public class MemberController {
     }
     return content;
   }
-  
+
   @RequestMapping("updateNickname")
   public Object updateNickname(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -141,7 +147,7 @@ public class MemberController {
     }
     return content;
   }
-  
+
   @RequestMapping("updateTel")
   public Object updateTel(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -156,6 +162,27 @@ public class MemberController {
     }
     return content;
   }
+
+  @RequestMapping("updateFile")
+  public Object updateFile(Member member, Part memberFile, HttpSession session) {
+    this.uploadDir = servletContext.getRealPath("/upload/memberfile");
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      System.out.println(member.getNo());
+      String filename = UUID.randomUUID().toString();
+      String filepath = uploadDir + "/" + filename; 
+      memberFile.write(filepath);
+      System.out.println(filename);
+//      memberService.updatePhoto(filename, memberNo);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status","fail");
+      content.put("error",e.getMessage());
+    }
+    return content;
+  } 
+
 }
 
 

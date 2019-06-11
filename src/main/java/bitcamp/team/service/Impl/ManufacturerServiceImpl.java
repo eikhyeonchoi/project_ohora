@@ -37,7 +37,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
   public int add(Manufacturer manufacturer) {
     return manufacturerDao.insert(manufacturer);
   }
-  
+
   @Override
   public int add2(Manufacturer manufacturer) {
     return manufacturerDao.insertCompany(manufacturer);
@@ -48,23 +48,19 @@ public class ManufacturerServiceImpl implements ManufacturerService {
   public Manufacturer get(int no) {
     return manufacturerDao.findByNo(no);
   }
-  @Override
-  public Manufacturer get(String keyword) {
-    return manufacturerDao.findNameByNickName(keyword);
-  }
 
   @Override
-  public int update(Manufacturer manufacturer) {
-    return manufacturerDao.update(manufacturer);
+  public Manufacturer findByMemberNo(int no) {
+    return manufacturerDao.findByMemberNo(no);
   }
 
   @Override
   public int delete(int no) {
     return manufacturerDao.delete(no);
   }
-  @Override
-  public int size() {
-    return manufacturerDao.countAll();
-  }
 
+  @Override
+  public int update(Manufacturer manufacturer) {
+    return manufacturerDao.update(manufacturer);
+  }
 }

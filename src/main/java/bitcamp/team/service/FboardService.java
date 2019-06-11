@@ -7,6 +7,7 @@ import bitcamp.team.domain.FboardComment;
 
 public interface FboardService {
   List<Fboard> list(HashMap<String, Object> param);
+  List<Fboard> findMyPost(int memberNo);
   int add(Fboard board);
   Fboard get(int no);
   int update(Fboard board);

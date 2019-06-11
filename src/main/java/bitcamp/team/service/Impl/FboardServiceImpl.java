@@ -9,7 +9,6 @@ import bitcamp.team.dao.FboardFileDao;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
 import bitcamp.team.domain.FboardFile;
-import bitcamp.team.domain.QuestionFile;
 import bitcamp.team.service.FboardService;
 
 @Service
@@ -59,7 +58,7 @@ public class FboardServiceImpl implements FboardService {
     if (board.getContents() != null && board.getTitle() != null) {
       count = fboardDao.update(board);
     }
-    
+
     List<FboardFile> fboardFiles = board.getFboardFiles();
     fboardFileDao.deleteByFboardNo(board.getNo());
     if(fboardFiles != null) {
@@ -68,7 +67,7 @@ public class FboardServiceImpl implements FboardService {
       } // for
       fboardFileDao.insert(board.getFboardFiles());
     } // if
-    
+
     return count;
   }
 
@@ -90,7 +89,7 @@ public class FboardServiceImpl implements FboardService {
     ArrayList<FboardComment> parentComment = new ArrayList<FboardComment>();
     ArrayList<FboardComment> childComment = new ArrayList<FboardComment>();
     HashMap<String, Object> content = new HashMap<String, Object>();
-    
+
     for (FboardComment comment : requestList) {
       if(comment.getParentId() == 0) {
         parentComment.add(comment);
@@ -100,7 +99,7 @@ public class FboardServiceImpl implements FboardService {
     }
     content.put("list",parentComment);
     content.put("clist",childComment);
-    
+
     return content;
   }
 
@@ -122,5 +121,10 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public List<FboardComment> findReply(HashMap<String, Object> param) {
     return fboardDao.findReply(param);
+  }
+
+  @Override
+  public List<Fboard> findMyPost(int memberNo) {
+    return fboardDao.findByMemberNo(memberNo);
   }
 }

@@ -95,4 +95,11 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.updateTel(member);
   }
   
+
+  @Override
+  public int updatePhoto(String memberFile, int memberNo) {
+    return memberDao.updatePhoto(memberFile, memberNo);
+  }
+  
+  
 }

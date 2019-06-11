@@ -30,7 +30,8 @@
     name,
     tel,
     homepage,
-    reg_no
+    reg_no, 
+    address
   from
     manufacturer
   </sql>
@@ -67,6 +68,12 @@
       manufac_no = #{value}
   </select>
   
+  <select id="findByMemberNo" resultMap="manufacturerMap" parameterType="int">
+    <include refid="default-columns"/>
+    where
+      member_no = #{value}
+  </select>
+  
   <insert id="insert" parameterType="manufacturer">
   insert into manufacturer (
     name, tel, homepage, reg_no
@@ -84,27 +91,24 @@
     (#{name}, #{tel}, #{homePage}, #{registerNo}, #{memberNo}, #{address})
   </insert>
   
-  <update id="update" parameterType="manufacturer">
-    update manufacturer
-      <set>
-        <if test="name != null">name = #{name},</if>
-        <if test="tel != null">tel = #{tel},</if>
-        <if test="homePage != null">homepage = #{homePage},</if>
-        <if test="registerNo != null">reg_no = #{registerNo}</if>
-      </set>
-      where
-        manufac_no = #{no}
-  </update>
-  
   <delete id="delete" parameterType="int">
     delete from manufacturer
     where
       manufac_no = #{no}
   </delete>
   
-  <select id="findNameByNickName" resultMap="findNickNameMap" parameterType="string">
-    select
-  </select>
+  <update id="update" parameterType="manufacturer">
+    update 
+      manufacturer
+    <set>
+      <if test="name != null">name = #{name}</if>,
+      <if test="homePage != null">homePage = #{homePage}</if>,
+      <if test="registerNo != null">reg_no = #{registerNo}</if>,
+      <if test="address != null">address = #{address}</if>
+    </set>
+    where member_no = #{memberNo}
+  </update>
+  
 </mapper>
 
 
