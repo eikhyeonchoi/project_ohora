@@ -20,6 +20,11 @@ $(document.body).bind('loaded.header', function(data) {
   });
 });
 
+$('#ohr-header-search').click(function(e) {
+  e.preventDefault();
+  location.href = '/bitcamp-team-project/html/search/index.html';
+})
+
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
