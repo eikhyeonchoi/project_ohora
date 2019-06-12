@@ -73,4 +73,11 @@ public class ReviewServiceImpl implements ReviewService {
   public List<Review> list(String keyword) {
     return reviewDao.findProd(keyword);
   }
+
+  @Override
+  public int countByProdNo(int no) {
+    return reviewDao.countByProdNo(no);
+  }
+
+
 }

@@ -63,7 +63,12 @@ $('#list_desc').click((e) => {
 $('#list_asc').click((e) => {
   cardDiv.slick('unslick');
   listType = 'asc';
-  console.log(listType);
+  loadList(listType);
+});
+
+$('#list_many').click((e) => {
+  cardDiv.slick('unslick');
+  listType = 'many';
   loadList(listType);
 });
 
