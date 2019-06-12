@@ -15,4 +15,6 @@ public interface ReviewService {
   int delete(int no);
 
   int update(Review review);
+
+  int countByProdNo(int no);
 }

@@ -15,7 +15,9 @@
   <header class="ohr-main-header"></header>
   <div class="container-fluid">
   
+  
     <div id='main-div' class='row mt-sm-1'>
+    
       <div id='product-div' class='col-sm-3 pl-sm-0 pr-sm-0'>
         <div id='product-inform-div' class='col-sm-12'>
           <br>
@@ -74,7 +76,7 @@
           
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#my-score" id='a-my-score'>내 평가</a>
+              <a class="nav-link active" data-toggle="tab" href="#my-score-div" id='a-my-score'>내 평가</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#eval" id='a-eval'>평가하기</a>
@@ -82,14 +84,14 @@
           </ul>
           
           <div class="tab-content">
-            <div class="tab-pane fade show active" id="my-score">
+            <div class="tab-pane fade show active" id="my-score-div">
             </div>
             
             <div class="tab-pane fade" id="eval">
               <div class='row mt-sm-3'>
                 <div class='col-sm-2 offset-sm-1'>난이도</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="level-backing">
+                  <input type="range" value="0" step="0.25" id="level-backing">
                   <div class='rateit' id='level-rate' data-rateit-backingfld="#level-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -101,7 +103,7 @@
               <div class='row'>
                 <div class='col-sm-2 offset-sm-1'>이해도</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="understand-backing">
+                  <input type="range" value="0" step="0.25" id="understand-backing">
                   <div class='rateit' id='understand-rate' data-rateit-backingfld="#understand-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -113,7 +115,7 @@
               <div class='row'>
                 <div class='col-sm-2 offset-sm-1'>디자인</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="design-backing">
+                  <input type="range" value="0" step="0.25" id="design-backing">
                   <div class='rateit' id='design-rate' data-rateit-backingfld="#design-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -125,7 +127,7 @@
               <div class='row'>
                 <div class='col-sm-2 offset-sm-1'>A/S</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="as-backing">
+                  <input type="range" value="0" step="0.25" id="as-backing">
                   <div class='rateit' id='as-rate' data-rateit-backingfld="#as-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -137,7 +139,7 @@
               <div class='row'>
                 <div class='col-sm-2 offset-sm-1'>편의성</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="convenience-backing">
+                  <input type="range" value="0" step="0.25" id="convenience-backing">
                   <div class='rateit' id='convenience-rate' data-rateit-backingfld="#convenience-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -149,7 +151,7 @@
               <div class='row'>
                 <div class='col-sm-2 offset-sm-1'>가격</div>
                 <div class='col-sm-6 pl-sm-0'>
-                  <input type="range" value="2.5" step="0.25" id="price-backing">
+                  <input type="range" value="0" step="0.25" id="price-backing">
                   <div class='rateit' id='price-rate' data-rateit-backingfld="#price-backing"
                     data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                   </div>
@@ -157,23 +159,39 @@
                 <div id='price-score' class='col-sm-3'> 0 
                 </div>
               </div>
-            </div>
-          </div>
+              
+              <div class='row mt-sm-3'> 
+                <div class='col-sm-2 offset-sm-1'>
+                  <p>한줄 평</p>
+                </div>
+                <div class='col-sm-9'>
+                  <textarea cols='30' id='contents'></textarea>
+                  <span id="counter" class='mr-sm-2'>0/100</span>
+                </div>
+              </div>
+              
+              
+              
+            </div> <!-- tab -->
+          </div> <!-- tab content -->
         
         </div> <!-- modal-body -->
         
         <div id='my-score-modal-footer' class="modal-footer col-sm-12 justify-content-between">
           <div class='col-4'>
-            <button id='' type="button" class="btn btn-outline-danger btn-block">삭제</button>
+            <button type="button" class="btn btn-light btn-block modal-cancel-btn">취소</button>
           </div>
           <div class='col-4'>
-            <button id='' type="button" class="btn btn-outline-success btn-block">수정</button>
+            <button id='satisfy-delete-btn' type="button" class="btn btn-outline-danger btn-block">삭제</button>
+          </div>
+          <div class='col-4'>
+            <button id='satisfy-update-btn' type="button" class="btn btn-outline-success btn-block">수정</button>
           </div>
         </div> <!-- modal-footer -->
         
         <div id='eval-modal-footer' class="modal-footer col-sm-12 justify-content-between" style="display: none;">
           <div class='col-4'>
-            <button id='modal-cancel-btn' type="button" class="btn btn-outline-danger btn-block">취소</button>
+            <button type="button" class="btn btn-light btn-block modal-cancel-btn">취소</button>
           </div>
           <div class='col-4'>
             <button id='modal-ok-btn' type="button" class="btn btn-outline-success btn-block">등록</button>
@@ -204,19 +222,19 @@
       {{name}}
     </div>
     <div class='col-sm-6 pl-sm-0'>
-      <div class="rateit" data-rateit-value="{{score}}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+      <div class="rateit my-score" data-rateit-value="{{score}}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
     </div>
-    <div class='col-sm-3'>
+    <div class='col-sm-3 my-score-next'>
       {{score}}
     </div>
   </div>
   {{/each}}
   <div class='row mt-sm-3'>
-    <div class='col-sm-3 offset-sm-1'>
-      <p>내 한줄평</p>
+    <div class='col-sm-2 offset-sm-1'>
+      <p>한줄 평</p>
     </div>
-    <div class='col-sm-10'>
-      <textarea value='{{eval}}'></textarea>
+    <div class='col-sm-9'>
+      <textarea id='my-score-eval' cols='35' disabled>{{eval}}</textarea>
     </div>
   </div>
   </script>

@@ -14,6 +14,8 @@ asStf = 0,
 useful = 0,
 price = 0;
 
+var satisfyNo = 0;
+
 var productName = '';
 
 var tipBtn = $('#tip-btn'),
@@ -184,49 +186,14 @@ $(document.body).bind('loaded-product', function(data){
     }) // get
   })
 
+  
   satisfyBtn.click(function() {
     $('#satisfy-add-modal').modal({backdrop: 'static', keyboard: false});
-    
-    $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
-      console.log(obj);
-      var scoreList = [{
-          name: '난이도',
-          score: obj.satisfy.level},
-        {name: '이해도',
-          score: obj.satisfy.understand},
-        {name: '디자인',
-          score: obj.satisfy.design},
-        {name: 'A/S',
-          score: obj.satisfy.asStf},
-        {name: '편의성',
-          score: obj.satisfy.useful},
-        {name: '가격',
-          score: obj.satisfy.priceStf}];
-      
-      var scoreObj = {
-          scoreList: scoreList,
-          eval: obj.satisfy.eval
-          };
-      console.log(scoreObj);
-      
-      if(obj.status == 'success') {
-        $(scoreGenerator(scoreObj)).appendTo($('#my-score'));
-        ReloadScripts('rateit');
-        
-        $('#eval, #modal-ok-btn').hover(function() {
-          $(this).css('opacity', '0.2');
-          $('#modal-ok-btn').parent()
-                            .removeClass('col-4')
-                            .addClass('col-5')
-                            .append('<p>이미 만족도를 등록했습니다</p>');
-          $('#modal-ok-btn').remove();
-        })
-      }
-    }) // get
-    
+    satisfyModalInitializer();
     
     $('#a-my-score').click(function(e) {
       e.preventDefault();
+      satisfyModalInitializer();
       $('#my-score-modal-footer').show();
       $('#eval-modal-footer').hide();
     })
@@ -242,10 +209,64 @@ $(document.body).bind('loaded-product', function(data){
       starGenerator('price-rate');
       $('#my-score-modal-footer').hide();
       $('#eval-modal-footer').show();
-    })
+    }) // click
+    
+    $('#satisfy-delete-btn').click(function() {
+      $.get('/bitcamp-team-project/app/json/satisfy/delete?no='+satisfyNo, function(obj) {
+        if(obj.status == 'success') {
+          location.reload();
+        } else {
+          swal('삭제 실패', obj.message, 'warning');
+        }
+      }); // get
+    }) // click
     
     
-    $('#modal-cancel-btn').click(function() {
+    $('#satisfy-update-btn').click(function() {
+      $('.my-score').each(function(index, item) {
+        $(item).rateit('readonly',!$(item).rateit('readonly'))
+      }) // each
+      
+      $('.my-score').bind('rated', function(e, value) {
+        $(e.target).parent().next().text(value);
+      });
+      $('.my-score').bind('reset', function(e, value) {
+        $(e.target).parent().next().text('0');
+      });
+      
+      $('#my-score-eval').prop('disabled', false);
+      $(this).replaceWith("<button id='new-satisfy-update-btn' type='button' class='btn btn-warning btn-block'>저장</button>");
+      
+      $('#new-satisfy-update-btn').click(function() {
+          var sList = [];
+          $('.my-score-next').each(function(index, item) {
+            sList.push(Number($(item).text()));
+          });
+          
+          sList.push($('#my-score-eval').val());
+          
+          $.post('/bitcamp-team-project/app/json/satisfy/update',{
+            no: satisfyNo,
+            level: sList[0],
+            understand: sList[1],
+            design: sList[2],
+            asStf: sList[3],
+            useful: sList[4],
+            priceStf: sList[5],
+            eval: sList[6]
+          }, function(obj) {
+            console.log(obj);
+            if (obj.status == 'success') {
+              location.reload();
+            } else {
+              swal('수정 실패!', obj.message, 'warning');
+            }
+          })
+      }); // click
+    }) // click
+    
+    
+    $('.modal-cancel-btn').click(function() {
       $('#satisfy-add-modal').modal('hide');
     }); // click
     
@@ -257,12 +278,13 @@ $(document.body).bind('loaded-product', function(data){
         design: $('#design-backing').val(),
         asStf: $('#as-backing').val(),
         useful: $('#convenience-backing').val(),
-        priceStf: $('#price-backing').val()
+        priceStf: $('#price-backing').val(),
+        eval: $('#contents').val()
       }, function(data) {
         if (data.status == 'success'){
           location.reload();
         } else {
-          swal("등록 실패!",'data.message','warning');
+          swal("등록 실패!", data.message, 'warning');
         }
       })
     }); // click
@@ -370,7 +392,7 @@ $(document.body).bind('loaded-satisfy', function(data){
 
 
   $("#fixed-background-div").mouseenter(function() {
-    //$(this).children().eq(0).css('display', 'none');
+    // $(this).children().eq(0).css('display', 'none');
     $(this).children().eq(0).fadeOut('fast');
     $(this).children().eq(1).fadeIn('fast');
   }).mouseleave(function() {
@@ -379,6 +401,55 @@ $(document.body).bind('loaded-satisfy', function(data){
 
   });  
 });
+
+
+
+
+function satisfyModalInitializer() {
+  $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
+    console.log(obj);
+    
+    if(obj.satisfy != null) {
+      window.satisfyNo = obj.satisfy.no;
+    }
+    
+    if(obj.status == 'success') {
+      $('#my-score-div').html('');
+      
+
+      var scoreList = [
+        {name: '난이도', score: obj.satisfy.level},
+        {name: '이해도', score: obj.satisfy.understand},
+        {name: '디자인', score: obj.satisfy.design},
+        {name: 'A/S', score: obj.satisfy.asStf},
+        {name: '편의성', score: obj.satisfy.useful},
+        {name: '가격', score: obj.satisfy.priceStf}];
+      
+      var scoreObj = {
+          scoreList: scoreList,
+          eval: obj.satisfy.eval};
+      
+      $(scoreGenerator(scoreObj)).appendTo($('#my-score-div'));
+      ReloadScripts('rateit');
+      
+      $('#eval, #modal-ok-btn').hover(function() {
+        $(this).css('opacity', '0.2');
+        $('#modal-ok-btn').parent()
+                          .removeClass('col-4')
+                          .addClass('col-5')
+                          .append('<p>이미 만족도를 등록했습니다</p>');
+        $('#modal-ok-btn').remove();
+      })
+      
+    } else {
+      $('#my-score-div').addClass('mt-sm-5').css('text-align', 'center').css('font-size', '5em')
+      .append('<i class="far fa-dizzy" style="color: red;"></i>')
+      .append('<h5>아직 만족도 등록을 하지 않았습니다</h5>');
+      
+    }
+  }) // get
+} // satisfyModalInitializer
+
 
 
 function starGenerator(id) {
@@ -459,8 +530,8 @@ function generatePieChart(id, value){
       elements: {
         center: {
           text: value,
-          fontStyle: 'Helvetica', //Default Arial
-          sidePadding: 15 //Default 20 (as a percentage)
+          fontStyle: 'Helvetica', // Default Arial
+          sidePadding: 15 // Default 20 (as a percentage)
         }
       },
       cutoutPercentage:70,
@@ -483,14 +554,14 @@ function getQuerystring(key, default_){
 } // getQuerystring
 
 
-//도넛 차트에서 필요한 plugin
+// 도넛 차트에서 필요한 plugin
 Chart.plugins.register({
   beforeDraw: function (chart) {
     if (chart.config.options.elements.center) {
-      //Get ctx from string
+      // Get ctx from string
       var ctx = chart.chart.ctx;
 
-      //Get options from the center object in options
+      // Get options from the center object in options
       var centerConfig = chart.config.options.elements.center;
       var fontSize = centerConfig.fontSize || '50';
       var fontStyle = centerConfig.fontStyle || 'Arial';
@@ -498,10 +569,11 @@ Chart.plugins.register({
       var color = centerConfig.color || '#000';
       var sidePadding = centerConfig.sidePadding || 20;
       var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
-      //Start with a base font of 30px
+      // Start with a base font of 30px
       ctx.font = fontSize + "px " + fontStyle;
 
-      //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+      // Get the width of the string and also the width of the element minus 10
+      // to give it 5px side padding
       var stringWidth = ctx.measureText(txt).width;
       var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
 
@@ -513,7 +585,7 @@ Chart.plugins.register({
       // Pick a new font size so it will not be larger than the height of label.
       var fontSizeToUse = Math.min(newFontSize, elementHeight);
 
-      //Set font settings to draw it correctly.
+      // Set font settings to draw it correctly.
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
@@ -521,7 +593,7 @@ Chart.plugins.register({
       ctx.font = fontSizeToUse+"px " + fontStyle;
       ctx.fillStyle = color;
 
-      //Draw text in center
+      // Draw text in center
       ctx.fillText(txt, centerX, centerY);
     }
   }
@@ -529,6 +601,7 @@ Chart.plugins.register({
 
 
 function ReloadScripts(value) {
+  console.log(value + " reload");
   var scriptTag = $('script[src]');
   var src;
   

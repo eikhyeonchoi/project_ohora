@@ -189,7 +189,11 @@
     where
     product_no=#{value}
   </delete>
-
+  
+  <select id="countByProdNo" resultType="int" parameterType="int">
+    select count(*) from review
+    where product_no = #{_parameter}
+  </select>
 
 
 

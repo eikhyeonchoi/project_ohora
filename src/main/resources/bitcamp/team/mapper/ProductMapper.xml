@@ -114,27 +114,6 @@
    </select>
    
   <select id="findAll" resultMap="productMap" parameterType="map">
-  
-  <!-- 
-  select
-      (select count(*) from product p join review r on p.product_no = r.product_no where p.product_no = 290) as rev_count,
-      mf.name as manufacturerName,
-      p.product_no,
-      p.sctg_no,
-      p.manufac_no,
-      p.name as productName,
-      pf.pfile_no,
-      pf.product_no,
-      pf.img
-    from
-      product p
-      join manufacturer mf on p.manufac_no=mf.manufac_no
-      join small_category sc on p.sctg_no=sc.sctg_no
-      join large_category lc on sc.lctg_no=lc.lctg_no
-      left join product_file pf on p.product_no=pf.product_no
-    order by
-      p.product_no in (select count(*) from product p join review r on p.product_no = r.product_no where p.product_no);
-   -->
     select
       mf.name as manufacturerName,
       p.product_no,
@@ -281,18 +260,14 @@
         and p.name like #{prodSeachPattern}
       </if>
     </where>
-    order by
     <if test="listType == ''">
+    order by
       p.product_no desc
     </if>
     <if test="listType == 'asc'">
+    order by
       p.product_no asc
     </if>
-    <!-- 
-    <if test="listType == 'many'">
-      p.product_no desc
-    </if>
-     -->
     
   </select>
   

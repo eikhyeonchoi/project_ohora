@@ -1,5 +1,7 @@
 package bitcamp.team.web.json;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +33,16 @@ public class ReviewController {
   @GetMapping("list")
   public Object list(int largeNo, int smallNo, String keyword, String listType) throws Exception {
     HashMap<String, Object> contents = new HashMap<>();
-    if (listType == "many") {
-      List<Review> list = reviewService.list(keyword);
-      contents.put("list", list);
+    List<Product> list = productService.list2(largeNo, smallNo, keyword, listType);
+
+    if (listType.contains("many")) {
+      for (Product p : list) {
+        p.setReviewCount(reviewService.countByProdNo(p.getNo()));
+      }
+      ArrayList<Product> pList = (ArrayList<Product>) quickSort(list, 0, list.size() - 1);
+      Collections.reverse(pList);
+      contents.put("list", pList);
     } else {
-      List<Product> list = productService.list2(largeNo, smallNo, keyword, listType);
       contents.put("list", list);
     }
     contents.put("keyword", keyword);
@@ -144,4 +151,33 @@ public class ReviewController {
     }
     return content;
   }
+
+  public static List<Product> quickSort(List<Product> arr, int start, int end) {
+    int partition = partition(arr, start, end);
+    if (partition - 1 > start) {
+      quickSort(arr, start, partition - 1);
+    }
+    if (partition + 1 < end) {
+      quickSort(arr, partition + 1, end);
+    }
+    return arr;
+  }
+
+  public static int partition(List<Product> arr, int start, int end) {
+    int pivot = arr.get(end).getReviewCount();
+    for (int i = start; i < end; i++) {
+      if (arr.get(i).getReviewCount() < pivot) {
+        Product temp = arr.get(start);
+        arr.set(start, arr.get(i));
+        arr.set(i, temp);
+        start++;
+      }
+    }
+    Product temp = arr.get(start);
+    arr.set(start, arr.get(end));
+    arr.set(end, temp);
+    return start;
+  }
+
+
 }

@@ -83,6 +83,28 @@
         #{priceStf}); 
   </insert>
   
+  <update id="update" parameterType="satisfy">
+  update 
+    satisfy
+  set
+    level = #{level},
+    understand = #{understand},
+    dgn = #{design},
+    as_stf = #{asStf},
+    useful = #{useful},
+    price_stf = #{priceStf},
+    eval = #{eval}
+  where
+    stf_no = #{no};
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  delete from
+    satisfy
+  where
+    stf_no = #{value}
+  </delete>
+  
   <select id='findByMemberNo' resultMap="satisfyMap" parameterType="map">
     select
       *
@@ -93,6 +115,7 @@
       and
       product_no=#{pNo}
   </select>
+  
   
   <delete id='deleteByProductNo' parameterType="int">
     delete from

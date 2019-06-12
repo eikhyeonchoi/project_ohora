@@ -20,4 +20,6 @@ public interface ReviewDao {
   int insert(Review review);
 
   int deleteByProductNo(int no);
+
+  int countByProdNo(int no);
 }
