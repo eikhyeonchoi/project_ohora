@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Satisfy;
@@ -44,18 +45,19 @@ public class SatisfyController {
     try {
       Member member = (Member) httpSession.getAttribute("loginUser");
       satisfy.setmNo(member.getNo());
-      if (satisfy.getLevel() > 5 || satisfy.getLevel() < 0) {
-        throw new Exception("0~5 숫자 입력");
-      } else if (satisfy.getUnderstand() > 5 || satisfy.getUnderstand() < 0) {
-        throw new Exception("0~5 숫자 입력");
-      } else if (satisfy.getDesign() > 5 || satisfy.getDesign() < 0) {
-        throw new Exception("0~5 숫자 입력");
-      } else if (satisfy.getAsStf() > 5 || satisfy.getAsStf() < 0) {
-        throw new Exception("0~5 숫자 입력");
-      } else if (satisfy.getUseful() > 5 || satisfy.getUseful() < 0) {
-        throw new Exception("0~5 숫자 입력");
-      } else if (satisfy.getPriceStf() > 5 || satisfy.getPriceStf() < 0) {
-        throw new Exception("0~5 숫자 입력");
+      
+      if (satisfy.getLevel() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getUnderstand() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getDesign() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getAsStf() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getUseful() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getPriceStf() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
       }
       
       satisfyService.add(satisfy);
@@ -68,6 +70,72 @@ public class SatisfyController {
     return content;
   } // add
   
+  @PostMapping("update")
+  public Object update(Satisfy satisfy) throws Exception{
+    HashMap<String,Object> content = new HashMap<>();
+    
+    try {
+      Member member = (Member) httpSession.getAttribute("loginUser");
+      satisfy.setmNo(member.getNo());
+      
+      if (satisfy.getLevel() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getUnderstand() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getDesign() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getAsStf() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getUseful() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      } else if (satisfy.getPriceStf() == 0) {
+        throw new Exception("입력이 안된 점수가 있습니다");
+      }
+      
+      satisfyService.update(satisfy);
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  } // add
+  
+  @GetMapping("delete")
+  public Object delete(@RequestParam(defaultValue = "0") int no) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (no == 0) {
+        throw new Exception("만족도 번호가 없습니다");
+      }
+      
+      if (satisfyService.delete(no) == 0) {
+        throw new Exception("삭제 실패");
+      }
+      
+      content.put("status", "success");
+      
+    } catch(Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+      
+    }
+    
+    return content;
+  }
   
   
 }
+
+
+
+
+
+
+
+
+
+
+
+

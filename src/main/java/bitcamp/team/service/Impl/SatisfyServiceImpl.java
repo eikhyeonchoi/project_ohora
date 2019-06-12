@@ -39,4 +39,14 @@ public class SatisfyServiceImpl implements SatisfyService {
   public Satisfy getReviewedMember(Map<String, Object> param) {
     return satisfyDao.findByMemberNo(param);
   }
+
+  @Override
+  public int update(Satisfy satisfy) {
+    return satisfyDao.update(satisfy);
+  }
+
+  @Override
+  public int delete(int no) {
+    return satisfyDao.delete(no);
+  }
 }
