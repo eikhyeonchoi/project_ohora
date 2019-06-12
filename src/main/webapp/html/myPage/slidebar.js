@@ -4,8 +4,8 @@ userMail;
 
 $(function(){
   var duration = 300;
-  var close = $('<i class="fas fa-chevron-left">');
-  var open = $('<i class="fas fa-chevron-right">');
+  var close = $('<i class="fas fa-times">');
+  var open = $('<i class="fas fa-bars">');
 
   var $sidebar = $('.sidebar');
   var $sidebarButton = $('#slide-btn').click(function(){
