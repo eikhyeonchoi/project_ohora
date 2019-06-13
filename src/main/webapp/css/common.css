@@ -1,6 +1,8 @@
 @charset "UTF-8";
 body {
   font-size: small;
+  padding-bottom: 0;
+  padding-top: 0;
 }
 
 body > header {
@@ -50,4 +52,9 @@ div.container {
     background-color: gray;
     border: solid 1px #ccc;
     color: white;
+}
+
+.ohr-footer {
+	padding: 0px;
+	background-color: #343a40;
 }
