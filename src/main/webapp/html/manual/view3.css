@@ -4,6 +4,7 @@ body {
 }
 
 /**/
+
 /* 대분류-소분류-제품명 */
 /* 대분류-소분류 */
 .category {
@@ -42,7 +43,6 @@ body {
 /* 사진 정보 */
 #fileDiv {
   text-align: center;
-  min-height: 80vh;
 }
 
 .contPhoto {
@@ -64,6 +64,13 @@ body {
   max-width: 100%;
 }
 
+/* 탭 하위 태그 자식들 */
+#conts {
+  max-width: 100%;
+  text-align: center;
+}
+
+
 /* 각 태그 눌리기 전 상태 */
 .nav-link {
   color: gray;
@@ -78,42 +85,16 @@ body {
 .active {
   font-weight: bold;
 }
-
-/* 탭 하단 글 내용 */
-#textconts {
-	max-width: 100%;
-  min-height: 100vh;
-  min-width: 300px;
-  font-size: 2em;
-}
-
-/* 탭 하단 사진 */
-
-#textimg {
-  max-width: 300px;
-  max-height: 300px;
-}
-
-#textimg > a {
+.main-gallery > ul > li a {
+  border: 3px solid #FFF;
   border-radius: 3px;
   display: block;
   overflow: hidden;
   position: relative;
   float: left;
 }
-
-#img-src {
-	width: 300px;
-	height: 300px;
-}
-
-#pdf-src {
-	min-width: 300px;
-	min-height: 300px;
-}
-
-#textimg > img {
-	-webkit-transition: -webkit-transform 0.15s ease 0s;
+.main-gallery > ul > li a > img {
+  -webkit-transition: -webkit-transform 0.15s ease 0s;
   -moz-transition: -moz-transform 0.15s ease 0s;
   -o-transition: -o-transform 0.15s ease 0s;
   transition: transform 0.15s ease 0s;
@@ -121,45 +102,12 @@ body {
   transform: scale3d(1, 1, 1);
   width: 100%;
 }
-
-#textimg > a:hover > img {
-	-webkit-transform: scale3d(1.1, 1.1, 1.1);
+.main-gallery > ul > li a:hover > img {
+  -webkit-transform: scale3d(1.1, 1.1, 1.1);
   transform: scale3d(1.1, 1.1, 1.1);
 }
 
-/* padding-bottom and top for image */
-.mfp-no-margins img.mfp-img {
-  padding: 0;
-}
-/* position of shadow behind the image */
-.mfp-no-margins .mfp-figure:after {
-  top: 0;
-  bottom: 0;
-}
-/* padding for main container */
-.mfp-no-margins .mfp-container {
-  padding: 0;
-}
-
-.mfp-with-zoom .mfp-container,
-.mfp-with-zoom.mfp-bg {
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  -webkit-transition: all 0.3s ease-out; 
-  -moz-transition: all 0.3s ease-out; 
-  -o-transition: all 0.3s ease-out; 
-  transition: all 0.3s ease-out;
-}
-
-.mfp-with-zoom.mfp-ready .mfp-container {
-    opacity: 1;
-}
-.mfp-with-zoom.mfp-ready.mfp-bg {
-    opacity: 0.8;
-}
-
-.mfp-with-zoom.mfp-removing .mfp-container, 
-.mfp-with-zoom.mfp-removing.mfp-bg {
-  opacity: 0;
+.main-gallery.dark > ul > li a {
+  border: 3px solid #04070a;
 }
 
