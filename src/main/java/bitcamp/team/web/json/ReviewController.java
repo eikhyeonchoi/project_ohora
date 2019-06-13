@@ -74,6 +74,8 @@ public class ReviewController {
     HashMap<String, Object> contents = new HashMap<>();
     Review review = reviewService.get2(no);
 
+    System.out.println(review.toString());
+
     try {
       contents.put("review", review);
       contents.put("status", "success");
@@ -179,5 +181,19 @@ public class ReviewController {
     return start;
   }
 
+  @GetMapping("findMyPageReview")
+  public Object findMyPageReview(int memberNo) throws Exception {
+    HashMap<String, Object> contents = new HashMap<>();
+
+    try {
+      List<Review> list = reviewService.findMyPageReview(memberNo);
+      contents.put("list", list);
+      contents.put("status", "success");
+    } catch (Exception e) {
+      contents.put("status", "fail");
+      contents.put("error", e.getMessage());
+    }
+    return contents;
+  }
 
 }

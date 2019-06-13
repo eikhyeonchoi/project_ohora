@@ -17,8 +17,6 @@
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 body {
-	padding-top: 3rem;
-	padding-bottom: 3rem;
 	color: #5a5a5a;
 }
 
@@ -151,6 +149,16 @@ body {
 }
 #ohr-carousel-4 > div {
     text-shadow: 0 0 2px #343a40;
+}
+
+#ohr-main-h2 {
+	text-align: center;
+	color: black;
+	padding-bottom: 1rem;
+}
+
+#1 {
+	background-color: black; 
 }
 
 #ohr-circle-img1 {

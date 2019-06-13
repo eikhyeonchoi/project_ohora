@@ -1,53 +1,53 @@
 html {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 #my-title {
-	margin: 25px 0px 20px 0px;
+  margin: 25px 0px 20px 0px;
 }
 
 body {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .nav-link {
-	color: #585858;
+  color: #585858;
 }
 
 .nav-tabs .nav-link.active {
-	color: black;
-	font-weight: bold;
+  color: black;
+  font-weight: bold;
 }
 
 #fboard-head {
-	border-top: 1px solid #dee2e6;
-	border-bottom: 2px solid black;
-	padding: 10px;
-	width: 100%;
-	margin-left: 0px;
-	margin-top: 20px;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 2px solid black;
+  padding: 10px;
+  width: 100%;
+  margin-left: 0px;
+  margin-top: 20px;
 }
 
 .fboard-body {
-	padding: 10px;
+  padding: 10px;
   width: 100%;
   margin: 10px 0px;
 }
 
 hr {
-	margin: 0px;
+  margin: 0px;
 }
 
 .fboard-head-col {
-	color: black;
-	font-weight: bold;
-	padding: 0px;
+  color: black;
+  font-weight: bold;
+  padding: 0px;
 }
 
 .fboard-body-col {
-	 padding: 0px;
+  padding: 0px;
 }
 
 .my-card {
@@ -55,15 +55,11 @@ hr {
 }
 
 .card-img {
-  padding:7px;
+  padding: 7px;
   border-radius: 0;
   width: 255px;
   height: 255px;
   object-fit: cover;
-}
-
-#card-cate {
-  font-size: 17px;
 }
 
 #card-cont-title {
@@ -77,10 +73,29 @@ hr {
   padding-top: 13px;
 }
 
+.largeCtg-span {
+  margin-right: 10px;
+  font-size: 17px;
+}
 
+.productName-span {
+  margin-left: 10px;
 
+  font-size: 17px;
+}
 
+.smallCtg-span {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 17px;
+}
 
+.smallCtg-span:hover, .productName-span:hover, .largeCtg-span:hover {
+   color: #00BFFF;
+   font-size: 20px;
+}
 
-
-
+.card:hover {
+  border: 1px solid #0B3861;
+  text-decoration: none;
+}

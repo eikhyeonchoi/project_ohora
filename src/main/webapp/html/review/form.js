@@ -1,20 +1,20 @@
 var productNo = getQuerystring('no'),
-    reviewNo = getQuerystring('rNo')
-    userNo = 0;
+reviewNo = getQuerystring('rNo')
+userNo = 0;
 
 $(document).ready(function() {
   $(document.body).bind('loaded.header', function(){
     userNo = sessionStorage.getItem('no');
-    
+
     if(userNo == null) {
       alert('글을 쓸 권한이 없습니다.\n로그인 후 이용해주세요.');
       location.href = 'prodView.html?no=' + $('#review-prod-no').val();
     }
-    
+
     if(reviewNo != '') {
       loadData(reviewNo);
     }
-    
+
     $(document.body).trigger('loaded-user');
   })
 }); // ready
@@ -36,24 +36,12 @@ $(document).ready(function() {
         [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
         [{ 'font': [] }],
         [{ 'align': [] }],
-        ['clean']                                         // remove formatting button
-        ],
-        imageUpload: {
-          url: '', // server url. If the url is empty then the base64 returns
-          dataType: 'json',
-          method: 'POST', // change query method, default 'POST'
-          name: 'image', // custom form name
-          withCredentials: false, // withCredentials
-          headers: {}, // add custom headers, example { token: 'your-token'}
-          // personalize successful callback and call next function to insert new url to the editor
-          callbackOK: (serverResponse, next) => {
-            next(serverResponse);
-          },
-          // personalize failed callback
-          callbackKO: serverError => {
-            alert(serverError);
-          }
-        }
+        ['clean'],                                         // remove formatting button
+        ], 
+        imageResize: {
+          modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+        },
+        imageDrop: true
     },
     placeholder: '내용을 입력해주세요.',
     theme: 'snow'  // or 'bubble'
@@ -64,20 +52,20 @@ $(document).ready(function() {
 $(document.body).bind('loaded-user', function(obj){
   $('#add-btn').click(function() {
     if(reviewNo == '') {
-    $.post('/bitcamp-team-project/app/json/review/add', {
-      memberNo: userNo,
-      productNo: productNo,
-      title: $('#review-title').val(),
-      contents: $(".ql-editor").html()
-    },
-    function(data) {
-      
-      if (data.status == 'success') {
-        location.href = 'prodView.html?no=' + productNo;
-      }else {
-        alert('등록 실패 입니다.\n' +  data.message);
-      }
-    }, "json")
+      $.post('/bitcamp-team-project/app/json/review/add', {
+        memberNo: userNo,
+        productNo: productNo,
+        title: $('#review-title').val(),
+        contents: $(".ql-editor").html()
+      },
+      function(data) {
+
+        if (data.status == 'success') {
+          location.href = 'prodView.html?no=' + productNo;
+        }else {
+          alert('등록 실패 입니다.\n' +  data.message);
+        }
+      }, "json")
     } else {
       $.post('/bitcamp-team-project/app/json/review/update', {
         no: reviewNo,
@@ -87,7 +75,7 @@ $(document.body).bind('loaded-user', function(obj){
         contents: $(".ql-editor").html()
       },
       function(data) {
-        
+
         if (data.status == 'success') {
           location.href = 'prodView.html?no=' + productNo;
         }else {

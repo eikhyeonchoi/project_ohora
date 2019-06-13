@@ -56,6 +56,39 @@
       </collection>
   </resultMap>
 
+  <resultMap type="review" id="myPageReviewMap">
+    <id column="rno" property="no"/>
+    <result column="review_product_no" property="productNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="reviewName" property="title"/>
+    <result column="conts" property="contents"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="cnt" property="viewCount"/>
+    
+    <association property="product" javaType="product">
+      <id column="product_no" property="no"/>
+      <result column="product_sctg_no" property="smallCategoryNo"/>
+      <result column="manufac_no"   property="manufacturerNo"/>
+      <result column="productName" property="name"/>
+      
+      <association property="productSmallCategory" javaType="productSmallCategory">
+        <id column="sctg_no" property="no"/>
+        <result column="smallCategory_lctg_no"   property="largeCategoryNo"/>
+        <result column="smallCategory_name" property="name"/>
+        <association property="productLargeCategory" javaType="productLargeCategory">
+          <id column="lctg_no" property="no"/>
+          <result column="largeCategory_name" property="name"/>
+        </association>
+      </association>
+      
+      <collection property="productFiles" ofType="productFile">
+        <id column="pfile_no" property="no"/>
+        <result column="productFiles_product_no" property="productNo"/>
+        <result column="img" property="img"/>
+      </collection>
+    </association>
+  </resultMap>
+  
   <select id="findProd" resultMap="reviewMap" parameterType="string">
     select DISTINCT
       (select count(*) from reciew where product_no = 290, 291) as rv_count,
@@ -129,8 +162,37 @@
     order by
     rno desc
   </select>
-
-  <select id="findByNo2" resultMap="reviewMap" parameterType="int">
+  
+  <select id="findMyPageReview" resultMap="myPageReviewMap" parameterType="int">
+    select
+      r.rv_no as rno,
+      r.product_no as review_product_no,
+      r.name as reviewName,
+      r.member_no,
+      r.cdt,
+      r.cnt,
+      pd.product_no,
+      pd.sctg_no as product_sctg_no,
+      pd.name as productName,
+      pdf.pfile_no,
+      pdf.img,
+      pdf.product_no as productFiles_product_no,
+      smc.sctg_no,
+      smc.lctg_no as smallCategory_lctg_no,
+      smc.name as smallCategory_name,
+      lgc.lctg_no,
+      lgc.name as largeCategory_name
+    from
+      review r
+    left join product pd on r.product_no = pd.product_no
+    left join product_file pdf on pdf.product_no = pd.product_no
+    left join small_category smc on smc.sctg_no = pd.sctg_no
+    left join large_category lgc on lgc.lctg_no = smc.lctg_no
+    where
+      r.member_no = #{value}
+  </select>
+    
+ <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
       r.rv_no as rno,
       r.product_no,
@@ -146,7 +208,7 @@
     where
       r.rv_no = #{value};
   </select>
-
+  
   <insert id="insert" parameterType="review">
     insert into review (product_no, member_no, name, conts)
     values

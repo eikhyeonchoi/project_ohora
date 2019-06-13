@@ -18,12 +18,13 @@
       <div class="form-group">
         <label for="email">이메일</label> <input type="email" class="form-control" id="email"
           name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
-          id="emailHelp" class="form-text text-muted">당신의 이메일을 다른 사이트와 결코 공유하지 않습니다.</small>
+          id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을 다른
+          사이트와 결코 공유하지 않습니다.</small>
       </div>
       <div class="form-group">
-        <label for="password">암호</label> <a href="#">(비밀번호를 잊으셨나요?)</a>
-         <input type="password" class="form-control" id="password"
-          name="password" placeholder="암호를 입력하세요.">
+        <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
+          type="password" class="form-control" id="password" name="password"
+          placeholder="암호를 입력하세요.">
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail"> <label
@@ -33,6 +34,42 @@
     </form>
   </div>
   <!-- .container -->
+
+  <div class="pwd-search-moadl modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">비밀번호 수정</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="pwd-search-name">이름</label> <input type="text" class="form-control"
+              id="pwd-search-name" placeholder="회원명을 입력해주세요.">
+          </div>
+
+          <div class="form-group">
+            <label for="pwd-search-email">이메일</label> <input type="text" class="form-control"
+              id="pwd-search-email" aria-describedby="email-help" placeholder="이메일을 입력해주세요."
+              style="margin-bottom: 5px;"> <small id="email-help"
+              style="font-size: 13px; color: red;">* 입력하신 이메일(ID)로 임시 비밀번호가 발급됩니다.</small>
+          </div>
+          <div style="text-align: right;">
+            <button type="button" class="btn btn-outline-dark" id="password-search-btn"
+              style="width: 100px;">메일 발송</button>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: inline-block;">
+          <p style="width: 100%; margin-bottom: 7px;">문제가 있으신경우 개별문의를 진행해 주세요.</p>
+          <p style="width: 100%; margin-bottom: 7px;">Tel) 010-1234-5678</p>
+          <p style="width: 100%; margin-bottom: 7px;">Mail) ohora5678@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>

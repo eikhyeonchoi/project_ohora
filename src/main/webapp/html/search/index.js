@@ -12,8 +12,7 @@ $(document).ready(function() {
 }); // ready
 
 (function loadList(pn) {
-  $.getJSON('../../app/json/notice/list?keyword=' + $('#keyword').val() + 
-          '&searchType=' + $('#searchType').val(), 
+  $.getJSON('../../app/json/search/list?keyword=' + $('#keyword').val(),
           function (obj){
     console.log(obj)
     page.pagination({
@@ -49,12 +48,4 @@ $('#keyword').keydown((e) => {
     }
     loadList(1);
   }
-});
-
-//검색
-$('#search-btn').click((e) => {
-  for(var no = 1; no < 6; no++) {
-    $('#page-' + no + ' > a').text(no);
-  }
-  loadList(1);
 });

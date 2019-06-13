@@ -2,8 +2,11 @@
 
 .ohr-footer-div {
 	position: relative;
-	/*border-top: 3px solid #f1f3f6;*/
-	padding-top: 3px;
+	padding-bottom: 1rem;
+}
+
+.ohr-footer-div p {
+	color: white;
 }
 
 #ohr-btt {

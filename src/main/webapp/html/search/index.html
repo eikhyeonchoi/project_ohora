@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>오호라</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="index.css">
@@ -14,11 +14,21 @@
  <header class="ohr-main-header"></header>
 
  <div class="container">
-  <h1>공지사항</h1>
-  <p>
-   <a id="add-button" href='form.html' class="btn btn-primary btn-sm" style="display:none">새 글</a>
-  </p>
+  <h5>''에 대한 검색 결과입니다.</h5>
 
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">전체</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="false">제품</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-manual" role="tab" aria-controls="nav-manual" aria-selected="false">매뉴얼</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false">리뷰</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-tip" role="tab" aria-controls="nav-tip" aria-selected="false">팁</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
+  <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">2</div>
+  <div class="tab-pane fade" id="nav-manual" role="tabpanel" aria-labelledby="nav-manual-tab">
   <div class="bit-list">
    <table id="table-list" class="table table-hover">
     <thead>
@@ -32,29 +42,13 @@
     <tbody></tbody>
 
    </table>
-  </div>
-  <!-- .bit-list -->
-  <!-- 검색창 -->
-
-  <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
-   <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label"></label>
-    <div class="col-sm-10">
-     <div class="input-group mb-3">
-      <select name="searchType" class="custom-select" id="searchType">
-       <option class="dropdown-item" value="title" id="search_title">제목</option>
-       <option class="dropdown-item" value="contents" id="search_contents">내용</option>
-       <option class="dropdown-item" value="all" id="search_all">제목+내용</option>
-      </select>
-     </div>
-    </div>
    </div>
-   <input id="keyword" class="form-control mr-sm-2" placeholder="검색" aria-label="검색">
-   <button type="button" id="search-btn" class="btn btn-outline-primary my-2 my-sm-0">검색</button>
-  </form>
+  <!-- .bit-list -->
+</div>
+<div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">3</div>
+<div class="tab-pane fade" id="nav-tip" role="tabpanel" aria-labelledby="nav-tip-tab">4</div>
+  </div>
   
-  <div id="pagination-container"></div>
-
  </div>
  <!-- .container -->
 
