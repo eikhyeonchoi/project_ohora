@@ -151,6 +151,16 @@
       member_no = #{value}
   </update>
   
+  <select id="findByNameEmail" resultMap="memberMap" parameterType="member">
+    select
+  <include refid="default-columns"/>
+    from
+      member
+    where
+      name = #{name} and
+      email = #{email}
+  </select>
+  
 </mapper>
 
 
