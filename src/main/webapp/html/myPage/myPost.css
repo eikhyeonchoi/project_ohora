@@ -50,5 +50,37 @@ hr {
 	 padding: 0px;
 }
 
+.my-card {
+  margin-top: 20px;
+}
+
+.card-img {
+  padding:7px;
+  border-radius: 0;
+  width: 255px;
+  height: 255px;
+  object-fit: cover;
+}
+
+#card-cate {
+  font-size: 17px;
+}
+
+#card-cont-title {
+  margin-top: 30px;
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.card-body {
+  padding-top: 13px;
+}
+
+
+
+
+
+
 
 
