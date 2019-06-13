@@ -55,6 +55,11 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
+  public List<Review> findMyPageReview(int no) {
+    return reviewDao.findMyPageReview(no);
+  }
+
+  @Override
   public int add(Review review) {
     return reviewDao.insert(review);
   }

@@ -55,7 +55,7 @@
           aria-labelledby="fboard-tab">
           <p style="visibility: hidden;">공백</p>
           <b style="margin-left: 10px; margin-bottom: 5px;">총 <span id="fboard-length"
-            style="color: #00BFFF"></span>건의 글이 있습니다.
+            style="color: #00BFFF"></span>건의 게시물이 있습니다.
           </b>
           <div class="row" id="fboard-head">
             <div class="col-sm fboard-head-col" id="fboard-head-no">번호</div>
@@ -68,48 +68,15 @@
           <div class='row page-container' style="margin-left: 30%; margin-bottom: 30px;"></div>
         </div>
         <!-- fboard-tab -->
+
         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
           <p style="visibility: hidden;">공백</p>
           <b style="margin-left: 10px; margin-bottom: 5px;">총 <span id="review-length"
-            style="color: #00BFFF">5</span>건의 글이 있습니다.
+            style="color: #00BFFF">5</span>건의 리뷰가 있습니다.
           </b>
-          <div class="card mt-3">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="정연.jpg" class="card-img" alt="제품사진">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <span id="card-cate">태블릿, 모바일 / 휴대폰, 스마트폰 </span>/ 갤럭시 노트10
-                  </h5>
-                  <p id="card-cont-title">게시물 제목: 갤럭시 노트10 신발보다 싸다!</p>
-                  <p class="card-text">등록일: 2019-06-11</p>
-                  <p class="card-text">조회수: 4회</p>
-                  <a href="#" class="btn btn-primary" style="margin-top: 10px;">리뷰 보러가기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card mt-3">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="제품.jpeg" class="card-img" alt="제품사진">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <span id="card-cate">태블릿, 모바일 / 휴대폰, 스마트폰 </span>/ 갤럭시 노트10
-                  </h5>
-                  <p id="card-cont-title">게시물 제목: 갤럭시 노트10 신발보다 싸다!</p>
-                  <p class="card-text">등록일: 2019-06-11</p>
-                  <p class="card-text">조회수: 4회</p>
-                  <a href="#" class="btn btn-primary" style="margin-top: 10px;">리뷰 보러가기</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div id="handle-bars-review-body"></div>
           <p style="visibility: hidden;">공백</p>
+          <div class='row review-page-container' style="margin-left: 30%; margin-bottom: 30px;"></div>
         </div>
         <!-- review-tab -->
       </div>
@@ -126,6 +93,32 @@
     <div class="col-sm fboard-body-col">{{viewCount}}</div>
   </div>
   <hr>
+  {{/each}}
+  </script>
+  <script id="review-template" type="text/x-handlebars-template">
+{{#each list}}
+  <div class="card mt-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      {{#each product.productFiles}}
+        <img src="/bitcamp-team-project/upload/productfile/{{img}}_thumb" class="card-img" onerror="javascript:this.src='에러.jpg'">
+      {{/each}}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">
+          <span class="largeCtg-span">{{product.productSmallCategory.productLargeCategory.name}}</span>/
+          <span class="smallCtg-span">{{product.productSmallCategory.name}}</span>/
+          <span class="productName-span">{{product.name}}</span>
+        </h5>
+        <p id="card-cont-title">리뷰 제목: {{title}}</p>
+        <p class="card-text">등록일: {{createdDate}}</p>
+        <p class="card-text">조회수: {{viewCount}}</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 10px;" data-no: {{no}}>리뷰 보러가기</a>
+      </div>
+    </div>
+  </div>
+  </div>
   {{/each}}
   </script>
 
