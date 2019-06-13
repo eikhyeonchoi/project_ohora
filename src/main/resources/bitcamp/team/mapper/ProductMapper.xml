@@ -142,6 +142,11 @@
         <bind name="prodSeachPattern" value="'%' + productName + '%'"/>
         and p.name like #{prodSeachPattern}
       </if>
+      
+      <if test="search != null">
+        <bind name="prodSeachPattern" value="'%' + productName + '%'"/>
+        p.name like #{prodSeachPattern} or mf.name like #{prodSeachPattern}  
+      </if>
     </where>
     order by
       p.product_no asc

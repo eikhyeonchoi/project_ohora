@@ -50,6 +50,7 @@
       <if test="memName != null"> m.n_name like #{pattern1}</if>
       <if test="cont != null"> conts like #{pattern1}</if>
       <if test="prodConts != null"> p.name like #{pattern1} or conts like #{pattern1}</if>
+      <if test="search != null"> p.name like #{pattern1} or conts like #{pattern1}</if>
     </if>
     </where>
     order by
