@@ -191,7 +191,7 @@
     where
       r.member_no = #{value}
   </select>
-
+    
  <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
       r.rv_no as rno,
