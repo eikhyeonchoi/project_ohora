@@ -74,6 +74,8 @@ public class ReviewController {
     HashMap<String, Object> contents = new HashMap<>();
     Review review = reviewService.get2(no);
 
+    System.out.println(review.toString());
+
     try {
       contents.put("review", review);
       contents.put("status", "success");
