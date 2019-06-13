@@ -10,6 +10,8 @@ public interface ReviewDao {
   List<Review> findByNo(Map<String, Object> param);
 
   Review findByNo2(int no);
+  
+  List<Review> findMyPageReview(int no);
 
   int increaseCount(int no);
 

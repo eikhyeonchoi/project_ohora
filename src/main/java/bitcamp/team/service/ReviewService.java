@@ -9,6 +9,8 @@ public interface ReviewService {
   List<Review> get(int no, String keyword, String searchType);
 
   Review get2(int no);
+  
+  List<Review> findMyPageReview(int no);
 
   int add(Review review);
 
