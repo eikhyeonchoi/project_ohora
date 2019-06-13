@@ -2,33 +2,37 @@
  * 
  */
 var productNo = getQuerystring('no'),
-type = 0,
-tipNo = 0;
+    type = 0,
+    tipNo = 0;
 
 var total = 0,
-satisAver = 0,
-level = 0,
-understand = 0,
-design = 0,
-asStf = 0,
-useful = 0,
-price = 0;
+    satisAver = 0,
+    level = 0,
+    understand = 0,
+    design = 0,
+    asStf = 0,
+    useful = 0,
+    price = 0;
 
 var satisfyNo = 0;
 
 var productName = '';
 
 var tipBtn = $('#tip-btn'),
-manualBtn = $('#manual-btn'),
-reviewBtn = $('#review-btn'),
-satisfyBtn = $('#satisfy-btn'),
-productUpdateBtn = $('#product-update-btn'),
-productDeleteBtn = $('#product-delete-btn');
+    manualBtn = $('#manual-btn'),
+    reviewBtn = $('#review-btn'),
+    satisfyBtn = $('#satisfy-btn'),
+    productUpdateBtn = $('#product-update-btn'),
+    productDeleteBtn = $('#product-delete-btn');
 
 
-var scoreTempate = $('#my-score-template').html();
+var scoreTempate = $('#my-score-template').html(),
+    satisfyTempate = $('#satisfy-template').html();
 
-var scoreGenerator = Handlebars.compile(scoreTempate);
+var scoreGenerator = Handlebars.compile(scoreTempate),
+    satisfyGenerator = Handlebars.compile(satisfyTempate);
+
+var page = $('#page-container');
 
 
 $(document.body).bind('loaded.loginuser', () => {
@@ -55,6 +59,11 @@ $(document.body).bind('loaded.loginuser', () => {
 $(document).ready(function(){
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, function(obj) {
     console.log(obj);
+    
+    if(obj.list.length != 0){
+      window.productName = obj.list[0].product.name;
+    }
+      
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
       price += el.priceStf,
@@ -271,6 +280,7 @@ $(document.body).bind('loaded-product', function(data){
     }); // click
     
     $('#modal-ok-btn').click(function() {
+      console.log();
       $.post('/bitcamp-team-project/app/json/satisfy/add',{
         pdNo: productNo,
         level: $('#level-backing').val(),
@@ -288,10 +298,10 @@ $(document.body).bind('loaded-product', function(data){
         }
       })
     }); // click
-    
   }) // click
 
 
+  
   tipBtn.click(function() {
     $.getJSON('/bitcamp-team-project/app/json/product/confirmTip?no=' + productNo, function(obj){
       if (obj.tipCount == 1){
@@ -331,22 +341,49 @@ $(document.body).bind('loaded-product', function(data){
         }
       }
     });
-  });
+  }); // click
 
   productUpdateBtn.click(function() {
     location.href = 'update.html?no=' + productNo;
-  })
+  }); // click
 
+  
   productDeleteBtn.click(function() {
-    $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
-      if (obj.status == 'success') {
-        location.href = 'index.html';
-
-      } else {
-        alert('삭제 실패!! \n' + obj.message);
-      }
+    swal({
+      title: "제품 삭제 알림",
+      text: "제품 정보를 삭제하시겠습니까 ?",
+      icon: "info",
+      buttons: {
+        no: {
+          text: '아니오',
+          value: 'no'
+        },
+        yes: {
+          text: '등록',
+          value: 'yes'
+        }
+      },
     })
-  });
+    .then((value) => {
+      switch(value){
+        case 'yes': 
+          $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
+            if (obj.status == 'success') {
+              location.href = 'index.html';
+            } else {
+              alert('삭제 실패!! \n' + obj.message);
+            }
+          });
+          break;
+        case  'no':
+          swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
+          break;
+        default:
+          swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
+          break;
+      }
+    });
+  }); // click
 
 }) // bind loaded-product
 
@@ -367,34 +404,64 @@ $(document.body).bind('loaded-satisfy', function(data){
   }
 
   if (isValidScore(satisAver) == true) {
-    // $('#user-evaluation-div').append('<h3>' + window.productName + '</h3>');
-    $('#user-evaluation-div').append('<h3>사용자들의</h3>');
-    $('#user-evaluation-div').append('<h3>평균만족도는 ?</h3>');
     
-    if (satisAver >= 4.00) {
-      $('#user-evaluation-div').append('<i class="far fa-smile-beam" style="font-size: 5em; color: green;"></i>');
-      $('#user-evaluation-div').append('<h3>good</h3>');
-    } else if (satisAver >= 2.00 ||satisAver < 4.00) {
-      $('#user-evaluation-div').append('<i class="far fa-meh" style="font-size: 5em; color: black;"></i>');
-      $('#user-evaluation-div').append('<h3>soso</h3>');
-    } else {
-      $('#user-evaluation-div').append('<i class="far fa-frown" style="font-size: 5em; color: red;"></i>');
-      $('#user-evaluation-div').append('<h3>bad</h3>');
-    }
-    $('#user-evaluation-div').append('<button type="button" class="btn btn-info">만족도 평가 수<span class="badge badge-light">'+ data.totalColumn +'</span></button>');
-    generatePieChart('pie-canvas', satisAver);
+    // generatePieChart('pie-canvas', satisAver);
     generateBarChart('bar-canvas', obj);
+    
+    $('#user-evaluation-div').append('<h4>'+ satisAver +'</h4>');
+    $('#rateYo').rateYo({
+      rating: satisAver,
+      readOnly: true,
+      halfStar: true
+    });
+    
+    $.get('/bitcamp-team-project/app/json/satisfy/list', function(obj) {
+      for (var comp of obj.list) {
+        $(comp).attr('aver', (comp.asStf + comp.design + comp.level + comp.priceStf + comp.understand + comp.useful)/6);
+      }
+      
+      $('#check-satisfy').text('총  ' + obj.list.length + '개의 평가');
+      
+      $('#score-high-sorted').click(function(e) {
+        e.preventDefault();
+        $(e.target).prev().css('color','red');
+        $(e.target).next().css('color','black');
+        obj.list.sort(function(a, b) {
+          return b.aver - a.aver;
+        })
+        selectPagination(obj);
+        rateYoGenerator(obj);
+      })
+      
+      $('#score-low-sorted').click(function(e) {
+        e.preventDefault();
+        $(e.target).prev().css('color','red');
+        $(e.target).prev().prev().prev().css('color','black');
+        obj.list.sort(function(a, b) {
+          return a.aver - b.aver;
+        })
+        selectPagination(obj);
+        rateYoGenerator(obj);
+      })
+      
+      selectPagination(obj);
+      rateYoGenerator(obj);
+      
+      
+      
+    }); // get
+    
+    
   } else {
-    $('#user-evaluation-div').append('<br><br><h3>아직 등록된 만족도 정보가 없습니다</h3>');
-    generatePieChart('pie-canvas', 0);
+    $('#user-evaluation-div').append('<h4> : 등록된 평가가 없습니다</h4>');
     generateBarChart('bar-canvas', obj);
   }
 
 
   $("#fixed-background-div").mouseenter(function() {
-    // $(this).children().eq(0).css('display', 'none');
     $(this).children().eq(0).fadeOut('fast');
     $(this).children().eq(1).fadeIn('fast');
+    
   }).mouseleave(function() {
     $(this).children().eq(0).fadeIn('fast');
     $(this).children().eq(1).fadeOut('fast');
@@ -403,7 +470,33 @@ $(document.body).bind('loaded-satisfy', function(data){
 });
 
 
+function rateYoGenerator(obj) {
+  $('.rateYo').each(function(index, item) {
+    $(item).parent().append('<h5>&nbsp&nbsp' + obj.list[index].aver.toFixed(2) + '</h5>');
+    $(item).rateYo({
+      rating: obj.list[index].aver,
+      halfStar: true,
+      readOnly: true,
+      ratedFill: "#E74C3C",
+      starWidth: "20px"
+    })
+  }); // each
+}
 
+function selectPagination(obj) {
+  page.pagination({
+    dataSource: obj,
+    locator: 'list',
+    pageSize: 7,
+    showGoInput: true,
+    showGoButton: true,
+    callback: function(data, pagination) {
+      $('#satisfy-list').html('');
+      var pageObj = {list: data};
+      $(satisfyGenerator(pageObj)).appendTo($('#satisfy-list'));
+    }
+  });
+}
 
 function satisfyModalInitializer() {
   $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + productNo, function(obj) {
@@ -497,6 +590,7 @@ function generateBarChart(id, obj) {
       }]
     },
     options: {
+      maintainAspectRatio: false,
       scales: {
         xAxes: [{
           barThickness: 40,
@@ -512,7 +606,7 @@ function generateBarChart(id, obj) {
       }
     }
   }); // chart
-}
+} // generateBarChart
 
 
 function generatePieChart(id, value){

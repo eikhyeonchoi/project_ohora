@@ -149,12 +149,12 @@ function faqTitleClick() {
     $(e.target).closest('div').before('<hr>');
     $(e.target).closest('div').next().show();
     $(e.target).closest('div').next().after('<hr>')
-
+    
     $(document.body).trigger({
       type: 'loaded-type'
     });
   }); // click
-}
+} // faqTitleClick
 
 
 

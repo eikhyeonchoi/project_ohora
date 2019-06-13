@@ -12,6 +12,8 @@ public class Satisfy {
   private double priceStf;
   private String eval;
   
+  
+  
   public String getEval() {
     return eval;
   }

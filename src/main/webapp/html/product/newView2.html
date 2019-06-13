@@ -5,11 +5,13 @@
 <title>product view</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/jquery.rateit/scripts/rateit.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/rateyo/min/jquery.rateyo.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
-<link rel="stylesheet" href="newView.css">
+<link rel="stylesheet" href="newView2.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
@@ -47,19 +49,28 @@
       
         <div id='img-div-by-large-category' class='col-sm-12'></div>
         
-        
         <div id='chart-div' class='col-sm-12' style="display: none;">
         
-          <div id='chart-div-top' class='row'>
-            <div id='user-evaluation-div' class='col-sm-6 bg-white text-dark'>
+          <div id='chart-div-top'>
+            <div id='user-evaluation-div' class='row offset-sm-3 mt-sm-2 mb-sm-2'>
+              <h4>유저 평점</h4>
+              <div id='rateYo'></div>
             </div>
-            <div id='pie-canvas-div' class='col-sm-6 p-sm-0'>
-              <canvas id="pie-canvas" height='0'></canvas>
+            <div class='row ml-sm-1' style="width:auto; height: 320px;">
+              <canvas id="bar-canvas"></canvas>
             </div>
           </div>
           
-          <div id='chart-div-bottom'>
-            <canvas id="bar-canvas" height='0'></canvas>
+          <div id='chart-div-bottom' class='ml-sm-4'>
+            <hr>
+            <div id='sorting-list' class='row col-sm-12' style="height: 20px;">
+              <i class="fas fa-check" style="font-size: .5em"></i><a id='score-high-sorted' href="#">평점 높은순</a>
+              <i class="fas fa-check" style="font-size: .5em"></i><a id='score-low-sorted' href="#">평점 낮은순</a>
+              <p id='check-satisfy' style="margin-left: 30px;"></p>
+            </div>
+            <hr>
+            <div id='satisfy-list'></div>
+            <div id='page-container' class='offset-sm-4'></div>
           </div>
           
         </div>
@@ -233,15 +244,34 @@
   </div>
   </script>
   
+  <script id="satisfy-template" type="text/x-handlebars-template">
+  {{#each list}}
+  <div class='row'>
+    <div class='row col-sm-4'>
+      <div class='rateYo'>
+      </div>
+    </div>
+    <div class='col-sm-6'>
+      {{eval}}
+    </div>
+    <div class='col-sm-2'>
+      {{member.nickName}}
+    </div>
+  </div>
+  {{/each}}
+  </script>
+  
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/rateyo/min/jquery.rateyo.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="../header.js"></script>
   <script src="../footer.js"></script>
-  <script src="newView.js"></script>
+  <script src="newView2.js"></script>
 </body>
 </html>

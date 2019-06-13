@@ -134,7 +134,7 @@ function searchSrc() {
 
 function afterLoadedClickEvent(){
   $('.product-view-btn').off().click((e) => {
-    location.href= 'newView.html?no=' + $(e.target).attr('data-no');
+    location.href= 'newView2.html?no=' + $(e.target).attr('data-no');
   })
 } // afterLoadedClickEvent
 

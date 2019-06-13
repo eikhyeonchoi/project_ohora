@@ -258,8 +258,11 @@ function confirmBeforeRegistration() {
   .then((value) => {
     if (value) {
       ajaxFileUpload('total-form');
+      location.href = 'index.html';
+      
     } else {
       swal("등록 취소", "취소되었습니다", "error");
+      
     }
   });
 }
@@ -361,6 +364,7 @@ function CheckuploadFileExt(objFile) {
     target.removeClass('is-invalid');
     target.addClass('is-valid');
     target.next().text(fileName + ' 이 선택되었습니다');
+    target.parents().eq(2).prev().html('');
     target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
   }
 } // CheckuploadFileExt
