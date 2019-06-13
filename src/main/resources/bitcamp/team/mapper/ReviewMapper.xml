@@ -191,11 +191,13 @@
     where
       r.member_no = #{value}
   </select>
-
-  <select id="findByNo2" resultMap="reviewMap" parameterType="int">
+    
+ <select id="findByNo2" resultMap="reviewMap" parameterType="int">
     select
       r.rv_no as rno,
       r.product_no,
+      m.name as memberName,
+      m.n_name as nickName,
       r.name as reviewName,
       r.conts,
       r.cdt,
@@ -206,7 +208,7 @@
     where
       r.rv_no = #{value};
   </select>
-
+  
   <insert id="insert" parameterType="review">
     insert into review (product_no, member_no, name, conts)
     values

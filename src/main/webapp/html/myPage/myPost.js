@@ -20,7 +20,6 @@ $(document).ready(function() {
 function loadFboard(memberNo) {
   $.getJSON('/bitcamp-team-project/app/json/fboard/myPost?no=' + memberNo , function(data) {
     $('#fboard-length').html(data.list.length);
-    console.log(data)
     page.pagination({
       dataSource: data,
       locator: 'list',

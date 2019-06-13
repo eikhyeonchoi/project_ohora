@@ -5,40 +5,12 @@ category = $('.categoryItem');
 
 $(document).ready(() => {
   
-  $('#fullpage').fullpage({
-    licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-    scrollOverflow: true,
-    anchors: ['firstPage'],
-    onLeave: function (section, origin) {
-      if (origin.index == 0 && section.index == 1) {
-        $('.info').removeClass('animated fadeOut');
-        $('.info').addClass('animated fadeIn');
-        $('.contsTab').removeClass('animated fadeIn');
-        $('.contsTab').addClass('animated fadeOut');
-      }
-      if (origin.index == 1 && section.index == 0) {
-        $('.info').removeClass('animated fadeIn');
-        $('.contsTab').removeClass('animated fadeOut');
-        $('.info').addClass('animated fadeOut');
-        $('.contsTab').addClass('animated fadeIn');
-      }
-    },
-    afterLoad: function (section, origin) {
-      if (origin.anchor == 'firstPage') {
-        $('.info').addClass('animated fadeIn');
-      }
-    }
-  });
-  
-  $.fn.fullpage.setAutoScrolling(true);
-  $.fn.fullpage.setAllowScrolling(true, 'down');
-  
   $.getJSON('/bitcamp-team-project/app/json/product/files?no=' + productNo, function(data) {
     if (data.status == 'success') {
       for (var i = 0; i < data.pList.productFiles.length; i++) {
-        $('<img class="row mx-sm-auto contPhoto">').attr('src', '/bitcamp-team-project/upload/productfile/' 
-            + data.pList.productFiles[i].img).appendTo(fileDiv);
-        
+        $('<img class="row mx-sm-auto contPhoto">')
+        .attr('src', '/bitcamp-team-project/upload/productfile/' + data.pList.productFiles[i].img)
+            .appendTo(fileDiv);
       }
     } else {
       alert('실패했습니다!\n' + data.error);
@@ -70,32 +42,38 @@ $(document).ready(() => {
       + data.manual[0].product.productSmallCategory.name + ' > '
       + data.manual[0].name);
       
-      fullpage_api.reBuild();
     } else {
       alert('실패했습니다\n' + data.error);
     }
   });
+  new WOW().init();
 });
 
 
 function content(mconts, mfile, no, i) {
   var cont = '';
+  var downbtn = '';
   if (i == 0) {
     cont = 'pdf-src';
+    downbtn 
+    = '<a href="#" class="download btn-sm btn-dark" id="download' + i + '">download</a>';
   } else {
-    cont = 'img-src' + i;
+    cont = 'img-src';
     mfile = mfile + '_thumb ';
   }
   
-  var contents = '<section class="row justify-content-between" id="conts">'
-    + '<span class="col-sm-4" id="textconts">' + mconts + '</span>'
-    + '<span class="col-sm-4" id="textimg">'
-    + '<img src="/bitcamp-team-project/upload/manualfile/' + mfile + '"'
+  var contents = '<section class="row mx-sm-1 justify-content-around">'
+    + '<div class="row">'
+    + '<span class="wow fadeInUp col-sm-4" id="textconts" data-wow-offset="80" data-wow-delay="0.2s">' 
+    + mconts + '</span>'
+    + '<span class="wow fadeInUp col-sm-4 justify-content-center" id="textimg" data-wow-offset="80" data-wow-delay="0.2s">'
+    + '<a class="image-popup-no-margins" href="/bitcamp-team-project/upload/manualfile/' + mfile + '" '
+    + 'title="' + mconts + '">'
+    + '<img class="img-responsive" src="/bitcamp-team-project/upload/manualfile/' + mfile + '"'
     + 'id="' + cont + '">'
-    + '<a href="#" class="download btn-sm btn-dark ml-sm-3" id="download' + i + '">download</a>' + '</span>';
-    + '</section>';
+    + downbtn + '</a></span>';
+    + '</div></section>';
     $(contents).appendTo($('.innerForm' + no));
-    
     if (i == 0) {
       $('#download0').click((e) => {
         e.preventDefault();
@@ -103,6 +81,22 @@ function content(mconts, mfile, no, i) {
         location.href = a;
       });
     }
+    
+    $('.image-popup-no-margins').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      closeBtnInside: false,
+      fixedContentPos: true,
+      mainClass: 'mfp-no-margins mfp-with-zoom',
+      image: {
+        verticalFit: true
+      },
+      zoom: {
+        enabled: true,
+        duration: 300
+      }
+    });
+    
 }
 
 function summarize(mconts) {

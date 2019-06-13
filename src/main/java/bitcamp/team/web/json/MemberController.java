@@ -196,6 +196,19 @@ public class MemberController {
     return content;
   };
 
+  @GetMapping("forgetPassword")
+  public Object forgetPassword(Member member) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("error", e.getMessage());
+    }
+    return content;
+  };
+
 }
 
 
