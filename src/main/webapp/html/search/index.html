@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>오호라</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="index.css">
@@ -16,6 +16,19 @@
  <div class="container">
   <h5>''에 대한 검색 결과입니다.</h5>
 
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">전체</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="false">제품</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-manual" role="tab" aria-controls="nav-manual" aria-selected="false">매뉴얼</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false">리뷰</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-tip" role="tab" aria-controls="nav-tip" aria-selected="false">팁</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
+  <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">2</div>
+  <div class="tab-pane fade" id="nav-manual" role="tabpanel" aria-labelledby="nav-manual-tab">
   <div class="bit-list">
    <table id="table-list" class="table table-hover">
     <thead>
@@ -29,8 +42,12 @@
     <tbody></tbody>
 
    </table>
-  </div>
+   </div>
   <!-- .bit-list -->
+</div>
+<div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">3</div>
+<div class="tab-pane fade" id="nav-tip" role="tabpanel" aria-labelledby="nav-tip-tab">4</div>
+  </div>
   
  </div>
  <!-- .container -->
