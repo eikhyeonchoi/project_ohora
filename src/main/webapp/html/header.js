@@ -18,12 +18,14 @@ $(document.body).bind('loaded.header', function(data) {
       sessionStorage.clear();
     });
   });
+  
+  $('#ohr-header-search').click(function() {
+    console.log('aaa');
+    location.href = '/bitcamp-team-project/html/search/index.html';
+  })
+  
 });
 
-$('#ohr-header-search').click(function(e) {
-  e.preventDefault();
-  location.href = '/bitcamp-team-project/html/search/index.html';
-})
 
 
 function loadLoginUser() {
