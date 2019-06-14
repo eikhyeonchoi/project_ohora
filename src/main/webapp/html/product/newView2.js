@@ -149,11 +149,7 @@ $(document.body).bind('loaded-product', function(data){
       if (obj.manualCount == 1) {
         console.log(obj.manualCount)
         swal('매뉴얼 이미 있음', 'detail 완성되면 링크걸어야함', 'warning');
-        //
-        // 매뉴얼 detail 경로
-        // 매뉴얼 detail 경로
-        // 매뉴얼 detail 경로
-        //
+        location.href = '../manual/view.html?no=' + productNo;
       } else {
         if (window.type == 1 || window.type == 0){
           swal('매뉴얼 알림', '매뉴얼이 등록되어 있지 않습니다', 'info');
@@ -464,12 +460,12 @@ $(document.body).bind('loaded-satisfy', function(data){
 
 
   $("#fixed-background-div").mouseenter(function() {
-    // $(this).children().eq(0).fadeOut('fast');
-    // $(this).children().eq(1).fadeIn('fast');
+    $(this).children().eq(0).fadeOut('fast');
+    $(this).children().eq(1).fadeIn('fast');
     
   }).mouseleave(function() {
-    // $(this).children().eq(0).fadeIn('fast');
-    // $(this).children().eq(1).fadeOut('fast');
+    $(this).children().eq(0).fadeIn('fast');
+    $(this).children().eq(1).fadeOut('fast');
 
   });  
 });
