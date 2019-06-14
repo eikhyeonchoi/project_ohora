@@ -52,7 +52,7 @@
         <div id='chart-div' class='col-sm-12' style="display: none;">
         
           <div id='chart-div-top'>
-            <div id='user-evaluation-div' class='row offset-sm-3 mt-sm-2 mb-sm-2'>
+            <div id='user-evaluation-div' class='row mt-sm-2 mb-sm-2' style="margin-left: 33%;">
               <h4>유저 평점</h4>
               <div id='rateYo'></div>
             </div>
@@ -62,7 +62,7 @@
           </div>
           
           <div id='chart-div-bottom' class='ml-sm-4'>
-            <hr>
+            <hr style="margin-top: 0px;">
             <div id='sorting-list' class='row col-sm-12' style="height: 20px;">
               <i class="fas fa-check" style="font-size: .5em"></i><a id='score-high-sorted' href="#">평점 높은순</a>
               <i class="fas fa-check" style="font-size: .5em"></i><a id='score-low-sorted' href="#">평점 낮은순</a>
@@ -70,7 +70,7 @@
             </div>
             <hr>
             <div id='satisfy-list'></div>
-            <div id='page-container' class='offset-sm-4'></div>
+            <div id='page-container' class='' style="margin-left: 40%;"></div>
           </div>
           
         </div>
@@ -239,7 +239,8 @@
       <p>한줄 평</p>
     </div>
     <div class='col-sm-9'>
-      <textarea id='my-score-eval' cols='35' disabled>{{eval}}</textarea>
+      <textarea id='my-score-eval' cols='30' disabled>{{eval}}</textarea>
+      <span id="counter" class='mr-sm-2'>0/100</span>
     </div>
   </div>
   </script>

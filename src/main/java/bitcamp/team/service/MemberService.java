@@ -10,10 +10,12 @@ public interface MemberService {
   Member get(int no);
   Member getEmailPassword(String email, String password);
   Member getEmail2(String email);
+  Member findByNameEmail(Member member);
   int getNo(String nickName);
   int authEmail(String nickName);
   int getEmail(String email);
   int updatePassword(HashMap<String,Object> param);
+  int updatePassword2(String email, String password);
   int updateName(Member member);
   int updateNickname(Member member);
   int updateTel(Member member);

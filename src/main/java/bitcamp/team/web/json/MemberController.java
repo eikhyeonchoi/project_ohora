@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Member;
 import bitcamp.team.service.MemberService;
 import bitcamp.team.web.Authentication.Gmail;
+import bitcamp.team.web.Authentication.Gmail2;
 import bitcamp.team.web.Authentication.RandomNo;
 
 @RestController("json/MemberController")
@@ -200,6 +201,10 @@ public class MemberController {
   public Object forgetPassword(Member member) {
     HashMap<String,Object> content = new HashMap<>();
     try {
+      Member member2 = memberService.findByNameEmail(member);
+      if (member2 == null)
+        throw new Exception("회원명 또는 이메일을 정확하게 입력해주세요.");
+
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -209,6 +214,26 @@ public class MemberController {
     return content;
   };
 
+  @GetMapping("forgetPasswordEmailSend")
+  public Object forgetPasswordEmailSend(Member member) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      Gmail2 gmail2 = new Gmail2();
+      String uuid = UUID.randomUUID().toString();
+      String[] newPassword = uuid.split("-");
+      String emailStatus = gmail2.gmailSend(member.getEmail(), member.getName(), newPassword[0]);
+      if (!emailStatus.equals("success"))
+        throw new Exception("메일 전송중 오류가 발생했습니다.");
+      
+      memberService.updatePassword2(member.getEmail() ,newPassword[0]);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("error", e.getMessage());
+    }
+    return content;
+  };
 }
 
 

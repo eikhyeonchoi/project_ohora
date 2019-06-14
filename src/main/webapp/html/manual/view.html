@@ -14,7 +14,7 @@
 </head>
 <body>
   <header class="ohr-main-header"></header>
-          <div class="container info wow fadeIn">
+          <div class="container info wow fadeInUp">
             <div class="category">
               <div class="categoryItem"></div>
             </div>
@@ -30,7 +30,8 @@
       
           <div class="container-fluid contsTab">
             <!-- tab -->
-            <ul class="nav nav-tabs justify-content-md-center" id="myTab" role="tablist">
+            <ul class="nav nav-tabs justify-content-md-center wow fadeInUp" id="myTab" role="tablist"
+                data-wow-offset="80" data-wow-delay="0.1s">
               <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
                 data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
                 aria-selected="true">일반 매뉴얼</a></li>
@@ -40,9 +41,9 @@
               <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
                 href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
               >주의사항 매뉴얼</a></li>
-              <li class="nav-item"><a class="nav-link" id="reply-tab" data-toggle="tab"
-                href="#replyContents" role="tab" aria-controls="contact" aria-selected="false"
-              >매뉴얼 댓글</a></li>
+              <li class="nav-item"><a class="nav-link" id="video-tab" data-toggle="tab"
+                href="#videoContents" role="tab" aria-controls="contact" aria-selected="false"
+              >동영상</a></li>
             </ul>
             <!-- tab -->
          
@@ -59,7 +60,7 @@
               <div class="tab-pane fade" id="warningContents" role="tabpanel" aria-labelledby="warning-tab">
                   <div class="innerForm3"></div>
               </div>
-              <div class="tab-pane fade" id="replyContents" role="tabpanel" aria-labelledby="reply-tab">
+              <div class="tab-pane fade" id="videoContents" role="tabpanel" aria-labelledby="video-tab">
                   <div class="innerForm4"></div>
               </div>
             </div> <!-- myTabContent -->

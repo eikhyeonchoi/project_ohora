@@ -101,6 +101,16 @@
     where 
       member_no = #{no}
   </update>
+  
+  <update id="updatePassword2" parameterType="map"> 
+    update 
+      member
+    <set>
+      <if test="password != null">pwd = password(#{password})</if>,
+    </set>
+    where 
+      email = #{email}
+  </update>
 
   <update id="updateName" parameterType="member"> 
     update 
