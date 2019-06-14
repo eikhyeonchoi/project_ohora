@@ -2,6 +2,7 @@
  * 
  */
 var productNo = getQuerystring('no'),
+    productName =  decodeURIComponent(getQuerystring('name')),
     type = 0,
     tipNo = 0;
 
@@ -16,7 +17,6 @@ var total = 0,
 
 var satisfyNo = 0;
 
-var productName = '';
 
 var tipBtn = $('#tip-btn'),
     manualBtn = $('#manual-btn'),
@@ -60,9 +60,6 @@ $(document).ready(function(){
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, function(obj) {
     console.log(obj);
     
-    if(obj.list.length != 0){
-      window.productName = obj.list[0].product.name;
-    }
       
     for (var el of obj.list) {
       total += el.asStf + el.design + el.level + el.priceStf + el.understand + el.useful,
@@ -90,7 +87,6 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/product/detail?no=' + productNo, function(obj) {
     console.log(obj);
-    window.productName = obj.product.name;
 
     $('#product-inform-div').prepend('<hr class="head-line">');
     $('#product-inform-div').prepend('<h5>'+ obj.product.manufacturer.name +'</h5>');
@@ -199,6 +195,7 @@ $(document.body).bind('loaded-product', function(data){
   satisfyBtn.click(function() {
     $('#satisfy-add-modal').modal({backdrop: 'static', keyboard: false});
     satisfyModalInitializer();
+    lengthCheck('contents');
     
     $('#a-my-score').click(function(e) {
       e.preventDefault();
@@ -359,7 +356,7 @@ $(document.body).bind('loaded-product', function(data){
           value: 'no'
         },
         yes: {
-          text: '등록',
+          text: '삭제',
           value: 'yes'
         }
       },
@@ -416,6 +413,9 @@ $(document.body).bind('loaded-satisfy', function(data){
     });
     
     $.get('/bitcamp-team-project/app/json/satisfy/list', function(obj) {
+      
+      console.log(obj);
+      
       for (var comp of obj.list) {
         $(comp).attr('aver', (comp.asStf + comp.design + comp.level + comp.priceStf + comp.understand + comp.useful)/6);
       }
@@ -453,22 +453,40 @@ $(document.body).bind('loaded-satisfy', function(data){
     
     
   } else {
-    $('#user-evaluation-div').append('<h4> : 등록된 평가가 없습니다</h4>');
+    $('#rateYo').rateYo({
+      rating: 0,
+      readOnly: true
+    });
+    
     generateBarChart('bar-canvas', obj);
+    $('#satisfy-list').append('<h4> 등록된 한줄평이 없습니다 </h4>');
   }
 
 
   $("#fixed-background-div").mouseenter(function() {
-    $(this).children().eq(0).fadeOut('fast');
-    $(this).children().eq(1).fadeIn('fast');
+    // $(this).children().eq(0).fadeOut('fast');
+    // $(this).children().eq(1).fadeIn('fast');
     
   }).mouseleave(function() {
-    $(this).children().eq(0).fadeIn('fast');
-    $(this).children().eq(1).fadeOut('fast');
+    // $(this).children().eq(0).fadeIn('fast');
+    // $(this).children().eq(1).fadeOut('fast');
 
   });  
 });
 
+
+function lengthCheck(id) {
+  $('#' + id).keyup(function(e) {
+    var target = $(e.target);
+    
+    target.next().text(target.val().length + '/100')
+    if(target.val().length > 99) {
+     target.val(target.val().substring(0, 99));
+      swal('글자수 제한', '100자 이상 작성할 수 없습니다', 'warning');
+    }
+  }) // keyup
+  
+} // lengthCheck
 
 function rateYoGenerator(obj) {
   $('.rateYo').each(function(index, item) {
@@ -478,7 +496,7 @@ function rateYoGenerator(obj) {
       halfStar: true,
       readOnly: true,
       ratedFill: "#E74C3C",
-      starWidth: "20px"
+      starWidth: "15px"
     })
   }); // each
 }
@@ -523,6 +541,8 @@ function satisfyModalInitializer() {
           eval: obj.satisfy.eval};
       
       $(scoreGenerator(scoreObj)).appendTo($('#my-score-div'));
+      
+      lengthCheck('my-score-eval');
       ReloadScripts('rateit');
       
       $('#eval, #modal-ok-btn').hover(function() {
@@ -576,16 +596,16 @@ function generateBarChart(id, obj) {
     data: {
       labels: [obj.name01, obj.name02, obj.name03, obj.name04, obj.name05, obj.name06],
       datasets: [{
-        label: window.productName + '의 대한 만족도',
+        label: '"' + window.productName + '"' + ' 의 평가',
         data: [obj.score01, obj.score02, obj.score03, obj.score04, obj.score05, obj.score06],
         fill: false,
         backgroundColor: [
-          "rgba(77, 86, 86, 0.7)",
-          "rgba(21, 67, 96, 0.7)",
-          "rgba(123, 125, 125, 0.7)",
-          "rgba(11, 83, 69, 0.7)",
-          "rgba(120, 66, 18, 0.7)",
-          "rgba(23, 32, 42, 0.7)"
+          "rgba(70, 23, 54, 0.8)",
+          "rgba(255, 233, 109, 0.8)",
+          "rgba(63, 181, 104, 0.8)",
+          "rgba(66, 85, 194, 0.8)",
+          "rgba(255, 164, 115, 0.8)",
+          "rgba(219, 236, 51, 0.8)"
           ]
       }]
     },
