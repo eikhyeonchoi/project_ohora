@@ -104,6 +104,16 @@ body {
   float: left;
 }
 
+.videosection {
+	padding-top: 1rem;
+	text-align: center;
+}
+
+#videoconts {
+	font-size: 1.5em;
+	font-style: bold;
+}
+
 #img-src {
 	width: 300px;
 	height: 300px;
