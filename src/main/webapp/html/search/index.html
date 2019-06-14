@@ -5,16 +5,16 @@
 <title>오호라</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
-<link rel="stylesheet" href="index.css">
  <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
 
  <header class="ohr-main-header"></header>
 
  <div class="container">
-  <h5>''에 대한 검색 결과입니다.</h5>
+  <div class="row">'<span id="keyword"></span>'에 대한 검색 결과입니다.</div>
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -27,10 +27,28 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
-  <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">2</div>
+  <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+  <div class="bit-prod-list">
+   <table id="prod-table-list" class="table table-hover">
+    <thead>
+     <tr>
+      <th scope="col">번호</th>
+      <th scope="col">카테고리</th>
+      <th scope="col">제품명</th>
+      <th scope="col">제조사명</th>
+     </tr>
+    </thead>
+    <tbody></tbody>
+
+   </table>
+   
+   <div id="pagination-container"></div>
+   </div>
+  <!-- .bit-list -->
+  </div>
   <div class="tab-pane fade" id="nav-manual" role="tabpanel" aria-labelledby="nav-manual-tab">
-  <div class="bit-list">
-   <table id="table-list" class="table table-hover">
+  <div class="bit-manu-list">
+   <table id="manu-table-list" class="table table-hover">
     <thead>
      <tr>
       <th scope="col">번호</th>
@@ -42,6 +60,8 @@
     <tbody></tbody>
 
    </table>
+   
+   <div id="pagination-container"></div>
    </div>
   <!-- .bit-list -->
 </div>
@@ -52,13 +72,13 @@
  </div>
  <!-- .container -->
 
- <script id="tr-template" type="text/x-handlebars-template">
-{{#each list}}
+ <script id="tr-template-product" type="text/x-handlebars-template">
+{{#each prodList}}
 <tr>
   <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{createdDate}}</td>
-  <td>{{viewCount}}</td>
+  <td>{{smallCategoryNo}}</td>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{manufacturer.name}}</td>
 </tr>
 {{/each}}
 </script>

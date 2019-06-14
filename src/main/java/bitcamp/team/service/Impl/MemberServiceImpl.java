@@ -80,6 +80,16 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.updatePassword(param);
   }
 
+
+  @Override
+  public int updatePassword2(String email, String password) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+    paramMap.put("password", password);
+
+    return memberDao.updatePassword2(paramMap);
+  }
+  
   @Override
   public int updateName(Member member) {
     return memberDao.updateName(member);

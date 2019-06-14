@@ -1,28 +1,26 @@
 var tbody = $('tbody'),
-templateSrc = $('#tr-template').html(),
+keyword = decodeURIComponent(getQuerystring('keyword')),
+templateSrc = $('#tr-template-product').html(),
 trGenerator = Handlebars.compile(templateSrc),
 page = $('#pagination-container');
 
 $(document).ready(function() {
-  if(sessionStorage.getItem('type') == 3) {
-    $('#add-button').show();
-  } else {
-    $('#add-button').hide();
-  }
+  $('#keyword').html('');
+  $('#keyword').html(keyword);
 }); // ready
 
-(function loadList(pn) {
-  $.getJSON('../../app/json/search/list?keyword=' + $('#keyword').val(),
+(function loadList() {
+  $.getJSON('../../app/json/search/list?keyword=' + keyword,
           function (obj){
-    console.log(obj)
+    console.log(obj.prodList)
     page.pagination({
-      dataSource: obj,
-      locator: 'list',
+      dataSource: obj.prodList,
+      locator: 'prodList',
       showGoInput: true,
       showGoButton: true,
       callback: function(data, pagination) {
         tbody.children().remove();
-        var pageObj = {list: data};
+        var pageObj = {prodList: data};
         $(trGenerator(pageObj)).appendTo(tbody);
       }
     });
@@ -39,13 +37,16 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
+function getQuerystring(key, default_){
+  if (default_==null) default_=""; 
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+  var qs = regex.exec(window.location.href);
+  if(qs == null)
+    return default_;
+  else
+    return qs[1];
+} // getQuerystring
 
-$('#keyword').keydown((e) => {
-  if (event.keyCode == 13) {
-    e.preventDefault();
-    for(var no = 1; no < 6; no++) {
-      $('#page-' + no + ' > a').text(no);
-    }
-    loadList(1);
-  }
-});
+
+

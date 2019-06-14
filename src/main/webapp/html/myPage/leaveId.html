@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 탈퇴</title>
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="slidebar.css">
+<link rel="stylesheet" href="leaveId.css">
+</head>
+<body>
+  <header class="ohr-main-header"></header>
+
+  <!-- 사이드 바 -->
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <img class="photo0"> <span id="photo-icon-back" style="cursor: pointer"> <i
+        class="fas fa-cog" id="photo-icon"></i>
+      </span>
+      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">프로필
+        삭제</button>
+      <input type="file" id="profile-fileupload" name="memberFile" style="display: none;">
+      <div class="list-group list-group-flush">
+        <a href="index.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 내정보 수정<span
+          class="my-list-span"><i class="fas fa-users-cog my-list-icon"></i></span></a> <a
+          href="myPost.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 내가쓴 게시물<span
+          class="my-list-span" id="my-list-span2"><i class="fas fa-list my-list-icon"></i></span></a> <a
+          href="index2.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 기업정보 수정<span
+          class="my-list-span" id="my-list-span4"><i class="fas fa-building my-list-icon"></i></span></a>
+        <a href="leaveId.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 회원 탈퇴<span
+          class="my-list-span" id="my-list-span3"><i style="margin-left: 5px;"
+            class="fas fa-user-slash my-list-icon"></i></span></a>
+      </div>
+      <br>
+    </div>
+    <button id="slide-btn">
+      <span class="sidebar-btn"><i class="fas fa-bars"></i></span>
+    </button>
+  </aside>
+
+  <div class="container">
+    <h3 id="my-title">탈퇴 안내</h3>
+    <p>회원탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
+    <hr>
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>사용하고 계신 아이디(dencw6@naver.com)는 탈퇴한 경우 재사용 및 복구가 불가능합니다.</p>
+        <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
+      </div>
+    </div>
+
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>내정보 및 개인형 서비스 이용기록 삭제 안내</p>
+        <p>내정보 및 개인형 서비스(리뷰, 자유게시판 등)의 이용기록이 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
+        <p>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</p>
+        <p>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</p>
+      </div>
+    </div>
+
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>제품, 메뉴얼 서비스에 등록한 게시물 삭제 불가 안내</p>
+        <p>삭제를 원하는 제품, 메뉴얼이 있다면 반드시 탈퇴전에 ohora고객센터로 문의해주시기 바랍니다.</p>
+        <p>탈퇴후에는 회원정보가 삭제되어 본인여부를 확인할 수 없어 , 게시물을 임의로 삭제해드릴 수 없습니다.</p>
+      </div>
+    </div>
+    <hr>
+    <p>탈퇴후 재가입시에는 이전 회원정보를 복구할 수 없습니다.</p>
+    <p>직접 회원탈퇴가 불가능한 경우, 고객센터(010-1122-3344)또는 ohora2234@gmail.com으로 문의 부탁드립니다.</p>
+    <div>
+      <input type="checkbox"> <span>안내 사항을 모두 확인하였으며, 이에 동의합니다.</span>
+    </div>
+    <button id="ieave-btn" type="button" class="mybtn btn btn-outline-dark">확인</button>
+
+  </div>
+
+
+  <!-- container -->
+  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="slidebar.js"></script>
+  <script src="leaveId.js"></script>
+</body>
+</html>

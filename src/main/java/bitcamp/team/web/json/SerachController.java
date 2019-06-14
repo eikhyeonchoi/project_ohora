@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Manual;
+import bitcamp.team.domain.Product;
 import bitcamp.team.service.ManualService;
 import bitcamp.team.service.ProductService;
 import bitcamp.team.service.ReviewService;
@@ -27,13 +29,15 @@ public class SerachController {
   TipService tipService;
 
   @GetMapping("list")
-  public Object list(String keyword) {
+  public Object list(@RequestParam("keyword") String keyword) {
 
     HashMap<String, Object> contents = new HashMap<>();
 
     List<Manual> manuList = manualService.list(keyword, "search");
+    List<Product> prodList = productService.list2(0, 0, keyword, "search");
 
     contents.put("manuList", manuList);
+    contents.put("prodList", prodList);
 
     return contents;
   }

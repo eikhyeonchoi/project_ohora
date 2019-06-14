@@ -15,6 +15,7 @@ public interface MemberService {
   int authEmail(String nickName);
   int getEmail(String email);
   int updatePassword(HashMap<String,Object> param);
+  int updatePassword2(String email, String password);
   int updateName(Member member);
   int updateNickname(Member member);
   int updateTel(Member member);
