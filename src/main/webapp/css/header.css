@@ -134,12 +134,12 @@
 	background: #424c55;
 }
 
-/*
-@media (min-width: 1010px) {
-	.ohr-header-nav{
-	border: solid 5px;
-	}
+#ohr-header-logo {
+	height: 70px;
 }
-*/
+
+#ohr-header-logo:hover {
+	cursor: pointer;
+}
 
 

@@ -34,6 +34,10 @@ $(document.body).bind('loaded.header', function(data) {
     }
   });
   
+  $('#ohr-header-logo').click(function() {
+    location.href = '/bitcamp-team-project/index.html';
+  })
+  
 });
 
 
