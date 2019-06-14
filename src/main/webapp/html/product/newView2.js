@@ -147,9 +147,48 @@ $(document.body).bind('loaded-product', function(data){
       console.log(obj);
       
       if (obj.manualCount == 1) {
-        console.log(obj.manualCount)
-        swal('매뉴얼 이미 있음', 'detail 완성되면 링크걸어야함', 'warning');
-        location.href = '../manual/view.html?no=' + productNo;
+        if (window.type != 3) {
+          location.href = '../manual/view.html?no=' + productNo;
+        } else {
+          swal({
+            title: "매뉴얼 매뉴 선택",
+            text: "매뉴얼 매뉴를 선택하세요",
+            icon: "info",
+            buttons: {
+              no: {
+                text: '삭제',
+                value: 'delete'
+              },
+              yes: {
+                text: '보기',
+                value: 'view'
+              }
+            },
+          })
+          .then((value) => {
+            switch(value){
+              case 'view': 
+                location.href = '../manual/view.html?no=' + productNo;
+                break;
+              case  'delete':
+                console.log('delete');
+                toastr.success('게시물 삭제 완료', '삭제가 성공적으로 수행되었습니다')
+                
+                //
+                // 매뉴얼 삭제
+                // 매뉴얼 삭제
+                //
+                
+                break;
+              default:
+                toastr.warning('취소하셨습니다');
+                break;
+            }
+          });
+          
+          
+        }
+        
       } else {
         if (window.type == 1 || window.type == 0){
           swal('매뉴얼 알림', '매뉴얼이 등록되어 있지 않습니다', 'info');
@@ -175,10 +214,10 @@ $(document.body).bind('loaded-product', function(data){
                 location.href = '../manual/add.html?no='+ productNo + '&name=' + productName;
                 break;
               case  'no':
-                swal('매뉴얼 등록 취소', '취소 하셨습니다', 'warning');
+                toastr.warning('취소하셨습니다')
                 break;
               default:
-                swal('매뉴얼 등록 취소', '취소 하셨습니다', 'warning');
+                toastr.warning('취소하셨습니다')
                 break;
             }
           });
@@ -216,6 +255,7 @@ $(document.body).bind('loaded-product', function(data){
     $('#satisfy-delete-btn').click(function() {
       $.get('/bitcamp-team-project/app/json/satisfy/delete?no='+satisfyNo, function(obj) {
         if(obj.status == 'success') {
+          toastr.success('게시물 삭제 완료', '게시물 삭제가 성공적으로 수행되었습니다')
           location.reload();
         } else {
           swal('삭제 실패', obj.message, 'warning');
@@ -259,6 +299,7 @@ $(document.body).bind('loaded-product', function(data){
           }, function(obj) {
             console.log(obj);
             if (obj.status == 'success') {
+              toastr.success('게시물 수정 완료', '수정이 성공적으로 수행되었습니다')
               location.reload();
             } else {
               swal('수정 실패!', obj.message, 'warning');
@@ -270,6 +311,7 @@ $(document.body).bind('loaded-product', function(data){
     
     $('.modal-cancel-btn').click(function() {
       $('#satisfy-add-modal').modal('hide');
+      toastr.warning('취소하셨습니다');
     }); // click
     
     $('#modal-ok-btn').click(function() {
@@ -285,6 +327,7 @@ $(document.body).bind('loaded-product', function(data){
         eval: $('#contents').val()
       }, function(data) {
         if (data.status == 'success'){
+          toastr.warning('취소하셨습니다')
           location.reload();
         } else {
           swal("등록 실패!", data.message, 'warning');
@@ -301,7 +344,7 @@ $(document.body).bind('loaded-product', function(data){
         location.href = '../tip/view.html?no=' + productNo;
       } else {
         if (window.type == 0){
-          swal('팁 없음', '등록된 팁이 존재하지 않습니다', 'warning');
+          toastr.warning('등록된 팁이 존재하지 않습니다')
         } else {
           swal({
             title: "팁 보기 오류",
@@ -324,10 +367,10 @@ $(document.body).bind('loaded-product', function(data){
                 location.href = '/bitcamp-team-project/html/tip/form.html?no=' + productNo;
                 break;
               case  'no':
-                swal('팁 등록 취소', '취소 하셨습니다', 'warning');
+                toastr.warning('취소하셨습니다')
                 break;
               default:
-                swal('팁 등록 취소', '취소 하셨습니다', 'warning');
+                toastr.warning('취소하셨습니다')
                 break;
             }
           });

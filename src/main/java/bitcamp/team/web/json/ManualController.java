@@ -83,42 +83,6 @@ public class ManualController {
     return content;
   }
 
-  @PostMapping("add")
-  public Object add(String contents, int no, int type, Part[] manualFiles) {
-    HashMap<String,Object> content = new HashMap<>();
-    ArrayList<ManualFile> files = new ArrayList<>();
-    Manual manual = new Manual();
-    this.uploadDir = servletContext.getRealPath("/upload/manualFile");
-    try {
-
-      for (Part part : manualFiles) {
-        String filename = UUID.randomUUID().toString();
-        String filepath = uploadDir + "/" + filename;
-        part.write(filepath);
-
-        ManualFile manualFile = new ManualFile();
-
-        manualFile.setFile(filename);
-        manualFile.setContents(contents);
-        manualFile.setTypeNo(type);
-        files.add(manualFile);
-      }
-
-      manual.setManualFile(files);
-
-      Product product = productService.get(no);
-      manual.setName(product.getName());
-
-      manualService.add(manual);
-      content.put("status", "success");
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("error", e.getMessage());
-    }
-
-    return content;
-  }
-
   @GetMapping("detail")
   public Object detail(int no) {
     HashMap<String,Object> contents = new HashMap<>();
@@ -152,8 +116,8 @@ public class ManualController {
   }
 
 
-  @PostMapping("hyeonTemp")
-  public Object hyeonTemp(
+  @PostMapping("add")
+  public Object add(
       @RequestParam(defaultValue = "0") int productNo,
       @RequestParam(defaultValue = "undefined") String productName,
       Part[] basicManualFiles, 

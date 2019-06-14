@@ -4,23 +4,41 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 <body>
 
-  <div id='ifram-list'>
+  <div class='container'>
+
+  <button type="button" id='toast-btn' class='btn btn-primary'>toast</button>
+
+
+  <!-- toasts -->
+  <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <!-- Position it -->
+    <div style="position: absolute; top: 0; right: 0;">
+  
+      <!-- Then put toasts within -->
+      <div id='delete-toast' class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay='1000'>
+        <div class="toast-header">
+          <i class="fas fa-info-circle"></i>
+          <strong class="mr-auto">Ohora</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          게시물이 삭제되었습니다
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
-
-
-  <script id="ifram-template" type="text/x-handlebars-template">
-  {{#each list}}
-  <iframe width="560" height="315" src="{{src}}" 
-    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  {{/each}}
-  </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/js/dist/util.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="hyeonTest.js"></script>
 </body>

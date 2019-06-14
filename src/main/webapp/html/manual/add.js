@@ -305,7 +305,7 @@ function ajaxFileUpload(formId) {
   
   var formAction = form.attr('action');
   $.ajax({
-    url         : '/bitcamp-team-project/app/json/manual/hyeonTemp',
+    url         : '/bitcamp-team-project/app/json/manual/add',
     data        : formdata ? formdata : form.serialize(),
         cache       : false,
         contentType : false,

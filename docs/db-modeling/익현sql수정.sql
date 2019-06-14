@@ -181,8 +181,14 @@ insert into fboard(member_no, titl, conts) values(1, '제목48','내용48');
 insert into fboard(member_no, titl, conts) values(1, '제목49','내용49');
 insert into fboard(member_no, titl, conts) values(1, '제목50','내용50');
 
-  
-  
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com', password('1'), '유저1', '1', '유저닉1', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com', password('2'), '유저2', '1', '유저닉2', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com', password('3'), '유저3', '1', '유저닉3', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user4@test.com', password('4'), '유저4', '1', '유저닉4', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user5@test.com', password('5'), '유저5', '1', '유저닉5', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user6@test.com', password('6'), '유저6', '1', '유저닉6', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user7@test.com', password('7'), '유저7', '1', '유저닉7', 1, false);
+insert into member(email, pwd, name, tel, n_name, type, ban) values('user8@test.com', password('8'), '유저8', '1', '유저닉8', 1, false);
   
   
   
