@@ -224,7 +224,8 @@ public class MemberController {
       String emailStatus = gmail2.gmailSend(member.getEmail(), member.getName(), newPassword[0]);
       if (!emailStatus.equals("success"))
         throw new Exception("메일 전송중 오류가 발생했습니다.");
-
+      
+      memberService.updatePassword2(member.getEmail() ,newPassword[0]);
       content.put("status", "success");
 
     } catch (Exception e) {

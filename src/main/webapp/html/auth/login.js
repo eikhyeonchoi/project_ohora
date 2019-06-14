@@ -44,8 +44,8 @@ $('#password-search').click(function(e) {
             $.getJSON('/bitcamp-team-project/app/json/member/forgetPasswordEmailSend?name='
                 + searchName2 + "&email=" + searchemail2,
                 function(data) {
-                  location.reload();
                 });
+            location.reload();
           } else {
             alert(data.error);
             searchName.val("");
