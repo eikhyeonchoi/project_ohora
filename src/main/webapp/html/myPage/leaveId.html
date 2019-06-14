@@ -11,29 +11,34 @@
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="slidebar.css">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="leaveId.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
 
-   <!-- 사이드 바 -->
+  <!-- 사이드 바 -->
   <aside class="sidebar">
     <div class="sidebar-content">
       <img class="photo0"> <span id="photo-icon-back" style="cursor: pointer"> <i
         class="fas fa-cog" id="photo-icon"></i>
       </span>
-      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">
-      프로필 삭제</button>
+      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">프로필
+        삭제</button>
       <input type="file" id="profile-fileupload" name="memberFile" style="display: none;">
       <div class="list-group list-group-flush">
-        <a href="index.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
-        내정보 수정<span class="my-list-span"><i class="fas fa-users-cog my-list-icon"></i></span></a>
-        <a href="myPost.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
-        내가쓴 게시물<span class="my-list-span" id="my-list-span2"><i class="fas fa-list my-list-icon"></i></span></a>
-        <a href="index2.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
-        기업정보 수정<span class="my-list-span" id="my-list-span4"><i class="fas fa-building my-list-icon"></i></span></a>
-        <a href="leaveId.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
-        회원 탈퇴<span class="my-list-span" id="my-list-span3"><i style="margin-left: 5px;" class="fas fa-user-slash my-list-icon"></i></span></a>
+        <a href="index.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 내정보 수정<span
+          class="my-list-span"><i class="fas fa-users-cog my-list-icon"></i></span></a> <a
+          href="myPost.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 내가쓴 게시물<span
+          class="my-list-span" id="my-list-span2"><i class="fas fa-list my-list-icon"></i></span></a> <a
+          href="index2.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 기업정보 수정<span
+          class="my-list-span" id="my-list-span4"><i class="fas fa-building my-list-icon"></i></span></a>
+        <a href="leaveId.html" style="cursor: pointer"
+          class="list-group-item list-group-item-action my-list"> 회원 탈퇴<span
+          class="my-list-span" id="my-list-span3"><i style="margin-left: 5px;"
+            class="fas fa-user-slash my-list-icon"></i></span></a>
       </div>
       <br>
     </div>
@@ -41,172 +46,45 @@
       <span class="sidebar-btn"><i class="fas fa-bars"></i></span>
     </button>
   </aside>
-  
+
   <div class="container">
-    <h3 id="my-title">내정보</h3>
+    <h3 id="my-title">탈퇴 안내</h3>
+    <p>회원탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
     <hr>
-
-    <div class="row my-row">
-
-      <div class="col-sm-6  my-col">
-        <div class="col-sm-10">
-          <h4>비밀번호 수정</h4>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-10">
-            <p class="myP-p">
-              비밀번호를 주기적으로 변경하여,<br> 소중한 개인정보를 안전하게 보호하세요.
-            </p>
-          </div>
-          <div class="col-md-10">
-            <dl>
-              <dt id="date-dt" style="margin-bottom: 20px;">최근 변경일</dt>
-              <dd id="date-dd"></dd>
-            </dl>
-          </div>
-          <div class="col-sm-10">
-            <button id="psw-update-btn" type="button" class="mybtn btn btn-outline-dark"
-              style="margin-right: 200px;">수정</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6  my-col">
-        <div class="col-md-10">
-          <h4>회원정보 변경</h4>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12">
-            <p class="myP-p">
-              안전한 정보보호를 위해 일부만 확인가능하며,<br> 변경화면에서 정확한 회원정보 확인이 가능합니다.
-            </p>
-          </div>
-          <div class="col-md-10">
-            <dl id="tel-dl">
-              <dt>이메일</dt>
-              <dd id="user-email"></dd>
-              <dt id="tel-dt">전화번호</dt>
-              <dd id="user-tel"></dd>
-            </dl>
-          </div>
-          <div class="col-md-10">
-            <button id="update-btn" type="button" class="mybtn btn btn-outline-dark">변경</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <!-- row -->
-
-    <!-- pwd-moadl -->
-    <div class="pwd-moadl modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">비밀번호 수정</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="oldPwd">현재 비밀번호</label> <input type="password" class="form-control"
-                id="oldPwd" placeholder="현재 비밀번호를 입력해주세요.">
-              <p class="pwd-p" id="oldPwd-p"></p>
-            </div>
-
-            <div class="form-group">
-              <label for="newPwd">새 비밀번호</label> <input type="password" class="form-control"
-                id="newPwd" placeholder="새로운 비밀번호를 입력해주세요.">
-              <p class="pwd-p" id="newPwd-p"></p>
-            </div>
-            <div class="form-group">
-              <label for="newPwd-agree">비밀번호 확인</label> <input type="password" class="form-control"
-                id="newPwd-agree" placeholder="비밀번호를 한번더 입력해주세요.">
-              <p class="pwd-p" id="newPwd-agree-p"></p>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="password-udt-cns-btn">취소</button>
-            <button type="button" class="btn btn-outline-dark" id="password-udt-btn">수정</button>
-          </div>
-        </div>
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>사용하고 계신 아이디(dencw6@naver.com)는 탈퇴한 경우 재사용 및 복구가 불가능합니다.</p>
+        <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
       </div>
     </div>
-    <!-- pwd-moadl -->
 
-    <!-- member-moadl -->
-    <div class="member-moadl modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">회원정보 변경</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-row align-items-center">
-              <div class="col-md-7 my-1">
-                <label for="name">이름</label> <input type="text" class="form-control" id="name"
-                  aria-describedby="nameHelp" placeholder="이름을 입력하세요." readonly="readonly">
-                <small id="nameHelp" class="form-text text-muted">* 개명으로 이름이 변경된 경우에만
-                  변경해주세요.</small>
-              </div>
-              <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary" id="name-udt-btn">수정</button>
-                <button type="submit" class="btn btn-primary name-btn" id="name-udt-cn-btn">취소</button>
-                <button type="submit" class="btn btn-primary name-btn" id="name-real-udt-btn">변경완료</button>
-              </div>
-              <p class="member-p" id="memberName-p"></p>
-            </div>
-            <div class="form-row align-items-center">
-              <div class="col-md-7 my-1">
-                <label for="nickName">별명</label> <input type="text" class="form-control"
-                  id="nickName" placeholder="닉네임을 입력하세요." readonly="readonly">
-              </div>
-              <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary" id="nickName-udt-btn">수정</button>
-                <button type="submit" class="btn btn-primary" id="nickName-udt-cn-btn">취소</button>
-                <button type="submit" class="btn btn-primary" id="nickName-real-udt-btn">변경완료</button>
-              </div>
-              <p class="member-p" id="memberNickname-p"></p>
-            </div>
-            <div class="form-row align-items-center">
-              <div class="col-md-3 my-1" id="tel1-div">
-                <label for="tel1">전화 번호</label> <select class="form-control" id="tel1">
-                  <option selected>010</option>
-                  <option>011</option>
-                  <option>016</option>
-                  <option>017</option>
-                  <option>018</option>
-                  <option>019</option>
-                </select>
-              </div>
-              <div class="col-md-2 my-1" id="tel2-div">
-                <input type="number" class="form-control tel-group" id="tel2"
-                  onkeydown="javascript: return event.keyCode == 69 ? false : true"
-                  readonly="readonly">
-              </div>
-              <div class="col-md-2 my-1" id="tel3-div">
-                <input type="number" class="form-control tel-group" id="tel3"
-                  onkeydown="javascript: return event.keyCode == 69 ? false : true"
-                  readonly="readonly">
-              </div>
-              <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary tel-group" id="tel-udt-btn">수정</button>
-                <button type="submit" class="btn btn-primary tel-group" id="tel-udt-cn-btn">취소</button>
-                <button type="submit" class="btn btn-primary tel-group" id="tel-real-udt-btn">변경완료</button>
-              </div>
-            </div>
-
-            <!-- form-row -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="member-udt-cns-btn">닫기</button>
-          </div>
-        </div>
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>내정보 및 개인형 서비스 이용기록 삭제 안내</p>
+        <p>내정보 및 개인형 서비스(리뷰, 자유게시판 등)의 이용기록이 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
+        <p>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</p>
+        <p>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</p>
       </div>
     </div>
-    <!-- member-moadl -->
+
+    <div class="row" id="my-row">
+      <div class="col" id="my-col">
+        <p>제품, 메뉴얼 서비스에 등록한 게시물 삭제 불가 안내</p>
+        <p>삭제를 원하는 제품, 메뉴얼이 있다면 반드시 탈퇴전에 ohora고객센터로 문의해주시기 바랍니다.</p>
+        <p>탈퇴후에는 회원정보가 삭제되어 본인여부를 확인할 수 없어 , 게시물을 임의로 삭제해드릴 수 없습니다.</p>
+      </div>
+    </div>
+    <hr>
+    <p>탈퇴후 재가입시에는 이전 회원정보를 복구할 수 없습니다.</p>
+    <p>직접 회원탈퇴가 불가능한 경우, 고객센터(010-1122-3344)또는 ohora2234@gmail.com으로 문의 부탁드립니다.</p>
+    <div>
+      <input type="checkbox"> <span>안내 사항을 모두 확인하였으며, 이에 동의합니다.</span>
+    </div>
+    <button id="ieave-btn" type="button" class="mybtn btn btn-outline-dark">확인</button>
 
   </div>
+
+
   <!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.js"></script>
@@ -218,6 +96,6 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
   <script src="slidebar.js"></script>
-  <script src="index.js"></script>
+  <script src="leaveId.js"></script>
 </body>
 </html>
