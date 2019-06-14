@@ -53,23 +53,25 @@ $(document).ready(() => {
 function content(mconts, mfile, no, i) {
   var cont = '';
   var downbtn = '';
+  var src = '';
   if (i == 0) {
     cont = 'pdf-src';
+    src = '/bitcamp-team-project/upload/manualfile/pdf-3383632_1280.png';
     downbtn 
     = '<a href="#" class="download btn-sm btn-dark" id="download' + i + '">download</a>';
   } else {
     cont = 'img-src';
+    src = '/bitcamp-team-project/upload/manualfile/' + mfile;
     mfile = mfile + '_thumb ';
   }
   
-  var contents = '<section class="row mx-sm-1 justify-content-around">'
-    + '<div class="row">'
-    + '<span class="wow fadeInUp col-sm-4" id="textconts" data-wow-offset="80" data-wow-delay="0.2s">' 
+  var contents = '<section class="row mx-sm-1 justify-content-center">'
+    + '<div class="row justify-content-center">'
+    + '<span class="wow fadeInUp col-sm-2" id="textconts" data-wow-offset="80" data-wow-delay="0.2s">' 
     + mconts + '</span>'
-    + '<span class="wow fadeInUp col-sm-4 justify-content-center" id="textimg" data-wow-offset="80" data-wow-delay="0.2s">'
-    + '<a class="image-popup-no-margins" href="/bitcamp-team-project/upload/manualfile/' + mfile + '" '
-    + 'title="' + mconts + '">'
-    + '<img class="img-responsive" src="/bitcamp-team-project/upload/manualfile/' + mfile + '"'
+    + '<span class="wow fadeInUp col-sm-2" id="textimg" data-wow-offset="80" data-wow-delay="0.2s">'
+    + '<a class="image-popup-no-margins" href="' + src + '">'
+    + '<img class="img-responsive" src="' + src + '"'
     + 'id="' + cont + '">'
     + downbtn + '</a></span>';
     + '</div></section>';
@@ -77,8 +79,7 @@ function content(mconts, mfile, no, i) {
     if (i == 0) {
       $('#download0').click((e) => {
         e.preventDefault();
-        var a = $('#pdf-src').attr("src");
-        location.href = a;
+        location.href = '/bitcamp-team-project/upload/manualfile/' + mfile;
       });
     }
     
