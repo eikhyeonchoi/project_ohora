@@ -20,9 +20,19 @@ $(document.body).bind('loaded.header', function(data) {
   });
   
   $('#ohr-header-search').click(function() {
-    console.log('aaa');
-    location.href = '/bitcamp-team-project/html/search/index.html';
+    location.href = 
+      '/bitcamp-team-project/html/search/index.html?keyword=' 
+      + $('#ohr-main-search-keyword').val();
   })
+  
+  $('#ohr-main-search-keyword').keydown((e) => {
+    if (event.keyCode == 13) {
+      e.preventDefault();
+      location.href = 
+        '/bitcamp-team-project/html/search/index.html?keyword=' 
+        + $('#ohr-main-search-keyword').val();
+    }
+  });
   
 });
 
