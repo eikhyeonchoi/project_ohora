@@ -36,10 +36,13 @@ $('#password-search').click(function(e) {
         + searchName.val() + "&email=" + searchemail.val(),
         function(data) {
           if (data.status == 'success') {
-            alert('성공')
+            alert('메일을 확인해주세요.');
           } else {
-            alert('실패')
+            alert(data.error);
+            searchName.val("");
+            searchemail.val("");
           }
         }); //getJSON
   }); //('#password-search-btn').click
 }); //('#password-search').click
+

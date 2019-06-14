@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
 
     return memberDao.findByEmailPassword(paramMap);
   }
-  
+
   @Override
   public Member getEmail2(String email) {
     HashMap<String,Object> paramMap = new HashMap<>();
@@ -84,28 +84,33 @@ public class MemberServiceImpl implements MemberService {
   public int updateName(Member member) {
     return memberDao.updateName(member);
   }
-  
+
   @Override
   public int updateNickname(Member member) {
     return memberDao.updateNickname(member);
   }
-  
+
   @Override
   public int updateTel(Member member) {
     return memberDao.updateTel(member);
   }
-  
+
 
   @Override
   public int updatePhoto(Member member) {
     return memberDao.updatePhoto(member);
   }
-  
+
 
   @Override
   public int deletePhoto(int no) {
     return memberDao.deletePhoto(no);
   }
-  
-  
+
+  @Override
+  public Member findByNameEmail(Member member) {
+    return memberDao.findByNameEmail(member);
+  }
+
+
 }
