@@ -204,10 +204,23 @@ public class MemberController {
       Member member2 = memberService.findByNameEmail(member);
       if (member2 == null)
         throw new Exception("회원명 또는 이메일을 정확하게 입력해주세요.");
+
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("error", e.getMessage());
+    }
+    return content;
+  };
+
+  @GetMapping("forgetPasswordEmailSend")
+  public Object forgetPasswordEmailSend(Member member) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
       Gmail2 gmail2 = new Gmail2();
       String uuid = UUID.randomUUID().toString();
       String[] newPassword = uuid.split("-");
-      System.out.println(newPassword[0]);
       String emailStatus = gmail2.gmailSend(member.getEmail(), member.getName(), newPassword[0]);
       if (!emailStatus.equals("success"))
         throw new Exception("메일 전송중 오류가 발생했습니다.");
@@ -220,7 +233,6 @@ public class MemberController {
     }
     return content;
   };
-
 }
 
 
