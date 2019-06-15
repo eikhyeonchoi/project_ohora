@@ -55,6 +55,8 @@ function video(mconts, mfile) {
   var regs = '';
   var url = '';
   var youtubeIframe = '';
+  
+  // 유튜브 url에 따라 경로를 바꾼다.
   if (mfile.indexOf(url1) != -1) {
     regs = /https?:\/\/youtu.be\/([a-zA-Z0-9\-_]+)/gi;
     result = regs.exec(mfile);

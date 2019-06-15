@@ -39,6 +39,15 @@
       <id column="product_no" property="no" />
       <result column="manufac_no" property="manufacturerNo" />
       <result column="name" property="name" />
+      <association property="productSmallCategory" javaType="productSmallCategory">
+        <id column="sctg_no" property="no" />
+        <result column="lctg_no" property="largeCategoryNo" />
+        <result column="sName" property="name" />
+        <association property="productLargeCategory" javaType="productLargeCategory">
+          <id column="lctg_no" property="no" />
+          <result column="lName" property="name" />
+        </association>
+      </association>
       <association property="manufacturer" javaType="manufacturer">
         <id column="manufac_no" property="no" />
         <result column="manuName" property="name" />
@@ -100,19 +109,10 @@
     f.img,
     ma.name as manuName
     from
-    manual m
-    left outer join
-    product p
-    on
-    m.product_no = p.product_no
-    left outer join
-    product_file f
-    on
-    p.product_no = f.product_no
-    left outer join
-    manufacturer ma
-    on
-    p.manufac_no = ma.manufac_no
+      manual m
+    left outer join product p on m.product_no = p.product_no
+    left outer join product_file f on p.product_no = f.product_no
+    left outer join manufacturer ma on p.manufac_no = ma.manufac_no
     <where>
       <if test="keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />

@@ -1,7 +1,11 @@
-var tbody = $('tbody'),
+var divRow = $('div.tableRow'),
     page = $('#pagination-container'),
     template = $('#pagination-template').html();
 var pageGenerator = Handlebars.compile(template);
+
+$(document).ready(() => {
+  new WOW().init();
+})
 
 function loadList() {
   $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
@@ -11,10 +15,11 @@ function loadList() {
           dataSource: obj.list,
           showGoInput: true,
           showGoButton: true,
+          pageSize: 9,
           callback: function(data, pagination) {
-            tbody.children().remove();
+            divRow.children().remove();
             var pageObj = {list: data};
-            $(pageGenerator(pageObj)).appendTo(tbody);
+            $(pageGenerator(pageObj)).appendTo(divRow);
             $(document.body).trigger('loaded-list');
           }
         });

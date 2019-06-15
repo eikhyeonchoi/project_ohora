@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>매뉴얼</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
->
-<link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet"
-  type="text/css"
->
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -16,37 +14,43 @@
 
 <body>
   <header class="ohr-main-header"></header>
+  <div class="container-fluid">
+    <section class="jumbotron text-center">
+      <h1 class="jumbotron-heading">매뉴얼</h1>
+      <p class="lead text-muted">그동안 잘 몰랐던 매뉴얼을 한 눈에 볼 수 있습니다.</p>
+      <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <div class="input-group mb-3"></div>
+          </div>
+        </div>
+        <div id="search">
+          <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
+          <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+        </div>
+      </form>
+      <button type="button" id="manual-add-btn" class="btn-sm btn-secondary row mh-2">매뉴얼 추가</button>
+     </section>
+    </div> <!-- .container-fluid -->
+    
   <div class="album py-5 bg-light">
     <div class="container">
-        <section class="jumbotron text-center">
-          <h1 class="jumbotron-heading">매뉴얼</h1>
-          <p class="lead text-muted">그동안 잘 몰랐던 매뉴얼을 손쉽게 볼 수 있습니다.</p>
-      
-          <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
-            <div class="form-group row">
-              <div class="col-sm-10">
-                <div class="input-group mb-3"></div>
-              </div>
-            </div>
-          <div id="search">
-            <input id="keyword" class="form-control mr-sm-2" 
-                   placeholder="제품명으로 검색하기" aria-label="검색">
-            <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
-          </div>
-        </form>
-        <button type="button" id="manual-add-btn" class="btn-sm btn-secondary row mh-2">
-        매뉴얼 추가</button>
-       </section>
       <div class="tableRow row"></div>
       <div class="row mx-sm-auto" id="pagination-container"></div>
-      </div>
+    </div>
   </div>
-  <!-- .container -->
+  
   <script id="pagination-template" type="text/x-handlebars-template">
     {{#each list}}
       <div class="col-md-4 card-img">
-          <div class="card mb-4 shadow-sm">
-            <svg class="card-img-top"></svg>
+          <div class="card mb-4 shadow-sm wow fadeInDown">
+              {{#each product.productFiles}}
+                {{#if img}}
+                  <img class="img-thumbnail hovereffect" src="/bitcamp-team-project/upload/productfile/{{img}}">
+                {{else}}
+                  <img class="img-thumbnail hovereffect" src="/bitcamp-team-project/upload/productfile/default.png">
+                {{/if}}   
+              {{/each}}
             <div class="card-body">
               <p class="card-text">{{product.name}}</p>
               <p class="card-text">{{product.manufacturer.name}}</p>
@@ -68,6 +72,7 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
 </body>

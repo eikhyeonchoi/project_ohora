@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>티키위키</title>
-<link rel="stylesheet"
-  href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css"
->
-<link href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
@@ -14,49 +14,58 @@
 
 <body>
   <header class="ohr-main-header"></header>
-  <div class="container">
-    <h1>티키위키</h1>
-    <div class="bit-list">
-      <table class="table table-hover">
-      <thead>
-          <tr>
-            <th scope="col">번호</th>
-            <th scope="col">제품명</th>
-            <th scope="col">기업명</th>
-            <th scope="col">등록일</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <div class="form-inline my-2 my-lg-0 justify-content-center">
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <div class="input-group mr-3">
-            <select id="searchTag" name="searchTag" class="custom-select">
-              <option value="">검색조건</option>
-              <option id="prodName" value="prodName">제품명</option>
-              <option id="memName" value="memName">기업명</option>
-              <option id="conts" value="cont">내용</option>
-              <option id="prodConts" value="prodConts">제품명 + 내용</option>
-            </select>
+  <div class="container-fluid">
+      <section class="jumbotron text-center">
+        <h1 class="jumbotron-heading">티키위키</h1>
+        <p class="lead text-muted">자기 만의 팁을 서로 공유해보세요.</p>
+        <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <div class="input-group mb-3"></div>
+            </div>
           </div>
-        </div>
+          <div id="search">
+            <input id="keyword" class="form-control mr-sm-2" 
+                   placeholder="제품명으로 검색하기" aria-label="검색">
+            <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+          </div>
+        </form>
+      </section>
+    </div> <!-- .container_fluid -->
+      
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="tableRow row"></div>
+        <div class="row mx-sm-auto" id="pagination-container"></div>
       </div>
-      <input type="text" class="form-control" id="search" name='search' placeholder="검색">
-      <button type="button" id="search-btn" class="btn btn-success btn-sm">검색</button>
-    </div>
-    <div id="pagination-container"></div>
-  </div> <!-- .container -->
+      </div>
+      
+      
   <script id="pagination-template" type="text/x-handlebars-template">
     {{#each list}}
-      <tr>
-        <th scope='row'>{{no}}</th>
-        <td scope="row"><a class="bit-view-link" href="#" data-no='{{productNo}}'>{{product.name}}</a></td>
-        <td>{{member.nickName}}</td>
-        <td>{{createdDate}}</td>
-      </tr>
+      <div class="col-md-4 card-img">
+          <div class="card mb-4 shadow-sm wow fadeInDown">
+              {{#each product.productFiles}}
+                {{#if img}}
+                  <img class="img-thumbnail hovereffect" src="/bitcamp-team-project/upload/productfile/{{img}}">
+                {{else}}
+                  <img class="img-thumbnail hovereffect" src="/bitcamp-team-project/upload/productfile/default.png">
+                {{/if}}   
+              {{/each}}
+            <div class="card-body">
+              <p class="card-text">{{product.name}}</p>
+              <p class="card-text">{{product.manufacturer.name}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary bit-view-link"
+                          data-no='{{product.no}}'>View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{viewCount}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
     {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
@@ -64,6 +73,7 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
 </body>

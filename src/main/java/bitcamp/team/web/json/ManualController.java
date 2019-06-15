@@ -55,7 +55,7 @@ public class ManualController {
 
     try {
       List<Manual> list = manualService.list(keyword, searchType);
-
+      
       contents.put("list", list);
       contents.put("status", "success");
     } catch (Exception e) {
