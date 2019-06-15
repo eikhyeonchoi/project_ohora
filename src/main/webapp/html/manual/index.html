@@ -17,7 +17,7 @@
 <body>
   <header class="ohr-main-header"></header>
   <div class="album py-5 bg-light">
-    <div class="container">
+    <div class="container-fluid">
         <section class="jumbotron text-center">
           <h1 class="jumbotron-heading">매뉴얼</h1>
           <p class="lead text-muted">그동안 잘 몰랐던 매뉴얼을 손쉽게 볼 수 있습니다.</p>
@@ -37,16 +37,20 @@
         <button type="button" id="manual-add-btn" class="btn-sm btn-secondary row mh-2">
         매뉴얼 추가</button>
        </section>
-      <div class="tableRow row"></div>
-      <div class="row mx-sm-auto" id="pagination-container"></div>
       </div>
-  </div>
-  <!-- .container -->
+      <!-- .container -->
+      <div class="container">
+        <div class="tableRow row"></div>
+        <div class="row mx-sm-auto" id="pagination-container"></div>
+      </div>
+      </div>
   <script id="pagination-template" type="text/x-handlebars-template">
     {{#each list}}
       <div class="col-md-4 card-img">
           <div class="card mb-4 shadow-sm">
-            <svg class="card-img-top"></svg>
+              {{#each product.productFiles}}
+                <img class="img-thumbnail hovereffect" src="/bitcamp-team-project/upload/productfile/{{img}}">
+              {{/each}}
             <div class="card-body">
               <p class="card-text">{{product.name}}</p>
               <p class="card-text">{{product.manufacturer.name}}</p>
