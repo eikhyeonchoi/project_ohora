@@ -58,7 +58,7 @@ public class WebAppInitializer
   protected void customizeRegistration(Dynamic registration) {
     // 멀티파트 설정 등 기타 DispatcherServlet에 대해 설정하려면 이 메서드를 오버라이딩 하라.
     MultipartConfigElement multipartConfig = 
-        new MultipartConfigElement("/tmp", 52428800, 52428800, 1000000);
+        new MultipartConfigElement("/tmp", 10485760, 52428800, 10485760);
     registration.setMultipartConfig(multipartConfig);
   }
 }

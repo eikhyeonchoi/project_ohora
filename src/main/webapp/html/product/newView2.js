@@ -4,7 +4,8 @@
 var productNo = getQuerystring('no'),
     productName =  decodeURIComponent(getQuerystring('name')),
     type = 0,
-    tipNo = 0;
+    tipNo = 0,
+    manualNo = 0;
 
 var total = 0,
     satisAver = 0,
@@ -146,7 +147,7 @@ $(document.body).bind('loaded-product', function(data){
     $.get('/bitcamp-team-project/app/json/product/confirmManual?pNo=' + productNo, function(obj) {
       console.log(obj);
       
-      if (obj.manualCount == 1) {
+      if (obj.status == 'success') {
         if (window.type != 3) {
           location.href = '../manual/view.html?no=' + productNo;
         } else {
@@ -171,14 +172,14 @@ $(document.body).bind('loaded-product', function(data){
                 location.href = '../manual/view.html?no=' + productNo;
                 break;
               case  'delete':
-                console.log('delete');
-                toastr.success('게시물 삭제 완료', '삭제가 성공적으로 수행되었습니다')
-                
-                //
-                // 매뉴얼 삭제
-                // 매뉴얼 삭제
-                //
-                
+                $.get('/bitcamp-team-project/app/json/manual/delete?no=' + obj.manual.no, function(obj) {
+                  if (obj.status == 'success') {
+                    toastr.success('게시물 삭제 완료', '삭제가 성공적으로 수행되었습니다')
+                    location.reload();
+                  } else {
+                    swal('게시물 삭제 오류', '매뉴얼 삭제중 오류발생\n' + obj.message, 'warning');
+                  }
+                });
                 break;
               default:
                 toastr.warning('취소하셨습니다');
@@ -385,40 +386,60 @@ $(document.body).bind('loaded-product', function(data){
 
   
   productDeleteBtn.click(function() {
-    swal({
-      title: "제품 삭제 알림",
-      text: "제품 정보를 삭제하시겠습니까 ?",
-      icon: "info",
-      buttons: {
-        no: {
-          text: '아니오',
-          value: 'no'
-        },
-        yes: {
-          text: '삭제',
-          value: 'yes'
-        }
-      },
-    })
-    .then((value) => {
-      switch(value){
-        case 'yes': 
-          $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
-            if (obj.status == 'success') {
-              location.href = 'index.html';
-            } else {
-              alert('삭제 실패!! \n' + obj.message);
-            }
-          });
-          break;
-        case  'no':
-          swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
-          break;
-        default:
-          swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
-          break;
+    $.get('/bitcamp-team-project/app/json/product/confirmManual?pNo=' + productNo, function(obj) {
+      if (obj.manual != null) {
+        window.manualNo = obj.manual.no;
       }
-    });
+      
+      swal({
+        title: "제품 삭제 알림",
+        text: "제품 정보를 삭제하시겠습니까 ?",
+        icon: "info",
+        buttons: {
+          no: {
+            text: '아니오',
+            value: 'no'
+          },
+          yes: {
+            text: '삭제',
+            value: 'yes'
+          }
+        },
+      }) // swal
+      .then((value) => {
+        switch(value){
+          case 'yes': 
+            if (obj.status == 'fail') {
+              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
+                if (obj.status == 'success') {
+                  location.href = 'index.html';
+                } else {
+                  alert('삭제 실패!! \n' + obj.message);
+                }
+              });
+              break;
+            } else {
+              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo + '&manualNo=' + window.manualNo, function(obj){
+                if (obj.status == 'success') {
+                  location.href = 'index.html';
+                } else {
+                  alert('삭제 실패!! \n' + obj.message);
+                }
+              });
+              break;
+              
+            }
+          case  'no':
+            swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
+            break;
+          default:
+            swal('제품 삭제 취소', '취소 하셨습니다', 'warning');
+            break;
+        }
+      }); // then
+    }); // get
+    
+    
   }); // click
 
 }) // bind loaded-product

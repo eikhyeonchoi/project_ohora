@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.Member;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
@@ -88,13 +89,15 @@ public class ProductController {
   public Object confirmManual(int pNo) {
     HashMap<String, Object> content = new HashMap<>();
     try {
-      int manualCount = manualService.confirm(pNo);
-      if(manualCount == 1) {
+      Manual manual = manualService.confirm(pNo);
+      if(manual != null) {
         content.put("status","success");
-        content.put("manualCount", manualCount);
+        content.put("manual", manual);
+        
       } else {
         content.put("status", "fail");
-        content.put("manualCount", 0);
+        content.put("manual", manual);
+        
       }
     } catch (Exception e) {
       content.put("error", e.getMessage());
@@ -267,12 +270,14 @@ public class ProductController {
 
   @GetMapping("delete")
   public Object delete(int no,
-      @RequestParam(required = false) int tipNo) {
+      @RequestParam(required = false) int tipNo,
+      @RequestParam(required = false, defaultValue = "0") int manualNo) {
     HashMap<String, Object> content = new HashMap<>();
     HashMap<String, Object> paramNumbers = new HashMap<>();
     
     paramNumbers.put("productNo", no);
     paramNumbers.put("tipNo", tipNo);
+    paramNumbers.put("manualNo", manualNo);
     
     try {
       if (productService.deleteProduct(paramNumbers) == 0) {

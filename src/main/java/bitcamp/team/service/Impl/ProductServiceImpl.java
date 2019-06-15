@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManualDao;
+import bitcamp.team.dao.ManualFileDao;
 import bitcamp.team.dao.ManufacturerDao;
 import bitcamp.team.dao.ProductDao;
 import bitcamp.team.dao.ProductFileDao;
@@ -26,12 +27,14 @@ public class ProductServiceImpl implements ProductService {
   SatisfyDao satisfyDao;
   ReviewDao reviewDao;
   ManualDao manualDao;
+  ManualFileDao manualFileDao;
   TipDao tipDao;
   TipHistoryDao tipHistoryDao;
+  
 
   public ProductServiceImpl(ProductDao productDao, ManufacturerDao manufacturerDao,
       ProductFileDao productFileDao, SatisfyDao satisfyDao, ReviewDao reviewDao, TipDao tipDao,
-      ManualDao manualDao, TipHistoryDao tipHistoryDao) {
+      ManualDao manualDao, TipHistoryDao tipHistoryDao, ManualFileDao manualFileDao) {
     this.productDao = productDao;
     this.manufacturerDao = manufacturerDao;
     this.productFileDao = productFileDao;
@@ -40,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
     this.manualDao = manualDao;
     this.tipDao = tipDao;
     this.tipHistoryDao = tipHistoryDao;
+    this.manualFileDao = manualFileDao;
   }
 
   @Override
@@ -129,19 +133,35 @@ public class ProductServiceImpl implements ProductService {
   public int deleteProduct(HashMap<String, Object> paramNumbers) {
     int productNo = (int) paramNumbers.get("productNo");
     int tipNo = (int) paramNumbers.get("tipNo");
+    int manualNo = (int) paramNumbers.get("manualNo");
 
     int count = 0;
     satisfyDao.deleteByProductNo(productNo);
+    System.out.println("satisfy");
     reviewDao.deleteByProductNo(productNo);
-    productFileDao.deleteByProductNo(productNo);
+    System.out.println("review");
 
     if (tipNo != 0) {
       tipHistoryDao.deleteByTipNo(tipNo);
+      System.out.println("tip history");
+    }
+    
+    if (manualNo != 0) {
+      manualFileDao.delete(manualNo);
+      System.out.println("manualfile");
     }
 
     tipDao.deleteByProductNo(productNo);
+    System.out.println("tip");
+    
     manualDao.deleteByProductNo(productNo);
+    System.out.println("manual");
+    
+    productFileDao.deleteByProductNo(productNo);
+    System.out.println("product file");
+    
     if (productDao.delete(productNo) != 0) {
+      System.out.println("product file");
       count++;
     }
     return count;

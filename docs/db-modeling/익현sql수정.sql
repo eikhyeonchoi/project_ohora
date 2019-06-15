@@ -17,6 +17,12 @@ ALTER TABLE fboard MODIFY conts mediumtext NOT NULL;
 임시값
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
+-- manual_type 임시값
+insert into manual_type (manual_type_no, name) values(1, '일반 매뉴얼');
+insert into manual_type (manual_type_no, name) values(2, '구성품 매뉴얼');
+insert into manual_type (manual_type_no, name) values(3, '주의사항 매뉴얼');
+insert into manual_type (manual_type_no, name) values(4, '동영상링크 댓글');
+
 
 insert into faq_type(name) values('회원관련FAQ');
 insert into faq_type(name) values('팁게시판FAQ');

@@ -180,18 +180,18 @@
 
   <delete id='deleteByProductNo' parameterType="int">
     delete from
-    manual
+      manual
     where
-    manual_no = #{value}
+      product_no = #{value}
   </delete>
 
-  <select id="confirmManual" resultType="int" parameterType="int">
+  <select id="confirmManual" resultMap="manualMap" parameterType="int">
     select
-    count(*)
+      *
     from
-    manual
+      manual
     where
-    product_no = #{value}
+      product_no = #{value}
   </select>
 
   <update id="increaseCount" parameterType="int">
@@ -201,6 +201,22 @@
     where
     product_no = #{value}
   </update>
+  
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      manual
+    where 
+      manual_no = #{value};
+  </delete>
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>
 
 

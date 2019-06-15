@@ -6,4 +6,5 @@ import bitcamp.team.domain.ManualFile;
 public interface ManualFileDao {
   List<ManualFile> findByTypeNo(int no);
   int insert(List<ManualFile> manualFiles);
+  int delete(int no);
 }

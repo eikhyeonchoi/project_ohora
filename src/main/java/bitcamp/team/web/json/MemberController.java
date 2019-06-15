@@ -1,10 +1,14 @@
 package bitcamp.team.web.json;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -174,6 +178,12 @@ public class MemberController {
       member.setFilePath(filename);
       memberService.updatePhoto(member);
       content.put("status", "success");
+      
+      try {
+        makeThumbnail(filepath);
+      } catch(Exception e) {
+        throw new Exception("썸네일 생성 중 오류 발생");
+      }
 
     } catch (Exception e) {
       content.put("status","fail");
@@ -234,6 +244,24 @@ public class MemberController {
     }
     return content;
   };
+  
+  
+
+  private void makeThumbnail(String filePath) throws Exception { 
+    BufferedImage srcImg = ImageIO.read(new File(filePath)); 
+    int dw = 50, dh = 50; 
+    int ow = srcImg.getWidth(); 
+    int oh = srcImg.getHeight(); 
+    int nw = ow; 
+    int nh = (ow * dh) / dw;
+    if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } 
+    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
+    BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
+    File thumbFile = new File(filePath + "_thumb");
+    ImageIO.write(destImg, "jpg", thumbFile);
+  } // makeThumbnail
+  
+  
 }
 
 

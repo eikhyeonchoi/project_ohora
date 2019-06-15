@@ -349,7 +349,7 @@ function settingToImageAndName(value) {
 
 
 
-function CheckuploadFileExt(objFile) {
+function checkuploadFileExt(objFile) {
   var target = $(objFile);
   
   var strFilePath = target.val();
@@ -367,7 +367,7 @@ function CheckuploadFileExt(objFile) {
     target.parents().eq(2).prev().html('');
     target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
   }
-} // CheckuploadFileExt
+} // checkuploadFileExt
 
 
 

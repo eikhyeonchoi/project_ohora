@@ -131,6 +131,9 @@ public class ManualController {
       ) throws IOException, ServletException {
     String uploadDir = servletContext.getRealPath("/upload/manualfile");
 
+    System.out.println(uploadDir);
+    System.out.println(productNo);
+    System.out.println(productName);
     HashMap<String, Object> content = new HashMap<>();
     ArrayList<ManualFile> files = new ArrayList<>(); 
     
@@ -237,12 +240,33 @@ public class ManualController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-
-
     return content;
   }
+  
+  
+  @GetMapping("delete")
+  public Object delete(int no) {
+    HashMap<String, Object> content = new HashMap<>();
+    HashMap<String, Object> paramNumbers = new HashMap<>();
+    
+    paramNumbers.put("manualNo", no);
+    
+    try {
+      if (manualService.delete(no) == 0) {
+        throw new Exception("해당 번호의 제품이 없습니다");
+      }
+      content.put("status", "success");
+    } catch(Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+      
+      
+    }
+    return content;
+  } // delete
+  
 
-
+  
 
   private void makeThumbnail(String filePath, int width, int height) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 

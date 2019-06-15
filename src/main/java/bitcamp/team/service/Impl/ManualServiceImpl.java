@@ -77,8 +77,15 @@ public class ManualServiceImpl implements ManualService {
   }
 
   @Override
-  public int confirm(int no) {
+  public Manual confirm(int no) {
     return manualDao.confirmManual(no);
+  }
+
+  @Override
+  public int delete(int no) {
+    manualFileDao.delete(no);
+    int count = manualDao.delete(no);
+    return count;
   }
   
   

@@ -11,7 +11,7 @@ public class Product {
   private Manufacturer manufacturer;
   private ProductSmallCategory productSmallCategory;
   private List<ProductFile> productFiles;
-
+  
   private Tip tip;
   private Review review;
 
@@ -24,6 +24,8 @@ public class Product {
         + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles + "]";
   }
 
+  
+  
   public int getReviewCount() {
     return reviewCount;
   }

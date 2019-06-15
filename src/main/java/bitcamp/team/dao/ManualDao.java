@@ -11,5 +11,6 @@ public interface ManualDao {
   Manual findFileByNo(int no);
   List<Manual> findByNo(int no);
   List<Manual> findAll(Map<String,Object> map);
-  int confirmManual(int no);
+  Manual confirmManual(int no);
+  int delete(int no);
 }

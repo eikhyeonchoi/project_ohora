@@ -50,6 +50,13 @@
        )
     </foreach>
   </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from
+      manual_file
+    where
+      manual_no = #{value};
+  </delete>
 
 </mapper>
 

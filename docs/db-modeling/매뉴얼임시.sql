@@ -66,9 +66,3 @@ insert into manual_file (manual_no, manual_type_no, conts, file)
 values(16, 4, '매뉴얼 댓글 내용입니다.', null);
 insert into manual_file (manual_no, manual_type_no, conts, file)
 values(16, 5, '요약 매뉴얼 내용입니다.', null);
--- manual_type 임시값
-insert into manual_type (manual_type_no, name) values(1, '일반 매뉴얼');
-insert into manual_type (manual_type_no, name) values(2, '구성품 매뉴얼');
-insert into manual_type (manual_type_no, name) values(3, '주의사항 매뉴얼');
-insert into manual_type (manual_type_no, name) values(4, '매뉴얼 댓글');
-insert into manual_type (manual_type_no, name) values(5, '간단 매뉴얼');
