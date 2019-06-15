@@ -42,6 +42,8 @@ $(document).ready(function() {
 $(document.body).bind('loaded-detail', function(data){
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
     console.log(obj);
+    
+    $('#total-comment').text('총 댓글  ' + obj.list.length + ' 개');
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
 
     $(document.body).trigger({
