@@ -3,9 +3,12 @@ var divRow = $('div.tableRow'),
     insert = $('#insert-btn'),
     type = sessionStorage.getItem('type'),
     template = $('#pagination-template').html();
+
 var pageGenerator = Handlebars.compile(template);
+
 insert.hide();
 console.log(divRow);
+
 $(document).ready(function() {
   $(document.body).bind('loaded.loginuser', () => {
     type = sessionStorage.getItem('type');
@@ -17,6 +20,7 @@ $(document).ready(function() {
       })
     }
   })
+  
 })
 
 
@@ -33,7 +37,6 @@ function loadList() {
           callback: function(data, pagination) {
             divRow.children().remove();
             var pageObj = {list: data};
-            console.log(pageObj);
             $(pageGenerator(pageObj)).appendTo(divRow);
             $(document.body).trigger('loaded-list');
           }

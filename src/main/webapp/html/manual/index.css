@@ -41,6 +41,26 @@ img {
 	width: 250px;
 }
 
+.img-thumbnail {
+	margin: auto;
+	height: 170px;
+	max-width: 200px;
+	max-height: 170px;
+	overflow: hidden;
+}
+
+.hovereffect:hover {
+  position: relative;
+  overflow: hidden;
+  maring: 10px;
+  min-width: 220px;
+  max-width: 310px;
+  max-height: 220px;
+  width: 100%;
+  background: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
 .download {
 	border: 1px solid gray;
 	height: 300px;
