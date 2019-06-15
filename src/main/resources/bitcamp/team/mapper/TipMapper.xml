@@ -15,6 +15,11 @@
     <association property="product" javaType="product">
       <id column="product_no"         property="no"/>
       <result column="name"           property="name"/>
+      <collection property="productFiles" ofType="productFile">
+        <id      column="pfile_no"   property="no"/>
+        <result column="product_no" property="productNo"/>
+        <result column="img"        property="img"/> 
+      </collection>
     </association>
     <association property="member"  javaType="member">
       <id column="member_no"          property="no"/>
@@ -30,15 +35,13 @@
       t.conts,
       t.cdt,
       p.name,
+      f.img,
       m.n_name
     from
       tip t
-    left outer join
-      product p
-    on t.product_no = p.product_no 
-    left outer join
-      member m
-    on t.member_no = m.member_no
+    left outer join product p on t.product_no = p.product_no
+    left outer join product_file f on p.product_no = f.product_no
+    left outer join member m on t.member_no = m.member_no
   </sql>
 
   <select id="findAll" resultMap="tipMap" parameterType="map">

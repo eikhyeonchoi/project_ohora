@@ -19,8 +19,8 @@ $(document).ready(function() {
         location.href = 'add.html';
       })
     }
-  })
-  
+  });
+  new WOW().init();
 })
 
 

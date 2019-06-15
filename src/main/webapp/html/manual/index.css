@@ -49,7 +49,7 @@ img {
 	overflow: hidden;
 }
 
-.hovereffect:hover {
+/* .hovereffect:hover {
   position: relative;
   overflow: hidden;
   maring: 10px;
@@ -59,7 +59,7 @@ img {
   width: 100%;
   background: #000000;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .download {
 	border: 1px solid gray;
