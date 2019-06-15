@@ -25,6 +25,7 @@
       <id column="member_no"  property="no" />
       <result column="email"  property="email" />
       <result column="n_name" property="nickName" />
+      <result column="file_path" property="filePath" />
     </association>
     
     <collection property="fboardFiles"  ofType="fboardFile">
@@ -47,6 +48,7 @@
     <association property="member" javaType="member">
       <id column="member_no" property="no" />
       <result column="n_name" property="nickName" />
+      <result column="file_path" property="filePath" />
     </association>
     
   </resultMap>
@@ -117,6 +119,7 @@
       b.cnt,
       m.member_no,
       m.n_name,
+      m.file_path,
       ff.file
     from
       fboard b
@@ -165,7 +168,8 @@
       fc.conts,
       fc.parent_id,
       fc.cdt,
-      m.n_name
+      m.n_name,
+      m.file_path
     from
       fboard_cmt fc
       join member m on m.member_no=fc.member_no

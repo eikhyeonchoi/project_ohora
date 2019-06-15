@@ -5,25 +5,35 @@
 <title>자유게시판 조회</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.core.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.snow.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="view2.css">
 </head>
 <body>
 
   <header class="ohr-main-header"></header>
   <div class="container">
-    <h1>자유게시판 detail</h1>
-    <form>
-
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <a href='index.html' class="btn btn-primary btn-sm">목록</a>
-          <button type="button" id="delete-btn" class="btn btn-danger btn-sm">삭제</button>
-          <button type="button" id="update-btn" class="btn btn-warning btn-sm">변경</button>
-        </div>
+  
+    <div class="form-group row mb-3">
+      <div class="col-sm-12">
+        <p id="fboard-title"></p>
       </div>
-
+    </div>
+      
+     <div class="form-group row">
+      <div class="col-sm-10">
+        <img id='fboard-id-img'>
+        <span id="fboard-id"></span>
+        <span id="fboard-createdDate"></span>
+        <span id="fboard-viewCount"></span>
+      </div>
+    </div>
+    
+    <hr>
+      
+      <!-- 
       <div class='row col-sm-12'>
         <div class='row col-sm-4 pl-sm-0'>
           <label for="memberNo" class="col-sm-4 col-form-label">작성자</label> <input type="text"
@@ -41,35 +51,27 @@
       <br>
       <div class="form-group row">
         <label for="title" class="col-sm-2 col-form-label">제목</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="title" name='title'>
+        <div class="col-sm-10" id="title">
         </div>
       </div>
+       -->
 
-      <div class="form-group row">
-        <label for="contents" class="col-sm-2 col-form-label">내용</label>
-        <div class="col-sm-10">
-          <textarea class="form-control" id="contents" name='contents' rows='10'></textarea>
-        </div>
+
+    <div class='form-group row'>
+      <div class='col-sm-12 mb-sm-2'>
+        <div id='contents'></div>
       </div>
+    </div>
 
-      <div id='img-div' class="form-group row"></div>
-
-      <div id='fboard-file-div' class="input-group">
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="fboard-file-input" name='fboardFiles'
-            aria-describedby="inputGroupFileAddon04" multiple> <label
-            class="custom-file-label" for="fboard-file-input">select file</label>
-        </div>
-      </div>
-
-    </form>
+    <div class="col-sm-3" id='btn-group' style="float: right; padding-bottom: 1rem;">
+      <button type="button" id="delete-btn" class="btn btn-danger btn-sm" style="visibility: hidden;">삭제</button>
+      <button type="button" id="update-btn" class="btn btn-warning btn-sm" style="visibility: hidden;">변경</button>
+      <a href='index.html' class="btn btn-primary btn-sm">목록</a>
+    </div>
+    <br>
+    <br>
     <hr>
-
-
-    <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-    <!-- 여기서부터 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-    <label for='basic-url'>총댓글</label>
+    <label for='basic-url'>총댓글 0개</label>
     <div id='fboard-comment-add-form' class='input-group'>
       <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
         placeholder='댓글을 입력하세요'></textarea>
@@ -87,6 +89,7 @@
     <div class='fboard-comment-list-form col-sm-12'>
     {{#each list}}
       <div class='user-inform col-sm-12 mt-sm-3'>
+        <img width='26.8' heigh='26.8' src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb'>
         <label for='basic-url' class='user-nickname'>{{member.nickName}}</label>
         <label for='basic-url' class='created-date'>{{createdDate}}</label>
       </div>
@@ -106,13 +109,10 @@
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-  <script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+  <script src="/bitcamp-team-project/node_modules/quill/dist/quill.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/quill-image-resize/image-resize.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/quill-image-upload/image-upload.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/quill-image-drop-module/image-drop.min.js"></script>
   <script src="../header.js"></script>
   <script src="view2.js"></script>
 </body>

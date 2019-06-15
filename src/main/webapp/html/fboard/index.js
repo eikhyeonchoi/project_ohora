@@ -34,7 +34,7 @@ $(document).ready(function(){
   
   $('#fboard-add-btn').click(function(){
     if(sessionStorage.getItem('no') != null) {
-      location.href = 'add.html';
+      location.href = 'form.html';
     } else {
       location.href = '../auth/login.html';
     }

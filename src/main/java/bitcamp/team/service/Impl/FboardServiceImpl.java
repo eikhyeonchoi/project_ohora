@@ -32,14 +32,6 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public int add(Fboard board) {
     int count = fboardDao.insert(board);
-    if (board.getFboardFiles() != null) {
-      List<FboardFile> fboardFiles = board.getFboardFiles();
-      for (FboardFile file : fboardFiles) {
-        System.out.println(board.getNo());
-        file.setFboardNo(board.getNo());
-      } // for
-      fboardFileDao.insert(fboardFiles);
-    } // if
     return count;
   }
 
@@ -58,16 +50,6 @@ public class FboardServiceImpl implements FboardService {
     if (board.getContents() != null && board.getTitle() != null) {
       count = fboardDao.update(board);
     }
-
-    List<FboardFile> fboardFiles = board.getFboardFiles();
-    fboardFileDao.deleteByFboardNo(board.getNo());
-    if(fboardFiles != null) {
-      for(FboardFile file : fboardFiles) {
-        file.setFboardNo(board.getNo());
-      } // for
-      fboardFileDao.insert(board.getFboardFiles());
-    } // if
-
     return count;
   }
 
@@ -86,19 +68,9 @@ public class FboardServiceImpl implements FboardService {
   @Override
   public HashMap<String, Object> commentList(int no) {
     ArrayList<FboardComment> requestList = (ArrayList<FboardComment>) fboardDao.findCommentAll(no);
-    ArrayList<FboardComment> parentComment = new ArrayList<FboardComment>();
-    ArrayList<FboardComment> childComment = new ArrayList<FboardComment>();
     HashMap<String, Object> content = new HashMap<String, Object>();
 
-    for (FboardComment comment : requestList) {
-      if(comment.getParentId() == 0) {
-        parentComment.add(comment);
-      } else {
-        childComment.add(comment);
-      }
-    }
-    content.put("list",parentComment);
-    content.put("clist",childComment);
+    content.put("list",requestList);
 
     return content;
   }

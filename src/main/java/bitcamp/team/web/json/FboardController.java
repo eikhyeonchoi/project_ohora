@@ -31,12 +31,7 @@ public class FboardController {
   @Autowired HttpSession httpSession;
 
   @RequestMapping("add")
-  public Object add(
-      Fboard board,
-      @RequestParam(required = false) Part[] fboardFiles) throws Exception {
-    String uploadDir = servletContext.getRealPath("/upload/fboardfile");
-    ArrayList<FboardFile> files = new ArrayList<>();
-
+  public Object add(Fboard board) throws Exception {
     Member member = (Member) httpSession.getAttribute("loginUser");
     board.setMemberNo(member.getNo());
 
@@ -48,18 +43,6 @@ public class FboardController {
       if (board.getContents() == "")
         throw new Exception("내용을 입력하세요");
 
-      if(fboardFiles != null) {
-        for(Part part : fboardFiles) {
-          String filename = UUID.randomUUID().toString();
-          String filepath = uploadDir + "/" + filename;
-          part.write(filepath);
-
-          FboardFile fboardFile = new FboardFile();
-          fboardFile.setFilepath(filename);
-          files.add(fboardFile);
-        } // for
-        board.setFboardFiles(files);
-      } // if
       boardService.add(board);
       content.put("status", "success");
 
@@ -77,7 +60,6 @@ public class FboardController {
   public Object detail(int no) throws Exception {
     HashMap<String, Object> content = new HashMap<>();
     content.put("board",  boardService.get(no));
-    content.put("path",  servletContext.getRealPath("/upload/fboardfile"));
     return content;
   }
 
@@ -91,6 +73,7 @@ public class FboardController {
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
     } catch (Exception e) {
+      
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
@@ -130,15 +113,11 @@ public class FboardController {
   }
 
   @PostMapping("update")
-  public Object update(Fboard board,
-      @RequestParam(required = false) Part[] fboardFiles) throws Exception {
+  public Object update(Fboard board) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    ArrayList<FboardFile> files = new ArrayList<>();
 
     Member member = (Member) httpSession.getAttribute("loginUser");
     board.setMemberNo(member.getNo());
-
-    String uploadDir = servletContext.getRealPath("/upload/fboardfile");
 
     try {
       if (board.getTitle() == "")
@@ -147,18 +126,6 @@ public class FboardController {
       if (board.getContents() == "")
         throw new Exception("내용을 입력하세요");
 
-      if(fboardFiles != null) {
-        for(Part part : fboardFiles) {
-          String filename = UUID.randomUUID().toString();
-          String filepath = uploadDir + "/" + filename;
-          part.write(filepath);
-
-          FboardFile fboardFile = new FboardFile();
-          fboardFile.setFilepath(filename);
-          files.add(fboardFile);
-        } // for
-        board.setFboardFiles(files);
-      } // if
 
       if (boardService.update(board) == 0) 
         throw new Exception("해당 번호의 게시물이 없습니다.");

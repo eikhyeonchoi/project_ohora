@@ -17,19 +17,18 @@ var userNo = sessionStorage.getItem('no'), // 로그인한 사람
     memberNo = 0; // 글을 쓴 사람
 
 $(document).ready(function() {
+  
   $.get('../../app/json/fboard/detail?no=' + boardNo, function(obj) {
-    $('#memberNo').val(obj.board.member.nickName);
-    $('#title').val(obj.board.title);
-    $('#contents').val(obj.board.contents);
-    $('#createdDate').val(obj.board.createdDate);
-    $('#viewCount').val(obj.board.viewCount);
-
-    if (obj.board.fboardFiles[0].filepath != null) {
-      for(var file of obj.board.fboardFiles) {
-        $('#img-div').append("<img src='/bitcamp-team-project/upload/fboardfile/" 
-            + file.filepath + "' width='auto' height='auto'>");
-      }
-    }
+    console.log(obj);
+    
+    $('#fboard-id-img').attr('src', '/bitcamp-team-project/upload/memberfile/' + obj.board.member.filePath + "_thumb");
+    $('#fboard-title').text(obj.board.title);
+    $('#contents').html(obj.board.contents);
+    
+    
+    $('#fboard-id').html(obj.board.member.nickName);
+    $('#fboard-createdDate').html(obj.board.createdDate + "   |");
+    $('#fboard-viewCount').html(obj.board.viewCount + " 읽음");
     
     memberNo = obj.board.memberNo;
 
@@ -42,8 +41,8 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-detail', function(data){
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
+    console.log(obj);
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
-
 
     $(document.body).trigger({
       type: 'loaded-comment-list'
@@ -61,53 +60,16 @@ $(document.body).bind('loaded-detail', function(data){
     }) // get
   }); // delete click
 
-  $('#fboard-file-input').fileupload({
-    url: '/bitcamp-team-project/app/json/fboard/update', 
-    dataType: 'json',
-    sequentialUploads: true,
-    singleFileUploads: false,
-    add: function (e, data) {
-      updateBtn.off().click(function() {
-        data.formData = {
-            no: boardNo,
-            title: $('#title').val(),
-            contents: $('#contents').val()
-        };
-        data.submit();
-      });
-    },
-    done: function (e, data) {
-      console.log(data);
-      if(data.result.status == 'success'){
-        location.href='index.html';
-      } else { 
-        alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
-      }
-    }
-  }) // fileupload
-
 
   updateBtn.off().click(function(){
-    $.post('/bitcamp-team-project/app/json/fboard/update', {
-      no: boardNo,
-      title: $('#title').val(),
-      contents: $('#contents').val()
-    }, function(obj) {
-      if (obj.status == 'success') {
-        location.href = 'index.html';
-      } else {
-        alert('변경 실패 입니다.\n' +  obj.message);
-      }
-    }, "json") 
+    location.href = 'form.html?no=' + boardNo;
   }); // update click
-
-
+  
 }) // loaded-detail bind
 
 
 
 $(document.body).bind('loaded-comment-list', function() {
-
   callUserInform();
   
   $('#comment-add-btn').click(function() {
@@ -151,9 +113,6 @@ $(document.body).bind('loaded-comment-list', function() {
       }
     }, "json")
   }) // click
-
-
-
 }) // loaded-comment-list bind
 
 
@@ -164,13 +123,9 @@ function callUserInform(){
     $('.reply-add-btn').remove();
   }
   
-  if(userNo != memberNo) {
-    deleteBtn.hide();
-    updateBtn.hide();
-    $('#fboard-file-div').hide();
-
-    $('#title').prop('disabled', true);
-    $('#contents').prop('disabled', true);
+  if(userNo == memberNo) {
+    deleteBtn.css('visibility', 'visible');
+    updateBtn.css('visibility', 'visible');
   }
   
   $('.p-member-no').each(function(index, item) {
@@ -180,37 +135,6 @@ function callUserInform(){
       $(item).next().next().next().hide();
     }
   }) // each
-  
-  /*
-  $.get('/bitcamp-team-project/app/json/auth/user' ,function(obj) {
-    console.log(obj);
-    if(obj.status == 'fail') {
-      $('#fboard-comment-add-form').remove();
-      $('.reply-add-btn').remove();
-    }
-
-    userNickName = obj.user.nickName;
-    userNo = obj.user.no;
-    if(userNo != memberNo){
-      deleteBtn.hide();
-      updateBtn.hide();
-      $('#fboard-file-div').hide();
-
-      $('#title').prop('disabled', true);
-      $('#contents').prop('disabled', true);
-    }
-    
-    
-    $('.p-member-no').each(function(index, item) {
-      if($(item).attr('data-member-no') != userNo){
-        $(item).next().prop('disabled', true);
-        $(item).next().next().hide();
-        $(item).next().next().next().hide();
-      }
-    }) // each
-    
-  }); // get
-  */
 } // callUserInform
 
 

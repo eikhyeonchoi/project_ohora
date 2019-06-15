@@ -6,6 +6,12 @@ alter table faq change qctg_no faq_type_no int not null;
 alter table satisfy add eval varchar(300) null default '';
 
 
+// 6월 15일 추가
+ALTER TABLE fboard MODIFY conts mediumtext NOT NULL;
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 임시값
@@ -181,6 +187,7 @@ insert into fboard(member_no, titl, conts) values(1, '제목48','내용48');
 insert into fboard(member_no, titl, conts) values(1, '제목49','내용49');
 insert into fboard(member_no, titl, conts) values(1, '제목50','내용50');
 
+insert into member(email, pwd, name, tel, n_name, type, ban) values('m1@test.com', password('1'), '매니저1', '3', '매니저닉1', 1, false);
 insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com', password('1'), '유저1', '1', '유저닉1', 1, false);
 insert into member(email, pwd, name, tel, n_name, type, ban) values('user2@test.com', password('2'), '유저2', '1', '유저닉2', 1, false);
 insert into member(email, pwd, name, tel, n_name, type, ban) values('user3@test.com', password('3'), '유저3', '1', '유저닉3', 1, false);
