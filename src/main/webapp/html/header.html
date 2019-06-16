@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark ohr-header-nav">
+<!-- 
     <img id="ohr-header-logo" src="/bitcamp-team-project/upload/main/로고1.png">
+     -->
+     <a href="/bitcamp-team-project/index.html">Ohora</a>
  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
   aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
@@ -32,7 +35,14 @@
       href="/bitcamp-team-project/html/question/index.html">QnA</a></li>
     </ul></li>
   </ul>
-  <div id="bit-not-login-state" class="bit-invisible">
+  
+  <form class="form-inline my-2 my-lg-0">
+   <input class="form-control mr-sm-2" type="search" id="ohr-main-search-keyword" 
+   placeholder="검색어를 입력하세요" aria-label="Search">
+   <button type="button" class="btn btn-outline-light my-2 my-sm-0" id="ohr-header-search">검색</button>
+  </form>
+  
+    <div id="bit-not-login-state" class="bit-invisible">
    <a id="login-menu" class="btn btn-secondary btn-sm"
     href='/bitcamp-team-project/html/auth/login.html'>로그인</a>
   </div>
@@ -47,14 +57,20 @@
    <a id="bit-auth" href='/bitcamp-team-project/html/auth/signup.html'
     class="btn btn-secondary btn-sm">회원 가입</a>
   </div>
+  
+  <!-- 
+  <form id="ohr-search-form">
+  <input type="search" id="ohr-main-search" placeholder="검색어를 입력하세요">
+  </form>
+   -->
 
+<!-- 로그인 사용자 마이페이지 / 로그아웃 등의 회원정보창 드롭다운으로 보여주기(EJoo)
   <form class="form-inline my-2 my-lg-0">
    <input class="form-control mr-sm-2" type="search" id="ohr-main-search-keyword" 
    placeholder="search" aria-label="Search">
    <button type="button" class="btn btn-outline-light my-2 my-sm-0" id="ohr-header-search">Search</button>
   </form>
 
-<!-- 로그인 사용자 마이페이지 / 로그아웃 등의 회원정보창 드롭다운으로 보여주기(EJoo)
 <div class="dropdown" id="bit-login-state">
   <a href="#" role="button" id="login-username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   </a>

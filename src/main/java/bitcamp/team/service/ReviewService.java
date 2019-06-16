@@ -1,6 +1,9 @@
 package bitcamp.team.service;
 
+import java.util.HashMap;
 import java.util.List;
+
+import bitcamp.team.domain.ReviewComment;
 import bitcamp.team.domain.Review;
 
 public interface ReviewService {
@@ -19,4 +22,11 @@ public interface ReviewService {
   int update(Review review);
 
   int countByProdNo(int no);
+  
+  // 댓글
+  HashMap<String, Object> commentList(int no);
+  int addComment(ReviewComment ReviewComment);
+  int deleteComment(int no);
+  int updateComment(HashMap<String, Object> param);
+  List<ReviewComment> findReply(HashMap<String, Object> param);
 }

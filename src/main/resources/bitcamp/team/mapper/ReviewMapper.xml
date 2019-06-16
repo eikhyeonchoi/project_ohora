@@ -89,9 +89,24 @@
     </association>
   </resultMap>
   
+    <resultMap type="reviewComment" id="fboardCommentMap">
+    <id column="rv_cmt_no" property="no" />
+    <result column="member_no" property="memberNo" />
+    <result column="rv_no" property="reviewNo" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="parent_id" property="parentId" />
+    <result column="depth" property="depth" />
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="no" />
+      <result column="n_name" property="nickName" />
+    </association>
+    
+  </resultMap>
+  
   <select id="findProd" resultMap="reviewMap" parameterType="string">
     select DISTINCT
-      (select count(*) from reciew where product_no = 290, 291) as rv_count,
       r.rv_no as rno,
       r.product_no,
       p.name,
@@ -155,6 +170,10 @@
         and conts like #{pattern1}
       </if>
       <if test="searchType == 'all' and keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and r.name like #{pattern1} or conts like #{pattern1}
+      </if>
+      <if test="searchType == 'search' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
         and r.name like #{pattern1} or conts like #{pattern1}
       </if>
@@ -257,6 +276,64 @@
     where product_no = #{_parameter}
   </select>
 
+<select id="findCommentAll" resultMap="fboardCommentMap" parameterType="int">
+    select
+      vc.rv_cmt_no,
+      vc.member_no,
+      vc.conts,
+      vc.parent_id,
+      vc.cdt,
+      m.n_name
+    from
+      review_cmt vc
+      join member m on m.member_no=vc.member_no
+    where
+      vc.rv_no = #{value}
+  </select>
+  
+  <insert id="insertComment" parameterType="fboardComment" useGeneratedKeys="true" keyProperty="no">
+    insert into review_cmt(member_no, rv_no, conts, depth, parent_id)
+    values(#{memberNo}, #{reviewNo}, #{contents}, #{depth}, #{parentId})
+  </insert>
+  
+  <delete id="deleteComment" parameterType="int">
+    delete from
+      reveiw_cmt
+    where
+      rv_cmt_no = #{value}
+  </delete>
+  
+  <delete id="deleteCommentReview" parameterType="int">
+    delete from
+      reveiw_cmt
+    where
+      rv_no = #{value}
+  </delete>
+  
+  <update id="updateComment" parameterType="map">
+    update
+      review_cmt
+    set
+      conts=#{contents},
+      cdt=#{updateDate}
+    where
+      fb_cmt_no=#{no}
+  </update>
+  
+  <select id="findReply" resultMap="fboardCommentMap" parameterType="map">
+    select
+      rc.rv_cmt_no,
+      rc.member_no,
+      rc.conts,
+      rc.parent_id,
+      rc.cdt,
+      m.n_name
+    from
+      review_cmt rc
+      join member m on m.member_no=rc.member_no
+    where
+      rc.rv_no=#{fboardNo} and rc.parent_id=#{parentNo}
+  </select>
 
 
 </mapper>
