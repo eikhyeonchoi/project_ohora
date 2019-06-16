@@ -31,6 +31,8 @@
           class="form-check-label" for="saveEmail">이메일 저장</label>
       </div>
       <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+     </fb:login-button>
     </form>
   </div>
   <!-- .container -->

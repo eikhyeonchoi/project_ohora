@@ -292,6 +292,21 @@ public class MemberController {
     return content;
   };
 
+  @RequestMapping("facebook")
+  public Object facebook(Object response) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      System.out.println(response);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  };
+
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
     int dw = 50, dh = 50; 
