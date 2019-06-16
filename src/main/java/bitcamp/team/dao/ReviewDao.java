@@ -1,8 +1,12 @@
 package bitcamp.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import bitcamp.team.domain.FboardComment;
 import bitcamp.team.domain.Review;
+import bitcamp.team.domain.ReviewComment;
 
 public interface ReviewDao {
   List<Review> findProd(String keyword);
@@ -24,4 +28,11 @@ public interface ReviewDao {
   int deleteByProductNo(int no);
 
   int countByProdNo(int no);
+  
+  //댓글
+  List<ReviewComment> findCommentAll(int no);
+  int insertComment(ReviewComment reviewComment);
+  int deleteComment(int no);
+  int updateComment(HashMap<String, Object> param);
+  List<ReviewComment> findReply(HashMap<String, Object> paramMap);
 }

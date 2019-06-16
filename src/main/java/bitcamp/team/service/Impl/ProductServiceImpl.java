@@ -173,7 +173,7 @@ public class ProductServiceImpl implements ProductService {
 
     param.put("keyword", keyword);
     param.put("listType", listType);
-    return productDao.findAll2(param);
+    return productDao.findAll(param);
   }
 
 }
