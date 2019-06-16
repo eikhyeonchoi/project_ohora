@@ -42,6 +42,21 @@
       </collection>
     </association>
   </resultMap>
+  
+  <resultMap type="question" id="questionTypeMap2">
+    <id column="q_no" property="no" />
+    <result column="qtype_no" property="questionNo" />
+    <result column="member_no" property="memberNo" />
+    <result column="titl" property="title" />
+    <result column="conts" property="contents" />
+    <result column="cdt" property="createdDate" />
+    <result column="status" property="status" />
+    <association property="answer" javaType="answer">
+      <id column="ans_no" property="no"/>
+      <result column="answerConts" property="content"/>
+      <result column="answerDate" property="createdDate"/>
+    </association>
+  </resultMap>
 
   <resultMap type="questionType" id="questionCategoryMap">
     <id column="qtype_no" property="no"/>
@@ -218,6 +233,18 @@
     where q_no = #{value}
   </delete>
   
+ <select id="findQno" resultMap="questionTypeMap2" parameterType="int">
+  select 
+    q.q_no,
+    a.ans_no
+  from
+    question q
+  left outer join
+    answer a
+  on q.q_no = a.q_no
+    where 
+  q.member_no = #{value}
+  </select>
 </mapper>
 
 

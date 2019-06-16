@@ -13,4 +13,8 @@ public interface QuestionService {
   Question get(int no);
   Question getFile(int no);
   int delete(int no, String status);
+  int delete2(List<Question> qNo);
+  List<Question> findQno(int memberNo);
+
+
 }

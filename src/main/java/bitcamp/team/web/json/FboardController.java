@@ -1,11 +1,8 @@
 package bitcamp.team.web.json;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
-import bitcamp.team.domain.FboardFile;
 import bitcamp.team.domain.Member;
 import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
@@ -73,7 +69,7 @@ public class FboardController {
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
     } catch (Exception e) {
-      
+
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }

@@ -2,6 +2,7 @@ package bitcamp.team.service.Impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.MemberDao;
 import bitcamp.team.domain.Member;
@@ -105,12 +106,10 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.updateTel(member);
   }
 
-
   @Override
   public int updatePhoto(Member member) {
     return memberDao.updatePhoto(member);
   }
-
 
   @Override
   public int deletePhoto(int no) {
@@ -122,5 +121,9 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findByNameEmail(member);
   }
 
-
+  @Override
+  public int updateDeleteMember(Map<String, Object> map) {
+    return memberDao.updateDeleteMember(map);
+  }
+  
 }

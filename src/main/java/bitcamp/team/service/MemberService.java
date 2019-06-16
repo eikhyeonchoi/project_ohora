@@ -2,6 +2,7 @@ package bitcamp.team.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import bitcamp.team.domain.Member;
 
 public interface MemberService {
@@ -20,6 +21,7 @@ public interface MemberService {
   int updateNickname(Member member);
   int updateTel(Member member);
   int updatePhoto(Member member);
+  int updateDeleteMember(Map<String, Object> map);
   int deletePhoto(int no);
 
 }

@@ -12,7 +12,7 @@ public interface ReviewDao {
   Review findByNo2(int no);
   
   List<Review> findMyPageReview(int no);
-
+  
   int increaseCount(int no);
 
   int delete(int no);

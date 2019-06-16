@@ -15,4 +15,5 @@ public interface QuestionDao {
   Question findFileByNo(int no);
   int status(int no);
   int delete(int no);
+  List<Question> findQno(int memberNo);
 }

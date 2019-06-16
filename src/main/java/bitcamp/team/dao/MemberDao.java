@@ -21,6 +21,7 @@ public interface MemberDao {
   int updateNickname(Member member);
   int updateTel(Member member);
   int updatePhoto(Member member);
+  int updateDeleteMember(Map<String, Object> map);
   int deletePhoto(int no);
 
 }

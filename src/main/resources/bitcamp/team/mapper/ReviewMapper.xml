@@ -257,6 +257,4 @@
     where product_no = #{_parameter}
   </select>
 
-
-
 </mapper>

@@ -8,7 +8,6 @@ import bitcamp.team.dao.FboardDao;
 import bitcamp.team.dao.FboardFileDao;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.FboardComment;
-import bitcamp.team.domain.FboardFile;
 import bitcamp.team.service.FboardService;
 
 @Service

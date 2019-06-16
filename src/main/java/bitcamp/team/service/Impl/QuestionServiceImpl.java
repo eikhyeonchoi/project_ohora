@@ -86,4 +86,23 @@ public class QuestionServiceImpl implements QuestionService {
     return questionDao.delete(no);
   }
 
+  @Override
+  public int delete2(List<Question> qNo) {
+    for (int i = 0; i < qNo.size(); i++) {
+      if (qNo.get(i).getAnswer() != null) {
+        int ansNo = qNo.get(i).getAnswer().getNo();
+        answerFileDao.deleteByAnswerNo(ansNo);
+        answerDao.deleteByQnsNo(qNo.get(i).getNo());
+      }
+      questionFileDao.deleteByQnsNo(qNo.get(i).getNo());
+      questionDao.delete(qNo.get(i).getNo());
+    }
+    return 1;
+  }
+
+  @Override
+  public List<Question> findQno(int memberNo) {
+    return questionDao.findQno(memberNo);
+  }
+
 }

@@ -14,8 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.Member;
+import bitcamp.team.domain.Question;
+import bitcamp.team.domain.Review;
+import bitcamp.team.service.AnswerService;
+import bitcamp.team.service.FboardService;
 import bitcamp.team.service.MemberService;
+import bitcamp.team.service.QuestionService;
+import bitcamp.team.service.ReviewService;
+import bitcamp.team.service.TipHistoryService;
+import bitcamp.team.service.TipService;
 import bitcamp.team.web.Authentication.Gmail;
 import bitcamp.team.web.Authentication.Gmail2;
 import bitcamp.team.web.Authentication.RandomNo;
@@ -28,6 +37,14 @@ public class MemberController {
 
   @Autowired MemberService memberService;
   @Autowired ServletContext servletContext;
+
+  @Autowired QuestionService questionService;
+  @Autowired AnswerService answerService;
+  @Autowired FboardService fboardService;
+  @Autowired ReviewService reviewService;
+  @Autowired TipService tipService;
+  @Autowired TipHistoryService TipHistoryService;
+
 
   @PostMapping("add")
   public Object add(Member member, HttpSession session) throws Exception {
@@ -178,7 +195,7 @@ public class MemberController {
       member.setFilePath(filename);
       memberService.updatePhoto(member);
       content.put("status", "success");
-      
+
       try {
         makeThumbnail(filepath);
       } catch(Exception e) {
@@ -234,7 +251,7 @@ public class MemberController {
       String emailStatus = gmail2.gmailSend(member.getEmail(), member.getName(), newPassword[0]);
       if (!emailStatus.equals("success"))
         throw new Exception("메일 전송중 오류가 발생했습니다.");
-      
+
       memberService.updatePassword2(member.getEmail() ,newPassword[0]);
       content.put("status", "success");
 
@@ -244,8 +261,36 @@ public class MemberController {
     }
     return content;
   };
-  
-  
+
+  @GetMapping("secessionMember")
+  public Object secessionMember(int memberNo) {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> map = new HashMap<>();
+    try {
+      System.out.println("회원번호" + memberNo);
+      List<Question> qNo = questionService.findQno(memberNo);
+      questionService.delete2(qNo);
+      List<Fboard> fNo = fboardService.findMyPost(memberNo);
+      for (int i = 0; i < fNo.size(); i++) {
+        fboardService.delete(fNo.get(i).getNo());
+      }
+      List<Review> rNo = reviewService.findMyPageReview(memberNo);
+      for (int i = 0; i < rNo.size(); i++) {
+        reviewService.delete(rNo.get(i).getNo());
+      }
+      String ranStr = UUID.randomUUID().toString();
+      map.put("memberNo", memberNo);
+      map.put("ranStr", ranStr);
+      memberService.updateDeleteMember(map);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      e.printStackTrace();
+      content.put("error", e.getMessage());
+    }
+    return content;
+  };
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
@@ -260,8 +305,8 @@ public class MemberController {
     File thumbFile = new File(filePath + "_thumb");
     ImageIO.write(destImg, "jpg", thumbFile);
   } // makeThumbnail
-  
-  
+
+
 }
 
 

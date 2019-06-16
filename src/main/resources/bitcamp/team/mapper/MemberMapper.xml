@@ -161,6 +161,16 @@
       member_no = #{value}
   </update>
   
+   <update id="updateDeleteMember" parameterType="map"> 
+    update 
+      member
+    set
+      email = #{ranStr},
+      n_name = #{ranStr}
+    where 
+      member_no = #{memberNo}
+  </update>
+  
   <select id="findByNameEmail" resultMap="memberMap" parameterType="member">
     select
   <include refid="default-columns"/>
