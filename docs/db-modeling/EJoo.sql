@@ -14,3 +14,5 @@ ALTER TABLE notice
 ALTER TABLE review
   MODIFY COLUMN conts mediumtext NOT NULL;
 
+ALTER TABLE review
+  ADD (prod_rv_no int);

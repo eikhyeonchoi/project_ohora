@@ -61,6 +61,7 @@ public class ReviewController {
     List<Review> review = reviewService.get(no, keyword, searchType);
     Product product = productService.get(no);
     Map<String, Object> satisfy = satisfyService.get(no);
+
     try {
       map.put("list", review);
       map.put("satisfy", satisfy);
@@ -96,10 +97,12 @@ public class ReviewController {
     HashMap<String, Object> content = new HashMap<>();
     try {
       Review review = reviewService.get2(no);
-
       Member member = (Member) httpSession.getAttribute("loginUser");
+      System.out.println(review.getMemberNo() != member.getNo());
+      System.out.println(review.getMemberNo());
+      System.out.println(member.getNo());
 
-      if (review.getMemberNo() != member.getNo()) {
+      if (review.getMemberNo() != member.getNo() && Integer.parseInt(member.getType()) != 3) {
         throw new RuntimeException("해당 글을 쓴 회원만 지울 수 있습니다.");
       }
       if (reviewService.delete(no) == 0)
@@ -121,9 +124,12 @@ public class ReviewController {
       Member member = (Member) httpSession.getAttribute("loginUser");
       review.setMemberNo(member.getNo());
 
+      if (member.getNo() == 0) {
+        throw new RuntimeException("글을 쓸 권한이 없습니다.\n로그인 후 등록해주세요");
+      }
+
       if (review.getTitle() == "") {
         throw new RuntimeException("제목을 입력해 주세요");
-
       } else if (review.getContents() == "") {
         throw new RuntimeException("내용을 입력해 주세요");
       }
@@ -132,6 +138,16 @@ public class ReviewController {
         throw new RuntimeException("제목 길이는 40자 까지 가능합니다");
       }
 
+      List<Review> list = reviewService.get(review.getProductNo(), "", "");
+      System.out.println(list.size() + "**");
+      if (list.size() == 0) {
+        System.out.println("11");
+        review.setrNo(1);
+      } else {
+        review.setrNo((list.get(list.size() - 1).getrNo()) + 1);
+        System.out.println(list.get(list.size() - 1).toString());
+      }
+      System.out.println(review.toString());
       reviewService.add(review);
       content.put("status", "success");
 

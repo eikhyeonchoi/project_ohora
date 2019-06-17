@@ -51,13 +51,23 @@ function loadList() {
         $('#ohr-product-manufacturer-name').html('');
         $('#ohr-product-manufacturer-name').append(manuName);
 
+        /*
         $('.review-a-class').click((e) => {
           e.preventDefault();
           window.location.href = 'view.html?no=' +  $(e.target).attr('data-no');
         });
+        */
+        
         $(document.body).trigger('loaded-list');
       })
 };
+
+$(document.body).bind('loaded-list', function() {
+  $('.review-tr-class').click((e) => {
+    window.location.href = 'view.html?no=' +  $(e.target).parent().attr('data-no');
+  });
+});
+
 
 loadList();
 

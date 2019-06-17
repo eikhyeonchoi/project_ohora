@@ -8,26 +8,26 @@ commentListGenerator = Handlebars.compile(commentListSrc);
 
 
 ($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
-	console.log(data)
-	$('#review-prod-no').val(data.productNo),
+  console.log(data)
+  $('#review-prod-no').val(data.productNo),
   $('#review-no').val(data.no),
   $('#review-id').html(data.member.nickName),
   $('#review-title').html(data.title),
   $('#review-contents').html(data.contents),
   $('#review-createdDate').html(data.createdDate + '   |'),
   $('#review-viewCount').html(data.viewCount + ' 읽음');
-	
-  if (name == data.member.name || type == 3) {
+
+  memberNo = data.memberNo;
+
+  if (userNo == data.memberNo || type == 3) {
     $('#update-btn').show();
     $('#delete-btn').show();
   }
-  
-  memberNo = data.memberNo;
-  
+
   $(document.body).trigger({
-      type: 'loaded-detail'
-    }) // trigger
-  
+    type: 'loaded-detail'
+  }) // trigger
+
 }));
 
 //삭제
@@ -35,8 +35,8 @@ $('#delete-btn').click(() => {
   $.getJSON('/bitcamp-team-project/app/json/review/delete?no=' + detailNo, function(data) {
   })
   .done(function(data) {
-	  location.href = 'prodView.html?no=' + $('#review-prod-no').val();
-    }
+    location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+  }
   ).fail(function(data) {
     alert('삭제 실패입니다!\n' + data.responseText);
   })
@@ -44,7 +44,7 @@ $('#delete-btn').click(() => {
 
 //수정
 $('#update-btn').click(() => {
-	location.href = 'form.html?no=' + $('#review-prod-no').val() + '&rNo=' + $('#review-no').val();
+  location.href = 'form.html?no=' + $('#review-prod-no').val() + '&rNo=' + $('#review-no').val();
 });
 
 //목록
@@ -76,120 +76,94 @@ function bytesHandler(obj){
 }
 
 $(document.body).bind('loaded-detail', function(data){
-	  $.get('/bitcamp-team-project/app/json/review/commentList?no=' + detailNo ,function(obj) {
-	    $(commentListGenerator(obj)).appendTo($('.comment-child'));
+  $.get('/bitcamp-team-project/app/json/review/commentList?no=' + detailNo ,function(obj) {
+    $(commentListGenerator(obj)).appendTo($('.comment-child'));
 
 
-	    $(document.body).trigger({
-	      type: 'loaded-comment-list'
-	    });
-	  }); // get
+    $(document.body).trigger({
+      type: 'loaded-comment-list'
+    });
+  }); // get
 
-
-	  $('#delete-btn').click(() => {
-	    $.getJSON('../../app/json/review/delete?no=' + detailNo, function(obj) {
-	      if (obj.status == 'success') {
-	        location.href = "index.html";
-	      } else {
-	        alert('삭제 실패 입니다.\n' +  obj.message);
-	      }
-	    }) // get
-	  }); // delete click
-
-
-	  $('#update-btn').off().click(function(){
-	    $.post('/bitcamp-team-project/app/json/review/update', {
-	      no: detailNo,
-	      title: $('#title').val(),
-	      contents: $('#contents').val()
-	    }, function(obj) {
-	      if (obj.status == 'success') {
-	        location.href = 'index.html';
-	      } else {
-	        alert('변경 실패 입니다.\n' +  obj.message);
-	      }
-	    }, "json") 
-	  }); // update click
-
-
-	}) // loaded-detail bind
+}) // loaded-detail bind
 
 
 
-	$(document.body).bind('loaded-comment-list', function() {
+$(document.body).bind('loaded-comment-list', function() {
 
-	  callUserInform();
-	  
-	  $('#comment-add-btn').click(function() {
-	    $.post('/bitcamp-team-project/app/json/review/addComment' , {
-	      reviewNo: detailNo,
-	      contents: $('#comment-contents').val(),
-	      depth: 0,
-	      parentId: 0
-	    }, function(obj) {
-	      if (obj.status == 'success') {
-	        location.reload();
-	      } else {
-	        alert('등록 실패 입니다.\n' +  obj.message);
-	      }
-	    }, "json") // post
-	  }) // click
+  callUserInform();
 
-
-	  $('.comment-delete-btn').click(function(e) {
-	    $.get('/bitcamp-team-project/app/json/review/deleteComment?no=' + $(e.target).attr('data-no') , function(obj) {
-	      if (obj.status == 'success') {
-	        location.reload();
-	      } else {
-	        alert('삭제 실패 입니다.\n' +  obj.message);
-	      }
-	    }, "json");
-
-	  }); // click
-	  
-
-	  $('.comment-update-btn').click(function(e) {
-	    $.post('/bitcamp-team-project/app/json/review/updateComment', {
-	      no: $(e.target).attr('data-no'),
-	      updateDate: getCurrentTime(),
-	      contents: $(e.target).prev().val()
-	    }, function(obj) {
-	      if (obj.status == 'success') {
-	        location.reload();
-	      } else {
-	        alert('변경 실패 입니다.\n' +  obj.message);
-	      }
-	    }, "json")
-	  }) // click
+  $('#comment-add-btn').click(function() {
+    $.post('/bitcamp-team-project/app/json/review/addComment' , {
+      reviewNo: detailNo,
+      contents: $('#comment-contents').val(),
+      depth: 0,
+      parentId: 0
+    }, function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('등록 실패 입니다.\n' +  obj.message);
+      }
+    }, "json") // post
+  }) // click
 
 
+  $('.comment-delete-btn').click(function(e) {
+    $.get('/bitcamp-team-project/app/json/review/deleteComment?no=' + $(e.target).attr('data-no') , function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('삭제 실패 입니다.\n' +  obj.message);
+      }
+    }, "json");
 
-	}) // loaded-comment-list bind
+  }); // click
+
+
+  $('.comment-update-btn').click(function(e) {
+    $.post('/bitcamp-team-project/app/json/review/updateComment', {
+      no: $(e.target).attr('data-no'),
+      updateDate: getCurrentTime(),
+      contents: $(e.target).prev().val()
+    }, function(obj) {
+      if (obj.status == 'success') {
+        location.reload();
+      } else {
+        alert('변경 실패 입니다.\n' +  obj.message);
+      }
+    }, "json")
+  }) // click
 
 
 
-	function callUserInform(){
-	  if(sessionStorage.getItem('no') == null) {
-	    $('#fboard-comment-add-form').remove();
-	    $('.reply-add-btn').remove();
-	  }
-	  
+}) // loaded-comment-list bind
+
+
+
+function callUserInform(){
+  if(sessionStorage.getItem('no') == null) {
+    $('#fboard-comment-add-form').remove();
+    $('.reply-add-btn').remove();
+  }
+
+  /*
 	  if(userNo != memberNo) {
 		  $('#delete-btn').hide();
 		  $('#update-btn').hide();
-	    $('#fboard-file-div').hide();
 
 	    $('#title').prop('disabled', true);
 	    $('#contents').prop('disabled', true);
 	  }
-	  
-	  $('.p-member-no').each(function(index, item) {
-	    if($(item).attr('data-member-no') != userNo){
-	      $(item).next().prop('disabled', true);
-	      $(item).next().next().hide();
-	      $(item).next().next().next().hide();
-	    }
-	  }) // each
+   */
+
+  $('.p-member-no').each(function(index, item) {
+    if($(item).attr('data-member-no') != userNo){
+      $(item).next().prop('disabled', true);
+      $(item).next().next().hide();
+      $(item).next().next().next().hide();
+    }
+  }) // each
 }
 
 function getCurrentTime() {

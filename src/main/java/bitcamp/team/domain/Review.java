@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Review {
   private int no;
+  private int rNo; // prodView에서 보일 번호
   private int productNo;
   private int memberNo;
   private String title;
@@ -16,13 +17,19 @@ public class Review {
   private Product product;
   private Member member;
 
-
-
   @Override
   public String toString() {
-    return "Review [no=" + no + ", productNo=" + productNo + ", memberNo=" + memberNo + ", title="
-        + title + ", contents=" + contents + ", createdDate=" + createdDate + ", viewCount="
-        + viewCount + ", product=" + product + ", member=" + member + "]";
+    return "Review [no=" + no + ", rNo=" + rNo + ", productNo=" + productNo + ", memberNo="
+        + memberNo + ", title=" + title + ", contents=" + contents + ", createdDate=" + createdDate
+        + ", viewCount=" + viewCount + ", product=" + product + ", member=" + member + "]";
+  }
+
+  public int getrNo() {
+    return rNo;
+  }
+
+  public void setrNo(int rNo) {
+    this.rNo = rNo;
   }
 
   public int getNo() {

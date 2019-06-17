@@ -66,9 +66,9 @@
 
   <script id="select-template" type="text/x-handlebars-template">
   {{#each list}}
-  <tr>
+  <tr class='review-tr-class' data-no='{{no}}'>
     <td>{{no}}</td>
-    <td><a class='review-a-class' href='#' data-no='{{no}}'>{{title}}</a></td>
+    <td>{{title}}</td>
     <td>{{member.nickName}}</a></td>
     <td>{{createdDate}}</td>
     <td>{{viewCount}}</td>
