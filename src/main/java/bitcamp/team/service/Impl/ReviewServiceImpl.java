@@ -24,23 +24,8 @@ public class ReviewServiceImpl implements ReviewService {
   public List<Review> get(int no, String keyword, String searchType) {
     HashMap<String, Object> param = new HashMap<>();
     param.put("selectNo", no);
-    switch (searchType) {
-      case "name":
-    	  param.put("name", searchType);
-        break;
-      case "title":
-    	  param.put("title", searchType);
-        break;
-      case "contents":
-    	  param.put("contents", searchType);
-        break;
-      case "all":
-    	  param.put("all", searchType);
-        break;
-      case "search":
-    	  param.put("search", searchType);
-        break;
-      default:;
+    if(searchType != null && !searchType.equals("")) {
+    	param.put("searchType", searchType);
     }
     if (keyword != null) {
       if (!keyword.equals("")) {

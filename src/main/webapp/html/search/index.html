@@ -82,7 +82,7 @@
         <th scope="col">제품명</th>
         <th scope="col">제조사명</th>
         <th scope="col">제목</th>
-        <th scope="col">내용</th>
+        <th scope="col">작성일</th>
        </tr>
       </thead>
       <tbody id="ohr-review-tbody"></tbody>
@@ -147,7 +147,7 @@
   <td scope='row'>{{product.name}}</th>
   <td>{{product.manufacturer.name}}</td>
   <td><a class='bit-rev-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td><p>{{contents}}</p></td>
+  <td><p>{{createdDate}}</p></td>
 </tr>
 {{/each}}
 </script>
@@ -157,7 +157,7 @@
 <tr>
   <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
   <td>{{product.productSmallCategory.name}}</td>
-  <td><a class='bit-tip-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td><a class='bit-tip-view-link' href='#' data-no='{{no}}'>{{product.name}}</a></td>
   <td>{{product.manufacturer.name}}</td>
 </tr>
 {{/each}}

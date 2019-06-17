@@ -39,6 +39,8 @@ $(document).ready(function() {
       }
     });
     
+    var revTrGenerator = Handlebars.compile($('#tr-template-review').html());
+    
     $('#pagination-container-review').pagination({
         dataSource: obj.revList,
         locator: 'revList',
@@ -47,9 +49,11 @@ $(document).ready(function() {
         callback: function(data, pagination) {
           $('#ohr-review-tbody').children().remove();
           var pageObj = {revList: data};
-          $(manuTrGenerator(pageObj)).appendTo($('#ohr-review-tbody'));
+          $(revTrGenerator(pageObj)).appendTo($('#ohr-review-tbody'));
         }
       });
+    
+    var tipTrGenerator = Handlebars.compile($('#tr-template-tip').html());
     
     $('#pagination-container-tip').pagination({
         dataSource: obj.tipList,
@@ -59,7 +63,7 @@ $(document).ready(function() {
         callback: function(data, pagination) {
           $('#ohr-tip-tbody').children().remove();
           var pageObj = {tipList: data};
-          $(manuTrGenerator(pageObj)).appendTo($('#ohr-tip-tbody'));
+          $(tipTrGenerator(pageObj)).appendTo($('#ohr-tip-tbody'));
         }
       });
 
