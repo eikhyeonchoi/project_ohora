@@ -12,6 +12,7 @@
     <result column="conts" property="contents" />
     <result column="cdt" property="createdDate" />
     <result column="cnt" property="viewCount" />
+    <result column="prod_rv_no" property="rNo" />
 
     <association property="member" javaType="member">
       <id column="member_no" property="memberNo" />
@@ -144,6 +145,7 @@
       r.product_no,
       r.cdt,
       r.cnt,
+      r.prod_rv_no,
       m.n_name as nickName,
       p.name,
       p.manufac_no,
@@ -176,6 +178,8 @@
       <if test="searchType == 'search' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
         and r.name like #{pattern1} or conts like #{pattern1}
+      </if>
+      <if test="searchType == '' and keyword == ''">
       </if>
     </where>
     order by

@@ -22,8 +22,6 @@ public class ReviewServiceImpl implements ReviewService {
   public List<Review> get(int no, String keyword, String searchType) {
     HashMap<String, Object> params = new HashMap<>();
     params.put("selectNo", no);
-    params.put("searchType", searchType);
-    params.put("keyword", keyword);
     switch (searchType) {
       case "name":
         params.put("name", searchType);
@@ -68,6 +66,7 @@ public class ReviewServiceImpl implements ReviewService {
 
   @Override
   public int delete(int no) {
+    reviewDao.deleteCommentReview(no);
     return reviewDao.delete(no);
   }
 

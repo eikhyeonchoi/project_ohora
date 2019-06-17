@@ -18,11 +18,13 @@ function loadList(listType) {
     cardDiv.html('');
     $(trGenerator(obj)).appendTo(cardDiv);
 
+    console.log(parseInt(cardDiv.css('width').split('.')[0]));
+    
     cardDiv.slick({
       infinite: false,
       autoplay: false, 
-      slidesToShow: 5,
-      slidesToScroll: 3,
+      slidesToShow: 3,
+      slidesToScroll: 2,
       arrows: true
     });
     

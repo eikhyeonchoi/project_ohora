@@ -53,7 +53,6 @@ $(document.body).bind('loaded-user', function(obj){
   $('#add-btn').click(function() {
     if(reviewNo == '') {
       $.post('/bitcamp-team-project/app/json/review/add', {
-        memberNo: userNo,
         productNo: productNo,
         title: $('#review-title').val(),
         contents: $(".ql-editor").html()
