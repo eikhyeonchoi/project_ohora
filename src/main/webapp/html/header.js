@@ -45,6 +45,8 @@ $(document.body).bind('loaded.header', function(data) {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
+    console.log("호출");
+    console.log(data);
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();

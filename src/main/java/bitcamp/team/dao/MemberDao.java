@@ -23,5 +23,6 @@ public interface MemberDao {
   int updatePhoto(Member member);
   int updateDeleteMember(Map<String, Object> map);
   int deletePhoto(int no);
-
+  int authFacebook(Map<String, Object> fbMap);
+  int authUpdateFacebook(Map<String, Object> fbMap);
 }

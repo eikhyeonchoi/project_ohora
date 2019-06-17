@@ -1,6 +1,7 @@
 package bitcamp.team.web.json;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -293,14 +294,32 @@ public class MemberController {
   };
 
   @RequestMapping("facebook")
-  public Object facebook(Object response) throws Exception {
-    HashMap<String,Object> content = new HashMap<>();
-
+  public Object facebook(String facebookId, String facebookName, String facebookPhoto) throws Exception {
+    HashMap<String,Object> content = new HashMap<>(); // 리턴할 해쉬맵
+    HashMap<String,Object> fbMap = new HashMap<>(); // DB에 파라미터로 넣을 해쉬맵
+    this.uploadDir = servletContext.getRealPath("/upload/memberfile"); // 사진 경로
+    String filename = UUID.randomUUID().toString(); // 사진 이름
+    String fbuserInfo = UUID.randomUUID().toString().replace("-", "").substring(0,10); // email,pwd 등을 설정할 랜덤값
+    String fbMemberId = facebookId + "@facebook.user"; // 페이스북 회원 id
     try {
-      System.out.println(response);
+      snsImageWrite(facebookPhoto, uploadDir, filename); // 사진 url을 파일로만들어서 지정한경로에 write하는 함수
+      fbMap.put("fbMemberId", fbMemberId); 
+      fbMap.put("facebookName", facebookName);
+      fbMap.put("filename", filename);
+      fbMap.put("fbuserInfo", fbuserInfo);
+      Member fbMember = memberService.getEmail2(fbMemberId);
+      if (fbMember == null) { // 페북 로그인시 처음 로그인하는 id인 경우
+        memberService.authFacebook(fbMap);
+      } else { // 페북 로그인시 이미 로그인했었던 id 일경우
+        fbMap.put("fbMemberNo", fbMember.getNo());
+        memberService.authUpdateFacebook(fbMap);
+      }
+
+
       content.put("status", "success");
 
     } catch (Exception e) {
+      e.printStackTrace();
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
@@ -321,6 +340,13 @@ public class MemberController {
     ImageIO.write(destImg, "jpg", thumbFile);
   } // makeThumbnail
 
+
+  private void snsImageWrite(String src, String uploadDir, String filename) throws Exception  {
+    URL url = new URL(src);
+    BufferedImage image = ImageIO.read(url);
+    File file = new File(uploadDir + "/" + filename + "_thumb");
+    ImageIO.write(image, "png", file);
+  }
 
 }
 

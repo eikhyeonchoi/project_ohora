@@ -181,6 +181,24 @@
       email = #{email}
   </select>
   
+  <insert id="authFacebook" parameterType="map">
+    insert into member (email, pwd, name, tel, n_name, type, ban, file_path, sns_type)
+    values
+    (#{fbMemberId}, password(#{fbuserInfo}), #{fbuserInfo},
+     #{fbuserInfo},  #{facebookName}, 1, 0, #{filename}, 4)
+  </insert>
+  
+  <update id="authUpdateFacebook" parameterType="map"> 
+    update 
+      member
+    <set>
+      <if test="facebookName != null">n_name = #{facebookName}</if>,
+      <if test="filename != null">file_path = #{filename}</if>,
+    </set>
+    where 
+      member_no = #{fbMemberNo}
+  </update>
+  
 </mapper>
 
 

@@ -90,7 +90,7 @@ public class MemberServiceImpl implements MemberService {
 
     return memberDao.updatePassword2(paramMap);
   }
-  
+
   @Override
   public int updateName(Member member) {
     return memberDao.updateName(member);
@@ -124,6 +124,16 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public int updateDeleteMember(Map<String, Object> map) {
     return memberDao.updateDeleteMember(map);
+  }
+
+  @Override
+  public int authFacebook(Map<String, Object> fbMap) {
+    return memberDao.authFacebook(fbMap);
+  }
+  
+  @Override
+  public int authUpdateFacebook(Map<String, Object> fbMap) {
+    return memberDao.authUpdateFacebook(fbMap);
   }
   
 }
