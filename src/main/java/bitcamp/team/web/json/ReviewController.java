@@ -80,8 +80,8 @@ public class ReviewController {
     HashMap<String, Object> contents = new HashMap<>();
 
     Review review = reviewService.get2(no);
-    Member member = (Member) httpSession.getAttribute("loginUser");
-    review.setMemberNo(member.getNo());
+
+    System.out.println(review.toString());
 
     try {
       contents.put("review", review);
@@ -145,6 +145,7 @@ public class ReviewController {
         review.setrNo((list.get(0).getrNo()) + 1);
       }
 
+      System.out.println(review.toString());
       reviewService.add(review);
       content.put("status", "success");
 

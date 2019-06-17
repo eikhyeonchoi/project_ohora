@@ -7,7 +7,7 @@
   <resultMap type="review" id="reviewMap">
     <id column="rno" property="no" />
     <result column="product_no" property="productNo" />
-    <result column="member_no" property="memberNo" />
+    <result column="memberNo" property="memberNo"/>
     <result column="reviewName" property="title" />
     <result column="conts" property="contents" />
     <result column="cdt" property="createdDate" />
@@ -220,6 +220,7 @@
     select
       r.rv_no as rno,
       r.product_no,
+      r.member_no as memberNo,
       m.name as memberName,
       m.n_name as nickName,
       r.name as reviewName,
