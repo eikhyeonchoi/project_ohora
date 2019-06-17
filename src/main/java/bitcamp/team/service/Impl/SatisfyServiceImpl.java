@@ -18,8 +18,8 @@ public class SatisfyServiceImpl implements SatisfyService {
   }
   
   @Override
-  public List<Satisfy> list() {
-    return satisfyDao.findAll();
+  public List<Satisfy> list(HashMap<String, Object> params) {
+    return satisfyDao.findAll(params);
   }
   
   @Override

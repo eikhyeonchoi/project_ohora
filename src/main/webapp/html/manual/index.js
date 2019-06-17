@@ -38,6 +38,7 @@ function loadList() {
             divRow.children().remove();
             var pageObj = {list: data};
             $(pageGenerator(pageObj)).appendTo(divRow);
+            $('.card-text').addClass('overflow-hidden');
             $(document.body).trigger('loaded-list');
           }
         });

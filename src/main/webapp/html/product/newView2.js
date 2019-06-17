@@ -472,8 +472,9 @@ $(document.body).bind('loaded-satisfy', function(data){
       halfStar: true
     });
     
-    $.get('/bitcamp-team-project/app/json/satisfy/list', function(obj) {
+    $.get('/bitcamp-team-project/app/json/satisfy/list?productNo=' + productNo, function(obj) {
       
+      console.log(productNo);
       console.log(obj);
       
       for (var comp of obj.list) {
@@ -490,7 +491,6 @@ $(document.body).bind('loaded-satisfy', function(data){
           return b.aver - a.aver;
         })
         selectPagination(obj);
-        rateYoGenerator(obj);
       })
       
       $('#score-low-sorted').click(function(e) {
@@ -501,11 +501,9 @@ $(document.body).bind('loaded-satisfy', function(data){
           return a.aver - b.aver;
         })
         selectPagination(obj);
-        rateYoGenerator(obj);
       })
       
       selectPagination(obj);
-      rateYoGenerator(obj);
       
       
       
@@ -572,6 +570,7 @@ function selectPagination(obj) {
       $('#satisfy-list').html('');
       var pageObj = {list: data};
       $(satisfyGenerator(pageObj)).appendTo($('#satisfy-list'));
+      rateYoGenerator(obj);
     }
   });
 }

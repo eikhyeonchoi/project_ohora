@@ -8,18 +8,20 @@ var type = sessionStorage.getItem('type'),
 $(document).ready(function() {
   loadData(tip_No);
   loadList(tip_No);
-  $('.history-list').hide();
-  $('#rollback-btn').hide();
-  if (type == null) {
-    $('#update-btn').hide();
-  } 
-  if (type == 3) {
-    $('.history-list').show();
-    $('#rollback-btn').show();
-  }
-  $(document).ready(function() {
-    $('#updateUser').attr('placeholder', nickName);
+  $('.history').hide();
+  
+  $(document.body).bind('loaded.loginuser', () => {
+    type = sessionStorage.getItem('type');
+    if (type < 1) {
+      $('#update-btn').hide();
+      
+    } else if (type == 3) {
+      $('.history').show();
+      
+    }
   });
+  
+  new WOW().init();
 });
 
 function loadList(no) {
@@ -37,7 +39,13 @@ $(document.body).bind('loaded-list', () => {
         function(data) {
       var hisNo = data.history.no;
       if (data.status == "success") {
-        var r = confirm('롤백 하시겠습니까?');
+        var r = swal({
+          title: "Are you sure?",
+          text: '롤백 하시겠습니까?',
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        });
         if (r == true) {
           $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + tip_No, {
             name: $('#productName').val(),
@@ -46,7 +54,7 @@ $(document.body).bind('loaded-list', () => {
             if (obj.status == 'success') {
               location.href = "view.html?no=" + tip_No;
             } else {
-              alert('롤백에 실패했습니다.\n' + data.message);
+              swal('오류', '롤백에 실패했습니다.\n' + data.message, 'warning');
             }
           }, "json")
         } else {
@@ -60,34 +68,16 @@ $(document.body).bind('loaded-list', () => {
 
 function loadData(no) {
   $.getJSON('../../app/json/tip/detail?no=' + no, function(data) {
-    $('#no').val(data.no);
-    $('#memberName').val(data.member.nickName);
-    $('#productName').val(data.product.name);
+    $('.memberName').html(data.member.nickName);
+    $('.productName').html(data.product.name);
     $('#contents').val(data.contents);
-    $('#createdDate').val(data.createdDate);
+    $('.createdDate').html(data.createdDate);
+    var psrc = '/bitcamp-team-project/upload/productfile/' + data.product.productFiles[0].img + '_thumb';
+    $('.productImg').attr('src', psrc);
   });
 
-  $('#update-btn').click(() => {
-    $.post('/bitcamp-team-project/app/json/tip/update?no=' + tip_No, {
-      name: $('#productName').val(),
-      contents: $('#contents').val()
-    }, function(data) {
-      if (data.status == 'success') {
-        location.href = "view.html?no=" + tip_No;
-      } else {
-        location.href = '/bitcamp-team-project/html/auth/login.html'; 
-      }
-    }, "json");
-
-    $.post('/bitcamp-team-project/app/json/tiphistory/add', {
-      tipNo: $('#no').val(),
-      contents: $('#contents').val(),
-    }, function(data) {
-      if (data.status == 'success') {
-        alert('히스토리 저장중입니다.');
-      } else {
-        location.href = '/bitcamp-team-project/html/auth/login.html';
-      }
-    }, "json")
+  $('#update-btn').click((e) => {
+    e.preventDefault();
+    location.href = 'form.html?no=' + tip_No;
   });
 };
