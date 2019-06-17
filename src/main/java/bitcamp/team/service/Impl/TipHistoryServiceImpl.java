@@ -33,10 +33,6 @@ public class TipHistoryServiceImpl implements TipHistoryService {
   public int delete(int no) {
     return tipDao.delete(no);
   }
-  @Override
-  public int count() {
-    return tipDao.countAll();
-  }
 
   @Override
   public TipHistory detail(int no) {

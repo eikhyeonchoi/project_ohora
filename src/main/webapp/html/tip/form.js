@@ -1,23 +1,24 @@
 var productNo = location.href.split('?')[1].split('=')[1],
-    nickName = sessionStorage.getItem('nickName');
+    nickName = sessionStorage.getItem('nickName'),
+    productName = '';
 
-$.getJSON('../../app/json/tip/productName?no=' 
-    + productNo, function(obj) {
-  $('#productName').attr('value', obj.product);
-});
 
-$('#add-btn').click(() => {
-  $.post('/bitcamp-team-project/app/json/tip/add', {
-    name:     $('#productName').val(),
-    contents: $('#contents').val()
-  }, function(data) {
-    if(data.status == 'success') {
-      history.back();
-    } else {
-      swal('실패!', '팁 생성 실패입니다.\n' + data.message, 'warning');
-    }
-  }, "json")
-});
+$(document).ready(function() {
+  $(document.body).bind('loaded.header', function(){
+    userNo = sessionStorage.getItem('no');
+    
+    $.getJSON('../../app/json/tip/productName?no=' 
+        + productNo, function(obj) {
+      $('#h1-title').html(obj.product);
+    });
+    
+    $.getJSON('/bitcamp-team-project/app/json/tip/detail?no=' + productNo
+        , function(data) {
+      $(".ql-editor").html(data.contents);
+    });
+    $(document.body).trigger('loaded-user');
+  })
+}); // ready
 
 //목록
 $('#list-btn').click((e) => {
@@ -47,10 +48,62 @@ $('#list-btn').click((e) => {
         imageResize: {
           modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
         },
-        imageDrop: true
+        imageDrop: true,
     },
-    placeholder: '내용을 입력해주세요.',
     theme: 'snow'  // or 'bubble'
   });
   $('.ql-picker').next().remove();
 })();
+
+$(document.body).bind('loaded-user', function(obj){
+  $('#add-btn').click(() => {
+    $.getJSON('/bitcamp-team-project/app/json/tip/confirm?name=' 
+        + $('#h1-title').html()
+        , function (data) {
+      if (data.status == 'success') {
+        if (data.confirm == 'exist') {
+          tipfunc(false);
+        } else {
+          tipfunc(true);
+        }
+      } else {
+        swal('예외 발생', '문제가 발생했습니다./n' + data.error, 'warning');
+        
+      } // if ~ else
+    })
+  });
+}) // bind
+
+
+function tipfunc(state) {
+  var src = '';
+  if (state) src = 'add';
+  else src = 'update';
+
+  // tip add
+  $.post('/bitcamp-team-project/app/json/tip/' + src, {
+    name:     $('#h1-title').html(),
+    contents: $(".ql-editor").html()
+  }, function(data) {
+    if(data.status == 'success') {
+      location.href = 'view.html?no=' + productNo;
+    } else {
+      swal('실패!', '팁 생성 실패입니다.\n' + data.message, 'warning');
+    }
+  }, "json");
+  // --tip add
+  
+  // tiphistory update
+  $.post('/bitcamp-team-project/app/json/tiphistory/add', {
+    no: productNo,
+    contents: $('.ql-editor').html()
+  }, function(data) {
+    if (data.status == 'success') {
+      swal('저장중','히스토리 저장중입니다.','info');
+      location.href = 'view.html?no=' + productNo;
+    } else {
+      location.href = '/bitcamp-team-project/html/auth/login.html';
+    }
+  }, "json") 
+  //--tiphistory update
+}
