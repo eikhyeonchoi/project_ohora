@@ -96,17 +96,17 @@ $(document).ready(function(){
 
     var largeCategory = obj.product.productSmallCategory.productLargeCategory.name;
     if (largeCategory.includes('태블릿')) {
-      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_pad.jpg' style='width: 100%; height: 100%;'>");
-      $('#product-inform-div').prepend('<i class="fas fa-mobile-alt" style="font-size: 5em;"></i>');
+      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_pad.png' style='width: 100%; height: 100%;'>");
+      $('#product-inform-div').prepend('<i class="fas fa-mobile-alt" style="font-size: 4em;"></i>');
     } else if(largeCategory.includes('카메라')) {
       $('#img-div-by-large-category').append("<imgcountAll src='/bitcamp-team-project/upload/productfile/lc_camera.jpg' style='width: 100%; height: 100%;'>");
-      $('#product-inform-div').prepend('<i class="fas fa-camera" style="font-size: 5em;"></i>');
+      $('#product-inform-div').prepend('<i class="fas fa-camera" style="font-size: 4em;"></i>');
     } else if(largeCategory.includes('노트북')) {
       $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_notebook.jpg' style='width: 100%; height: 100%;'>");
-      $('#product-inform-div').prepend('<i class="fas fa-laptop" style="font-size: 5em;"></i>');
+      $('#product-inform-div').prepend('<i class="fas fa-laptop" style="font-size: 4em;"></i>');
     } else if(largeCategory.includes('가전')) {
       $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_appliances.jpg' style='width: 100%; height: 100%;'>");
-      $('#product-inform-div').prepend('<i class="fas fa-plug" style="font-size: 5em;"></i>');
+      $('#product-inform-div').prepend('<i class="fas fa-plug" style="font-size: 4em;"></i>');
     }
 
     // hover 시 썸네일 사진
@@ -134,7 +134,7 @@ $(document.body).bind('loaded-product', function(data){
     $(this).children().eq(1).fadeIn('fast');
 
   }).mouseleave(function() {
-    $(this).css('background-color', 'black');
+    $(this).css('background-color', '#02142f');
     $(this).children().eq(0).fadeIn('fast');
     $(this).children().eq(1).fadeOut('fast');
   });

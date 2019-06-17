@@ -13,7 +13,9 @@ table tr th:nth-child(2), table tr td:nth-child(2) {
 	min-height: 500px;
 }
 
-
+tr {
+	cursor: pointer;
+}
 
 
 /* 

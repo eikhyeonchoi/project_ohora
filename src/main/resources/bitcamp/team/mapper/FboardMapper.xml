@@ -27,12 +27,6 @@
       <result column="n_name" property="nickName" />
       <result column="file_path" property="filePath" />
     </association>
-    
-    <collection property="fboardFiles"  ofType="fboardFile">
-      <id     column="fb_file_no"  property="fileNo"/>
-      <result column="fb_no"       property="fboardNo"/>
-      <result column="file"        property="filepath"/>
-    </collection>
   </resultMap>
 
 
@@ -73,10 +67,12 @@
   </select>
   
   <select id="findByMemberNo" resultMap="boardMap" parameterType="int">
-    select *
+    select 
+      *
     from
       fboard
-    where member_no = #{value}
+    where 
+      member_no = #{value}
   </select>
    
   <select id="findAll" resultMap="boardMemberMap" parameterType="map">
@@ -119,22 +115,21 @@
       b.cnt,
       m.member_no,
       m.n_name,
-      m.file_path,
-      ff.file
+      m.file_path
     from
       fboard b
       left join member m on b.member_no = m.member_no
-      left join fboard_file ff on b.fb_no = ff.fb_no
     where 
       b.fb_no = #{value}
   </select>
 
   <update id="increaseCount" parameterType="int">
-    update fboard
+    update 
+      fboard
     set
-    cnt = cnt + 1
-    where fb_no =
-    #{value}
+      cnt = cnt + 1
+    where 
+      fb_no = #{value}
   </update>
   
   <insert id="insert" parameterType="fboard" useGeneratedKeys="true" keyProperty="no">

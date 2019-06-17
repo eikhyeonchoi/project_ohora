@@ -16,15 +16,6 @@ public class Fboard implements Serializable {
   private int viewCount;
   
   private Member member;
-  private List<FboardFile> fboardFiles;
-
-  public List<FboardFile> getFboardFiles() {
-    return fboardFiles;
-  }
-
-  public void setFboardFiles(List<FboardFile> fboardFiles) {
-    this.fboardFiles = fboardFiles;
-  }
 
   public Member getMember() {
     return member;
@@ -69,10 +60,12 @@ public class Fboard implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+
   @Override
   public String toString() {
     return "Fboard [no=" + no + ", memberNo=" + memberNo + ", title=" + title + ", contents="
         + contents + ", createdDate=" + createdDate + ", viewCount=" + viewCount + ", member="
         + member + "]";
   }
+  
 }

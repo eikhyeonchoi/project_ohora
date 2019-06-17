@@ -1,6 +1,10 @@
 package bitcamp.team.web.json;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -212,5 +216,13 @@ public class FboardController {
   }
 
 
+  
+  private void snsImageWrite(String src, String uploadDir) throws Exception  {
+    URL url = new URL(src);
+    BufferedImage image = ImageIO.read(url);
+    String filepath = uploadDir + "/" + url;
+    File file = new File(filepath);
+    ImageIO.write(image, "png", file);
+  }
 
 }
