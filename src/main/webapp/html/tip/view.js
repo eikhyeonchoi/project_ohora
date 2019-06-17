@@ -1,4 +1,5 @@
-var productNo = location.href.split('?')[1].split('=')[1];
+var productNo = location.href.split('?')[1].split('=')[1],
+    page = $('#pagination-container');
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
@@ -27,15 +28,20 @@ $(document).ready(function() {
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
       function(obj) {
-    tbody.html(''); 
-    $(trGenerator(obj)).appendTo(tbody);
-    $(document.body).trigger('loaded-list');
-    $(document.body).trigger('loaded-data');
+    page.pagination({
+      dataSource: obj.list,
+      showGoInput: true,
+      showGoButton: true,
+      pageSize: 5,
+      callback: function(data, pagination) {
+        tbody.children().remove();
+        var pageObj = {list : data}
+        $(trGenerator(pageObj)).appendTo(tbody);
+        $(document.body).trigger('loaded-data');
+      }
+    });
   }); 
 }
-
-$(document.body).bind('loaded-list', () => {
-});
 
 function loadData(no) {
   $.getJSON('../../app/json/tip/detail?no=' + no, function(data) {
