@@ -81,6 +81,8 @@ public class ReviewController {
 
     Review review = reviewService.get2(no);
 
+    System.out.println(review.toString());
+
     try {
       contents.put("review", review);
       contents.put("status", "success");
@@ -98,9 +100,6 @@ public class ReviewController {
     try {
       Review review = reviewService.get2(no);
       Member member = (Member) httpSession.getAttribute("loginUser");
-      System.out.println(review.getMemberNo() != member.getNo());
-      System.out.println(review.getMemberNo());
-      System.out.println(member.getNo());
 
       if (review.getMemberNo() != member.getNo() && Integer.parseInt(member.getType()) != 3) {
         throw new RuntimeException("해당 글을 쓴 회원만 지울 수 있습니다.");
@@ -139,14 +138,13 @@ public class ReviewController {
       }
 
       List<Review> list = reviewService.get(review.getProductNo(), "", "");
-      System.out.println(list.size() + "**");
+
       if (list.size() == 0) {
-        System.out.println("11");
         review.setrNo(1);
       } else {
-        review.setrNo((list.get(list.size() - 1).getrNo()) + 1);
-        System.out.println(list.get(list.size() - 1).toString());
+        review.setrNo((list.get(0).getrNo()) + 1);
       }
+
       System.out.println(review.toString());
       reviewService.add(review);
       content.put("status", "success");

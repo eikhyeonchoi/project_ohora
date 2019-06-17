@@ -55,6 +55,7 @@ public class TipController {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
+      System.out.println(product);
       int prodNo = productService.getNo(product.getName());
       Member member = (Member)httpSession.getAttribute("loginUser");
       tips.setMemberNo(member.getNo());
@@ -76,17 +77,20 @@ public class TipController {
   }
 
   @PostMapping("update")
-  public Object update(Tip tip, Product product) throws Exception {
+  public Object update(Tip tip, String name) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
-      Tip tips = tip;
+      int tipNo = tipService.getNo(productService.getNo(name));
       Member member = (Member) httpSession.getAttribute("loginUser");
+
+      Tip tips = tip;
+      tips.setNo(tipNo);
       tips.setMemberNo(member.getNo());
-      tips.setProductNo(productService.getNo(product.getName()));
-      if(tipService.update(tips) == 0)
+      tips.setProductNo(productService.getNo(name));
+      
+      if(tipService.updateTip(tips) == 0)
         throw new RuntimeException("해당 번호의 팁이 존재하지 않습니다.");
       contents.put("status", "success");
-      
     } catch (Exception e) {
       contents.put("status", "fail");
       contents.put("error", e.getMessage());
@@ -98,19 +102,19 @@ public class TipController {
   public Object rollback(Tip tip, Product product, int hisNo) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     try {
-      Tip tips = tip;
-      for (TipHistory his : tipHistoryService.get(tip.getNo())) {
+      int tipNo = tipService.getNo(product.getNo());
+      Tip tips = tipService.getTip(tipNo);
+      for (TipHistory his : tipHistoryService.get(product.getNo())) {
         if (his.getNo() == tipHistoryService.detail(hisNo).getNo()) {
           tips.setContents(his.getContents());
           tips.setCreatedDate(his.getUpdateDate());
           tips.setMemberNo(memberService.getNo(his.getNickName()));
-          tips.setProductNo(productService.getNo(product.getName()));
           break;
         } else {
           tipHistoryService.delete(his.getNo());
         }
       }
-      if(tipService.update(tips) == 0)
+      if(tipService.updateTip(tips) == 0)
         throw new RuntimeException("해당 번호의 팁이 존재하지 않습니다.");
 
       contents.put("status", "success");
@@ -140,12 +144,10 @@ public class TipController {
 
   @GetMapping("productName")
   public Object get(int no) throws Exception {
-    System.out.println(no);
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Product product = productService.get(no);
       String prd = product.getName();
-      System.out.println(prd);
       contents.put("status", "success");
       contents.put("product", prd);
     } catch (Exception e) {

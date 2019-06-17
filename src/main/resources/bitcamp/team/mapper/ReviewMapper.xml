@@ -7,7 +7,7 @@
   <resultMap type="review" id="reviewMap">
     <id column="rno" property="no" />
     <result column="product_no" property="productNo" />
-    <result column="member_no" property="memberNo" />
+    <result column="memberNo" property="memberNo"/>
     <result column="reviewName" property="title" />
     <result column="conts" property="contents" />
     <result column="cdt" property="createdDate" />
@@ -177,7 +177,8 @@
       </if>
       <if test="searchType == 'search' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
-        and r.name like #{pattern1} or conts like #{pattern1}
+        and r.name like #{pattern1} or p.name like #{pattern1} 
+        or mf.name like #{pattern1} 
       </if>
       <if test="searchType == '' and keyword == ''">
       </if>
@@ -219,6 +220,7 @@
     select
       r.rv_no as rno,
       r.product_no,
+      r.member_no as memberNo,
       m.name as memberName,
       m.n_name as nickName,
       r.name as reviewName,
@@ -233,9 +235,9 @@
   </select>
   
   <insert id="insert" parameterType="review">
-    insert into review (product_no, member_no, name, conts)
+    insert into review (product_no, member_no, name, conts, prod_rv_no)
     values
-    (#{productNo},#{memberNo}, #{title}, #{contents})
+    (#{productNo},#{memberNo}, #{title}, #{contents}, #{rNo})
   </insert>
 
   <update id="increaseCount" parameterType="int">

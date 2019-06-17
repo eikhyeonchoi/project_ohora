@@ -19,9 +19,16 @@ commentListGenerator = Handlebars.compile(commentListSrc);
 
   memberNo = data.memberNo;
 
-  if (userNo == data.memberNo || type == 3) {
+  console.log(userNo);
+  console.log(data.memberNo);
+  console.log(userNo == memberNo);
+  
+  if (userNo == memberNo || type == 3) {
     $('#update-btn').show();
     $('#delete-btn').show();
+  } else {
+    $('#update-btn').hide();
+    $('#delete-btn').hide();
   }
 
   $(document.body).trigger({
@@ -146,16 +153,6 @@ function callUserInform(){
     $('#fboard-comment-add-form').remove();
     $('.reply-add-btn').remove();
   }
-
-  /*
-	  if(userNo != memberNo) {
-		  $('#delete-btn').hide();
-		  $('#update-btn').hide();
-
-	    $('#title').prop('disabled', true);
-	    $('#contents').prop('disabled', true);
-	  }
-   */
 
   $('.p-member-no').each(function(index, item) {
     if($(item).attr('data-member-no') != userNo){

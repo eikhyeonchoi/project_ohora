@@ -59,6 +59,8 @@ public class AuthController {
 
     Member member = memberService.getEmail2(email);
     HashMap<String,Object> content = new HashMap<>();
+    System.out.println("멤ㄴ버");
+    System.out.println(member);
 
     session.setAttribute("loginUser", member);
     content.put("status", "success");

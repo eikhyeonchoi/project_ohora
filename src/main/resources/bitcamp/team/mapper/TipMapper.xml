@@ -68,6 +68,14 @@
       tip_no desc
   </select>
   
+  <select id="findByTipNo" resultMap="tipMap" parameterType="int">
+    <include refid="join-select1"/>
+    where
+      tip_no = #{value}
+    order by
+      tip_no desc
+  </select>
+  
   <update id="update" parameterType="tip">
     update tip
     <set>
@@ -78,6 +86,18 @@
     </set>
     where
      product_no=#{no}
+  </update>
+  
+  <update id="updateTip" parameterType="tip">
+    update tip
+    <set>
+      member_no = #{memberNo},
+      conts = #{contents},
+      <if test="createdDate != null">cdt = #{createdDate}</if>
+      <if test="createdDate == null">cdt = current_timestamp()</if>
+    </set>
+    where
+     tip_no=#{no}
   </update>
   
   <select id="confirmTip" resultType="int" parameterType="int">

@@ -25,7 +25,11 @@ public class TipServiceImpl implements TipService{
   public int update(Tip tip) {
     return tipDao.update(tip);
   }
-
+  
+  @Override
+  public int updateTip(Tip tip) {
+    return tipDao.updateTip(tip);
+  }
   @Override
   public List<Tip> list(String keyword, String searchType) {
     HashMap<String,Object> contents = new HashMap<>();
@@ -53,7 +57,10 @@ public class TipServiceImpl implements TipService{
   public Tip get(int no) {
     return tipDao.findByNo(no);
   }
-
+  @Override
+  public Tip getTip(int no) {
+    return tipDao.findByTipNo(no);
+  }
   @Override
   public int confirm(int no) {
     return tipDao.confirmTip(no);
