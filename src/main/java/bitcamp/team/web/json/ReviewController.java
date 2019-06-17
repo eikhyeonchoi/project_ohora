@@ -80,6 +80,8 @@ public class ReviewController {
     HashMap<String, Object> contents = new HashMap<>();
 
     Review review = reviewService.get2(no);
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    review.setMemberNo(member.getNo());
 
     try {
       contents.put("review", review);
@@ -98,9 +100,6 @@ public class ReviewController {
     try {
       Review review = reviewService.get2(no);
       Member member = (Member) httpSession.getAttribute("loginUser");
-      System.out.println(review.getMemberNo() != member.getNo());
-      System.out.println(review.getMemberNo());
-      System.out.println(member.getNo());
 
       if (review.getMemberNo() != member.getNo() && Integer.parseInt(member.getType()) != 3) {
         throw new RuntimeException("해당 글을 쓴 회원만 지울 수 있습니다.");
