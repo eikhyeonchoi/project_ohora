@@ -37,10 +37,14 @@ div.tableRow {
   overflow: hidden;
 }
 
+.card {
+	max-width: 210px;
+}
+
 p.card-text {
+	overflow: hidden;
+	white-space: nowrap;
+  text-overflow: ellipsis;
   max-height: 4.8em;
-  overflow: hidden;
-  display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+  height: 19px;
 }
