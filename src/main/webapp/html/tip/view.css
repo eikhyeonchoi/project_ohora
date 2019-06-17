@@ -42,3 +42,17 @@ td:nth-child(4) {
 .productimg {
 	text-align: right;
 }
+
+#contents {
+	min-height: 500px;
+	font-size: 1.5em;
+}
+
+.cont {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  white-space: nowrap; 
+	width: 300px;
+	height: 1.5em;
+}

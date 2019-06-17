@@ -1,4 +1,4 @@
-var tip_No = location.href.split('?')[1].split('=')[1];
+var productNo = location.href.split('?')[1].split('=')[1];
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
@@ -6,8 +6,8 @@ var type = sessionStorage.getItem('type'),
     nickName = sessionStorage.getItem('nickName');
 
 $(document).ready(function() {
-  loadData(tip_No);
-  loadList(tip_No);
+  loadData(productNo);
+  loadList(productNo);
   $('.history').hide();
   
   $(document.body).bind('loaded.loginuser', () => {
@@ -39,45 +39,39 @@ $(document.body).bind('loaded-list', () => {
         function(data) {
       var hisNo = data.history.no;
       if (data.status == "success") {
-        var r = swal({
-          title: "Are you sure?",
-          text: '롤백 하시겠습니까?',
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        });
-        if (r == true) {
-          $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + tip_No, {
-            name: $('#productName').val(),
-            hisNo: hisNo
-          }, function(obj) {
-            if (obj.status == 'success') {
-              location.href = "view.html?no=" + tip_No;
-            } else {
-              swal('오류', '롤백에 실패했습니다.\n' + data.message, 'warning');
-            }
-          }, "json")
-        } else {
-          location.href = "view.html?no=" + tip_No;
-        }
-      } else {
+        $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + productNo, {
+          name: $('.productName').html(),
+          productNo: productNo,
+          hisNo: hisNo,
+          contents: data.history.contents
+        }, function(obj) {
+          if (obj.status == 'success') {
+            location.href = "view.html?no=" + productNo;
+          } else {
+            swal('오류', '롤백에 실패했습니다.\n' + data.message, 'warning');
+          }
+        }, "json");
       }
     });
-  })
+  });
 });
 
 function loadData(no) {
   $.getJSON('../../app/json/tip/detail?no=' + no, function(data) {
     $('.memberName').html(data.member.nickName);
     $('.productName').html(data.product.name);
-    $('#contents').val(data.contents);
+    $('#contents').html(data.contents);
     $('.createdDate').html(data.createdDate);
-    var psrc = '/bitcamp-team-project/upload/productfile/' + data.product.productFiles[0].img + '_thumb';
+    if (data.product.productFiles[0].img != null) {
+      var psrc = '/bitcamp-team-project/upload/productfile/' + data.product.productFiles[0].img + '_thumb';
+    } else {
+      var psrc = '/bitcamp-team-project/upload/productfile/default.png';
+    }
     $('.productImg').attr('src', psrc);
   });
 
   $('#update-btn').click((e) => {
     e.preventDefault();
-    location.href = 'form.html?no=' + tip_No;
+    location.href = 'form.html?no=' + productNo;
   });
 };

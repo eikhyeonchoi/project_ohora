@@ -8,29 +8,25 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.snow.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="form.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
   <div class="container">
-    <h1 id="h1-title"></h1>
-    <div class="row justify-content-sm-center">
-      <div class="col">
-        <h3 class="productname"></h3>
-        <p class="bytes"></p>
-     </div>
-    </div>
-    
+    <h1 id="h1-title" class="mt-sm-3"></h1>
+  </div>
+  <hr>
+  <div class="container">
     <div class="form-group row">
       <div class="col-sm-12">
         <div id="quillEditor"></div>
-        <div id="ohr-rev-btns">
+        <div class="mt-sm-3" id="ohr-rev-btns">
           <button type="button" id="list-btn"  class="btn btn-primary bit-view-item">목록</button>
           <button type="button" id="add-btn" class="btn btn-primary bit-view-item">등록</button> 
         </div>
       </div>
     </div>
-  </div>
-  <!-- container -->
+  </div> <!-- container -->
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
