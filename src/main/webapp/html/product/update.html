@@ -25,18 +25,18 @@
         <div class="input-group-prepend">
           <span class="input-group-text">제품명</span>
         </div>
-        <input type="text" class="form-control" id="productName" name='productName'>
+        <input type="text" class="form-control is-invalid" id="productName" name='productName'>
       </div>
 
-      <div class="custom-file" style="min-height: 234px;">
-        <input type="file" id="fileupload" name='productFile' class='custom-file-input'>
+      <div class="custom-file" style="min-height: 134px;">
+        <input type="file" id="fileupload" name='productFile' class='custom-file-input is-invalid' required>
         <label class="custom-file-label" for="fileupload">Choose file</label>
         <div id='images-div'></div>
       </div>
 
       <div class="form-group row">
         <div class="col-sm-4 mt-sm-2">
-          <button type="button" id="update-btn" class="btn btn-success btn-sm">변경</button>
+          <button type="button" id="update-btn" class="btn btn-success btn-sm" disabled>변경</button>
           <button type="button" id="cancel-btn" class="btn btn-danger btn-sm">취소</button>
         </div>
       </div>
@@ -47,17 +47,16 @@
 
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script
-    src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
   <script src="update.js"></script>
 </body>

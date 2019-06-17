@@ -58,7 +58,7 @@ $(document).ready(function() {
 }); // ready
 
 
-//trigger 2개 bind
+// trigger 2개 bind
 $(document.body).bind('loaded-type', function(obj) {
   if (userType != 3) {
     $('.managerDiv').hide();
@@ -79,8 +79,8 @@ $(document.body).bind('loaded-type', function(obj) {
 
   $('.faq-update-btn').off().click(function(e) {
     var contents = $(e.target).closest('div').prev().text();
-    var title = $(e.target).parents('.faq-contents').prev().children().first().attr('data-title');
-    console.log(title);
+    var title = $(e.target).parents('.faq-contents').prev().prev().children().first().attr('data-title');
+    
     $(e.target).closest('div').prev().remove();
     $(e.target).closest('div').before('<textarea id="faq-contents-textarea" rows="5" cols="50">' + contents + '</textarea>');
     $(e.target).before('<button id="faq-add-temp-btn" class="btn btn-primary btn-sm">등록</button>')
@@ -142,17 +142,27 @@ $(document.body).bind('loaded-type', function(obj) {
 
 
 function faqTitleClick() {
-  $('.faq-title > p').one('click', function(e) {
-    $(e.target).find('i').replaceWith('<i class="fas fa-angle-down mr-sm-2"></i>');
-    $(e.target).css('font-size', '1.5em');
-    $(e.target).css('font-style', 'bold');
-    $(e.target).closest('div').before('<hr>');
-    $(e.target).closest('div').next().show();
-    $(e.target).closest('div').next().after('<hr>')
-    
-    $(document.body).trigger({
-      type: 'loaded-type'
-    });
+  
+  $('.faq-title > p').on('click', function(e) {
+    if ($(e.target).attr('data-check') == 'true') {
+      $(e.target).find('i').replaceWith('<i class="fas fa-angle-down mr-sm-2"></i>');
+      $(e.target).css('font-size', '1.5em');
+      $(e.target).css('font-style', 'bold');
+      $(e.target).closest('div').next().next().show();
+      $(e.target).attr('data-check', false);
+      
+      $(document.body).trigger({
+        type: 'loaded-type'
+      });
+      
+    } else {
+      $(e.target).find('i').replaceWith('<i class="fas fa-angle-right"></i>');
+      $(e.target).css('font-size', '1em');
+      $(e.target).css('font-style', 'normal');
+      $(e.target).closest('div').next().next().hide();
+      
+      $(e.target).attr('data-check', true);
+    }
   }); // click
 } // faqTitleClick
 

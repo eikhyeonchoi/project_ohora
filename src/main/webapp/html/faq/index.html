@@ -42,14 +42,14 @@
   </script>
 
   <script id="faq-template" type="text/x-handlebars-template">
-    <hr>
     {{#each list}}  
+      <hr>
       <div class='faq-title'>
-        <p data-title='{{title}}'>
+        <p data-title='{{title}}' data-check='true'>
           <i class="fas fa-angle-right"></i>{{title}}
         </p>
-        <hr>
       </div>
+      <hr>
       <div class='faq-contents'>
         <p>{{contents}}</p>
         <div class='managerDiv offset-sm-10'>

@@ -18,6 +18,8 @@ var productGenerator = Handlebars.compile(productSrc),
     videoContentGenerator = Handlebars.compile(videoContentSrc);
 
 
+var totalFileSize = 0;
+
 var slide = [
   {
     id: $('#s1')
@@ -258,7 +260,6 @@ function confirmBeforeRegistration() {
   .then((value) => {
     if (value) {
       ajaxFileUpload('total-form');
-      location.href = 'index.html';
       
     } else {
       swal("등록 취소", "취소되었습니다", "error");
@@ -307,20 +308,22 @@ function ajaxFileUpload(formId) {
   $.ajax({
     url         : '/bitcamp-team-project/app/json/manual/add',
     data        : formdata ? formdata : form.serialize(),
-        cache       : false,
-        contentType : false,
-        processData : false,
-        type        : 'POST',
-        success     : function(data, textStatus, jqXHR){
-          console.log('전송완료');
-        }
+    cache       : false,
+    contentType : false,
+    processData : false,
+    type        : 'POST',
+    success     : function(data, textStatus, jqXHR){
+      location.href = 'index.html';
+      window.totalFileSize = 0;
+    } // success
   });
-}
+} // ajaxFileUpload
 
 
 
 function settingToImageAndName(value) {
   var target = $(value);
+  
   if(value.files && value.files[0]){
     var fileValue = $(value).val().split("\\");
     var fileName = fileValue[fileValue.length-1];
@@ -329,13 +332,35 @@ function settingToImageAndName(value) {
     var strExt = strFilePath.split('.').pop().toLowerCase();
     if ($.inArray(strExt, ['jpg','jpeg','png']) == -1){
       swal("파일 선택오류", "이미지파일(JPG, JPEG, PNG) 파일만 선택가능합니다", "warning");
+      target.parents().eq(2).prev().html('');
+      target.next().text("파일 선택오류: 이미지 파일만 가능합니다");
+      target.removeClass('is-valid');
+      target.addClass('is-invalid');
       target.val('');
       return;
-    } 
+    }
     
+    // window.totalFileSize += value.files[0].size;
+    // console.log(window.totalFileSize);
+    
+    /*
+    if(window.totalFileSize > 50000000) {
+      window.totalFileSize = window.totalFileSize - value.files[0].size;
+      console.log(window.totalFileSize);
+      swal("파일 용량 오류", "총 파일(PDF, 이미지)의 용량제한은 50MB입니다\n 사진을 변경하거나 삭제해주세요", "warning");
+      target.parents().eq(2).prev().html('');
+      target.next().text("파일 용량오류: 용량제한은 50MB입니다");
+      target.removeClass('is-valid');
+      target.addClass('is-invalid');
+      target.val('');
+      return;
+    }
+    */
+    
+    
+    target.next().text(fileName + ' 이 선택되었습니다');
     target.removeClass('is-invalid');
     target.addClass('is-valid');
-    target.next().text(fileName + ' 이 선택되었습니다');
     
     var reader  = new FileReader();
     reader.onload = function(e) {
@@ -345,28 +370,46 @@ function settingToImageAndName(value) {
     }
     reader.readAsDataURL(value.files[0]);
   }
-} // loadImg
+} // settingToImageAndName
 
 
 
 function checkuploadFileExt(objFile) {
   var target = $(objFile);
+  // window.totalFileSize = 0;
   
   var strFilePath = target.val();
   var strExt = strFilePath.split('.').pop().toLowerCase();
+  if (objFile.files[0].size > 10000000) {
+    swal("파일 선택오류", "파일 용량이 너무 큽니다!\n 10MB 이상은 업로드할 수 없습니다", "warning");
+    target.parents().eq(2).prev().html('')
+    target.next().text('파일 선택 오류 : 파일 용량이 너무 큽니다');
+    target.removeClass('is-valid');
+    target.addClass('is-invalid');
+    target.val('');
+    return;
+  }
+  
   if ($.inArray(strExt, ["pdf"]) == -1){
     swal("파일 선택오류", "PDF 파일만 선택가능합니다", "warning");
+    target.parents().eq(2).prev().html('')
+    target.next().text('파일 선택 오류 : PDF 파일이 아닙니다');
+    target.removeClass('is-valid');
+    target.addClass('is-invalid');
     target.val('');
-    
-  } else {
-    var fileValue = target.val().split("\\");
-    var fileName = fileValue[fileValue.length-1];
-    target.removeClass('is-invalid');
-    target.addClass('is-valid');
-    target.next().text(fileName + ' 이 선택되었습니다');
-    target.parents().eq(2).prev().html('');
-    target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
+    return;
   }
+  
+  // window.totalFileSize += objFile.files[0].size;
+  // console.log(window.totalFileSize);
+  
+  var fileValue = target.val().split("\\");
+  var fileName = fileValue[fileValue.length-1];
+  target.removeClass('is-invalid');
+  target.addClass('is-valid');
+  target.next().text(fileName + ' 이 선택되었습니다');
+  target.parents().eq(2).prev().html('');
+  target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
 } // checkuploadFileExt
 
 
