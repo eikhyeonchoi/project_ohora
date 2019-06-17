@@ -35,6 +35,9 @@ public class ReviewServiceImpl implements ReviewService {
       case "all":
         params.put("all", searchType);
         break;
+      case "search":
+        params.put("search", searchType);
+        break;
       default:;
     }
     if (keyword != null) {

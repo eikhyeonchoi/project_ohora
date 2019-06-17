@@ -3,13 +3,11 @@ package bitcamp.team.web.json;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import bitcamp.team.domain.Manual;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.Review;
@@ -42,8 +40,6 @@ public class SerachController {
     List<Review> revList = reviewService.get(0, keyword, "search");
     List<Tip> tipList = tipService.list(keyword, "search");
 
-    System.out.println(prodList.get(0).toString());
-    
     contents.put("manuList", manuList);
     contents.put("prodList", prodList);
     contents.put("revList", revList);

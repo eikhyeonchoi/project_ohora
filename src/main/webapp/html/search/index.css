@@ -1,3 +1,18 @@
 #nav-tab {
 	padding-top: 1rem;
 }
+
+#pagination-container-prod{
+	position: absolute;
+	top: 660px;
+}
+
+#pagination-container-manu{
+    position: absolute;
+    top: 660px;
+}
+
+.paginationjs {
+	position: relative;
+	left: 12rem;
+}

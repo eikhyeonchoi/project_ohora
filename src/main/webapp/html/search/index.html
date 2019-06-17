@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>오호라</title>
-<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+ href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
- <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="index.css">
 </head>
@@ -14,71 +15,150 @@
  <header class="ohr-main-header"></header>
 
  <div class="container">
-  <div class="row">'<span id="keyword"></span>'에 대한 검색 결과입니다.</div>
-
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">전체</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="false">제품</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-manual" role="tab" aria-controls="nav-manual" aria-selected="false">매뉴얼</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false">리뷰</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-tip" role="tab" aria-controls="nav-tip" aria-selected="false">팁</a>
+  <div class="row">
+   '<span id="keyword"></span>'에 대한 검색 결과입니다.
   </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
-  <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
-  <div class="bit-prod-list">
-   <table id="prod-table-list" class="table table-hover">
-    <thead>
-     <tr>
-      <th scope="col">번호</th>
-      <th scope="col">카테고리</th>
-      <th scope="col">제품명</th>
-      <th scope="col">제조사명</th>
-     </tr>
-    </thead>
-    <tbody></tbody>
 
-   </table>
-   
-   <div id="pagination-container"></div>
+  <nav>
+   <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-all"
+     role="tab" aria-controls="nav-all" aria-selected="true">전체</a> <a class="nav-item nav-link"
+     id="nav-profile-tab" data-toggle="tab" href="#nav-product" role="tab"
+     aria-controls="nav-product" aria-selected="false">제품</a> <a class="nav-item nav-link"
+     id="nav-contact-tab" data-toggle="tab" href="#nav-manual" role="tab" aria-controls="nav-manual"
+     aria-selected="false">매뉴얼</a> <a class="nav-item nav-link" id="nav-contact-tab"
+     data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review"
+     aria-selected="false">리뷰</a> <a class="nav-item nav-link" id="nav-contact-tab"
+     data-toggle="tab" href="#nav-tip" role="tab" aria-controls="nav-tip" aria-selected="false">팁</a>
    </div>
-  <!-- .bit-list -->
-  </div>
-  <div class="tab-pane fade" id="nav-manual" role="tabpanel" aria-labelledby="nav-manual-tab">
-  <div class="bit-manu-list">
-   <table id="manu-table-list" class="table table-hover">
-    <thead>
-     <tr>
-      <th scope="col">번호</th>
-      <th scope="col">제목</th>
-      <th scope="col">등록일</th>
-      <th scope="col">조회수</th>
-     </tr>
-    </thead>
-    <tbody></tbody>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
 
-   </table>
-   
-   <div id="pagination-container"></div>
+   <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+    <div class="bit-prod-list">
+     <table id="prod-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+       </tr>
+      </thead>
+      <tbody id="ohr-prod-tbody"></tbody>
+     </table>
+     <div id="pagination-container-prod"></div>
+    </div>
+    <!-- .bit-list -->
    </div>
-  <!-- .bit-list -->
-</div>
-<div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">3</div>
-<div class="tab-pane fade" id="nav-tip" role="tabpanel" aria-labelledby="nav-tip-tab">4</div>
+
+   <div class="tab-pane fade" id="nav-manual" role="tabpanel" aria-labelledby="nav-manual-tab">
+    <div class="bit-manu-list">
+     <table id="manu-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+       </tr>
+      </thead>
+      <tbody id="ohr-manu-tbody"></tbody>
+
+     </table>
+
+     <div id="pagination-container-manu"></div>
+    </div>
+    <!-- .bit-list -->
+   </div>
+
+
+   <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+    <div class="bit-rev-list">
+     <table id="rev-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+        <th scope="col">제목</th>
+        <th scope="col">내용</th>
+       </tr>
+      </thead>
+      <tbody id="ohr-review-tbody"></tbody>
+
+     </table>
+
+     <div id="pagination-container-review"></div>
+    </div>
+    <!-- .bit-list -->
+   </div>
+
+   <div class="tab-pane fade" id="nav-tip" role="tabpanel" aria-labelledby="nav-tip-tab">
+    <div class="bit-tip-list">
+     <table id="tip-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col">등록일</th>
+        <th scope="col">조회수</th>
+       </tr>
+      </thead>
+      <tbody id="ohr-tip-tbody"></tbody>
+
+     </table>
+
+     <div id="pagination-container-tip"></div>
+    </div>
+    <!-- .bit-list -->
+   </div>
+
   </div>
-  
+
  </div>
  <!-- .container -->
 
  <script id="tr-template-product" type="text/x-handlebars-template">
 {{#each prodList}}
 <tr>
-  <th scope='row'>{{no}}</th>
-  <td>{{smallCategoryNo}}</td>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td scope='row'>{{productSmallCategory.productLargeCategory.name}}</td>
+  <td>{{productSmallCategory.name}}</td>
+  <td><a class='bit-prod-view-link' href='#' data-no='{{no}}' data-name='{{name}}'>{{name}}</a></td>
   <td>{{manufacturer.name}}</td>
+</tr>
+{{/each}}
+</script>
+
+ <script id="tr-template-manual" type="text/x-handlebars-template">
+{{#each manuList}}
+<tr>
+  <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
+  <td>{{product.productSmallCategory.name}}</td>
+  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{product.manufacturer.name}}</td>
+</tr>
+{{/each}}
+</script>
+
+ <script id="tr-template-review" type="text/x-handlebars-template">
+{{#each revList}}
+<tr>
+  <td scope='row'>{{product.name}}</th>
+  <td>{{product.manufacturer.name}}</td>
+  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td><p>{{contents}}</p></td>
+</tr>
+{{/each}}
+</script>
+
+ <script id="tr-template-tip" type="text/x-handlebars-template">
+{{#each tipList}}
+<tr>
+  <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
+  <td>{{product.productSmallCategory.name}}</td>
+  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{product.manufacturer.name}}</td>
 </tr>
 {{/each}}
 </script>

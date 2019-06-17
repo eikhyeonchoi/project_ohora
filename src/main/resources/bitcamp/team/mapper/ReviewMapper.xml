@@ -177,7 +177,8 @@
       </if>
       <if test="searchType == 'search' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
-        and r.name like #{pattern1} or conts like #{pattern1}
+        and r.name like #{pattern1} or p.name like #{pattern1} 
+        or mf.name like #{pattern1} 
       </if>
       <if test="searchType == '' and keyword == ''">
       </if>
@@ -233,9 +234,9 @@
   </select>
   
   <insert id="insert" parameterType="review">
-    insert into review (product_no, member_no, name, conts)
+    insert into review (product_no, member_no, name, conts, prod_rv_no)
     values
-    (#{productNo},#{memberNo}, #{title}, #{contents})
+    (#{productNo},#{memberNo}, #{title}, #{contents}, #{rNo})
   </insert>
 
   <update id="increaseCount" parameterType="int">

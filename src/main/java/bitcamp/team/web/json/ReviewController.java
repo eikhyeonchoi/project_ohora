@@ -139,15 +139,13 @@ public class ReviewController {
       }
 
       List<Review> list = reviewService.get(review.getProductNo(), "", "");
-      System.out.println(list.size() + "**");
+
       if (list.size() == 0) {
-        System.out.println("11");
         review.setrNo(1);
       } else {
-        review.setrNo((list.get(list.size() - 1).getrNo()) + 1);
-        System.out.println(list.get(list.size() - 1).toString());
+        review.setrNo((list.get(0).getrNo()) + 1);
       }
-      System.out.println(review.toString());
+
       reviewService.add(review);
       content.put("status", "success");
 

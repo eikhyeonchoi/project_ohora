@@ -1,8 +1,4 @@
-var tbody = $('tbody'),
-keyword = decodeURIComponent(getQuerystring('keyword')),
-templateSrc = $('#tr-template-product').html(),
-trGenerator = Handlebars.compile(templateSrc),
-page = $('#pagination-container');
+var keyword = decodeURIComponent(getQuerystring('keyword'));
 
 $(document).ready(function() {
   $('#keyword').html('');
@@ -12,28 +8,48 @@ $(document).ready(function() {
 (function loadList() {
   $.getJSON('../../app/json/search/list?keyword=' + keyword,
           function (obj){
-    console.log(obj.prodList)
-    page.pagination({
+    console.log(obj);
+    console.log(obj.revList);
+
+    var prodTrGenerator = Handlebars.compile($('#tr-template-product').html());
+
+    $('#pagination-container-prod').pagination({
       dataSource: obj.prodList,
       locator: 'prodList',
       showGoInput: true,
       showGoButton: true,
       callback: function(data, pagination) {
-        tbody.children().remove();
+        $('#ohr-prod-tbody').children().remove();
         var pageObj = {prodList: data};
-        $(trGenerator(pageObj)).appendTo(tbody);
+        $(prodTrGenerator(pageObj)).appendTo($('#ohr-prod-tbody'));
       }
     });
+    
+    var manuTrGenerator = Handlebars.compile($('#tr-template-manual').html());
+    
+    $('#pagination-container-manu').pagination({
+      dataSource: obj.manuList,
+      locator: 'manuList',
+      showGoInput: true,
+      showGoButton: true,
+      callback: function(data, pagination) {
+        $('#ohr-manu-tbody').children().remove();
+        var pageObj = {manuList: data};
+        $(manuTrGenerator(pageObj)).appendTo($('#ohr-manu-tbody'));
+      }
+    });
+
     $(document.body).trigger('loaded-list');
+
   });
 })();
 
 //detail 링크
 $(document.body).bind('loaded-list', () => {
 
-  $('.bit-view-link').click((e) => {
-    window.location.href = 'view.html?no=' + 
-    $(e.target).attr('data-no');
+  $('.bit-prod-view-link').click((e) => {
+    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
   });
 });
 

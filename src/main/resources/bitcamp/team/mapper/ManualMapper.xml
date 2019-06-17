@@ -107,12 +107,18 @@
     m.cnt,
     p.product_no,
     f.img,
+    s.name as sName,
+    l.name as lName,
     ma.name as manuName
+    
     from
-      manual m
+    manual m
     left outer join product p on m.product_no = p.product_no
     left outer join product_file f on p.product_no = f.product_no
     left outer join manufacturer ma on p.manufac_no = ma.manufac_no
+    left join small_category s on p.sctg_no = s.sctg_no
+    left join large_category l on s.lctg_no = l.lctg_no
+    
     <where>
       <if test="keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />

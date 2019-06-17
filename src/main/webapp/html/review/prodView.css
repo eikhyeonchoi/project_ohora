@@ -100,18 +100,12 @@ footer p {
 
 #ohr-satisfy-btn {
 	position: absolute;
-	/*
-	right: 45rem;
-	*/
 	left: 19em;
 	top: 17rem;
 }
 
 #review-add-btn {
 	position: absolute;
-	/*
-	right: 40rem;
-	*/
 	left: 26em;
 	top: 17rem;
 }
@@ -124,4 +118,17 @@ footer p {
 	width: 400px;
 	margin: 0 auto;
 }
+
+#ohr-tr-title {
+	text-align: center;
+}
+
+.review-tr-class:hover {
+	cursor: pointer;
+}
+
+.review-td-titl {
+	text-align: center;
+}
+
 
