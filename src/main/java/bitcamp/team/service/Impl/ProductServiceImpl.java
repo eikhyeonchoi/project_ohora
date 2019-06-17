@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
   ManualFileDao manualFileDao;
   TipDao tipDao;
   TipHistoryDao tipHistoryDao;
-  
+
 
   public ProductServiceImpl(ProductDao productDao, ManufacturerDao manufacturerDao,
       ProductFileDao productFileDao, SatisfyDao satisfyDao, ReviewDao reviewDao, TipDao tipDao,
@@ -145,7 +145,7 @@ public class ProductServiceImpl implements ProductService {
       tipHistoryDao.deleteByTipNo(tipNo);
       System.out.println("tip history");
     }
-    
+
     if (manualNo != 0) {
       manualFileDao.delete(manualNo);
       System.out.println("manualfile");
@@ -153,13 +153,13 @@ public class ProductServiceImpl implements ProductService {
 
     tipDao.deleteByProductNo(productNo);
     System.out.println("tip");
-    
+
     manualDao.deleteByProductNo(productNo);
     System.out.println("manual");
-    
+
     productFileDao.deleteByProductNo(productNo);
     System.out.println("product file");
-    
+
     if (productDao.delete(productNo) != 0) {
       System.out.println("product file");
       count++;
@@ -173,7 +173,7 @@ public class ProductServiceImpl implements ProductService {
 
     param.put("keyword", keyword);
     param.put("listType", listType);
-    return productDao.findAll(param);
+    return productDao.findAll2(param);
   }
 
 }

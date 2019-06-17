@@ -6,6 +6,7 @@ memberNo = 0,
 commentListSrc = $('#comment-list').html(),
 commentListGenerator = Handlebars.compile(commentListSrc);
 
+
 ($.getJSON('/bitcamp-team-project/app/json/review/detail2?no=' + detailNo, function(data) {
 	console.log(data)
 	$('#review-prod-no').val(data.productNo),
@@ -191,6 +192,30 @@ $(document.body).bind('loaded-detail', function(data){
 	  }) // each
 }
 
+function getCurrentTime() {
+  var d = new Date();
+  var s =
+    leadingZeros(d.getFullYear(), 4) + '-' +
+    leadingZeros(d.getMonth() + 1, 2) + '-' +
+    leadingZeros(d.getDate(), 2) + ' ' +
 
+    leadingZeros(d.getHours(), 2) + ':' +
+    leadingZeros(d.getMinutes(), 2) + ':' +
+    leadingZeros(d.getSeconds(), 2);
+
+  return s;
+} // getCurrentTime
+
+
+function leadingZeros(n, digits) {
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (i = 0; i < digits - n.length; i++)
+      zero += '0';
+  }
+  return zero + n;
+}
 
 

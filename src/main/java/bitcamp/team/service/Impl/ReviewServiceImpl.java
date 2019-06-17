@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ReviewDao;
 import bitcamp.team.domain.Review;
+import bitcamp.team.domain.ReviewComment;
 import bitcamp.team.service.ReviewService;
 
 @Service
@@ -83,6 +84,37 @@ public class ReviewServiceImpl implements ReviewService {
   @Override
   public int countByProdNo(int no) {
     return reviewDao.countByProdNo(no);
+  }
+
+  @Override
+  public HashMap<String, Object> commentList(int no) {
+    ArrayList<ReviewComment> requestList = (ArrayList<ReviewComment>) reviewDao.findCommentAll(no);
+    HashMap<String, Object> content = new HashMap<String, Object>();
+
+    content.put("list", requestList);
+
+    return content;
+  }
+
+  // 댓글
+  @Override
+  public int addComment(ReviewComment reviewComment) {
+    return reviewDao.insertComment(reviewComment);
+  }
+
+  @Override
+  public int deleteComment(int no) {
+    return reviewDao.deleteComment(no);
+  }
+
+  @Override
+  public int updateComment(HashMap<String, Object> param) {
+    return reviewDao.updateComment(param);
+  }
+
+  @Override
+  public List<ReviewComment> findReply(HashMap<String, Object> param) {
+    return reviewDao.findReply(param);
   }
 
 }

@@ -252,17 +252,9 @@
       left join product_file pf on p.product_no=pf.product_no
        
     <where>
-      <if test="largeNo != null">
-        lc.lctg_no=#{largeNo} and
-      </if>
-      
-      <if test="smallNo != null">
-        sc.sctg_no=#{smallNo}
-      </if>
-      
       <if test="keyword != null">
         <bind name="prodSeachPattern" value="'%' + keyword + '%'"/>
-        and p.name like #{prodSeachPattern}
+        p.name like #{prodSeachPattern}
       </if>
     </where>
     <if test="listType == ''">

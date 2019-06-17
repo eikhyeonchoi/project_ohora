@@ -298,14 +298,14 @@
   
   <delete id="deleteComment" parameterType="int">
     delete from
-      reveiw_cmt
+      review_cmt
     where
       rv_cmt_no = #{value}
   </delete>
   
   <delete id="deleteCommentReview" parameterType="int">
     delete from
-      reveiw_cmt
+      review_cmt
     where
       rv_no = #{value}
   </delete>
@@ -317,7 +317,7 @@
       conts=#{contents},
       cdt=#{updateDate}
     where
-      fb_cmt_no=#{no}
+      rv_cmt_no=#{no}
   </update>
   
   <select id="findReply" resultMap="fboardCommentMap" parameterType="map">
