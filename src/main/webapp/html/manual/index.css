@@ -28,12 +28,17 @@ td:nth-child(3) {
 div.tableRow {
 	min-height: 1098px;
 }
+
+.card {
+  max-width: 210px;
+}
+
 p.card-text {
-  max-height: 4.8em;
   overflow: hidden;
-  display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-height: 4.8em;
+  height: 19px;
 }
 
 img {
