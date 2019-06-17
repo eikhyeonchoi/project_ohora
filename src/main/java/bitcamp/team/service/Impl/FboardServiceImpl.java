@@ -54,7 +54,6 @@ public class FboardServiceImpl implements FboardService {
 
   @Override
   public int delete(int no) {
-    fboardFileDao.deleteByFboardNo(no);
     fboardDao.deleteCommentFboard(no);
     return fboardDao.delete(no);
   }
