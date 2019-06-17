@@ -30,30 +30,11 @@ function loadList(no) {
     tbody.html(''); 
     $(trGenerator(obj)).appendTo(tbody);
     $(document.body).trigger('loaded-list');
+    $(document.body).trigger('loaded-data');
   }); 
 }
 
 $(document.body).bind('loaded-list', () => {
-  $('.rollback-btn').click(function(e) {
-    $.getJSON('/bitcamp-team-project/app/json/tiphistory/detail?no=' + $(e.target).attr('data-no'),
-        function(data) {
-      var hisNo = data.history.no;
-      if (data.status == "success") {
-        $.post('/bitcamp-team-project/app/json/tip/rollback?no=' + productNo, {
-          name: $('.productName').html(),
-          productNo: productNo,
-          hisNo: hisNo,
-          contents: data.history.contents
-        }, function(obj) {
-          if (obj.status == 'success') {
-            location.href = "view.html?no=" + productNo;
-          } else {
-            swal('오류', '롤백에 실패했습니다.\n' + data.message, 'warning');
-          }
-        }, "json");
-      }
-    });
-  });
 });
 
 function loadData(no) {
@@ -75,3 +56,10 @@ function loadData(no) {
     location.href = 'form.html?no=' + productNo;
   });
 };
+
+$(document.body).bind('loaded-data', () => {
+  $('.cont').click((e) => {
+    e.preventDefault();
+    location.href = 'view2.html?no=' + $(e.target).attr('data-no');
+  })
+})

@@ -79,31 +79,31 @@ function tipfunc(state) {
   var src = '';
   if (state) src = 'add';
   else src = 'update';
+
+  // tip add
+  $.post('/bitcamp-team-project/app/json/tip/' + src, {
+    name:     $('#h1-title').html(),
+    contents: $(".ql-editor").html()
+  }, function(data) {
+    if(data.status == 'success') {
+      location.href = 'view.html?no=' + productNo;
+    } else {
+      swal('실패!', '팁 생성 실패입니다.\n' + data.message, 'warning');
+    }
+  }, "json");
+  // --tip add
   
-    // tip add
-    $.post('/bitcamp-team-project/app/json/tip/' + src, {
-      name:     $('#h1-title').html(),
-      contents: $(".ql-editor").html()
-    }, function(data) {
-      if(data.status == 'success') {
-        location.href = 'view.html?no=' + productNo;
-      } else {
-        swal('실패!', '팁 생성 실패입니다.\n' + data.message, 'warning');
-      }
-    }, "json");
-    // --tip add
-    
-    // tiphistory update
-    $.post('/bitcamp-team-project/app/json/tiphistory/add', {
-      no: productNo,
-      contents: $('.ql-editor').html()
-    }, function(data) {
-      if (data.status == 'success') {
-        swal('저장중','히스토리 저장중입니다.','info');
-        location.href = 'view.html?no=' + productNo;
-      } else {
-        location.href = '/bitcamp-team-project/html/auth/login.html';
-      }
-    }, "json") 
-    //--tiphistory update
+  // tiphistory update
+  $.post('/bitcamp-team-project/app/json/tiphistory/add', {
+    no: productNo,
+    contents: $('.ql-editor').html()
+  }, function(data) {
+    if (data.status == 'success') {
+      swal('저장중','히스토리 저장중입니다.','info');
+      location.href = 'view.html?no=' + productNo;
+    } else {
+      location.href = '/bitcamp-team-project/html/auth/login.html';
+    }
+  }, "json") 
+  //--tiphistory update
 }

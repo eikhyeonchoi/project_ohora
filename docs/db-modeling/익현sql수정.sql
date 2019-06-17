@@ -10,6 +10,12 @@ alter table satisfy add eval varchar(300) null default '';
 ALTER TABLE fboard MODIFY conts mediumtext NOT NULL;
 
 
+// 6월 17일 추가
+alter table tip modify conts mediumtext not null;
+alter table tip_history modify conts mediumtext not null;
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
