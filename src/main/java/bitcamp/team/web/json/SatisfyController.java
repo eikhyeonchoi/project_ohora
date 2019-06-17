@@ -26,11 +26,16 @@ public class SatisfyController {
   }
   
   @GetMapping("list")
-  public Object list() throws Exception {
-    HashMap<String,Object> map = new HashMap<>();
-    map.put("list", satisfyService.list());
-
-    return map;
+  public Object listByProductNo(@RequestParam(required = false, defaultValue = "0") int productNo) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> params = new HashMap<>();
+    
+    if (productNo != 0) {
+      params.put("productNo", productNo);
+    }
+    
+    content.put("list", satisfyService.list(params));
+    return content;
   }
   
   @GetMapping("detail")
