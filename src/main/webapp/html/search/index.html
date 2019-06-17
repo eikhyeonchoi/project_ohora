@@ -99,10 +99,10 @@
      <table id="tip-table-list" class="table table-hover">
       <thead>
        <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">등록일</th>
-        <th scope="col">조회수</th>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
        </tr>
       </thead>
       <tbody id="ohr-tip-tbody"></tbody>
@@ -146,7 +146,7 @@
 <tr>
   <td scope='row'>{{product.name}}</th>
   <td>{{product.manufacturer.name}}</td>
-  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td><a class='bit-rev-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
   <td><p>{{contents}}</p></td>
 </tr>
 {{/each}}
@@ -157,7 +157,7 @@
 <tr>
   <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
   <td>{{product.productSmallCategory.name}}</td>
-  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td><a class='bit-tip-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
   <td>{{product.manufacturer.name}}</td>
 </tr>
 {{/each}}

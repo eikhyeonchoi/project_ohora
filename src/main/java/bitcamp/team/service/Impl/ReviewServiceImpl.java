@@ -3,7 +3,9 @@ package bitcamp.team.service.Impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import bitcamp.team.dao.ReviewDao;
 import bitcamp.team.domain.Review;
 import bitcamp.team.domain.ReviewComment;
@@ -20,32 +22,32 @@ public class ReviewServiceImpl implements ReviewService {
 
   @Override
   public List<Review> get(int no, String keyword, String searchType) {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("selectNo", no);
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("selectNo", no);
     switch (searchType) {
       case "name":
-        params.put("name", searchType);
+    	  param.put("name", searchType);
         break;
       case "title":
-        params.put("title", searchType);
+    	  param.put("title", searchType);
         break;
       case "contents":
-        params.put("contents", searchType);
+    	  param.put("contents", searchType);
         break;
       case "all":
-        params.put("all", searchType);
+    	  param.put("all", searchType);
         break;
       case "search":
-        params.put("search", searchType);
+    	  param.put("search", searchType);
         break;
       default:;
     }
     if (keyword != null) {
       if (!keyword.equals("")) {
-        params.put("keyword", keyword);
+    	  param.put("keyword", keyword);
       }
     }
-    return reviewDao.findByNo(params);
+    return reviewDao.findByNo(param);
   }
 
   @Override
