@@ -32,18 +32,26 @@
             <!-- tab -->
             <ul class="nav nav-tabs justify-content-md-center wow fadeInUp" id="myTab" role="tablist"
                 data-wow-offset="80" data-wow-delay="0.1s">
+                
               <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
                 data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
                 aria-selected="true">일반 매뉴얼</a></li>
+                
               <li class="nav-item"><a class="nav-link" id="configure-tab" data-toggle="tab"
                 href="#configureContents" role="tab" aria-controls="profile" aria-selected="false"
               >구성품 매뉴얼</a></li>
+              
               <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
                 href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
               >주의사항 매뉴얼</a></li>
+              
               <li class="nav-item"><a class="nav-link" id="video-tab" data-toggle="tab"
                 href="#videoContents" role="tab" aria-controls="contact" aria-selected="false"
               >동영상</a></li>
+              
+              <li class="nav-item"><a class="nav-link" id="comment-tab" data-toggle="tab"
+                href="#manualComment" role="tab" aria-controls="contact" aria-selected="false"
+              >댓글</a></li>
             </ul>
             <!-- tab -->
          
@@ -63,11 +71,42 @@
               <div class="tab-pane fade" id="videoContents" role="tabpanel" aria-labelledby="video-tab">
                   <div class="innerForm4"></div>
               </div>
+              <div class="tab-pane fade" id="manualComment" role="tabpanel" aria-labelledby="comment-tab">
+                <div class="container comment">
+                    <label id='total-comment' for='basic-url'>총댓글</label>
+                    <div id='manual-comment-add-form' class='input-group'>
+                      <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
+                        placeholder='댓글을 입력하세요'></textarea>
+                      <div class="input-group-append">
+                        <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
+                      </div>
+                    </div>
+                  <div class='comment-child'></div>
+                  </div>
+              </div>
             </div> <!-- myTabContent -->
           </div>
+  <script id="comment-list" type="text/x-handlebars-template">
+    <div class='fboard-comment-list-form col-sm-12'>
+    {{#each list}}
+      <div class='user-inform col-sm-12 mt-sm-3'>
+        <img width='26.8' heigh='26.8' src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb'>
+        <label for='basic-url' class='user-nickname'>{{member.nickName}}</label>
+        <label for='basic-url' class='created-date'>{{createdDate}}</label>
+      </div>
+      <div class='comment-form input-group'>
+        <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
+        <input type="text" class="form-control col-sm-10 commen-list-contents" value='{{contents}}'>
+        <a href='#' class='comment-update-btn btn btn-sm btn-light' data-no='{{no}}'>수정</a>
+        <a href='#' class='comment-delete-btn btn btn-sm btn-light' data-no='{{no}}'>삭제</a>
+      </div>
+    {{/each}}
+    </div>
+  </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/fullpage.js/vendors/easings.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/fullpage.js/vendors/scrolloverflow.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>

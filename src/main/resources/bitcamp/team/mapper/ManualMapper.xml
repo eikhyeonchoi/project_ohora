@@ -99,6 +99,21 @@
       </association>
     </collection>
   </resultMap>
+  
+  <resultMap type="manualComment"  id="manualCommentMap">
+    <id       column="m_cmt_no"    property="no"/>
+    <result   column="manual_no"   property="manualNo"/>
+    <result   column="member_no"   property="memberNo"/>
+    <result   column="conts"       property="contents"/>
+    <result   column="cdt"         property="createdDate"/>
+    <result   column="depth"       property="depth"/>
+    <result   column="parent_id"   property="parentId"/>
+    <association property="member" javaType="member">
+      <id     column="member_no"   property="no"/>
+      <result column="n_name"      property="nickName"/>
+      <result column="file_path"   property="filePath"/>
+    </association>
+  </resultMap>
 
   <select id="findAll" resultMap="manualAllMap" parameterType="map">
     select
@@ -216,13 +231,62 @@
       manual_no = #{value};
   </delete>
   
+  <select id="findCommentAll" resultMap="manualCommentMap" parameterType="int">
+    select
+      mc.m_cmt_no,
+      mc.member_no,
+      mc.conts,
+      mc.parent_id,
+      mc.cdt,
+      mm.n_name,
+      mm.file_path
+    from
+      manual_cmt mc
+    join member mm on mm.member_no = mc.member_no
+    where
+      mc.manual_no = #{value}
+  </select>
   
+  <select id="findReply" resultMap="manualCommentMap" parameterType="map">
+    select
+      mc.m_cmt_no,
+      mc.member_no,
+      mc.conts,
+      mc.parent_id,
+      mc.cdt,
+      mm.n_name
+    from
+      manual_cmt mc
+    join member mm on mm.member_no = mc.member_no
+    where
+      mc.manual_no = #{manualNo} and mc.parent_id = #{parentNo}
+  </select>
   
+  <insert id="insertComment" parameterType="manualComment"
+          useGeneratedKeys="true" keyProperty="no">
+    insert into manual_cmt (member_no, manual_no, conts, depth, parent_id)
+    value (#{memberNo}, #{manualNo}, #{contents}, #{depth}, #{parentId})
+  </insert>
   
+  <update id="updateComment" parameterType="map">
+    update manual_cmt
+    <set>
+      <if test="contents != null">conts = #{contents}</if>
+      <if test="cdt != null">cdt = #{updateDate}</if>
+    </set>
+    where
+      m_cmt_no = #{no}
+  </update>
   
+  <delete id="deleteComment" parameterType="int">
+    delete from manual_cmt
+    where m_cmt_no = #{value}
+  </delete>
   
-  
-  
+  <delete id="deleteCommentManual" parameterType="int">
+    delete from manual_cmt
+    where manual_no = #{value}
+  </delete>
 </mapper>
 
 

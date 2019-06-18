@@ -3,16 +3,14 @@ package bitcamp.team.web.json;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.imgscalr.Scalr;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import bitcamp.team.domain.Manual;
+import bitcamp.team.domain.ManualComment;
 import bitcamp.team.domain.ManualFile;
-import bitcamp.team.domain.Product;
+import bitcamp.team.domain.Member;
 import bitcamp.team.service.ManualService;
 import bitcamp.team.service.ManufacturerService;
 import bitcamp.team.service.ProductService;
@@ -37,16 +35,19 @@ public class ManualController {
   ProductService productService;
   ManufacturerService manufacturerService;
   ServletContext servletContext;
+  HttpSession httpSession;
 
   public ManualController(
       ManualService manualService, 
       ServletContext servletContext,
       ProductService productService,
-      ManufacturerService manufacturerService) {
+      ManufacturerService manufacturerService,
+      HttpSession httpSession) {
     this.manualService = manualService;
     this.servletContext = servletContext;
     this.productService = productService;
     this.manufacturerService = manufacturerService;
+    this.httpSession = httpSession;
   }
 
   @GetMapping("list")
@@ -106,15 +107,12 @@ public class ManualController {
     return contents;
   }
 
-
-
   @GetMapping("allProductName")
   public Object allProductName() {
     HashMap<String, Object> content = new HashMap<>();
     content.put("allProduct", manualService.getAllProduct());
     return content;
   }
-
 
   @PostMapping("add")
   public Object add(
@@ -264,9 +262,6 @@ public class ManualController {
     }
     return content;
   } // delete
-  
-
-  
 
   private void makeThumbnail(String filePath, int width, int height) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
@@ -281,7 +276,84 @@ public class ManualController {
     File thumbFile = new File(filePath + "_thumb");
     ImageIO.write(destImg, "jpg", thumbFile);
   } // makeThumbnail
+  
+  @GetMapping("commentList")
+  public Object commentList(int no) throws Exception {
+    return manualService.commentList(no);
+  }
+
+  @PostMapping("addComment")
+  public Object addComment(ManualComment comment) {
+    HashMap<String,Object> content = new HashMap<>();
+
+    Member member = (Member) httpSession.getAttribute("loginUser");
+    comment.setMemberNo(member.getNo());
+
+    try {
+
+      if (manualService.addComment(comment) == 0) 
+        throw new Exception("저장 실패");
+      else {
+        content.put("status", "success");
+        content.put("manualNo", comment.getNo());
+      }
+    } catch(Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+
+  @GetMapping("deleteComment")
+  public Object deleteComment(int no) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (manualService.deleteComment(no) == 0)
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
+  @PostMapping("updateComment")
+  public Object updateComment(int no, String contents, String updateDate) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("no",no);
+    paramMap.put("contents",contents);
+    paramMap.put("updateDate",updateDate);
+
+    try {
+      if (manualService.updateComment(paramMap) == 0) 
+        throw new Exception("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
+  @GetMapping("findReply")
+  public Object findReply(int manualNo, int parentNo) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> param = new HashMap<>();
+
+    param.put("manualNo", manualNo);
+    param.put("parentNo", parentNo);
+
+    content.put("replyList", manualService.findReply(param));
+    return content;
+  }
 }
+
 
 
 

@@ -1,12 +1,15 @@
 package bitcamp.team.service.Impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import bitcamp.team.dao.ManualDao;
 import bitcamp.team.dao.ManualFileDao;
 import bitcamp.team.dao.ProductDao;
 import bitcamp.team.domain.Manual;
+import bitcamp.team.domain.ManualComment;
 import bitcamp.team.domain.ManualFile;
 import bitcamp.team.domain.Product;
 import bitcamp.team.service.ManualService;
@@ -88,6 +91,29 @@ public class ManualServiceImpl implements ManualService {
     return count;
   }
   
+  @Override
+  public int addComment(ManualComment manual) {
+    return manualDao.insertComment(manual);
+  }
   
+  @Override
+  public HashMap<String, Object> commentList(int no) {
+    ArrayList<ManualComment> requestList = (ArrayList<ManualComment>) manualDao.findCommentAll(no);
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    content.put("list", requestList);
+    return content;
+  }
+  @Override
+  public int deleteComment(int no) {
+    return manualDao.deleteComment(no);
+  }
+  @Override
+  public List<ManualComment> findReply(Map<String, Object> param) {
+    return manualDao.findReply(param);
+  }
   
+  @Override
+  public int updateComment(Map<String, Object> param) {
+    return manualDao.updateComment(param);
+  }
 }
