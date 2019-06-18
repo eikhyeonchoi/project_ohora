@@ -124,6 +124,10 @@ body {
 	min-height: 300px;
 }
 
+.comment {
+	margin: 0 auto;
+}
+
 #textimg > img {
 	-webkit-transition: -webkit-transform 0.15s ease 0s;
   -moz-transition: -moz-transform 0.15s ease 0s;
