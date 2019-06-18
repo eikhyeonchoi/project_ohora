@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#wrap {
-	text-align: center;
-}
-</style>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>회원 가입</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
 
   <header class="ohr-main-header"> </header>
 
-  <div id="wrap">
-    <h1>오호라 회원가입!</h1>
-    <br> <br>
-    <!-- container -->
-    <div id="container">
-      <h3>개인회원 가입</h3>
-      <p>
-        ohora의 다양한 정보와,<br> 서버스를 이용하실수 있습니다.
-      </p>
-      <p class="btn">
-        <button type="button" id="nomalBtn"><img
-          src="https://contents.albamon.kr/monimg/login/btn_gg_1_n.png" alt="개인회원 가입"></button>
-      </p>
+  <div class="container" style="width: 1000px;">
+    <h3 id="my-title">Ohora 회원가입</h3>
+    <hr>
+    <div class="row my-row" id="head-div">
+      <div class="col-md-12" style="text-align: center;">
+        <h3 style="color: #00BFFF">회원가입을 환영합니다.</h3>
+        <h3>회원의 종류를 선택하여 가입해 주세요.</h3>
+      </div>
+    </div>
 
-      <hr>
-      <h3>기업회원 가입</h3>
-      <p>
-        ohora의 기업지원을 위한,<br> 모든 서비스를 이용하실 수 있습니다.
-      </p>
-      <p class="btn">
-        <button type="button" id="companyBtn"><img
-          src="https://contents.albamon.kr/monimg/login/btn_gi_1_n.png" alt="기업회원 가입"></button>
-      </p>
-      <p>※ 담당자(개인/기업)의 명의로 실명인증을 해주세요.</p>
+    <div class="row my-row">
+      <div class="col-sm-5  my-col">
+        <div class="col-md-12" style="max-width: 350px;">
+          <img alt="일반" src="서치.jpg" style="width: 100%; margin-left: 20px;">
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <p class="myP-p">
+              ohora의 다양한 정보와,<br> 서버스를 이용하실수 있습니다.
+            </p>
+          </div>
+          <div class="col-sm-12 btn-div">
+            <button type="button" id="nomalBtn" class="mymemberbtb mybtn btn btn-outline-secondary btn-lg btn-block">개인회원 가입</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6  my-col">
+        <div class="col-md-12" style="max-width: 430px; max-height: 350px;">
+          <img alt="기업" src="기업.jpg"
+            style="width: 100%; margin-bottom: 18px; margin-top: 10px; margin-left: 20px;">
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <p class="myP-p">
+              ohora의 기업지원을 위한,<br> 모든 서비스를 이용하실 수 있습니다.
+            </p>
+          </div>
+          <div class="col-md-12 btn-div">
+            <button type="button" id="companyBtn" class="mybtn btn btn-outline-secondary btn-lg btn-block">기업회원 가입</button>
+            <p id="company-p">※ 담당자(개인/기업)의 명의로 실명인증을 해주세요.</p>
+          </div>
+        </div>
+      </div>
 
     </div>
-    <!-- //container -->
+
   </div>
-  <!-- wrap -->
+
 
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
