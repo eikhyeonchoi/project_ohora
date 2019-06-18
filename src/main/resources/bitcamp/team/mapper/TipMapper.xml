@@ -12,9 +12,25 @@
     <result column="member_no"        property="memberNo"/>
     <result column="conts"            property="contents"/>
     <result column="cdt"              property="createdDate"/>
+    
     <association property="product" javaType="product">
       <id column="product_no"         property="no"/>
       <result column="name"           property="name"/>
+      
+      <association property="productSmallCategory" javaType="productSmallCategory">
+        <id column="sctg_no" property="no" />
+        <result column="lctg_no" property="largeCategoryNo" />
+        <result column="sName" property="name" />
+        
+        <association property="productLargeCategory" javaType="productLargeCategory">
+          <id column="lctg_no" property="no" />
+          <result column="lName" property="name" />
+        </association>
+      </association>
+      <association property="manufacturer" javaType="manufacturer">
+        <id column="manufac_no" property="no" />
+        <result column="manuName" property="name" />
+      </association>
       <collection property="productFiles" ofType="productFile">
         <id      column="pfile_no"   property="no"/>
         <result column="product_no" property="productNo"/>
@@ -35,13 +51,19 @@
       t.conts,
       t.cdt,
       p.name,
+      ma.name as manuName,
       f.img,
-      m.n_name
+      m.n_name,
+      s.name as sName,
+      l.name as lName
     from
       tip t
-    left outer join product p on t.product_no = p.product_no
-    left outer join product_file f on p.product_no = f.product_no
-    left outer join member m on t.member_no = m.member_no
+      left outer join product p on t.product_no = p.product_no
+      left outer join product_file f on p.product_no = f.product_no
+      left outer join member m on t.member_no = m.member_no
+      left join small_category s on p.sctg_no = s.sctg_no
+      left join large_category l on s.lctg_no = l.lctg_no
+      left join manufacturer ma on p.manufac_no = ma.manufac_no
   </sql>
 
   <select id="findAll" resultMap="tipMap" parameterType="map">

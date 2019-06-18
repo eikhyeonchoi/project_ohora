@@ -9,39 +9,52 @@ $(document).ready(function() {
   $.getJSON('../../app/json/search/list?keyword=' + keyword,
           function (obj){
     console.log(obj);
-    console.log(obj.tipList);
+    console.log(obj.prodList.length);
 
-    var prodTrGenerator = Handlebars.compile($('#tr-template-product').html());
 
-    $('#pagination-container-prod').pagination({
-      dataSource: obj.prodList,
-      locator: 'prodList',
-      showGoInput: true,
-      showGoButton: true,
-      callback: function(data, pagination) {
-        $('#ohr-prod-tbody').children().remove();
-        var pageObj = {prodList: data};
-        $(prodTrGenerator(pageObj)).appendTo($('#ohr-prod-tbody'));
-      }
-    });
-    
-    var manuTrGenerator = Handlebars.compile($('#tr-template-manual').html());
-    
-    $('#pagination-container-manu').pagination({
-      dataSource: obj.manuList,
-      locator: 'manuList',
-      showGoInput: true,
-      showGoButton: true,
-      callback: function(data, pagination) {
-        $('#ohr-manu-tbody').children().remove();
-        var pageObj = {manuList: data};
-        $(manuTrGenerator(pageObj)).appendTo($('#ohr-manu-tbody'));
-      }
-    });
-    
-    var revTrGenerator = Handlebars.compile($('#tr-template-review').html());
-    
-    $('#pagination-container-review').pagination({
+    if(obj.prodList.length > 0) {
+      var prodTrGenerator = Handlebars.compile($('#tr-template-product').html());
+
+      $('#pagination-container-prod').pagination({
+        dataSource: obj.prodList,
+        locator: 'prodList',
+        showGoInput: true,
+        showGoButton: true,
+        callback: function(data, pagination) {
+          $('#ohr-prod-tbody').children().remove();
+          var pageObj = {prodList: data};
+          $(prodTrGenerator(pageObj)).appendTo($('#ohr-prod-tbody'));
+        }
+      });
+    } else {
+      $('#prod-table-list').remove();
+      $('.bit-prod-list').append('<p>검색 결과가 없습니다.</p>')
+    }
+
+
+    if(obj.manuList.length > 0) {
+      var manuTrGenerator = Handlebars.compile($('#tr-template-manual').html());
+
+      $('#pagination-container-manu').pagination({
+        dataSource: obj.manuList,
+        locator: 'manuList',
+        showGoInput: true,
+        showGoButton: true,
+        callback: function(data, pagination) {
+          $('#ohr-manu-tbody').children().remove();
+          var pageObj = {manuList: data};
+          $(manuTrGenerator(pageObj)).appendTo($('#ohr-manu-tbody'));
+        }
+      });
+    } else {
+      $('#manu-table-list').remove();
+      $('.bit-manu-list').append('<p>검색 결과가 없습니다.</p>')
+    }
+
+    if(obj.revList.length > 0) {
+      var revTrGenerator = Handlebars.compile($('#tr-template-review').html());
+
+      $('#pagination-container-review').pagination({
         dataSource: obj.revList,
         locator: 'revList',
         showGoInput: true,
@@ -52,10 +65,15 @@ $(document).ready(function() {
           $(revTrGenerator(pageObj)).appendTo($('#ohr-review-tbody'));
         }
       });
-    
-    var tipTrGenerator = Handlebars.compile($('#tr-template-tip').html());
-    
-    $('#pagination-container-tip').pagination({
+    } else {
+      $('#rev-table-list').remove();
+      $('.bit-rev-list').append('<p>검색 결과가 없습니다.</p>')
+    }
+
+    if(obj.tipList.length > 0) {
+      var tipTrGenerator = Handlebars.compile($('#tr-template-tip').html());
+
+      $('#pagination-container-tip').pagination({
         dataSource: obj.tipList,
         locator: 'tipList',
         showGoInput: true,
@@ -66,6 +84,10 @@ $(document).ready(function() {
           $(tipTrGenerator(pageObj)).appendTo($('#ohr-tip-tbody'));
         }
       });
+    } else {
+      $('#tip-table-list').remove();
+      $('.bit-tip-list').append('<p>검색 결과가 없습니다.</p>')
+    }
 
     $(document.body).trigger('loaded-list');
 
@@ -79,22 +101,22 @@ $(document.body).bind('loaded-list', () => {
     window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
     $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
   });
-  
+
   //링크 수정
   $('.bit-manu-view-link').click((e) => {
-	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
-	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
-	  });
-  
+    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+  });
+
   $('.bit-rev-view-link').click((e) => {
-	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
-	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
-	  });
-  
+    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+  });
+
   $('.bit-tip-view-link').click((e) => {
-	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
-	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
-	  });
+    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+  });
 });
 
 function getQuerystring(key, default_){
