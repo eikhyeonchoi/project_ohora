@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -8,11 +8,12 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
-  <div class="container">
+  <div class="container" style="min-height: 630px;">
 
     <div class='row'>
       <h3 class='col-sm-6 offset-sm-4'>자주묻는질문 index</h3>
@@ -31,8 +32,9 @@
     <h3>전체 FAQ</h3>
     </div>
     
-  </div>
-  <!-- container -->
+  </div><!-- container -->
+  
+  <footer class="container-fluid ohr-footer"></footer>
 
   <script id="faq-type-template" type="text/x-handlebars-template">
     {{#each faqCtg}}
@@ -42,14 +44,14 @@
   </script>
 
   <script id="faq-template" type="text/x-handlebars-template">
-    <hr>
     {{#each list}}  
+      <hr>
       <div class='faq-title'>
-        <p data-title='{{title}}'>
+        <p data-title='{{title}}' data-check='true'>
           <i class="fas fa-angle-right"></i>{{title}}
         </p>
-        <hr>
       </div>
+      <hr>
       <div class='faq-contents'>
         <p>{{contents}}</p>
         <div class='managerDiv offset-sm-10'>
@@ -68,6 +70,7 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>
+  <script src="../footer.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

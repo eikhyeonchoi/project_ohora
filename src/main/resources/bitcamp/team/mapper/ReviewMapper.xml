@@ -177,7 +177,7 @@
       </if>
       <if test="searchType == 'search' and keyword != null">
         <bind name="pattern1" value="'%' + keyword + '%'" />
-        and r.name like #{pattern1} or p.name like #{pattern1} 
+        or r.name like #{pattern1} or p.name like #{pattern1} 
         or mf.name like #{pattern1} 
       </if>
       <if test="searchType == '' and keyword == ''">

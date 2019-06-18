@@ -33,6 +33,8 @@
       <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
       <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
      </fb:login-button>
+      <a id="kakao-login-btn"></a>
+      <a href="http://developers.kakao.com/logout"></a>
     </form>
   </div>
   <!-- .container -->
@@ -77,6 +79,7 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="../header.js"></script>
   <script src="login.js"></script>
 </body>

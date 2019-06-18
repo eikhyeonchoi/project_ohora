@@ -214,9 +214,6 @@ public class FboardController {
     content.put("replyList", boardService.findReply(param));
     return content;
   }
-
-
-  
   private void snsImageWrite(String src, String uploadDir) throws Exception  {
     URL url = new URL(src);
     BufferedImage image = ImageIO.read(url);
@@ -224,5 +221,4 @@ public class FboardController {
     File file = new File(filepath);
     ImageIO.write(image, "png", file);
   }
-
 }

@@ -14,3 +14,7 @@
 	text-align: center;
 }
 
+.faq-title > p {
+	cursor: pointer;
+}
+

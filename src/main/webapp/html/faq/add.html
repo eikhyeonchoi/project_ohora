@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 <link rel="stylesheet" href="add.css">
 </head>
 <body>
@@ -38,26 +39,27 @@
     
     <hr>
     
-    <div class='offset-sm-5'>
+    <div class='offset-sm-5 mb-sm-5'>
       <button id='faq-add-btn' class='btn btn-success btn-md'>등록</button>
       <button id='faq-cancel-btn' class='btn btn-danger btn-md'>취소</button>
     </div>
     
-    
-
-
   </div> <!-- container -->
   
-    <script id="faq-type-template" type="text/x-handlebars-template">
-      {{#each faqCtg}}
-        <a class="dropdown-item" href="#" data-type-name='{{faqType.name}}' data-no='{{qcNo}}'>{{faqType.name}}</a>
-      {{/each}}
+  
+  <footer class="container-fluid ohr-footer"></footer>
+  
+  <script id="faq-type-template" type="text/x-handlebars-template">
+    {{#each faqCtg}}
+      <a class="dropdown-item" href="#" data-type-name='{{faqType.name}}' data-no='{{qcNo}}'>{{faqType.name}}</a>
+    {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../header.js"></script>
+  <script src="../footer.js"></script>
   <script src="add.js"></script>
 </body>
 </html>

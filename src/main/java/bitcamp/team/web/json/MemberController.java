@@ -303,10 +303,12 @@ public class MemberController {
     String fbMemberId = facebookId + "@facebook.user"; // 페이스북 회원 id
     try {
       snsImageWrite(facebookPhoto, uploadDir, filename); // 사진 url을 파일로만들어서 지정한경로에 write하는 함수
-      fbMap.put("fbMemberId", fbMemberId); 
-      fbMap.put("facebookName", facebookName);
+      fbMap.put("snsId", fbMemberId); 
+      fbMap.put("snsName", facebookName);
       fbMap.put("filename", filename);
-      fbMap.put("fbuserInfo", fbuserInfo);
+      fbMap.put("snsUserInfo", fbuserInfo);
+      fbMap.put("snsType", 4);
+      
       Member fbMember = memberService.getEmail2(fbMemberId);
       if (fbMember == null) { // 페북 로그인시 처음 로그인하는 id인 경우
         memberService.authFacebook(fbMap);
@@ -314,7 +316,6 @@ public class MemberController {
         fbMap.put("fbMemberNo", fbMember.getNo());
         memberService.authUpdateFacebook(fbMap);
       }
-
 
       content.put("status", "success");
 
@@ -325,6 +326,43 @@ public class MemberController {
     }
     return content;
   };
+  
+  @RequestMapping("kakao")
+  public Object kakao(String id, String nickName, String thumbnail) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<>();
+    this.uploadDir = servletContext.getRealPath("/upload/memberfile");
+    String filename = UUID.randomUUID().toString();
+    String kakaoUserInfo = UUID.randomUUID().toString().replace("-", "").substring(0,10); // email,pwd 등을 설정할 랜덤값
+    String kakaoMemberId = id + "@kakao.user"; // 페이스북 회원 id
+    
+    try {
+      snsImageWrite(thumbnail, uploadDir, filename); 
+      paramMap.put("snsId", kakaoMemberId); 
+      paramMap.put("snsName", nickName);
+      paramMap.put("filename", filename);
+      paramMap.put("snsUserInfo", kakaoUserInfo);
+      paramMap.put("snsType", 5);
+      
+      
+      Member kakaoMember = memberService.getEmail2(kakaoMemberId);
+      if (kakaoMember == null) {
+        memberService.authFacebook(paramMap);
+      } else { // 페북 로그인시 이미 로그인했었던 id 일경우
+        paramMap.put("fbMemberNo", kakaoMember.getNo());
+        memberService.authUpdateFacebook(paramMap);
+      }
+      
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  };
+  
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 

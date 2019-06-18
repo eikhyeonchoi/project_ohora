@@ -51,12 +51,13 @@ public class TipHistoryController {
 
 
   @PostMapping("add")
-  public Object add(TipHistory tipHistory) throws Exception {
+  public Object add(TipHistory tipHistory, int no) throws Exception {
     HashMap<String,Object> contents = new HashMap<>();
     
     try {
       Member member = (Member) httpSession.getAttribute("loginUser");
       tipHistory.setNickName(member.getNickName());
+      tipHistory.setTipNo(tipService.getNo(no));
       tipHistoryService.add(tipHistory);
       contents.put("status", "success");
 

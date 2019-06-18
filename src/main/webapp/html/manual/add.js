@@ -18,6 +18,8 @@ var productGenerator = Handlebars.compile(productSrc),
     videoContentGenerator = Handlebars.compile(videoContentSrc);
 
 
+var totalFileSize = 0;
+
 var slide = [
   {
     id: $('#s1')
@@ -35,14 +37,16 @@ var slide = [
 
 
 $(document).ready(function() {
+  toastr.success('총 파일 사이즈는 30MB 제한 입니다', '파일 용량 제한 알림')
+  
   if(productNo == '' || productName == '') {
     $.get('/bitcamp-team-project/app/json/manual/allProductName', function(obj) {
       console.log(obj);
       $(productGenerator(obj)).appendTo($('.modal-body'));
     }); // get
 
-    //{backdrop: 'static', keyboard: false}
-    $('#manual-add-intro').modal();
+    // {backdrop: 'static', keyboard: false}
+    $('#manual-add-intro').modal({backdrop: 'static', keyboard: false});
     $('#modal-cancel-btn').click(function() {
       location.href = '../../index.html';
     }); // click
@@ -258,7 +262,6 @@ function confirmBeforeRegistration() {
   .then((value) => {
     if (value) {
       ajaxFileUpload('total-form');
-      location.href = 'index.html';
       
     } else {
       swal("등록 취소", "취소되었습니다", "error");
@@ -307,20 +310,32 @@ function ajaxFileUpload(formId) {
   $.ajax({
     url         : '/bitcamp-team-project/app/json/manual/add',
     data        : formdata ? formdata : form.serialize(),
-        cache       : false,
-        contentType : false,
-        processData : false,
-        type        : 'POST',
-        success     : function(data, textStatus, jqXHR){
-          console.log('전송완료');
-        }
+    cache       : false,
+    contentType : false,
+    processData : false,
+    type        : 'POST',
+    beforeSend  : function(){
+      $('body').loading({
+        stoppable: false,
+        theme: 'dark',
+        message: '업로드 중 입니다, 잠시만 기다려주세요',
+      });
+    },
+    success     : function(data, textStatus, jqXHR){
+      location.href = 'index.html';
+      window.totalFileSize = 0;
+    }, // success
+    fail        : function(error) {
+      swal('매뉴얼 등록 실패', "매뉴얼 등록에 실패했습니다", 'warning');
+    }
   });
-}
+} // ajaxFileUpload
 
 
 
 function settingToImageAndName(value) {
   var target = $(value);
+  
   if(value.files && value.files[0]){
     var fileValue = $(value).val().split("\\");
     var fileName = fileValue[fileValue.length-1];
@@ -329,13 +344,49 @@ function settingToImageAndName(value) {
     var strExt = strFilePath.split('.').pop().toLowerCase();
     if ($.inArray(strExt, ['jpg','jpeg','png']) == -1){
       swal("파일 선택오류", "이미지파일(JPG, JPEG, PNG) 파일만 선택가능합니다", "warning");
+      target.parents().eq(2).prev().html('');
+      target.next().text("파일 선택오류: 이미지 파일만 가능합니다");
+      target.removeClass('is-valid');
+      target.addClass('is-invalid');
       target.val('');
       return;
-    } 
+    }
     
+    if (value.files[0].size > 10000000){
+      swal("파일 선택오류", "파일 용량이 너무 큽니다!\n 이미지당 용량제한은 10MB 입니다", "warning");
+      target.parents().eq(2).prev().html('');
+      target.next().text("파일 선택오류: 10MB를 초과합니다");
+      target.removeClass('is-valid');
+      target.addClass('is-invalid');
+      target.val('');
+      return;
+    }
+    
+    var input =  $("input[type='file']");
+    window.totalFileSize = 0;
+    input.each(function(index, item) {
+      window.totalFileSize += item.files[0].size;
+      console.log(window.totalFileSize);
+    });
+    
+    
+    if(window.totalFileSize > 30000000) {
+      window.totalFileSize = window.totalFileSize - value.files[0].size;
+      console.log(window.totalFileSize);
+      
+      swal("파일 용량 오류", "총 파일(PDF, 이미지)의 용량제한은 30MB입니다\n 사진을 변경하거나 삭제해주세요", "warning");
+      target.parents().eq(2).prev().html('');
+      target.next().text("파일 용량오류: 용량제한은 50MB입니다");
+      target.removeClass('is-valid');
+      target.addClass('is-invalid');
+      target.val('');
+      return;
+    }
+    
+    toastr.warning('현재 총 파일 사이즈\n' + formatSizeUnits(window.totalFileSize) + " / 30MB", '현재 총 파일 사이즈 알림')
+    target.next().text(fileName + ' 이 선택되었습니다');
     target.removeClass('is-invalid');
     target.addClass('is-valid');
-    target.next().text(fileName + ' 이 선택되었습니다');
     
     var reader  = new FileReader();
     reader.onload = function(e) {
@@ -345,28 +396,45 @@ function settingToImageAndName(value) {
     }
     reader.readAsDataURL(value.files[0]);
   }
-} // loadImg
+} // settingToImageAndName
 
 
 
 function checkuploadFileExt(objFile) {
   var target = $(objFile);
-  
+
   var strFilePath = target.val();
   var strExt = strFilePath.split('.').pop().toLowerCase();
+  
+  if (objFile.files[0].size > 10000000) {
+    swal("파일 선택오류", "파일 용량이 너무 큽니다!\n 10MB 이상은 업로드할 수 없습니다", "warning");
+    target.parents().eq(2).prev().html('')
+    target.next().text("파일 선택오류: 10MB를 초과합니다");
+    target.removeClass('is-valid');
+    target.addClass('is-invalid');
+    target.val('');
+    return;
+  }
+  
   if ($.inArray(strExt, ["pdf"]) == -1){
     swal("파일 선택오류", "PDF 파일만 선택가능합니다", "warning");
+    target.parents().eq(2).prev().html('')
+    target.next().text('파일 선택 오류 : PDF 파일이 아닙니다');
+    target.removeClass('is-valid');
+    target.addClass('is-invalid');
     target.val('');
-    
-  } else {
-    var fileValue = target.val().split("\\");
-    var fileName = fileValue[fileValue.length-1];
-    target.removeClass('is-invalid');
-    target.addClass('is-valid');
-    target.next().text(fileName + ' 이 선택되었습니다');
-    target.parents().eq(2).prev().html('');
-    target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
+    return;
   }
+  
+  toastr.warning('현재 총 파일 사이즈\n' + formatSizeUnits(objFile.files[0].size) + " / 30MB", '현재 총 파일 사이즈 알림')
+  
+  var fileValue = target.val().split("\\");
+  var fileName = fileValue[fileValue.length-1];
+  target.removeClass('is-invalid');
+  target.addClass('is-valid');
+  target.next().text(fileName + ' 이 선택되었습니다');
+  target.parents().eq(2).prev().html('');
+  target.parents().eq(2).prev().append('<i class="fas fa-file-pdf"></i>')
 } // checkuploadFileExt
 
 
@@ -381,3 +449,15 @@ function getQuerystring(key, default_){
   else
     return qs[1];
 } // getQuerystring
+
+
+
+function formatSizeUnits(bytes){
+  if      (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + " GB"; }
+  else if (bytes >= 1048576)    { bytes = (bytes / 1048576).toFixed(2) + " MB"; }
+  else if (bytes >= 1024)       { bytes = (bytes / 1024).toFixed(2) + " KB"; }
+  else if (bytes > 1)           { bytes = bytes + " BYTES"; }
+  else if (bytes == 1)          { bytes = bytes + " BYTE"; }
+  else                          { bytes = "0 BYTES"; }
+  return bytes;
+} // formatSizeUnits

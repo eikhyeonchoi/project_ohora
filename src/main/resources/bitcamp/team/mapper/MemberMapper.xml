@@ -186,8 +186,8 @@
   <insert id="authFacebook" parameterType="map">
     insert into member (email, pwd, name, tel, n_name, type, ban, file_path, sns_type)
     values
-    (#{fbMemberId}, password(#{fbuserInfo}), #{fbuserInfo},
-     #{fbuserInfo},  #{facebookName}, 1, 0, #{filename}, 4)
+    (#{snsId}, password(#{snsUserInfo}), #{snsUserInfo},
+     #{snsUserInfo},  #{snsName}, 1, 0, #{filename}, #{snsType})
   </insert>
   
   <update id="authUpdateFacebook" parameterType="map"> 

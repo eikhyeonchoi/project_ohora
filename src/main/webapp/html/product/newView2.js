@@ -96,10 +96,10 @@ $(document).ready(function(){
 
     var largeCategory = obj.product.productSmallCategory.productLargeCategory.name;
     if (largeCategory.includes('태블릿')) {
-      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_pad.png' style='width: 100%; height: 100%;'>");
+      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_pad.jpg' style='width: 100%; height: 100%;'>");
       $('#product-inform-div').prepend('<i class="fas fa-mobile-alt" style="font-size: 4em;"></i>');
     } else if(largeCategory.includes('카메라')) {
-      $('#img-div-by-large-category').append("<imgcountAll src='/bitcamp-team-project/upload/productfile/lc_camera.jpg' style='width: 100%; height: 100%;'>");
+      $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_camera.jpg' style='width: 100%; height: 100%;'>");
       $('#product-inform-div').prepend('<i class="fas fa-camera" style="font-size: 4em;"></i>');
     } else if(largeCategory.includes('노트북')) {
       $('#img-div-by-large-category').append("<img src='/bitcamp-team-project/upload/productfile/lc_notebook.jpg' style='width: 100%; height: 100%;'>");

@@ -11,5 +11,4 @@ public interface TipHistoryService {
   List<TipHistory> get(int no);
   TipHistory detail(int no);
   int delete(int no);
-  int count();
 }

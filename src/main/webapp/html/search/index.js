@@ -9,7 +9,7 @@ $(document).ready(function() {
   $.getJSON('../../app/json/search/list?keyword=' + keyword,
           function (obj){
     console.log(obj);
-    console.log(obj.revList);
+    console.log(obj.tipList);
 
     var prodTrGenerator = Handlebars.compile($('#tr-template-product').html());
 
@@ -38,6 +38,34 @@ $(document).ready(function() {
         $(manuTrGenerator(pageObj)).appendTo($('#ohr-manu-tbody'));
       }
     });
+    
+    var revTrGenerator = Handlebars.compile($('#tr-template-review').html());
+    
+    $('#pagination-container-review').pagination({
+        dataSource: obj.revList,
+        locator: 'revList',
+        showGoInput: true,
+        showGoButton: true,
+        callback: function(data, pagination) {
+          $('#ohr-review-tbody').children().remove();
+          var pageObj = {revList: data};
+          $(revTrGenerator(pageObj)).appendTo($('#ohr-review-tbody'));
+        }
+      });
+    
+    var tipTrGenerator = Handlebars.compile($('#tr-template-tip').html());
+    
+    $('#pagination-container-tip').pagination({
+        dataSource: obj.tipList,
+        locator: 'tipList',
+        showGoInput: true,
+        showGoButton: true,
+        callback: function(data, pagination) {
+          $('#ohr-tip-tbody').children().remove();
+          var pageObj = {tipList: data};
+          $(tipTrGenerator(pageObj)).appendTo($('#ohr-tip-tbody'));
+        }
+      });
 
     $(document.body).trigger('loaded-list');
 
@@ -51,6 +79,22 @@ $(document.body).bind('loaded-list', () => {
     window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
     $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
   });
+  
+  //링크 수정
+  $('.bit-manu-view-link').click((e) => {
+	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+	  });
+  
+  $('.bit-rev-view-link').click((e) => {
+	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+	  });
+  
+  $('.bit-tip-view-link').click((e) => {
+	    window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
+	    $(e.target).attr('data-no') + '?name=' + $(e.target).attr('data-name');
+	  });
 });
 
 function getQuerystring(key, default_){
