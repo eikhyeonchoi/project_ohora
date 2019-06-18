@@ -4,8 +4,11 @@
 
 
 $('#toast-btn').click(function() {
-  console.log('click btn');
-  $('#delete-toast').toast('show');
+  $('body').loading({
+    stoppable: false,
+    theme: 'dark',
+    message: '업로드 중 입니다, 잠시만 기다려주세요',
+    
+  });
 });
 
-console.log($('#delete-toast'));
