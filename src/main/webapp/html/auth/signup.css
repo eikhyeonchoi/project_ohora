@@ -1,0 +1,58 @@
+.my-col {
+  border-radius: 7px;
+  border: 1px solid #BDBDBD;
+  margin: 10px;
+}
+
+.my-col:hover {
+  border: 1px solid #0B3861;
+  text-decoration: none;
+}
+
+.myP-p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  color: #848484;
+}
+
+.mybtn {
+  font-size: 23px;
+  min-height: 60px;
+  margin-bottom: 11px;
+  font-weight: bold;
+  border: 2px solid;
+}
+
+.btn-div {
+  text-align: center;
+}
+
+#company-p {
+  color: #6E6E6E;
+}
+
+.mymemberbtb {
+  border-color: #58ACFA;
+  color: #58ACFA;
+}
+
+.mymemberbtb:hover {
+  background-color: #58ACFA;
+  color: white;
+  border: 1px solid #58ACFA;
+}
+
+.my-row {
+  margin-left: 13px;
+  margin-right: -33px;
+}
+
+#head-div {
+ margin: 10px 0; 
+}
+
+#my-title {
+  margin: 20px 0;
+  margin-left: 27px;
+}

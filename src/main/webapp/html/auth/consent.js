@@ -1,11 +1,16 @@
 var allcb =  $("#all-checkBox"),
-    agree = $('#agree'),
-    sercb = $('#service-checkBox'),
-    memcb = $('#member-checkBox');
+agree = $('#agree'),
+sercb = $('#service-checkBox'),
+memcb = $('#member-checkBox');
 
-allcb.prop("checked", false);
-sercb.prop("checked", false);
-memcb.prop("checked", false);
+$(document).ready(function() {
+  allcb.prop("checked", false);
+  sercb.prop("checked", false);
+  memcb.prop("checked", false);
+  $("#ohora1-consent-div").load("ohora1Consent.html");
+  $("#ohora2-consent-div").load("ohora2Consent.html");
+  $("#ohora3-consent-div").load("ohora3Consent.html");
+});
 
 allcb.click(function() {
   setTerms()
@@ -23,8 +28,16 @@ agree.click(function() {
   if (allcb.is(":checked")) {
     location.href = '/bitcamp-team-project/html/member/form.html';
   } else {
-    alert('동의하세요!');
+    swal({
+      title: "필수 약관에 모두 동의해주세요.",
+      icon: "error",
+      button: "확인",
+    });
   }
+})
+
+$('#cancle').click(function() {
+  location.replace('/bitcamp-team-project/index.html');
 })
 
 function viewTerms() {
@@ -44,3 +57,4 @@ function setTerms() {
     memcb.prop("checked", false);
   }
 }
+

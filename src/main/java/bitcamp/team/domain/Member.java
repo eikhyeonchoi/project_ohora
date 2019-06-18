@@ -17,6 +17,7 @@ public class Member implements Serializable {
   private String filePath;
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date passwordUpdateDate;
+  private int snsType;
 
   public int getNo() {
     return no;
@@ -78,13 +79,22 @@ public class Member implements Serializable {
   public void setPasswordUpdateDate(Date passwordUpdateDate) {
     this.passwordUpdateDate = passwordUpdateDate;
   }
-
+  public int getSnsType() {
+    return snsType;
+  }
+  public void setSnsType(int snsType) {
+    this.snsType = snsType;
+  }
+  
   @Override
   public String toString() {
     return "Member [no=" + no + ", email=" + email + ", name=" + name + ", password=" + password
         + ", nickName=" + nickName + ", tel=" + tel + ", type=" + type + ", ban=" + ban
-        + ", filePath=" + filePath + ", passwordUpdateDate=" + passwordUpdateDate + "]";
+        + ", filePath=" + filePath + ", passwordUpdateDate=" + passwordUpdateDate + ", snsType="
+        + snsType + "]";
   }
 
+ 
+  
 }
 

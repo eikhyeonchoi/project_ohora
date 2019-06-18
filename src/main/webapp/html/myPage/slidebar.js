@@ -29,7 +29,7 @@ $(document.body).ready(function() {
     userMail = sessionStorage.getItem('email');
     memberPhoto = sessionStorage.getItem('filePath');
 
-    $('.photo0').attr('src', '/bitcamp-team-project/upload/memberfile/' + memberPhoto);
+    $('.photo0').attr('src', '/bitcamp-team-project/upload/memberfile/' + memberPhoto + "_thumb");
 
     $('#photo-icon-back').click(function() {
       $('#profile-fileupload').click();
