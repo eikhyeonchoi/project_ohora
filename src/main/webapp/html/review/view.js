@@ -16,7 +16,12 @@ commentListGenerator = Handlebars.compile(commentListSrc);
   $('#review-contents').html(data.contents),
   $('#review-createdDate').html(data.createdDate + '   |'),
   $('#review-viewCount').html(data.viewCount + ' 읽음');
-
+  
+  if(data.member.filePath != null) {
+  $('#review-id-img').css('background-image', 'url(/bitcamp-team-project/upload/memberfile/' + data.member.filePath + "_thumb)");
+  } else {
+    $('#review-id-img').css('background-image', 'url(/bitcamp-team-project/upload/memberfile/user.jpg_thumb)');
+  }
   memberNo = data.memberNo;
 
   console.log(userNo);
@@ -150,7 +155,7 @@ $(document.body).bind('loaded-comment-list', function() {
 
 function callUserInform(){
   if(sessionStorage.getItem('no') == null) {
-    $('#fboard-comment-add-form').remove();
+    $('#review-comment-add-form').remove();
     $('.reply-add-btn').remove();
   }
 
