@@ -35,7 +35,7 @@ commentListGenerator = Handlebars.compile(commentListSrc);
     $('#update-btn').hide();
     $('#delete-btn').hide();
   }
-
+  
   $(document.body).trigger({
     type: 'loaded-detail'
   }) // trigger
@@ -90,7 +90,7 @@ function bytesHandler(obj){
 $(document.body).bind('loaded-detail', function(data){
   $.get('/bitcamp-team-project/app/json/review/commentList?no=' + detailNo ,function(obj) {
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
-
+    $('#ohr-comment-count').text('(' + obj.list.length + ')');
 
     $(document.body).trigger({
       type: 'loaded-comment-list'
