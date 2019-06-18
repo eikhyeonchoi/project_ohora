@@ -65,8 +65,8 @@ footer p {
 	font-weight: bold;
 	margin: .5rem;
 	position: absolute;
-	top: 12.5rem;
-	left: 16.2rem;
+	top: 12rem;
+	left: 16.5rem;
 }
 
 #ohr-product-img {
@@ -87,7 +87,7 @@ footer p {
 	margin: .5rem;
 	position: absolute;
 	top: 14.5rem;
-	left: 16.2rem;
+	left: 16.7rem;
 }
 
 #ohr-product-grade {
@@ -98,15 +98,9 @@ footer p {
 	left: 28em;
 }
 
-#ohr-satisfy-btn {
-	position: absolute;
-	left: 19em;
-	top: 17rem;
-}
-
 #review-add-btn {
 	position: absolute;
-	left: 26em;
+	left: 19.5em;
 	top: 17rem;
 }
 
