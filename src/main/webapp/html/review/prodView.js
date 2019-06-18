@@ -51,13 +51,6 @@ function loadList() {
         $('#ohr-product-manufacturer-name').html('');
         $('#ohr-product-manufacturer-name').append(manuName);
 
-        /*
-        $('.review-a-class').click((e) => {
-          e.preventDefault();
-          window.location.href = 'view.html?no=' +  $(e.target).attr('data-no');
-        });
-        */
-        
         $(document.body).trigger('loaded-list');
       })
 };
@@ -94,15 +87,4 @@ $(document).ready(() => {
     })
   }
 });
-
-$('#ohr-satisfy-btn').click(function() {
-  $.get('/bitcamp-team-project/app/json/product/findReviewedMember?pNo=' + detailNo, function(obj) {
-    if (obj.status == 'fail') {
-      swal("만족도 평가 오류", "이미 만족도를 등록하셨습니다", "warning");
-      $('#go-satisfy-add-btn').prop('disabled',true);
-    } else {
-      location.href = '../satisfy/add.html?productNo=' + detailNo;
-    }
-  }) // get
-}); // click
 
