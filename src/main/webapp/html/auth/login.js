@@ -7,6 +7,40 @@ facebookName,
 facebookPhoto;
 
 $(document).ready(function() {
+  
+  Kakao.init('2c964d35ffec8240fa4f8147d744e961');
+  // 카카오 로그인 버튼을 생성합니다.
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v1/user/me',
+        success: function(res) {
+          $.post('/bitcamp-team-project/app/json/member/kakao', {
+            id: res.id,
+            nickName: res.properties.nickname,
+            thumbnail: res.properties.thumbnail_image
+          }, function(obj) {
+            if (obj.status == 'success') {
+              var kakaoId = res.id + "@kakao.user";
+              snsLogin(kakaoId);
+              location.replace('/bitcamp-team-project/index.html'); 
+            } else {
+              alert("카카오톡 로그인 오류!");
+            }
+          });
+        },
+        fail: function(error) {
+          alert(JSON.stringify(error));
+        }
+      });
+    },
+    fail: function(err) {
+       alert(JSON.stringify(err));
+    }
+  });
+  
+  
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -99,7 +133,7 @@ function getUserInfo(accessToken) {
     }, function(data) {
       if (data.status == 'success') {
         var fbMemberId = facebookId + "@facebook.user";
-        fbLogIn(fbMemberId);
+        snsLogin(fbMemberId);
         location.replace('/bitcamp-team-project/index.html'); 
       } else {
         alert("페이스북 로그인 오류!");
@@ -108,9 +142,9 @@ function getUserInfo(accessToken) {
   });
 } //getUserInfo()
 
-function fbLogIn(fbMemberId) {
+function snsLogin(id) {
   $.ajax({
-    url     : '/bitcamp-team-project/app/json/auth/login2?email=' + fbMemberId,
+    url     : '/bitcamp-team-project/app/json/auth/login2?email=' + id,
     type    : 'GET',
     sendDataType : 'json',
     async   : false

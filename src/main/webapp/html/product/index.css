@@ -13,11 +13,10 @@ canvas.horizon{
 }
 
 #pagination-container {
-	width: 450px;
-  margin: 0 auto;
+	margin-left: 40%;
+	
 }
 
 #product-div {
-	min-height: 1071px;
 }
 
