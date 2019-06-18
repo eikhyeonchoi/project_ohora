@@ -6,6 +6,10 @@ public class ManualComment {
   private int memberNo;
   private String contents;
   private String createdDate;
+  private int depth;
+  private int parentId;
+
+  private Member member;
   
   public int getNo() {
     return no;
@@ -37,8 +41,28 @@ public class ManualComment {
   public void setCreatedDate(String createdDate) {
     this.createdDate = createdDate;
   }
-
-  
-  
-  
+  public int getDepth() {
+    return depth;
+  }
+  public void setDepth(int depth) {
+    this.depth = depth;
+  }
+  public int getParentId() {
+    return parentId;
+  }
+  public void setParentId(int parentId) {
+    this.parentId = parentId;
+  }
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
+  @Override
+  public String toString() {
+    return "ManualComment [no=" + no + ", manualNo=" + manualNo + ", memberNo=" + memberNo
+        + ", contents=" + contents + ", createdDate=" + createdDate + ", depth=" + depth
+        + ", parentId=" + parentId + ", member=" + member + "]";
+  }
 }
