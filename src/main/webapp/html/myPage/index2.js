@@ -95,7 +95,11 @@ $(document).bind('loaded-data', function() {
         registerNo.attr('readonly',true);
         add3.attr('readonly',true);
       } else {
-        alert("변경중 오류가 발생했습니다." + data.message);
+        swal({
+          title: "변경중 오류가 발생했습니다.",
+          icon: "error",
+        });
+        location.reload();
       }
     }, "json");
   });

@@ -168,6 +168,7 @@
       member
     set
       email = #{ranStr},
+      name = #{ranStr},
       n_name = #{ranStr}
     where 
       member_no = #{memberNo}

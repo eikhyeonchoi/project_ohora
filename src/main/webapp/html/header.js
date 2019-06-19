@@ -1,7 +1,7 @@
 //헤더 가져오기
 $(document.body).ready(function() {
   $('.ohr-main-header').load('/bitcamp-team-project/html/header.html',
-          function (){
+      function (){
     $(document.body).trigger('loaded.header');
   });
 });
@@ -61,15 +61,14 @@ $('#ohr-header-logo').click(function() {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
       $('#bit-login-state').show();
       $('#login-username').html(data.user.nickName);
-
+      
       $('#login-username').click(function(){
-        location.href = '/bitcamp-team-project/html/myPage/password.html';  
+        location.href = '/bitcamp-team-project/html/myPage/myPost.html';  
       });
 
       sessionStorage.setItem('no', data.user.no);
@@ -80,14 +79,15 @@ function loadLoginUser() {
       sessionStorage.setItem('tel', data.user.tel);
       sessionStorage.setItem('pwdUpdateDate', data.user.passwordUpdateDate);
       sessionStorage.setItem('filePath', data.user.filePath);
-
+      sessionStorage.setItem('snsType', data.user.snsType);
+      
       $(document.body).trigger('loaded.loginuser');
-
+      
     } else {
       $('#bit-not-login-state').show();
       $('#bit-login-state').hide();
       $("#bit-auth-div").show();
-
+      
       // fail 일때도 trigger 보내줘야함 // 0602 최익현 추가
       $(document.body).trigger('loaded.loginuser');
     }

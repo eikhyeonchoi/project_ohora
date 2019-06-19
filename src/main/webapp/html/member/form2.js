@@ -21,11 +21,11 @@ $(document).ready(function() {
   tel2.val(tel);
 });
 
-namee.change(function() {
+namee.keyup(function() {
   nameCheck()
 });
 
-homePage.change(function() {
+homePage.keyup(function() {
   hompCheck()
 });
 
@@ -35,7 +35,7 @@ registerNo.keydown(function() {
   } 
 });
 
-registerNo.change(function() {
+registerNo.keyup(function() {
   renCheck()
 });
 
@@ -61,7 +61,7 @@ function hompCheck() {
 
 function renCheck() {
   if (registerNo.val() == ""){
-    rp.html("&emsp; -를 제외하고 입력해주세요.");
+    rp.html("* -를 제외하고 입력해주세요.");
     regNoCk = false;
   } else {
     rp.html("");
@@ -81,12 +81,8 @@ function adrCheck() {
   if (adr1.val() != "" && adr3.val() != "") {
     address = adr1.val() + "/" + adr2.val() + "/" + adr3.val() + "/" + adr4.val();
     adrCk = true;
-    console.log(address);
-
   } else {
     adrCk = false;
-    console.log("else");
-
   }
 };
 
@@ -103,18 +99,56 @@ $('#add-btn').click(function() {
       address: address,
     }, function(data) {
       if (data.status == 'success') {
-        alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
+        swal({
+          title: "환영합니다!",
+          text: namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.",
+          icon: "success",
+        });
         location.replace("../auth/login.html");
       } else {
-        alert('등록 실패 입니다.\n' +  data.message);
+        swal({
+          title: "회원가입중 오류가 발생했습니다.",
+          icon: "error",
+        });
+        location.reload();
       }
 
     }, "json");
 
   } else {
-    alert("기업 정보를 모두 입력하세여~")
-    return;
+    if (nameCk != true){
+      swal({
+        title: "기업명을 입력하세요",
+        icon: "error",
+      });
+      return;
+      
+    } else if (hompCk != true) {
+      swal({
+        title: "기업 URL을 입력하세요",
+        icon: "error",
+      });
+      return;
+      
+    } else if (regNoCk != true) {
+      swal({
+        title: "사업자 등록번호를 입력하세요",
+        icon: "error",
+      });
+      return;
+      
+    } else if (adrCk != true) {
+      swal({
+        title: "기업 주소를 입력하세요",
+        icon: "error",
+      });
+      return;
+    }
   }
+});
+
+$("#add-cns-btn").click(function() {
+  location.replace("/bitcamp-team-project/index.html");
 });
 
 

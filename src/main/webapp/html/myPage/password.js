@@ -19,10 +19,18 @@ $('#confirm-btn').click(function() {
   $.getJSON("/bitcamp-team-project/app/json/member/password?email=" + email + "&&password=" + $('#password').val(), 
       function(data) {
     if (data.status == "success"){
-      alert('인증성공!');
+      swal({
+        title: "인증 성공!",
+        icon: "success",
+      });
+      location.reload();
       location.replace('index.html');
     } else {
-      alert('비밀번호를 틀리셨습니다\n다시 입력해주세요.');
+      swal({
+        title: "비밀번호를 다시 입력해주세요",
+        icon: "error",
+      });
+      location.reload();
       $('#password').val("")
     }
   }, "json");
