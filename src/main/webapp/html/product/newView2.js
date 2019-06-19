@@ -563,7 +563,7 @@ function selectPagination(obj) {
   page.pagination({
     dataSource: obj,
     locator: 'list',
-    pageSize: 7,
+    pageSize: 6,
     showGoInput: true,
     showGoButton: true,
     callback: function(data, pagination) {
@@ -604,6 +604,9 @@ function satisfyModalInitializer() {
       lengthCheck('my-score-eval');
       ReloadScripts('rateit');
       
+      $('#a-eval').hide();
+      
+      /*
       $('#eval, #modal-ok-btn').hover(function() {
         $(this).css('opacity', '0.2');
         $('#modal-ok-btn').parent()
@@ -612,6 +615,7 @@ function satisfyModalInitializer() {
                           .append('<p>이미 만족도를 등록했습니다</p>');
         $('#modal-ok-btn').remove();
       })
+      */
       
     } else {
       $('#my-score-div').html('');

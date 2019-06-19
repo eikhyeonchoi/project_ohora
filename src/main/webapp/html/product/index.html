@@ -13,22 +13,38 @@
 <body>
 
   <header class="ohr-main-header"></header>
+  
+  <div class='container-fluid' style="padding: 0;">
+   <section class="jumbotron jumbotron-fluid text-center">
+     <h1 class="jumbotron-heading">제품</h1>
+     <p class="lead text-muted">사용자가 작성한 제품의 상세정보를 확인할 수 있습니다</p>
+     <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+       <div id="search">
+         <input id="keyword" class="form-control mr-sm-2" placeholder="제품명으로 검색하기" aria-label="검색">
+         <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+       </div>
+      </form>
+    </section>
+  </div>
+  
+  
   <div class="container">
-    <h1>All Product List</h1>
-
-    <div class="row form-inline formInline">
+  
+    <div class="col-sm-12">
       <button id='insert-btn' type="button" class="btn btn-warning btn-sm mr-5">새 글</button>
-      <div id='category-div' class="input-group offset-sm-1"></div>
     </div>
     
     <div id='product-div' class='row mt-sm-3'>
     </div> <!-- product-div -->
     
-    <div id="pagination-container" class='mb-sm-5'></div>
+    <div id="pagination-container" class='mb-sm-5'>
+    </div>
     
   </div> <!-- container -->
   
+  
   <footer class="container-fluid ohr-footer"></footer>
+  
   
   <script id="large-category-template" type="text/x-handlebars-template">
     <select id='lageCtgSelect' class="custom-select">
@@ -47,17 +63,6 @@
       {{/each}}
     </select>
   </script>
-  
-  <script id="basic-list-form-template" type="text/x-handlebars-template">
-    {{#each list}}
-    <tr class='product-tr-class' data-no='{{no}}'>
-      <th>{{no}}</th>
-      <td><a class='product-a-class' href='#' data-no='{{no}}' data-name='{{name}}'>{{name}}</a></td>
-      <td>{{manufacturer.name}}</td>
-    </tr>
-    {{/each}}
-  </script>
-  
   
   <script id="card-template" type="text/x-handlebars-template">
     {{#each list}}

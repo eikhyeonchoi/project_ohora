@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bitcamp.team.domain.Fboard;
 import bitcamp.team.domain.Member;
@@ -332,7 +333,8 @@ public class MemberController {
   };
 
   @RequestMapping("kakao")
-  public Object kakao(String id, String nickName, String thumbnail) throws Exception {
+  public Object kakao(String id, String nickName,
+      @RequestParam(required = false, defaultValue = "undefined") String thumbnail) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> paramMap = new HashMap<>();
     this.uploadDir = servletContext.getRealPath("/upload/memberfile");
@@ -341,13 +343,17 @@ public class MemberController {
     String kakaoMemberId = id + "@kakao.user"; // 페이스북 회원 id
 
     try {
-      snsImageWrite(thumbnail, uploadDir, filename); 
+      if (!thumbnail.equals("undefined")) {
+        snsImageWrite(thumbnail, uploadDir, filename); 
+      } else {
+        filename = "user.jpg";
+      }
+      
       paramMap.put("snsId", kakaoMemberId); 
       paramMap.put("snsName", nickName);
       paramMap.put("filename", filename);
       paramMap.put("snsUserInfo", kakaoUserInfo);
       paramMap.put("snsType", 5);
-
 
       Member kakaoMember = memberService.getEmail2(kakaoMemberId);
       if (kakaoMember == null) {

@@ -112,7 +112,7 @@ h4 {
 }
 
 #satisfy-list {
-	min-height: 240px;
+	min-height: 200px;
 }
 
 #sorting-list a {
@@ -120,7 +120,15 @@ h4 {
 	color: black;
 }
 
-
+#product-hover-div {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  background-image: url(product-hover-div.png);
+  background-repeat: no-repeat;
+  
+}
 
 
 

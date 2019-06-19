@@ -1,18 +1,14 @@
 var searchSpan = $('#seachSpan'),
-tbody = $('tbody'),
-page = $('#pagination-container'),
-largeSrc = $('#large-category-template').html(),
-smallSrc = $('#small-category-template').html(),
-formInline = $('.formInline'),
-basicSrc = $('#basic-list-form-template').html(),
-cardSrc = $('#card-template').html();
+    page = $('#pagination-container'),
+    largeSrc = $('#large-category-template').html(),
+    smallSrc = $('#small-category-template').html(),
+    cardSrc = $('#card-template').html();
 
 var largeCategoryGenerator = Handlebars.compile(largeSrc),
-smallCategoryGenerator = Handlebars.compile(smallSrc),
-cardGenerator = Handlebars.compile(cardSrc),
-listGenerator = Handlebars.compile(basicSrc);
+    smallCategoryGenerator = Handlebars.compile(smallSrc),
+    cardGenerator = Handlebars.compile(cardSrc);
 
-var type;
+var type = 0;
 
 $(document).ready(function() {
   $(document.body).bind('loaded.header', function() {
@@ -31,18 +27,17 @@ $(document).ready(function() {
   }); // bind
 
   loadList();
+  
   $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
-    $(largeCategoryGenerator(obj)).appendTo($('#category-div'));
-    $(smallCategoryGenerator(obj)).appendTo($('#category-div'));
-
-    formInline
-    .append("<div class='ml-sm-1'><input id='searchWord' type='text' class='form-control'>")
-    .append("<button id='search-btn' type='button' class='btn btn-success btn-sm'>검색</button></div>");
+    $(smallCategoryGenerator(obj)).prependTo($('#search'));
+    $(largeCategoryGenerator(obj)).prependTo($('#search'));
 
     $(document.body).trigger('loaded-category');
   });
 })
   
+
+
 $(document.body).bind('loaded-category', function(){
   $('#lageCtgSelect').off().change(function() {
     var state = $('#lageCtgSelect option:selected').val();
@@ -73,15 +68,6 @@ $(document.body).bind('loaded-category', function(){
 
 }); // loaded-category
 
-$(document.body).bind('loaded', ()=>{
-  $('#searchWord').keydown((e) => {
-    if (event.keyCode == 13) {
-      e.preventDefault();
-      searchSrc();
-    }
-  })
-}) // bind
-
 
 function loadList() {
   $.get('/bitcamp-team-project/app/json/product/list?largeNo=' + 0
@@ -102,14 +88,15 @@ function paging(obj) {
     callback: function(data, pagination) {
       $('#product-div').children().remove();
       var pageSrc = {list : data};
-      // $(listGenerator(pageSrc)).appendTo(tbody);
       $(cardGenerator(pageSrc)).appendTo($('#product-div'));
-      $(document.body).trigger('loaded');
 
-
-      afterLoadedClickEvent();
-    }
-  })
+      $('.product-view-btn').off().click((e) => {
+        location.href= 'newView2.html?no=' + $(e.target).attr('data-no') + '&name=' + $(e.target).attr('data-name'); 
+      }); // click
+      
+    } // callback
+  
+  }) // pagination
 }; // paging
 
 
@@ -118,7 +105,7 @@ function searchSrc() {
       + $('#lageCtgSelect option:selected').val()
       + '&smallNo=' + $('#smallCtgSelect option:selected').val() 
       + '&productName=' 
-      + $('#searchWord').val() , function(obj){
+      + $('#keyword').val() , function(obj){
         console.log(obj);
         if (obj.list.length == 0) {
           swal("검색 결과", "등록된 제품이 존재하지 않습니다", "error").then(function(){
@@ -127,15 +114,10 @@ function searchSrc() {
         }
 
         paging(obj);
-        $(document.body).trigger('loaded-search-list');
       }) // get
+      
 } // searchSrc
 
 
-function afterLoadedClickEvent(){
-  $('.product-view-btn').off().click((e) => {
-    location.href= 'newView2.html?no=' + $(e.target).attr('data-no') + '&name=' + $(e.target).attr('data-name'); 
-  })
-} // afterLoadedClickEvent
 
 
