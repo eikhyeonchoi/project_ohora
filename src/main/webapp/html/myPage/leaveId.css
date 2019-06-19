@@ -1,3 +1,97 @@
 #my-row {
-  border: 1px solid #BDBDBD;
+  border: 1px solid #D8D8D8;
+  margin: 0 20px;
+  padding: 25px;
+  margin-bottom: 15px;
+}
+
+#stop-img {
+  float: left; 
+  max-width : 150px;
+  max-height: 150px;
+  max-width: 150px;
+}
+
+#stop-p {
+  padding-top: 30px; 
+  font-size : 20px;
+  font-weight: bold;
+  color: #585858;
+  font-size: 20px;
+}
+
+#stop-p2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #585858;
+}
+
+#stop-col {
+  min-height: 140px;
+}
+
+#my-title {
+  margin: 25px 0px 20px 45px;
+}
+
+.stop-sp {
+  color: #2E9AFE;
+}
+
+#my-leave-div {
+  padding: 45px 30px;
+  background-color: #FAFAFA;
+  margin-top: -16px;
+  margin-bottom: -17px;
+}
+
+.cont-title-div {
+  font-size: 17px;
+  font-weight: bold;
+  color: #424242;
+  margin-bottom: 13px;
+}
+
+.cont-text-div {
+  color: #585858;
+}
+
+#my-email {
+  color: #2E9AFE;
+}
+
+#my-email-span-2 {
+  color: #FE642E;
+}
+
+#my-service-span {
+  color: #FE642E;
+}
+
+.manual-span {
+  color: #FE642E;
+}
+
+.my-set-title {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #424242;
+}
+
+.my-set-cont {
+  color: #A4A4A4;
+}
+
+.my-row-yeah {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.my-row-yeah2 {
+  margin-top: 30px;
+}
+
+.my-set-cont:hover {
+  cursor: pointer;
+  color: #FE642E;
 }
