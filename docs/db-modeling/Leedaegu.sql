@@ -8,5 +8,6 @@ add pwd_udt datetime NULL;
 // 0618 추가
 // 페이스북 4
 // 카카오톡 5
+// gmail 6
 ALTER TABLE member
 add sns_type int NULL;

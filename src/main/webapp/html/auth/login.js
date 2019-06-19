@@ -7,7 +7,6 @@ facebookName,
 facebookPhoto;
 
 $(document).ready(function() {
-
   if (window.localStorage.getItem('email')) {
     $('#email').val(localStorage.email);
   }
