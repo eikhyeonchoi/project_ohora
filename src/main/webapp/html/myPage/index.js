@@ -166,14 +166,21 @@ $('#password-udt-btn').click(function() {
 		pwdUpdateDate: getCurrentTime()
 	},function(data) {
 		if(data.status == 'success'){
-			alert("변경이 완료되었습니다!");
+		  swal({
+        title: "변경이 완료되었습니다.",
+        icon: "success",
+      });
 			$.get('/bitcamp-team-project/app/json/auth/logout', () => {
 				location.href = "/bitcamp-team-project/index.html";
 				sessionStorage.clear();
 			});
 
 		} else { 
-			alert(data.error);
+		  swal({
+        title: "변경중 오류가 발생했습니다.",
+        icon: "error",
+      });
+		  location.reload();
 		}
 	}, "json")
 })
@@ -302,7 +309,11 @@ $(document).bind('udt-name', function() {
 				logOut();
 				logIn();
 			} else {
-				alert("변경중 오류가 발생했습니다." + data.error);
+			  swal({
+	        title: "변경중 오류가 발생했습니다.",
+	        icon: "error",
+	      });
+    location.reload();
 			}
 		}, "json")
 	});
@@ -366,7 +377,11 @@ $(document).bind('udt-nickName', function() {
 				logOut();
 				logIn();
 			} else {
-				alert("변경중 오류가 발생했습니다." + data.error);
+			  swal({
+	        title: "변경중 오류가 발생했습니다.",
+	        icon: "error",
+	      });
+				location.reload();
 			}
 		}, "json");
 	});
@@ -420,7 +435,11 @@ $(document).bind('udt-tel', function() {
 				logOut();
 				logIn();
 			} else {
-				alert("변경중 오류가 발생했습니다." + data.error);
+			  swal({
+          title: "변경중 오류가 발생했습니다.",
+          icon: "error",
+        });
+			  location.reload();
 			}
 		}, "json")
 	});

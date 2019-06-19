@@ -87,7 +87,7 @@ input[type="number"]::-webkit-inner-spin-button
 
 .auth-pp {
   margin-top: 3px;
-  color: #848484;
+  color: red;
 }
 
 .form-control:disabled, 
