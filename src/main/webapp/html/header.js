@@ -45,7 +45,6 @@ $(document.body).bind('loaded.header', function(data) {
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
@@ -55,7 +54,6 @@ function loadLoginUser() {
       $('#login-username').click(function(){
         location.href = '/bitcamp-team-project/html/myPage/myPost.html';  
       });
-      console.log(data.user)
       sessionStorage.setItem('no', data.user.no);
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
