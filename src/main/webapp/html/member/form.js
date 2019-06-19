@@ -191,13 +191,20 @@ function telCheck() {
 
 $("#n-name-btn").click(function() {
   if (nickName.val() == "") {
-    alert("닉네임을 입력하세요.")
+    swal({
+      title: "닉네임을 입력하세요.",
+      icon: "error",
+    });
   } else {
     $.getJSON('../../app/json/member/nickName?nickName=' + nickName.val()
         , function(data) {
       if (data != 0) {
         nickName.val("");
-        alert("닉네임 중복\n 사용할수 없는 닉네임 입니다.");
+        swal({
+          title: "닉네임 중복.",
+          text: "사용할수 없는 닉네임 입니다.",
+          icon: "error",
+        });
         nnp.html("닉네임을 입력해 주세요.");
         nickName.addClass("is-invalid");
         nickName.removeClass("is-valid");
@@ -251,42 +258,77 @@ $('#add-btn').click(function() {
           window.localStorage.tel = tel;
           location.href = 'form2.html'; 
         } else {
-          alert(namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.")
+          swal({
+            title: "환영합니다.",
+            text: namee.val() + "님 Ohora에 가입해 주셔서 감사합니다.",
+            icon: "success",
+          });
           location.replace("../auth/login.html");
         }
       } else {
-        alert('등록 실패 입니다.\n' +  data.message);
+        swal({
+          title: "회원가입시 오류가 발생했습니다.",
+          text: "다시 가입해주세요.",
+          icon: "error",
+        });
       }
     }, "json");
 
   } else {
     if (ranNoCk != true) {
-      alert("이메일을 인증해주세요.")
+      swal({
+        title: "이메일을 인증해주세요.",
+        icon: "error",
+      });
       return;
     } else if(emailCk != true){
-      alert("이메일을 인증해주세요.")
+      swal({
+        title: "이메일을 인증해주세요.",
+        icon: "error",
+      });
       return;
     } else if(passwordCk != true){
-      alert("8자리 이상의 비밀번호를 입력해주세요.")
+      swal({
+        title: "8자리 이상의 비밀번호를 입력해주세요",
+        icon: "error",
+      });
       return;
     } else if(password2Ck != true){
-      alert("비밀번호를 확인해주세요.")
+      swal({
+        title: "비밀번호를 확인해주세요.",
+        icon: "error",
+      });
       return;
     } else if(nameCk != true){
-      alert("회원명을 입력해주세요.")
+      swal({
+        title: "회원명을 입력해주세요.",
+        icon: "error",
+      });
       return;
     }  else if(nickNameCk != true){
-      alert("닉네임 중복검사를 해주세요.")
+      swal({
+        title: "닉네임 중복검사를 해주세요.",
+        icon: "error",
+      });
       return;
     } else if(nNameOverlap != true){
-      alert("닉네임 중복검사를 해주세요.")
+      swal({
+        title: "닉네임 중복검사를 해주세요.",
+        icon: "error",
+      });
       return;
     } else if(telCk != true){
-      alert("올바른 전화번호를 입력해주세요.")
+      swal({
+        title: "올바른 전화번호를 입력해주세요.",
+        icon: "error",
+      });
       return;
     } else {
       return;
-      alert("회원 정보를 모두 입력해주세요.")
+      swal({
+        title: "회원정보를 모두 입력해주세요.",
+        icon: "error",
+      });
     }
   }
 });
@@ -296,7 +338,10 @@ function msg_time() { // 카운트 다운 함수.
   msg = "현재 남은 시간은 " + m + " 입니다.";
 
   if (SetTime < 0) {      // 시간이 종료 되었으면..\
-    alert('시간이 만료되었습니다.');
+    swal({
+      title: "시간이 만료되었습니다.",
+      icon: "error",
+    });
     clearInterval(tid);   // 타이머 해제
     location.replace("/bitcamp-team-project/index.html");
   }
@@ -306,7 +351,11 @@ function msg_time() { // 카운트 다운 함수.
 
 $("#email-btn").click(function() {
   ranNo.val("");
-  alert("이메일을 확인해 주세요.\n 제한시간은 3분입니다.");
+  swal({
+    title: "이메일을 확인해주세요.",
+    text: "제한시간은 3분 입니다.",
+    icon: "info",
+  });
   ranNoCk = false;
   randomNo = 0;
   SetTime = 180;
@@ -321,7 +370,10 @@ $("#email-btn").click(function() {
       randomNo = data.ranNo;
       $("#ranNo-btn").off("click").on("click", function(e) {
         if (randomNo == ranNo.val()) {
-          alert("인증성공!");
+          swal({
+            title: "인증성공!",
+            icon: "success",
+          });
           email.addClass("is-valid");
           email.removeClass("is-invalid");
           clearInterval(tid);
@@ -332,11 +384,18 @@ $("#email-btn").click(function() {
           $("#ranNo-btn").hide();
           ranNoCk = true;
         } else {
-          alert("인증번호를 다시 확인해주세요.");
+          swal({
+            title: "인증번호를 다시 확인해주세요.",
+            icon: "error",
+          });
         }
       })
     } else {
-      alert("이메일 인증에 실패했습니다.");
+      swal({
+        title: "이메일 인증에 실패했습니다.",
+        icon: "error",
+      });
+      location.reload();
     }
   }, "json");
 

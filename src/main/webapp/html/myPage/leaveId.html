@@ -16,29 +16,24 @@
 <body>
   <header class="ohr-main-header"></header>
 
-  <!-- 사이드 바 -->
+   <!-- 사이드 바 -->
   <aside class="sidebar">
     <div class="sidebar-content">
       <img class="photo0"> <span id="photo-icon-back" style="cursor: pointer"> <i
         class="fas fa-cog" id="photo-icon"></i>
       </span>
-      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">프로필
-        삭제</button>
+      <button type="button" class="btn btn-outline-light btn-sm" id="Profile-dlt-btn">
+      프로필 삭제</button>
       <input type="file" id="profile-fileupload" name="memberFile" style="display: none;">
       <div class="list-group list-group-flush">
-        <a href="index.html" style="cursor: pointer"
-          class="list-group-item list-group-item-action my-list"> 내정보 수정<span
-          class="my-list-span"><i class="fas fa-users-cog my-list-icon"></i></span></a> <a
-          href="myPost.html" style="cursor: pointer"
-          class="list-group-item list-group-item-action my-list"> 내가쓴 게시물<span
-          class="my-list-span" id="my-list-span2"><i class="fas fa-list my-list-icon"></i></span></a> <a
-          href="index2.html" style="cursor: pointer"
-          class="list-group-item list-group-item-action my-list"> 기업정보 수정<span
-          class="my-list-span" id="my-list-span4"><i class="fas fa-building my-list-icon"></i></span></a>
-        <a href="leaveId.html" style="cursor: pointer"
-          class="list-group-item list-group-item-action my-list"> 회원 탈퇴<span
-          class="my-list-span" id="my-list-span3"><i style="margin-left: 5px;"
-            class="fas fa-user-slash my-list-icon"></i></span></a>
+        <a href="password.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
+        내정보 수정<span class="my-list-span"><i class="fas fa-users-cog my-list-icon"></i></span></a>
+        <a href="myPost.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
+        내가쓴 게시물<span class="my-list-span" id="my-list-span2"><i class="fas fa-list my-list-icon"></i></span></a>
+        <a href="leaveId.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list">
+        회원 탈퇴<span class="my-list-span" id="my-list-span3"><i style="margin-left: 5px;" class="fas fa-user-slash my-list-icon"></i></span></a>
+        <a href="index2.html" style="cursor: pointer" class="list-group-item list-group-item-action my-list" id="company-id">
+        기업정보 수정<span class="my-list-span" id="my-list-span4"><i class="fas fa-building my-list-icon"></i></span></a>
       </div>
       <br>
     </div>
@@ -48,31 +43,74 @@
   </aside>
 
   <div class="container">
-    <h3 id="my-title">탈퇴 안내</h3>
-    <p>회원탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
+    <h3 id="my-title">탈퇴 안내</h3><hr style="border: 1px solid #6E6E6E;">
+    <div class="col-lg" id="stop-col">
+      <img id="stop-img" src="stop.png">
+      <p id="stop-p">회원탈퇴에 앞서<span class="stop-sp"> 유의사항 및 안내</span>를 반드시 읽고 진행해 주세요!</p>
+      <p id="stop-p2">안내사항을 읽지않아 생기는 불이익에 대해서는 Ohora에서 책임지지 않습니다.</p>
+    </div>
     <hr>
+    <div id="my-leave-div">
     <div class="row" id="my-row">
       <div class="col" id="my-col">
-        <p>사용하고 계신 아이디(dencw6@naver.com)는 탈퇴한 경우 재사용 및 복구가 불가능합니다.</p>
-        <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
+        <div class="cont-title-div">Ohora 아이디 복구불가 안내</div>
+        <div class="cont-text-div">회원탈퇴시 ohora에서 보관중인 개인정보는 모두 삭제됩니다.</div>
+        <div class="cont-text-div">따라서 사용하고 계신 아이디 (<span id="my-email"></span>)는 탈퇴한 경우 <span id="my-email-span-2"> 복구가 불가능합니다.</span></div>
+        <div class="cont-text-div">신중히 선택하신 후 결정해주세요.</div>
       </div>
     </div>
 
     <div class="row" id="my-row">
       <div class="col" id="my-col">
-        <p>내정보 및 개인형 서비스 이용기록 삭제 안내</p>
-        <p>내정보 및 개인형 서비스(리뷰, 자유게시판 등)의 이용기록이 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
-        <p>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</p>
-        <p>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</p>
+        <div class="cont-title-div">내정보 및 개인형 서비스 이용기록 삭제 안내</div>
+        <div class="cont-text-div">내정보 및 개인형 서비스 이용기록이 모두 삭제되며,<span id="my-service-span"> 삭제된 데이터는 복구되지 않습니다.</span></div>
+        <div class="cont-text-div">삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</div>
+        <div class="row my-row-yeah my-row-yeah2">
+          <div class="col-sm-3 my-set-title">회원정보</div>
+          <div class="col-sm-8 my-set-cont">이메일, 전화번호, 이름, 닉네임 등의 개인정보 삭제</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">리뷰</div>
+          <div class="col-sm-8 my-set-cont">리뷰게시판에 작성된 리뷰, 사진파일, 댓글 삭제</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">만족도</div>
+          <div class="col-sm-8 my-set-cont">제품에대해 평가한 평점 삭제</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">자유게시판</div>
+          <div class="col-sm-8 my-set-cont">자유게시판에 작성된 게시물, 사진파일, 댓글 삭제</div>
+        </div>
+         <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">QnA</div>
+          <div class="col-sm-8 my-set-cont">QnA에 질문한 질문내역, 첨부파일, 답변 삭제</div>
+        </div>
       </div>
     </div>
 
     <div class="row" id="my-row">
       <div class="col" id="my-col">
-        <p>제품, 메뉴얼 서비스에 등록한 게시물 삭제 불가 안내</p>
-        <p>삭제를 원하는 제품, 메뉴얼이 있다면 반드시 탈퇴전에 ohora고객센터로 문의해주시기 바랍니다.</p>
-        <p>탈퇴후에는 회원정보가 삭제되어 본인여부를 확인할 수 없어 , 게시물을 임의로 삭제해드릴 수 없습니다.</p>
+        <div class="cont-title-div">메뉴얼 관련 서비스에 등록한 게시물 삭제불가 안내</div>
+        <div class="cont-text-div">삭제를 원하는 제품, 메뉴얼이 있다면<span class="manual-span"> 반드시 탈퇴전에 ohora고객센터로 문의해주시기 바랍니다.</span></div>
+        <div class="cont-text-div">탈퇴후에는 회원정보가 삭제되어 본인여부를 확인할 수 없어 ,<span class="manual-span"> 게시물을 임의로 삭제해드릴 수 없습니다.</span></div>
+        <div class="row my-row-yeah  my-row-yeah2">
+          <div class="col-sm-3 my-set-title">기업정보</div>
+          <div class="col-sm-8 my-set-cont">기업명, URL 등의 메뉴얼 필수정보 삭제불가</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">제품정보</div>
+          <div class="col-sm-8 my-set-cont">등록하신 제품명, 첨부파일(썸네일) 삭제불가</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">메뉴얼</div>
+          <div class="col-sm-8 my-set-cont">썸네일, pdf 등의 첨부파일 및 메뉴얼 작성내용 삭제불가</div>
+        </div>
+        <div class="row my-row-yeah">
+          <div class="col-sm-3 my-set-title">티키위키</div>
+          <div class="col-sm-8 my-set-cont">티키위키 롤백용 작성내용 삭제불가</div>
+        </div>
       </div>
+    </div>
     </div>
     <hr>
     <p>탈퇴후 재가입시에는 이전 회원정보를 복구할 수 없습니다.</p>

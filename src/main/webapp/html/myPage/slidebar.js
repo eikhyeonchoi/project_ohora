@@ -1,6 +1,7 @@
 var memberNo,
 memberPhoto,
-userMail;
+userMail,
+type;
 
 $(function(){
   var duration = 300;
@@ -25,6 +26,11 @@ $(function(){
 $(document.body).ready(function() {
 
   $(document.body).bind('loaded.loginuser', function() {
+    type = sessionStorage.getItem('type');
+    console.log(type);
+    if (type != 1) {
+      $('#company-id').show();
+    }
     memberNo = sessionStorage.getItem('no');
     userMail = sessionStorage.getItem('email');
     memberPhoto = sessionStorage.getItem('filePath');

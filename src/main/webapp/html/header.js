@@ -18,34 +18,49 @@ $(document.body).bind('loaded.header', function(data) {
       sessionStorage.clear();
     });
   });
-  
-  $('#ohr-header-search').click(function() {
+
+  const input = $("#search-input");
+  const searchBtn = $("#search-btn");
+
+  const expand = () => {
+    searchBtn.toggleClass("close");
+    input.toggleClass("square");
+    
+    if($('#navbarCollapse').find('li').hasClass('ohr-disappear')) {
+      $('#navbarCollapse').find('li').removeClass('ohr-disappear');
+      $('#navbarCollapse').find('li').addClass('ohr-appear');
+      $('#ohr-search-tag').removeClass('ohr-appear-tag');
+      $('#ohr-search-tag').addClass('ohr-disappear-tag');
+    } else {
+      $('#navbarCollapse').find('li').removeClass('ohr-appear');
+      $('#navbarCollapse').find('li').addClass('ohr-disappear');
+      $('#ohr-search-tag').removeClass('ohr-disappear-tag');
+      $('#ohr-search-tag').addClass('ohr-appear-tag');
+    }
+};
+
+searchBtn.on("click", expand);
+
+$('#search-input').keydown((e) => {
+  if (event.keyCode == 13) {
+    e.preventDefault();
     location.href = 
       '/bitcamp-team-project/html/search/index.html?keyword=' 
-      + $('#ohr-main-search-keyword').val();
-  })
-  
-  $('#ohr-main-search-keyword').keydown((e) => {
-    if (event.keyCode == 13) {
-      e.preventDefault();
-      location.href = 
-        '/bitcamp-team-project/html/search/index.html?keyword=' 
-        + $('#ohr-main-search-keyword').val();
-    }
-  });
-  
-  $('#ohr-header-logo').click(function() {
-    location.href = '/bitcamp-team-project/index.html';
-  });
-  
-  
+      + $('#search-input').val();
+  }
+});
+
+$('#ohr-header-logo').click(function() {
+  location.href = '/bitcamp-team-project/index.html';
+});
+
+
 });
 
 
 
 function loadLoginUser() {
   $.getJSON('/bitcamp-team-project/app/json/auth/user', function(data) {
-    console.log(data);
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
@@ -53,9 +68,9 @@ function loadLoginUser() {
       $('#login-username').html(data.user.nickName);
       
       $('#login-username').click(function(){
-        location.href = '/bitcamp-team-project/html/myPage/password.html';  
+        location.href = '/bitcamp-team-project/html/myPage/myPost.html';  
       });
-      
+
       sessionStorage.setItem('no', data.user.no);
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
@@ -64,6 +79,7 @@ function loadLoginUser() {
       sessionStorage.setItem('tel', data.user.tel);
       sessionStorage.setItem('pwdUpdateDate', data.user.passwordUpdateDate);
       sessionStorage.setItem('filePath', data.user.filePath);
+      sessionStorage.setItem('snsType', data.user.snsType);
       
       $(document.body).trigger('loaded.loginuser');
       

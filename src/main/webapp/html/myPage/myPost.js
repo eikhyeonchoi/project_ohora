@@ -1,6 +1,7 @@
-var memberNo
-page = $('.page-container');
-reviewPage = $('.review-page-container');
+var memberNo,
+page = $('.page-container'),
+reviewPage = $('.review-page-container'),
+snsType;
 var fboardBody = $('#handle-bars-fboad-body'),
 fboardTemplateSrc = $('#fboard-template').html(),
 fbiardGenerator = Handlebars.compile(fboardTemplateSrc);
@@ -11,6 +12,11 @@ reviewGenerator = Handlebars.compile(reviewTemplateSrc);
 
 $(document).ready(function() {
   $(document.body).bind('loaded.loginuser', function() {
+    snsType = sessionStorage.getItem('snsType');
+    console.log(snsType);
+    if (snsType != 0) {
+      $('.sidebar').hide();
+    }
     memberNo = sessionStorage.getItem('no');
     loadFboard(memberNo);
     loadReview(memberNo);
