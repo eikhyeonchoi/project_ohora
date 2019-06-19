@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark ohr-header-nav">
-<!-- 
+ <!-- 
     <img id="ohr-header-logo" src="/bitcamp-team-project/upload/main/로고1.png">
      -->
-     <a href="/bitcamp-team-project/index.html">Ohora</a>
+    <a class="navbar-brand" id="ohr-header" href="/bitcamp-team-project/index.html">OhHora</a>
+    <span id="ohr-search-tag" class="ohr-disappear-tag">검색</span>
+    
  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
   aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
@@ -10,12 +12,17 @@
  <div class="collapse navbar-collapse" id="navbarCollapse">
   <ul class="navbar-nav mr-auto" id="main">
    <li><a class="nav-link" id="products" href="#">제품</a>
+   <!-- 
+   <div>
+   
+   </div>
+     -->
     <ul>
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/product/index.html">제품</a></li>
-      <li class="nav-item active"><a class="nav-link"
+     <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/manual/index.html">매뉴얼</a></li>
-      <li class="nav-item active"><a class="nav-link"
+     <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/review/index.html">리뷰</a></li>
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/tip/index.html">티키위키</a></li>
@@ -35,37 +42,33 @@
       href="/bitcamp-team-project/html/question/index.html">QnA</a></li>
     </ul></li>
   </ul>
-  
-  <form class="form-inline my-2 my-lg-0">
-   <input class="form-control mr-sm-2" type="search" id="ohr-main-search-keyword" 
-   placeholder="검색어를 입력하세요" aria-label="Search">
-   <button type="button" class="btn btn-outline-light my-2 my-sm-0" id="ohr-header-search">검색</button>
+
+  <form id="content">
+   <input type="search" name="input" class="ohr-search-input" id="search-input">
+   <button type="reset" class="search" id="search-btn"></button>
   </form>
-  
-    <div id="bit-not-login-state" class="bit-invisible">
+
+
+  <div id="bit-not-login-state" class="bit-invisible">
    <a id="login-menu" class="btn btn-secondary btn-sm"
     href='/bitcamp-team-project/html/auth/login.html'>로그인</a>
   </div>
-  
-  
+
+
   <div id="bit-login-state" class="bit-invisible">
    <span id="login-username"></span>
    <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a>
   </div>
- 
+
+  <!-- 
 
   <div id="bit-auth-div" class="bit-invisible">
    <a id="bit-auth" href='/bitcamp-team-project/html/auth/signup.html'
     class="btn btn-secondary btn-sm">회원 가입</a>
   </div>
-  
-  <!-- 
-  <form id="ohr-search-form">
-  <input type="search" id="ohr-main-search" placeholder="검색어를 입력하세요">
-  </form>
-   -->
+    -->
 
-<!-- 로그인 사용자 마이페이지 / 로그아웃 등의 회원정보창 드롭다운으로 보여주기(EJoo)
+  <!-- 로그인 사용자 마이페이지 / 로그아웃 등의 회원정보창 드롭다운으로 보여주기(EJoo)
   <form class="form-inline my-2 my-lg-0">
    <input class="form-control mr-sm-2" type="search" id="ohr-main-search-keyword" 
    placeholder="search" aria-label="Search">
