@@ -7,7 +7,6 @@ facebookName,
 facebookPhoto;
 
 $(document).ready(function() {
-  
   Kakao.init('2c964d35ffec8240fa4f8147d744e961');
   // 카카오 로그인 버튼을 생성합니다.
   Kakao.Auth.createLoginButton({

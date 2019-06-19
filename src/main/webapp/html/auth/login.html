@@ -5,13 +5,13 @@
 <title>로그인</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<meta name="google-signin-client_id" 
+      content="865288255206-ovp5h2ha490f68njcqtdmos8n3hc5ld5.apps.googleusercontent.com">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 </head>
 <body>
-
   <header class="ohr-main-header"></header>
-
   <div class="container">
     <h1>로그인</h1>
     <form>
@@ -32,9 +32,10 @@
       </div>
       <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
       <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-     </fb:login-button>
+      </fb:login-button>
       <a id="kakao-login-btn"></a>
       <a href="http://developers.kakao.com/logout"></a>
+      <a id="my-signin2"></a>
     </form>
   </div>
   <!-- .container -->
@@ -79,9 +80,12 @@
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="../header.js"></script>
   <script src="login.js"></script>
+  <script src="gmaillogin.js"></script>
 </body>
 </html>
 

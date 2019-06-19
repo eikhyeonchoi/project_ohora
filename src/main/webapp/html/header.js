@@ -56,7 +56,7 @@ function loadLoginUser() {
       $('#login-username').click(function(){
         location.href = '/bitcamp-team-project/html/myPage/password.html';  
       });
-      
+      console.log(data.user)
       sessionStorage.setItem('no', data.user.no);
       sessionStorage.setItem('type', data.user.type);
       sessionStorage.setItem('nickName', data.user.nickName);
@@ -65,6 +65,7 @@ function loadLoginUser() {
       sessionStorage.setItem('tel', data.user.tel);
       sessionStorage.setItem('pwdUpdateDate', data.user.passwordUpdateDate);
       sessionStorage.setItem('filePath', data.user.filePath);
+      sessionStorage.setItem('sns_type', data.user);
       
       $(document.body).trigger('loaded.loginuser');
       
