@@ -297,17 +297,16 @@ public class ReviewController {
   }
 
   @GetMapping("findReply")
-  public Object findReply(int fboardNo, int parentNo) throws Exception {
+  public Object findReply(int reviewNo, int parentNo) throws Exception {
     HashMap<String, Object> content = new HashMap<>();
     HashMap<String, Object> param = new HashMap<>();
 
-    param.put("fboardNo", fboardNo);
+    param.put("reviewNo", reviewNo);
     param.put("parentNo", parentNo);
 
     content.put("replyList", reviewService.findReply(param));
     return content;
   }
-
 
 
 }

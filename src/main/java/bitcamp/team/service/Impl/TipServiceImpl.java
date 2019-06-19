@@ -8,7 +8,7 @@ import bitcamp.team.domain.Tip;
 import bitcamp.team.service.TipService;
 
 @Service
-public class TipServiceImpl implements TipService{
+public class TipServiceImpl implements TipService {
 
   TipDao tipDao;
 
@@ -25,42 +25,58 @@ public class TipServiceImpl implements TipService{
   public int update(Tip tip) {
     return tipDao.update(tip);
   }
-  
+
   @Override
   public int updateTip(Tip tip) {
     return tipDao.updateTip(tip);
   }
+
   @Override
   public List<Tip> list(String keyword, String searchType) {
-    HashMap<String,Object> contents = new HashMap<>();
+    HashMap<String, Object> contents = new HashMap<>();
     if (searchType != null) {
       switch (searchType) {
-        case "prodName": contents.put("prodName", searchType); break;
-        case "memName": contents.put("memName", searchType); break;
-        case "cont": contents.put("cont", searchType); break;
-        case "prodConts": contents.put("prodConts", searchType); break;
-        default: ;
+        case "prodName":
+          contents.put("prodName", searchType);
+          break;
+        case "memName":
+          contents.put("memName", searchType);
+          break;
+        case "cont":
+          contents.put("cont", searchType);
+          break;
+        case "prodConts":
+          contents.put("prodConts", searchType);
+          break;
+        case "search":
+          contents.put("search", searchType);
+          break;
+        default:;
       }
     }
-    if (keyword != null ) {
+    if (keyword != null) {
       if (!keyword.equals("")) {
         contents.put("keyword", keyword);
       }
     }
     return tipDao.findAll(contents);
   }
+
   @Override
   public int delete(int no) {
     return tipDao.delete(no);
   }
+
   @Override
   public Tip get(int no) {
     return tipDao.findByNo(no);
   }
+
   @Override
   public Tip getTip(int no) {
     return tipDao.findByTipNo(no);
   }
+
   @Override
   public int confirm(int no) {
     return tipDao.confirmTip(no);
@@ -72,14 +88,5 @@ public class TipServiceImpl implements TipService{
   }
 
 }
-
-
-
-
-
-
-
-
-
 
 

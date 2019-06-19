@@ -68,24 +68,28 @@ public class MemberController {
   public Object Authentication (String email) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
 
-    int emailNo = memberService.getEmail(email);
-    if (emailNo == 0) {
-      Gmail gmail = new Gmail();
-      int ranNo = RandomNo.randomNo();
+    Gmail gmail = new Gmail();
+    int ranNo = RandomNo.randomNo();
 
-      String emailStatus = gmail.gmailSend(email, ranNo);
-      if (emailStatus.equals("success")) {
-        content.put("status", "success");
-        content.put("ranNo", ranNo);
-      } else {
-        content.put("status", "fail");
-      }
-      return content;
+    String emailStatus = gmail.gmailSend(email, ranNo);
+    if (emailStatus.equals("success")) {
+      content.put("status", "success");
+      content.put("ranNo", ranNo);
     } else {
-      content.put("nop", 0);
-      return content;
+      content.put("status", "fail");
     }
-  }
+    return content;
+  };
+
+  @GetMapping("emailCk")
+  public Object emailCk (String email) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+
+    int emailNo = memberService.getEmail(email);
+
+    content.put("emailNo", emailNo);
+    return content;
+  };
 
   @GetMapping("nickName")
   public Object detail(String nickName) throws Exception {
@@ -308,7 +312,7 @@ public class MemberController {
       fbMap.put("filename", filename);
       fbMap.put("snsUserInfo", fbuserInfo);
       fbMap.put("snsType", 4);
-      
+
       Member fbMember = memberService.getEmail2(fbMemberId);
       if (fbMember == null) { // 페북 로그인시 처음 로그인하는 id인 경우
         memberService.authFacebook(fbMap);
@@ -326,7 +330,7 @@ public class MemberController {
     }
     return content;
   };
-  
+
   @RequestMapping("kakao")
   public Object kakao(String id, String nickName, String thumbnail) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
@@ -335,7 +339,7 @@ public class MemberController {
     String filename = UUID.randomUUID().toString();
     String kakaoUserInfo = UUID.randomUUID().toString().replace("-", "").substring(0,10); // email,pwd 등을 설정할 랜덤값
     String kakaoMemberId = id + "@kakao.user"; // 페이스북 회원 id
-    
+
     try {
       snsImageWrite(thumbnail, uploadDir, filename); 
       paramMap.put("snsId", kakaoMemberId); 
@@ -343,8 +347,8 @@ public class MemberController {
       paramMap.put("filename", filename);
       paramMap.put("snsUserInfo", kakaoUserInfo);
       paramMap.put("snsType", 5);
-      
-      
+
+
       Member kakaoMember = memberService.getEmail2(kakaoMemberId);
       if (kakaoMember == null) {
         memberService.authFacebook(paramMap);
@@ -352,7 +356,7 @@ public class MemberController {
         paramMap.put("fbMemberNo", kakaoMember.getNo());
         memberService.authUpdateFacebook(paramMap);
       }
-      
+
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -362,7 +366,7 @@ public class MemberController {
     }
     return content;
   };
-  
+
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 

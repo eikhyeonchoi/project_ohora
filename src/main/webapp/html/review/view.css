@@ -111,10 +111,11 @@ footer p {
 }
 
 #review-id-img {
-	background-color: white;
 	width: 40px;
 	height: 40px;
-	border: 1px solid #000;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
 	border-radius: 50px;
 	text-align: left;
 	margin: 0;
@@ -152,3 +153,35 @@ footer p {
 	float: right;
 	padding-bottom: 1rem;
 }
+
+#review-comment {
+	position: relative;
+	top: 4em;
+}
+
+#review-comment-add-form {
+	position: absolute;
+	left: 1.5em;
+}
+
+#comment-add-btn {
+	width: 90px;
+}
+
+#ohr-comment-label {
+	font-weight: bold;
+	font-size: 16px;
+	position: relative;
+	left: 0.5em;
+}
+
+.review-comment-list-form {
+	position: relative;
+	top: 10.5em;
+}
+
+.user-inform {
+	position: relative;
+	right: 0.5em;
+}
+

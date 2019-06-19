@@ -1,0 +1,114 @@
+#my-auth-div {
+  border: 1px solid #D8D8D8;
+  padding: 65px;
+  margin-bottom: 50px;
+}
+
+#my-auth-head {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.my-form {
+  outline: none;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 2px solid #D8D8D8;
+  padding-left: 0;
+  cursor: pointer;
+}
+
+.my-form:focus {
+  outline: :none;
+  box-shadow: none;
+  border-bottom: 2px solid #6E6E6E;
+}
+
+#my-btn-col {
+  margin: auto;
+}
+
+.my-autn-btn2 {
+  border: 2px solid #6c757d;
+  border-radius: 0;
+  font-weight: bold;
+  min-height: 60px;
+  margin: auto;
+  width: 47%;
+  margin-top: 30px;
+  font-weight: bold;
+  min-height: 60px;
+  margin: auto;
+  width: 47%;
+  margin-top: 30px;
+  margin-bottom: -10px;
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button
+  {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.my-form::-webkit-input-placeholder {
+  color: #BDBDBD;
+}
+
+#auth-h4 {
+  margin-bottom: 30px;
+  color: #6E6E6E;
+}
+
+.col-form-label {
+  margin-top: 20px;
+}
+
+.addr-search-btn {
+  margin-left: -19px;
+  height: 38px;
+  font-weight: bold;
+  border-radius: 0;
+  border: 2px solid #6c757d;
+}
+
+#add-cns-btn {
+  margin-left: 13px;
+}
+
+.form-control.is-valid:focus {
+  box-shadow: none;
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: none;
+}
+
+.auth-pp {
+  margin-top: 3px;
+  color: #848484;
+}
+
+.form-control:disabled, 
+.form-control[readonly] {
+  background-color: white;
+}
+
+.my-addr-input {
+  margin-bottom: 10px;
+  border-radius: 0;
+  border: 2px solid #D8D8D8;
+  cursor: pointer;
+}
+
+.my-addr-input:focus {
+  outline: :none;
+  box-shadow: none;
+  border: 2px solid #6E6E6E;
+}
+
+#adr3 {
+  margin-bottom: 10px;
+}
+

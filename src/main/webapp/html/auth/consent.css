@@ -1,0 +1,67 @@
+#my-title {
+  margin: 20px 0;
+  margin-left: 27px;
+}
+
+.consent-row {
+  border: 1px solid #BDBDBD;
+  max-height: 200px;
+  overflow-y: scroll;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.consent-row:hover {
+  border: 1px solid #0B3861;
+  text-decoration: none;
+}
+
+.consent-title-label {
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #585858;
+  font-size: 15px;
+  font-weight: bold;
+  color: #585858;
+}
+
+hr {
+  margin: 0;
+}
+
+.all-consent {
+  margin-bottom: 20px;
+}
+
+.option-span {
+  color: #0174DF;
+  margin-right: 5px;
+}
+
+#all-ck-label {
+  font-size: 18px;
+}
+
+#consent-btn-row {
+  margin: auto;
+}
+
+.consent-btn {
+  font-weight: bold;
+  min-height: 60px;
+  margin: auto;
+  width: 47%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#agree {
+  border-color: #58ACFA;
+  color: #58ACFA;
+}
+
+#agree:hover {
+  background-color: #58ACFA;
+  color: white;
+  border: 1px solid #58ACFA;
+}

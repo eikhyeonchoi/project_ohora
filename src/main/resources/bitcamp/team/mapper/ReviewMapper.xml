@@ -18,6 +18,7 @@
       <id column="member_no" property="memberNo" />
       <result column="memberName" property="name" />
       <result column="nickName" property="nickName" />
+      <result column="file_path" property="filePath" />
     </association>
 
     <association property="product" javaType="product">
@@ -90,7 +91,7 @@
     </association>
   </resultMap>
   
-    <resultMap type="reviewComment" id="fboardCommentMap">
+    <resultMap type="reviewComment" id="reviewCommentMap">
     <id column="rv_cmt_no" property="no" />
     <result column="member_no" property="memberNo" />
     <result column="rv_no" property="reviewNo" />
@@ -102,6 +103,7 @@
     <association property="member" javaType="member">
       <id column="member_no" property="no" />
       <result column="n_name" property="nickName" />
+      <result column="file_path" property="filePath" />
     </association>
     
   </resultMap>
@@ -223,6 +225,7 @@
       r.member_no as memberNo,
       m.name as memberName,
       m.n_name as nickName,
+      m.file_path,
       r.name as reviewName,
       r.conts,
       r.cdt,
@@ -282,14 +285,15 @@
     where product_no = #{_parameter}
   </select>
 
-<select id="findCommentAll" resultMap="fboardCommentMap" parameterType="int">
+<select id="findCommentAll" resultMap="reviewCommentMap" parameterType="int">
     select
       vc.rv_cmt_no,
       vc.member_no,
       vc.conts,
       vc.parent_id,
       vc.cdt,
-      m.n_name
+      m.n_name,
+      m.file_path
     from
       review_cmt vc
       join member m on m.member_no=vc.member_no
@@ -297,7 +301,7 @@
       vc.rv_no = #{value}
   </select>
   
-  <insert id="insertComment" parameterType="fboardComment" useGeneratedKeys="true" keyProperty="no">
+  <insert id="insertComment" parameterType="reviewComment" useGeneratedKeys="true" keyProperty="no">
     insert into review_cmt(member_no, rv_no, conts, depth, parent_id)
     values(#{memberNo}, #{reviewNo}, #{contents}, #{depth}, #{parentId})
   </insert>
@@ -326,7 +330,7 @@
       rv_cmt_no=#{no}
   </update>
   
-  <select id="findReply" resultMap="fboardCommentMap" parameterType="map">
+  <select id="findReply" resultMap="reviewCommentMap" parameterType="map">
     select
       rc.rv_cmt_no,
       rc.member_no,
@@ -338,7 +342,7 @@
       review_cmt rc
       join member m on m.member_no=rc.member_no
     where
-      rc.rv_no=#{fboardNo} and rc.parent_id=#{parentNo}
+      rc.rv_no=#{reviewNo} and rc.parent_id=#{parentNo}
   </select>
 
 

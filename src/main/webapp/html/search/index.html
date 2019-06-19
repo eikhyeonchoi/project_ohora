@@ -21,19 +21,118 @@
 
   <nav>
    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-all"
-     role="tab" aria-controls="nav-all" aria-selected="true">전체</a> <a class="nav-item nav-link"
-     id="nav-profile-tab" data-toggle="tab" href="#nav-product" role="tab"
-     aria-controls="nav-product" aria-selected="false">제품</a> <a class="nav-item nav-link"
-     id="nav-contact-tab" data-toggle="tab" href="#nav-manual" role="tab" aria-controls="nav-manual"
-     aria-selected="false">매뉴얼</a> <a class="nav-item nav-link" id="nav-contact-tab"
-     data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review"
-     aria-selected="false">리뷰</a> <a class="nav-item nav-link" id="nav-contact-tab"
-     data-toggle="tab" href="#nav-tip" role="tab" aria-controls="nav-tip" aria-selected="false">팁</a>
+    <a class="nav-item nav-link active" 
+    id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" 
+    aria-controls="nav-all" aria-selected="true">전체</a> 
+    
+     <a class="nav-item nav-link"
+     id="nav-product-tab" data-toggle="tab" href="#nav-product" role="tab"
+     aria-controls="nav-product" aria-selected="false">제품</a> 
+    
+     <a class="nav-item nav-link"
+     id="nav-manual-tab" data-toggle="tab" href="#nav-manual" role="tab" 
+     aria-controls="nav-manual" aria-selected="false">매뉴얼</a> 
+     
+     <a class="nav-item nav-link" 
+     id="nav-review-tab" data-toggle="tab" href="#nav-review" role="tab" 
+     aria-controls="nav-review" aria-selected="false">리뷰</a> 
+     
+     <a class="nav-item nav-link" 
+     id="nav-tip-tab" data-toggle="tab" href="#nav-tip" role="tab" 
+     aria-controls="nav-tip" aria-selected="false">팁</a>
    </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
-   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">1</div>
+   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+   
+   <br>
+   <h4>제품 검색 결과</h4>
+    <div class="bit-prod-list">
+     <table id="prod-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+       </tr>
+      </thead>
+      <tbody class="ohr-prod-tbody"></tbody>
+     </table>
+     <div class="ohr-search-a" id="ohr-search-a-prod">
+     <a id="ohr-search-prod" data-toggle="tab" href="#nav-product" role="tab" 
+     aria-controls="nav-product" aria-selected="false">제품 검색 결과 더 보기</a>
+     </div>
+     <hr>
+    </div>
+    <!-- .bit-list -->
+
+<br>
+   <h4>매뉴얼 검색 결과</h4>
+<div class="bit-manu-list">
+     <table id="manu-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+       </tr>
+      </thead>
+      <tbody class="ohr-manu-tbody"></tbody>
+     </table>
+     <div class="ohr-search-a" id="ohr-search-a-manu">
+     <a id="ohr-search-manu" data-toggle="tab" href="#nav-manual" role="tab" 
+     aria-controls="nav-manual" aria-selected="false">매뉴얼 검색 결과 더 보기</a>
+     </div>
+     <hr>
+    </div>
+    <!-- .bit-list -->
+<br>
+   <h4>리뷰 검색 결과</h4>
+<div class="bit-rev-list">
+     <table id="rev-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+        <th scope="col">제목</th>
+        <th scope="col">작성일</th>
+       </tr>
+      </thead>
+      <tbody class="ohr-review-tbody"></tbody>
+     </table>
+     <div class="ohr-search-a" id="ohr-search-a-rev">
+     <a id="ohr-search-rev" data-toggle="tab" href="#nav-review" role="tab" 
+     aria-controls="nav-review" aria-selected="false">리뷰 검색 결과 더 보기</a>
+     </div>
+     <hr>
+    </div>
+    <!-- .bit-list -->
+
+<br>
+   <h4>티키위키 검색 결과</h4>
+<div class="bit-tip-list">
+     <table id="tip-table-list" class="table table-hover">
+      <thead>
+       <tr>
+        <th scope="col">대분류</th>
+        <th scope="col">소분류</th>
+        <th scope="col">제품명</th>
+        <th scope="col">제조사명</th>
+       </tr>
+      </thead>
+      <tbody class="ohr-tip-tbody"></tbody>
+     </table>
+     <div class="ohr-search-a" id="ohr-search-a-tip">
+     <a id="ohr-search-tip" data-toggle="tab" href="#nav-tip" role="tab" 
+     aria-controls="nav-tip" aria-selected="false">티키위키 검색 결과 더 보기</a>
+     </div>
+     <hr>
+    </div>
+    <!-- .bit-list -->
+
+   </div>
 
    <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
     <div class="bit-prod-list">
@@ -46,7 +145,7 @@
         <th scope="col">제조사명</th>
        </tr>
       </thead>
-      <tbody id="ohr-prod-tbody"></tbody>
+      <tbody class="ohr-prod-tbody"></tbody>
      </table>
      <div id="pagination-container-prod"></div>
     </div>
@@ -64,7 +163,7 @@
         <th scope="col">제조사명</th>
        </tr>
       </thead>
-      <tbody id="ohr-manu-tbody"></tbody>
+      <tbody class="ohr-manu-tbody"></tbody>
 
      </table>
 
@@ -85,7 +184,7 @@
         <th scope="col">작성일</th>
        </tr>
       </thead>
-      <tbody id="ohr-review-tbody"></tbody>
+      <tbody class="ohr-review-tbody"></tbody>
 
      </table>
 
@@ -105,7 +204,7 @@
         <th scope="col">제조사명</th>
        </tr>
       </thead>
-      <tbody id="ohr-tip-tbody"></tbody>
+      <tbody class="ohr-tip-tbody"></tbody>
 
      </table>
 
@@ -121,10 +220,10 @@
 
  <script id="tr-template-product" type="text/x-handlebars-template">
 {{#each prodList}}
-<tr>
+<tr class='bit-prod-view-link' data-no='{{no}}' data-name='{{name}}'>
   <td scope='row'>{{productSmallCategory.productLargeCategory.name}}</td>
   <td>{{productSmallCategory.name}}</td>
-  <td><a class='bit-prod-view-link' href='#' data-no='{{no}}' data-name='{{name}}'>{{name}}</a></td>
+  <td>{{name}}</td>
   <td>{{manufacturer.name}}</td>
 </tr>
 {{/each}}
@@ -132,10 +231,10 @@
 
  <script id="tr-template-manual" type="text/x-handlebars-template">
 {{#each manuList}}
-<tr>
+<tr class='bit-manu-view-link' data-no='{{no}}'>
   <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
   <td>{{product.productSmallCategory.name}}</td>
-  <td><a class='bit-manu-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{name}}</td>
   <td>{{product.manufacturer.name}}</td>
 </tr>
 {{/each}}
@@ -143,21 +242,21 @@
 
  <script id="tr-template-review" type="text/x-handlebars-template">
 {{#each revList}}
-<tr>
+<tr class='bit-rev-view-link' data-no='{{no}}'>
   <td scope='row'>{{product.name}}</th>
   <td>{{product.manufacturer.name}}</td>
-  <td><a class='bit-rev-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td><p>{{createdDate}}</p></td>
+  <td>{{title}}</td>
+  <td>{{createdDate}}</td>
 </tr>
 {{/each}}
 </script>
 
  <script id="tr-template-tip" type="text/x-handlebars-template">
 {{#each tipList}}
-<tr>
+<tr class='bit-tip-view-link' data-no='{{no}}'>
   <td scope='row'>{{product.productSmallCategory.productLargeCategory.name}}</th>
   <td>{{product.productSmallCategory.name}}</td>
-  <td><a class='bit-tip-view-link' href='#' data-no='{{no}}'>{{product.name}}</a></td>
+  <td>{{product.name}}</td>
   <td>{{product.manufacturer.name}}</td>
 </tr>
 {{/each}}

@@ -2,17 +2,44 @@
 	padding-top: 1rem;
 }
 
-#pagination-container-prod{
-	position: absolute;
-	top: 660px;
-}
-
-#pagination-container-manu{
-    position: absolute;
-    top: 660px;
-}
-
 .paginationjs {
 	position: relative;
 	left: 12rem;
 }
+
+.ohr-search-a {
+	position: relative;
+	/*left: 50em;*/
+	top: 1em;
+	text-align: right;
+}
+
+.ohr-search-nolist {
+	text-align: left;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+.bit-tip-list {
+	padding-bottom: 70px;
+}
+
+.bit-prod-view-link:hover {
+	cursor: pointer;
+}
+
+.bit-manu-view-link:hover {
+    cursor: pointer;
+}
+
+.bit-rev-view-link:hover {
+    cursor: pointer;
+}
+
+.bit-tip-view-link:hover {
+    cursor: pointer;
+}
+
+
+
+

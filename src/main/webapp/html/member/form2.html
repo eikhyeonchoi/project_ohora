@@ -2,64 +2,74 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 조회</title>
+<title>기업회원 가입</title>
 <link rel="stylesheet"
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="form2.css">
 </head>
 
 <body>
   <header class="ohr-main-header"></header>
-  <div class="container">
-    <form>
-      <h3 class="bit-new-item">기업 추가정보</h3>
-      <br>
-      <div class="form-group row bit-new-item">
-        <label for="name" class="col-sm-2 col-form-label">기업명</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name='name'>
-          <p id="name-p">기업명을 입력하세요.</p>
+  <div class="container" style="max-width: 700px;">
+    <h2 id="my-auth-head">OHORA회원 가입</h2>
+
+    <div id="my-auth-div">
+      <form>
+        <h4 id="auth-h4">기업정보를 입력해주세요.</h4>
+        <div class="form-group">
+          <label for="name" class="col-form-label">기업명</label> 
+          <input type='text' class="my-form form-control" id="tel" placeholder="기업명을 입력하세요.">
+          <p id="name-p" class="auth-pp"></p>
         </div>
-      </div>
-      <div class="form-group row bit-new-item">
-        <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="tel" name='tel' readonly>
-           <p>
+
+        <div class="form-group">
+          <label for="tel" class="col-form-label">전화번호</label> 
+          <input type='text' class="my-form form-control" id="tel" readonly>
+          <p id="tel-p" class="auth-pp"></p>
         </div>
-      </div>
-      <div class="form-group row bit-new-item">
-        <label for="homePage" class="col-sm-2 col-form-label">기업 홈페이지 주소</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="homePage" name='homePage'>
-          <P id="homePage-p">기업 URL을 입력해주세요.</P>
+
+        <div class="form-group">
+          <label for="homePage" class="col-form-label">기업 홈페이지 주소</label>
+          <input type='text' class="my-form form-control" id="homePage" placeholder="기업 URL을 입력해주세요.">
+          <p id="homePage-p" class="auth-pp"></p>
         </div>
-      </div>
-      <div class="form-group row bit-new-item">
-        <label for="registerNo" class="col-sm-2 col-form-label">사업자 등록번호</label>
-        <div class="col-sm-10">
-          <input type="number" min="1" class="form-control" id="registerNo" name='registerNo'>
-          <p id="registerNo-p">&emsp;-를 제외하고 입력해주세요.</p>
+        
+        <div class="form-group">
+          <label for="registerNo" class="col-form-label">사업자 등록번호</label> 
+          <input type='number' class="my-form form-control" 
+            id="registerNo" placeholder="기업 URL을 입력해주세요." min="1">
+          <p id="registerNo-p" class="auth-pp">* -를 제외하고 입력해주세요.</p>
         </div>
-      </div>
-      <div class="form-group row bit-new-item">
-        <label for="registerNo" class="col-sm-2 col-form-label">주소</label>
-        <div class="col-sm-10">
-          <button type="button" id="postcodify_search_button">주소 검색</button><br />
-          <input id="adr1" type="text" name="" class="postcodify_postcode5 form-control" value="" placeholder="우편 번호" readonly/>
-          <input id="adr2" type="text" name="" class="postcodify_address form-control" value="" placeholder="도로명 주소" readonly/>
-          <input id="adr3" type="text" name="" class="postcodify_details form-control" value="" placeholder="상세 주소를 입력하세요."/>
-          <input id="adr4" type="text" name="" class="postcodify_extra_info form-control" value="" placeholder="참고항목" readonly/><br/>
+
+        <div class="form-group">
+          <label for="address" class="col-form-label">주소</label>
+          <div class="row"> 
+            <div class="col-md-8">
+              <input id="adr1" type="text" name="" class="postcodify_postcode5 form-control my-addr-input"
+                value="" placeholder="우편 번호" readonly/>
+            </div>
+            <div class="col-md-3">
+              <button type="button" id="postcodify_search_button" 
+                class="addr-search-btn btn btn-outline-secondary btn-sm">주소 검색</button>
+            </div>
+         </div>
+          <input id="adr2" type="text" name="" class="postcodify_address form-control my-addr-input" 
+            value="" placeholder="도로명 주소" readonly/>
+          <input id="adr3" type="text" name="" class="postcodify_details form-control my-form"
+            value="" placeholder="상세 주소를 입력하세요."/>
+          <input id="adr4" type="text" name="" class="postcodify_extra_info form-control my-addr-input"
+            value="" placeholder="참고항목" readonly/>
         </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <a href='index.html' class="btn btn-primary btn-sm">취소</a>
-          <button type="button" id="add-btn" class="btn btn-success btn-sm">가입하기</button>
+
+        <div class="col-md" id="my-btn-col">
+          <button type="button" id="add-cns-btn" class="my-autn-btn2 btn btn-outline-secondary btn-lg">취소</button>
+          <button type="button" id="add-btn" class="my-autn-btn2 btn btn-outline-secondary btn-lg">가입하기</button>
         </div>
-      </div>
-    </form>
+
+      </form>
+    </div>
   </div>
   <!-- container -->
 
@@ -71,7 +81,11 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
   <!-- 주소검색 버튼을 누르면 주소검색 폼을 띄우는 함수 -->
-  <script>$(function() { $("#postcodify_search_button").postcodifyPopUp(); });</script> 
+  <script>
+      $(function() {
+        $("#postcodify_search_button").postcodifyPopUp();
+      });
+    </script>
   <script src="../header.js"></script>
   <script src="form2.js"></script>
 </body>

@@ -7,6 +7,10 @@ facebookName,
 facebookPhoto;
 
 $(document).ready(function() {
+
+  if (window.localStorage.getItem('email')) {
+    $('#email').val(localStorage.email);
+  }
   
   Kakao.init('2c964d35ffec8240fa4f8147d744e961');
   // 카카오 로그인 버튼을 생성합니다.
@@ -40,22 +44,17 @@ $(document).ready(function() {
     }
   });
   
-  
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    js.src = "//connect.facebook.net/ko_KR/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  if (window.localStorage.getItem('email')) {
-    $('#email').val(localStorage.email);
-  }
+  } (document, 'script', 'facebook-jssdk'));
 
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '2218567868454373', // 개발자가 등록한 앱 ID
+      appId      : '440057900129999', // 개발자가 등록한 앱 ID
       cookie     : true,  
       xfbml      : true,  
       version    : 'v3.3' 
