@@ -1,25 +1,18 @@
-th:nth-child(1) {
-  width: 50px;
-  text-align: center;
+.container-fluid {
+	padding: 0;
 }
 
-th:nth-child(3) {
-  text-align: center;
-  width: 100px;
+.jumbotron {
+  background-image: url(tip.jpg);
+  background-repeat: no-repeat;
+  background-position: 10% 190%;
+  background-attachment: fixed;
+  margin: 0;
+  color: white;
 }
 
-th:nth-child(4) {
-	text-align: center;
-  width: 100px;
-}
-
-td:nth-child(3) {
-  text-align: center;
-}
-
-td:nth-child(4) {
-  text-align: center;
-  width: 100px;
+.jumbotron p {
+  color: white !important;
 }
 
 #pagination-container {
@@ -39,6 +32,7 @@ div.tableRow {
 
 .card {
 	max-width: 210px;
+	margin: auto;
 }
 
 p.card-text {
