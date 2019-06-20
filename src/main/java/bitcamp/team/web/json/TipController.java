@@ -55,7 +55,6 @@ public class TipController {
     HashMap<String,Object> contents = new HashMap<>();
     try {
       Tip tips = tip;
-      System.out.println(product);
       int prodNo = productService.getNo(product.getName());
       Member member = (Member)httpSession.getAttribute("loginUser");
       tips.setMemberNo(member.getNo());

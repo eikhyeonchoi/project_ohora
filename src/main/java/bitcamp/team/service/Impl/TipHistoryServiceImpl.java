@@ -27,10 +27,7 @@ public class TipHistoryServiceImpl implements TipHistoryService {
 
   @Override
   public List<TipHistory> get(int no) {
-    System.out.println(no);
-    List<TipHistory> list = tipDao.findByNo(no);
-    System.out.print("get >>> "); System.out.println(list);
-    return list;
+    return tipDao.findByNo(no);
   }
   @Override
   public int delete(int no) {
@@ -39,7 +36,6 @@ public class TipHistoryServiceImpl implements TipHistoryService {
 
   @Override
   public TipHistory detail(int no) {
-    TipHistory history = tipDao.findContsByNo(no);
-    return history;
+    return tipDao.findContsByNo(no);
   }
 }
