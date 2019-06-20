@@ -5,7 +5,7 @@ var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
 var type = sessionStorage.getItem('type'),
     nickName = sessionStorage.getItem('nickName');
-
+localStorage.setItem('productNo', productNo);
 $(document).ready(function() {
   loadData(productNo);
   loadList(productNo);

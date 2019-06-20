@@ -8,7 +8,7 @@ import bitcamp.team.domain.TipHistory;
 public interface TipHistoryService {
   int add(TipHistory tip);
   int update(TipHistory tip);
+  int delete(int no);
   List<TipHistory> get(int no);
   TipHistory detail(int no);
-  int delete(int no);
 }

@@ -39,6 +39,11 @@ td:nth-child(4) {
   text-align: right;
 }
 
+.img-thumbnail {
+	width: 140px;
+	height: 140px;
+}
+
 .productimg {
 	text-align: right;
 }
