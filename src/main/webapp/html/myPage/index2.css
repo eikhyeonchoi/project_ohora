@@ -25,4 +25,17 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.jumbotron {
+  background-image: url(회사.jpg);
+  background-repeat: no-repeat;
+  background-position: 70% 90%;
+  background-attachment: fixed;
+  margin: 0;
+  color: white;
+}
+
+.jumbotron p {
+  color: white !important;
+}
+
 

@@ -23,14 +23,12 @@ $('#confirm-btn').click(function() {
         title: "인증 성공!",
         icon: "success",
       });
-      location.reload();
       location.replace('index.html');
     } else {
       swal({
         title: "비밀번호를 다시 입력해주세요",
         icon: "error",
       });
-      location.reload();
       $('#password').val("")
     }
   }, "json");

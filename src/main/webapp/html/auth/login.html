@@ -8,47 +8,23 @@
 <!-- <meta name="google-signin-client_id" 
       content="865288255206-ovp5h2ha490f68njcqtdmos8n3hc5ld5.apps.googleusercontent.com"> -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<style type="text/css">
-    #customBtn {
-      display: inline-block;
-      background: white;
-      color: #444;
-      width: 221px;
-      border-radius: 5px;
-      border: thin solid #888;
-      box-shadow: 1px 1px 1px grey;
-      white-space: nowrap;
-    }
-    #customBtn:hover {
-      cursor: pointer;
-    }
-    span.icon {
-      background: url('g-normal.png') transparent 5px 50% no-repeat;
-      display: inline-block;
-      vertical-align: middle;
-      width: 42px;
-      height: 42px;
-    }
-    span.buttonText {
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 42px;
-      padding-right: 42px;
-      font-size: 14px;
-      font-weight: bold;
-      font-family: 'Roboto', sans-serif;
-    }
-    .sns {
-      text-align: center;
-    }
-  </style>
+<link rel="stylesheet" href="login.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
+
+  <div class='container-fluid' style="padding: 0; margin-bottom: 30px;">
+    <section class="jumbotron jumbotron-fluid text-center">
+      <h1 class="jumbotron-heading">로그인</h1>
+      <p class="lead text-muted">자신의 정보를 조회또는 수정하실 수 있습니다</p>
+    </section>
+  </div>
+
   <div class="container">
-    <h1>로그인</h1>
     <form>
       <div class="form-group">
         <label for="email">이메일</label> <input type="email" class="form-control" id="email"
@@ -67,18 +43,18 @@
       </div>
       <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
       <div class="col sns">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button><br>
-        <a id="kakao-login-btn"></a>
-        <a href="http://developers.kakao.com/logout"></a>
+        <div class="button facebook" id="fbloginBtn">
+          <i class="fab fa-facebook-square" id="my-fb"></i><span id="fb-span-text">페이스북계정으로
+            로그인</span>
+        </div>
+        <br> <a id="kakao-login-btn"></a> <a href="http://developers.kakao.com/logout"></a>
         <div id="gSignInWrapper">
           <div id="customBtn" class="customGPlusSignIn">
-          <span class="icon"></span>
-          <span class="buttonText">Google</span>
+            <span class="icon"></span> <span class="buttonText">구글계정으로 로그인</span>
+          </div>
         </div>
       </div>
-  </div>
-  <div id="name"></div>
+      <div id="name"></div>
     </form>
   </div>
   <!-- .container -->
@@ -125,7 +101,7 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
-    <script src="https://apis.google.com/js/api:client.js"></script>
+  <script src="https://apis.google.com/js/api:client.js"></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="../header.js"></script>
   <script src="login.js"></script>
