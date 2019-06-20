@@ -8,78 +8,63 @@
 <!-- <meta name="google-signin-client_id" 
       content="865288255206-ovp5h2ha490f68njcqtdmos8n3hc5ld5.apps.googleusercontent.com"> -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+  href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
-<style type="text/css">
-    #customBtn {
-      display: inline-block;
-      background: white;
-      color: #444;
-      width: 221px;
-      border-radius: 5px;
-      border: thin solid #888;
-      box-shadow: 1px 1px 1px grey;
-      white-space: nowrap;
-    }
-    #customBtn:hover {
-      cursor: pointer;
-    }
-    span.icon {
-      background: url('g-normal.png') transparent 5px 50% no-repeat;
-      display: inline-block;
-      vertical-align: middle;
-      width: 42px;
-      height: 42px;
-    }
-    span.buttonText {
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 42px;
-      padding-right: 42px;
-      font-size: 14px;
-      font-weight: bold;
-      font-family: 'Roboto', sans-serif;
-    }
-    .sns {
-      text-align: center;
-    }
-  </style>
+<link rel="stylesheet" href="login.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
+
+  <div class='container-fluid' style="padding: 0; margin-bottom: 30px;">
+    <section class="jumbotron jumbotron-fluid text-center">
+      <h1 class="jumbotron-heading">로그인</h1>
+      <p class="lead text-muted">자신의 정보를 조회또는 수정하실 수 있습니다</p>
+    </section>
+  </div>
+
   <div class="container">
-    <h1>로그인</h1>
-    <form>
-      <div class="form-group">
-        <label for="email">이메일</label> <input type="email" class="form-control" id="email"
-          name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
-          id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을 다른
-          사이트와 결코 공유하지 않습니다.</small>
-      </div>
-      <div class="form-group">
-        <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
-          type="password" class="form-control" id="password" name="password"
-          placeholder="암호를 입력하세요.">
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail"> <label
-          class="form-check-label" for="saveEmail">이메일 저장</label>
-      </div>
-      <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
-      <div class="col sns">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button><br>
-        <a id="kakao-login-btn"></a>
-        <a href="http://developers.kakao.com/logout"></a>
-        <div id="gSignInWrapper">
-          <div id="customBtn" class="customGPlusSignIn">
-          <span class="icon"></span>
-          <span class="buttonText">Google</span>
+    <div class="row" id="main-row">
+      <div class="col-lg-5" id="sns-col">
+       <div class="col" id="sns-col2"></div>
+        <div class="col sns">
+          <div class="button facebook" id="fbloginBtn">
+            <i class="fab fa-facebook-square" id="my-fb"></i><span id="fb-span-text">페이스북계정으로
+              로그인</span>
+          </div>
+          <br> <a id="kakao-login-btn"></a> <a href="http://developers.kakao.com/logout"></a>
+          <div id="gSignInWrapper">
+            <div id="customBtn" class="customGPlusSignIn">
+              <span class="icon"></span> <span class="buttonText">구글계정으로 로그인</span>
+            </div>
+          </div>
         </div>
       </div>
-  </div>
-  <div id="name"></div>
-    </form>
+      <div class="col-lg-7">
+        <form>
+          <div class="form-group">
+            <label for="email">이메일</label> <input type="email" class="form-control" id="email"
+              name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
+              id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을
+              다른 사이트와 결코 공유하지 않습니다.</small>
+          </div>
+          <div class="form-group">
+            <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
+              type="password" class="form-control" id="password" name="password"
+              placeholder="암호를 입력하세요.">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail">
+            <label class="form-check-label" for="saveEmail">이메일 저장</label>
+          </div>
+          <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
+
+          <div id="name"></div>
+        </form>
+      </div>
+    </div>
+
   </div>
   <!-- .container -->
 
@@ -125,7 +110,7 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
-    <script src="https://apis.google.com/js/api:client.js"></script>
+  <script src="https://apis.google.com/js/api:client.js"></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="../header.js"></script>
   <script src="login.js"></script>

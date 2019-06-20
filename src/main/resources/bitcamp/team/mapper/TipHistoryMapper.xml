@@ -23,6 +23,7 @@
         <result column="name"         property="name"/>
         <collection property="productFiles" ofType="productFile">
 	        <id     column="pfile_no"     property="no"/>
+	        <result column="product_no" property="productNo"/>
 	        <result column="img"          property="img"/>
         </collection>
       </association>
@@ -49,10 +50,10 @@
       m.n_name
     from
       tip_history h
-    left outer join tip t on h.tip_no = t.tip_no 
-    left outer join product p on t.product_no = p.product_no
-    left outer join member m on t.member_no = m.member_no
-    left outer join product_file f on p.product_no = f.product_no
+    left join tip t on t.tip_no = h.tip_no
+    left join product p on p.product_no = t.product_no
+    left join product_file f on f.product_no = p.product_no
+    left join member m on m.n_name = h.nickName 
   </sql>
 
   <select id="findByNo" resultMap="tipHistoryMap" parameterType="int">
@@ -73,10 +74,6 @@
     insert into tip_history (tip_no, conts, nickName)
     values (#{tipNo}, #{contents}, #{nickName})
   </insert>
-  
-  <select id="countAll" resultType="int">
-    select count(*) from tip_history;
-  </select>
   
   <delete id="delete" parameterType="int">
     delete from tip_history

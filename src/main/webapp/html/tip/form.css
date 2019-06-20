@@ -1,3 +1,12 @@
 #ohr-rev-btns {
 	text-align: right;
 }
+
+#contents {
+	max-width: 770px;
+}
+
+p > img {
+	max-width: 500px;
+	max-height: 500px;
+}

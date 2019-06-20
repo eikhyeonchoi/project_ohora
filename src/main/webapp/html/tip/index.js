@@ -8,8 +8,7 @@ $(document).ready(() => {
 })
 
 function loadList() {
-  $.getJSON('/bitcamp-team-project/app/json/tip/list?searchType=' 
-      + $('select#searchTag').val() + '&keyword=' + $('#search').val()
+  $.getJSON('/bitcamp-team-project/app/json/tip/list?keyword=' + $('#keyword').val()
       , function(obj) {
         page.pagination({
           dataSource: obj.list,
