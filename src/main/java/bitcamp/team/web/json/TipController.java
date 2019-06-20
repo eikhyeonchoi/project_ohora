@@ -29,10 +29,10 @@ public class TipController {
   @Autowired HttpSession httpSession;
   
   @GetMapping("list")
-  public Object list(String searchType, String keyword) throws Exception {
+  public Object list(String keyword) throws Exception {
     HashMap<String,Object> map = new HashMap<>();
     try {
-      List<Tip> tips = tipService.list(keyword, searchType);
+      List<Tip> tips = tipService.list(keyword);
 
       map.put("list", tips);
       map.put("status", "success");
