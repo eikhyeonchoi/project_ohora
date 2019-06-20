@@ -1,11 +1,44 @@
 @charset "UTF-8";
 
+
+.body {
+	background-color: #f9f9f9;
+}
+
+#product-div {
+	min-height: 50vh;
+}
+
 #pagination-container {
 	margin-left: 40%;
 }
 
+.card {
+  max-width: 210px;
+  margin: auto;
+}
+
+p.card-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-height: 4.8em;
+  height: 19px;
+}
+
+.img-thumbnail {
+  margin: auto;
+  height: 170px;
+  max-width: 200px;
+  max-height: 170px;
+  overflow: hidden;
+}
+
+.container {
+}
+
 .jumbotron {
-	background-image: url(jumbo.jpg);
+	background-image: url(image/jumbo.jpg);
 	background-repeat: no-repeat;
 	background-position: 0% 80%;
 	background-attachment: fixed;

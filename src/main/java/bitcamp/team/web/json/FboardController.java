@@ -1,10 +1,6 @@
 package bitcamp.team.web.json;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,21 +79,25 @@ public class FboardController {
 
   @GetMapping("list")
   public Object list(
-      @RequestParam(defaultValue = "undefined" ,required = false) String search) throws Exception {
-    HashMap<String,Object> param = new HashMap<>();
+      @RequestParam(defaultValue = "undefined" ,required = false) String type,
+      @RequestParam(defaultValue = "undefined" ,required = false) String keyword) throws Exception {
+    HashMap<String,Object> paramMap = new HashMap<>();
     HashMap<String,Object> content = new HashMap<>();
 
-    if(!search.equals("undefined")) {
-      if (search.contains("t.")) {
-        param.put("title", search.substring(2));
-      } else if (search.contains("c.")) {
-        param.put("contents", search.substring(2));
-      } else if(search.contains("n.")){
-        param.put("nickName", search.substring(2));
+    if(!type.equals("undefined") && !type.equals("undefined")) {
+      if (type == "title") {
+        paramMap.put("title", keyword);
+        
+      } else if (type == "contents") {
+        paramMap.put("contents", keyword);
+        
+      } else {
+        paramMap.put("all", keyword);
+        
       }
     }
-
-    List<Fboard> boards = boardService.list(param);
+    
+    List<Fboard> boards = boardService.list(paramMap);
     content.put("list", boards);
 
     return content;

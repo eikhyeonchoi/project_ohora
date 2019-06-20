@@ -18,13 +18,17 @@ $(document.body).bind('loaded.header', function(data) {
       sessionStorage.clear();
     });
   });
+  
+  $('#ohr-menu').click(function(){
+    $('.ohr-menu-det').toggleClass("ohr-menu-show")
+  });
 
   const input = $("#search-input");
   const searchBtn = $("#search-btn");
 
   const expand = () => {
-    searchBtn.toggleClass("close");
-    input.toggleClass("square");
+    searchBtn.toggleClass("ohr-close");
+    input.toggleClass("ohr-square");
     
     if($('#navbarCollapse').find('li').hasClass('ohr-disappear')) {
       $('#navbarCollapse').find('li').removeClass('ohr-disappear');

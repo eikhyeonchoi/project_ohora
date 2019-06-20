@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+
+.notice-info {
+	border-right: 1px solid;
+}
+
+.notice {
+	min-height: 500px;
+}

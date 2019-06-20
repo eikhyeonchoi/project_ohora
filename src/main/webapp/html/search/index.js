@@ -103,7 +103,7 @@ $(document.body).bind('loaded-list', () => {
 
   $('.bit-prod-view-link').click((e) => {
     window.location.href = '/bitcamp-team-project/html/product/newView2.html?no=' + 
-    $(e.target).parent().attr('data-no') + '?name=' + $(e.target).parent().attr('data-name');
+    $(e.target).parent().attr('data-no') + '&name=' + $(e.target).parent().attr('data-name');
   });
 
   $('.bit-manu-view-link').click((e) => {

@@ -13,19 +13,30 @@
 </head>
 <body>
   <header class="ohr-main-header"></header>
-  <div class="container" style="min-height: 630px;">
-
-    <div class='row'>
-      <h3 class='col-sm-6 offset-sm-4'>자주묻는질문 index</h3>
-      <button class='faq-add-btn btn btn-success btn-sm col-sm-2'>새 FAQ</button>
-    </div>
+  
+  
+  <div class='container-fluid' style="padding: 0;">
+   <section class="jumbotron jumbotron-fluid text-center">
+     <h1 class="jumbotron-heading">자주 묻는 질문</h1>
+     <p class="lead text-muted">고객님께서 자주 문의하시는 질문과 답변을 모았습니다</p>
+     <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
+       <div id="search">
+       </div>
+      </form>
+    </section>
+  </div>
+  
+  <div class="container">
+    <button id='faq-add-btn' class='btn btn-primary btn-sm'>새 FAQ</button>
 
     <hr class='head-line'>
+    
     <div class='row col-sm-12'>
       <div class='faq-type-div col-sm-12'>
-        <i class="fas fa-circle"></i>
+        <i class="fab fa-pagelines"></i>
       </div>
     </div>
+    
     <hr class='head-line'>
     
     <div id='faq-div' class='faq-div col-sm-12'>
@@ -38,8 +49,8 @@
 
   <script id="faq-type-template" type="text/x-handlebars-template">
     {{#each faqCtg}}
-      <a href='#' class='faq-type col-sm-3' data-no='{{qcNo}}'>{{faqType.name}}</a>
-      <i class="fas fa-circle"></i>
+      <a href='#' class='faq-type col-sm-3' data-no='{{qcNo}}' style="color: black; font-size: 1.1em;">{{faqType.name}}</a>
+      <i class="fab fa-pagelines"></i>
     {{/each}}
   </script>
 
