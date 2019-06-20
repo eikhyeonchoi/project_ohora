@@ -6,7 +6,7 @@ body {
 }
 
 body > header {
-  min-height: 60px;
+  min-height: 75px;
 }
 
 .container {
@@ -35,7 +35,7 @@ div.container {
   margin: 0px 10px;
 }
 
-
+/*
 .btn-primary {
     background-color: white;
     border: solid 1px #ccc;
@@ -53,6 +53,7 @@ div.container {
     border: solid 1px #ccc;
     color: white;
 }
+*/
 
 .ohr-footer {
 	padding: 0px;

@@ -42,9 +42,15 @@
       <span class="sidebar-btn"><i class="fas fa-bars"></i></span>
     </button>
   </aside>
-
+  
+  <div class='container-fluid' style="padding: 0;">
+   <section class="jumbotron jumbotron-fluid text-center">
+     <h1 class="jumbotron-heading">내가쓴 게시물</h1>
+     <p class="lead text-muted">사용자가 작성한 게시물을 확인하실 수 있습니다</p>
+    </section>
+  </div>
+  
   <div class="container">
-    <h3 id="my-title">내가쓴 게시물</h3>
     <div id="my-row">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item"><a class="nav-link active" id="fboard-tab" data-toggle="tab"
@@ -57,7 +63,7 @@
           aria-labelledby="fboard-tab">
           <p style="visibility: hidden;">공백</p>
           <b style="margin-left: 10px; margin-bottom: 5px;">총 <span id="fboard-length"
-            style="color: #00BFFF"></span>건의 게시물이 있습니다.
+            style="color: #FF8000"></span>건의 게시물이 있습니다.
           </b>
           <div class="row" id="fboard-head">
             <div class="col-sm fboard-head-col" id="fboard-head-no">번호</div>
@@ -74,7 +80,7 @@
         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
           <p style="visibility: hidden;">공백</p>
           <b style="margin-left: 10px; margin-bottom: 5px;">총 <span id="review-length"
-            style="color: #00BFFF">5</span>건의 리뷰가 있습니다.
+            style="color: #FF8000">5</span>건의 리뷰가 있습니다.
           </b>
           <div id="handle-bars-review-body"></div>
           <p style="visibility: hidden;">공백</p>
@@ -89,10 +95,10 @@
   <script id="fboard-template" type="text/x-handlebars-template">
   {{#each list}}
   <div class="row fboard-body" data-no={{no}}>
-    <div class="col-sm fboard-body-col">{{no}}</div>
-    <div class="col-sm fboard-body-col">{{title}}</div>
-    <div class="col-sm fboard-body-col">{{createdDate}}</div>
-    <div class="col-sm fboard-body-col">{{viewCount}}</div>
+    <div class="col-sm fboard-body-col fboard-body-no">{{no}}</div>
+    <div class="col-sm fboard-body-col fboard-body-title">{{title}}</div>
+    <div class="col-sm fboard-body-col fboard-body-cdt">{{createdDate}}</div>
+    <div class="col-sm fboard-body-col fboard-body-vcnt">{{viewCount}}</div>
   </div>
   <hr>
   {{/each}}
@@ -116,7 +122,7 @@
         <p id="card-cont-title">리뷰 제목: {{title}}</p>
         <p class="card-text">등록일: {{createdDate}}</p>
         <p class="card-text">조회수: {{viewCount}}</p>
-        <a href="/bitcamp-team-project/html/review/view.html?no={{no}}" class="btn btn-primary" style="margin-top: 10px;" data-no: {{no}}>리뷰 보러가기</a>
+        <a href="/bitcamp-team-project/html/review/view.html?no={{no}}" class="btn btn-outline-secondary my-btn-review" style="margin-top: 10px;" data-no: {{no}}>리뷰 보러가기</a>
       </div>
     </div>
   </div>

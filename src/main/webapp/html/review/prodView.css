@@ -16,6 +16,7 @@
 .jumbotron {
 	margin-bottom: 0;
 	background-color: #383d41;
+	border-radius: 0;
 }
 
 @media ( min-width : 768px) {

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>팁 디테일</title>
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/paginationjs/dist/pagination.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
@@ -15,12 +16,12 @@
   <div class="container mt-sm-4">
     <div class="row">
       <div class="wow fadeInLeft col">
-        <h4>티키위키</h4>
-        <h1 class="productName"></h1>
+        <h4 class="row">티키위키</h4>
+        <h1 class="row productName"></h1>
         <span class="row">
           <button type="button" class="btn btn-sm btn-secondary history mb-sm-3" 
-                  data-toggle="modal" data-target=".bd-modal-xl">history</button>
-          <button type='button' class="btn btn-sm btn-secondary rollback-btn mb-sm-3">rollback</button>
+                  data-toggle="modal" data-target=".bd-modal-xl">히스토리</button>
+          <button type='button' class="btn btn-sm btn-secondary rollback-btn mb-sm-3">롤백</button>
         </span>
       </div>
       <div class="wow fadeInRight col productimg">
@@ -44,7 +45,7 @@
     <div class="wow fadeInUp">
       <hr>
       <div class="form-group row justify-content-center">
-        <pre class="col-sm-10 px-sm-3" id="contents"></pre>
+        <p class="col-sm-10 px-sm-3" id="contents"></p>
       </div>
       <hr>
       <div class="form-group row">
@@ -58,7 +59,7 @@
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">History</h5>
+            <h5 class="modal-title" id="exampleModalLabel">히스토리</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -77,6 +78,7 @@
                   </table>
                 </div>
               </div>
+              <div class="row mx-sm-auto" id="pagination-container"></div>
             </div>
           </div>
         </div>
@@ -93,6 +95,7 @@
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/paginationjs/src/pagination.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>

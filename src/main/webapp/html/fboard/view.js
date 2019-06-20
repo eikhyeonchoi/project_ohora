@@ -12,9 +12,14 @@ var boardNo = getQuerystring('no'),
     commentListSrc = $('#comment-list').html(),
     commentListGenerator = Handlebars.compile(commentListSrc);
 
+<<<<<<< HEAD
 var userNo = sessionStorage.getItem('no'), // 로그인한 사람
     userNickName = sessionStorage.getItem('nickName'),
     memberNo = 0; // 글을 쓴 사람
+=======
+var userNo = 0,
+    userNickName = '';
+>>>>>>> branch 'master' of https://github.com/eikhyeonchoi/bitcamp-team-project.git
 
 $(document).ready(function() {
   

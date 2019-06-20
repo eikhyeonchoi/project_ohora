@@ -30,6 +30,13 @@ td:nth-child(4) {
   text-align: center;
   width: 40px;
 }
+p > img {
+	max-width: 500px;
+}
+.img-thumbnail {
+  width: 140px;
+  height: 140px;
+}
 
 .time {
 	text-align: right;
@@ -44,6 +51,8 @@ td:nth-child(4) {
 }
 
 #contents {
+	
+	max-width: 770px;
 	min-height: 500px;
 	font-size: 1.5em;
 }

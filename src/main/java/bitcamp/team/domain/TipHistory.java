@@ -12,7 +12,8 @@ public class TipHistory {
   private String nickName;
   
   private Tip tip;
-
+  private Product product;
+ 
   public int getNo() {
     return no;
   }
@@ -61,9 +62,17 @@ public class TipHistory {
     this.tip = tip;
   }
 
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
+  }
+
   @Override
   public String toString() {
     return "TipHistory [no=" + no + ", contents=" + contents + ", tipNo=" + tipNo + ", updateDate="
-        + updateDate + ", nickName=" + nickName + ", tip=" + tip + "]";
+        + updateDate + ", nickName=" + nickName + ", tip=" + tip + ", product=" + product + "]";
   }
 }

@@ -14,7 +14,7 @@ public class TipHistoryServiceImpl implements TipHistoryService {
   public TipHistoryServiceImpl(TipHistoryDao tipDao) {
     this.tipDao = tipDao;
   }
-
+  
   @Override
   public int add(TipHistory tip) {
     return tipDao.insert(tip);
@@ -36,7 +36,6 @@ public class TipHistoryServiceImpl implements TipHistoryService {
 
   @Override
   public TipHistory detail(int no) {
-    TipHistory history = tipDao.findContsByNo(no);
-    return history;
+    return tipDao.findContsByNo(no);
   }
 }

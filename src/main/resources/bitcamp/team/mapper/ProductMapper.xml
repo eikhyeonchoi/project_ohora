@@ -50,7 +50,11 @@
   <resultMap type="product" id="productFileMap">
     <id       column="product_no"         property="no"/>
     <result   column="name"               property="name"/>
-    <collection property="productFiles"      ofType="productFile">
+    <association property="tip"           javaType="tip">
+      <id     column="tip_no"             property="no"/>
+      <result column="productNo"         property="productNo"/>
+    </association>
+    <collection property="productFiles"   ofType="productFile">
       <id     column="pfile_no"           property="no"/>
       <result column="productNo"          property="productNo"/>
       <result column="img"                property="img"/>
@@ -185,6 +189,9 @@
   
   <select id="findByNo" resultMap="productMap" parameterType="int">
     select
+      p.product_no,
+      p.sctg_no,
+      p.manufac_no,
       p.name as productName,
       t.tip_no,
       lc.name as largeName,
@@ -192,11 +199,11 @@
       m.name as manufacturerName
     from
       product p
-      left join tip t on p.product_no = t.product_no
-      join small_category sc on p.sctg_no=sc.sctg_no
-      join large_category lc on sc.lctg_no=lc.lctg_no
-      join product_file pf on pf.product_no = p.product_no
-      join manufacturer m on p.manufac_no = m.manufac_no
+    left join tip t on p.product_no = t.product_no
+    left join small_category sc on p.sctg_no=sc.sctg_no
+    left join large_category lc on sc.lctg_no=lc.lctg_no
+    left join product_file pf on pf.product_no = p.product_no
+    left join manufacturer m on p.manufac_no = m.manufac_no
     where
       p.product_no = #{value}
   </select>

@@ -1,12 +1,22 @@
-var historyNo = location.href.split('?')[1].split('=')[1];
+var historyNo = location.href.split('?')[1].split('=')[1],
+    page = $('#pagination-container');
 var tbody = $('tbody');
 var templateSrc = $('#tr-template').html();
 var trGenerator = Handlebars.compile(templateSrc);
-
+var productNo = localStorage.getItem('productNo');
 $(document).ready(function() {
+  loadList(productNo);
+  
+  $(document.body).bind('loaded.loginuser', () => {
+    type = sessionStorage.getItem('type');
+    console.log(type);
+    if (type < 3) {
+      location.href = '/bitcamp-team-project/html/auth/login.html';
+    }
+  });
+  
   $.getJSON('/bitcamp-team-project/app/json/tiphistory/detail?no=' + historyNo,
       function (data) {
-    console.log(data.history);
     $('.memberName').html(data.history.nickName);
     $('.productName').html(data.history.tip.product.name);
     $('#contents').html(data.history.contents);
@@ -43,9 +53,20 @@ $(document).ready(function() {
 function loadList(no) {
   $.getJSON('../../app/json/tiphistory/list?no=' + no, 
       function(obj) {
-    tbody.html(''); 
-    $(trGenerator(obj)).appendTo(tbody);
-    $(document.body).trigger('loaded-data');
+    page.pagination({
+      dataSource: obj,
+      locator: 'list',
+      showGoInput: true,
+      showGoButton: true,
+      pageSize: 5,
+      callback: function(data, pagination) {
+        tbody.children().remove();
+        var pageObj = {list : data}
+        console.log(pageObj)
+        $(trGenerator(pageObj)).appendTo(tbody);
+        $(document.body).trigger('loaded-data');
+      }
+    });
   }); 
 }
 
@@ -55,4 +76,3 @@ $(document.body).bind('loaded-data', () => {
     location.href = 'view2.html?no=' + $(e.target).attr('data-no');
   })
 })
-

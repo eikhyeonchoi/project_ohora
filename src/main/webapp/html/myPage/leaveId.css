@@ -5,6 +5,11 @@
   margin-bottom: 15px;
 }
 
+#my-row:hover {
+  border: 1px solid #0B3861;
+  text-decoration: none;
+}
+
 #stop-img {
   float: left; 
   max-width : 150px;
@@ -95,3 +100,16 @@
   cursor: pointer;
   color: #FE642E;
 }
+
+#btn-next-div {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#leave-btn {
+  border: 2px solid; 
+  border-radius: 0;
+}
+
+

@@ -32,7 +32,7 @@
         <result column="manuName" property="name" />
       </association>
       <collection property="productFiles" ofType="productFile">
-        <id      column="pfile_no"   property="no"/>
+        <id     column="pfile_no"   property="no"/>
         <result column="product_no" property="productNo"/>
         <result column="img"        property="img"/> 
       </collection>
@@ -71,11 +71,7 @@
     <where>
     <if test="keyword != null">
       <bind name="pattern1" value="'%' + keyword + '%'"/>
-      <if test="prodName != null"> p.name like #{pattern1}</if>
-      <if test="memName != null"> m.n_name like #{pattern1}</if>
-      <if test="cont != null"> conts like #{pattern1}</if>
-      <if test="prodConts != null"> p.name like #{pattern1} or conts like #{pattern1}</if>
-      <if test="search != null"> p.name like #{pattern1} or conts like #{pattern1}</if>
+      p.name like #{pattern1} or conts like #{pattern1}
     </if>
     </where>
     order by

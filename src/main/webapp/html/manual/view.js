@@ -110,18 +110,31 @@ $(document.body).bind('loaded-comment-list', function() {
 
   }); // click
 
-  $('.comment-update-btn').click(function(e) {
-    $.post('/bitcamp-team-project/app/json/manual/updateComment', {
-      no: $(e.target).attr('data-no'),
-      updateDate: getCurrentTime(),
-      contents: $(e.target).prev().val()
-    }, function(obj) {
-      if (obj.status == 'success') {
-        location.reload();
-      } else {
-        swal('실패!', '변경 실패 입니다.\n' +  obj.message, 'warning');
-      }
-    }, "json")
+  $('.comment-update-btn').one('click', function(e) {
+    e.preventDefault();
+    var target = $(e.target);
+    target.next().hide();
+    target.text('등록').removeClass('comment-update-btn').addClass('new-comment-update-btn');
+    var oldText = target.closest('.user-inform').next().find('p').text();
+    target.closest('.user-inform').next().find('p').remove();
+    var contentsTextArea = $('<textarea>').addClass('form-control col-sm-12').addClass('contents').attr('rows','2').val(oldText);
+    target.closest('.user-inform').next().append(contentsTextArea);
+    
+    $('.new-comment-update-btn').click(function(e) {
+      e.preventDefault();
+      $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
+        no: $(e.target).attr('data-no'),
+        updateDate: getCurrentTime(),
+        contents: $(e.target).closest('.user-inform').next().find('textarea').val()
+      }, function(obj) {
+        if (obj.status == 'success') {
+          location.reload();
+        } else {
+          alert('변경 실패 입니다.\n' +  obj.message);
+        }
+      }, "json")
+    });
+    
   }) // click
 }) // loaded-comment-list bind
 

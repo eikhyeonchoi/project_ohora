@@ -1,3 +1,45 @@
 #my-row {
-  border: 1px solid #BDBDBD;
+  border: 1px solid #D8D8D8;
+  margin: auto;
+  padding: 25px;
+  margin-bottom: 15px;
+  max-width: 400px;
+}
+
+#my-row:hover {
+  border: 1px solid #0B3861;
+  text-decoration: none;
+}
+
+#my-title {
+  margin: 25px 0px 20px 45px;
+}
+
+.mybtn {
+  height: 45px;
+  border-radius: 0;
+  width: 100%;
+}
+
+#real-leave-btn {
+  margin-top: 30px;
+}
+
+#my-div-1 {
+  color: #848484;
+}
+
+#my-div-2 {
+  margin-bottom: 20px;
+  color: #848484;
+}
+
+.col, .col-sm {
+  padding: 0;
+}
+
+#leave-email[readonly] {
+  background-color: white;
+  font-weight: bold;
+  color: #6E6E6E;
 }

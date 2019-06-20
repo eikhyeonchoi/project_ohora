@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.bit-main-header {
-	min-height: 75px;
-}
-
 .ohr-header-nav {
 	min-height: 75px;
 }
@@ -42,37 +38,10 @@
 	border-right: 6px solid white;
 }
 
-/*
-menu hover 효과1
-
-.borderLeftRight {
-  display: inline-block;
-  position: relative;
-  color: #474E51;
-}
-
-.borderLeftRight::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #5878F3;
-  transform-origin: bottom right;
-  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-}
-
-.borderLeftRight:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-*/
 #content {
 	position: relative;
 	height: 50px;
-	width: 50px;
+	width: 34px;
 	top: 3.5em;
 	left: 1.5em;
 	transform: translate(-50%, -50%);
@@ -112,6 +81,10 @@ menu hover 효과1
 	transform: translate(-100%, -50%);
 }
 
+button:focus {
+	outline: 0;
+}
+
 .search {
 	background: none;
 	position: absolute;
@@ -147,7 +120,7 @@ menu hover 효과1
 	transition: 0.2s ease-in-out;
 }
 
-.close {
+.ohr-close {
 	-webkit-transition: 0.4s ease-in-out;
 	transition: 0.4s ease-in-out;
 	-webkit-transition-delay: 0.4s;
@@ -155,7 +128,7 @@ menu hover 효과1
 	margin-top: 1px;
 }
 
-.close:before {
+.ohr-close:before {
 	content: "";
 	position: absolute;
 	width: 27px;
@@ -170,7 +143,7 @@ menu hover 효과1
 	transition: 0.2s ease-in-out;
 }
 
-.close:after {
+.ohr-close:after {
 	content: "";
 	position: absolute;
 	width: 27px;
@@ -184,11 +157,17 @@ menu hover 효과1
 	transform: rotate(-45deg);
 }
 
-.square {
+#ohr-search-tag {
+	position: relative;
+	cursor: default;
+}
+
+.ohr-square {
+	position: absolute;
 	box-sizing: border-box;
 	padding: 0 40px 0 10px;
 	margin-top: 1px;
-	width: 45rem;
+	width: 65vw;
 	height: 50px;
 	border: 4px solid #ffffff;
 	border-radius: 0;
@@ -263,50 +242,62 @@ menu hover 효과1
 }
 
 #navbarCollapse li {
-	float: left;
+	float: none;
+	text-align: center;
 }
 
 #navbarCollapse li a {
-	color: #cccccc;
-	display: block;
-	font-weight: normal;
+	color: #fff;
+	display: inline-block;
+	font-weight: 560;
+	font-size: 16px;
 	line-height: 50px;
 	margin: 0px;
 	padding: 0px 25px;
 	text-align: center;
 	text-decoration: none;
 	width: 120px;
+	position: relative;
+}
+
+.ohr-header-list:after {
+	display: block;
+	content: '';
+	border-bottom: 5px solid #fff;
+	transform: scaleX(0);
+	transition: transform 0.25s ease-in-out;
+}
+
+.ohr-header-list:hover:after {
+	transform: scaleX(1);
 }
 
 #navbarCollapse li a:hover, #navbarCollapse ul li:hover a {
-	background: #778899; /*rgb(44, 62, 80)*/
-	opacity: 0.8;
 	color: #FFFFFF;
 	text-decoration: none;
 }
 
 #navbarCollapse li ul {
-	background: #778899;
+	background-color: #343a40;
 	visibility: hidden;
-	height: auto;
 	padding: 0px;
+	padding-bottom: 10px;
 	margin: 0px;
 	border: 0px;
 	position: absolute;
 	width: 120px;
 	z-index: 200;
-	opacity: 0.5;
-	transition: .2s ease-in-out;
 }
 
 #navbarCollapse li:hover ul {
 	display: block;
 	visibility: visible;
-	opacity: 0.8;
+	height: auto;
+	transition: height 1s ease-in-out;
 }
 
 #navbarCollapse li li {
-	background: #778899;
+	background-color: #323a45;
 	display: block;
 	float: none;
 	margin: 0px;
@@ -323,23 +314,47 @@ menu hover 효과1
 	height: 50px;
 	font-size: 12px;
 	font-style: normal;
-	padding: 0px 10px 0px 15px;
-	text-align: left;
+	font-weight: 450;
+	text-align: center;
+}
+
+#navbarCollapse li ul a:after {
+    display: block;
+    content: '';
+    border-bottom: 5px solid #fff;
+    transform: scaleX(0);
+    transition: transform 0.25s ease-in-out;
+}
+
+#navbarCollapse li ul a:hover:after {
+    transform: scaleX(1);
 }
 
 #navbarCollapse li ul a:hover, #navbarCollapse li ul li:hover a {
-	background: #3f6184;
 	border: 0px;
 	color: #ffffff;
 	font-weight: bold;
 	text-decoration: none;
-	border-radius: 4px;
 }
 
 #navbarCollapse p {
 	clear: left;
 }
 
+#ohr-user-info {
+	background-image: url(../upload/main/customer.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 55px;
+	width: 55px;
+	margin-top: 3px;
+}
+
+#ohr-user-info:hover {
+	cursor: pointer;
+}
+
+/*
 .btn-secondary {
 	background: #62707e;
 }
@@ -352,7 +367,6 @@ menu hover 효과1
 	background: #1C2125;
 }
 
-/*
 #ohr-header-logo {
 	height: 70px;
 }
