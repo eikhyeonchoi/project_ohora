@@ -9,6 +9,7 @@ $(document).ready(function() {
     
     $.getJSON('../../app/json/tip/productName?no=' 
         + productNo, function(obj) {
+          console.log(obj.product);
       $('#h1-title').html(obj.product);
     });
     
