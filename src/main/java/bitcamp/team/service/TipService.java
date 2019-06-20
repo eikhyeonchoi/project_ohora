@@ -14,5 +14,5 @@ public interface TipService {
   int confirm(int no);
   Tip get(int no);
   Tip getTip(int no);
-  List<Tip> list(String keyword, String searchType);
+  List<Tip> list(String keyword);
 }

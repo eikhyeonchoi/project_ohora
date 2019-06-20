@@ -32,28 +32,8 @@ public class TipServiceImpl implements TipService {
   }
 
   @Override
-  public List<Tip> list(String keyword, String searchType) {
+  public List<Tip> list(String keyword) {
     HashMap<String, Object> contents = new HashMap<>();
-    if (searchType != null) {
-      switch (searchType) {
-        case "prodName":
-          contents.put("prodName", searchType);
-          break;
-        case "memName":
-          contents.put("memName", searchType);
-          break;
-        case "cont":
-          contents.put("cont", searchType);
-          break;
-        case "prodConts":
-          contents.put("prodConts", searchType);
-          break;
-        case "search":
-          contents.put("search", searchType);
-          break;
-        default:;
-      }
-    }
     if (keyword != null) {
       if (!keyword.equals("")) {
         contents.put("keyword", keyword);

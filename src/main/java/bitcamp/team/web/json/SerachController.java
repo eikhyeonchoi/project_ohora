@@ -38,7 +38,7 @@ public class SerachController {
     List<Manual> manuList = manualService.list(keyword, "search");
     List<Product> prodList = productService.list2(0, 0, keyword, "search");
     List<Review> revList = reviewService.get(0, keyword, "search");
-    List<Tip> tipList = tipService.list(keyword, "search");
+    List<Tip> tipList = tipService.list(keyword);
 
     contents.put("manuList", manuList);
     contents.put("prodList", prodList);
