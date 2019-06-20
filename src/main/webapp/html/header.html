@@ -2,21 +2,17 @@
  <!-- 
     <img id="ohr-header-logo" src="/bitcamp-team-project/upload/main/로고1.png">
      -->
-    <a class="navbar-brand" id="ohr-header" href="/bitcamp-team-project/index.html">OhHora</a>
-    <span id="ohr-search-tag" class="ohr-disappear-tag">검색</span>
-    
+ <a class="navbar-brand" id="ohr-header" href="/bitcamp-team-project/index.html">OhHora</a> <span
+  id="ohr-search-tag" class="ohr-disappear-tag">검색</span>
+
  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
   aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
  </button>
  <div class="collapse navbar-collapse" id="navbarCollapse">
-  <ul class="navbar-nav mr-auto" id="main">
-   <li><a class="nav-link" id="products" href="#">제품</a>
-   <!-- 
-   <div>
-   
-   </div>
-     -->
+  
+  
+  <!-- 
     <ul>
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/product/index.html">제품</a></li>
@@ -27,28 +23,70 @@
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/tip/index.html">티키위키</a></li>
     </ul>
-   <li><a class="nav-link" id="community" href="#">커뮤니티</a>
+    
     <ul>
      <li class="nav-item active"><a class="nav-link"
-      href="/bitcamp-team-project/html/fboard/index.html">게시판</a></li>
-    </ul></li>
-   <li><a class="nav-link" id="service" href="#">서비스</a>
-    <ul>
+      href="/bitcamp-team-project/html/fboard/index.html">게시판</a>
+    </ul>
+    
+     <ul> 
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/faq/index.html">FAQ</a></li>
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/notice/index.html">공지사항</a></li>
      <li class="nav-item active"><a class="nav-link"
       href="/bitcamp-team-project/html/question/index.html">QnA</a></li>
-    </ul></li>
+    </ul>
+   -->
+  
+  <ul class="navbar-nav mr-auto" id="main">
+   <li>
+   <a class="nav-link ohr-header-list" id="ohr-products" href="#">제품</a>
+   
+    <ul>
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/product/index.html">제품</a></li>
+      
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/manual/index.html">매뉴얼</a></li>
+      
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/review/index.html">리뷰</a></li>
+      
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/tip/index.html">티키위키</a></li>
+    </ul>
+    
+   <li><a class="nav-link ohr-header-list" id="ohr-community" href="#">커뮤니티</a>
+   
+    <ul>
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/fboard/index.html">게시판</a></li>
+    </ul>
+    
+   <li><a class="nav-link ohr-header-list" id="ohr-service" href="#">서비스</a>
+   
+    <ul> 
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/faq/index.html">FAQ</a></li>
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/notice/index.html">공지사항</a></li>
+     <li class="nav-item active"><a class="nav-link"
+      href="/bitcamp-team-project/html/question/index.html">QnA</a></li>
+    </ul>
+    
+    </li>
+    
   </ul>
 
   <form id="content">
-   <input type="search" name="input" class="ohr-search-input" id="search-input">
+   <input type="text" name="input" class="ohr-search-input" id="search-input">
    <button type="reset" class="search" id="search-btn"></button>
   </form>
 
+  <form id="ohr-user-info"></form>
 
+  <!-- 
   <div id="bit-not-login-state" class="bit-invisible">
    <a id="login-menu" class="btn btn-secondary btn-sm"
     href='/bitcamp-team-project/html/auth/login.html'>로그인</a>
@@ -59,9 +97,7 @@
    <span id="login-username"></span>
    <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a>
   </div>
-
-  <!-- 
-
+  
   <div id="bit-auth-div" class="bit-invisible">
    <a id="bit-auth" href='/bitcamp-team-project/html/auth/signup.html'
     class="btn btn-secondary btn-sm">회원 가입</a>
