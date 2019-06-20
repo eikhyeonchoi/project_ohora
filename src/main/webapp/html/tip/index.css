@@ -3,9 +3,9 @@
 }
 
 .jumbotron {
-  background-image: url(tip.jpg);
+  background-image: url(tiip.jpg);
   background-repeat: no-repeat;
-  background-position: 10% 190%;
+  background-position: 0% 80%;
   background-attachment: fixed;
   margin: 0;
   color: white;
