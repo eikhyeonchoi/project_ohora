@@ -20,7 +20,7 @@
   margin: 0 auto;
 }
 div.tableRow {
-  min-height: 100vh;
+  min-height: 50vh;
 }
 .img-thumbnail {
   margin: auto;
@@ -33,6 +33,10 @@ div.tableRow {
 .card {
 	max-width: 210px;
 	margin: auto;
+}
+
+.card-img {
+	height: 340px;
 }
 
 p.card-text {
