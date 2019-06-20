@@ -5,11 +5,15 @@ page = $('#pagination-container');
 
 $(document).ready(function() {
   if(sessionStorage.getItem('type') == 3) {
-    $('#add-button').show();
+    $('#notice-add-btn').show();
   } else {
-    $('#add-button').hide();
+    $('#notice-add-btn').hide();
   }
 }); // ready
+
+$('#notice-add-btn').click(function() {
+  location.href = 'form.html';
+})
 
 function loadList() {
   $.getJSON('../../app/json/notice/list?keyword=' + $('#keyword').val() + 
@@ -32,11 +36,10 @@ function loadList() {
 };
 
 //detail 링크
-$(document.body).bind('loaded-list', () => {
+$(document.body).bind('loaded-list', function() {
 
-  $('.bit-view-link').click((e) => {
-    window.location.href = 'view.html?no=' + 
-    $(e.target).attr('data-no');
+  $('.notice-view').off().click(function(e) {
+     location.href = 'view.html?no=' + $(this).attr('data-no');
   });
 });
 

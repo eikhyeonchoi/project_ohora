@@ -5,9 +5,6 @@ table tr th:nth-child(2), table tr td:nth-child(2) {
 	text-align: center;
 }
 
-.pagination {
-	text-align: center;
-}
 
 .bit-list {
 	min-height: 500px;
@@ -17,26 +14,19 @@ tr {
 	cursor: pointer;
 }
 
-
-/* 
-th:nth-child(1) {
-  width: 50px;
-  text-align: center;
+.page-container {
+	margin-left: 30%;
 }
 
-th:nth-child(3) {
-  text-align: center;
-  width: 100px;
+.jumbotron {
+  background-image: url(image/jumbo.jpg);
+  background-repeat: no-repeat;
+  background-position: 70% 100%;
+  background-attachment: fixed;
+  margin: 0;
+  color: white;
 }
 
-th:nth-child(4) {
-  width: 60px;
+.jumbotron p {
+  color: white !important;
 }
-
-td:nth-child(3) {
-  text-align: center;
-}
-
-td:nth-child(4) {
-  text-align: center;
-} */

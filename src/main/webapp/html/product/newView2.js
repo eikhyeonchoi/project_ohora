@@ -129,7 +129,7 @@ $(document).ready(function(){
 
 $(document.body).bind('loaded-product', function(data){
   $("#product-div").mouseenter(function() {
-    $(this).css('background-color', 'white');
+    $(this).css('background-color', '#F2F3F4');
     $(this).children().eq(0).fadeOut('fast');
     $(this).children().eq(1).fadeIn('fast');
 

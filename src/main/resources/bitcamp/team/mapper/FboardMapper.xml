@@ -94,16 +94,14 @@
         <bind name="contentsSearch" value="'%' + contents + '%'"/>
           b.conts like #{contentsSearch}
       </if>
-      <if test="nickName != null">
-        <bind name="nickNameSearch" value="'%' + nickName + '%'"/>
-          m.n_name like #{nickNameSearch}
+      <if test="all != null">
+        <bind name="allSearch" value="'%' + all + '%'"/>
+          b.titl like #{allSearch} or
+          b.conts like #{allSearch}
       </if>
     </where>
     order by
       b.fb_no asc
-    <if test="size != null and pageNo != null">
-      limit #{pageNo}, #{size}
-    </if>
   </select>
 
   <select id="findByNo" resultMap="boardMemberMap" parameterType="int">

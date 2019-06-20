@@ -31,16 +31,7 @@ public class NoticeServiceImpl implements NoticeService {
 
   @Override
   public int add(Notice notice) {
-    int count = noticeDao.insert(notice);
-
-    if (notice.getNoticeFile() != null) {
-      List<NoticeFile> noticeFiles = notice.getNoticeFile();
-      for (NoticeFile file : noticeFiles) {
-        file.setNoticeNo(notice.getNo());
-      }
-      noticeFileDao.insert(noticeFiles);
-    }
-    return count;
+    return noticeDao.insert(notice);
   }
 
   @Override

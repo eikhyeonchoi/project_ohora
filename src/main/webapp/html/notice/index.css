@@ -25,6 +25,24 @@ td:nth-child(4) {
 	text-align: center;
 }
 
+#pagination-container {
+	margin-left: 40%;
+}
 
+.bit-list {
+  min-height: 500px;
+}
 
+.jumbotron {
+  background-image: url(image/jumbo.jpg);
+  background-repeat: no-repeat;
+  background-position: 40% 125%;
+  background-attachment: fixed;
+  margin: 0;
+  color: white;
+}
+
+.jumbotron p {
+  color: white !important;
+}
 

@@ -12,12 +12,29 @@
 </head>
 <body>
   <header class="ohr-main-header"></header>
+  
+  <div class='container-fluid' style="padding: 0;">
+   <section class="jumbotron jumbotron-fluid text-center">
+     <h1 class="jumbotron-heading">자유 게시판</h1>
+     <p class="lead text-muted">자유롭게 의사소통 할 수 있습니다</p>
+     <form class="form-inline my-2 my-lg-0 justify-content-center">
+       <div id="search">
+         <select name="searchType" class="custom-select" id="searchType">
+           <option class="dropdown-item" value="title" id="search_title">제목</option>
+           <option class="dropdown-item" value="contents" id="search_contents">내용</option>
+           <option class="dropdown-item" value="all" id="search_all">제목+내용</option>
+         </select>
+         <input id="keyword" class="form-control mr-sm-2" placeholder="검색어 입력" aria-label="검색">
+         <button type="button" id="search-btn" class="btn btn-secondary my-2 my-sm-0">검색</button>
+       </div>
+      </form>
+    </section>
+  </div>
+  
+  
   <div class="container">
-
-    <div class='row'>
-      <h3 class='col-sm-6 offset-sm-4'>자유게시판 index</h3>
-    </div>
-    <br>
+    <button id='fboard-add-btn' class='btn btn-primary btn-sm'>새 글</button>
+  
     <!-- list -->
     <div class="bit-list">
       <table class="table table-hover">
@@ -35,29 +52,8 @@
     </div>
 
     <!-- page -->
-    <div class='row offset-sm-3 page-container'></div>
+    <div class='row offset-sm-3 page-container mb-sm-5'></div>
 
-    <div class='row mt-sm-5'>
-      <!-- add -->
-      <button id='fboard-add-btn' class='btn btn-outline-primary btn-sm col-sm-1'>새 글</button>
-      
-      <!-- search -->
-      <div class="input-group col-sm-8 offset-sm-1">
-        <div class="input-group-prepend">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색조건</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" data-condition='title'>제목</a> 
-            <a class="dropdown-item" href="#" data-condition='contents'>내용</a>
-            <a class="dropdown-item" href="#" data-condition='nickName'>닉네임</a>
-          </div>
-        </div>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-      </div>
-      <button id='fboard-search-btn' class='btn btn-info btn-sm col-sm-1'>검색</button>
-    </div>
-    <br>
-    <br>
-    <br>
   </div><!-- .container -->
   
   <footer class="container-fluid ohr-footer"></footer>

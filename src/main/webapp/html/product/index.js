@@ -26,9 +26,9 @@ $(document).ready(function() {
     }); // click
   }); // bind
 
-  loadList();
+  loadList(0, 0, 'undefined');
   
-  $.getJSON('/bitcamp-team-project/app/json/product/ctgList', (obj) => {
+  $.getJSON('/bitcamp-team-project/app/json/product/ctgList', function(obj) {
     $(smallCategoryGenerator(obj)).prependTo($('#search'));
     $(largeCategoryGenerator(obj)).prependTo($('#search'));
 
@@ -60,20 +60,27 @@ $(document.body).bind('loaded-category', function(){
       for(var i=1; i<=12; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); } 
     }
   }) // change
-
-  $('#search-btn').off().click(function(){
-    searchSrc();
-  }) // click
-
-
 }); // loaded-category
 
 
-function loadList() {
-  $.get('/bitcamp-team-project/app/json/product/list?largeNo=' + 0
-      + '&smallNo=' + 0 
-      + '&productName=' + 'undefined', function(obj){
-    console.log(obj);
+
+$('#search-btn').off().click(function(e) {
+  loadList($('#lageCtgSelect option:selected').val(), $('#smallCtgSelect option:selected').val(), $('#keyword').val());
+}) // click
+
+
+
+function loadList(largeNo, smallNo, productName) {
+  $.get('/bitcamp-team-project/app/json/product/list?largeNo=' + largeNo
+      + '&smallNo=' + smallNo 
+      + '&productName=' + productName, function(obj){
+    if (obj.list.length == 0) {
+      swal("검색 결과", "등록된 제품이 존재하지 않습니다", "error")
+      .then(function(){
+        location.reload();
+      })
+    }
+    
     paging(obj);
   }) // get
 } // loadList
@@ -89,35 +96,14 @@ function paging(obj) {
       $('#product-div').children().remove();
       var pageSrc = {list : data};
       $(cardGenerator(pageSrc)).appendTo($('#product-div'));
-
       $('.product-view-btn').off().click((e) => {
-        location.href= 'newView2.html?no=' + $(e.target).attr('data-no') + '&name=' + $(e.target).attr('data-name'); 
+        location.href= 'newView2.html?no=' + $(e.target).attr('data-no') + '&name=' + $(e.target).attr('data-name');
+        
       }); // click
       
     } // callback
   
   }) // pagination
+  
 }; // paging
-
-
-function searchSrc() {
-  $.get('/bitcamp-team-project/app/json/product/list?largeNo=' 
-      + $('#lageCtgSelect option:selected').val()
-      + '&smallNo=' + $('#smallCtgSelect option:selected').val() 
-      + '&productName=' 
-      + $('#keyword').val() , function(obj){
-        console.log(obj);
-        if (obj.list.length == 0) {
-          swal("검색 결과", "등록된 제품이 존재하지 않습니다", "error").then(function(){
-            location.reload();
-          })
-        }
-
-        paging(obj);
-      }) // get
-      
-} // searchSrc
-
-
-
 
