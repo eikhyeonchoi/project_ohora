@@ -74,34 +74,44 @@
               <div class="tab-pane fade" id="manualComment" role="tabpanel" aria-labelledby="comment-tab">
                 <div class="container comment">
                     <label id='total-comment' for='basic-url'>총댓글</label>
-                    <div id='manual-comment-add-form' class='input-group'>
+                    <div id='fboard-comment-add-form' class='input-group'>
                       <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
                         placeholder='댓글을 입력하세요'></textarea>
                       <div class="input-group-append">
                         <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
                       </div>
                     </div>
-                  <div class='comment-child'></div>
+                    <div class='comment-child' style="min-height: 270px;"></div>
                   </div>
               </div>
             </div> <!-- myTabContent -->
           </div>
   <script id="comment-list" type="text/x-handlebars-template">
-    <div class='fboard-comment-list-form col-sm-12'>
     {{#each list}}
-      <div class='user-inform col-sm-12 mt-sm-3'>
-        <img width='26.8' heigh='26.8' src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb'>
-        <label for='basic-url' class='user-nickname'>{{member.nickName}}</label>
-        <label for='basic-url' class='created-date'>{{createdDate}}</label>
+    <div class='user-inform row col-sm-12 mt-sm-3'>
+      <div class='col-sm-1'>
+        <img width='50' height='50' src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb' style="border-radius: 50px;">
       </div>
-      <div class='comment-form input-group'>
-        <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
-        <input type="text" class="form-control col-sm-10 commen-list-contents" value='{{contents}}'>
-        <a href='#' class='comment-update-btn btn btn-sm btn-light' data-no='{{no}}'>수정</a>
-        <a href='#' class='comment-delete-btn btn btn-sm btn-light' data-no='{{no}}'>삭제</a>
+      <div class='col-sm-11'>
+        <div class='row col-sm-12'>
+          <div class='col-sm-11 p-sm-0'>
+            <h6 class='user-nickname'>{{member.nickName}}</h6>
+          </div>
+          <div class='col-sm-1 p-sm-0'>
+            <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
+            <a href='#' class='comment-update-btn' data-no='{{no}}'>수정</a>
+            <a href='#' class='comment-delete-btn' data-no='{{no}}'>삭제</a>
+          </div>
+        </div>
+        <div class='row col-sm-12'>
+          <label class='created-date'>{{createdDate}}</label>
+        </div>
       </div>
-    {{/each}}
     </div>
+    <div class='col-sm-11 input-group mt-sm-2'>
+      <p>{{contents}}</p>
+    </div>
+    {{/each}}
   </script>
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>

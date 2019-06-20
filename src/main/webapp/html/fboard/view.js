@@ -15,7 +15,7 @@ var boardNo = getQuerystring('no'),
     replyGenerator = Handlebars.compile(replySrc);
 
 var userNo = 0,
-userNickName = '';
+    userNickName = '';
 
 $(document).ready(function() {
   $.get('../../app/json/fboard/detail?no=' + boardNo, function(obj) {
