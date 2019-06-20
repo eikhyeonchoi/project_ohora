@@ -32,7 +32,7 @@
         <result column="manuName" property="name" />
       </association>
       <collection property="productFiles" ofType="productFile">
-        <id      column="pfile_no"   property="no"/>
+        <id     column="pfile_no"   property="no"/>
         <result column="product_no" property="productNo"/>
         <result column="img"        property="img"/> 
       </collection>
