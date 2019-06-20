@@ -25,37 +25,46 @@
   </div>
 
   <div class="container">
-    <form>
-      <div class="form-group">
-        <label for="email">이메일</label> <input type="email" class="form-control" id="email"
-          name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
-          id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을 다른
-          사이트와 결코 공유하지 않습니다.</small>
-      </div>
-      <div class="form-group">
-        <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
-          type="password" class="form-control" id="password" name="password"
-          placeholder="암호를 입력하세요.">
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail"> <label
-          class="form-check-label" for="saveEmail">이메일 저장</label>
-      </div>
-      <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
-      <div class="col sns">
-        <div class="button facebook" id="fbloginBtn">
-          <i class="fab fa-facebook-square" id="my-fb"></i><span id="fb-span-text">페이스북계정으로
-            로그인</span>
-        </div>
-        <br> <a id="kakao-login-btn"></a> <a href="http://developers.kakao.com/logout"></a>
-        <div id="gSignInWrapper">
-          <div id="customBtn" class="customGPlusSignIn">
-            <span class="icon"></span> <span class="buttonText">구글계정으로 로그인</span>
+    <div class="row" id="main-row">
+      <div class="col-lg-5" id="sns-col">
+       <div class="col" id="sns-col2"></div>
+        <div class="col sns">
+          <div class="button facebook" id="fbloginBtn">
+            <i class="fab fa-facebook-square" id="my-fb"></i><span id="fb-span-text">페이스북계정으로
+              로그인</span>
+          </div>
+          <br> <a id="kakao-login-btn"></a> <a href="http://developers.kakao.com/logout"></a>
+          <div id="gSignInWrapper">
+            <div id="customBtn" class="customGPlusSignIn">
+              <span class="icon"></span> <span class="buttonText">구글계정으로 로그인</span>
+            </div>
           </div>
         </div>
       </div>
-      <div id="name"></div>
-    </form>
+      <div class="col-lg-7">
+        <form>
+          <div class="form-group">
+            <label for="email">이메일</label> <input type="email" class="form-control" id="email"
+              name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
+              id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을
+              다른 사이트와 결코 공유하지 않습니다.</small>
+          </div>
+          <div class="form-group">
+            <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
+              type="password" class="form-control" id="password" name="password"
+              placeholder="암호를 입력하세요.">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail">
+            <label class="form-check-label" for="saveEmail">이메일 저장</label>
+          </div>
+          <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
+
+          <div id="name"></div>
+        </form>
+      </div>
+    </div>
+
   </div>
   <!-- .container -->
 
