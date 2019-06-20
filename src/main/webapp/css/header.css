@@ -289,11 +289,26 @@ button:focus {
 	z-index: 200;
 }
 
+#navbarCollapse #ohr-user-ul {
+	right: 0;
+	width: 150px;
+}
+
+#navbarCollapse #ohr-user-ul li {
+	right: 0;
+	width: 150px;
+	padding-bottom: 10px;
+}
+
+#navbarCollapse #ohr-user-ul li a {
+	right: 0;
+	width: 150px;
+	border: 0;
+}
+
 #navbarCollapse li:hover ul {
 	display: block;
 	visibility: visible;
-	height: auto;
-	transition: height 1s ease-in-out;
 }
 
 #navbarCollapse li li {
@@ -347,11 +362,22 @@ button:focus {
 	background-size: 100%;
 	height: 55px;
 	width: 55px;
-	margin-top: 3px;
+	margin-top: -15px;
 }
 
 #ohr-user-info:hover {
 	cursor: pointer;
+}
+
+#login-userimg {
+	background-image: url(../upload/memberfile/user.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 55px;
+	width: 55px;
+	border-radius: 50px;
+	margin-left: 3.5em;
+	margin-bottom: 1em; 
 }
 
 /*
