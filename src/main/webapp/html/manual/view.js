@@ -242,8 +242,8 @@ function content(mconts, mfile, no, i) {
 
   var contents = '<section class="row mx-sm-1 justify-content-center">'
     + '<div class="row justify-content-center">'
-    + '<span class="wow fadeInUp col-sm-2" id="textconts" data-wow-offset="80" data-wow-delay="0.2s">' 
-    + mconts + '</span>'
+    + '<span class="wow fadeInUp col-sm-2" id="textconts" data-wow-offset="80" data-wow-delay="0.2s"><p>' 
+    + mconts + '</p></span>'
     + '<span class="wow fadeInUp col-sm-2" id="textimg" data-wow-offset="80" data-wow-delay="0.2s">'
     + a + '</span>';
   + '</div></section>';
