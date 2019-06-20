@@ -1,15 +1,17 @@
 @charset "UTF-8";
 
 .ohr-footer-div {
-	position: relative;
-	padding-bottom: 1rem;
+  position: relative;
+  padding-bottom: 1rem;
 }
 
 .ohr-footer-div p {
-	color: white;
+  color: white;
 }
 
 #ohr-btt {
-    color: #5faeb6;
+  color: #5faeb6;
 }
 
+.card-footer {
+}

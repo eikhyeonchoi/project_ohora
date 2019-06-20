@@ -35,10 +35,18 @@ function loadFboard(memberNo) {
         fboardBody.children().remove();
         var pageObj = {list: data};
         $(fbiardGenerator(pageObj)).appendTo(fboardBody);
+        
+        $('.fboard-body').click(function() {
+          location.replace("/bitcamp-team-project/html/fboard/view.html?no=" + $(this).attr('data-no'));
+        });
+        
       } 
     }); //page.pagination
   }) //getJSON
 }; //loadFboard
+
+
+
 
 function loadReview(memberNo) {
   $.getJSON('/bitcamp-team-project/app/json/review/findMyPageReview?memberNo=' + memberNo , function(data) {
@@ -57,5 +65,6 @@ function loadReview(memberNo) {
     }); //page.pagination
   }); //getJSON
 }; //loadReview
+
 
 

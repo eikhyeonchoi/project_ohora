@@ -92,9 +92,10 @@
   </div>
   <!-- container -->
 
+
   <script id="fboard-template" type="text/x-handlebars-template">
   {{#each list}}
-  <div class="row fboard-body" data-no={{no}}>
+  <div class="row fboard-body" data-no='{{no}}'>
     <div class="col-sm fboard-body-col fboard-body-no">{{no}}</div>
     <div class="col-sm fboard-body-col fboard-body-title">{{title}}</div>
     <div class="col-sm fboard-body-col fboard-body-cdt">{{createdDate}}</div>

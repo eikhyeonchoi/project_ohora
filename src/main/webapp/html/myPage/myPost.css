@@ -31,9 +31,10 @@ body {
 }
 
 .fboard-body {
-  padding: 10px;
+  padding: 20px 10px;
+  
   width: 100%;
-  margin: 10px 0px;
+  margin: 0;
 }
 
 hr {
@@ -155,5 +156,8 @@ hr {
   padding-left: 40px;
 }
 
-
+.fboard-body:hover {
+  background-color: #E6E6E6;
+  cursor: pointer;
+}
 

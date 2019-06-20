@@ -12,22 +12,20 @@
   href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link href="/bitcamp-team-project/css/footer.css" rel="stylesheet">
 <link rel="stylesheet" href="login.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
 
-  <div class='container-fluid' style="padding: 0; margin-bottom: 30px;">
-    <section class="jumbotron jumbotron-fluid text-center">
-      <h1 class="jumbotron-heading">로그인</h1>
-      <p class="lead text-muted">자신의 정보를 조회또는 수정하실 수 있습니다</p>
-    </section>
-  </div>
-
   <div class="container">
     <div class="row" id="main-row">
       <div class="col-lg-5" id="sns-col">
-       <div class="col" id="sns-col2"></div>
+      <div class="col" id="sns-col2"></div>
+        <div class="col" id="sns-text-col">
+          <h3 id="my-col-title">SNS 로그인</h3>
+          <span id="my-col-text">SNS 계정으로 간편하게 이용하실 수 있습니다.</span>
+        </div>
         <div class="col sns">
           <div class="button facebook" id="fbloginBtn">
             <i class="fab fa-facebook-square" id="my-fb"></i><span id="fb-span-text">페이스북계정으로
@@ -41,26 +39,34 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-7">
+      
+      <div class="col-lg-7 my-login-col">
+        <div class="col">
+          <h3 id="my-col-title">Ohora 로그인</h3>
+          <span id="my-col-text">로그인 하시면 더욱 다양한 서비스를 이용하실 수 있습니다.</span>
+
+        </div>
         <form>
           <div class="form-group">
-            <label for="email">이메일</label> <input type="email" class="form-control" id="email"
-              name="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요."> <small
-              id="emailHelp" class="form-text text-muted" style="font-size: 13px;">당신의 이메일을
-              다른 사이트와 결코 공유하지 않습니다.</small>
+            <input type="email" class="my-form form-control" id="email" name="email"
+             placeholder="이메일을 입력하세요.">
           </div>
           <div class="form-group">
-            <label for="password">암호</label> <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a> <input
-              type="password" class="form-control" id="password" name="password"
+            <input type="password" class="my-form form-control" id="password" name="password"
               placeholder="암호를 입력하세요.">
           </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail">
-            <label class="form-check-label" for="saveEmail">이메일 저장</label>
+          <div class="row">
+            <div class="custom-control custom-checkbox" id="login-ck-box">
+              <input type="checkbox" class="custom-control-input" id="saveEmail" name="saveEmail">
+              <label class="custom-control-label" for="saveEmail" id="save-email-lb">이메일 저장</label>
+            </div>
+            <a href="#" id="password-search">(비밀번호를 잊으셨나요?)</a>
           </div>
           <button type="button" id="login-btn" class="btn btn-primary">로그인</button>
-
-          <div id="name"></div>
+          <div class="row" id="auth-answer-div">
+           <span>아직 Ohora 회원이 아니신가요?</span>
+           <a href="/bitcamp-team-project/html/auth/signup.html" id="my-auth-a">회원 가입</a>
+         </div>
         </form>
       </div>
     </div>
@@ -103,7 +109,11 @@
       </div>
     </div>
   </div>
-
+  
+  <footer class="container-fluid ohr-footer" style="position: absolute; bottom: 0;"></footer>
+  
+  
+  
   <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -115,6 +125,7 @@
   <script src="../header.js"></script>
   <script src="login.js"></script>
   <script src="gmaillogin.js"></script>
+   <script src="/bitcamp-team-project/html/footer.js"></script>
 </body>
 </html>
 
