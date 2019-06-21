@@ -36,7 +36,7 @@ body {
 /* 제품 요약 설명 */
 #contents {
   text-align: center;
-  font: 1.5em HanSans;
+  font: 1.5em Myriad;
   color: black;
 }
 /* 사진 정보 */
@@ -49,6 +49,9 @@ body {
   max-width: 100%;
 }
 
+.inner {
+	margin: 50px;
+}
 /**/
 
 /* 탭 정보 */

@@ -241,7 +241,7 @@ function content(mconts, mfile, no, i) {
   + 'id="' + cont + '">' + downbtn + '</a>';
 
   var contents = '<section class="row mx-sm-1 justify-content-center">'
-    + '<div class="row justify-content-center">'
+    + '<div class="row justify-content-center inner">'
     + '<span class="wow fadeInUp col-sm-2" id="textconts" data-wow-offset="80" data-wow-delay="0.2s"><p>' 
     + mconts + '</p></span>'
     + '<span class="wow fadeInUp col-sm-2" id="textimg" data-wow-offset="80" data-wow-delay="0.2s">'
