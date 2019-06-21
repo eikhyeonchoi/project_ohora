@@ -281,7 +281,6 @@ button:focus {
 	background-color: #343a40;
 	visibility: hidden;
 	padding: 0px;
-	padding-bottom: 10px;
 	margin: 0px;
 	border: 0px;
 	position: absolute;
@@ -326,7 +325,7 @@ button:focus {
 
 #navbarCollapse li ul a {
 	display: block;
-	height: 50px;
+	height: 60px;
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 450;
@@ -370,7 +369,6 @@ button:focus {
 }
 
 #login-userimg {
-	background-image: url(../upload/memberfile/user.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	height: 55px;
@@ -393,11 +391,13 @@ button:focus {
 	background: #1C2125;
 }
 
+*/
 #ohr-header-logo {
-	height: 70px;
+	height: 75px;
+	border-right: 5px solid #fff;
+	padding-right: 20px;
 }
 
 #ohr-header-logo:hover {
 	cursor: pointer;
 }
-*/

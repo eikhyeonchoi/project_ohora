@@ -20,15 +20,21 @@
       }
 
 .jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 0;
-  background-color: #fff;
+  background-image: url(review1.jpg);
+  background-repeat: no-repeat;
+  background-position: 0% -250%;
+  background-attachment: fixed;
+  background-size: 100%;
+  margin: 0;
+  color: white;
 }
+
+.jumbotron p {
+  color: white !important;
+}
+
 @media (min-width: 768px) {
   .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
   }
 }
 

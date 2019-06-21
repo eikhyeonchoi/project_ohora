@@ -3,100 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <title>오호라</title>
-<link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+ href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.snow.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.core.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link href="/bitcamp-team-project/css/footer.css" rel="stylesheet">
 <link rel="stylesheet" href="view.css">
 </head>
 <body>
-  <header class="ohr-main-header"></header>
-  <div class="container">
-<form id="ohr-review-view">
+ <header class="ohr-main-header"></header>
+ <div class="container">
+  <form id="ohr-review-view">
 
-	<div id="review-prod-no"></div>
+   <div id="review-prod-no"></div>
 
    <div class="form-group row bit-view-item" id="review-no-div">
     <div class="col-sm-10">
-      <p id="review-no"></p>
+     <p id="review-no"></p>
     </div>
-  </div>
-  
-  <div class="form-group row mb-3" id="review-title-div">
+   </div>
+
+   <div class="form-group row mb-3" id="review-title-div">
     <div class="col-sm-12">
-      <p id="review-title"></p>
+     <p id="review-title"></p>
     </div>
-  </div>
-  
+   </div>
+
    <div class="form-group row bit-view-item" id="review-id-div">
     <div class="col-sm-10">
-      <div id="review-id-img"></div>
-      <span id="review-id"></span>
-      <span id="review-createdDate"></span>
-      <span id="review-viewCount"></span>
+     <div id="review-id-img"></div>
+     <span id="review-id"></span> <span id="review-createdDate"></span> <span id="review-viewCount"></span>
     </div>
-  </div>
-  
-  <hr>
-  
-  <div class="form-group row" id="review-contents-div">
+   </div>
+
+   <hr>
+
+   <div class="form-group row" id="review-contents-div">
     <div class="col-sm-12">
-    <div class="ql-editor">
+     <div class="ql-editor">
       <span id="review-contents"></span>
-      </div>
+     </div>
     </div>
-  </div>
-  
-  <hr>
-  
-  <div class="form-group row" id="ohr-rev-btn">
+   </div>
+
+   <hr>
+
+   <div class="form-group row" id="ohr-rev-btn">
     <div class="col-sm-12">
-      <button type="button" id="update-btn" class="btn btn-primary bit-view-item" style="display:none">변경</button>
-      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item" style="display:none">삭제</button> 
-      <button type="button" id="list-btn"  class="btn btn-primary bit-view-item">목록</button>
+     <button type="button" id="update-btn" class="btn btn-primary bit-view-item"
+      style="display: none">변경</button>
+     <button type="button" id="delete-btn" class="btn btn-primary bit-view-item"
+      style="display: none">삭제</button>
+     <button type="button" id="list-btn" class="btn btn-primary bit-view-item">목록</button>
     </div>
+   </div>
+  </form>
+
+  <div id="review-comment">
+   <label for='basic-url' id="ohr-comment-label">댓글<span id="ohr-comment-count"></span></label>
+   <div id='review-comment-add-form' class='input-group'>
+    <textarea id='comment-contents' class='form-control col-sm-10' rows='3' placeholder='댓글을 입력하세요'></textarea>
+    <div class="input-group-append">
+     <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
+    </div>
+   </div>
   </div>
-</form>
+  <div class='comment-child'></div>
 
-<div id="review-comment">
- <label for='basic-url' id="ohr-comment-label">댓글<span id="ohr-comment-count"></span></label>
-    <div id='review-comment-add-form' class='input-group'>
-      <textarea id='comment-contents' class='form-control col-sm-10' rows='3'
-        placeholder='댓글을 입력하세요'></textarea>
-      <div class="input-group-append">
-        <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
-      </div>
-    </div>
-</div>
-    <div class='comment-child'></div>
+ </div>
+ <footer class="container-fluid ohr-footer"></footer>
 
-</div>
 
-  <script id="comment-list" type="text/x-handlebars-template">
+ <script id="comment-list" type="text/x-handlebars-template">
     <div class='review-comment-list-form col-sm-12'>
     {{#each list}}
-      <div class='user-inform col-sm-12 mt-sm-3'>
-        <img width='40' heigh='40' style="border-radius: 50px;" 
-         src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb'>
-        <label for='basic-url' class='user-nickname'>{{member.nickName}}</label>
-        <label for='basic-url' class='created-date'>{{createdDate}}</label>
+    <div class='user-inform row col-sm-12 mt-sm-3'>
+      <div class='col-sm-1'>
+        <img width='50' height='50' src='/bitcamp-team-project/upload/memberfile/{{member.filePath}}_thumb' style="border-radius: 50px;">
       </div>
-      <div class='comment-form input-group mt-sm-2'>
-        <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
-        <input type="text" class="form-control col-sm-10 commen-list-contents" value='{{contents}}'>
-        <a href='' class='comment-update-btn' data-no='{{no}}'>수정</a>
-        <a href='' class='comment-delete-btn' data-no='{{no}}'>삭제</a>
+      <div class='col-sm-11'>
+        <div class='row col-sm-12'>
+          <div class='col-sm-10 p-sm-0'>
+            <h6 class='user-nickname'>{{member.nickName}}</h6>
+          </div>
+          <div class='col-sm-2 p-sm-0'>
+            <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
+            <a href='#' class='comment-update-btn' data-no='{{no}}'>수정</a>
+            <a href='#' class='comment-delete-btn' data-no='{{no}}'>삭제</a>
+          </div>
+        </div>
+        <div class='row col-sm-12'>
+          <label class='created-date'>{{createdDate}}</label>
+        </div>
       </div>
+    </div>
+    <div class='col-sm-11 input-group mt-sm-2'>
+      <p>{{contents}}</p>
+    </div>
     {{/each}}
     </div>
   </script>
-  
-<script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="../header.js"></script>
-<script src="view.js"></script>
+
+ <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.js"></script>
+ <script src="/bitcamp-team-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="../header.js"></script>
+ <script src="/bitcamp-team-project/html/footer.js"></script>
+ <script src="view.js"></script>
 </body>
 </html>
