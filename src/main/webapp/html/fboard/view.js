@@ -43,7 +43,7 @@ $(document.body).bind('loaded-detail', function(data){
   $.get('/bitcamp-team-project/app/json/fboard/commentList?no=' + boardNo ,function(obj) {
     console.log(obj);
     
-    $('#total-comment').text('총 댓글  ' + obj.list.length + ' 개');
+    $('#total-comment').text('댓글 (' + obj.list.length + ')');
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
 
     $(document.body).trigger({
@@ -75,6 +75,11 @@ $(document.body).bind('loaded-comment-list', function() {
   callUserInform();
   
   $('#comment-add-btn').click(function() {
+    if($('#comment-contents').val() == '') {
+      swal('내용 비어있음', '댓글 내용을 입력해주세요', 'warning');
+      return;
+    }
+    
     $.post('/bitcamp-team-project/app/json/fboard/addComment' , {
       fboardNo: boardNo,
       contents: $('#comment-contents').val(),
