@@ -7,6 +7,8 @@
   href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.core.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/quill/dist/quill.snow.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
@@ -17,13 +19,13 @@
   <header class="ohr-main-header"></header>
   <div class="container">
   
-    <div class="form-group row mb-3">
+    <div class="form-group row mb-3 wow fadeInLeft">
       <div class="col-sm-12">
         <p id="fboard-title"></p>
       </div>
     </div>
       
-     <div class="form-group row">
+     <div class="form-group row wow fadeInLeft">
       <div class="col-sm-10">
         <img id='fboard-id-img'>
         <span id="fboard-id"></span>
@@ -58,13 +60,13 @@
        -->
 
 
-    <div class='form-group row'>
+    <div class='form-group row wow fadeInLeft'>
       <div class='col-sm-12 mb-sm-2'>
         <div id='contents'></div>
       </div>
     </div>
 
-    <div class="col-sm-3" id='btn-group' style="float: right; padding-bottom: 1rem;">
+    <div class="col-sm-3 wow fadeInLeft" id='btn-group' style="float: right; padding-bottom: 1rem;">
       <button type="button" id="delete-btn" class="btn btn-danger btn-sm" style="visibility: hidden;">삭제</button>
       <button type="button" id="update-btn" class="btn btn-warning btn-sm" style="visibility: hidden;">변경</button>
       <a href='index.html' class="btn btn-primary btn-sm">목록</a>
@@ -74,14 +76,14 @@
     <hr>
     
     <label id='total-comment' for='basic-url'>총댓글</label>
-    <div id='fboard-comment-add-form' class='input-group'>
+    <div id='fboard-comment-add-form' class='input-group wow fadeInRight'>
       <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
         placeholder='댓글을 입력하세요'></textarea>
       <div class="input-group-append">
         <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
       </div>
     </div>
-    <div class='comment-child' style="min-height: 270px;"></div>
+    <div class='comment-child wow fadeInRight' style="min-height: 270px;"></div>
 
   </div><!-- container -->
   
@@ -146,6 +148,7 @@
   <script src="/bitcamp-team-project/node_modules/quill-image-resize/image-resize.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/quill-image-upload/image-upload.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/quill-image-drop-module/image-drop.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
   <script src="../header.js"></script>
   <script src="../footer.js"></script>  
   <script src="view.js"></script>

@@ -4,6 +4,8 @@ trGenerator = Handlebars.compile(templateSrc),
 page = $('#pagination-container');
 
 $(document).ready(function() {
+  new WOW().init();
+  
   if(sessionStorage.getItem('type') == 3) {
     $('#notice-add-btn').show();
   } else {

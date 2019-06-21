@@ -17,6 +17,7 @@ var userNo = sessionStorage.getItem('no'), // 로그인한 사람
     memberNo = 0; // 글을 쓴 사람
 
 $(document).ready(function() {
+  new WOW().init();
   $.get('../../app/json/fboard/detail?no=' + boardNo, function(obj) {
     console.log(obj);
     

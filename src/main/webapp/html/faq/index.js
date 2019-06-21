@@ -20,6 +20,8 @@ var userType = 0;
 $('#faq-add-btn').hide();
 
 $(document).ready(function() {
+  new WOW().init();
+  
   $(document.body).bind('loaded.loginuser', function() {
     window.userType = sessionStorage.getItem('type');
     if (userType == 3){
