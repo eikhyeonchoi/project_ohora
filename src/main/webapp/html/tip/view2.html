@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 <link rel="stylesheet" href="view2.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
+  
   <div class="container mt-sm-4">
     <div class="row">
       <div class="wow fadeInLeft col">
@@ -28,7 +30,8 @@
         <img class="img-thumbnail productImg" src="">
       </div>
     </div>
-  </div>
+  </div> <!-- tip header container -->
+  
   <div class="container">
     <div class="row justify-content-between">
       <div class="col finwriter wow fadeInLeft">
@@ -40,7 +43,8 @@
         <span class="createdDate"></span>
       </div>
     </div>
-  </div>
+  </div> <!-- final edit time & member -->
+  
   <div class="container">
     <div class="wow fadeInUp">
       <hr>
@@ -53,37 +57,41 @@
           <a href='index.html' class="btn btn-primary btn-sm">목록</a>
         </div>
       </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal bd-modal-xl fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">히스토리</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-            <div class="modal-body">
-              <div class="history-list">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">등록일</th>
-                        <th scope="col">히스토리 내용</th>
-                        <th scope="col">작성자</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="row mx-sm-auto" id="pagination-container"></div>
-            </div>
+    </div> <!-- contents container -->
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal bd-modal-xl fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">히스토리</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="history-list">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">등록일</th>
+                  <th scope="col">히스토리 내용</th>
+                  <th scope="col">작성자</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
         </div>
+        <div class="row mx-sm-auto" id="pagination-container"></div>
+      </div>
     </div>
-   <script id="tr-template" type="text/x-handlebars-template">
+  </div> <!-- end modal -->
+  
+  <footer class="container-fluid ohr-footer"></footer>
+  
+  <script id="tr-template" type="text/x-handlebars-template">
      {{#each list}}
      <tr>
        <td scope='row'>{{updateDate}}</td>
@@ -99,7 +107,8 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
-  <script src="../header.js"></script>
+  <script src="/bitcamp-team-project/html/header.js"></script>
+  <script src="/bitcamp-team-project/html/footer.js"></script>
   <script src="view2.js"></script>
 </body>
 </html>

@@ -10,82 +10,86 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/magnific-popup/dist/magnific-popup.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
 <link rel="stylesheet" href="view.css">
 </head>
 <body>
   <header class="ohr-main-header"></header>
-          <div class="container info wow fadeInUp">
-            <div class="category">
-              <div class="categoryItem"></div>
-            </div>
-            <div class="form-group row">
-              <div class="form-control-plaintext col"  id="productName"></div>
-              <div class="w-100"></div>
-              <div class="form-control-plaintext col pb-sm-2" id="memberName"></div>
-              <div class="w-100"></div>
-              <div class="form-control-plaintext" id="contents"></div>
-            </div>
-            <div id="fileDiv"></div>
-          </div>
+  <div class="container info wow fadeInUp">
+    <div class="category">
+      <div class="categoryItem"></div>
+    </div>
+    <div class="form-group row">
+      <div class="form-control-plaintext col"  id="productName"></div>
+      <div class="w-100"></div>
+      <div class="form-control-plaintext col pb-sm-2" id="memberName"></div>
+      <div class="w-100"></div>
+      <div class="form-control-plaintext" id="contents"></div>
+    </div>
+    <div id="fileDiv"></div>
+  </div>
+
+  <div class="container-fluid contsTab">
+    <!-- tab -->
+    <ul class="nav nav-tabs justify-content-md-center wow fadeInUp" id="myTab" role="tablist"
+        data-wow-offset="80" data-wow-delay="0.1s">
+        
+      <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
+        data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
+        aria-selected="true">일반 매뉴얼</a></li>
+        
+      <li class="nav-item"><a class="nav-link" id="configure-tab" data-toggle="tab"
+        href="#configureContents" role="tab" aria-controls="profile" aria-selected="false"
+      >구성품 매뉴얼</a></li>
       
-          <div class="container-fluid contsTab">
-            <!-- tab -->
-            <ul class="nav nav-tabs justify-content-md-center wow fadeInUp" id="myTab" role="tablist"
-                data-wow-offset="80" data-wow-delay="0.1s">
-                
-              <li class="nav-item"><a class="nav-link active tabAction" id="general-tab"
-                data-toggle="tab" href="#generalContents" role="tab" aria-controls="home"
-                aria-selected="true">일반 매뉴얼</a></li>
-                
-              <li class="nav-item"><a class="nav-link" id="configure-tab" data-toggle="tab"
-                href="#configureContents" role="tab" aria-controls="profile" aria-selected="false"
-              >구성품 매뉴얼</a></li>
-              
-              <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
-                href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
-              >주의사항 매뉴얼</a></li>
-              
-              <li class="nav-item"><a class="nav-link" id="video-tab" data-toggle="tab"
-                href="#videoContents" role="tab" aria-controls="contact" aria-selected="false"
-              >동영상</a></li>
-              
-              <li class="nav-item"><a class="nav-link" id="comment-tab" data-toggle="tab"
-                href="#manualComment" role="tab" aria-controls="contact" aria-selected="false"
-              >댓글</a></li>
-            </ul>
-            <!-- tab -->
-         
-            <!-- tab content -->
-            <div class="tab-content px-sm-2" id="myTabContent">
-              <div class="tab-pane fade show active" id="generalContents" role="tabpanel"
-                aria-labelledby="general-tab">
-                  <div class="innerForm1"></div>
+      <li class="nav-item"><a class="nav-link" id="warning-tab" data-toggle="tab"
+        href="#warningContents" role="tab" aria-controls="contact" aria-selected="false"
+      >주의사항 매뉴얼</a></li>
+      
+      <li class="nav-item"><a class="nav-link" id="video-tab" data-toggle="tab"
+        href="#videoContents" role="tab" aria-controls="contact" aria-selected="false"
+      >동영상</a></li>
+      
+      <li class="nav-item"><a class="nav-link" id="comment-tab" data-toggle="tab"
+        href="#manualComment" role="tab" aria-controls="contact" aria-selected="false"
+      >댓글</a></li>
+    </ul>
+    <!-- tab -->
+ 
+    <!-- tab content -->
+    <div class="tab-content px-sm-2" id="myTabContent">
+      <div class="tab-pane fade show active" id="generalContents" role="tabpanel"
+        aria-labelledby="general-tab">
+          <div class="innerForm1"></div>
+      </div>
+      <div class="tab-pane fade" id="configureContents" role="tabpanel"
+        aria-labelledby="configure-tab">
+          <div class="innerForm2"></div>
+      </div>
+      <div class="tab-pane fade" id="warningContents" role="tabpanel" aria-labelledby="warning-tab">
+          <div class="innerForm3"></div>
+      </div>
+      <div class="tab-pane fade" id="videoContents" role="tabpanel" aria-labelledby="video-tab">
+          <div class="innerForm4"></div>
+      </div>
+      <div class="tab-pane fade" id="manualComment" role="tabpanel" aria-labelledby="comment-tab">
+        <div class="container comment">
+            <label id='total-comment' for='basic-url'>총댓글</label>
+            <div id='fboard-comment-add-form' class='input-group'>
+              <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
+                placeholder='댓글을 입력하세요'></textarea>
+              <div class="input-group-append">
+                <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
               </div>
-              <div class="tab-pane fade" id="configureContents" role="tabpanel"
-                aria-labelledby="configure-tab">
-                  <div class="innerForm2"></div>
-              </div>
-              <div class="tab-pane fade" id="warningContents" role="tabpanel" aria-labelledby="warning-tab">
-                  <div class="innerForm3"></div>
-              </div>
-              <div class="tab-pane fade" id="videoContents" role="tabpanel" aria-labelledby="video-tab">
-                  <div class="innerForm4"></div>
-              </div>
-              <div class="tab-pane fade" id="manualComment" role="tabpanel" aria-labelledby="comment-tab">
-                <div class="container comment">
-                    <label id='total-comment' for='basic-url'>총댓글</label>
-                    <div id='fboard-comment-add-form' class='input-group'>
-                      <textarea id='comment-contents' class='form-control col-sm-10' rows='2'
-                        placeholder='댓글을 입력하세요'></textarea>
-                      <div class="input-group-append">
-                        <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
-                      </div>
-                    </div>
-                    <div class='comment-child' style="min-height: 270px;"></div>
-                  </div>
-              </div>
-            </div> <!-- myTabContent -->
+            </div>
+            <div class='comment-child' style="min-height: 270px;"></div>
           </div>
+      </div>
+    </div> <!-- myTabContent -->
+  </div>
+  
+  <footer class="container-fluid ohr-footer"></footer>
+          
   <script id="comment-list" type="text/x-handlebars-template">
     {{#each list}}
     <div class='user-inform row col-sm-12 mt-sm-3'>
@@ -122,7 +126,8 @@
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
-  <script src="../header.js"></script>
+  <script src="/bitcamp-team-project/html/header.js"></script>
+  <script src="/bitcamp-team-project/html/footer.js"></script>
   <script src="view.js"></script>
 </body>
 </html>
