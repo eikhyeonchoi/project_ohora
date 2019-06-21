@@ -44,6 +44,8 @@ hr {
 }
 
 .my-text {
+  font-size: 15px;
+  max-width: 680px;
 	margin-left: 30px;
 	padding: 5px;
 	resize: none;
@@ -66,6 +68,7 @@ hr {
 
 #qtype-span {
 	font-weight: bold;
+	font-size: 15px;
 }
 
 #qtype-p {
@@ -84,4 +87,12 @@ img {
 
 #images-div, #ans-images-div {
 	text-align: center;
+}
+
+#question-type {
+  width: 200px;
+}
+
+.custom-file {
+  width: 180px;
 }

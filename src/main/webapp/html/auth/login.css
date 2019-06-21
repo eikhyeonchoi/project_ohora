@@ -77,18 +77,19 @@ span.buttonText {
 }
 
 #main-row {
+  box-shadow: -1px 2px 10px black;
+  border-radius: 10px;
   margin-top: 30px;
   width: 740px;
   height: 420px;
-  border: 1px solid #dbdbdb;
 }
 
 #sns-col {
-  background-image: url(로그인2.jpg);
-  background-size: cover;
+ 
 }
 
 #sns-col2 {
+  border-radius: 10px 0 0 10px;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.7);
   width: 100%;
@@ -112,6 +113,7 @@ span.buttonText {
 }
 
 .my-login-col {
+  border-radius: 0 10px 10px 0;
   padding: 40px;
   padding-top: 30px;
   text-align: center;
@@ -166,13 +168,17 @@ span.buttonText {
 }
 
 body {
-  background-color: #F2F2F2;
+  background-image: url(로그인2.jpg);
+  background-size: cover;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   width: 100%;
   height: 100%;
 }
+
 

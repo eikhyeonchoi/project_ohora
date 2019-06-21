@@ -16,22 +16,26 @@
 
 <body>
   <header class="ohr-main-header"></header>
-  
+
   <div class='container-fluid' style="padding: 0;">
-   <section class="jumbotron jumbotron-fluid text-center">
-     <h1 class="jumbotron-heading">문의 내역</h1>
-     <p class="lead text-muted">문의사항 있으시면 언제든지 문의할 수 있습니다</p>
+    <section class="jumbotron jumbotron-fluid text-center">
+      <h1 class="jumbotron-heading">문의 내역</h1>
+      <p class="lead text-muted">문의사항 있으시면 언제든지 문의할 수 있습니다</p>
     </section>
   </div>
   <div class="container wow fadeInDown">
     <p>
-      <button id="delete-btn" type="button" class="btn btn-success btn-sm">선택 삭제</button>
-      <button id="add-btn" type="button" class="btn btn-success btn-sm">문의 하기</button>
+      <button id="delete-btn" type="button" class="btn btn-outline-secondary btn-sm">선택 삭제</button>
+      <button id="add-btn" type="button" class="btn btn-outline-secondary btn-sm">문의 하기</button>
     </p>
     <div id="master-option">
-      <a id="qtype-p"> <span id="qtype-span">문의 유형&nbsp;&nbsp;</span>
-      </a> <span id="checkBox-span">미답변 질문만 보기<input id="answer-ck" type="checkbox"></span>
+      <span id="qtype-p"></span>
+      <span class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="answer-ck">
+        <label class="custom-control-label" for="answer-ck">미답변 질문만 보기</label>
+      </span>
     </div>
+
     <div class="bit-list">
       <table class="table table-hover">
         <thead>
@@ -51,28 +55,30 @@
 
     <div class='row offset-sm-3 page-container mb-sm-5'></div>
     <br id="my-br">
-  </div><!-- .container -->
-  
+  </div>
+  <!-- .container -->
+
   <footer class="container-fluid ohr-footer"></footer>
-  
-  
-  
-  
+
+
+
+
   <script id="tr-template" type="text/x-handlebars-template">
   {{#each list}}
-    <tr>
-      <th scope='row'>[{{questionType.name}}]</th>
-      <td scope='row'><a class='bit-view-link my-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-      <td scope='row' class="my-question">{{member.nickName}}</td>
-      <td scope='row'>{{createdDate}}</td>
-      <td scope='row'>{{status}}</td>
-      <td scope='row' class="question-ck"><input type="checkbox" name="delete-Ck" data-no='{{no}}' data-status='{{status}}'></td>
+    <tr class="cont-tr">
+      <th scope='row' class='bit-view-link' data-no='{{no}}'>{{questionType.name}}</th>
+      <td scope='row' class='bit-view-link' data-no='{{no}}'>{{title}}</td>
+      <td scope='row' class="my-question bit-view-link" data-no='{{no}}'>{{member.nickName}}</td>
+      <td scope='row' class='bit-view-link' data-no='{{no}}'>{{createdDate}}</td>
+      <td scope='row' class='bit-view-link' data-no='{{no}}'>{{status}}</td>
+      <td scope='row' class="question-ck"><input type="checkbox" name="delete-Ck" 
+        data-no='{{no}}' data-status='{{status}}' class="my-ck-box"></td>
     </tr>
   {{/each}}
   </script>
-  
+
   <script id="questionType-template" type="text/x-handlebars-template">
-    <select id="question-type">
+    <select class="custom-select" id="question-type">
       <option value="0" selected>유형을 선택하세요.</option>
     {{#each type}}
       <option value='{{no}}'>{{name}}</option>
@@ -87,6 +93,7 @@
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../header.js"></script>
   <script src="../footer.js"></script>
   <script src="index.js"></script>

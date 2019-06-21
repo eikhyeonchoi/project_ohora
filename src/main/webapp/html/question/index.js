@@ -42,6 +42,8 @@ $(document).ready(function() {
       memberType = data.user.type;
 
       $.getJSON('/bitcamp-team-project/app/json/question/list?type=' + memberType, function(data) {
+        
+        
         if (data.list[0] == null) {
           $('#noDataP').html("등록된 질문이 없습니다.");
         }
@@ -90,22 +92,19 @@ $(document).ready(function() {
 }) //ready
 
 $(document.body).bind('loaded-list', () => {
-
+  
+  $('.bit-view-link').click(function (e) {
+    location.href = 'view.html?no=' + $(this).attr('data-no');
+  });
 
   if (memberType == 1 || memberType == 2) {
     $('#master-option').hide();
-    $('#my-question-title').html('나의 문의내역');
     $('.my-question').hide();
   } else {
     addBtn.hide();
     dltBtn.hide();
     $('.question-ck').hide();
   }
-
-  $('.bit-view-link').off().click((e) => {
-    e.preventDefault();
-    location.href = 'view.html?no=' + $(e.target).attr('data-no');
-  });
 
 }); //bind(loaded-list)
 
@@ -128,11 +127,20 @@ $('#delete-btn').click(function() {
         }).done(function(data) {
           if (data.status == 'success') {
             if ((parseInt(cnt) - 1) == parseInt(index)){
-              alert('삭제 되었습니다.');
+              swal({
+                title: "삭제 되었습니다",
+                icon: "success",
+                button: "확인",
+              });
               location.reload();
             }
           } else {
-            alert('삭제 실패했습니다!\n' + data.error);
+            swal({
+              title: "오류가 발생했습니다",
+              text: "다시 시도해주세요",
+              icon: "error",
+              button: "확인",
+            });
           }
         });
       }); // each
@@ -140,8 +148,11 @@ $('#delete-btn').click(function() {
       return; // alert창에서 아니오를 누르면 지우지않는다.
     } 
   } else {
-    alert('삭제할 문의를 선택해주세요.')
+    swal({
+      title: "삭제할 문의를 선택해주세요",
+      icon: "error",
+      button: "확인",
+    });
   }
 }) // delete.click
-
 

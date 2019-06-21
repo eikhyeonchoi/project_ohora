@@ -29,7 +29,12 @@ $(document).ready(function() {
               snsLogin(kakaoId);
               location.replace('/bitcamp-team-project/index.html'); 
             } else {
-              alert("카카오톡 로그인 오류!");
+              swal({
+                text: "카카오톡 로그인 오류",
+                title: "다시 시도해주세요",
+                icon: "error",
+                button: "확인",
+              });
             }
           });
         },
@@ -72,7 +77,12 @@ function checkLoginState() {
     if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
       getUserInfo(response.authResponse.accessToken);
     } else { // 로그인이 되지 않았을 때,
-      alert("로그인 되지 않았음");
+      swal({
+        text: "페이스북 로그인 오류",
+        title: "다시 시도해주세요",
+        icon: "error",
+        button: "확인",
+      });
     }
   });
 }; //checkLoginState()
@@ -92,7 +102,12 @@ function getUserInfo(accessToken) {
         snsLogin(fbMemberId);
         location.replace('/bitcamp-team-project/index.html'); 
       } else {
-        alert("페이스북 로그인 오류!");
+        swal({
+          text: "페이스북 로그인 오류",
+          title: "다시 시도해주세요",
+          icon: "error",
+          button: "확인",
+        });
       }
     }, "json");
   });
@@ -117,14 +132,22 @@ $('#password-search').click(function(e) {
         + searchName.val() + "&email=" + searchemail.val(),
         function(data) {
           if (data.status == 'success') {
-            alert('메일을 확인해주세요.');
+            swal({
+              title: "메일을 확인해주세요.",
+              icon: "success",
+              button: "확인",
+            });
             $.getJSON('/bitcamp-team-project/app/json/member/forgetPasswordEmailSend?name='
                 + searchName2 + "&email=" + searchemail2,
                 function(data) {
                 });
             location.reload();
           } else {
-            alert(data.error);
+            swal({
+              text: "오류발생.",
+              icon: "error",
+              button: "확인",
+            });
             searchName.val("");
             searchemail.val("");
           }
@@ -147,7 +170,12 @@ $('#login-btn').click(() => {
       var prevLoc = document.referrer;
       location.href = prevLoc;
     } else {
-      alert('로그인 실패입니다!\n' + data.message);
+      swal({
+        title: "오류발생.",
+        text: "다시 시도해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   })
 });

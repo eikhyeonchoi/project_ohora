@@ -68,7 +68,12 @@ $(document).bind('load-file', function() {
         $('#img-div').hide();
       }
     } else {
-      alert('실패했습니다!\n' + data.error);
+      swal({
+        title: "오류발생.",
+        text: "다시 시도해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   });
 }) //load-file
@@ -85,7 +90,12 @@ $(document).bind('load-ans-file', function() {
         $('#ans-img-div').hide();
       }
     } else {
-      alert('실패했습니다!\n' + data.error);
+      swal({
+        title: "오류발생.",
+        text: "다시 시도해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   });
 }) //load-file
@@ -143,7 +153,12 @@ $('#fileupload').fileupload({ // 질문 파일등록
     if(data.result.status == 'success'){
       location.href='index.html';
     } else { 
-      alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+      swal({
+        title: "필수값을 입력하지 않았습니다.",
+        text: "제목 또는 내용을 입력해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   }
 }) // fileupload
@@ -158,7 +173,12 @@ $('#add-btn').click(function() {
       if(data.status == 'success'){
         location.href='index.html';
       } else { 
-        alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
+        swal({
+          title: "필수값을 입력하지 않았습니다.",
+          text: "제목 또는 내용을 입력해주세요.",
+          icon: "error",
+          button: "확인",
+        });
       }
     }, "json")
   } else {
@@ -169,7 +189,12 @@ $('#add-btn').click(function() {
       if(data.status == 'success') {
         location.href='index.html';
       } else {
-        alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
+        swal({
+          title: "필수값을 입력하지 않았습니다.",
+          text: "제목 또는 내용을 입력해주세요.",
+          icon: "error",
+          button: "확인",
+        });
       }
     }, "json") 
   } // else(답변 등록)
@@ -184,7 +209,6 @@ $('#ans-fileupload').fileupload({ // 답변 파일등록
     $('#fileAdd-btn').show();
     $('#add-btn').hide();
     $('#fileAdd-btn').click(function() {
-      alert('답변 파일등록')
       data.formData = {
         questionNo: qNo,
         content: $('#answer-content').val()
@@ -196,7 +220,12 @@ $('#ans-fileupload').fileupload({ // 답변 파일등록
     if(data.result.status == 'success'){
       location.href='index.html';
     } else { 
-      alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+      swal({
+        title: "필수값을 입력하지 않았습니다.",
+        text: "제목 또는 내용을 입력해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   }
 }) // fileupload
@@ -210,7 +239,12 @@ $("#update-btn").click(function() {
     if(data.status == 'success') {
       location.href='index.html';
     } else {
-      alert("필수 입력값을 입력하지 않았습니다\n" + data.error);
+      swal({
+        title: "필수값을 입력하지 않았습니다.",
+        text: "제목 또는 내용을 입력해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   }, "json") 
 })
@@ -236,11 +270,15 @@ $('#ans-update-fileupload').fileupload({
     if(data.result.status == 'success'){
       location.href='index.html';
     } else { 
-      alert("필수 입력값을 입력하지 않았습니다\n" + data.result.error);
+      swal({
+        title: "필수값을 입력하지 않았습니다.",
+        text: "제목 또는 내용을 입력해주세요.",
+        icon: "error",
+        button: "확인",
+      });
     }
   }
 }) // fileupload
-
 
 
 
