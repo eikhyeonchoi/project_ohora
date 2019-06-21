@@ -21,12 +21,13 @@
 
 .jumbotron {
   background-image: url(review1.jpg);
-  background-repeat: no-repeat;
-  background-position: 0% -250%;
+  background-repeat: repeat-y;
+  background-position: 0% 0%;
   background-attachment: fixed;
   background-size: 100%;
   margin: 0;
   color: white;
+  border-radius: 0;
 }
 
 .jumbotron p {
@@ -43,7 +44,6 @@
 }
 
 .jumbotron-heading {
-  font-weight: 300;
 }
 
 .jumbotron .container {

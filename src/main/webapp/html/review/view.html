@@ -52,11 +52,11 @@
 
    <div class="form-group row" id="ohr-rev-btn">
     <div class="col-sm-12">
-     <button type="button" id="update-btn" class="btn btn-primary bit-view-item"
+     <button type="button" id="update-btn" class="btn btn-outline-secondary btn-sm bit-view-item"
       style="display: none">변경</button>
-     <button type="button" id="delete-btn" class="btn btn-primary bit-view-item"
+     <button type="button" id="delete-btn" class="btn btn-outline-secondary btn-sm bit-view-item"
       style="display: none">삭제</button>
-     <button type="button" id="list-btn" class="btn btn-primary bit-view-item">목록</button>
+     <button type="button" id="list-btn" class="btn btn-outline-secondary btn-sm bit-view-item">목록</button>
     </div>
    </div>
   </form>
@@ -64,7 +64,7 @@
   <div id="review-comment">
    <label for='basic-url' id="ohr-comment-label">댓글<span id="ohr-comment-count"></span></label>
    <div id='review-comment-add-form' class='input-group'>
-    <textarea id='comment-contents' class='form-control col-sm-10' rows='3' placeholder='댓글을 입력하세요'></textarea>
+    <textarea id='comment-contents' class='form-control col-sm-10' rows='2' placeholder='댓글을 입력하세요'></textarea>
     <div class="input-group-append">
      <button id="comment-add-btn" class='btn btn-primary' type='button'>등록</button>
     </div>
@@ -88,7 +88,7 @@
           <div class='col-sm-10 p-sm-0'>
             <h6 class='user-nickname'>{{member.nickName}}</h6>
           </div>
-          <div class='col-sm-2 p-sm-0'>
+          <div class='col-sm-2 p-sm-0 ohr-upd-del'>
             <p style='display: none' data-member-no='{{memberNo}}' data-no='{{no}}' class='p-member-no'></p>
             <a href='#' class='comment-update-btn' data-no='{{no}}'>수정</a>
             <a href='#' class='comment-delete-btn' data-no='{{no}}'>삭제</a>

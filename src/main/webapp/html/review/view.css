@@ -52,6 +52,10 @@ footer p {
 	margin-bottom: .25rem;
 }
 
+textarea{
+	resize: none;
+}
+
 .slick-prev:before, .slick-next:before {
 	color: black;
 }
@@ -155,11 +159,9 @@ footer p {
 }
 
 #comment-add-btn {
-	width: 90px;
 }
 
 #review-comment {
-	margin-left: 15px;
 }
 
 #ohr-comment-label {
@@ -171,7 +173,7 @@ footer p {
 }
 
 .comment-child {
-	min-height: 270px;
+	min-height: 268px;
 }
 
 .review-comment-list-form {
@@ -183,5 +185,8 @@ footer p {
 	right: 0.5em;
 }
 
+.ohr-upd-del {
+	text-align: right;
+}
 
 
