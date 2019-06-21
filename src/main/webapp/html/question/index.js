@@ -33,6 +33,7 @@ var typeList = function(no, check) {
 }; //typeList
 
 $(document).ready(function() {
+  new WOW().init();
 
   $.get('/bitcamp-team-project/app/json/auth/user' ,function(data) {
     if(data.status == 'fail') {

@@ -12,6 +12,7 @@ var tbody = $('tbody'),
 
 
 $(document).ready(function(){
+  new WOW().init();
   loadList();
   
 }) // ready

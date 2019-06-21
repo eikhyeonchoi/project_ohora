@@ -58,6 +58,8 @@ $(document.body).bind('loaded.loginuser', () => {
 
 
 $(document).ready(function(){
+  new WOW().init();
+  
   $.get('/bitcamp-team-project/app/json/satisfy/detail?no=' + productNo, function(obj) {
     console.log(obj);
     

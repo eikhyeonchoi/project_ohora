@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/jquery-ui-dist/jquery-ui.min.css">
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/footer.css">
@@ -22,11 +24,11 @@
      <form class="form-inline my-2 my-lg-0 justify-content-center" id="notice-search">
        <div id="search">
        </div>
-      </form>
+      </form><script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
     </section>
   </div>
   
-  <div class="container">
+  <div class="container wow fadeInDown">
     <button id='faq-add-btn' class='btn btn-primary btn-sm'>새 FAQ</button>
 
     <hr class='head-line'>
@@ -39,7 +41,7 @@
     
     <hr class='head-line'>
     
-    <div id='faq-div' class='faq-div col-sm-12'>
+    <div id='faq-div' class='faq-div col-sm-12 wow fadeInDown'>
     <h3>전체 FAQ</h3>
     </div>
     
@@ -63,7 +65,7 @@
         </p>
       </div>
       <hr>
-      <div class='faq-contents'>
+      <div class='faq-contents wow fadeInDown'>
         <p>{{contents}}</p>
         <div class='managerDiv offset-sm-10'>
           <button class='faq-update-btn btn btn-warning btn-sm' data-no='{{no}}' data-ctype='{{qcNo}}'>수정</button>
@@ -80,6 +82,7 @@
   <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
   <script src="../header.js"></script>
   <script src="../footer.js"></script>
   <script src="index.js"></script>

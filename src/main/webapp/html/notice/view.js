@@ -3,6 +3,8 @@ var noticeNo = getQuerystring('no');
 
 
 $(document).ready(function() {
+  new WOW().init();
+  
   $.get('/bitcamp-team-project/app/json/auth/user', function(obj){
     console.log(obj);
     var loginUser = obj.user.type;

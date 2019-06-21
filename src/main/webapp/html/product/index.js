@@ -11,6 +11,8 @@ var largeCategoryGenerator = Handlebars.compile(largeSrc),
 var type = 0;
 
 $(document).ready(function() {
+  new WOW().init();
+  
   $(document.body).bind('loaded.header', function() {
     $('#insert-btn').off().click(function() {
       window.type = Number(sessionStorage.getItem('type'));
@@ -67,6 +69,13 @@ $(document.body).bind('loaded-category', function(){
 $('#search-btn').off().click(function(e) {
   loadList($('#lageCtgSelect option:selected').val(), $('#smallCtgSelect option:selected').val(), $('#keyword').val());
 }) // click
+
+$('#keyword').keydown(function(e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+    loadList($('#lageCtgSelect option:selected').val(), $('#smallCtgSelect option:selected').val(), $('#keyword').val());
+  }
+});
 
 
 
