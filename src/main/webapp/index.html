@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
  crossorigin="anonymous">
+ <link rel="stylesheet" href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick-theme.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 
 <!-- Custom styles for this template -->
 <link href="/bitcamp-team-project/css/common.css" rel="stylesheet">
@@ -83,53 +87,34 @@
   class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
  </a>
 
- <div class="container marketing" id="ohr-middle-div">
-
-  <h2 id="ohr-main-h2">여기에 뭐가 있긴 있어야 하는데</h2>
-
-  <div class="ohr-middle-div-div">
-   <div id="1"></div>
-   <div id="1"></div>
-   <div id="1"></div>
-  </div>
-
-  <div class="row" id="ohr-ph-circle">
-   <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" id="ohr-circle-img1" width="140" height="140"
-     preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-     aria-label="Placeholder: 140x140">
-     <title>매뉴얼 바로가기</title>
-     </svg>
-    <h2>매뉴얼</h2>
-    <p>제품의 매뉴얼을 볼 수 있는 페이지.</p>
+ <div class="container-fluid" id="ohr-middle-div">
+ 
+ 
+   <div id='main-slick' class='col-sm-12'>
    </div>
-   <!-- /.col-lg-4 -->
-   <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" id="ohr-circle-img2" width="140" height="140"
-     preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-     aria-label="Placeholder: 140x140">
-     <title>리뷰 바로가기</title></svg>
-    <h2>리뷰</h2>
-    <p>제품에 대한 만족도와 사용자가 작성한 리뷰를 볼 수 있는 페이지.</p>
-   </div>
-   <!-- /.col-lg-4 -->
-   <div class="col-lg-4">
-    <svg class="bd-placeholder-img rounded-circle" id="ohr-circle-img3" width="140" height="140"
-     focusable="true" role="img" aria-label="Placeholder: 140x140">
-     <title>제품 바로가기</title></svg>
-    <h2>제품</h2>
-    <p>매뉴얼과 리뷰를 한 번에 볼 수 있는 페이지.</p>
-   </div>
-   <!-- /.col-lg-4 -->
-  </div>
-  <!-- /.row -->
- </div>
+ </div> <!-- container -->
 
  <footer class="container-fluid ohr-footer"></footer> </main>
 
+
+ <script id="product-template" type="text/x-handlebars-template">
+ {{#each list}}
+ <div>
+   {{#each productFiles}}
+     <img class='img-thumbnail' src='/bitcamp-team-project/upload/productfile/{{img}}_thumb'>
+   {{/each}}
+   <p data-name='{{name}}' data-manu='{{manufacturer.name}}' style='display: none;'></p>
+ </div>
+ {{/each}}
+ </script>
+
  <script src="/bitcamp-team-project/node_modules/jquery/dist/jquery.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
  <script src="/bitcamp-team-project/html/header.js"></script>
  <script src="/bitcamp-team-project/html/footer.js"></script>
+ <script src="index.js"></script>
 </body>
 </html>
