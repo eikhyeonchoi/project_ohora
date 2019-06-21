@@ -2,10 +2,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Jekyll v3.8.5">
 <title>오호라</title>
 
 <link rel="stylesheet"
@@ -13,9 +9,12 @@
 <link rel="stylesheet" href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.css">
 <link rel="stylesheet"
  href="/bitcamp-team-project/node_modules/slick-carousel/slick/slick-theme.css">
+ <link rel="stylesheet" href="/bitcamp-team-project/node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="/bitcamp-team-project/node_modules/wowjs/css/libs/animate.css">
 <link href="index.css" rel="stylesheet">
 <link rel="stylesheet" href="/bitcamp-team-project/css/common.css">
 <link rel="stylesheet" href="/bitcamp-team-project/css/header.css">
+<link href="/bitcamp-team-project/css/footer.css" rel="stylesheet">
 </head>
 <body>
 
@@ -55,12 +54,13 @@
 
   </div>
  </div>
+ <footer class="container-fluid ohr-footer"></footer>
  </main>
 
  <script id="ohr-card-tr" type="text/x-handlebars-template">
     {{#each list}}
     <div class="col-sm-4 ohr-card-1stdiv">
-     <div class="card sm-4 shadow-sm ohr-card-2nddiv">
+     <div class="card sm-4 shadow-sm wow fadeInDown ohr-card-2nddiv">
       {{#each productFiles}}
           <img src='/bitcamp-team-project/upload/productfile/{{img}}_thumb' width="215px" height="225px">
           {{/each}}
@@ -90,6 +90,8 @@
  <script src="/bitcamp-team-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src="/bitcamp-team-project/node_modules/slick-carousel/slick/slick.min.js"></script>
+ <script src="/bitcamp-team-project/node_modules/wowjs/dist/wow.min.js"></script>
+ <script src="/bitcamp-team-project/html/footer.js"></script>
  <script src="../header.js"></script>
  <script src="index.js"></script>
 </body>

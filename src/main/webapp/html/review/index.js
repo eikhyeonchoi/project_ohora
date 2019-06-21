@@ -4,6 +4,7 @@ trGenerator = Handlebars.compile(tr);
 var listType = '';
 
 $(document).ready(function(){
+  new WOW().init();
 })
 
 function loadList(listType) {
@@ -13,7 +14,6 @@ function loadList(listType) {
           + '&listType=' + listType, 
           function (obj){
     console.log(obj)
-    console.log($('#listType').val())
 
     cardDiv.html('');
     $(trGenerator(obj)).appendTo(cardDiv);

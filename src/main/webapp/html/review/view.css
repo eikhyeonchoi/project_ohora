@@ -154,34 +154,34 @@ footer p {
 	padding-bottom: 1rem;
 }
 
-#review-comment {
-	position: relative;
-	top: 4em;
-}
-
-#review-comment-add-form {
-	position: absolute;
-	left: 1.5em;
-}
-
 #comment-add-btn {
 	width: 90px;
+}
+
+#review-comment {
+	margin-left: 15px;
 }
 
 #ohr-comment-label {
 	font-weight: bold;
 	font-size: 16px;
 	position: relative;
-	left: 0.5em;
+	left: -0.5em;
+	top: 38px;
+}
+
+.comment-child {
+	min-height: 270px;
 }
 
 .review-comment-list-form {
 	position: relative;
-	top: 10.5em;
 }
 
 .user-inform {
 	position: relative;
 	right: 0.5em;
 }
+
+
 

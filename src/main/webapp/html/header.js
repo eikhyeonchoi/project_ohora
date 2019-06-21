@@ -70,7 +70,7 @@ function loadLoginUser() {
       $("#bit-auth").hide();
       $('#bit-login-state').show();
       $('#login-username').html(data.user.nickName);
-      $('#login-userimg').css('background-image', 'url(/bitcamp-team-project/upload/memberfile/' + data.user.filePath + ')');
+      $('#login-userimg').css('background-image', 'url(/bitcamp-team-project/upload/memberfile/' + data.user.filePath + '_thumb)');
       
       $('#login-username').click(function(){
         location.href = '/bitcamp-team-project/html/myPage/myPost.html';  
