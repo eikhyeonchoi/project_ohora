@@ -16,6 +16,11 @@
   line-height: 150px;
 }
 
+#total-comment {
+	font-weight: bold;
+	font-size: 16px;
+}
+
 #fboard-id{
   margin: 0px;
   font-size: 16px;
@@ -38,12 +43,17 @@
 }
 
 
-.contents {
+#contents {
 	word-break: break-all;
+	min-height: 300px;
 }
 
 
 
+#comment-contents {
+	border: 1px solid #6c757d;
+	resize: none;
+}
 
 
 
