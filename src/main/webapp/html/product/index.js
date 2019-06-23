@@ -85,11 +85,12 @@ function loadList(largeNo, smallNo, productName) {
       + '&productName=' + productName, function(obj){
     if (obj.list.length == 0) {
       swal("검색 결과", "등록된 제품이 존재하지 않습니다", "error")
+      /*
       .then(function(){
         location.reload();
       })
+      */
     }
-    
     paging(obj);
   }) // get
 } // loadList

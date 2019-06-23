@@ -39,12 +39,14 @@ $(document).ready(function() {
           });
         },
         fail: function(error) {
-          alert(JSON.stringify(error));
+          // alert(JSON.stringify(error));
+          swal("카카오톡 로그인 오류", "카카오톡 로그인 중 오류가 발생했습니다", "error");
         }
       });
     },
     fail: function(err) {
-      alert(JSON.stringify(err));
+      // alert(JSON.stringify(err));
+      swal("카카오톡 로그인 오류", "카카오톡 로그인 중 오류가 발생했습니다", "error");
     }
   });
 

@@ -137,7 +137,13 @@ $('#fileupload').fileupload({ // 질문 파일등록
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
   sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
   singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기 (add 한번만 호출)..
+  autoUpload: false, 
   add: function (e, data) { // 파일을 모두 업로드한후 호출.
+    $(e.target).removeClass('is-invalid');
+    $(e.target).addClass('is-valid');
+    for(var i = 0; i < data.files.length; i++) {
+      $(e.target).parent().next().append('<p>' + data.files[i].name + ' 가 선택되었습니다.</p>')
+    }
     $('#fileAdd-btn').show();
     $('#add-btn').hide();
     $('#fileAdd-btn').click(function() {
@@ -205,7 +211,13 @@ $('#ans-fileupload').fileupload({ // 답변 파일등록
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
   sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
   singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기 (add 한번만 호출)..
+  autoUpload: false, 
   add: function (e, data) { // 파일을 모두 업로드한후 호출.
+    $(e.target).removeClass('is-invalid');
+    $(e.target).addClass('is-valid');
+    for(var i = 0; i < data.files.length; i++) {
+      $(e.target).parent().next().append('<p>' + data.files[i].name + ' 가 선택되었습니다.</p>')
+    }
     $('#fileAdd-btn').show();
     $('#add-btn').hide();
     $('#fileAdd-btn').click(function() {
@@ -254,7 +266,13 @@ $('#ans-update-fileupload').fileupload({
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
   sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
   singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기 (add 한번만 호출)..
+  autoUpload: false, 
   add: function (e, data) { // 파일을 모두 업로드한후 호출.
+    $(e.target).removeClass('is-invalid');
+    $(e.target).addClass('is-valid');
+    for(var i = 0; i < data.files.length; i++) {
+      $(e.target).parent().next().append('<p>' + data.files[i].name + ' 가 선택되었습니다.</p>')
+    }
     $('#file-update-btn').show();
     $('#update-btn').hide();
     $('#file-update-btn').click(function() {

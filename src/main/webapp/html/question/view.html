@@ -37,13 +37,15 @@
         <p id="file-pp">첨부파일</p>
         <div id="images-div"></div>
       </div>
-      <div id="file-add-div">
+      <div id="file-add-div" class='row'>
         <br>
-        <p id="file-p">첨부파일</p>
-        <div class="custom-file">
+        <p id="file-p" class='col-sm-12'>첨부파일</p>
+        <div class="custom-file col-sm-10">
           <input type="file" id="fileupload" class="custom-file-input form-control is-invalid" 
           name="questionFiles" multiple>
-          <label class="custom-file-label" for='fileupload'>메뉴얼 첨부파일</label>
+          <label class="custom-file-label" for='fileupload'>파일을 선택해주세요</label>
+        </div>
+        <div>
         </div>
       </div>
       <div id="answer-div">
@@ -63,20 +65,24 @@
           <div id="ans-images-div"></div>
         </div>
         <br>
-        <div id="ans-file-add-div">
-          <p id="ans-file-p">첨부파일</p>
-          <div class="custom-file">
+        <div id="ans-file-add-div" class='row'>
+          <p id="ans-file-p" class='col-sm-12'>첨부파일</p>
+          <div class="custom-file col-sm-10">
             <input type="file" id="ans-fileupload" class="custom-file-input form-control is-invalid" 
               name="answerFiles" multiple>
-            <label class="custom-file-label" for='ans-fileupload'>첨부파일</label>
+            <label class="custom-file-label" for='ans-fileupload'>답변 파일을 등록해주세요</label>
+          </div>
+          <div>
           </div>
         </div>
-        <div id="ans-file-update-div">
-          <p id="ans-update-file-p">첨부파일 등록</p>
-          <div class="custom-file">
+        <div id="ans-file-update-div" class='row'>
+          <p id="ans-update-file-p" class='col-sm-12'>첨부파일 등록</p>
+          <div class="custom-file col-sm-10">
             <input type="file" id="ans-update-fileupload" class="custom-file-input form-control is-invalid" 
               name="answerUpdateFiles" multiple>
-            <label class="custom-file-label" for='ans-update-fileupload'>첨부파일</label>
+            <label class="custom-file-label" for='ans-update-fileupload'>답변 파일을 등록해주세요</label>
+          </div>
+          <div>
           </div>
         </div>
       </div>
