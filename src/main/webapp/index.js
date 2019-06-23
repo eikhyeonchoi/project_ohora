@@ -26,9 +26,9 @@ function loadList(largeNo, smallNo, productName) {
     mainSlick.slick({
       infinite: true,
       autoplay: true, 
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 1,
+      speed: 5500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
       arrows: false
     });
     
