@@ -14,10 +14,12 @@ $(document).ready(function() {
     type = sessionStorage.getItem('type');
     if (type > 1) {
       insert.show();
-      
+      $('#manual-add-btn').show();
       insert.click(function() {
         location.href = 'add.html';
       })
+    } else {
+      $('#manual-add-btn').hide();
     }
   });
   new WOW().init();
