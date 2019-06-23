@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 .ohr-footer-div {
-  position: relative;
   padding-bottom: 1rem;
+  margin-left: 5em;
 }
 
 .ohr-footer-div p {
@@ -14,4 +14,68 @@
 }
 
 .card-footer {
+	margin-top: 10.5em;
 }
+
+#ohr-footer-logo {
+	width: 300px;
+	height: 150px;
+	margin: 20px;
+}
+
+#ohr-sns-div {
+}
+
+#ohr-footer-at {
+	font-size: 27px;
+	font-weight: bold;
+	color: white;
+	width: 100px;
+	margin: 0 auto;
+	padding: 0px 115px 0px 0px;
+	border-right: 3px solid white;
+}
+
+#ohr-bit-facebook {
+	background-image: url(/bitcamp-team-project/upload/main/facebook.png);
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #fff;
+	border-radius: 50px;
+	border: 2px solid #fff;
+	height: 70px;
+	width: 70px;
+	padding: 0;
+	margin: 50px 10px 0px 30px;
+}
+
+#ohr-bit-instagram {
+	background-image: url(/bitcamp-team-project/upload/main/instagram.png);
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #fff;
+	border-radius: 50px;
+	border: 2px solid #fff;
+	height: 70px;
+	width: 70px;
+	padding: 0;
+	margin: 50px 10px 0px 10px;
+}
+
+#ohr-bit-youtube {
+	background-image: url(/bitcamp-team-project/upload/main/youtube.png);
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #fff;
+	border-radius: 50px;
+	border: 2px solid #fff;
+	height: 70px;
+	width: 70px;
+	padding: 0;
+	margin: 50px 10px 0px 10px;
+}
+
+
