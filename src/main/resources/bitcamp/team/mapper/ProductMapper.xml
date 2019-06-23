@@ -153,7 +153,7 @@
       </if>
     </where>
     order by
-      p.product_no asc
+      p.product_no desc
   </select>
   
     

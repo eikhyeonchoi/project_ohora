@@ -27,6 +27,7 @@ $(document).ready(function() {
         }
       });
     } else {
+    	$('#nav-product-tab').addClass('disabled');
       $('#prod-table-list').remove();
       $('#ohr-search-prod').remove();
       $('#ohr-search-a-prod').append('<p class="ohr-search-nolist">검색 결과가 없습니다.</p>');
@@ -48,6 +49,7 @@ $(document).ready(function() {
         }
       });
     } else {
+    	$('#nav-manual-tab').addClass('disabled');
       $('#manu-table-list').remove();
       $('#ohr-search-manu').remove();
       $('#ohr-search-a-manu').append('<p class="ohr-search-nolist">검색 결과가 없습니다.</p>');
@@ -68,6 +70,7 @@ $(document).ready(function() {
         }
       });
     } else {
+    	$('#nav-review-tab').addClass('disabled');
       $('#rev-table-list').remove();
       $('#ohr-search-rev').remove();
       $('#ohr-search-a-rev').append('<p class="ohr-search-nolist">검색 결과가 없습니다.</p>');
@@ -88,6 +91,7 @@ $(document).ready(function() {
         }
       });
     } else {
+    	$('#nav-tip-tab').addClass('disabled');
       $('#tip-table-list').remove();
       $('#ohr-search-tip').remove();
       $('#ohr-search-a-tip').append('<p class="ohr-search-nolist">검색 결과가 없습니다.</p>');

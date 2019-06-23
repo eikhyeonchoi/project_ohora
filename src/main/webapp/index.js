@@ -4,10 +4,12 @@
  * 
  */
 
+/*
 var mainSlick = $('#main-slick');
 
 var productSrc = $('#product-template').html(),
      productGenerator = Handlebars.compile(productSrc);
+*/
 
 $(document.body).ready(function() {
   loadList(0, 0, 'undefined');
@@ -20,6 +22,22 @@ function loadList(largeNo, smallNo, productName) {
       + '&productName=' + productName, function(obj){
     console.log(obj);
     
+    var prodTrGenerator = Handlebars.compile($('#product-tr').html());
+
+    $('#ohr-index-card').pagination({
+        dataSource: obj.list,
+        locator: 'list',
+        showGoInput: true,
+        showGoButton: true,
+        pageSize: 9,
+        callback: function(data, pagination) {
+        	$('#ohr-index-card').children().remove();
+          var pageObj = {list: data};
+          $(prodTrGenerator(pageObj)).appendTo($('#ohr-index-card'));
+        }
+      });
+    
+    /*
     mainSlick.html('');
     $(productGenerator(obj)).appendTo(mainSlick);
     
@@ -34,7 +52,14 @@ function loadList(largeNo, smallNo, productName) {
     
     $('.img-thumbnail').hover(function(e) {
     });
+    */
     
   }) // get
   
 } // loadList
+
+$(".hover").mouseleave(
+		  function () {
+		    $(this).removeClass("hover");
+		  }
+		);

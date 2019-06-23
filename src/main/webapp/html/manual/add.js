@@ -97,7 +97,7 @@ $(document).ready(function() {
         .then((value) => {
           switch(value){
             case 'yes': 
-              swal("구성품 파일 업로드", "구성품의 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
+              swal("구성품 파일 업로드", "구성품에 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
               break;
               
             case  'no':
@@ -114,7 +114,7 @@ $(document).ready(function() {
       }
 
       if(section.index == 0 && origin.index == 1 && direction == 'right'){
-        swal("주의사항 이미지 업로드", "주의사항 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
+        swal("주의사항 이미지 업로드", "주의사항에 대한 이미지, 설명을 업로드하는 페이지 입니다", "info");
       }
       
       if(section.index == 0 && origin.index == 2 && direction == 'right'){
@@ -142,7 +142,7 @@ $(document.body).bind('loaded-required', function() {
           return;
         }
         if ($("textarea[name='basicContents']").eq(index).val() == '') {
-          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
+          swal("내용 입력 오류", "파일추가시, 내용 입력은 필수사항 입니다", "warning");
           return;
         }
       }
@@ -156,7 +156,7 @@ $(document.body).bind('loaded-required', function() {
           return;
         }
         if ($("textarea[name='componentContents']").eq(index).val() == '') {
-          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
+          swal("내용 입력오류", "파일 추가시, 내용 입력은 필수사항 입니다", "warning");
           return;
         }
       }
@@ -171,7 +171,7 @@ $(document.body).bind('loaded-required', function() {
           return;
         }
         if ($("textarea[name='cautionContents']").eq(index).val() == '') {
-          swal("내용 입력오류", "파일추가시, 내용입력은 필수사항 입니다", "warning");
+          swal("내용 입력오류", "파일 추가시, 내용 입력은 필수사항 입니다", "warning");
           return;
         }
       }
