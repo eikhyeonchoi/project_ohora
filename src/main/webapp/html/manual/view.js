@@ -239,7 +239,7 @@ function content(mconts, mfile, no, i) {
   a = '<a class="image-popup-no-margins" href="' + src + '">'
   + '<img class="img-responsive" src="' + src + '"'
   + 'id="' + cont + '">' + downbtn + '</a>';
-
+  mconts = mconts.replace(/\. /g, '.</p><p>');
   var contents = '<section class="row mx-sm-1 justify-content-center">'
     + '<div class="row justify-content-center inner">'
     + '<span class="wow fadeInUp col-sm-2" id="textconts" data-wow-offset="80" data-wow-delay="0.2s"><p>' 

@@ -84,12 +84,16 @@ body {
 
 /* 탭 하단 글 내용 */
 #textconts {
-	text-align: center;
+	text-align: left;
 	max-width: 100%;
   min-height: 80vh;
   min-width: 500px;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-right: 150px;
+}
+
+#textconts > p {
+	width: 500px;
 }
 
 /* 탭 하단 사진 */
