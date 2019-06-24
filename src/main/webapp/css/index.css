@@ -113,7 +113,7 @@ body {
 
 #ohr-carousel-1 {
 	background-color: #e7e6ec;
-	background-image: url(../upload/main/1.svg);
+	background-image: url(../upload/main/1.jpg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -123,7 +123,7 @@ body {
 
 #ohr-carousel-2 {
 	background-color: #e7e6ec;
-    background-image: url(../upload/main/2.svg);
+    background-image: url(../upload/main/3-4.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -133,7 +133,7 @@ body {
 
 #ohr-carousel-3 {
 	background-color: #e7e6ec;
-    background-image: url(../upload/main/3.svg);
+    background-image: url(../upload/main/2.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -143,7 +143,7 @@ body {
 
 #ohr-carousel-4 {
 	background-color: #e7e6ec;
-    background-image: url(../upload/main/4.svg);
+    background-image: url(../upload/main/4.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -158,6 +158,15 @@ body {
 }
 
 #ohr-2nd-sec {
+}
+
+#ohr-2nd-div {
+	position: relative;
+	right: 5em;
+}
+
+.bd-placeholder-img {
+	background-color: rgba(50,58,69,0.2);
 }
 
 #ohr-2nd-img {

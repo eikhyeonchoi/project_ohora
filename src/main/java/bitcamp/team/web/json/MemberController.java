@@ -376,7 +376,7 @@ public class MemberController {
 
   private void makeThumbnail(String filePath) throws Exception { 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
-    int dw = 50, dh = 50; 
+    int dw = 150, dh = 150; 
     int ow = srcImg.getWidth(); 
     int oh = srcImg.getHeight(); 
     int nw = ow; 

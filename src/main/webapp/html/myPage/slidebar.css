@@ -1,6 +1,6 @@
 .sidebar {
   padding-right: 30px;
-  margin-top: 67px;
+  margin-top: 93px;
   background-color: #343a40;
   width: 230px;
   height: 100%;
@@ -91,12 +91,12 @@
   border-left: 1px solid #2E2E2E;
   width: 30px;
   height: 43px;
-  margin-left: 48px;
+  margin-left: 43px;
   margin-top: -12px;
 }
 
 #my-list-span2 {
-  margin-left: 36px;
+  margin-left: 31px;
   margin-top: -12px;
 }
 
@@ -116,7 +116,7 @@
 }
 
 #my-list-span3 {
-  margin-left: 60px;
+  margin-left: 59px;
 }
 
 #my-list-span4 {

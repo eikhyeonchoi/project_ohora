@@ -7,8 +7,13 @@ $(document).ready(function() {
     userNo = sessionStorage.getItem('no');
 
     if(userNo == null) {
-      alert('글을 쓸 권한이 없습니다.\n로그인 후 이용해주세요.');
-      location.href = 'prodView.html?no=' + $('#review-prod-no').val();
+      swal({
+        icon: "warning",
+        text: '글을 쓸 권한이 없습니다.\n로그인 후 이용해주세요.',
+        dangerMode: true
+      }).then(() =>{
+      location.href = 'http://localhost:8080/bitcamp-team-project/html/review/index.html';
+      });
     }
 
     if(reviewNo != '') {
@@ -62,7 +67,13 @@ $(document.body).bind('loaded-user', function(obj){
         if (data.status == 'success') {
           location.href = 'prodView.html?no=' + productNo;
         }else {
-          alert('등록 실패 입니다.\n' +  data.message);
+          swal({
+            icon: "warning",
+            text: '등록 실패 입니다.\n' +  data.message,
+            dangerMode: true
+          }).then(() =>{
+            location.href = 'http://localhost:8080/bitcamp-team-project/html/review/index.html';
+          });
         }
       }, "json")
     } else {
@@ -78,7 +89,13 @@ $(document.body).bind('loaded-user', function(obj){
         if (data.status == 'success') {
           location.href = 'prodView.html?no=' + productNo;
         }else {
-          alert('등록 실패 입니다.\n' +  data.message);
+          swal({
+            icon: "warning",
+            text: '등록 실패 입니다.\n' +  data.message,
+            dangerMode: true
+          }).then(() =>{
+            location.href = 'http://localhost:8080/bitcamp-team-project/html/review/index.html';
+          });
         }
       }, "json")
     }
