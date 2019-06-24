@@ -24,10 +24,6 @@ commentListGenerator = Handlebars.compile(commentListSrc);
   }
   memberNo = data.memberNo;
 
-  console.log(userNo);
-  console.log(data.memberNo);
-  console.log(userNo == memberNo);
-  
   if (userNo == memberNo || type == 3) {
     $('#update-btn').show();
     $('#delete-btn').show();
@@ -92,6 +88,8 @@ $(document.body).bind('loaded-detail', function(data){
     $(commentListGenerator(obj)).appendTo($('.comment-child'));
     $('#ohr-comment-count').text(' (' + obj.list.length + ')');
 
+    console.log(obj);
+    
     $(document.body).trigger({
       type: 'loaded-comment-list'
     });
@@ -157,13 +155,13 @@ function callUserInform(){
   if(sessionStorage.getItem('no') == null) {
     $('#review-comment-add-form').remove();
     $('.reply-add-btn').remove();
-  }
+  } 
 
   $('.p-member-no').each(function(index, item) {
     if($(item).attr('data-member-no') != userNo){
       $(item).next().prop('disabled', true);
+      $(item).next().hide();
       $(item).next().next().hide();
-      $(item).next().next().next().hide();
     }
   }) // each
 }
