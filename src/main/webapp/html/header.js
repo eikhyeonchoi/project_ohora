@@ -68,7 +68,7 @@ function loadLoginUser() {
     if (data.status == 'success') {
       $('#bit-not-login-state').hide();
       $("#bit-auth").hide();
-      $('#bit-login-state').show();
+      $('.bit-login-state').show();
       $('#login-username').html(data.user.nickName);
       $('#login-userimg').css('background-image', 'url(/bitcamp-team-project/upload/memberfile/' + data.user.filePath + '_thumb)');
       
@@ -113,7 +113,7 @@ function loadLoginUser() {
       
     } else {
       $('#bit-not-login-state').show();
-      $('#bit-login-state').hide();
+      $('.bit-login-state').hide();
       $("#bit-auth-div").show();
       
       // fail 일때도 trigger 보내줘야함 // 0602 최익현 추가
