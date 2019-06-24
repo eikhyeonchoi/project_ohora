@@ -342,9 +342,9 @@ insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시
 insert into product(sctg_no, manufac_no, name) values(16,9,'AMD 에어컨 임시값2');
 
 -- faq_type 임시값 '질문 카테고리' (자주묻는질문)
-insert into faq_type(name) values('질문 유형 1');
-insert into faq_type(name) values('질문 유형 2');
-insert into faq_type(name) values('질문 유형 3');
+insert into faq_type(name) values('회원관련');
+insert into faq_type(name) values('팁게시판');
+insert into faq_type(name) values('메 3');
 insert into faq_type(name) values('질문 유형 4');
 insert into faq_type(name) values('질문 유형 5');
 
