@@ -165,6 +165,10 @@ body {
 	right: 5em;
 }
 
+.bd-placeholder-img {
+	background-color: rgba(50,58,69,0.2);
+}
+
 #ohr-2nd-img {
 	background-image: url(../upload/main/main2-1.jpg);
 	background-repeat: no-repeat;

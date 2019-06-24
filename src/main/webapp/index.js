@@ -13,6 +13,7 @@ var productSrc = $('#product-template').html(),
 
 $(document.body).ready(function() {
   loadList(0, 0, 'undefined');
+  new WOW().init();
 }); // ready
 
 
