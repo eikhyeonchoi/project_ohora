@@ -16,7 +16,9 @@ var total = 0,
     useful = 0,
     price = 0;
 
-var satisfyNo = 0;
+var satisfyNo = 0,
+    productReviews = [];
+
 
 
 var tipBtn = $('#tip-btn'),
@@ -90,7 +92,15 @@ $(document).ready(function(){
 
   $.get('/bitcamp-team-project/app/json/product/detail?no=' + productNo, function(obj) {
     console.log(obj);
-
+    
+    if (obj.product.reviews != null) {
+      for(var i = 0; i < obj.product.reviews.length; i++) {
+        window.productReviews.push(obj.product.reviews[i].no);
+      } // for
+    }
+    
+    console.log(window.productReviews);
+    
     $('#product-inform-div').prepend('<hr class="head-line">');
     $('#product-inform-div').prepend('<h5>'+ obj.product.manufacturer.name +'</h5>');
     $('#product-inform-div').prepend('<h3>'+ obj.product.name +'</h3>');
@@ -412,7 +422,7 @@ $(document.body).bind('loaded-product', function(data){
         switch(value){
           case 'yes': 
             if (obj.status == 'fail') {
-              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo, function(obj){
+              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo + '&reviews=' + window.productReviews, function(obj){
                 if (obj.status == 'success') {
                   location.href = 'index.html';
                 } else {
@@ -421,7 +431,7 @@ $(document.body).bind('loaded-product', function(data){
               });
               break;
             } else {
-              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo + '&manualNo=' + window.manualNo, function(obj){
+              $.get('/bitcamp-team-project/app/json/product/delete?no=' + productNo + '&tipNo=' + window.tipNo + '&manualNo=' + window.manualNo + '&reviews=' + window.productReviews, function(obj){
                 if (obj.status == 'success') {
                   location.href = 'index.html';
                 } else {

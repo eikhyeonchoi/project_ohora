@@ -169,8 +169,7 @@ $('#login-btn').click(() => {
       window.localStorage.removeItem("email");
     }
     if (data.status == 'success') {
-      var prevLoc = document.referrer;
-      location.href = prevLoc;
+      location.replace('/bitcamp-team-project/index.html'); 
     } else {
       swal({
         title: "오류발생.",

@@ -13,19 +13,25 @@ public class Product {
   private List<ProductFile> productFiles;
   
   private Tip tip;
-  private Review review;
-
+  private List<Review> reviews;
   private int reviewCount;
 
   @Override
   public String toString() {
     return "Product [no=" + no + ", smallCategoryNo=" + smallCategoryNo + ", manufacturerNo="
         + manufacturerNo + ", name=" + name + ", manufacturer=" + manufacturer
-        + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles + "]";
+        + ", productSmallCategory=" + productSmallCategory + ", productFiles=" + productFiles
+        + ", tip=" + tip + ", reviews=" + reviews + ", reviewCount=" + reviewCount + "]";
   }
 
-  
-  
+  public List<Review> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(List<Review> reviews) {
+    this.reviews = reviews;
+  }
+
   public int getReviewCount() {
     return reviewCount;
   }
@@ -34,13 +40,6 @@ public class Product {
     this.reviewCount = reviewCount;
   }
 
-  public Review getReview() {
-    return review;
-  }
-
-  public void setReview(Review review) {
-    this.review = review;
-  }
 
   public Tip getTip() {
     return tip;
