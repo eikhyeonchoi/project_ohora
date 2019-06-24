@@ -78,8 +78,11 @@ $(document.body).bind('loaded-user', function(obj){
 
 function tipfunc(state) {
   var src = '';
-  if (state) src = 'add';
-  else src = 'update';
+  if (state) {
+    src = 'add';
+  } else {
+    src = 'update';
+  }
 
   // tip add
   $.post('/bitcamp-team-project/app/json/tip/' + src, {
@@ -94,11 +97,16 @@ function tipfunc(state) {
   }, "json");
   // --tip add
   
-  // tiphistory update
+  $(document.body).trigger('historyAdd');
+}
+
+$(document.body).bind('historyAdd', function(data) {
+  //tiphistory update
   $.post('/bitcamp-team-project/app/json/tiphistory/add', {
     no: productNo,
-    contents: $('.ql-editor').html()
+    contents: $('.ql-editor').html();
   }, function(data) {
+    console.log(data.status);
     if (data.status == 'success') {
       swal('저장중','히스토리 저장중입니다.','info');
       location.href = 'view.html?no=' + productNo;
@@ -107,4 +115,4 @@ function tipfunc(state) {
     }
   }, "json") 
   //--tiphistory update
-}
+});
