@@ -173,8 +173,8 @@ $('#login-btn').click(() => {
       location.href = prevLoc;
     } else {
       swal({
-        title: "오류발생.",
-        text: "다시 시도해주세요.",
+        title: "로그인 실패.",
+        text: "이메일 또는, 비밀번호를 확인해주세요.",
         icon: "error",
         button: "확인",
       });
