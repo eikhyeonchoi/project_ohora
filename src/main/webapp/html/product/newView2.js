@@ -489,9 +489,11 @@ $(document.body).bind('loaded-satisfy', function(data){
       console.log(productNo);
       console.log(obj);
       
+      console.log(obj);
       for (var comp of obj.list) {
-        $(comp).attr('aver', (comp.asStf + comp.design + comp.level + comp.priceStf + comp.understand + comp.useful)/6);
+        $(comp).attr('aver', ((comp.asStf + comp.design + comp.level + comp.priceStf + comp.understand + comp.useful) / 6));
       }
+      console.log(obj);
       
       $('#check-satisfy').text('총  ' + obj.list.length + '개의 평가');
       

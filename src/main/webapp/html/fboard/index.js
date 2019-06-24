@@ -43,6 +43,7 @@ function loadList(type, keyword) {
       locator : 'list',
       showGoInput : true,
       showGoButton : true,
+      pageSize: 15,
       callback : function(data, pagination) {
         tbody.children().remove();
         var pageObj = {

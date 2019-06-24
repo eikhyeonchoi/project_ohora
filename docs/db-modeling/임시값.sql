@@ -30,6 +30,7 @@ insert into small_category(lctg_no, name) values(4, '세탁기'); --13
 insert into small_category(lctg_no, name) values(4, 'TV'); --14
 insert into small_category(lctg_no, name) values(4, '냉장고'); --15
 insert into small_category(lctg_no, name) values(4, '에어컨'); --16
+insert into small_category(lctg_no, name) values(4, '청소기'); --16
 
 -- member 임시값 '회원'
 insert into member(email, pwd, name, tel, n_name, type, ban) values('user1@test.com',password('1111'),'김지성','1234-1234','일반회원1','1',false);
@@ -360,6 +361,7 @@ insert into manufacturer(reg_no, name, tel, homepage) values('999-99-9999', 'AMD
 insert into manufacturer(reg_no, name, tel, homepage, member_no) values('111-44-777', 'bit-1','3424-1234', 'https://www.bit.com/ko', 1); --10
 insert into manufacturer(reg_no, name, tel, homepage, member_no) values('222-55-888', 'bit-2','2321-1234', 'https://www.camp.com/ko', 1); --11
 insert into manufacturer(reg_no, name, tel, homepage, member_no) values('333-66-9999', 'bit-3','6431-1234', 'https://www.ohora.com/ko', 1); --12
+insert into manufacturer(reg_no, name, tel, homepage, member_no) values('333-66-9999', '다이슨','1111-1111', 'https://www.kr.dyson.com', 1); --12
 
 
 

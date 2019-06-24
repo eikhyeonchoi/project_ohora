@@ -46,6 +46,7 @@
       s.as_stf,
       s.useful,
       s.price_stf,
+      s.understand,
       s.eval,
       m.n_name
     from

@@ -172,9 +172,8 @@ function callUserInform(){
   
   $('.p-member-no').each(function(index, item) {
     if($(item).attr('data-member-no') != userNo){
-      $(item).next().prop('disabled', true);
+      $(item).next().hide();
       $(item).next().next().hide();
-      $(item).next().next().next().hide();
     }
   }) // each
 } // callUserInform

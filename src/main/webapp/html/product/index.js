@@ -44,19 +44,19 @@ $(document.body).bind('loaded-category', function(){
   $('#lageCtgSelect').off().change(function() {
     var state = $('#lageCtgSelect option:selected').val();
 
-    for (var i=1; i <= 16; i++)
+    for (var i=1; i <= 17; i++)
       $('#smallCtgSelect').find('[value='+i+']').show();
 
     if (state.includes('1')){
-      for(var i=5; i<=16; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
+      for(var i=5; i<=17; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
 
     } else if (state.includes('2')){
       for(var i=1; i<=4; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
-      for(var i=9; i<=16; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
+      for(var i=9; i<=17; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
 
     } else if(state.includes('3')){
       for(var i=1; i<=8; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
-      for(var i=13; i<=16; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
+      for(var i=13; i<=17; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); }
 
     } else if(state.includes('4')) {
       for(var i=1; i<=12; i++){ $('#smallCtgSelect').find('[value='+i+']').hide(); } 
