@@ -11,72 +11,47 @@
 </head>
 <body>
   <header class="ohr-main-header"></header>
-  <div class="container">
+  
+  <div class="container mt-sm-5">
     <h3>새로운 제품 등록</h3>
-    <div id='selectDiv'></div>
     
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">제품 이름</span>
+    <div class='row col-sm-12'>
+      <div class='col-sm-3'>
+        <div id='product-thumnail-div' class='col-sm-12'>
+        </div>
       </div>
-    <input type="text" id='productName' class="form-control" aria-label="productName" aria-describedby="basic-addon1">
+      <div class='col-sm-9'>
+        <div id='selectDiv'>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">제품 이름</span>
+          </div>
+        <input type="text" id='productName' class="form-control is-invalid" aria-label="productName" aria-describedby="basic-addon1">
+        </div>
+        
+       <div class="custom-file">
+         <input id="fileupload" type="file" name="productFiles" class="custom-file-input is-invalid" required>
+         <label id='product-name-label' class="custom-file-label" for="fileupload">파일을 선택해주세요</label> 
+       </div>
+       
+      </div>
     </div>
-    
-   <div class="custom-file">
-     <input id="fileupload" type="file" name="productFiles" class="custom-file-input">
-     <label class="custom-file-label" for="fileupload">Choose file</label>
-   </div>
-   
-   <div class='row col-sm-12 mt-sm-2 offset-sm-2'>
-     <button id="product-add-btn" type="button" class='btn btn-sm btn-outline-secondary'>등록</button>
-     <button id="product-cancel-btn" type="button" class='btn btn-sm btn-outline-secondary'>취소</button>
-   </div>
-    <div id="images-div"></div>
-
+     <div class='row col-sm-12 mt-sm-4'>
+       <button id="product-add-btn" type="button" class='btn btn-sm btn-outline-secondary' disabled>등록</button>
+       <button id="product-cancel-btn" type="button" class='btn btn-sm btn-outline-secondary'>취소</button>
+     </div>
 
   </div> <!-- .container -->
+  <footer class="container-fluid ohr-footer"></footer>
   
-  <!-- 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3" id="ohr-product-thumb"></div>
-      <div class="col-sm-9" style="height:38px;"><div id='selectDiv'></div></div>
-      <div class="input-group mb-3 col-sm-9" style="height:38px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">제품명</span>
-        </div>
-        <input type="text" id='productName' class="form-control" aria-label="productName" aria-describedby="basic-addon1">
-      </div>
-    </div>
-  </div> <!-- container -->
- -->
-
-<!-- 
-  <script id="large-category-template" type="text/x-handlebars-template">
-    <select id='lageCtgSelect' class="custom-select">
-      <option value='0' option:selected>대분류 선택</option>
-      {{#each largeList}}
-        <option value='{{productSmallCategory.productLargeCategory.no}}'>{{productSmallCategory.productLargeCategory.name}}</option>
-      {{/each}}
-    </select>
-  </script>
-
-  <script id="small-category-template" type="text/x-handlebars-template">
-    <select id='smallCtgSelect' class="custom-select">
-      <option value='0' option:selected>소분류 선택</option>
-      {{#each smallList}}
-        <option value='{{productSmallCategory.no}}'>{{productSmallCategory.name}}</option>
-      {{/each}}
-    </select>
-  </script>
- -->
-
+  
   <script id="small-category-template" type="text/x-handlebars-template">
   <div class='input-group mb-3'>
     <div class="input-group-prepend">
       <label class="input-group-text" for="smallCtgSelect">소분류</label>
     </div>
-    <select id='smallCtgSelect' class='custom-select'>
+    <select id='smallCtgSelect' class='custom-select is-invalid' onchange='selectValidCheck(this);'>
       <option value='0' option:selected>소분류 선택</option>
     {{#each smallList}}
       <option value='{{productSmallCategory.no}}'>{{productSmallCategory.name}}</option>
@@ -90,7 +65,7 @@
     <div class="input-group-prepend">
       <label class="input-group-text" for="manufacturerSelect">제조사</label>
     </div>
-    <select id='manufacturerSelect' class='custom-select'>
+    <select id='manufacturerSelect' class='custom-select is-invalid' onchange='selectValidCheck(this);'>
       <option value='0' option:selected>제조사 선택</option>
     {{#each manuList}}
       <option value='{{no}}'>{{name}}</option>
@@ -110,6 +85,7 @@
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
   <script src="/bitcamp-team-project/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="/bitcamp-team-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="/bitcamp-team-project/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/bitcamp-team-project/html/header.js"></script>
   <script src="/bitcamp-team-project/html/footer.js"></script>
   <script src="add.js"></script>

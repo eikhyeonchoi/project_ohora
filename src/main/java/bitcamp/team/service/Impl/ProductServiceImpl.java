@@ -16,6 +16,7 @@ import bitcamp.team.dao.TipHistoryDao;
 import bitcamp.team.domain.Manufacturer;
 import bitcamp.team.domain.Product;
 import bitcamp.team.domain.ProductFile;
+import bitcamp.team.domain.Review;
 import bitcamp.team.service.ProductService;
 
 @Service
@@ -130,14 +131,22 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public int deleteProduct(HashMap<String, Object> paramNumbers) {
     int productNo = (int) paramNumbers.get("productNo");
     int tipNo = (int) paramNumbers.get("tipNo");
     int manualNo = (int) paramNumbers.get("manualNo");
+    List<Integer> reviews = (List<Integer>) paramNumbers.get("reviews");
 
     int count = 0;
     satisfyDao.deleteByProductNo(productNo);
     System.out.println("satisfy");
+    
+    for (Integer reviewNo : reviews) {
+      reviewDao.deleteCommentReview(reviewNo);
+    }
+    
+    
     reviewDao.deleteByProductNo(productNo);
     System.out.println("review");
 

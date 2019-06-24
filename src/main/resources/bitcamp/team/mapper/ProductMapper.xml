@@ -35,10 +35,10 @@
       <id column="tip_no"       property="no"/>
     </association>
     
-    <association property="review" javaType="review">
+    <collection property="reviews" ofType="review">
       <id column="rno" property="no" />
       <result column="product_no" property="productNo" />
-    </association>
+    </collection>
      
     <collection property="productFiles" ofType="productFile" >
       <id column="pfile_no"       property="no"/>
@@ -196,14 +196,16 @@
       t.tip_no,
       lc.name as largeName,
       pf.img,
-      m.name as manufacturerName
+      m.name as manufacturerName,
+      r.rv_no as rno
     from
       product p
-    left join tip t on p.product_no = t.product_no
-    left join small_category sc on p.sctg_no=sc.sctg_no
-    left join large_category lc on sc.lctg_no=lc.lctg_no
-    left join product_file pf on pf.product_no = p.product_no
-    left join manufacturer m on p.manufac_no = m.manufac_no
+      left join tip t on p.product_no = t.product_no
+      left join small_category sc on p.sctg_no=sc.sctg_no
+      left join large_category lc on sc.lctg_no=lc.lctg_no
+      left join product_file pf on pf.product_no = p.product_no
+      left join manufacturer m on p.manufac_no = m.manufac_no
+      left join review r on p.product_no = r.product_no
     where
       p.product_no = #{value}
   </select>

@@ -5,3 +5,8 @@
 	height: 200px;
 	background-color: #ccc;
 }
+
+
+.container {
+	min-height: 450px;
+}

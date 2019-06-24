@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -176,10 +177,6 @@ public class ProductController {
     HashMap<String,Object> content = new HashMap<>();
     ArrayList<ProductFile> files = new ArrayList<>();
     try {
-      if (product.getName().equals("") ||
-          product.getSmallCategoryNo() == 0 || 
-          product.getManufacturerNo() == 0)
-        throw new Exception("필수 입력 사항을 입력하지 않았습니다");
       for (Part part : productFiles) {
         String filename = UUID.randomUUID().toString();
         String filepath = uploadDir + "/"  +filename;
@@ -198,19 +195,11 @@ public class ProductController {
       } // for
 
       product.setProductFiles(files);
-      if (product.getSmallCategoryNo() == 0) {
-        throw new RuntimeException("소분류를 선택해주세요!");
-      } else if (product.getName().length() == 0) {
-        throw new RuntimeException("제품 제목을 입력해주세요!");
-      } else if (product.getManufacturerNo() == 0) {
-        throw new RuntimeException("제조사를 선택해주세요!");
-      } else if (files.size() == 0) {
-        throw new RuntimeException("최소 한개 사진을 등록해야 합니다.");
-      } else {
-        productService.add(product);
-        content.put("status", "success");
-        
-      }
+      productService.add(product);
+      
+      
+      
+      content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -271,13 +260,17 @@ public class ProductController {
   @GetMapping("delete")
   public Object delete(int no,
       @RequestParam(required = false) int tipNo,
-      @RequestParam(required = false, defaultValue = "0") int manualNo) {
+      @RequestParam(required = false, defaultValue = "0") int manualNo,
+      @RequestParam(required = false) List<Integer> reviews) {
     HashMap<String, Object> content = new HashMap<>();
     HashMap<String, Object> paramNumbers = new HashMap<>();
     
     paramNumbers.put("productNo", no);
     paramNumbers.put("tipNo", tipNo);
     paramNumbers.put("manualNo", manualNo);
+    if (reviews != null) {
+      paramNumbers.put("reviews", reviews);
+    }
     
     try {
       if (productService.deleteProduct(paramNumbers) == 0) {
@@ -289,6 +282,7 @@ public class ProductController {
       content.put("message", e.getMessage());
     }
     return content;
+    
   } // delete
 
 
