@@ -120,10 +120,10 @@ $(document.body).bind('loaded-comment-list', function() {
     var contentsTextArea = $('<textarea>').addClass('form-control col-sm-12').addClass('contents').attr('rows','2').val(oldText);
     target.closest('.user-inform').next().append(contentsTextArea);
     
-    $('.new-comment-update-btn').click(function(e) {
-      e.preventDefault();
-      $.post('/bitcamp-team-project/app/json/fboard/updateComment', {
-        no: $(e.target).attr('data-no'),
+    $('.new-comment-update-btn').click(function(event) {
+      event.preventDefault();
+      $.post('/bitcamp-team-project/app/json/manual/updateComment', {
+        no: $(event.target).attr('data-no'),
         updateDate: getCurrentTime(),
         contents: $(e.target).closest('.user-inform').next().find('textarea').val()
       }, function(obj) {

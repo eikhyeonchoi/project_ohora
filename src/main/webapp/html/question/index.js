@@ -114,39 +114,62 @@ addBtn.click(function() {
 
 $('#delete-btn').click(function() {
   if ($("input:checkbox[name='delete-Ck']").is(":checked")) {
-    if (confirm("선택하신 1:1문의를 삭제하시겠 습니까?")) {
-      var cnt = $("input[name=delete-Ck]:checked").length;
-      $("input[name=delete-Ck]:checked").each(function(index) {
-        deleteNo = $(this).attr('data-no');
-        status = $(this).attr('data-status')
-        $.ajax({
-          url:"/bitcamp-team-project/app/json/question/delete?no=" + deleteNo + "&status=" + status,
-          type: "GET",
-          async: false,
-          dataType: "json"
-        }).done(function(data) {
-          if (data.status == 'success') {
-            if ((parseInt(cnt) - 1) == parseInt(index)){
-              swal({
-                title: "삭제 되었습니다",
-                icon: "success",
-                button: "확인",
-              });
-              location.reload();
-            }
-          } else {
-            swal({
-              title: "오류가 발생했습니다",
-              text: "다시 시도해주세요",
-              icon: "error",
+    swal({
+      title: "문의 삭제 알림",
+      text: "선택하신 1:1문의를 삭제하시겠 습니까?",
+      icon: "info",
+      buttons: {
+        no: {
+          text: '아니오',
+          value: 'no'
+        },
+        yes: {
+          text: '삭제',
+          value: 'yes'
+        }
+      },
+    })
+    .then((value) => {
+      switch(value){
+        case 'yes': 
+           var cnt = $("input[name=delete-Ck]:checked").length;
+           $("input[name=delete-Ck]:checked").each(function(index) {
+           deleteNo = $(this).attr('data-no');
+           status = $(this).attr('data-status')
+            $.ajax({
+              url:"/bitcamp-team-project/app/json/question/delete?no=" + deleteNo + "&status=" + status,
+              type: "GET",
+              async: false,
+              dataType: "json"
+            }).done(function(data) {
+              if (data.status == 'success') {
+                if ((parseInt(cnt) - 1) == parseInt(index)){
+                  swal({
+              title: "삭제 되었습니다",
+              icon: "success",
               button: "확인",
+                  });
+                  location.reload();
+                }
+              } else {
+                swal({
+                  title: "오류가 발생했습니다",
+                  text: "다시 시도해주세요",
+                  icon: "error",
+                  button: "확인",
+                });
+              }
             });
-          }
-        });
-      }); // each
-    } else {
-      return; // alert창에서 아니오를 누르면 지우지않는다.
-    } 
+                }); // each
+                      break;
+                    case  'no':
+                      swal('삭제취소', '삭제가 취소되었습니다', 'warning');
+                      break;
+                    default:
+                      swal('삭제취소', '삭제가 취소되었습니다', 'warning');
+                      break;
+                  }
+                });
   } else {
     swal({
       title: "삭제할 문의를 선택해주세요",
