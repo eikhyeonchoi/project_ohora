@@ -14,7 +14,7 @@ public class Gmail2 {
 
   public String gmailSend(String email, String name, String newPassword) {
     String user = "dencw6"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
-    String password = "fwqdkamfbohqyycr"; // 패스워드
+    String password = "ccqmbovyndwopkwf"; // 패스워드
 
     // SMTP 서버 정보를 설정한다.
     Properties prop = new Properties();
