@@ -17,7 +17,25 @@ $(document).ready(function() {
         , function(data) {
       $(".ql-editor").html(data.contents);
     });
-    $(document.body).trigger('loaded-user');
+    
+    $('#add-btn').click(() => {
+      $.getJSON('/bitcamp-team-project/app/json/tip/confirm?name=' 
+          + $('#h1-title').html()
+          , function (data) {
+        if (data.status == 'success') {
+          if (data.confirm == 'exist') {
+            tipfunc(false);
+          } else {
+            tipfunc(true);
+          }
+          $(document.body).trigger('historyAdd');
+          
+        } else {
+          swal('예외 발생', '문제가 발생했습니다./n' + data.error, 'warning');
+          
+        } // if ~ else
+      })
+    });
   })
 }); // ready
 
@@ -56,26 +74,6 @@ $('#list-btn').click((e) => {
   $('.ql-picker').next().remove();
 })();
 
-$(document.body).bind('loaded-user', function(obj){
-  $('#add-btn').click(() => {
-    $.getJSON('/bitcamp-team-project/app/json/tip/confirm?name=' 
-        + $('#h1-title').html()
-        , function (data) {
-      if (data.status == 'success') {
-        if (data.confirm == 'exist') {
-          tipfunc(false);
-        } else {
-          tipfunc(true);
-        }
-      } else {
-        swal('예외 발생', '문제가 발생했습니다./n' + data.error, 'warning');
-        
-      } // if ~ else
-    })
-  });
-}) // bind
-
-
 function tipfunc(state) {
   var src = '';
   if (state) {
@@ -96,22 +94,20 @@ function tipfunc(state) {
     }
   }, "json");
   // --tip add
-  
-  $(document.body).trigger('historyAdd');
 }
 
 $(document.body).bind('historyAdd', function(data) {
   //tiphistory update
   $.post('/bitcamp-team-project/app/json/tiphistory/add', {
     no: productNo,
-    contents: $('.ql-editor').html();
+    contents: $('.ql-editor').html()
   }, function(data) {
     console.log(data.status);
     if (data.status == 'success') {
       swal('저장중','히스토리 저장중입니다.','info');
       location.href = 'view.html?no=' + productNo;
     } else {
-      location.href = '/bitcamp-team-project/html/auth/login.html';
+      /*location.href = '/bitcamp-team-project/html/auth/login.html';*/
     }
   }, "json") 
   //--tiphistory update
