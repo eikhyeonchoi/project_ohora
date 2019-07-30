@@ -27,7 +27,7 @@ $(document.body).ready(function() {
 
 		$('#user-nickName').html(nickName);
 		$('#user-email').html(email);
-		$('#user-tel').html(secretTel(tel));
+		$('#user-tel').html(tel);
 		if (pwdUpdateDate.length == 4) {
 			$('#date-dd').html("변경하신적이 없습니다.");
 		} else {

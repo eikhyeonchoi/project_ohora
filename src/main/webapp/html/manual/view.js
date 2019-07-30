@@ -227,7 +227,7 @@ function content(mconts, mfile, no, i) {
 
   if (i == 0) {
     cont = 'pdf-src';
-    src = '/bitcamp-team-project/upload/manualfile/pdf-3383632_1280.png';
+    src = '/bitcamp-team-project/upload/manualfile/pdf.png';
     downbtn = '<button type="button" class="download btn btn-sm btn-outline-secondary"' 
             + ' id="download' + i + '">download</button>';
   } else {
